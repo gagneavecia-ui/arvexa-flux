@@ -1,0 +1,65 @@
+{
+  "name": "ARVEXA School — Préparation BAC",
+  "short_name": "ARVEXA",
+  "description": "Prépare ton BAC avec ARVEXA School : cours, exercices, corrections et outils.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0A0A0A",
+  "theme_color": "#0A0A0A",
+  "lang": "fr",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "permissions": ["microphone", "audio-capture"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mes matières",
+      "short_name": "Matières",
+      "description": "Accéder directement à mes matières",
+      "url": "./matiere.html?subject=mathematiques",
+      "icons": [{ "src": "icon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Formulaires",
+      "short_name": "Formules",
+      "description": "Consulter les formules",
+      "url": "./formulaires.html",
+      "icons": [{ "src": "icon.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Calculatrice",
+      "short_name": "Calculatrice",
+      "description": "Calculatrice scientifique",
+      "url": "./calculatrice.html",
+      "icons": [{ "src": "icon.png", "sizes": "192x192" }]
+    }
+  ]
+}

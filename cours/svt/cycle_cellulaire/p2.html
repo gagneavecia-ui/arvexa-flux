@@ -1,0 +1,460 @@
+<!-- ============================================================ -->
+<!-- PARTIE 2 : VARIATION DE LA QUANTITÉ D'ADN AU COURS DU CYCLE   -->
+<!-- (25 min)                                                      -->
+<!-- Notion 1 : convention_C — Mesurer l'ADN avec la convention C  -->
+<!-- Notion 2 : variation_adn — 2C → 4C → 2C au fil des phases     -->
+<!-- Notion 3 : adn_vs_chromosomes — Quantité d'ADN ≠ nb chromos.  -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 02 · Cycle cellulaire</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      La quantité d'ADN au fil du <em>cycle cellulaire</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Avant de se partager en deux, une cellule doit <em>doubler</em> son ADN — mais quand, et de combien ? Cette partie suit la quantité d'ADN pas à pas, phase par phase, autour de <strong>3 notions</strong> : la <strong>convention C</strong> pour mesurer l'ADN, la <strong>variation 2C → 4C → 2C</strong> au cours du cycle, et la différence capitale entre <strong>quantité d'ADN</strong> et <strong>nombre de chromosomes</strong>.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧬 3 notions</span>
+      <span class="lecture-hero-meta-item">📚 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">3 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — La cellule et ses photocopies</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion · convention_C — Mesurer l'ADN : la convention C</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion · variation_adn — G1 : la quantité de départ (2C)</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion · variation_adn — S : le doublement progressif (2C → 4C)</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion · variation_adn — G2 et mitose : le plateau à 4C</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion · variation_adn — Après la mitose : retour à 2C</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion · adn_vs_chromosomes — ADN double, chromosomes stables</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Exemple chiffré — La cellule humaine : 7 pg → 14 pg</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION                                       -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">La cellule et ses photocopies</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Imagine que tu veux partager un cahier complet avec un camarade. Tu ne lui donnes pas la moitié du cahier : tu <strong>photocopies tout</strong>, puis chacun garde un exemplaire complet. La cellule fait exactement la même chose avec son patrimoine génétique : avant chaque division, elle copie la totalité de son ADN, puis chaque cellule fille reçoit un exemplaire complet.
+      </p>
+
+      <p class="lecture-text">
+        Le chiffre donne le vertige : une cellule humaine contient environ <strong>2 mètres d'ADN</strong> en tout, repliés dans un noyau de <span class="math">6 µm</span> de diamètre. Et cette quantité doit être <em>doublée</em> pendant la phase S, puis <em>partagée</em> avec une précision parfaite. Pour raconter cette histoire, les biologistes ont besoin de <strong>mesurer</strong> la quantité d'ADN — et pour mesurer, il faut une convention, des unités et des repères. C'est l'objet de cette partie.
+      </p>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Le fil conducteur de la partie</div>
+          <p>On va suivre une grandeur — <strong>la quantité d'ADN contenue dans une cellule</strong> — au fil des 24 heures du cycle. Tu vas découvrir une règle d'or en trois temps : la quantité <strong>double progressivement</strong> pendant S, elle <strong>reste à son maximum</strong> pendant G2 et le début de la mitose, puis elle <strong>retombe brutalement</strong> à la fin de la mitose, quand la cellule se coupe en deux.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION · convention_C                            -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · convention_C</span>
+        <h2 class="lecture-section-title">Mesurer l'ADN : la convention C</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Comment exprimer « combien d'ADN » contient une cellule ? On pourrait compter les nucléotides ou peser l'ADN en picogrammes — mais les biologistes ont adopté une convention relative, très commode pour comparer les phases du cycle entre elles.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📖 Définition — Convention C</div>
+          <p>Par convention, on note <strong>C</strong> la quantité d'ADN contenue dans un <strong>génome haploïde</strong>, c'est-à-dire dans un jeu complet de chromosomes non répliqués (l'ADN d'un gamète humain, par exemple). Une cellule contenant deux jeux de chromosomes non répliqués (une cellule somatique humaine en phase G1) contient donc <span class="math">2C</span> d'ADN ; après réplication de son ADN, elle en contient <span class="math">4C</span>.</p>
+        </div>
+      </div>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">🔬 Exemple — Chez l'humain (2n = 46)</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text">
+            Un gamète humain (spermatozoïde ou ovule) contient <span class="math">23 chromosomes</span> non répliqués : sa quantité d'ADN vaut <span class="math">C</span> (environ <span class="math">3,5 pg</span>). Une cellule de peau en phase G1 contient <span class="math">46 chromosomes</span> à 1 chromatide : sa quantité d'ADN vaut <span class="math">2C</span> (environ <span class="math">7 pg</span>). Cette même cellule, en phase G2, a répliqué son ADN : elle vaut <span class="math">4C</span> (environ <span class="math">14 pg</span>).
+          </p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ 2C ≠ 2n : deux lettres, deux grandeurs</div>
+          <p><strong>C</strong> mesure une <em>quantité d'ADN</em> ; <strong>n</strong> compte un <em>nombre de chromosomes</em>. Ce sont deux grandeurs différentes : ne les mélange jamais. Chez l'humain, une cellule somatique en G1 est <span class="math">2n = 46</span> (46 chromosomes) ET <span class="math">2C</span> (7 pg d'ADN). Le nombre <span class="math">2n</span> ne bougera pas au cours du cycle ; la valeur <span class="math">2C</span>, si — c'est tout l'intérêt de cette partie.</p>
+        </div>
+      </div>
+
+      <aside class="lecture-aside">
+        <div class="lecture-aside-label">🔍 Pourquoi la lettre C ?</div>
+        <p>La lettre C vient de l'anglais <em>« Content »</em> : C désigne le <em>contenu</em> en ADN d'un jeu haploïde de chromosomes. Cette convention est si pratique qu'elle s'utilise chez toutes les espèces — du blé au zébu — sans avoir à jongler avec des picogrammes à chaque comparaison. On peut toujours traduire en masse : <span class="math">1C ≈ 3,5 pg</span> chez l'humain.</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : variation_adn — G1 : 2C                          -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · variation_adn</span>
+        <h2 class="lecture-section-title">G1 : la quantité de départ (2C)</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Plaçons-nous au début du cycle : la cellule sort d'une division. Elle vient d'hériter d'un lot complet de chromosomes, chacun sous forme d'<strong>une seule chromatide</strong>. Sa quantité d'ADN est donc celle d'un contenu <em>non répliqué</em> :
+      </p>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Pendant G1 : quantité d'ADN = 2C</div>
+        <div class="lecture-formula-desc">Cellule somatique humaine : 46 chromosomes à 1 chromatide, soit environ 7 pg d'ADN. Aucune synthèse d'ADN pendant G1 : la valeur reste constante pendant toute la phase.</div>
+      </div>
+
+      <p class="lecture-text">
+        Retiens le mot <strong>constant</strong> : pendant les ≈ 11 heures de G1, la cellule grandit, fabrique des protéines et des organites… mais son ADN ne bouge pas. Si tu traçais la quantité d'ADN en fonction du temps pendant G1, tu obtiendrais une <strong>ligne horizontale</strong> — un plateau à <span class="math">2C</span>. Ce plateau, tu le retrouveras sur tous les graphiques du Bac.
+      </p>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Pourquoi 2C et pas C ?</div>
+          <p>Une cellule somatique humaine est <em>diploïde</em> : elle possède <strong>deux</strong> jeux de chromosomes (un d'origine paternelle, un d'origine maternelle). Chaque jeu, non répliqué, vaut <span class="math">C</span> — donc la cellule entière vaut <span class="math">2C</span>. Écrire que la cellule en G1 vaut <span class="math">C</span> confondrait cellule somatique et gamète.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : variation_adn — S : 2C → 4C                      -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · variation_adn</span>
+        <h2 class="lecture-section-title">S : le doublement progressif (2C → 4C)</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Pendant la phase S, chaque molécule d'ADN est recopiée. La quantité d'ADN de la cellule <strong>augmente au fur et à mesure</strong> que les molécules sont répliquées, l'une après l'autre ou simultanément : elle passe de <span class="math">2C</span> au début de S à <span class="math">4C</span> en fin de S. Ce doublement est <strong>progressif</strong> — c'est une rampe, pas un saut.
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">            <p class="lecture-text"><strong>Ouverture.</strong> Pour chaque molécule d'ADN, les deux brins de la double hélice se séparent : chaque brin va servir de <em>matrice</em> (modèle).</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">            <p class="lecture-text"><strong>Copie.</strong> Des nucléotides libres viennent s'apparier aux bases des matrices selon la complémentarité A–T et G–C : chaque brin matrice dirige la synthèse d'un brin complémentaire.</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">            <p class="lecture-text"><strong>Résultat.</strong> Une molécule d'ADN donne deux molécules <strong>identiques</strong> entre elles et à la molécule mère (réplication <em>semi-conservative</em>) : la quantité d'ADN de la cellule a doublé.</p></div>
+        </div>
+      </div>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Pendant S : quantité d'ADN = 2C → 4C</div>
+        <div class="lecture-formula-desc">Doublement PROGRESSIF au fil de la réplication. En fin de S : 46 chromosomes à 2 chromatides sœurs, environ 14 pg d'ADN — mais toujours 46 chromosomes !</div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ « Progressif » : un mot qui rapporte des points</div>
+          <p>La réplication démarre en plusieurs points le long de chaque chromosome et se déroule sur ≈ 8 heures : la quantité d'ADN croît donc <strong>régulièrement</strong> pendant toute la phase S. Sur un graphique, cela donne une <strong>rampe montante</strong> entre les plateaux 2C et 4C. Écrire que « l'ADN double d'un coup en début de phase S » est une faute : le doublement s'étale sur toute la phase.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📖 La distinction à mémoriser</div>
+          <p>En fin de phase S : la <strong>quantité d'ADN</strong> a doublé (<span class="math">2C → 4C</span>) et le nombre de <strong>chromatides</strong> a doublé (<span class="math">46 → 92</span>), mais le <strong>nombre de chromosomes</strong> est inchangé (<span class="math">46</span>) — chaque chromosome a simplement deux chromatides au lieu d'une. La partie 06 détaille ce piège.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : variation_adn — G2 ET MITOSE : 4C                -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · variation_adn</span>
+        <h2 class="lecture-section-title">G2 et mitose : le plateau à 4C</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Une fois la réplication achevée, la cellule contient le double d'ADN : <span class="math">4C</span>, soit environ <span class="math">14 pg</span> chez l'humain. Cette valeur se maintient pendant <strong>toute la phase G2</strong> (≈ 4 h), puis pendant <strong>le début et le milieu de la phase M</strong> — prophase, métaphase, anaphase.
+      </p>
+
+      <p class="lecture-text">
+        Pourquoi ce plateau à <span class="math">4C</span> ? Parce que, même pendant la mitose, <strong>l'ADN n'a pas encore quitté la cellule mère</strong>. Les chromatides sœurs se séparent en anaphase et migrent vers les pôles, mais elles restent dans le même volume cellulaire tant que la cytodiérèse n'a pas coupé le cytoplasme. La quantité d'ADN <em>par cellule</em> ne diminue donc pas pendant la mitose : elle chute seulement <strong>à la toute fin</strong>, au moment du partage.
+      </p>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">G2 et prophase / métaphase / anaphase : quantité d'ADN = 4C</div>
+        <div class="lecture-formula-desc">Plateau maximal : l'ADN est répliqué mais encore réuni dans la cellule mère. La répartition en deux lots n'intervient qu'avec la cytodiérèse.</div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">🚨 Erreur fréquente : « l'ADN diminue pendant la mitose »</div>
+          <p>Beaucoup d'élèves dessinent une descente <em>progressive</em> de 4C à 2C pendant toute la mitose. Faux : la courbe reste <strong>plate à 4C</strong> pendant prophase, métaphase et anaphase, puis <strong>tombe brutalement</strong> à 2C au moment de la cytodiérèse (fin de télophase). Une chute brutale, pas une pente douce — la séparation en deux cellules est un événement rapide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : variation_adn — RETOUR À 2C                      -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · variation_adn</span>
+        <h2 class="lecture-section-title">Après la mitose : retour à 2C</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        À la fin de la mitose, la cytodiérèse sépare le cytoplasme : les deux lots de chromosomes partent chacun dans une cellule fille. Chaque fille reçoit <strong>46 chromosomes à 1 chromatide</strong> — exactement le même lot que la cellule mère au début de son cycle. Sa quantité d'ADN revient à <span class="math">2C</span> (≈ <span class="math">7 pg</span>).
+      </p>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Après la cytodiérèse : 2 cellules filles à 2C chacune</div>
+        <div class="lecture-formula-desc">Le 4C de la cellule mère s'est partagé en 2C + 2C. Chaque fille a la même quantité d'ADN que la mère au départ : le patrimoine est conservé.</div>
+      </div>
+
+      <p class="lecture-text">
+        Le compte est bon : rien ne se perd. La cellule mère avait copié son ADN pour que <em>chacune</em> de ses deux filles reçoive un exemplaire complet. Le cycle boucle — et chaque cellule fille, si les conditions s'y prêtent, entre aussitôt dans un nouveau cycle en G1, avec ses <span class="math">2C</span> d'ADN.
+      </p>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">La règle d'or de la partie — à réciter</div>
+          <p><span class="math"><strong>2C → (phase S) → 4C → (mitose) → 2C + 2C</strong></span>. La quantité d'ADN double pendant la phase S et se partage lors de la cytodiérèse : chaque cellule fille retrouve la quantité initiale. C'est cette phrase qui répond à 90 % des questions « décrivez l'évolution de la quantité d'ADN ».</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : adn_vs_chromosomes                               -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · adn_vs_chromosomes</span>
+        <h2 class="lecture-section-title">L'ADN double, les chromosomes restent stables</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Voici la distinction la plus payante du chapitre. Deux grandeurs évoluent <em>différemment</em> au cours du cycle : la quantité d'ADN et le nombre de chromosomes. Regarde-les côte à côte (cellule somatique humaine, <span class="math">2n = 46</span>) :
+      </p>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Phase</th><th>Quantité d'ADN</th><th>Nombre de chromosomes</th><th>Chromatides par chromosome</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>G1</strong></td><td><span class="math">2C</span></td><td><span class="math">46</span></td><td>1</td></tr>
+            <tr><td><strong>S</strong> (début → fin)</td><td><span class="math">2C → 4C</span></td><td><span class="math">46</span></td><td>1 → 2</td></tr>
+            <tr><td><strong>G2</strong></td><td><span class="math">4C</span></td><td><span class="math">46</span></td><td>2</td></tr>
+            <tr><td><strong>M</strong> (prophase → anaphase)</td><td><span class="math">4C</span></td><td><span class="math">46</span></td><td>2</td></tr>
+            <tr><td><strong>Fin de M</strong> (après cytodiérèse)</td><td><span class="math">2C</span> par cellule fille</td><td><span class="math">46</span> par cellule fille</td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="lecture-text">
+        La lecture du tableau est sans appel : la colonne « nombre de chromosomes » est <strong>toujours à 46</strong>, du début à la fin du cycle. Seules les colonnes « quantité d'ADN » et « chromatides » varient. Pourquoi ? Parce qu'un chromosome se compte par ses <strong>centromères</strong> : tant que les deux chromatides sœurs restent liées au même centromère, elles forment <em>un seul</em> chromosome.
+      </p>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">🚨 LE piège n°1 du chapitre</div>
+          <p><strong>La quantité d'ADN double pendant S, mais le nombre de chromosomes ne change PAS.</strong> Ce qui double, ce sont les chromatides (et les molécules d'ADN). Le nombre de chromosomes ne « se partage » qu'au moment de la cytodiérèse : chacune des deux filles en reçoit 46 — la même quantité que la cellule mère. Toute phrase du type « la cellule passe de 46 à 92 chromosomes pendant la réplication » est fausse.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ L'analogie qui sauve</div>
+          <p>Un chromosome à 2 chromatides, c'est comme <strong>une paire de chaussettes tenues par une pince</strong> : c'est <em>une</em> paire (un chromosome, un centromère = la pince) contenant <em>deux</em> exemplaires (les chromatides). À l'anaphase, la pince s'ouvre : chaque chaussette part de son côté — et chacune devient alors, <em>de facto</em>, un chromosome à part entière dans chaque cellule fille.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : EXEMPLE CHIFFRÉ — LA CELLULE HUMAINE             -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Exemple chiffré</span>
+        <h2 class="lecture-section-title">La cellule humaine : 7 pg → 14 pg → 7 pg</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Traduisons la convention C en masses réelles, avec le picogramme (<span class="math">pg</span>, soit <span class="math">10⁻¹² g</span>) comme unité. Chez l'humain : <span class="math">C ≈ 3,5 pg</span>. Le suivi complet d'une cellule de peau donne :
+      </p>
+
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Bilan chiffré — Cellule somatique humaine</div>
+        <div class="lecture-formula-hero-main">2C ≈ 7 pg → (phase S) → 4C ≈ 14 pg → (mitose) → 7 pg + 7 pg</div>
+        <div class="lecture-formula-hero-desc">La cellule double son ADN pendant S (7 pg → 14 pg), puis le partage à parts égales lors de la cytodiérèse : chaque fille repart avec ≈ 7 pg.</div>
+      </div>
+
+      <p class="lecture-text">
+        Et voici la courbe qui résume toute la partie — celle que tu retrouveras (et devras redessiner) dans les sujets de Bac :
+      </p>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 660 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbe de la quantité d'ADN par cellule en fonction du temps : plateau 2C, rampe pendant S, plateau 4C, chute à la cytodiérèse, plateau 2C">
+          <text x="330" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">QUANTITÉ D'ADN PAR CELLULE EN FONCTION DU TEMPS (CYCLE ≈ 24 h)</text>
+
+          <line x1="60" y1="210" x2="636" y2="210" style="stroke:var(--text-dim)" stroke-width="1.5"/> <polygon points="642,210 632,206 632,214" style="fill:var(--text-dim)"/> <line x1="60" y1="230" x2="60" y2="46" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="60,40 56,50 64,50" style="fill:var(--text-dim)"/>
+          <text x="640" y="228" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">temps (h)</text>
+          <text x="52" y="36" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="end">ADN/cellule</text>
+
+          <line x1="60" y1="170" x2="630" y2="170" style="stroke:var(--border-soft)" stroke-width="1" stroke-dasharray="3 4"/> <line x1="60" y1="90" x2="630" y2="90" style="stroke:var(--border-soft)" stroke-width="1" stroke-dasharray="3 4"/>
+          <text x="54" y="174" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">2C</text>
+          <text x="54" y="94" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">4C</text>
+
+          <polyline points="70,170 287,170 453,90 592,90 615,170 630,170" fill="none" style="stroke:var(--accent-bright)" stroke-width="3" stroke-linejoin="round"/>
+
+          <line x1="287" y1="60" x2="287" y2="210" style="stroke:var(--green-bright)" stroke-width="1" stroke-dasharray="4 3"/> <line x1="453" y1="60" x2="453" y2="210" style="stroke:var(--green-bright)" stroke-width="1" stroke-dasharray="4 3"/> <line x1="592" y1="60" x2="592" y2="210" style="stroke:var(--danger-light)" stroke-width="1" stroke-dasharray="4 3"/>
+
+          <text x="178" y="156" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">G1 : 2C constant</text>
+          <text x="370" y="72" style="fill:var(--green-bright)" font-size="12" font-weight="700" font-family="Inter" text-anchor="middle">S : réplication</text>
+          <text x="522" y="76" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">G2 + M : 4C</text>
+          <text x="606" y="132" style="fill:var(--danger-light)" font-size="11" font-weight="700" font-family="Inter" text-anchor="end">cytodiérèse</text>
+          <text x="622" y="156" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">2C</text>
+
+          <text x="70" y="228" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter">0</text>
+          <text x="287" y="228" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">11</text>
+          <text x="453" y="228" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">19</text>
+          <text x="592" y="228" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">23</text>
+          <text x="630" y="228" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">24</text>
+
+          <text x="330" y="258" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">plateau 2C (G1) · rampe (S) · plateau 4C (G2 + M) · chute à la cytodiérèse · retour à 2C</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">La courbe de référence : 2C en G1, montée progressive pendant S, plateau à 4C pendant G2 et la mitose, chute brutale à la cytodiérèse, puis 2C pour chaque cellule fille. Durées : cellule humaine en culture (G1 ≈ 11 h, S ≈ 8 h, G2 + M ≈ 5 h).</figcaption>
+      </figure>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Deux unités, une seule histoire</div>
+          <p>Les sujets expriment la quantité d'ADN soit en <strong>unités arbitraires</strong> (<span class="math">2C</span>, <span class="math">4C</span> — ou parfois <span class="math">U</span>), soit en <strong>masse</strong> (pg). C'est la <em>même courbe</em> : seules les graduations changent (2 → 4, ou 7 → 14 pg chez l'humain). À l'examen, recopie les unités de l'énoncé — ne mélange jamais les deux systèmes dans une même réponse.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Chez l'humain, la quantité d'ADN d'une cellule somatique en phase G1 vaut :</p>
+      <div class="lecture-quiz-options">
+        <span>A) C</span> <span>B) 2C</span> <span>C) 4C</span>
+        <span>D) 46C</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) 2C.</strong> Une cellule somatique diploïde contient 2 jeux de chromosomes non répliqués en G1 : 2 × C. (C correspond à un gamète ; 4C correspond à la cellule après réplication.)</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Pendant la phase S, la quantité d'ADN d'une cellule :</p>
+      <div class="lecture-quiz-options">
+        <span>A) double instantanément en début de phase</span> <span>B) augmente progressivement de 2C à 4C</span> <span>C) reste constante à 2C</span>
+        <span>D) diminue de 4C à 2C</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B.</strong> Les molécules d'ADN se répliquent tout au long de la phase (≈ 8 h chez l'humain) : la quantité croît PROGRESSIVEMENT de 2C à 4C — une rampe sur les graphiques, jamais un saut.</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Une cellule de peau humaine en phase G2 contient environ :</p>
+      <div class="lecture-quiz-options">
+        <span>A) 3,5 pg d'ADN</span> <span>B) 7 pg d'ADN et 46 chromosomes à 2 chromatides</span> <span>C) 14 pg d'ADN et 46 chromosomes à 2 chromatides</span>
+        <span>D) 14 pg d'ADN et 92 chromosomes</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>C.</strong> En G2, l'ADN est répliqué : 4C ≈ 14 pg — mais toujours 46 chromosomes (chacun à 2 chromatides sœurs). (D tombe dans le piège : le nombre de chromosomes ne double jamais pendant S.)</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[convention_C]</strong> C = quantité d'ADN d'un génome haploïde (≈ 3,5 pg chez l'humain). Cellule somatique : 2C en G1, 4C après réplication. Ne pas confondre C (quantité d'ADN) et n (nombre de chromosomes).</li>
+      <li><strong>[variation_adn]</strong> Règle d'or : <strong>2C (G1) → 4C (fin de S, en passant progressivement) → 2C + 2C (après la cytodiérèse)</strong>. Doublement progressif pendant S ; plateau à 4C pendant G2 et la mitose ; chute brutale à la cytodiérèse.</li>
+      <li><strong>[variation_adn]</strong> La quantité d'ADN ne diminue PAS pendant la mitose : les chromatides restent dans la cellule mère jusqu'au partage du cytoplasme.</li>
+      <li><strong>[adn_vs_chromosomes]</strong> La quantité d'ADN double pendant S ; le nombre de chromosomes (46 chez l'humain) ne change JAMAIS au cours du cycle. Ce sont les chromatides qui doublent (46 → 92) — on compte les chromosomes par leurs centromères.</li>
+      <li><strong>[adn_vs_chromosomes]</strong> Tableau réflexe : G1 = 2C · 46 · 1 chromatide / S = 2C→4C · 46 · 1→2 / G2 et M = 4C · 46 · 2 / après M = 2C · 46 · 1 par cellule fille.</li>
+      <li><strong>[variation_adn]</strong> Chez l'humain : ≈ 7 pg d'ADN en G1, ≈ 14 pg en G2, puis 7 pg pour chacune des deux cellules filles.</li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 2 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie 3 : savoir lire et interpréter les courbes du Bac</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

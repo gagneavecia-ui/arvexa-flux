@@ -1,0 +1,561 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · STATISTIQUES             -->
+<!-- PARTIE 1 : SÉRIE STATISTIQUE & INDICATEURS DE POSITION       -->
+<!-- Notion 1 : vocab_stat — Population, individu, caractère      -->
+<!-- Notion 2 : frequence — Effectifs, fréquences, cumuls         -->
+<!-- Notion 3 : mode — Le mode                                    -->
+<!-- Notion 4 : moyenne — La moyenne arithmétique x̄              -->
+<!-- Notion 5 : mediane — La médiane Me                           -->
+<!-- Notion 6 : quartiles — Q₁, Q₃, écart interquartile, étendue  -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 01 · Statistiques</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Série statistique &amp; <em>indicateurs de position</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Une liste brute de nombres ne raconte rien : il faut la résumer par quelques valeurs bien choisies. Cette partie couvre <strong>6 notions</strong> : le <strong>vocabulaire</strong> (population, individu, caractère, effectif), les <strong>fréquences</strong> et <strong>effectifs cumulés</strong>, puis les trois <strong>indicateurs de position</strong> — le <strong>mode</strong>, la <strong>moyenne</strong> <span class="math">x̄</span> et la <strong>médiane</strong> <span class="math">Me</span> — enfin les <strong>quartiles</strong> et l'<strong>étendue</strong>. Un fil rouge accompagne tout le chapitre : les rendements du mil sur 10 parcelles d'un village de la région de Dosso.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span>
+      <span class="lecture-hero-meta-item">🧮 6 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">6 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Résumer une liste de nombres</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · vocab_stat — Population, individu, caractère, effectif</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 2 · frequence — Fréquences et effectifs cumulés</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 3 · mode — Le mode</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 4 · moyenne — La moyenne <span class="math">x̄</span></span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 5 · mediane — La médiane <span class="math">Me</span></span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 6 · quartiles — Q₁, Q₃ et étendue</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — L'essentiel de la partie</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION                                       -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Résumer une liste de nombres</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Au Niger, le mil est la céréale de base : sa récolte décide de la sécurité alimentaire des familles. Un agronome du village mesure le rendement de <strong>10 parcelles</strong> de mil, en tonnes par hectare (t/ha). Voici ses relevés, dans l'ordre où il a marché :
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">🧪 Fil rouge du chapitre — 10 parcelles de mil</div>
+          <p><span class="math">0,8 ; 1,2 ; 1,5 ; 1,2 ; 2,0 ; 1,8 ; 1,5 ; 0,9 ; 1,2 ; 1,7</span> (en t/ha)</p>
+          <p>Dix nombres bruts : le chef du village ne peut pas les retenir. Ce qu'il veut savoir tient en trois questions : quel rendement est <strong>le plus courant</strong> ? quel rendement est <strong>représentatif</strong> du village ? <strong>quelle récolte partage</strong> les parcelles en deux moitiés ? La statistique descriptive répond avec le mode, la moyenne et la médiane.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Nommer</strong> les objets : population, individu, caractère, effectif, fréquence, effectifs cumulés.</li>
+            <li><strong>Calculer</strong> les trois indicateurs de position : mode, moyenne <span class="math">x̄</span>, médiane <span class="math">Me</span>.</li>
+            <li><strong>Décrire</strong> la position des valeurs : quartiles <span class="math">Q₁</span> et <span class="math">Q₃</span>, écart interquartile, étendue.</li>
+            <li><strong>Lire</strong> un tableau de données et repérer ces valeurs sur un axe gradué.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Petite histoire des sciences</div>
+        <div class="lecture-aside-content">
+          Dès le XVIᵉ siècle, les astronomes — Tycho Brahe en tête — moyennaient leurs observations répétées d'une même étoile pour réduire les erreurs de mesure : la moyenne arithmétique est née des sciences d'observation. Aujourd'hui, l'Institut National de la Statistique du Niger applique le même principe quand il publie les prix du mil sur les marchés de Niamey, Maradi ou Zinder : des dizaines de relevés ramenés à un seul chiffre parlant.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · vocab_stat                            -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · vocab_stat</span>
+        <h2 class="lecture-section-title">Population, individu, caractère, effectif</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Avant tout calcul, la statistique exige un vocabulaire précis — c'est un chapitre où les définitions rapportent des points faciles à l'examen.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définitions officielles</div>
+          <ul class="lecture-list">
+            <li>La <strong>population</strong> est l'ensemble des objets (ou personnes, ou années…) sur lesquels porte l'étude. Chaque élément de la population est un <strong>individu</strong>.</li>
+            <li>Le <strong>caractère</strong> (ou variable statistique) est la propriété étudiée sur chaque individu. Il est <strong>qualitatif</strong> (couleur, ethnie, profession…) ou <strong>quantitatif</strong> (mesurable par un nombre : taille, prix, rendement).</li>
+            <li>L'<strong>effectif</strong> <span class="math">nᵢ</span> d'une valeur <span class="math">xᵢ</span> est le nombre de fois où cette valeur apparaît. L'<strong>effectif total</strong> est noté <span class="math">N</span>.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Appliquons ce vocabulaire au fil rouge : la <strong>population</strong> est l'ensemble des 10 parcelles ; chaque <strong>individu</strong> est une parcelle ; le <strong>caractère</strong> est le rendement annuel, quantitatif continu ; l'<strong>effectif total</strong> vaut <span class="math">N = 10</span>. Voici le tableau brut des relevés :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Parcelle</th><th>Rendement xᵢ (t/ha)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>P1</td><td><span class="math">0,8</span></td></tr>
+            <tr><td>P2</td><td><span class="math">1,2</span></td></tr>
+            <tr><td>P3</td><td><span class="math">1,5</span></td></tr>
+            <tr><td>P4</td><td><span class="math">1,2</span></td></tr>
+            <tr><td>P5</td><td><span class="math">2,0</span></td></tr>
+            <tr><td>P6</td><td><span class="math">1,8</span></td></tr>
+            <tr><td>P7</td><td><span class="math">1,5</span></td></tr>
+            <tr><td>P8</td><td><span class="math">0,9</span></td></tr>
+            <tr><td>P9</td><td><span class="math">1,2</span></td></tr>
+            <tr><td>P10</td><td><span class="math">1,7</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-vocab-grid">
+        <div class="vocab-card">
+          <div class="vocab-symbol">👥</div>
+          <div class="vocab-name">Population</div>
+          <div class="vocab-notation">les 10 parcelles de mil</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">1️⃣</div>
+          <div class="vocab-name">Individu</div>
+          <div class="vocab-notation">une parcelle P1, P2, …</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">📏</div>
+          <div class="vocab-name">Caractère</div>
+          <div class="vocab-notation">rendement (t/ha), quantitatif continu</div>
+        </div>
+        <div class="vocab-card vocab-card-info">
+          <div class="vocab-symbol">Σ</div>
+          <div class="vocab-name">Effectif total</div>
+          <div class="vocab-notation">N = 10, la somme des nᵢ</div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Caractère ou valeur ?</div>
+          <p>Le <strong>caractère</strong> est la grandeur étudiée (« le rendement ») ; une <strong>valeur</strong> est un nombre pris par ce caractère (<span class="math">0,8</span>, <span class="math">1,2</span>…). À l'examen, décris d'abord l'étude : population = …, individu = …, caractère = … — c'est souvent la première question, et elle rapporte des points sans aucun calcul.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 2 · frequence                             -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · frequence</span>
+        <h2 class="lecture-section-title">Fréquences et effectifs cumulés</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        L'effectif <span class="math">nᵢ</span> dit combien de fois une valeur sort ; la <strong>fréquence</strong> dit quelle <strong>part</strong> de la population elle représente. C'est elle qui permet de comparer deux enquêtes de tailles différentes (10 parcelles ici, 500 ailleurs).
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">fᵢ = nᵢ / N</div>
+        <div class="lecture-formula-desc">La fréquence fᵢ est un nombre entre 0 et 1, sans unité ; multipliée par 100, elle donne le pourcentage. La somme de toutes les fréquences vaut toujours 1.</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Fréquences du fil rouge</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>La valeur <span class="math">0,8</span> sort une fois : <span class="math">f = 1 / 10 = 0,1</span>, soit <span class="math">10 %</span> des parcelles.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>La valeur <span class="math">1,2</span> sort trois fois : <span class="math">f = 3 / 10 = 0,3</span>, soit <span class="math">30 %</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>De même <span class="math">1,5</span> a pour fréquence <span class="math">2 / 10 = 0,2</span>, et toutes les autres valeurs <span class="math">0,1</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Vérification : <span class="math">0,1 + 0,1 + 0,3 + 0,2 + 0,1 + 0,1 + 0,1 = 1</span> : la somme des fréquences vaut bien 1 (100 %).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>On complète enfin les <strong>effectifs cumulés croissants</strong> (ECC) et les <strong>fréquences cumulées</strong> (FCC) : on additionne au fur et à mesure.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Rendement xᵢ (t/ha)</th><th>Effectif nᵢ</th><th>Fréquence fᵢ</th><th>Effectif cumulé (ECC)</th><th>Fréquence cumulée (FCC)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">0,8</span></td><td>1</td><td>0,1</td><td>1</td><td>0,1</td></tr>
+            <tr><td><span class="math">0,9</span></td><td>1</td><td>0,1</td><td>2</td><td>0,2</td></tr>
+            <tr><td><span class="math">1,2</span></td><td>3</td><td>0,3</td><td>5</td><td>0,5</td></tr>
+            <tr><td><span class="math">1,5</span></td><td>2</td><td>0,2</td><td>7</td><td>0,7</td></tr>
+            <tr><td><span class="math">1,7</span></td><td>1</td><td>0,1</td><td>8</td><td>0,8</td></tr>
+            <tr><td><span class="math">1,8</span></td><td>1</td><td>0,1</td><td>9</td><td>0,9</td></tr>
+            <tr><td><span class="math">2,0</span></td><td>1</td><td>0,1</td><td>10</td><td>1,0</td></tr>
+            <tr><td><strong>Total</strong></td><td>10</td><td>1,0</td><td>—</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Lire les cumuls</div>
+          <p>L'<strong>effectif cumulé croissant</strong> d'une valeur <span class="math">xᵢ</span> est le nombre d'individus dont la valeur est inférieure ou égale à <span class="math">xᵢ</span>. Ici, 5 parcelles ont un rendement <span class="math">≤ 1,2</span> et 7 parcelles ont un rendement <span class="math">≤ 1,5</span>. La FCC raconte la même histoire en pourcentages. C'est cette lecture qui donnera la médiane et les quartiles en sections 05 et 06.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 3 · mode                                  -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · mode</span>
+        <h2 class="lecture-section-title">Le mode : la valeur la plus courante</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Premier indicateur de position, le plus simple : il ne demande aucun calcul, seulement de l'attention.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définition officielle — Mode</div>
+          <p>Le <strong>mode</strong> d'une série statistique est la (ou les) valeur(s) du caractère qui a (ont) le <strong>plus grand effectif</strong>. Lorsque les données sont regroupées en classes, on parle de <strong>classe modale</strong>.</p>
+        </div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Le mode des 10 parcelles</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On lit la colonne des effectifs : la plus grande valeur est <span class="math">3</span>, atteinte pour <span class="math">1,2</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Aucune autre valeur n'atteint 3 : <span class="math">1,5</span> suit avec un effectif de 2, les autres avec 1.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Mode = 1,2 t/ha</strong> : le rendement le plus courant dans le village, réalisé par 30 % des parcelles.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Si les données étaient regroupées en classes — par exemple <span class="math">[0,5 ; 1,3[</span>, <span class="math">[1,3 ; 1,6[</span>, <span class="math">[1,6 ; 2,1[</span> — la classe modale serait <span class="math">[0,5 ; 1,3[</span>, d'effectif 5.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Le mode est la valeur <strong>la plus fréquente</strong>, pas la plus grande ! Ici le mode vaut <span class="math">1,2</span> alors que le maximum de la série est <span class="math">2,0</span>. Autre piège : une série peut avoir <strong>deux modes</strong> (série bimodale) si deux valeurs ex æquo ont le plus grand effectif — dans ce cas, cite les deux.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 4 · moyenne                               -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · moyenne</span>
+        <h2 class="lecture-section-title">La moyenne arithmétique <span class="math">x̄</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La moyenne est le centre d'équilibre de la série : c'est la valeur que chaque parcelle aurait si toutes partageaient équitablement la récolte totale. Sa formule exige de <strong>pondérer</strong> chaque valeur par son effectif.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule reine de la partie</div>
+        <div class="lecture-formula-hero-main">x̄ = (Σ nᵢ·xᵢ) / N</div>
+        <div class="lecture-formula-hero-desc">On multiplie chaque valeur xᵢ par son effectif nᵢ, on additionne tout, on divise par l'effectif total N. La barre du x̄ se lit « x barre ».</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">
+          x̄ = (Σ fᵢ·xᵢ) / 1<br>
+          x̄ = Σ fᵢ·xᵢ
+        </div>
+        <div class="lecture-formula-desc">Variante avec les fréquences (fᵢ = nᵢ/N) : on multiplie chaque valeur par sa fréquence et on additionne — le résultat est le même, sans division finale.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — La moyenne des 10 parcelles</div>
+        <div class="lecture-example-content">
+          <p>On part de la formule <span class="math">x̄ = (Σ nᵢ·xᵢ) / N</span> avec <span class="math">N = 10</span>. D'abord, le tableau de calcul des produits <span class="math">nᵢ × xᵢ</span> :</p>
+          <div class="lecture-table">
+            <table>
+              <thead>
+                <tr><th>Valeur xᵢ</th><th>Effectif nᵢ</th><th>Produit nᵢ × xᵢ</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><span class="math">0,8</span></td><td>1</td><td><span class="math">1 × 0,8 = 0,8</span></td></tr>
+                <tr><td><span class="math">0,9</span></td><td>1</td><td><span class="math">1 × 0,9 = 0,9</span></td></tr>
+                <tr><td><span class="math">1,2</span></td><td>3</td><td><span class="math">3 × 1,2 = 3,6</span></td></tr>
+                <tr><td><span class="math">1,5</span></td><td>2</td><td><span class="math">2 × 1,5 = 3,0</span></td></tr>
+                <tr><td><span class="math">1,7</span></td><td>1</td><td><span class="math">1 × 1,7 = 1,7</span></td></tr>
+                <tr><td><span class="math">1,8</span></td><td>1</td><td><span class="math">1 × 1,8 = 1,8</span></td></tr>
+                <tr><td><span class="math">2,0</span></td><td>1</td><td><span class="math">1 × 2,0 = 2,0</span></td></tr>
+                <tr><td><strong>Total</strong></td><td><span class="math">N = 10</span></td><td><span class="math">Σ nᵢ·xᵢ = 13,8</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On additionne les produits de la dernière colonne : <span class="math">Σ nᵢ·xᵢ = 13,8</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On écrit la formule, puis le développement sur sa ligne :</p>
+              <p><span class="math">x̄ = (Σ nᵢ·xᵢ) / N</span><br>
+              <span class="math">x̄ = 13,8 / 10</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Le résultat final, sur sa propre ligne :</p>
+              <p><span class="math">x̄ = 1,38 t/ha</span></p>
+              <p>Une parcelle « moyenne » du village produit 1,38 tonne de mil par hectare.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Contrôle avec les fréquences</strong> : <span class="math">x̄ = Σ fᵢ·xᵢ</span> — on multiplie chaque valeur par sa fréquence :</p>
+              <p><span class="math">x̄ = 0,1 × 0,8 + 0,1 × 0,9 + 0,3 × 1,2 + 0,2 × 1,5 + 0,1 × 1,7 + 0,1 × 1,8 + 0,1 × 2,0</span></p>
+              <p><span class="math">x̄ = 0,08 + 0,09 + 0,36 + 0,30 + 0,17 + 0,18 + 0,20</span></p>
+              <p><span class="math">x̄ = 1,38</span> ✓ Même résultat.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Le piège classique : faire la moyenne des <strong>7 valeurs distinctes</strong> en oubliant les effectifs. On obtiendrait :</p>
+          <p><span class="math">(0,8 + 0,9 + 1,2 + 1,5 + 1,7 + 1,8 + 2,0) / 7 = 9,9 / 7 ≈ 1,41</span></p>
+          <p>C'est faux ! Les valeurs ne comptent pas toutes pareil : <span class="math">1,2</span> pèse trois fois plus que <span class="math">0,8</span>. Toujours pondérer par les <span class="math">nᵢ</span> (ou les <span class="math">fᵢ</span>).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 5 · mediane                               -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 5 · mediane</span>
+        <h2 class="lecture-section-title">La médiane <span class="math">Me</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La médiane est une autre idée du « centre » : on range toutes les valeurs <strong>dans l'ordre</strong>, et on prend celle du milieu. La moitié de la population est en dessous, l'autre moitié au-dessus.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définition officielle — Médiane</div>
+          <p>La <strong>médiane</strong> <span class="math">Me</span> d'une série ordonnée est la valeur qui partage la série en deux groupes de même effectif : au moins la moitié des valeurs sont inférieures ou égales à <span class="math">Me</span>, et au moins la moitié lui sont supérieures ou égales.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La médiane se prend sur la série ORDONNÉE</div>
+        <div class="lecture-formula-hero-main">Me = valeur centrale de la série ordonnée</div>
+        <div class="lecture-formula-hero-desc">N impair : Me est la valeur de rang (N + 1)/2. N pair : Me est la moyenne des valeurs de rangs N/2 et (N/2) + 1. Elle peut ne pas figurer dans la série.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — La médiane des 10 parcelles</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On <strong>range</strong> d'abord les 10 valeurs : <span class="math">0,8 ; 0,9 ; 1,2 ; 1,2 ; 1,2 ; 1,5 ; 1,5 ; 1,7 ; 1,8 ; 2,0</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><span class="math">N = 10</span> est pair : la médiane est la moyenne des valeurs de rangs <span class="math">10 / 2 = 5</span> et <span class="math">6</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>De rang 5 : <span class="math">x₅ = 1,2</span> (troisième des trois valeurs <span class="math">1,2</span>) ; de rang 6 : <span class="math">x₆ = 1,5</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>On écrit le calcul sur sa ligne, puis le résultat sur la sienne :</p>
+              <p><span class="math">Me = (1,2 + 1,5) / 2</span><br>
+              <span class="math">Me = 2,7 / 2 = 1,35</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Contrôle par les effectifs cumulés : l'ECC atteint 5 (la moitié de N) pour la valeur <span class="math">1,2</span>, puis 7 pour <span class="math">1,5</span> : la frontière des 50 % est bien entre <span class="math">1,2</span> et <span class="math">1,5</span> ✓.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Médiane : Me = 1,35 t/ha</strong> — cinq parcelles produisent moins, cinq produisent plus. <span class="math">1,35</span> n'est pas une valeur de la série : c'est normal quand N est pair.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 560 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Axe gradué des rendements de 0,5 à 2,5 t/ha avec les 10 parcelles en points empilés et la médiane 1,35 en pointillés">
+          <line x1="40" y1="120" x2="525" y2="120" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="536,120 524,114 524,126" style="fill:var(--text-dim)"/>
+          <line x1="60" y1="114" x2="60" y2="126" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="60" y="142" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">0,5</text>
+          <line x1="160" y1="114" x2="160" y2="126" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="160" y="142" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">1,0</text>
+          <line x1="260" y1="114" x2="260" y2="126" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="260" y="142" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">1,5</text>
+          <line x1="360" y1="114" x2="360" y2="126" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="360" y="142" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">2,0</text>
+          <line x1="460" y1="114" x2="460" y2="126" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="460" y="142" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">2,5</text>
+          <text x="524" y="106" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">t/ha</text>
+          <circle cx="120" cy="105" r="6" style="fill:var(--accent-bright)"/>
+          <text x="120" y="88" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">0,8</text>
+          <circle cx="140" cy="105" r="6" style="fill:var(--accent-bright)"/>
+          <text x="140" y="88" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">0,9</text>
+          <circle cx="200" cy="105" r="6" style="fill:var(--accent-bright)"/>
+          <circle cx="200" cy="85" r="6" style="fill:var(--accent-bright)"/>
+          <circle cx="200" cy="65" r="6" style="fill:var(--accent-bright)"/>
+          <text x="200" y="48" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">1,2</text>
+          <circle cx="260" cy="105" r="6" style="fill:var(--accent-bright)"/>
+          <circle cx="260" cy="85" r="6" style="fill:var(--accent-bright)"/>
+          <text x="260" y="68" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">1,5</text>
+          <circle cx="300" cy="105" r="6" style="fill:var(--accent-bright)"/>
+          <text x="300" y="88" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">1,7</text>
+          <circle cx="320" cy="105" r="6" style="fill:var(--accent-bright)"/>
+          <text x="320" y="88" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">1,8</text>
+          <circle cx="360" cy="105" r="6" style="fill:var(--accent-bright)"/>
+          <text x="360" y="88" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">2,0</text>
+          <line x1="230" y1="28" x2="230" y2="120" style="stroke:var(--green-bright)" stroke-width="2.5" stroke-dasharray="6 4"/>
+          <text x="230" y="18" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">Me = 1,35</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Chaque point figure une parcelle ; les valeurs identiques s'empilent — la colonne de 3 points au-dessus de <span class="math">1,2</span> révèle le mode. La ligne en pointillés marque la médiane <span class="math">Me = 1,35</span> : cinq parcelles à gauche, cinq à droite.</figcaption>
+      </figure>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Ne pas confondre Me et x̄</div>
+          <p>Ici <span class="math">Me = 1,35</span> et <span class="math">x̄ = 1,38</span> : proches, mais <strong>différents</strong> ! La moyenne additionne toutes les valeurs (elle bouge si une valeur extrême change) ; la médiane regarde seulement la position (une parcelle à <span class="math">5,0</span> t/ha déplacerait <span class="math">x̄</span>, presque pas <span class="math">Me</span>). Un salaire « médian » décrit mieux une population qu'un salaire « moyen » faussé par quelques très hauts revenus.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 6 · quartiles                             -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 6 · quartiles</span>
+        <h2 class="lecture-section-title">Quartiles Q₁, Q₃ et étendue</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La médiane coupe en deux ; les quartiles coupent en quatre. Ils décrivent la <strong>position</strong> du « cœur » de la population — très utilisés pour comparer des campagnes agricoles ou des résultats d'examen.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définitions officielles — Quartiles</div>
+          <p>Dans une série ordonnée : <span class="math">Q₁</span> est la plus petite valeur telle qu'<strong>au moins 25 %</strong> des valeurs lui soient inférieures ou égales ; <span class="math">Q₃</span> est la plus petite valeur telle qu'<strong>au moins 75 %</strong> des valeurs lui soient inférieures ou égales. (La médiane est parfois notée <span class="math">Q₂</span>.)</p>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Q₁ et Q₃ des 10 parcelles</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On cherche <span class="math">Q₁</span> : <span class="math">0,25 × 10 = 2,5</span> — il faut la première valeur dont l'effectif cumulé atteint ou dépasse 2,5.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>ECC : 2 jusqu'à <span class="math">0,9</span>, puis 5 dès <span class="math">1,2</span>. Donc <span class="math">Q₁ = 1,2 t/ha</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On cherche <span class="math">Q₃</span> : <span class="math">0,75 × 10 = 7,5</span> — il faut l'ECC ≥ 7,5.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>ECC : 7 jusqu'à <span class="math">1,5</span>, puis 8 dès <span class="math">1,7</span>. Donc <span class="math">Q₃ = 1,7 t/ha</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Écart interquartile : <span class="math">Q₃ − Q₁ = 1,7 − 1,2 = 0,5 t/ha</span> : le cœur des 50 % de parcelles centrales s'étale sur 0,5 t/ha.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p>Étendue : <span class="math">e = 2,0 − 0,8 = 1,2 t/ha</span> : entre la meilleure et la pire parcelle, l'écart atteint 1,2 t/ha.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Valeur xᵢ</th><th>FCC (part des valeurs ≤ xᵢ)</th><th>Lecture</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">0,9</span></td><td><span class="math">0,2</span></td><td>&lt; 25 %</td></tr>
+            <tr><td><span class="math">1,2</span></td><td><span class="math">0,5</span></td><td><strong>= Q₁</strong></td></tr>
+            <tr><td><span class="math">1,5</span></td><td><span class="math">0,7</span></td><td>&lt; 75 %</td></tr>
+            <tr><td><span class="math">1,7</span></td><td><span class="math">0,8</span></td><td><strong>= Q₃</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">étendue : e = x_max − x_min</div>
+        <div class="lecture-formula-desc">L'étendue ne regarde que les deux valeurs extrêmes : simple, mais fragile — une seule parcelle exceptionnelle la ferait bondir.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">écart interquartile : EI = Q₃ − Q₁</div>
+        <div class="lecture-formula-desc">Amplitude du cœur de la série (50 % central des valeurs). Moins sensible aux extrêmes que l'étendue : c'est lui qu'on préfère pour comparer deux dispersions.</div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN                                            -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">L'essentiel de la partie</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La liste brute des 10 parcelles est maintenant résumée par une poignée de nombres : <span class="math">mode = 1,2</span>, <span class="math">x̄ = 1,38</span>, <span class="math">Me = 1,35</span>, <span class="math">Q₁ = 1,2</span>, <span class="math">Q₃ = 1,7</span>, étendue <span class="math">1,2</span>. Le fil rouge continue en Partie 2 avec la <strong>dispersion</strong>.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">🎯 La carte d'identité du fil rouge</div>
+          <div class="lecture-table">
+            <table>
+              <thead>
+                <tr><th>Indicateur</th><th>Valeur (t/ha)</th><th>Lecture</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Mode</td><td><span class="math">1,2</span></td><td>la valeur la plus courante</td></tr>
+                <tr><td>Moyenne x̄</td><td><span class="math">1,38</span></td><td>le centre d'équilibre</td></tr>
+                <tr><td>Médiane Me</td><td><span class="math">1,35</span></td><td>la valeur du milieu</td></tr>
+                <tr><td>Premier quartile Q₁</td><td><span class="math">1,2</span></td><td>la coupe des 25 %</td></tr>
+                <tr><td>Troisième quartile Q₃</td><td><span class="math">1,7</span></td><td>la coupe des 75 %</td></tr>
+                <tr><td>Étendue e</td><td><span class="math">1,2</span></td><td><span class="math">x_max − x_min</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Trois positions (le plus courant, l'équilibre, le milieu) et deux coupes (25 %, 75 %) pour résumer 10 nombres — tout est en t/ha.</p>
+        </div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><strong>Vocabulaire</strong> : population (les 10 parcelles), individu (une parcelle), caractère (rendement, quantitatif), effectif <span class="math">nᵢ</span>, effectif total <span class="math">N</span>.</li>
+        <li><strong>Fréquence</strong> <span class="math">fᵢ = nᵢ / N</span> : la somme des fréquences vaut toujours 1 (100 %) — premier contrôle de toute copie.</li>
+        <li><strong>Effectifs cumulés</strong> : « combien d'individus ont une valeur ≤ xᵢ » — la porte d'entrée de la médiane et des quartiles.</li>
+        <li><strong>Mode</strong> : la valeur de plus grand effectif ; il peut être double, et ce n'est pas forcément la plus grande valeur.</li>
+        <li><strong>Moyenne</strong> <span class="math">x̄ = (Σ nᵢ·xᵢ) / N</span> : toujours pondérer par les effectifs ; elle est sensible aux valeurs extrêmes.</li>
+        <li><strong>Médiane</strong> <span class="math">Me</span> : valeur centrale de la série <strong>ordonnée</strong> ; N pair → moyenne des deux valeurs centrales.</li>
+        <li><strong>Quartiles et étendue</strong> : <span class="math">Q₁</span> (25 %), <span class="math">Q₃</span> (75 %), <span class="math">EI = Q₃ − Q₁</span>, <span class="math">e = x_max − x_min</span>.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Réflexe rédaction pour l'examen</div>
+          <p>Trois automatismes qui rapportent des points : (1) <strong>ranger</strong> la série avant toute médiane ou tout quartile ; (2) présenter les effectifs et fréquences dans un <strong>tableau</strong> avec leur ligne de total ; (3) donner l'<strong>unité</strong> dans la conclusion (« <span class="math">x̄ = 1,38 t/ha</span> », pas « <span class="math">x̄ = 1,38</span> »).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Dans une classe de 20 élèves, 5 ont obtenu la note 12. Quelle est la fréquence de la note 12 ?</p>
+      <div class="lecture-quiz-options"><span>A) 0,5</span><span>B) 0,25</span><span>C) 4</span><span>D) 15</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) 0,25.</strong> On applique <span class="math">fᵢ = nᵢ / N</span> avec <span class="math">nᵢ = 5</span> et <span class="math">N = 20</span> : <span class="math">f = 5 / 20 = 0,25</span>, soit 25 % de la classe. (L'option C confond fréquence et effectif ; D donne le complément 20 − 5.)</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — La moyenne des valeurs 2 ; 4 ; 6 ; 8 est :</p>
+      <div class="lecture-quiz-options"><span>A) 4</span><span>B) 5</span><span>C) 6</span><span>D) 20</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) 5.</strong> Ici toutes les valeurs ont l'effectif 1 : la somme des valeurs se divise simplement par <span class="math">N = 4</span>.
+        <p><span class="math">x̄ = (2 + 4 + 6 + 8) / 4</span></p>
+        <p><span class="math">x̄ = 20 / 4 = 5</span></p>
+      </div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — La médiane de la série ordonnée 3 ; 7 ; 9 ; 15 est :</p>
+      <div class="lecture-quiz-options"><span>A) 6</span><span>B) 7</span><span>C) 8</span><span>D) 9</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>C) 8.</strong> <span class="math">N = 4</span> est pair : la médiane est la moyenne des valeurs de rangs 2 et 3. Elle n'appartient pas à la série — c'est normal.
+        <p><span class="math">Me = (7 + 9) / 2</span></p>
+        <p><span class="math">Me = 16 / 2 = 8</span></p>
+      </div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[vocab_stat]</strong> Population = ensemble étudié, individu = un élément, caractère = propriété étudiée (qualitatif ou quantitatif), effectif nᵢ, effectif total N</li>
+      <li><strong>[vocab_stat]</strong> Décrire une étude (population/individu/caractère) est une question d'examen à part entière — zéro calcul, points garantis</li>
+      <li><strong>[frequence]</strong> fᵢ = nᵢ/N, nombre entre 0 et 1 ; Σ fᵢ = 1 (ou 100 %) — toujours vérifier cette somme</li>
+      <li><strong>[frequence]</strong> Effectifs cumulés croissants (ECC) : nombre d'individus de valeur ≤ xᵢ — ils serviront pour Me, Q₁, Q₃</li>
+      <li><strong>[mode]</strong> Le mode est la valeur de plus grand effectif (classe modale si données groupées) ; il peut être double et n'est pas la plus grande valeur</li>
+      <li><strong>[moyenne]</strong> x̄ = (Σ nᵢ·xᵢ)/N — pondérer par les effectifs ; variante x̄ = Σ fᵢ·xᵢ avec les fréquences</li>
+      <li><strong>[moyenne]</strong> Fil rouge : x̄ = 13,8/10 = 1,38 t/ha — ne jamais moyenner les seules valeurs distinctes</li>
+      <li><strong>[mediane]</strong> Me = valeur centrale de la série ORDONNÉE ; N impair : rang (N + 1)/2 ; N pair : moyenne des rangs N/2 et (N/2) + 1</li>
+      <li><strong>[mediane]</strong> Fil rouge : Me = (1,2 + 1,5)/2 = 1,35 t/ha — Me et x̄ sont deux centres différents</li>
+      <li><strong>[quartiles]</strong> Q₁ : au moins 25 % des valeurs ≤ Q₁ ; Q₃ : au moins 75 % ≤ Q₃ — lecture des ECC ; EI = Q₃ − Q₁ ; étendue e = x_max − x_min</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 1 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : dispersion de la série et ajustement linéaire</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

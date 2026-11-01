@@ -1,0 +1,1848 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0A0A">
+<script>(function(){try{if(localStorage.getItem('arvexa-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}})();</script>
+<script src="theme.js"></script><script src="wake-lock.js"></script><script src="arvexa-i18n.js" defer></script>
+  <title>ARVEXA | Planificateur Premium</title>
+  <meta name="description" content="Planificateur IA ARVEXA — Ton programme de révision hebdomadaire personnalisé">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+  <script src="katex-utils.js" defer></script>
+  <script src="analytics.js"></script>
+  <script src="register-sw.js" defer></script>
+
+  <link rel="stylesheet" href="perf.css">
+  <link rel="stylesheet" href="arvexa-ui.css">
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       ROOT — Design tokens ARVEXA
+       ═══════════════════════════════════════════════════════════ */
+    :root {
+      --accent: #B8860B;
+      --accent-bright: #E0B84A;
+      --accent-dim: rgba(184, 134, 11, 0.08);
+
+      --success: #2D7D5A;
+      --success-light: #3AB67E;
+      --danger: #B85C3A;
+      --danger-light: #E07A5F;
+      --warning: #D4A017;
+      --warning-light: #E8C158;
+      --info: #4AAFE0;
+
+      --bg-dark: #0A0A0A;
+      --bg-surface: #141414;
+      --bg-card: rgba(20, 20, 20, 0.7);
+
+      --text-light: #F5F0E8;
+      --text-dim: #8A8A7A;
+      --text-muted: #5A5A4A;
+      --text-body: #cfd0cc;
+
+      --border-soft: rgba(255, 255, 255, 0.05);
+      --border-strong: rgba(255, 255, 255, 0.08);
+      --border-gold: rgba(184, 134, 11, 0.15);
+
+      --transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      --transition-fast: all 0.15s ease;
+
+      --radius-sm: 10px;
+      --radius: 16px;
+      --radius-lg: 20px;
+
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    html {
+      background: var(--bg-dark);
+      color-scheme: dark;
+      min-width: 320px;
+      width: 100%;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse 40% 30% at 30% 15%, rgba(184, 134, 11,  0.16) 0%, transparent 70%),
+        radial-gradient(ellipse 35% 25% at 75% 85%, rgba(184, 134, 11, 0.05) 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-deep) 100%);
+      color: var(--text-light);
+      font: 15px/1.6 var(--font-body);
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: 0.55; }
+
+    /* ═══════════════════════════════════════════════════════════
+       SHELL & HEADER
+       ═══════════════════════════════════════════════════════════ */
+    .shell {
+      width: min(100% - 28px, 1080px);
+      margin: auto;
+      padding: 22px 0 60px;
+    }
+
+    .top-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font: 700 26px var(--font-serif);
+      letter-spacing: 0.04em;
+    }
+    .brand span {
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-style: italic;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .top-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-soft);
+      background: rgba(var(--rgb-soft), 0.03);
+      color: var(--text-light);
+      font-weight: 700;
+      font-size: 13px;
+      transition: var(--transition);
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .top-btn:hover {
+      border-color: rgba(224, 184, 74, 0.3);
+      background: rgba(224, 184, 74, 0.06);
+      color: var(--accent-bright);
+    }
+    .top-btn i { font-size: 12px; }
+
+    .premium-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(184, 134, 11, 0.15), rgba(184, 134, 11, 0.05));
+      border: 1px solid rgba(184, 134, 11, 0.3);
+      color: var(--accent-bright);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════════════════ */
+    .hero {
+      margin-bottom: 28px;
+    }
+    .hero h1 {
+      font: 700 clamp(28px, 4.5vw, 44px)/1.1 var(--font-serif);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .hero h1 em {
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-style: italic;
+    }
+    .hero p {
+      color: var(--text-dim);
+      max-width: 640px;
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       LAUNCH PANEL
+       ═══════════════════════════════════════════════════════════ */
+    .launch-panel {
+      padding: 26px 28px;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(var(--rgb-card), 0.95), rgba(var(--rgb-card), 0.9));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .launch-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright), var(--accent));
+    }
+
+    .launch-note {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(224, 184, 74, 0.28);
+      border-radius: var(--radius-sm);
+      background: rgba(224, 184, 74, 0.06);
+      color: var(--text-light);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .launch-note i { color: var(--accent-bright); margin-top: 3px; flex-shrink: 0; }
+
+    .launch-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  min-height: 50px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+  color: #0a0d0b;
+  font-weight: 800;
+  font-size: 14.5px;
+  border: none;
+  transition: var(--transition);
+  box-shadow: 0 8px 24px rgba(184, 134, 11, 0.25);
+  font-family: inherit;
+}
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(184, 134, 11, 0.4);
+    }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 22px;
+      border-radius: var(--radius-sm);
+      background: rgba(var(--rgb-soft), 0.04);
+      color: var(--text-light);
+      border: 1px solid var(--border-soft);
+      font-weight: 700;
+      font-size: 14px;
+      transition: var(--transition);
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .btn-secondary:hover:not(:disabled) {
+      background: rgba(var(--rgb-soft), 0.08);
+      border-color: var(--border-strong);
+    }
+    .btn-secondary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .loader {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(var(--rgb-veil), 0.25);
+      border-top-color: currentColor;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .status {
+      min-height: 22px;
+      margin-top: 16px;
+      color: var(--text-dim);
+      font-size: 13.5px;
+    }
+    .status.error { color: var(--danger-light); }
+    .status.success { color: var(--accent-bright); }
+
+    /* ═══════════════════════════════════════════════════════════
+       SKELETON LOADING
+       ═══════════════════════════════════════════════════════════ */
+    .skeleton-view { display: none; }
+    .skeleton-view.show { display: block; animation: fadeInUp 0.4s ease; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .skeleton {
+      background: linear-gradient(90deg,
+        rgba(var(--rgb-soft), 0.03) 25%,
+        rgba(var(--rgb-soft), 0.06) 50%,
+        rgba(var(--rgb-soft), 0.03) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.6s infinite;
+      border-radius: 10px;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .skeleton-banner {
+      padding: 20px 24px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .skeleton-spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid rgba(224, 184, 74, 0.15);
+      border-top-color: var(--accent-bright);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+      flex-shrink: 0;
+    }
+    .skeleton-banner-text { flex: 1; }
+    .skeleton-line {
+      height: 14px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+    }
+    .skeleton-line.w60 { width: 60%; }
+    .skeleton-line.w40 { width: 40%; }
+    .skeleton-line.w80 { width: 80%; }
+    .skeleton-line.title { height: 18px; }
+
+    .skeleton-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .skeleton-card {
+      padding: 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      min-height: 120px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PLAN VIEW
+       ═══════════════════════════════════════════════════════════ */
+    .plan-view { display: none; }
+    .plan-view.show { display: block; animation: fadeInUp 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+
+    /* META BAR */
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    .meta-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 15px;
+      border-radius: 999px;
+      background: rgba(var(--rgb-soft), 0.03);
+      border: 1px solid var(--border-soft);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-dim);
+    }
+    .meta-chip i { color: var(--accent-bright); font-size: 12px; }
+    .meta-chip strong { color: var(--text-light); font-weight: 700; }
+    .meta-chip.ai-badge {
+      background: rgba(224, 184, 74,  0.1);
+      border-color: rgba(224, 184, 74,  0.3);
+      color: var(--accent-bright);
+    }
+    .meta-chip.ai-badge i { color: var(--accent-bright); }
+    .meta-chip.cache-badge {
+      background: rgba(74, 175, 224,  0.08);
+      border-color: rgba(74, 175, 224,  0.25);
+      color: var(--info);
+    }
+    .meta-chip.cache-badge i { color: var(--info); }
+
+    /* READINESS CARD */
+    .readiness-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 28px;
+      align-items: center;
+      padding: 28px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(var(--rgb-card), 0.95), rgba(var(--rgb-card), 0.9));
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 640px) {
+      .readiness-card { grid-template-columns: 1fr; gap: 20px; text-align: center; }
+    }
+
+    .readiness-circle {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      flex-shrink: 0;
+    }
+    .readiness-circle svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+    .readiness-circle .circle-bg { fill: none; stroke: rgba(var(--rgb-soft), 0.06); stroke-width: 10; }
+    .readiness-circle .circle-progress {
+      fill: none;
+      stroke-width: 10;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .circle-progress.solide { stroke: var(--success-light); }
+    .circle-progress.progressing { stroke: var(--accent-bright); }
+    .circle-progress.reinforce { stroke: var(--danger-light); }
+    .circle-progress.insuffisant { stroke: var(--text-muted); }
+    .readiness-value {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font: 800 36px var(--font-serif);
+      color: var(--text-light);
+      line-height: 1;
+    }
+    .readiness-value small { font-size: 14px; color: var(--text-dim); font-weight: 500; }
+
+    .readiness-info h2 {
+      font: 700 24px var(--font-serif);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .readiness-info p {
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 14px;
+      overflow-wrap: break-word;
+    }
+    .readiness-info .target-info {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 12px;
+      background: rgba(224, 184, 74, 0.08);
+      border: 1px solid rgba(224, 184, 74, 0.2);
+      color: var(--accent-bright);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* WEEK GOAL CARD */
+    .week-goal-card {
+      padding: 22px 24px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(224, 184, 74, 0.08), rgba(224, 184, 74,  0.04));
+      border: 1px solid rgba(224, 184, 74, 0.18);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .week-goal-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent-bright), var(--accent));
+    }
+    .week-goal-label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent-bright);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .week-goal-title {
+      font: 700 20px var(--font-serif);
+      color: var(--text-light);
+      line-height: 1.35;
+      margin-bottom: 10px;
+      overflow-wrap: break-word;
+    }
+    .week-goal-desc {
+      font-size: 14.5px;
+      color: var(--text-body);
+      line-height: 1.7;
+      margin-bottom: 14px;
+      overflow-wrap: break-word;
+    }
+    .week-goal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .week-goal-cell {
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--block-bg);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .week-goal-cell i {
+      color: var(--accent-bright);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .week-goal-cell .cell-text {
+      font-size: 13px;
+      color: var(--text-body);
+      line-height: 1.5;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    /* ALERTS */
+    .alerts-list { display: grid; gap: 10px; margin-bottom: 24px; }
+    .alert-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 15px 18px;
+      border-radius: 16px;
+      background: rgba(var(--rgb-soft), 0.02);
+      border: 1px solid var(--border-soft);
+    }
+    .alert-item.danger { border-color: rgba(231, 111, 81, 0.3); background: rgba(231, 111, 81, 0.05); }
+    .alert-item.warning { border-color: rgba(245, 158, 11, 0.3); background: rgba(245, 158, 11, 0.05); }
+    .alert-item.info { border-color: rgba(74, 175, 224,  0.3); background: rgba(74, 175, 224,  0.05); }
+    .alert-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 15px;
+    }
+    .alert-item.danger .alert-icon { background: rgba(231, 111, 81, 0.15); color: var(--danger-light); }
+    .alert-item.warning .alert-icon { background: rgba(245, 158, 11, 0.15); color: var(--warning-bright); }
+    .alert-item.info .alert-icon { background: rgba(74, 175, 224,  0.15); color: var(--info); }
+    .alert-content { flex: 1; min-width: 0; }
+    .alert-title { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+    .alert-message {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.55;
+      overflow-wrap: break-word;
+    }
+
+    /* SWOT */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font: 700 18px var(--font-serif);
+      color: var(--text-light);
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-soft);
+      position: relative;
+    }
+    .section-label::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--accent-bright);
+    }
+    .section-label i { color: var(--accent-bright); font-size: 16px; }
+
+    .swot-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 640px) {
+      .swot-grid { grid-template-columns: 1fr; }
+    }
+    .swot-card {
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: rgba(var(--rgb-soft), 0.02);
+      border: 1px solid var(--border-soft);
+    }
+    .swot-title {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .swot-card.strengths { border-color: rgba(224, 184, 74,  0.25); background: rgba(224, 184, 74,  0.04); }
+    .swot-card.strengths .swot-title { color: var(--success-light); }
+    .swot-card.weaknesses { border-color: rgba(231, 111, 81, 0.25); background: rgba(231, 111, 81, 0.04); }
+    .swot-card.weaknesses .swot-title { color: var(--danger-light); }
+    .swot-card.opportunities { border-color: rgba(74, 175, 224,  0.25); background: rgba(74, 175, 224,  0.04); }
+    .swot-card.opportunities .swot-title { color: var(--info); }
+    .swot-card.threats { border-color: rgba(245, 158, 11, 0.25); background: rgba(245, 158, 11, 0.04); }
+    .swot-card.threats .swot-title { color: var(--warning); }
+
+    .swot-list {
+      list-style: none;
+      display: block;
+    }
+    .swot-list li {
+      display: block;
+      position: relative;
+      padding-left: 20px;
+      font-size: 13.5px;
+      color: var(--text-body);
+      line-height: 1.6;
+      margin-bottom: 8px;
+      overflow-wrap: break-word;
+    }
+    .swot-list li:last-child { margin-bottom: 0; }
+    .swot-list li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: currentColor;
+      opacity: 0.5;
+      font-weight: 700;
+    }
+
+    /* PRIORITIES */
+    .priorities-list { display: grid; gap: 12px; margin-bottom: 32px; }
+
+    .priority-card {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: rgba(var(--rgb-card), 0.85);
+      border: 1px solid var(--border-soft);
+      transition: var(--transition);
+    }
+    @media (max-width: 640px) {
+      .priority-card { grid-template-columns: auto 1fr; }
+      .priority-score { grid-column: 2; }
+    }
+    .priority-card:hover {
+      border-color: rgba(224, 184, 74, 0.3);
+      transform: translateX(4px);
+    }
+
+    .priority-rank {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font: 800 16px var(--font-serif);
+      background: rgba(224, 184, 74, 0.12);
+      color: var(--accent-bright);
+    }
+    .priority-card.urgent .priority-rank { background: rgba(231, 111, 81, 0.15); color: var(--danger-light); }
+    .priority-card.important .priority-rank { background: rgba(245, 158, 11, 0.15); color: var(--warning-bright); }
+
+    .priority-body { min-width: 0; }
+    .priority-subject {
+      font: 700 16px var(--font-serif);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .priority-subject i { color: var(--accent-bright); font-size: 14px; }
+
+    .priority-badge {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 10px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .priority-badge.urgent { background: rgba(231, 111, 81, 0.15); color: var(--danger-light); }
+    .priority-badge.important { background: rgba(245, 158, 11, 0.15); color: var(--warning-bright); }
+    .priority-badge.entretien { background: rgba(224, 184, 74,  0.15); color: var(--accent-bright); }
+
+    .priority-reason {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 8px;
+      overflow-wrap: break-word;
+    }
+    .priority-goal {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      background: rgba(224, 184, 74, 0.06);
+      border: 1px solid rgba(224, 184, 74, 0.12);
+      font-size: 12.5px;
+      color: var(--text-body);
+      line-height: 1.5;
+      margin-bottom: 8px;
+      overflow-wrap: break-word;
+    }
+    .priority-goal i { color: var(--accent-bright); font-size: 12px; margin-top: 2px; flex-shrink: 0; }
+
+    .priority-chapters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .chapter-chip {
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      background: rgba(231, 111, 81, 0.08);
+      border: 1px solid rgba(231, 111, 81, 0.2);
+      color: var(--danger-light);
+      font-weight: 600;
+    }
+
+    .priority-score {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      text-align: right;
+    }
+    .priority-score .score-value {
+      font: 800 24px var(--font-serif);
+      color: var(--accent-bright);
+      line-height: 1;
+    }
+    .priority-score .score-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+    .priority-score .score-time {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    /* WEEK GRID */
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 900px) { .week-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 480px) { .week-grid { grid-template-columns: 1fr; } }
+
+    .day-card {
+      padding: 16px 14px;
+      border-radius: 16px;
+      background: rgba(var(--rgb-card), 0.85);
+      border: 1px solid var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 260px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .day-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      opacity: 0.6;
+    }
+    .day-card:hover {
+      border-color: rgba(224, 184, 74, 0.3);
+      transform: translateY(-3px);
+    }
+    .day-card.rest-day {
+      background: rgba(74, 175, 224, 0.04);
+      border-color: rgba(74, 175, 224, 0.2);
+    }
+    .day-card.rest-day::before {
+      background: linear-gradient(90deg, var(--info), transparent);
+    }
+
+    .day-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+    .day-num {
+      font: 800 12px var(--font-serif);
+      color: var(--accent-bright);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .day-theme {
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 10px;
+      background: rgba(224, 184, 74, 0.1);
+      color: var(--accent-bright);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    .day-theme.repos { background: rgba(74, 175, 224, 0.15); color: var(--info); }
+    .day-theme.bilan { background: rgba(155, 89, 182, 0.15); color: var(--accent-purple); }
+
+    .day-subject {
+      font: 700 14px var(--font-serif);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-wrap: break-word;
+    }
+    .day-subject i { color: var(--accent-bright); font-size: 12px; }
+
+    .day-task {
+      font-size: 12.5px;
+      color: var(--text-light);
+      line-height: 1.55;
+      flex: 1;
+      overflow-wrap: break-word;
+    }
+
+    .day-steps {
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: var(--block-bg);
+      border-left: 2px solid rgba(224, 184, 74, 0.3);
+      display: block;
+    }
+    .day-steps-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .day-steps ol {
+      padding-left: 16px;
+      display: block;
+      margin: 0;
+    }
+    .day-steps li {
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.5;
+      margin-bottom: 4px;
+      overflow-wrap: break-word;
+    }
+    .day-steps li:last-child { margin-bottom: 0; }
+
+    .day-criteria {
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(224, 184, 74,  0.06);
+      border-left: 2px solid rgba(224, 184, 74,  0.4);
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.5;
+      overflow-wrap: break-word;
+    }
+    .day-criteria strong {
+      color: var(--accent-bright);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 2px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .day-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      padding-top: 8px;
+      border-top: 1px solid rgba(var(--rgb-soft), 0.05);
+    }
+    .day-meta .duration {
+      color: var(--accent-bright);
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* SUCCESS METRICS */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .metric-card {
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(224, 184, 74, 0.06), rgba(184, 134, 11,  0.04));
+      border: 1px solid rgba(224, 184, 74, 0.15);
+      text-align: center;
+    }
+    .metric-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .metric-target {
+      font: 800 20px var(--font-serif);
+      color: var(--accent-bright);
+      line-height: 1.2;
+    }
+
+    /* ENCOURAGEMENT */
+    .encouragement-card {
+      padding: 24px 26px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(224, 184, 74, 0.08), rgba(224, 184, 74,  0.04));
+      border: 1px solid rgba(224, 184, 74, 0.2);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .encouragement-card::before {
+      content: '"';
+      position: absolute;
+      top: -20px; right: 20px;
+      font-family: var(--font-serif);
+      font-size: 100px;
+      color: var(--accent-bright);
+      opacity: 0.1;
+      line-height: 1;
+    }
+    .encouragement-text {
+      font: 500 16px/1.7 var(--font-serif);
+      color: var(--text-light);
+      font-style: italic;
+      position: relative;
+      overflow-wrap: break-word;
+    }
+
+    /* ACTION LINKS */
+    .action-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .action-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: rgba(var(--rgb-soft), 0.02);
+      border: 1px solid var(--border-soft);
+      transition: var(--transition);
+      text-decoration: none;
+      color: inherit;
+    }
+    .action-link:hover {
+      background: rgba(224, 184, 74, 0.06);
+      border-color: rgba(224, 184, 74, 0.3);
+      transform: translateY(-2px);
+    }
+    .action-link-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(224, 184, 74, 0.12);
+      color: var(--accent-bright);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .action-link-body { flex: 1; min-width: 0; }
+    .action-link-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 2px;
+    }
+    .action-link-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ✅ v8.3 — la modale « Accès Premium » utilise désormais le
+       composant UNIFORME du site (arvexa-confirm.js) : mêmes couleurs,
+       mêmes arrondis, mêmes boutons que index/profil/abonnement. */
+    /* TOAST */
+    .toast {
+      position: fixed;
+      top: calc(var(--safe-top) + 20px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      padding: 12px 20px;
+      border-radius: 12px;
+      background: rgba(var(--rgb-card), 0.96);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(224, 184, 74, 0.3);
+      color: var(--text-light);
+      font-size: 13px;
+      font-weight: 500;
+      z-index: 300;
+      opacity: 0;
+      transition: var(--transition);
+      max-width: 90%;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .toast.success { border-color: rgba(58, 182, 126, 0.5); }
+    .toast.error { border-color: rgba(248, 113, 113, 0.5); }
+    .toast i { font-size: 14px; flex-shrink: 0; }
+    .toast.success i { color: var(--success-light); }
+    .toast.error i { color: var(--danger-light); }
+
+    /* KATEX */
+    .katex { font-size: 1.05em; color: inherit; }
+    .katex-display {
+      margin: 10px 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 4px 0;
+    }
+    .readiness-info p .katex,
+    .week-goal-desc .katex,
+    .priority-reason .katex,
+    .priority-goal .katex,
+    .day-task .katex,
+    .day-steps li .katex,
+    .day-criteria .katex,
+    .encouragement-text .katex {
+      display: inline;
+      white-space: normal;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 20px, 1080px); padding-top: 14px; }
+      .launch-panel { padding: 20px; }
+      .launch-actions { flex-direction: column; }
+      .launch-actions .btn-primary,
+      .launch-actions .btn-secondary { justify-content: center; width: 100%; }
+      .readiness-card { padding: 22px 20px; }
+      .readiness-circle { width: 120px; height: 120px; margin: 0 auto; }
+      .readiness-value { font-size: 30px; }
+      .readiness-info h2 { font-size: 20px; }
+      .section-label { font-size: 16px; }
+      .swot-card { padding: 16px; }
+      .priority-card { padding: 16px; gap: 12px; }
+      .priority-score .score-value { font-size: 20px; }
+      .week-goal-card { padding: 20px 18px; }
+      .week-goal-title { font-size: 18px; }
+      .action-links { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(184, 134, 11, 0.25);
+      border-radius: 10px;
+    }
+  </style>
+  <!-- ⚡ ARVEXA FLUX v1 — navigation instantanée -->
+  <script src="flux-router.js?v=flux1" defer></script>
+</head>
+<body>
+
+<main class="shell">
+
+  <header class="top-header">
+    <a class="brand" href="index.html">ARVEX<span>A School</span></a>
+    <div class="top-actions">
+      <div class="premium-badge"><i class="fas fa-crown"></i> Premium</div>
+      <a class="top-btn" href="outils.html">
+        <i class="fas fa-arrow-left"></i> Outils
+      </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Ton plan de révision <em>personnalisé</em></h1>
+    <p>Analyse intelligente de tes examens par IA. Priorités, sessions détaillées, objectifs concrets. Un vrai copilote pour ton BAC.</p>
+  </section>
+
+  <section class="launch-panel">
+    <div class="launch-note">
+      <i class="fas fa-lock"></i>
+      <div>Ce service analyse tes examens et construit un plan IA. Réservé aux comptes Premium.</div>
+    </div>
+    <div class="launch-actions">
+      <button class="btn-primary" id="loadPlanButton" type="button">
+        <i class="fas fa-wand-magic-sparkles"></i>
+        <span class="btn-text">Générer mon plan</span>
+        <span class="loader" style="display:none"></span>
+      </button>
+      <button class="btn-secondary" id="refreshPlanButton" type="button" disabled title="Rafraîchir depuis l'IA (ignorer le cache)">
+        <i class="fas fa-rotate"></i> Rafraîchir
+      </button>
+      <button class="btn-secondary" id="copyPlanButton" type="button" disabled title="Copier le plan en texte">
+        <i class="fas fa-copy"></i> Copier
+      </button>
+      <a class="btn-secondary" href="abonnement.html">
+        <i class="fas fa-crown"></i> Gérer Premium
+      </a>
+    </div>
+    <div class="status" id="plannerStatus" role="status" aria-live="polite"></div>
+  </section>
+
+  <!-- Skeleton loading -->
+  <section class="skeleton-view" id="skeletonView">
+    <div class="skeleton-banner">
+      <div class="skeleton-spinner"></div>
+      <div class="skeleton-banner-text">
+        <div class="skeleton skeleton-line title w60"></div>
+        <div class="skeleton skeleton-line w40"></div>
+      </div>
+    </div>
+    <div class="skeleton-grid">
+      <div class="skeleton-card"><div class="skeleton skeleton-line w80"></div><div class="skeleton skeleton-line w60"></div></div>
+      <div class="skeleton-card"><div class="skeleton skeleton-line w80"></div><div class="skeleton skeleton-line w40"></div></div>
+      <div class="skeleton-card"><div class="skeleton skeleton-line w80"></div><div class="skeleton skeleton-line w60"></div></div>
+    </div>
+    <div class="skeleton skeleton-card" style="margin-bottom:20px; min-height:180px;"></div>
+    <div class="skeleton skeleton-card" style="min-height:240px;"></div>
+  </section>
+
+  <section class="plan-view" id="planView"></section>
+
+</main>
+
+<!-- ✅ v8.3 — modale Premium supprimée : window.arvexaConfirm() (composant
+     uniforme du site) est ouverte par openPremiumGate() ci-dessous. -->
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <i class="fas fa-info-circle"></i>
+  <span id="toastText"></span>
+</div>
+
+<script type="module">
+// ✅ v8.3 — app/auth partagés via auth-guard.js (même instance que le site)
+//      + modale uniforme arvexa-confirm.js chargée AVANT le reste du module.
+import { getIdToken } from 'https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js';
+import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js';
+import { requireAuth, app } from './auth-guard.js';
+import './arvexa-confirm.js';
+
+const $ = (id) => document.getElementById(id);
+let currentUser = null;
+let lastPlan = null;
+
+// ═══════════════════════════════════════════════════════════════
+// UTILITAIRES
+// ═══════════════════════════════════════════════════════════════
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = String(text || '');
+  return div.innerHTML;
+}
+
+/**
+ * Sécurise le texte pour injection HTML :
+ * échappe < et > uniquement, préserve $ pour KaTeX.
+ */
+function safeText(text) {
+  return String(text || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function setStatus(message, type = '') {
+  $('plannerStatus').textContent = message;
+  $('plannerStatus').className = `status ${type}`;
+}
+
+// ✅ v8.3 — verrou Premium : la modale UNIFORME du site (arvexaConfirm),
+//    mêmes couleurs et mêmes boutons que index/profil/abonnement.
+function openPremiumGate() {
+  if (typeof window.arvexaConfirm !== 'function') {
+    window.location.assign('abonnement.html'); // filet si le composant manque
+    return;
+  }
+  window.arvexaConfirm({
+    title: 'Accès Premium requis',
+    message: "Le <strong>Planificateur</strong> analyse tes examens et construit un programme sur mesure grâce à l'IA. Il est réservé aux comptes <strong>Premium</strong>.",
+    icon: '👑',
+    confirmText: "S'abonner maintenant",
+    cancelText: 'Plus tard',
+    variant: 'primary',
+    onConfirm: () => window.location.assign('abonnement.html')
+  });
+}
+
+function formatRelativeTime(isoDate) {
+  if (!isoDate) return '';
+  const diff = Date.now() - new Date(isoDate).getTime();
+  const min = Math.floor(diff / 60000);
+  if (min < 1) return "à l'instant";
+  if (min < 60) return `il y a ${min} min`;
+  const h = Math.floor(min / 60);
+  if (h < 24) return `il y a ${h}h`;
+  const d = Math.floor(h / 24);
+  return `il y a ${d} j`;
+}
+
+function showToast(message, type = 'info') {
+  const toast = $('toast');
+  const text = $('toastText');
+  text.textContent = message;
+  toast.className = `toast show ${type}`;
+  const icon = toast.querySelector('i');
+  if (icon) {
+    icon.className = type === 'success' ? 'fas fa-check-circle'
+      : type === 'error' ? 'fas fa-exclamation-circle'
+      : 'fas fa-info-circle';
+  }
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+}
+
+function renderKaTeX(root) {
+  if (!root || typeof renderMathInElement !== 'function') return;
+  try {
+    renderMathInElement(root, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      throwOnError: false,
+      errorColor: 'var(--danger-light)',
+      strict: false,
+      trust: true
+    });
+  } catch (_) {}
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDU
+// ═══════════════════════════════════════════════════════════════
+function renderPlan(data) {
+  const plan = data.plan || {};
+  const meta = plan._meta || {};
+  const container = $('planView');
+
+  const readinessScore = meta.readinessScore || 0;
+  const readinessLevel = meta.readinessLevel || 'insuffisant';
+  const readinessLabel = meta.readinessLabel || 'Données insuffisantes';
+  const circumference = 2 * Math.PI * 60;
+  const offset = circumference - (readinessScore / 100) * circumference;
+
+  let html = '';
+
+  // ═══ META BAR ═══
+  html += `
+    <div class="meta-bar">
+      <span class="meta-chip"><i class="fa-solid fa-book"></i> <strong>${meta.resultCount || 0}</strong> examen${(meta.resultCount || 0) > 1 ? 's' : ''} analysé${(meta.resultCount || 0) > 1 ? 's' : ''}</span>
+      <span class="meta-chip"><i class="fa-solid fa-signal"></i> ${safeText(meta.dataQualityLabel || 'N/A')}</span>
+      ${meta.aiGenerated ? `<span class="meta-chip ai-badge"><i class="fa-solid fa-brain"></i> Généré par IA</span>` : `<span class="meta-chip"><i class="fa-solid fa-robot"></i> Mode local</span>`}
+      ${data.cached ? `<span class="meta-chip cache-badge"><i class="fa-solid fa-bolt"></i> Depuis le cache</span>` : ''}
+      <span class="meta-chip"><i class="fa-solid fa-clock"></i> ${formatRelativeTime(meta.generatedAt)}</span>
+    </div>
+  `;
+
+  // ═══ READINESS CARD ═══
+  html += `
+    <div class="readiness-card">
+      <div class="readiness-circle">
+        <svg viewBox="0 0 140 140">
+          <circle class="circle-bg" cx="70" cy="70" r="60"></circle>
+          <circle class="circle-progress ${readinessLevel}" cx="70" cy="70" r="60"
+            stroke-dasharray="${circumference}"
+            stroke-dashoffset="${offset}"></circle>
+        </svg>
+        <div class="readiness-value">${readinessScore}<small>/100</small></div>
+      </div>
+      <div class="readiness-info">
+        <h2>${safeText(readinessLabel)}</h2>
+        <p>${safeText(plan.summary || 'Analyse en cours...')}</p>
+        ${meta.targetScore ? `<div class="target-info"><i class="fa-solid fa-bullseye"></i> Objectif : ${meta.targetScore}/20 en ${safeText(meta.targetHorizon || '3 semaines')}</div>` : ''}
+      </div>
+    </div>
+  `;
+
+  // ═══ WEEK GOAL ═══
+  if (plan.weekGoal) {
+    const wg = plan.weekGoal;
+    const isObject = typeof wg === 'object';
+
+    if (isObject && wg.title) {
+      html += `
+        <div class="week-goal-card">
+          <div class="week-goal-label"><i class="fas fa-flag-checkered"></i> Objectif de la semaine</div>
+          <div class="week-goal-title">${safeText(wg.title)}</div>
+          ${wg.description ? `<div class="week-goal-desc">${safeText(wg.description)}</div>` : ''}
+          <div class="week-goal-grid">
+            ${wg.measurable ? `<div class="week-goal-cell"><i class="fas fa-check-circle"></i><span class="cell-text">${safeText(wg.measurable)}</span></div>` : ''}
+            ${wg.deadline ? `<div class="week-goal-cell"><i class="fas fa-calendar-check"></i><span class="cell-text">Échéance : ${safeText(wg.deadline)}</span></div>` : ''}
+            ${plan.estimatedGain ? `<div class="week-goal-cell"><i class="fas fa-arrow-trend-up"></i><span class="cell-text">${safeText(plan.estimatedGain)}</span></div>` : ''}
+          </div>
+        </div>
+      `;
+    } else if (typeof wg === 'string') {
+      html += `
+        <div class="week-goal-card">
+          <div class="week-goal-label"><i class="fas fa-flag-checkered"></i> Objectif de la semaine</div>
+          <div class="week-goal-title">${safeText(wg)}</div>
+          ${plan.estimatedGain ? `<div class="week-goal-desc">📈 ${safeText(plan.estimatedGain)}</div>` : ''}
+        </div>
+      `;
+    }
+  }
+
+  // ═══ ALERTES ═══
+  if (Array.isArray(meta.alerts) && meta.alerts.length > 0) {
+    html += `<div class="section-label"><i class="fa-solid fa-triangle-exclamation"></i> Points d'attention</div>`;
+    html += `<div class="alerts-list">`;
+    meta.alerts.forEach((alert) => {
+      html += `
+        <div class="alert-item ${alert.type}">
+          <div class="alert-icon"><i class="fa-solid ${alert.icon}"></i></div>
+          <div class="alert-content">
+            <div class="alert-title">${safeText(alert.title)}</div>
+            <div class="alert-message">${safeText(alert.message)}</div>
+          </div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  }
+
+  // ═══ SWOT ═══
+  if (plan.swot) {
+    const s = plan.swot;
+    const hasContent =
+      (s.strengths && s.strengths.length) ||
+      (s.weaknesses && s.weaknesses.length) ||
+      (s.opportunities && s.opportunities.length) ||
+      (s.threats && s.threats.length);
+
+    if (hasContent) {
+      html += `<div class="section-label"><i class="fa-solid fa-chart-simple"></i> Analyse SWOT</div>`;
+      html += `<div class="swot-grid">`;
+
+      if (s.strengths && s.strengths.length) {
+        html += `<div class="swot-card strengths"><div class="swot-title"><i class="fa-solid fa-arrow-up"></i> Forces</div><ul class="swot-list">${s.strengths.map((x) => `<li>${safeText(x)}</li>`).join('')}</ul></div>`;
+      }
+      if (s.weaknesses && s.weaknesses.length) {
+        html += `<div class="swot-card weaknesses"><div class="swot-title"><i class="fa-solid fa-arrow-down"></i> Faiblesses</div><ul class="swot-list">${s.weaknesses.map((x) => `<li>${safeText(x)}</li>`).join('')}</ul></div>`;
+      }
+      if (s.opportunities && s.opportunities.length) {
+        html += `<div class="swot-card opportunities"><div class="swot-title"><i class="fa-solid fa-lightbulb"></i> Opportunités</div><ul class="swot-list">${s.opportunities.map((x) => `<li>${safeText(x)}</li>`).join('')}</ul></div>`;
+      }
+      if (s.threats && s.threats.length) {
+        html += `<div class="swot-card threats"><div class="swot-title"><i class="fa-solid fa-shield"></i> Menaces</div><ul class="swot-list">${s.threats.map((x) => `<li>${safeText(x)}</li>`).join('')}</ul></div>`;
+      }
+
+      html += `</div>`;
+    }
+  }
+
+  // ═══ PRIORITÉS ═══
+  if (Array.isArray(plan.priorities) && plan.priorities.length > 0) {
+    html += `<div class="section-label"><i class="fa-solid fa-list-ol"></i> Priorités</div>`;
+    html += `<div class="priorities-list">`;
+
+    plan.priorities.forEach((p, i) => {
+      const urgent = p.priority === 'Urgente';
+      const important = p.priority === 'Importante';
+      const priorityClass = urgent ? 'urgent' : important ? 'important' : '';
+      const badgeClass = urgent ? 'urgent' : important ? 'important' : 'entretien';
+
+      html += `
+        <div class="priority-card ${priorityClass}">
+          <div class="priority-rank">${i + 1}</div>
+          <div class="priority-body">
+            <div class="priority-subject">
+              ${safeText(p.subject)}
+              <span class="priority-badge ${badgeClass}">${safeText(p.priority)}</span>
+            </div>
+            <div class="priority-reason">${safeText(p.reason)}</div>
+            ${p.concreteGoal ? `<div class="priority-goal"><i class="fas fa-bullseye"></i><span>${safeText(p.concreteGoal)}</span></div>` : ''}
+            ${Array.isArray(p.weakChapters) && p.weakChapters.length > 0 ? `
+              <div class="priority-chapters">
+                ${p.weakChapters.map((c) => `<span class="chapter-chip">⚠ ${safeText(c)}</span>`).join('')}
+              </div>
+            ` : ''}
+          </div>
+          <div class="priority-score">
+            <div class="score-value">${p.averageScore !== null && p.averageScore !== undefined ? p.averageScore : '—'}</div>
+            <div class="score-label">Moyenne</div>
+            <div class="score-time">${p.recommendedMinutes || 30} min/sem</div>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+  }
+
+  // ═══ PLAN SEMAINE ═══
+  if (Array.isArray(plan.sessions) && plan.sessions.length > 0) {
+    html += `
+      <div class="section-label">
+        <i class="fa-solid fa-calendar-week"></i> Plan de la semaine
+        <span style="font-size:12px;color:var(--text-muted);font-weight:500;margin-left:auto;">${plan.weekOverview?.totalHours ? plan.weekOverview.totalHours + 'h au total' : '7 jours'}</span>
+      </div>
+    `;
+    html += `<div class="week-grid">`;
+
+    plan.sessions.forEach((s) => {
+      const themeClass = s.theme === 'Repos' || s.theme === 'Repos / Bilan' ? 'repos'
+        : s.theme === 'Bilan' ? 'bilan' : '';
+      const isRestDay = themeClass === 'repos';
+
+      html += `
+        <div class="day-card ${isRestDay ? 'rest-day' : ''}">
+          <div class="day-header">
+            <div class="day-num">Jour ${s.day}</div>
+            ${s.theme ? `<div class="day-theme ${themeClass}">${safeText(s.theme)}</div>` : ''}
+          </div>
+          <div class="day-subject"><i class="fa-solid fa-book"></i> ${safeText(s.subject)}</div>
+          <div class="day-task">${safeText(s.task)}</div>
+          ${Array.isArray(s.steps) && s.steps.length > 0 ? `
+            <div class="day-steps">
+              <div class="day-steps-title">Étapes</div>
+              <ol>${s.steps.map((step) => `<li>${safeText(step)}</li>`).join('')}</ol>
+            </div>
+          ` : ''}
+          ${s.successCriteria ? `
+            <div class="day-criteria">
+              <strong>✓ Réussite</strong>
+              ${safeText(s.successCriteria)}
+            </div>
+          ` : ''}
+          <div class="day-meta">
+            <span class="duration"><i class="fa-solid fa-clock"></i> ${s.durationMinutes || 30} min</span>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+  }
+
+  // ═══ SUCCESS METRICS ═══
+  if (Array.isArray(plan.successMetrics) && plan.successMetrics.length > 0) {
+    html += `<div class="section-label"><i class="fa-solid fa-trophy"></i> Objectifs mesurables</div>`;
+    html += `<div class="metrics-grid">`;
+    plan.successMetrics.forEach((m) => {
+      html += `
+        <div class="metric-card">
+          <div class="metric-label">${safeText(m.label)}</div>
+          <div class="metric-target">${safeText(m.target)}</div>
+        </div>
+      `;
+    });
+    html += `</div>`;
+  }
+
+  // ═══ ENCOURAGEMENT ═══
+  if (plan.encouragement) {
+    html += `
+      <div class="encouragement-card">
+        <div class="week-goal-label"><i class="fa-solid fa-quote-left"></i> Message du coach</div>
+        <div class="encouragement-text">${safeText(plan.encouragement)}</div>
+      </div>
+    `;
+  }
+
+  // ═══ ACTION LINKS ═══
+  html += `
+    <div class="action-links">
+      <a href="arv.html" class="action-link">
+        <div class="action-link-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="action-link-body">
+          <div class="action-link-title">Comprendre mes priorités</div>
+          <div class="action-link-desc">Voir l'analyse détaillée par matière</div>
+        </div>
+      </a>
+      <a href="arv-progress.html" class="action-link">
+        <div class="action-link-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="action-link-body">
+          <div class="action-link-title">Suivre ma progression</div>
+          <div class="action-link-desc">Ajouter des cours et réviser activement</div>
+        </div>
+      </a>
+      <a href="reviseur.html" class="action-link">
+        <div class="action-link-icon"><i class="fas fa-chalkboard-user"></i></div>
+        <div class="action-link-body">
+          <div class="action-link-title">Réviser maintenant</div>
+          <div class="action-link-desc">Générer une fiche ou un quiz</div>
+        </div>
+      </a>
+      <a href="exam.html" class="action-link">
+        <div class="action-link-icon"><i class="fas fa-file-circle-check"></i></div>
+        <div class="action-link-body">
+          <div class="action-link-title">Passer un examen</div>
+          <div class="action-link-desc">Tester mes connaissances</div>
+        </div>
+      </a>
+    </div>
+  `;
+
+  container.innerHTML = html;
+  container.classList.add('show');
+  renderKaTeX(container);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// COPIE DU PLAN (texte)
+// ═══════════════════════════════════════════════════════════════
+async function copyPlanAsText() {
+  if (!lastPlan) return;
+
+  const plan = lastPlan.plan || {};
+  const meta = plan._meta || {};
+  const lines = [];
+
+  lines.push('═══════════════════════════════════════');
+  lines.push('   ARVEXA — PLAN DE RÉVISION');
+  lines.push('═══════════════════════════════════════');
+  lines.push('');
+
+  // Résumé
+  if (plan.summary) {
+    lines.push('📊 RÉSUMÉ');
+    lines.push(plan.summary);
+    lines.push('');
+  }
+
+  // Objectif
+  if (plan.weekGoal) {
+    const wg = plan.weekGoal;
+    lines.push('🎯 OBJECTIF DE LA SEMAINE');
+    if (typeof wg === 'string') lines.push(wg);
+    else {
+      lines.push(wg.title || '');
+      if (wg.description) lines.push(wg.description);
+      if (wg.measurable) lines.push(`✓ ${wg.measurable}`);
+      if (wg.deadline) lines.push(`Échéance : ${wg.deadline}`);
+    }
+    lines.push('');
+  }
+
+  // Priorités
+  if (Array.isArray(plan.priorities) && plan.priorities.length > 0) {
+    lines.push('📋 PRIORITÉS');
+    plan.priorities.forEach((p, i) => {
+      lines.push(`${i + 1}. [${p.priority}] ${p.subject}`);
+      if (p.reason) lines.push(`   Raison : ${p.reason}`);
+      if (p.concreteGoal) lines.push(`   🎯 ${p.concreteGoal}`);
+      if (Array.isArray(p.weakChapters) && p.weakChapters.length > 0) {
+        lines.push(`   ⚠ Chapitres : ${p.weakChapters.join(', ')}`);
+      }
+      lines.push('');
+    });
+  }
+
+  // Sessions
+  if (Array.isArray(plan.sessions) && plan.sessions.length > 0) {
+    lines.push('📅 PLAN DE LA SEMAINE');
+    lines.push('');
+    plan.sessions.forEach((s) => {
+      lines.push(`Jour ${s.day} — ${s.theme || ''} — ${s.subject}`);
+      lines.push(`  ${s.task} (${s.durationMinutes} min)`);
+      if (Array.isArray(s.steps) && s.steps.length > 0) {
+        s.steps.forEach((step, i) => lines.push(`    ${i + 1}. ${step}`));
+      }
+      if (s.successCriteria) lines.push(`  ✓ ${s.successCriteria}`);
+      lines.push('');
+    });
+  }
+
+  // Encouragement
+  if (plan.encouragement) {
+    lines.push('💬 MESSAGE DU COACH');
+    lines.push(plan.encouragement);
+    lines.push('');
+  }
+
+  lines.push('═══════════════════════════════════════');
+  lines.push(`Généré le ${new Date().toLocaleString('fr-FR')}`);
+  lines.push('ARVEXA School — arvexa.com');
+  lines.push('═══════════════════════════════════════');
+
+  const text = lines.join('\n');
+
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    showToast('Plan copié dans le presse-papier', 'success');
+  } catch (e) {
+    showToast('Impossible de copier', 'error');
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CHARGEMENT DU PLAN
+// ═══════════════════════════════════════════════════════════════
+async function loadPlan(forceRefresh = false) {
+  if (!currentUser) {
+    setStatus('Connecte-toi pour utiliser le planificateur.', 'error');
+    return;
+  }
+  if (!isPremium) { // ✅ v8.3 — double barrière (la 1ʳᵉ est l'ouverture de page)
+    openPremiumGate();
+    setStatus('Premium requis.', 'error');
+    return;
+  }
+
+  const btn = $('loadPlanButton');
+  const refreshBtn = $('refreshPlanButton');
+  const copyBtn = $('copyPlanButton');
+  const btnText = btn.querySelector('.btn-text');
+  const btnLoader = btn.querySelector('.loader');
+
+  btn.disabled = true;
+  refreshBtn.disabled = true;
+  copyBtn.disabled = true;
+  if (btnText) btnText.textContent = 'Analyse en cours...';
+  if (btnLoader) btnLoader.style.display = 'inline-block';
+  setStatus(forceRefresh ? 'Nouvelle analyse IA en cours (peut prendre 15-30 sec)...' : 'Chargement du plan...');
+
+  // Afficher le skeleton
+  $('planView').classList.remove('show');
+  $('skeletonView').classList.add('show');
+
+  try {
+    if (window.ARVEXAWakeLock) ARVEXAWakeLock.acquire('planner');
+    const token = await getIdToken(currentUser);
+    const url = forceRefresh ? '/api/planner?refresh=true' : '/api/planner';
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ refresh: forceRefresh })
+    });
+
+    const payload = await response.json().catch(() => null);
+
+    if (response.status === 403 && payload?.code === 'PREMIUM_REQUIRED') {
+      openPremiumGate(); // ✅ v8.3 — modale uniforme
+      setStatus('Premium requis.', 'error');
+      $('skeletonView').classList.remove('show');
+      return;
+    }
+    if (!response.ok) {
+      throw new Error(payload?.error || 'Service indisponible.');
+    }
+
+    lastPlan = payload;
+    $('skeletonView').classList.remove('show');
+    renderPlan(payload);
+
+    copyBtn.disabled = false;
+
+    if (payload.aiGenerated) {
+      setStatus('✨ Plan IA généré avec succès.', 'success');
+    } else {
+      setStatus('Plan généré localement (IA temporairement indisponible).', 'success');
+    }
+
+  } catch (error) {
+    console.error('Planner error:', error);
+    setStatus(error.message || 'Impossible de charger le plan.', 'error');
+    $('skeletonView').classList.remove('show');
+  } finally {
+    if (window.ARVEXAWakeLock) ARVEXAWakeLock.release('planner');
+    btn.disabled = false;
+    refreshBtn.disabled = false;
+    if (btnText) btnText.textContent = 'Générer mon plan';
+    if (btnLoader) btnLoader.style.display = 'none';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ÉVÉNEMENTS
+// ═══════════════════════════════════════════════════════════════
+$('loadPlanButton').addEventListener('click', () => loadPlan(false));
+$('refreshPlanButton').addEventListener('click', () => {
+  // ✅ Modale uniforme (même modèle que index.html)
+  window.arvexaConfirm({
+    title: 'Rafraîchir le plan ?',
+    message: 'Cela appellera l\'<strong>IA</strong> et écrasera le cache actuel.',
+    icon: '🔄',
+    confirmText: 'Rafraîchir',
+    cancelText: 'Annuler',
+    variant: 'primary',
+    onConfirm: () => loadPlan(true)
+  });
+});
+$('copyPlanButton').addEventListener('click', copyPlanAsText);
+// ✅ v8.3 — fermeture de la modale Premium gérée par arvexa-confirm.js
+
+// ═══════════════════════════════════════════════════════════════
+// AUTH + VERROU PREMIUM (✅ v8.3 — demande propriétaire :
+// « le planificateur n'est pas gratuite, le premium est requise »)
+// Même logique de statut que arv.html : users/{uid} → premium/isUnlocked/
+// hasDeposited + date de fin d'abonnement.
+// ═══════════════════════════════════════════════════════════════
+let isPremium = false;
+
+function isUserPremium(data) {
+  if (!data) return false;
+  const active = data.premium === true || data.isUnlocked === true || data.hasDeposited === true;
+  if (!active) return false;
+  const end = data.subscriptionEndDate?.toDate?.() ||
+    (data.subscriptionEndDate?.seconds ? new Date(data.subscriptionEndDate.seconds * 1000) : null);
+  return !end || end.getTime() > Date.now();
+}
+
+function setButtonsFor(premium) {
+  $('loadPlanButton').disabled = !currentUser || !premium;
+  // refresh/copy restent désactivés tant qu'aucun plan n'est affiché
+}
+
+requireAuth({
+  redirectTo: 'login.html',
+  onUser: async (user) => {
+    currentUser = user;
+    try {
+      const db = getFirestore(app);
+      const snap = await getDoc(doc(db, 'users', user.uid));
+      const data = snap.exists() ? snap.data() : null;
+      if (isUserPremium(data)) {
+        isPremium = true;
+        setButtonsFor(true);
+        setStatus('Prêt à générer ton plan personnalisé.');
+      } else {
+        isPremium = false;
+        setButtonsFor(false);
+        setStatus('Premium requis pour utiliser le planificateur.', 'error');
+        openPremiumGate();
+      }
+    } catch (e) {
+      console.warn('[Planner] Lecture profil impossible :', e.code || e.message);
+      // Profil indisponible (hors-ligne) : on ne bloque pas ici,
+      // le backend /api/planner arbitre (403 PREMIUM_REQUIRED → modale).
+      setButtonsFor(true);
+      setStatus('Statut Premium en cours de vérification…');
+    }
+  }
+});
+
+console.log('🚀 ARVEXA — Planificateur v3 (verrou Premium + modale uniforme)');
+</script>
+
+</body>
+</html>

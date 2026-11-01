@@ -1,0 +1,431 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · CALCUL DE PROBABILITÉS   -->
+<!-- PARTIE 3 : PROBABILITÉ CONDITIONNELLE & PROBABILITÉS TOTALES -->
+<!-- Notion 1 : conditionnelle — P(B/A) = P(A ∩ B)/P(A)           -->
+<!-- Notion 2 : arbre — Arbre pondéré et règle des produits       -->
+<!-- Notion 3 : proba_totales — Formule des probabilités totales  -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 03 · Calcul de probabilités</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Probabilité conditionnelle &amp; <em>probabilités totales</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Une information change les chances : savoir que le dé a donné un nombre pair change la probabilité d'avoir obtenu un 6. Cette partie couvre <strong>3 notions</strong> : la <strong>probabilité conditionnelle</strong> <span class="math">P(B/A) = P(A ∩ B)/P(A)</span>, la <strong>règle des produits</strong> et l'outil graphique qui l'organise — l'<strong>arbre pondéré</strong> — puis la <strong>formule des probabilités totales</strong> <span class="math">P(A) = Σ P(Bᵢ) × P(A/Bᵢ)</span> pour additionner les branches d'une partition.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 3 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">3 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Quand l'information change tout</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · conditionnelle — <span class="math">P(B/A) = P(A ∩ B)/P(A)</span></span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · conditionnelle — La règle des produits</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · arbre — L'arbre pondéré</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · arbre — Tirages sans remise : urne 4R/6B</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 3 · proba_totales — La formule des probabilités totales</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 3 · proba_totales — Exemples complets (deux urnes, séries)</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — Tableau des formules &amp; pièges</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Quand l'information change tout</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Avant le tirage du loto, chaque numéro a la même chance. Mais imagine qu'on te dise : « le numéro gagnant est <strong>pair</strong> ». Ta probabilité d'avoir le bon numéro vient de changer : tu joues maintenant parmi les numéros pairs seulement. Une <strong>information partielle</strong> modifie les probabilités — c'est le cœur de cette partie.
+      </p>
+      <p class="lecture-text">
+        La situation la plus concrète est celle des <strong>tirages sans remise</strong> : tu tires une boule rouge d'une urne et tu la gardes en main. Pour le second tirage, l'urne n'est plus la même — il manque une rouge. La probabilité d'obtenir encore du rouge <strong>dépend</strong> du premier tirage : elle est <em>conditionnelle</em>. Les commerçants qui « coupent » un jeu de cartes, les contrôleurs qui retirent des bulletins déjà gagnants, les urnes qu'on ne réapprovisionne pas : tout cela, ce sont des probabilités conditionnelles.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Calculer</strong> une probabilité conditionnelle <span class="math">P(B/A)</span>.</li>
+            <li><strong>Organiser</strong> les calculs avec un arbre pondéré (produits le long des branches).</li>
+            <li><strong>Additionner</strong> les branches d'une partition avec la formule des probabilités totales.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · conditionnelle — DÉFINITION          -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · conditionnelle</span>
+        <h2 class="lecture-section-title">La probabilité conditionnelle <span class="math">P(B/A)</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        On note <span class="math">P(B/A)</span> la probabilité que <span class="math">B</span> se réalise <strong>sachant que</strong> <span class="math">A</span> s'est réalisé. Une fois <span class="math">A</span> acquis, tout se passe comme si le nouvel univers était <span class="math">A</span> lui-même, et non plus <span class="math">Ω</span>.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définition officielle — Probabilité conditionnelle</div>
+          <p>Pour deux événements <span class="math">A</span> et <span class="math">B</span> avec <span class="math">P(A) &gt; 0</span>, la <strong>probabilité de <span class="math">B</span> sachant <span class="math">A</span></strong> est définie par :</p>
+          <p><span class="math">P(B/A) = P(A ∩ B)/P(A)</span></p>
+          <p>Le dénominateur <span class="math">P(A)</span> n'est jamais nul : on ne peut conditionner que par un événement possible.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule à graver — probabilité conditionnelle</div>
+        <div class="lecture-formula-hero-main">P(B/A) = P(A ∩ B)/P(A)&nbsp;&nbsp;(P(A) &gt; 0)</div>
+        <div class="lecture-formula-hero-desc">Au numérateur : l'intersection (ce qui réalise B ET A). Au dénominateur : l'information dont on dispose (A). Le résultat reste dans [0 ; 1].</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Le 6 sachant un nombre pair</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text">On lance un dé équilibré. <span class="math">A</span> = « obtenir un nombre pair » = <span class="math">{2 ; 4 ; 6}</span>, <span class="math">B</span> = « obtenir 6 » = <span class="math">{6}</span>. Calculer <span class="math">P(B/A)</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><span class="math">P(A) = 3/6 = 1/2</span> et <span class="math">A ∩ B = {6}</span> donc <span class="math">P(A ∩ B) = 1/6</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On applique la définition : <span class="math">P(B/A) = P(A ∩ B)/P(A) = (1/6)/(1/2)</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On divise : <span class="math">(1/6)/(1/2) = 1/6 × 2/1 = 2/6 = 1/3</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Interprétation : sachant le dé pair, le nouvel univers est <span class="math">{2 ; 4 ; 6}</span> et « obtenir 6 » y prend 1 place sur 3. <span class="math">P(B/A) = 1/3 &gt; P(B) = 1/6</span> : l'information a <strong>augmenté</strong> la chance. ✓</p></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · conditionnelle — RÈGLE DES PRODUITS  -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · conditionnelle</span>
+        <h2 class="lecture-section-title">La règle des produits</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La définition se réécrit en multipliant chaque membre par <span class="math">P(A)</span> : on obtient la formule qui sert à <strong>calculer une intersection</strong> sans compter les issues — et qui portera les poids de l'arbre pondéré.
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">P(A ∩ B) = P(A) × P(B/A)</div>
+        <div class="lecture-formula-desc">Règle des produits. Par symétrie (avec P(B) &gt; 0) : P(A ∩ B) = P(B) × P(A/B). On choisit le point de vue le plus commode.</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Un cœur puis un as (une seule carte tirée)</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Jeu de 32 cartes : <span class="math">A</span> = « tirer un cœur » (<span class="math">P(A) = 8/32</span>), <span class="math">B</span> = « tirer un as » (<span class="math">P(B) = 4/32</span>).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Sachant que la carte est un cœur, il reste 8 cœurs dont un seul as : <span class="math">P(B/A) = 1/8</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Règle des produits : <span class="math">P(A ∩ B) = P(A) × P(B/A) = 8/32 × 1/8 = 1/32</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Vérification directe : l'as de cœur est une carte sur 32, donc <span class="math">P(A ∩ B) = 1/32</span>. ✓</p></div></div></div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac — confondre <span class="math">P(A ∩ B)</span> et <span class="math">P(B/A)</span></div>
+          <p>Ce sont deux nombres <strong>différents</strong>. Avec le dé : <span class="math">P(B/A) = 1/3</span> pour <span class="math">B</span> = « obtenir 6 » sachant « pair », mais <span class="math">P(A ∩ B) = 1/6</span>. Le conditionnel <span class="math">P(B/A)</span> suppose l'information <span class="math">A</span> <strong>déjà acquise</strong> (dénominateur <span class="math">P(A)</span>) ; l'intersection <span class="math">P(A ∩ B)</span> ne suppose rien. Au moindre doute, reviens à la définition <span class="math">P(B/A) = P(A ∩ B)/P(A)</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · arbre — L'ARBRE PONDÉRÉ              -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · arbre</span>
+        <h2 class="lecture-section-title">L'arbre pondéré, l'outil graphique du chapitre</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Quand une épreuve en enchaîne une seconde, l'arbre pondéré organise tout : chaque <strong>branche</strong> porte en poids la probabilité de l'issue qu'elle représente, et les branches du second niveau portent des probabilités <strong>conditionnelles</strong>. Deux règles suffisent à tout exploiter :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">produit le long d'un chemin&nbsp;;&nbsp;somme des feuilles = 1</div>
+        <div class="lecture-formula-desc">Règle 1 : la probabilité d'un chemin (une feuille) est le PRODUIT des poids des branches parcourues — c'est la règle des produits. Règle 2 : la somme des probabilités de toutes les feuilles vaut 1 — contrôle systématique.</div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arbre pondéré à deux niveaux : racine, branches A et Ā, puis branches conditionnelles B et B̄, feuilles produits des poids">
+          <circle cx="70" cy="170" r="6" style="fill:var(--text-dim)"/>
+          <text x="42" y="196" style="fill:var(--text-dim)" font-size="12" font-family="Inter">départ</text>
+          <line x1="76" y1="164" x2="230" y2="80" style="stroke:var(--accent-bright)" stroke-width="2.5"/>
+          <line x1="76" y1="176" x2="230" y2="260" style="stroke:var(--text-dim)" stroke-width="2.5"/>
+          <text x="130" y="106" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">P(A)</text>
+          <text x="130" y="244" style="fill:var(--text-dim)" font-size="12" font-weight="700" font-family="Inter">P(Ā) = 1 − P(A)</text>
+          <circle cx="236" cy="76" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="236" cy="264" r="5" style="fill:var(--text-dim)"/>
+          <text x="222" y="58" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter">A</text>
+          <text x="220" y="290" style="fill:var(--text-dim)" font-size="13" font-weight="700" font-family="Inter">Ā</text>
+          <line x1="241" y1="72" x2="420" y2="40" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <line x1="241" y1="80" x2="420" y2="130" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <line x1="241" y1="260" x2="420" y2="210" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <line x1="241" y1="268" x2="420" y2="300" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="300" y="42" style="fill:var(--accent-bright)" font-size="12" font-family="Inter">P(B/A)</text>
+          <text x="300" y="122" style="fill:var(--text-dim)" font-size="12" font-family="Inter">P(B̄/A) = 1 − P(B/A)</text>
+          <text x="300" y="200" style="fill:var(--accent-bright)" font-size="12" font-family="Inter">P(B/Ā)</text>
+          <text x="300" y="296" style="fill:var(--text-dim)" font-size="12" font-family="Inter">P(B̄/Ā)</text>
+          <circle cx="426" cy="39" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="426" cy="131" r="5" style="fill:var(--text-dim)"/>
+          <circle cx="426" cy="209" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="426" cy="301" r="5" style="fill:var(--text-dim)"/>
+          <text x="438" y="44" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">P(A) × P(B/A)</text>
+          <text x="438" y="136" style="fill:var(--text-dim)" font-size="12" font-weight="700" font-family="Inter">P(A) × P(B̄/A)</text>
+          <text x="438" y="214" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">P(Ā) × P(B/Ā)</text>
+          <text x="438" y="306" style="fill:var(--text-dim)" font-size="12" font-weight="700" font-family="Inter">P(Ā) × P(B̄/Ā)</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Arbre pondéré à deux niveaux : au premier niveau les poids sont <span class="math">P(A)</span> et <span class="math">P(Ā)</span> (somme = 1) ; au second niveau, des probabilités <strong>conditionnelles</strong>. Chaque feuille est un produit le long du chemin, et les quatre feuilles somment à 1.</figcaption>
+      </figure>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Lire un arbre en trois gestes</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Multiplier</strong> le long d'un chemin : <span class="math">A</span> puis <span class="math">B</span> donne <span class="math">P(A ∩ B) = P(A) × P(B/A)</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Additionner</strong> les feuilles d'un même événement : <span class="math">P(B) = P(A) × P(B/A) + P(Ā) × P(B/Ā)</span> — c'est la formule des probabilités totales (section 05).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Vérifier</strong> : branches issues d'un même nœud somment à 1, et les quatre feuilles somment à 1.</p></div></div></div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Dessiner l'arbre rapporte des points</div>
+          <p>Au Bac, l'arbre bien construit (branches nommées, poids écrits) vaut des points même si le calcul final dérape. Commence <strong>toujours</strong> par le dessiner : il remplace trois lignes de rédaction et évite d'oublier une branche.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 2 · arbre — SANS REMISE UNE 4R/6B        -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · arbre</span>
+        <h2 class="lecture-section-title">Tirages sans remise : l'urne 4R/6B</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Une urne contient 4 boules rouges et 6 boules bleues. On tire <strong>deux boules successivement sans remise</strong> : la première n'est pas remise dans l'urne. Après le premier tirage, la composition change — le second tirage est <strong>conditionnel</strong>. Calculons chaque branche de l'arbre.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Deux tirages sans remise, branche par branche</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Premier tirage :</strong> <span class="math">P(R₁) = 4/10</span> et <span class="math">P(B₁) = 6/10</span> — somme : <span class="math">4/10 + 6/10 = 1</span>. ✓</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Sachant R₁</strong> (une rouge sortie, non remise) : il reste <span class="math">3</span> rouges et <span class="math">6</span> bleues sur <span class="math">9</span> boules, donc <span class="math">P(R₂/R₁) = 3/9</span> et <span class="math">P(B₂/R₁) = 6/9</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Chemin rouge-rouge :</strong> <span class="math">P(R₁ ∩ R₂) = P(R₁) × P(R₂/R₁) = 4/10 × 3/9 = 12/90 = 2/15</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Chemin rouge-bleu :</strong> <span class="math">P(R₁ ∩ B₂) = 4/10 × 6/9 = 24/90 = 4/15</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Sachant B₁</strong> : il reste <span class="math">4</span> rouges et <span class="math">5</span> bleues sur <span class="math">9</span>, donc <span class="math">P(R₂/B₁) = 4/9</span> et <span class="math">P(B₂/B₁) = 5/9</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Chemin bleu-rouge :</strong> <span class="math">P(B₁ ∩ R₂) = 6/10 × 4/9 = 24/90 = 4/15</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p><strong>Chemin bleu-bleu :</strong> <span class="math">P(B₁ ∩ B₂) = 6/10 × 5/9 = 30/90 = 5/15 = 1/3</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">8</div><div class="lecture-step-content"><p><strong>Contrôle — somme des feuilles :</strong> <span class="math">2/15 + 4/15 + 4/15 + 5/15 = 15/15 = 1</span>. ✓</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">9</div><div class="lecture-step-content"><p><strong>Application :</strong> « au moins une rouge » est le contraire de « aucune rouge » : <span class="math">P = 1 − P(B₁ ∩ B₂) = 1 − 5/15 = 10/15 = 2/3</span>. (Recomptage : <span class="math">2/15 + 4/15 + 4/15 = 10/15</span>. ✓)</p></div></div></div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac — refaire comme si de rien n'était</div>
+          <p>Sans remise, écrire <span class="math">P(R₁ ∩ R₂) = 4/10 × 4/10</span> est <strong>faux</strong> : après la première rouge, il ne reste que 3 rouges sur 9 boules. Le bon produit est <span class="math">4/10 × 3/9 = 2/15</span>. Avec remise, en revanche, l'urne retrouve sa composition — cette distinction est traitée en Partie 4 (indépendance).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 3 · proba_totales — LA FORMULE           -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · proba_totales</span>
+        <h2 class="lecture-section-title">La formule des probabilités totales</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        L'événement <span class="math">B</span> peut arriver « par plusieurs chemins » : via <span class="math">A</span>, ou via <span class="math">Ā</span>, ou via d'autres causes. Quand ces causes découpent <span class="math">Ω</span> proprement, on dit qu'elles forment une <strong>partition</strong> :
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définition — Partition de l'univers</div>
+          <p>Les événements <span class="math">B₁ ; B₂ ; … ; Bₙ</span> forment une <strong>partition</strong> de <span class="math">Ω</span> lorsqu'ils sont <strong>deux à deux incompatibles</strong> (<span class="math">Bᵢ ∩ Bⱼ = ∅</span> pour <span class="math">i ≠ j</span>) et que leur réunion est <span class="math">Ω</span> : chaque issue appartient à exactement un des <span class="math">Bᵢ</span>. Cas typique : un événement et son contraire (<span class="math">B₁ = A</span>, <span class="math">B₂ = Ā</span>).</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Formule des probabilités totales — partition <span class="math">B₁ ; B₂ ; … ; Bₙ</span></div>
+        <div class="lecture-formula-hero-main">P(A) = Σ P(Bᵢ) × P(A/Bᵢ)</div>
+        <div class="lecture-formula-hero-desc">La probabilité de A est la somme pondérée des « morceaux » A ∩ Bᵢ. Sur l'arbre : on additionne les feuilles qui réalisent A, chacune étant un produit le long de son chemin.</div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Partition de l'univers en trois zones B1, B2, B3 avec un événement A qui les traverse">
+          <rect x="30" y="30" width="460" height="180" style="fill:none;stroke:var(--text-dim)" stroke-width="2"/>
+          <line x1="214" y1="30" x2="214" y2="210" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <line x1="375" y1="30" x2="375" y2="210" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <text x="110" y="58" style="fill:var(--text-dim)" font-size="13" font-weight="700" font-family="Inter">B₁</text>
+          <text x="285" y="58" style="fill:var(--text-dim)" font-size="13" font-weight="700" font-family="Inter">B₂</text>
+          <text x="425" y="58" style="fill:var(--text-dim)" font-size="13" font-weight="700" font-family="Inter">B₃</text>
+          <ellipse cx="260" cy="140" rx="170" ry="42" style="fill:var(--green-bright);fill-opacity:0.14;stroke:var(--green-bright)" stroke-width="3"/>
+          <text x="90" y="163" style="fill:var(--green-bright)" font-size="12" font-weight="700" font-family="Inter">A ∩ B₁</text>
+          <text x="272" y="163" style="fill:var(--green-bright)" font-size="12" font-weight="700" font-family="Inter">A ∩ B₂</text>
+          <text x="382" y="163" style="fill:var(--green-bright)" font-size="12" font-weight="700" font-family="Inter">A ∩ B₃</text>
+          <text x="452" y="228" style="fill:var(--text-dim)" font-size="13" font-weight="700" font-family="Inter">Ω</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">L'événement <span class="math">A</span> est découpé par la partition : <span class="math">A = (A ∩ B₁) ∪ (A ∩ B₂) ∪ (A ∩ B₃)</span>, morceaux incompatibles. D'où <span class="math">P(A) = P(B₁) × P(A/B₁) + P(B₂) × P(A/B₂) + P(B₃) × P(A/B₃)</span>.</figcaption>
+      </figure>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple guidé — Partition en deux : A et Ā</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>La partition la plus simple : <span class="math">B₁ = A</span> et <span class="math">B₂ = Ā</span>. La formule devient <span class="math">P(B) = P(A) × P(B/A) + P(Ā) × P(B/Ā)</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Sur l'arbre de la section 03, cela veut dire : additionner les <strong>deux feuilles</strong> où <span class="math">B</span> est réalisé.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>C'est exactement le calcul « au moins une rouge » de la section 04 : <span class="math">2/15 + 4/15 + 4/15 = 10/15 = 2/3</span>.</p></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 3 · proba_totales — EXEMPLES COMPLETS    -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · proba_totales</span>
+        <h2 class="lecture-section-title">Exemples complets : deux urnes, répartition par séries</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Deux situations types où la « cause » est inconnue et où les probabilités totales donnent la réponse.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet 1 — Le choix entre deux urnes</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text">On choisit au hasard l'une de deux urnes : <span class="math">U₁</span> contient 2 boules rouges et 3 bleues ; <span class="math">U₂</span> contient 4 boules rouges et 1 bleue. Puis on tire une boule. Quelle est la probabilité qu'elle soit rouge ?</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Partition :</strong> <span class="math">B₁</span> = « l'urne U₁ est choisie » et <span class="math">B₂</span> = « l'urne U₂ est choisie », avec <span class="math">P(B₁) = P(B₂) = 1/2</span> (choix au hasard) et <span class="math">B₁ ∩ B₂ = ∅</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Conditionnelles :</strong> <span class="math">P(R/B₁) = 2/5</span> et <span class="math">P(R/B₂) = 4/5</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Probabilités totales :</strong> <span class="math">P(R) = P(B₁) × P(R/B₁) + P(B₂) × P(R/B₂) = 1/2 × 2/5 + 1/2 × 4/5</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>On calcule chaque morceau : <span class="math">1/2 × 2/5 = 1/5</span> et <span class="math">1/2 × 4/5 = 2/5</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Somme : <span class="math">P(R) = 1/5 + 2/5 = 3/5 = 0,6</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Vérification par le contraire :</strong> <span class="math">P(B/B₁) = 3/5</span>, <span class="math">P(B/B₂) = 1/5</span>, donc <span class="math">P(B) = 1/2 × 3/5 + 1/2 × 1/5 = 3/10 + 1/10 = 4/10 = 2/5</span>, et <span class="math">3/5 + 2/5 = 1</span>. ✓</p></div></div></div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet 2 — Répartition par séries dans un lycée</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text">Dans un lycée, 40 % des élèves sont en série A, 35 % en série C et 25 % en série D. La proportion de filles est de 60 % en A, 50 % en C et 40 % en D. On choisit un élève au hasard. Quelle est la probabilité que ce soit une fille ?</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Partition par séries :</strong> <span class="math">P(A) = 0,40</span>, <span class="math">P(C) = 0,35</span>, <span class="math">P(D) = 0,25</span> — somme : <span class="math">0,40 + 0,35 + 0,25 = 1</span>. ✓</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Conditionnelles :</strong> <span class="math">P(F/A) = 0,60</span>, <span class="math">P(F/C) = 0,50</span>, <span class="math">P(F/D) = 0,40</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Probabilités totales :</strong> <span class="math">P(F) = P(A) × P(F/A) + P(C) × P(F/C) + P(D) × P(F/D)</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>On calcule chaque morceau : <span class="math">0,40 × 0,60 = 0,24</span> ; <span class="math">0,35 × 0,50 = 0,175</span> ; <span class="math">0,25 × 0,40 = 0,10</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Somme : <span class="math">P(F) = 0,24 + 0,175 + 0,10 = 0,515</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Vérification par les garçons :</strong> <span class="math">P(G) = 0,40 × 0,40 + 0,35 × 0,50 + 0,25 × 0,60 = 0,16 + 0,175 + 0,15 = 0,485</span>, et <span class="math">0,515 + 0,485 = 1</span>. ✓</p></div></div></div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Réflexe rédaction pour l'examen</div>
+          <p>Structure obligatoire : (1) nommer la <strong>partition</strong> et ses probabilités, (2) écrire les <strong>probabilités conditionnelles</strong>, (3) poser la <strong>formule</strong> des probabilités totales, (4) calculer morceau par morceau, (5) vérifier la cohérence. Un résultat posé sans la formule écrite perd les points de méthode.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN — TABLEAU DES FORMULES                    -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">Tableau des formules &amp; pièges</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La carte d'identité de la partie, puis le tableau de référence à relire avant l'épreuve.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La carte d'identité de la partie 3</div>
+        <div class="lecture-formula-hero-main">P(B/A) = P(A ∩ B)/P(A)&nbsp;&nbsp;·&nbsp;&nbsp;P(A) = Σ P(Bᵢ) × P(A/Bᵢ)</div>
+        <div class="lecture-formula-hero-desc">Entre les deux, la règle des produits : P(A ∩ B) = P(A) × P(B/A). Hypothèses : P(A) &gt; 0 pour la conditionnelle, partition pour les totales.</div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Objet</th><th>Formule</th><th>À retenir / vérifier</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Conditionnelle</td><td><span class="math">P(B/A) = P(A ∩ B)/P(A)</span></td><td>exige <span class="math">P(A) &gt; 0</span> ; résultat dans <span class="math">[0 ; 1]</span></td></tr>
+            <tr><td>Règle des produits</td><td><span class="math">P(A ∩ B) = P(A) × P(B/A)</span></td><td>produit le long d'un chemin d'arbre</td></tr>
+            <tr><td>Produits (symétrique)</td><td><span class="math">P(A ∩ B) = P(B) × P(A/B)</span></td><td>on peut renverser le point de vue</td></tr>
+            <tr><td>Arbre pondéré</td><td>feuille = produit des branches</td><td>somme des feuilles = 1</td></tr>
+            <tr><td>Sans remise</td><td>second tirage : <span class="math">P(x₂/x₁)</span></td><td>la composition change — jamais de produit direct</td></tr>
+            <tr><td>Probabilités totales</td><td><span class="math">P(A) = Σ P(Bᵢ) × P(A/Bᵢ)</span></td><td><span class="math">Bᵢ</span> en partition ; somme des <span class="math">P(Bᵢ)</span> = 1</td></tr>
+            <tr><td>Partition minimale</td><td><span class="math">P(B) = P(A) × P(B/A) + P(Ā) × P(B/Ā)</span></td><td>additionner les 2 feuilles de l'arbre</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li>« Sachant que… » dans l'énoncé = probabilité conditionnelle : passer par <span class="math">P(A ∩ B)/P(A)</span>.</li>
+        <li><span class="math">P(B/A)</span> et <span class="math">P(A ∩ B)</span> sont deux nombres différents — ne jamais les interchanger.</li>
+        <li>Sans remise : le second tirage se calcule dans la nouvelle composition (4R/6B → 3R/6B sur 9 si une rouge est sortie).</li>
+        <li>Probabilités totales : identifier la partition (séries, urnes, contraire), puis somme pondérée des morceaux.</li>
+        <li>Deux contrôles gratuits : <span class="math">Σ P(Bᵢ) = 1</span> et somme des feuilles de l'arbre = 1.</li>
+      </ul>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Dé équilibré, <span class="math">A</span> = « pair », <span class="math">B</span> = « obtenir 6 ». Que vaut <span class="math">P(B/A)</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) 1/6</span><span>B) 1/3</span><span>C) 1/2</span><span>D) 2/3</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) 1/3.</strong> <span class="math">P(B/A) = P(A ∩ B)/P(A) = (1/6)/(1/2) = 1/3</span>. L'option A est <span class="math">P(A ∩ B)</span> — ne pas confondre !</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Urne 4R/6B, deux tirages <strong>sans remise</strong>. Que vaut <span class="math">P(« deux rouges »)</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) 4/25</span><span>B) 2/15</span><span>C) 4/15</span><span>D) 16/100</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) 2/15.</strong> <span class="math">P(R₁ ∩ R₂) = 4/10 × 3/9 = 12/90 = 2/15</span>. Les options A et D (4/25 = 16/100) correspondent à <span class="math">4/10 × 4/10</span> : l'erreur « comme si la boule était remise ».</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Urne choisie au hasard : <span class="math">U₁</span> (2R/3B) ou <span class="math">U₂</span> (4R/1B), puis tirage d'une boule. Que vaut <span class="math">P(R)</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) 2/5</span><span>B) 1/2</span><span>C) 3/5</span><span>D) 4/5</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>C) 3/5.</strong> <span class="math">P(R) = 1/2 × 2/5 + 1/2 × 4/5 = 1/5 + 2/5 = 3/5</span>. C'est la formule des probabilités totales avec la partition {U₁ ; U₂}.</div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[conditionnelle]</strong> <span class="math">P(B/A) = P(A ∩ B)/P(A)</span> avec <span class="math">P(A) &gt; 0</span> : la probabilité de B une fois A acquis</li>
+      <li><strong>[conditionnelle]</strong> <span class="math">P(B/A)</span> ≠ <span class="math">P(A ∩ B)</span> : le conditionnel a un dénominateur, l'intersection n'a aucune information</li>
+      <li><strong>[produits]</strong> <span class="math">P(A ∩ B) = P(A) × P(B/A)</span> — et par symétrie <span class="math">P(A ∩ B) = P(B) × P(A/B)</span></li>
+      <li><strong>[arbre]</strong> Branches du premier niveau : <span class="math">P(A)</span>, <span class="math">P(Ā)</span> ; branches du second : probabilités conditionnelles</li>
+      <li><strong>[arbre]</strong> Feuille = produit le long du chemin ; somme des feuilles = 1 ; somme des branches d'un nœud = 1</li>
+      <li><strong>[proba_totales]</strong> Partition <span class="math">B₁ ; … ; Bₙ</span> (incompatibles, réunion <span class="math">Ω</span>) : <span class="math">P(A) = Σ P(Bᵢ) × P(A/Bᵢ)</span></li>
+      <li><strong>[proba_totales]</strong> Cas de la partition {A ; Ā} : <span class="math">P(B) = P(A) × P(B/A) + P(Ā) × P(B/Ā)</span></li>
+      <li><strong>[proba_totales]</strong> Sans remise = conditionnel obligatoire (4R/6B : <span class="math">P(R₁ ∩ R₂) = 4/10 × 3/9 = 2/15</span>)</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 3 terminée !</div>
+    <div class="lecture-end-sub">Dernière ligne droite : la fiche complète — formule de Bayes et indépendance</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

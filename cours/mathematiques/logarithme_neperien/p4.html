@@ -1,0 +1,427 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · LOGARITHME NÉPÉRIEN      -->
+<!-- PARTIE 4 : FICHE COMPLÈTE DE RÉVISION                        -->
+<!-- ÉQUATIONS · INÉQUATIONS · CHANGEMENT DE VARIABLE             -->
+<!-- APPLICATIONS · RÉFLEXES BAC · TABLEAU DE SYNTHÈSE            -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 04 · Logarithme népérien</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Fiche complète : <em>équations, inéquations &amp; applications</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Dernière partie du chapitre, pensée comme une <strong>fiche de révision condensée</strong> : toutes les formules majeures, toutes les méthodes, tous les réflexes d'examen. Elle couvre <strong>4 blocs</strong> : la <strong>résolution d'équations</strong> avec <span class="math">ln</span>, les <strong>inéquations</strong> (l'ordre est conservé), le <strong>changement de variable</strong> pour les trinômes en <span class="math">ln x</span>, puis les <strong>applications concrètes</strong> (temps de doublement, pH, décibels) et le <strong>tableau de synthèse</strong> à relire la veille de l'épreuve.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 4 notions</span>
+      <span class="lecture-hero-meta-item">📊 6 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 6 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Mode d'emploi de la fiche</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Formules vitales — l'essentiel en un coup d'œil</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · équations — ln x = a et ln x = ln b</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · inéquations — l'ordre est conservé</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 3 · changement de variable &amp; croissances comparées</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 4 · applications, réflexes Bac et tableau de synthèse</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MODE D'EMPLOI -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Mode d'emploi</span>
+        <h2 class="lecture-section-title">Comment réviser avec cette fiche</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Une fiche ne se lit pas comme un cours : elle se <strong>parcourt, puis s'interroge</strong>. Voici le circuit recommandé la veille de l'évaluation.
+      </p>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Circuit de révision — 3 passes</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>Passe 1 (5 min)</strong> : lis la section 01 et récite chaque formule à voix haute, conditions comprises.</li>
+            <li><strong>Passe 2 (10 min)</strong> : cache les résolutions des exemples (sections 02 à 05) et refais-les sur papier ; compare ligne par ligne.</li>
+            <li><strong>Passe 3 (5 min)</strong> : relis les réflexes Bac et les erreurs interdites, puis la grande table de synthèse — ce sont les points les plus souvent perdus.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Le fil conducteur de tout le chapitre</div>
+          <p><span class="math">ln</span> et <span class="math">exp</span> sont réciproques : chacun défait le travail de l'autre, sur les bons domaines. <strong>Résoudre une équation avec ln, c'est éliminer le ln grâce à exp.</strong> Le reste n'est que conditions d'existence et calculs soignés.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : FORMULES VITALES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Formules vitales</span>
+        <h2 class="lecture-section-title">L'essentiel en un coup d'œil</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Formule vitale n° 1 — transformer les produits</div>
+        <div class="lecture-formula-hero-main">ln(ab) = ln a + ln b&nbsp;&nbsp;&nbsp;(a &gt; 0, b &gt; 0)</div>
+        <div class="lecture-formula-hero-desc">Avec ses conséquences : ln(1/b) = −ln b ; ln(a/b) = ln a − ln b ; ln(aⁿ) = n·ln a. Jamais pour une somme : ln(a + b) ≠ ln a + ln b.</div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Formule vitale n° 2 — dériver et primitiver</div>
+        <div class="lecture-formula-hero-main">(ln u)' = u'/u&nbsp;&nbsp;&nbsp;(u &gt; 0)<br>u'/u&nbsp;→&nbsp;ln(u) + C</div>
+        <div class="lecture-formula-hero-desc">Cas particulier : (ln x)' = 1/x sur ]0 ; +∞[, donc ln x est une primitive de 1/x.</div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Formule vitale n° 3 — résoudre les équations</div>
+        <div class="lecture-formula-hero-main">ln x = a ⇔ x = e^a<br>ln x = ln b ⇔ x = b</div>
+        <div class="lecture-formula-hero-desc">La solution de la première est automatiquement positive (car e^a &gt; 0) ; la seconde « enlève les ln » des deux côtés, avec x &gt; 0 et b &gt; 0.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">ln x ≤ x − 1&nbsp;&nbsp;(tout x &gt; 0, égalité en x = 1)</div>
+        <div class="lecture-formula-desc">L'inégalité de référence (partie 3) : conséquence immédiate ln x &lt; x — le logarithme ne rattrape jamais la fonction identité.</div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Chaque formule traîne sa condition</div>
+          <p>Une formule de cette section utilisée <strong>sans sa condition</strong> est une demi-formule : elle rapporte peu et coûte cher. Écris « car <span class="math">a &gt; 0</span> et <span class="math">b &gt; 0</span> » à chaque application — le correcteur cherche ces mentions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · ÉQUATIONS -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · équations</span>
+        <h2 class="lecture-section-title">Équations : ln x = a, ln x = ln b</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Les deux équations de référence</div>
+          <ul class="lecture-list">
+            <li>Pour tout réel <span class="math">a</span> : <span class="math">ln x = a ⇔ x = e^a</span>. La solution est <strong>automatiquement positive</strong> : aucune condition à rejeter.</li>
+            <li>Pour <span class="math">x &gt; 0</span> et <span class="math">b &gt; 0</span> : <span class="math">ln x = ln b ⇔ x = b</span>. On « enlève les ln » des deux côtés.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode — résoudre une équation avec ln en 4 étapes</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>(1)</strong> Écrire les <strong>conditions d'existence</strong> sur leur propre ligne (tout ce qui est sous un ln doit être &gt; 0), <strong>avant</strong> toute manipulation.</li>
+            <li><strong>(2)</strong> <strong>Regrouper</strong> tous les ln en un seul de chaque côté (propriétés du produit et du quotient).</li>
+            <li><strong>(3)</strong> <strong>Éliminer les ln</strong> : <span class="math">ln A = ln B</span> donne <span class="math">A = B</span>, ou <span class="math">ln A = k</span> donne <span class="math">A = e^k</span>.</li>
+            <li><strong>(4)</strong> Résoudre, <strong>rejeter</strong> les solutions hors des conditions, puis <strong>vérifier</strong> et conclure avec l'ensemble <span class="math">S</span>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 1 (type Bac) — ln x + ln(x − 1) = ln 6</div>
+        <div class="lecture-example-content">
+          <p><strong>Conditions d'existence, écrites avant la résolution :</strong></p>
+          <p><span class="math">x &gt; 0</span> et <span class="math">x − 1 &gt; 0</span>, c'est-à-dire <span class="math">x &gt; 1</span></p>
+          <p>Toute solution en dehors de <span class="math">]1 ; +∞[</span> sera rejetée. La résolution, une transformation par étape :</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Regrouper.</strong> Pour <span class="math">x &gt; 1</span> :</p><p><span class="math">ln x + ln(x − 1) = ln(x(x − 1))</span></p><p>L'équation devient <span class="math">ln(x(x − 1)) = ln 6</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Éliminer les ln.</strong></p><p><span class="math">x(x − 1) = 6</span></p><p><span class="math">x² − x − 6 = 0</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Résoudre le trinôme.</strong></p><p><span class="math">Δ = 1 + 24 = 25</span></p><p><span class="math">x = (1 ± 5)/2</span> : donc <span class="math">x = 3</span> ou <span class="math">x = −2</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Filtrer, vérifier, conclure.</strong> <span class="math">−2</span> viole la condition <span class="math">x &gt; 1</span> : rejeté. Reste <span class="math">x = 3</span>, et en effet <span class="math">ln 3 + ln 2 = ln 6</span> ✓ (car <span class="math">3 × 2 = 6</span>). Donc <span class="math">S = {3}</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 2 — ln(2x + 1) = 3</div>
+        <div class="lecture-example-content">
+          <p><strong>Condition d'existence, écrite avant la résolution :</strong></p>
+          <p><span class="math">2x + 1 &gt; 0 ⇔ x &gt; −1/2</span></p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Passer à l'exponentielle.</strong></p><p><span class="math">ln(2x + 1) = 3 ⇔ 2x + 1 = e³</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Isoler, une étape par ligne.</strong></p><p><span class="math">2x = e³ − 1</span></p><p><span class="math">x = (e³ − 1)/2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Conclure.</strong> <span class="math">S = {(e³ − 1)/2}</span>, soit environ <span class="math">9,54</span>, qui vérifie bien <span class="math">x &gt; −1/2</span> ✓ — la forme exacte avec <span class="math">e³</span> vaut mieux qu'un arrondi.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Type d'équation</th><th>Méthode</th><th>Solution</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">ln x = a</span></td><td>passer à l'exponentielle</td><td><span class="math">x = e^a</span> (toujours <span class="math">&gt; 0</span>)</td></tr>
+            <tr><td><span class="math">ln x = ln b</span></td><td>« enlever les ln »</td><td><span class="math">x = b</span>, avec <span class="math">x &gt; 0</span> et <span class="math">b &gt; 0</span></td></tr>
+            <tr><td><span class="math">ln A(x) = k</span></td><td>exponentielle : <span class="math">A(x) = e^k</span>, puis condition</td><td>ex. <span class="math">ln(2x + 1) = 3</span> donne <span class="math">x = (e³ − 1)/2</span></td></tr>
+            <tr><td><span class="math">ln A = ln B</span></td><td><span class="math">A = B</span>, puis filtre du domaine</td><td>ex. <span class="math">ln x + ln(x − 1) = ln 6</span> donne <span class="math">S = {3}</span></td></tr>
+            <tr><td>trinôme en <span class="math">ln x</span></td><td>poser <span class="math">X = ln x</span>, résoudre, revenir par <span class="math">x = e^X</span></td><td>ex. <span class="math">2(ln x)² − 3 ln x + 1 = 0</span> donne <span class="math">S = {√e ; e}</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">🚨 L'erreur éliminatoire : oublier les conditions</div>
+          <p>Dans l'exemple 1, résoudre le trinôme et conclure <span class="math">S = {3 ; −2}</span> sans avoir écrit (ni utilisé) la condition <span class="math">x &gt; 1</span> fait perdre la question entière : <span class="math">ln(−2)</span> et <span class="math">ln(−3)</span> n'existent pas ! <strong>Les conditions d'existence d'abord, le calcul ensuite, le filtre enfin.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · INÉQUATIONS -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · inéquations</span>
+        <h2 class="lecture-section-title">Inéquations : l'ordre est conservé</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        <span class="math">ln</span> est <strong>strictement croissante</strong> : passer au logarithme (ou l'éliminer) ne change pas le sens des inégalités. C'est tout ce qu'il faut savoir — le reste est du filtrage de domaine.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 Les trois inéquations de référence</div>
+          <ul class="lecture-list">
+            <li>Pour <span class="math">x &gt; 0</span> et <span class="math">b &gt; 0</span> : <span class="math">ln x &lt; ln b ⇔ x &lt; b</span> (idem avec ≤, &gt;, ≥).</li>
+            <li>Pour tout réel <span class="math">a</span> : <span class="math">ln x ≥ a ⇔ x ≥ e^a</span> — et <span class="math">x &gt; 0</span> est alors automatiquement vérifié.</li>
+            <li>Seuils utiles : <span class="math">ln x &gt; 0 ⇔ x &gt; 1</span> ; <span class="math">ln x ≤ 0 ⇔ 0 &lt; x ≤ 1</span>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 1 — ln(x − 2) &gt; 0</div>
+        <div class="lecture-example-content">
+          <p><strong>Condition d'existence, écrite avant la résolution :</strong></p>
+          <p><span class="math">x − 2 &gt; 0 ⇔ x &gt; 2</span></p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Résoudre sans le ln.</strong></p><p><span class="math">ln(x − 2) &gt; 0 ⇔ x − 2 &gt; e⁰ = 1</span></p><p><span class="math">x − 2 &gt; 1 ⇔ x &gt; 3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Fusionner avec la condition.</strong> <span class="math">x &gt; 3</span> implique <span class="math">x &gt; 2</span> : <span class="math">S = ]3 ; +∞[</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 2 — ln x ≤ ln 5</div>
+        <div class="lecture-example-content">
+          <p><strong>Condition d'existence, écrite avant la résolution :</strong></p>
+          <p><span class="math">x &gt; 0</span> (et <span class="math">5 &gt; 0</span> est acquis)</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Résoudre sans le ln.</strong> Ordre conservé :</p><p><span class="math">ln x ≤ ln 5 ⇔ x ≤ 5</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Fusionner avec la condition.</strong> <span class="math">S = ]0 ; 5]</span> — le <span class="math">0</span> est <strong>exclu</strong> car <span class="math">ln 0</span> n'existe pas.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 3 — ln(x + 1) &lt; 2</div>
+        <div class="lecture-example-content">
+          <p><strong>Condition d'existence, écrite avant la résolution :</strong></p>
+          <p><span class="math">x + 1 &gt; 0 ⇔ x &gt; −1</span></p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Résoudre sans le ln, une équivalence par ligne.</strong></p><p><span class="math">ln(x + 1) &lt; 2 ⇔ x + 1 &lt; e²</span></p><p><span class="math">x + 1 &lt; e² ⇔ x &lt; e² − 2</span> (environ <span class="math">5,39</span>)</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Fusionner avec la condition.</strong> <span class="math">S = ]−1 ; e² − 2[</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Deux ensembles à joindre, pas un seul</div>
+          <p>La réponse d'une inéquation logarithmique est presque toujours l'<strong>intersection</strong> de la condition d'existence et de la solution « sans ln ». Écrire <span class="math">S = ]−∞ ; e² − 2[</span> pour l'exemple 3 en oubliant <span class="math">x &gt; −1</span> est l'erreur la plus fréquente du chapitre.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 3 · CHANGEMENT DE VARIABLE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · changement de variable</span>
+        <h2 class="lecture-section-title">Changement de variable &amp; croissances comparées</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Quand <span class="math">ln x</span> apparaît plusieurs fois, dont une fois <strong>au carré</strong>, l'équation est un trinôme déguisé. On pose l'inconnue intermédiaire <span class="math">X = ln x</span>, on résout en <span class="math">X</span>, puis on revient à <span class="math">x</span>.
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">X = ln x&nbsp;&nbsp;⇔&nbsp;&nbsp;x = e^X&nbsp;&nbsp;&nbsp;(x &gt; 0, X ∈ ℝ)</div>
+        <div class="lecture-formula-desc">Le retour à x passe par l'exponentielle : la solution x est positive automatiquement, quel que soit le signe de X.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple travaillé (type Bac) — 2(ln x)² − 3 ln x + 1 = 0</div>
+        <div class="lecture-example-content">
+          <p><strong>Condition d'existence, écrite avant la résolution :</strong></p>
+          <p><span class="math">x &gt; 0</span> — on pose alors <span class="math">X = ln x</span>, avec <span class="math">X</span> réel quelconque</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Réécrire l'équation.</strong> Elle devient un trinôme classique :</p><p><span class="math">2X² − 3X + 1 = 0</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Résoudre en X.</strong></p><p><span class="math">Δ = 9 − 8 = 1</span></p><p><span class="math">X = (3 ± 1)/4</span> : donc <span class="math">X = 1/2</span> ou <span class="math">X = 1</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Revenir à x, une valeur par ligne.</strong></p><p><span class="math">X = 1</span> donne <span class="math">x = e¹ = e</span></p><p><span class="math">X = 1/2</span> donne <span class="math">x = e^(1/2) = √e</span> (environ <span class="math">1,65</span>)</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Conclure et vérifier.</strong> <span class="math">S = {√e ; e}</span>. Contrôles : pour <span class="math">x = e</span>, <span class="math">2 − 3 + 1 = 0</span> ✓ ; pour <span class="math">x = √e</span>, <span class="math">2 × (1/2)² − 3 × (1/2) + 1 = 0</span> ✓.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ (ln x)² et ln(x²) : ne jamais mélanger</div>
+          <p><span class="math">(ln x)²</span> est le <strong>carré du logarithme</strong> (c'est lui qui donne le trinôme ci-dessus) ; <span class="math">ln(x²) = 2·ln x</span> est le <strong>logarithme du carré</strong>. Les deux expressions n'ont ni le même sens ni le même domaine : <span class="math">]0 ; +∞[</span> pour l'une, <span class="math">ℝ*</span> pour l'autre.</p>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Seconde arme de la section : les <strong>croissances comparées</strong>, qui répondent à la question piège « peut-on avoir <span class="math">x &lt; ln x</span> ? ». Réponse : <strong>jamais</strong> (pour <span class="math">x &gt; 0</span>), car <span class="math">ln x ≤ x − 1</span> entraîne <span class="math">ln x &lt; x</span>. Vérification numérique :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>x</th><th>0,5</th><th>1</th><th>e ≈ 2,72</th><th>10</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ln x</strong></td><td>≈ −0,69</td><td>0</td><td>1</td><td>≈ 2,30</td></tr>
+            <tr><td><strong>x</strong></td><td>0,5</td><td>1</td><td>≈ 2,72</td><td>10</td></tr>
+            <tr><td><strong>ln x &lt; x ?</strong></td><td>oui</td><td>oui</td><td>oui</td><td>oui</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Hiérarchie des croissances (à retenir telle quelle)</div>
+          <p>À l'infini : <strong>exp écrase les puissances, qui écrasent ln</strong>. Conséquences chiffrées : le quotient de <span class="math">ln x</span> par <span class="math">x</span> tend vers <span class="math">0</span> en <span class="math">+∞</span>, le produit <span class="math">x · ln x</span> tend vers <span class="math">0</span> en <span class="math">0⁺</span>, et pour tout <span class="math">x &gt; 0</span> : <span class="math">ln x ≤ x − 1 &lt; x</span>. Le logarithme ne « rattrape » jamais <span class="math">x</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 4 · APPLICATIONS & RÉFLEXES BAC -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · applications &amp; examen</span>
+        <h2 class="lecture-section-title">Applications concrètes &amp; réflexes Bac</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <h3 class="lecture-subtitle">📈 Le temps de doublement</h3>
+      <p class="lecture-text">
+        Une grandeur qui croît de façon exponentielle s'écrit <span class="math">N(t) = N₀ e^(k·t)</span> avec <span class="math">k &gt; 0</span>. Le <strong>temps de doublement</strong> <span class="math">T</span> est la durée au bout de laquelle la grandeur vaut le double de son départ :
+      </p>
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Écrire l'équation du doublement.</strong></p><p><span class="math">N₀ e^(k·T) = 2N₀</span></p><p><span class="math">e^(k·T) = 2</span></p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Prendre le log et isoler.</strong></p><p><span class="math">k·T = ln 2</span></p><p><span class="math">T = (ln 2)/k</span></p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Application.</strong> Avec <span class="math">k = 0,07</span> par an : <span class="math">T = 0,693/0,07 ≈ 9,9</span> ans — on retrouve la « règle des 70 » des économistes (<span class="math">70/7 = 10</span> ans).</p></div></div>
+      </div>
+      <h3 class="lecture-subtitle">🧪 Le pH et le logarithme décimal</h3>
+      <p class="lecture-text">
+        Le logarithme décimal se déduit du népérien par <span class="math">log x = ln x / ln 10</span> (avec <span class="math">ln 10 ≈ 2,303</span>). En chimie, le pH vaut l'opposé du log de la concentration <span class="math">a</span> en ions hydrogène :
+      </p>
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Eau neutre.</strong> Sa concentration vaut <span class="math">a = 10⁻⁷</span>, donc <span class="math">log(10⁻⁷) = −7</span>.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Conclure.</strong> <span class="math">pH = −log a = 7</span> : chaque unité de pH divise la concentration par <span class="math">10</span> — une échelle logarithmique.</p></div></div>
+      </div>
+      <h3 class="lecture-subtitle">🔊 Les décibels</h3>
+      <p class="lecture-text">
+        L'intensité sonore se mesure aussi en échelle log : <span class="math">L = 10 · log(I/I₀)</span> avec <span class="math">I₀ = 10⁻¹²</span> W·m⁻² (seuil d'audition).
+      </p>
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Calculer le rapport.</strong> Pour <span class="math">I = 10⁻⁶</span> :</p><p><span class="math">I/I₀ = 10⁻⁶/10⁻¹² = 10⁶</span></p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Conclure, une multiplication par ligne.</strong></p><p><span class="math">L = 10 × log(10⁶)</span></p><p><span class="math">L = 10 × 6 = 60</span> dB</p><p>(conversation courante). Multiplier l'intensité par <span class="math">10</span> ajoute <span class="math">10</span> dB seulement — la propriété du produit en action.</p></div></div>
+      </div>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 Les 5 réflexes Bac</div>
+          <ul class="lecture-list">
+            <li><strong>Réflexe 1 — Domaine d'abord</strong> : écrire toutes les conditions (&gt; 0) avant la moindre manipulation.</li>
+            <li><strong>Réflexe 2 — Un seul ln par côté</strong> : regrouper avec les propriétés du produit et du quotient.</li>
+            <li><strong>Réflexe 3 — Exp pour éliminer</strong> : <span class="math">ln A = ln B ⇔ A = B</span> et <span class="math">ln A = k ⇔ A = e^k</span>.</li>
+            <li><strong>Réflexe 4 — Filtrer les solutions</strong> : rejeter toute solution hors du domaine, et l'expliquer en une phrase.</li>
+            <li><strong>Réflexe 5 — Contrôler</strong> : réinjecter la solution, ou vérifier à la calculatrice avec des valeurs approchées.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">🚨 Les 6 erreurs interdites (vérifie ta copie)</div>
+          <ul class="lecture-list">
+            <li>Écrire <span class="math">ln(a + b) = ln a + ln b</span> : faux, le log ne transforme que les produits.</li>
+            <li>Conclure <span class="math">ln x = 0 ⇒ x = 0</span> : faux, la solution est <span class="math">x = 1</span> (et <span class="math">ln 0</span> n'existe pas).</li>
+            <li>Garder une solution hors du domaine (exemple : garder <span class="math">x = −2</span> quand il faut <span class="math">x &gt; 1</span>).</li>
+            <li>Confondre <span class="math">(ln x)²</span> et <span class="math">ln(x²) = 2·ln x</span>.</li>
+            <li>Écrire <span class="math">ln 1 = 1</span> : faux, <span class="math">ln 1 = 0</span> (c'est <span class="math">ln e</span> qui vaut <span class="math">1</span>).</li>
+            <li>Dériver ou primitiver <span class="math">ln(u)</span> sans vérifier <span class="math">u &gt; 0</span>.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Et voici la <strong>grande table de synthèse</strong> du chapitre : la relire la veille de l'épreuve, en cachant la colonne du milieu pour se tester.
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Objet</th><th>Formule</th><th>Réflexe de vérification</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Réciprocité</td><td><span class="math">ln(e^x) = x ; e^(ln x) = x</span></td><td>domaines : <span class="math">ℝ</span> et <span class="math">]0 ; +∞[</span></td></tr>
+            <tr><td>Valeurs pivot</td><td><span class="math">ln 1 = 0</span> ; <span class="math">ln e = 1</span> ; <span class="math">ln(eⁿ) = n</span></td><td>retour à la définition : <span class="math">e⁰ = 1</span>, <span class="math">e¹ = e</span></td></tr>
+            <tr><td>Produit</td><td><span class="math">ln(ab) = ln a + ln b</span> (<span class="math">a ; b &gt; 0</span>)</td><td>essai : <span class="math">ln(2 × 8) = ln 2 + ln 8</span></td></tr>
+            <tr><td>Inverse</td><td><span class="math">ln(1/b) = −ln b</span></td><td>essai : <span class="math">ln(1/e) = −1</span></td></tr>
+            <tr><td>Quotient</td><td><span class="math">ln(a/b) = ln a − ln b</span></td><td>essai : <span class="math">ln(10/5) = ln 2</span></td></tr>
+            <tr><td>Puissance</td><td><span class="math">ln(aⁿ) = n·ln a</span></td><td>essai : <span class="math">ln 9 = 2·ln 3</span></td></tr>
+            <tr><td>Dérivées</td><td><span class="math">(ln x)' = 1/x ; (ln u)' = u'/u</span></td><td>conditions <span class="math">x &gt; 0 ; u &gt; 0</span> écrites</td></tr>
+            <tr><td>Primitives</td><td><span class="math">1/x → ln x + C ; u'/u → ln(u) + C</span></td><td>redériver pour retrouver <span class="math">f</span></td></tr>
+            <tr><td>Limites</td><td><span class="math">ln x → −∞</span> en <span class="math">0⁺</span> ; <span class="math">→ +∞</span> en <span class="math">+∞</span></td><td>asymptote verticale <span class="math">x = 0</span></td></tr>
+            <tr><td>Croissances comparées</td><td><span class="math">(ln x)/x → 0</span> ; <span class="math">x · ln x → 0</span> en <span class="math">0⁺</span></td><td>la puissance gagne toujours</td></tr>
+            <tr><td>Équations</td><td><span class="math">ln x = a ⇔ x = e^a</span> ; <span class="math">ln x = ln b ⇔ x = b</span></td><td>solution <span class="math">&gt; 0</span>, puis réinjection</td></tr>
+            <tr><td>Ordre</td><td><span class="math">a &lt; b ⇔ ln a &lt; ln b ; ln x ≤ x − 1</span></td><td><span class="math">ln</span> croissante ; tangente en <span class="math">1</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 La carte mentale du chapitre</div>
+          <p>Une question avec <span class="math">ln</span> se traite de trois façons : <strong>simplifier</strong> (propriétés algébriques du produit, du quotient, de la puissance), <strong>éliminer le ln</strong> (exponentielle pour les équations, ordre conservé pour les inéquations), <strong>étudier</strong> (domaine, dérivée <span class="math">u'/u</span>, limites, tableau). Chaque exercice du Bac demande simplement de choisir le bon outil — et de citer ses conditions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[fiche]</strong> Formule vitale n° 1 : <span class="math">ln(ab) = ln a + ln b</span> (<span class="math">a ; b &gt; 0</span>), avec <span class="math">ln(a/b) = ln a − ln b</span> et <span class="math">ln(aⁿ) = n·ln a</span></li>
+      <li><strong>[fiche]</strong> Formule vitale n° 2 : <span class="math">(ln u)' = u'/u</span> et primitive de <span class="math">u'/u</span> : <span class="math">ln(u) + C</span> (<span class="math">u &gt; 0</span>)</li>
+      <li><strong>[equations]</strong> <span class="math">ln x = a ⇔ x = e^a</span> (solution toujours positive) ; <span class="math">ln x = ln b ⇔ x = b</span> (avec <span class="math">x ; b &gt; 0</span>)</li>
+      <li><strong>[equations]</strong> Méthode : conditions d'existence → regrouper les ln → éliminer par exp → filtrer et vérifier</li>
+      <li><strong>[inequations]</strong> <span class="math">ln</span> croissante : <span class="math">ln x &lt; ln b ⇔ x &lt; b</span> ; <span class="math">ln x ≥ a ⇔ x ≥ e^a</span> ; toujours joindre la condition d'existence</li>
+      <li><strong>[changement_variable]</strong> Équation en <span class="math">(ln x)²</span> : poser <span class="math">X = ln x</span>, résoudre le trinôme, revenir par <span class="math">x = e^X</span> — exemple : <span class="math">2(ln x)² − 3 ln x + 1 = 0</span> donne <span class="math">S = {√e ; e}</span></li>
+      <li><strong>[croissances]</strong> Pour tout <span class="math">x &gt; 0</span> : <span class="math">ln x ≤ x − 1 &lt; x</span> — donc jamais <span class="math">x &lt; ln x</span> ; à l'infini, les puissances écrasent <span class="math">ln</span></li>
+      <li><strong>[applications]</strong> Temps de doublement : <span class="math">T = (ln 2)/k</span> ; pH : <span class="math">−log a</span> ; décibels : <span class="math">10 · log(I/I₀)</span>, avec <span class="math">log x = ln x / ln 10</span></li>
+      <li><strong>[reflexes]</strong> Les 5 réflexes : domaine → regrouper → exponentielle → filtrer → contrôler</li>
+      <li><strong>[reflexes]</strong> Erreurs interdites : <span class="math">ln(a + b)</span> « = » <span class="math">ln a + ln b</span> ; <span class="math">ln x = 0</span> « ⇒ » <span class="math">x = 0</span> ; <span class="math">(ln x)²</span> confondu avec <span class="math">ln(x²)</span> ; <span class="math">ln 1</span> « = » <span class="math">1</span></li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Fiche terminée — chapitre ln bouclé !</div>
+    <div class="lecture-end-sub">Refais les exemples sans regarder les résolutions, puis passe aux exercices du chapitre</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

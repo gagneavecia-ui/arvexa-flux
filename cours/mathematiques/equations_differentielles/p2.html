@@ -1,0 +1,474 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · ÉQUATIONS DIFFÉRENTIELLES -->
+<!-- PARTIE 2 : L'ÉQUATION y' = ay + b                             -->
+<!-- Notion 1 : solution_particuliere — chercher une solution      -->
+<!--            particulière constante et la vérifier en steps     -->
+<!-- Notion 2 : eq_y_ayb — solution générale y = C·e^(ax) − b/a,   -->
+<!--            démonstration (v = y + b/a), condition initiale,   -->
+<!--            interprétation graphique                           -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge"><span class="lecture-hero-icon">📘</span><span class="lecture-hero-label">Partie 02 · Équations différentielles</span></div>
+    <h1 class="lecture-hero-title">
+      L'équation <em>y' = ay + b</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Dans la partie 1, tu maîtrises <span class="math">y' = ay</span>. Voici maintenant une <strong>constante</strong> <span class="math">b</span> qui s'ajoute : l'équation devient <span class="math">y' = ay + b</span>, et elle décrit des situations très concrètes — un réservoir qui fuit mais qu'alimente une pompe à débit fixe, une population qui reçoit un apport constant, une facture avec abonnement. Cette partie couvre <strong>2 notions</strong> : la recherche d'une <strong>solution particulière constante</strong>, puis la <strong>résolution complète</strong> de <span class="math">y' = ay + b</span> : solution générale, démonstration, condition initiale et lecture graphique. Au bout du compte, une seule recette, valable pour toutes ces équations.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span><span class="lecture-hero-meta-item">🧮 2 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span><span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header"><span>Dans cette partie</span><span class="lecture-toc-count">2 notions · 8 sections</span></div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Quand un apport constant s'invite</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · solution_particuliere — L'équation homogène et l'idée de la partie</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · solution_particuliere — La solution particulière constante</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · eq_y_ayb — La solution générale de y' = ay + b</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · eq_y_ayb — Démonstration : le changement v = y + b/a</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 2 · eq_y_ayb — Exemples de résolution complets</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 2 · eq_y_ayb — Des courbes qui convergent vers −b/a</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — L'essentiel de la partie</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header"><div class="lecture-section-num">00</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span><h2 class="lecture-section-title">Quand un apport constant s'invite</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le modèle <span class="math">y' = ay</span> de la partie 1 suppose que la variation est <em>strictement</em> proportionnelle à la quantité. Mais la réalité ajoute souvent un terme fixe, indépendant de la quantité présente. Un réservoir d'eau d'un village se vide d'autant plus vite qu'il est plein (fuite proportionnelle au volume), mais une pompe y verse un <strong>débit constant</strong>. Un compte d'épargne croît proportionnellement au capital, mais des <strong>frais fixes</strong> sont prélevés chaque année. Dans tous ces cas, la dérivée vaut « un terme proportionnel à y, plus une constante » : on obtient exactement <span class="math">y' = ay + b</span>.
+      </p>
+      <p class="lecture-text">
+        La bonne nouvelle : cette équation ne demande <strong>aucun outil nouveau</strong>. On va simplement trouver <em>une</em> solution (la plus simple possible), puis la combiner aux solutions de la partie 1. Tout le chapitre repose sur cette idée de <strong>décomposition</strong>.
+      </p>
+      <div class="lecture-callout lecture-callout-gold"><div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Identifier</strong> la structure : équation homogène + solution particulière.</li>
+            <li><strong>Trouver</strong> la solution particulière constante <span class="math">y_p = −b/a</span> et la vérifier.</li>
+            <li><strong>Résoudre</strong> <span class="math">y' = ay + b</span> : solution générale, démonstration, condition initiale, graphique.</li>
+          </ul>
+        </div></div>
+      <div class="lecture-aside"><div class="lecture-aside-label">🌍 Autour de nous</div><div class="lecture-aside-content">
+          Le <strong>refroidissement d'une tasse de thé</strong> obéit à <span class="math">y' = ay + b</span> : la température se rapproche d'autant plus vite de celle de la salle qu'elle en est éloignée (terme proportionnel), et la salle impose une température fixe (la constante <span class="math">b</span>). La température finale — l'asymptote — est exactement la <span class="math">−b/a</span> que tu vas calculer dans cette partie.
+        </div></div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · solution_particuliere — STRUCTURE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header"><div class="lecture-section-num">01</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · solution_particuliere</span><h2 class="lecture-section-title">L'équation homogène et l'idée de la partie</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Voici l'objet d'étude, avec sa définition officielle — à restituer telle quelle à l'examen.
+      </p>
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définition officielle — Équation linéaire à second membre constant</div>
+          <p>Une <strong>équation différentielle linéaire du premier ordre à second membre constant</strong> est une équation de la forme <span class="math">y' = ay + b</span>, où <span class="math">a</span> et <span class="math">b</span> sont deux réels <strong>donnés</strong>, avec <span class="math">a ≠ 0</span>. Le réel <span class="math">b</span> s'appelle le <strong>second membre constant</strong>. Résoudre cette équation, c'est trouver <strong>toutes</strong> les fonctions y dérivables sur <span class="math">ℝ</span> qui vérifient l'égalité pour tout x.</p>
+        </div></div>
+      <p class="lecture-text">
+        À l'intérieur de cette équation se cache une vieille connaissance : si l'on supprime la constante <span class="math">b</span> (on pose <span class="math">b = 0</span>), on retrouve l'équation <strong>homogène</strong> de la partie 1, déjà entièrement résolue.
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">y' = ay&nbsp;&nbsp;(homogène)&nbsp;&nbsp;⇔&nbsp;&nbsp;y_h = C·e^(ax),&nbsp;&nbsp;C ∈ ℝ</div><div class="lecture-formula-desc">Les solutions de l'équation homogène s'appellent les solutions homogènes : c'est exactement le théorème de la partie 1. Elles servent de « socle » dans toute la suite.</div>
+      </div>
+      <p class="lecture-text">
+        Le tableau suivant fixe la comparaison entre les deux équations — et annonce la stratégie :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th></th><th><span class="math">y' = ay</span> (partie 1)</th><th><span class="math">y' = ay + b</span> (cette partie)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Second membre</td><td>aucun (<span class="math">0</span>)</td><td>la constante <span class="math">b</span></td></tr>
+            <tr><td>Solution « évidente »</td><td>la fonction nulle</td><td>la constante <span class="math">−b/a</span></td></tr>
+            <tr><td>Solution générale</td><td><span class="math">C·e^(ax)</span></td><td><span class="math">C·e^(ax) − b/a</span></td></tr>
+            <tr><td>Rôle de C</td><td>réglage libre</td><td>réglage libre (imposé par la condition initiale)</td></tr>
+          </tbody>
+        </table></div>
+      <p class="lecture-text">
+        La stratégie de la partie tient en une phrase : <strong>trouver UNE solution particulière, puis lui ajouter toutes les solutions homogènes</strong>. Il ne reste qu'à fabriquer cette solution particulière — et le plus simple est d'en chercher une constante.
+      </p>
+      <div class="lecture-vocab-grid">
+        <div class="vocab-card"><div class="vocab-symbol">📘</div><div class="vocab-name">Équation homogène</div><div class="vocab-notation">y' = ay : on a « enlevé » b</div></div>
+        <div class="vocab-card"><div class="vocab-symbol">🧱</div><div class="vocab-name">Second membre</div><div class="vocab-notation">la constante b, indépendante de y</div></div>
+        <div class="vocab-card"><div class="vocab-symbol">🎯</div><div class="vocab-name">Solution particulière</div><div class="vocab-notation">une fonction y_p qui convient, n'importe laquelle</div></div>
+        <div class="vocab-card vocab-card-info"><div class="vocab-symbol">⚠️</div><div class="vocab-name">Solution générale</div><div class="vocab-notation">particulière + homogène : la famille entière</div></div>
+      </div></div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · solution_particuliere — LA CONSTANTE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header"><div class="lecture-section-num">02</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · solution_particuliere</span><h2 class="lecture-section-title">La solution particulière constante</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Pour trouver <em>une</em> solution de <span class="math">y' = ay + b</span>, on teste la forme la plus simple qui existe : une <strong>fonction constante</strong>. Une constante ne varie pas, donc sa dérivée est nulle — voyons si le compte y est.
+      </p>
+      <div class="lecture-example lecture-example-featured"><div class="lecture-example-label">🧮 Recherche et vérification — Chercher <span class="math">y_p</span> constante</div><div class="lecture-example-content">          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On teste une fonction constante : <span class="math">y_p = k</span>, où <span class="math">k</span> est un réel à déterminer.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content">
+                <p>On dérive : la dérivée d'une constante est nulle.</p>
+                <p><span class="math">y_p' = 0</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content">
+                <p>On substitue dans l'équation <span class="math">y' = ay + b</span> :</p>
+                <p><span class="math">0 = a·k + b</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content">
+                <p>On résout cette petite équation d'inconnue k :</p>
+                <p><span class="math">a·k = −b&nbsp;&nbsp;⇒&nbsp;&nbsp;k = −b/a</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content">
+                <p><strong>Vérification</strong> de <span class="math">y_p = −b/a</span> — trois lignes :</p>
+                <p>On calcule y_p' : <span class="math">y_p' = 0</span></p>
+                <p>On calcule a·y_p + b : <span class="math">a × (−b/a) + b = −b + b = 0</span></p>
+                <p>Comparaison : les deux membres valent 0 pour tout x ✓</p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p>La fonction constante <span class="math">y_p = −b/a</span> est bien une <strong>solution particulière</strong> de <span class="math">y' = ay + b</span>. ✅</p></div></div>
+          </div></div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La solution particulière constante — à connaître par cœur</div>
+        <div class="lecture-formula-hero-main">y' = ay + b&nbsp;&nbsp;⇒&nbsp;&nbsp;y_p = −b/a</div>
+        <div class="lecture-formula-hero-desc">a ≠ 0. C'est la « valeur d'équilibre » : si y part exactement de −b/a, il n'y reste plus qu'à rester — sa dérivée est nulle, tout est stable.</div>
+      </div>
+      <p class="lecture-text">
+        Retiens aussi le sens physique : <span class="math">−b/a</span> est la valeur vers laquelle le phénomène <strong>se stabilise</strong> (tu verras la courbe correspondante en section 06). Mais attention au signe — c'est LE piège de la partie :
+      </p>
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Le signe de −b/a</div>
+          <p>Pour <span class="math">y' = 2y + 4</span> : <span class="math">y_p = −4/2 = −2</span>, <strong>pas</strong> <span class="math">+2</span>. Le moins vient de la résolution <span class="math">a·k = −b</span> : le k doit annuler <span class="math">a·k + b</span>, donc il compense <span class="math">b</span> avec le signe contraire. Vérifie toujours en substituant : <span class="math">2 × (−2) + 4 = 0</span> ✓. Si tu obtiens autre chose que 0, ton signe est faux.</p>
+        </div></div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · eq_y_ayb — SOLUTION GÉNÉRALE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header"><div class="lecture-section-num">03</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · eq_y_ayb</span><h2 class="lecture-section-title">La solution générale de y' = ay + b</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        On a maintenant les deux morceaux : les solutions homogènes <span class="math">C·e^(ax)</span> et une solution particulière <span class="math">−b/a</span>. Le théorème central de la partie dit qu'il suffit de les <strong>additionner</strong> :
+      </p>
+      <div class="lecture-callout lecture-callout-gold"><div class="lecture-callout-body"><div class="lecture-callout-title">📗 Théorème — Solutions de y' = ay + b</div>
+          <p>Soient <span class="math">a ≠ 0</span> et <span class="math">b</span> deux réels. Les solutions sur <span class="math">ℝ</span> de l'équation différentielle <span class="math">y' = ay + b</span> sont <strong>exactement</strong> les fonctions définies par :</p>
+          <p><span class="math">y(x) = C·e^(ax) − b/a</span>&nbsp;&nbsp;où&nbsp;&nbsp;<span class="math">C ∈ ℝ</span></p>
+          <p>Il y en a une infinité : une pour chaque valeur de C. La démonstration est donnée en section 04.</p>
+        </div></div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">LA formule de la partie — à savoir par cœur</div>
+        <div class="lecture-formula-hero-main">y' = ay + b&nbsp;&nbsp;⇔&nbsp;&nbsp;y = C·e^(ax) − b/a</div>
+        <div class="lecture-formula-hero-desc">Deux ingrédients : l'exponentielle hérite du coefficient a (comme en partie 1), et le terme constant −b/a hérite du second membre. C multiplie l'exponentielle, jamais −b/a.</div>
+      </div>
+      <p class="lecture-text">
+        Vérifions le théorème par le calcul — la vérification générique à savoir refaire, une ligne à la fois :
+      </p>
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On pose <span class="math">y = C·e^(ax) − b/a</span>, avec C un réel fixé quelconque.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content">
+            <p><strong>Ligne 1 — On calcule y'</strong> (le terme constant <span class="math">−b/a</span> disparaît) :</p>
+            <p><span class="math">y' = a·C·e^(ax)</span></p>
+          </div></div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content">
+            <p><strong>Ligne 2 — On calcule a·y + b</strong> :</p>
+            <p><span class="math">a·y + b = a × (C·e^(ax) − b/a) + b</span></p>
+          </div></div>
+        <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content">
+            <p>On développe et simplifie :</p>
+            <p><span class="math">a·y + b = a·C·e^(ax) − b + b = a·C·e^(ax)</span></p>
+          </div></div>
+        <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Ligne 3 — Comparaison et conclusion</strong> : les deux membres sont égaux, <span class="math">y' = a·y + b</span> pour tout x. Chaque fonction <span class="math">C·e^(ax) − b/a</span> est bien solution. ✅</p></div></div>
+      </div>
+      <p class="lecture-text">
+        Et comme toujours, une condition initiale sélectionne <strong>une seule</strong> solution dans la famille :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">y(0) = y₀&nbsp;&nbsp;⇒&nbsp;&nbsp;y = (y₀ + b/a)·e^(ax) − b/a</div><div class="lecture-formula-desc">En effet y(0) = C − b/a = y₀ donne C = y₀ + b/a. Remarque : la constante C vaut y₀ « corrigé » de b/a — c'est le décalage vers la valeur d'équilibre.</div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Rédaction attendue</div>
+          <p>Écris la solution générale <strong>avec C</strong> d'abord, puis substitue la condition initiale, puis donne la valeur de C, puis la solution unique. Et ne modifie pas la structure : C <strong>multiplie</strong> <span class="math">e^(ax)</span> ; écrire <span class="math">e^(ax) + C − b/a</span> est faux — dérive et tu verras le terme <span class="math">a·C</span> qui manque côté gauche.</p>
+        </div></div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 2 · eq_y_ayb — DÉMONSTRATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header"><div class="lecture-section-num">04</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · eq_y_ayb</span><h2 class="lecture-section-title">Démonstration : le changement v = y + b/a</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Pourquoi la formule <span class="math">C·e^(ax) − b/a</span> donne-t-elle <strong>toutes</strong> les solutions ? L'astuce est de <strong>décaler</strong> la fonction inconnue de sa valeur d'équilibre, pour se ramener à l'équation homogène — déjà résolue en partie 1. C'est une démonstration courte, à savoir refaire.
+      </p>
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On pose une nouvelle fonction inconnue : <span class="math">v = y + b/a</span> (on « décale » y de sa valeur d'équilibre).</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content">
+            <p>On dérive : <span class="math">b/a</span> est une constante, donc :</p>
+            <p><span class="math">v' = y'</span></p>
+          </div></div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content">
+            <p>Comme <span class="math">y = v − b/a</span>, l'équation <span class="math">y' = ay + b</span> devient :</p>
+            <p><span class="math">v' = a × (v − b/a) + b</span></p>
+          </div></div>
+        <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content">
+            <p>On développe :</p>
+            <p><span class="math">v' = a·v − b + b</span></p>
+          </div></div>
+        <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content">
+            <p>On simplifie : les constantes se compensent.</p>
+            <p><span class="math">v' = a·v</span></p>
+          </div></div>
+        <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p>C'est l'équation homogène de la partie 1 ! Donc <span class="math">v = C·e^(ax)</span>, C ∈ ℝ.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content">
+            <p>On revient à y : <span class="math">y = v − b/a</span>, d'où :</p>
+            <p><span class="math">y = C·e^(ax) − b/a</span>&nbsp;&nbsp;∎</p>
+          </div></div>
+      </div>
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body"><div class="lecture-callout-title">💡 L'idée à retenir — se ramener à l'homogène</div>
+          <p>Toute la stratégie du chapitre tient dans ce mouvement : un bon changement de fonction inconnue transforme l'équation « avec second membre » en équation homogène, que l'on sait déjà résoudre. Ici le bon décalage était <span class="math">+ b/a</span> ; en partie 3, avec un second membre variable, on procédera autrement — mais l'esprit restera le même.</p>
+        </div></div>
+      <div class="lecture-rule"><div class="lecture-rule-label">🧠 Méthode — La recette en 3 temps pour y' = ay + b</div><div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>Temps 1 — Homogène</strong> : écrire les solutions de <span class="math">y' = ay</span>, c'est-à-dire <span class="math">C·e^(ax)</span>.</li>
+            <li><strong>Temps 2 — Particulière</strong> : calculer la constante <span class="math">y_p = −b/a</span>.</li>
+            <li><strong>Temps 3 — Somme</strong> : conclure <span class="math">y = C·e^(ax) − b/a</span>, puis vérifier en dérivant.</li>
+          </ul>
+        </div></div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 2 · eq_y_ayb — EXEMPLES COMPLETS -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header"><div class="lecture-section-num">05</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · eq_y_ayb</span><h2 class="lecture-section-title">Exemples de résolution complets</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Trois calculs purs à refaire sans regarder : une résolution simple, une résolution avec coefficients négatifs, une résolution avec condition initiale. Le schéma est toujours : <strong>identifier a et b → particulière → somme → condition initiale → vérification</strong>.
+      </p>
+      <div class="lecture-example lecture-example-featured"><div class="lecture-example-label">🧮 Exemple complet 1 — Résoudre <span class="math">y' = 2y + 4</span></div><div class="lecture-example-content">          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Identifier</strong> : l'équation est de la forme <span class="math">y' = ay + b</span> avec <span class="math">a = 2</span> et <span class="math">b = 4</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content">
+                <p><strong>Solution particulière</strong> :</p>
+                <p><span class="math">y_p = −b/a = −4/2</span>, donc <span class="math">y_p = −2</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content">
+                <p><strong>Solution générale</strong> :</p>
+                <p><span class="math">y = C·e^(2x) − 2</span>,&nbsp;&nbsp;C ∈ ℝ</p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content">
+                <p><strong>Vérification — ligne 1, on calcule y'</strong> :</p>
+                <p><span class="math">y' = 2C·e^(2x)</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content">
+                <p><strong>Vérification — ligne 2, on calcule 2y + 4</strong> :</p>
+                <p><span class="math">2y + 4 = 2 × (C·e^(2x) − 2) + 4</span></p>
+                <p><span class="math">2y + 4 = 2C·e^(2x) − 4 + 4 = 2C·e^(2x)</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Vérification — ligne 3, comparaison</strong> : les deux membres sont égaux pour tout x. Les solutions de <span class="math">y' = 2y + 4</span> sont <span class="math">y = C·e^(2x) − 2</span>, C ∈ ℝ. ✅</p></div></div>
+          </div></div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple complet 2 — Résoudre <span class="math">y' = −3y + 6</span></div><div class="lecture-example-content">          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Identifier</strong> : <span class="math">a = −3</span> et <span class="math">b = 6</span> (attention : a est négatif).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content">
+                <p><strong>Solution particulière</strong> :</p>
+                <p><span class="math">y_p = −b/a = −6/(−3)</span>, donc <span class="math">y_p = 2</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content">
+                <p><strong>Solution générale</strong> :</p>
+                <p><span class="math">y = C·e^(−3x) + 2</span>,&nbsp;&nbsp;C ∈ ℝ</p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content">
+                <p><strong>Vérification — ligne 1, on calcule y'</strong> :</p>
+                <p><span class="math">y' = −3C·e^(−3x)</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content">
+                <p><strong>Vérification — ligne 2, on calcule −3y + 6</strong> :</p>
+                <p><span class="math">−3y + 6 = −3 × (C·e^(−3x) + 2) + 6</span></p>
+                <p><span class="math">−3y + 6 = −3C·e^(−3x) − 6 + 6 = −3C·e^(−3x)</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Vérification — ligne 3, comparaison</strong> : les deux membres sont égaux pour tout x. Les solutions sont <span class="math">y = C·e^(−3x) + 2</span>, C ∈ ℝ. ✅</p></div></div>
+          </div></div>
+      </div>
+      <div class="lecture-example lecture-example-featured"><div class="lecture-example-label">🧮 Exemple complet 3 — <span class="math">y' = 2y + 4</span> avec <span class="math">y(0) = 1</span></div><div class="lecture-example-content">          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Solution générale</strong> (exemple 1) : <span class="math">y = C·e^(2x) − 2</span>, C ∈ ℝ.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content">
+                <p><strong>Substitution de la condition initiale</strong> — on exprime y(0) :</p>
+                <p><span class="math">y(0) = C·e^(0) − 2 = C − 2</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content">
+                <p><strong>Résolution de C</strong> — la condition impose <span class="math">y(0) = 1</span> :</p>
+                <p><span class="math">C − 2 = 1</span>, donc <span class="math">C = 3</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content">
+                <p><strong>Solution unique</strong> :</p>
+                <p><span class="math">y = 3e^(2x) − 2</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content">
+                <p><strong>Vérification</strong> — trois lignes :</p>
+                <p>On calcule y' : <span class="math">y' = 6e^(2x)</span></p>
+                <p>On calcule 2y + 4 : <span class="math">2y + 4 = 2 × (3e^(2x) − 2) + 4 = 6e^(2x)</span></p>
+                <p>Comparaison : <span class="math">y' = 2y + 4</span> pour tout x, et <span class="math">y(0) = 3 − 2 = 1</span> ✓ ✅</p>
+              </div></div>
+          </div></div>
+      </div>
+      <p class="lecture-text">
+        Le tableau récapitule les équations rencontrées dans cette partie — trois colonnes à savoir remplir les yeux fermés :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Équation</th><th>Solution particulière</th><th>Solution générale</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">y' = 2y + 4</span></td><td><span class="math">y_p = −2</span></td><td><span class="math">y = C·e^(2x) − 2</span></td></tr>
+            <tr><td><span class="math">y' = −3y + 6</span></td><td><span class="math">y_p = 2</span></td><td><span class="math">y = C·e^(−3x) + 2</span></td></tr>
+            <tr><td><span class="math">y' = −y + 2</span></td><td><span class="math">y_p = 2</span></td><td><span class="math">y = C·e^(−x) + 2</span></td></tr>
+            <tr><td><span class="math">y' = −2y + 8</span></td><td><span class="math">y_p = 4</span></td><td><span class="math">y = C·e^(−2x) + 4</span></td></tr>
+          </tbody>
+        </table></div>
+      <div class="lecture-callout lecture-callout-danger"><div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac — oublier le −b/a</div>
+          <p>Répondre <span class="math">y = C·e^(2x)</span> à l'équation <span class="math">y' = 2y + 4</span> est l'erreur n°1 du chapitre. Vérifie-la toi-même : en dérivant, <span class="math">y' = 2C·e^(2x)</span>, mais <span class="math">2y + 4 = 2C·e^(2x) + 4</span> — les deux membres diffèrent de 4, ce n'est <strong>pas</strong> une solution. Le terme <span class="math">−b/a</span> n'est pas décoratif : c'est lui qui absorbe la constante b. Réflexe : termine <strong>toujours</strong> par la vérification, elle détecte l'oubli en deux lignes.</p>
+        </div></div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 2 · eq_y_ayb — GRAPHIQUE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header"><div class="lecture-section-num">06</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · eq_y_ayb</span><h2 class="lecture-section-title">Des courbes qui convergent vers −b/a</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Observons le cas le plus fréquent en physique, celui où <span class="math">a &lt; 0</span> : prenons <span class="math">y' = −y + 2</span>, donc <span class="math">a = −1</span> et <span class="math">b = 2</span>. La formule donne <span class="math">y = C·e^(−x) + 2</span>. Quand x devient grand, <span class="math">e^(−x)</span> devient minuscule : toutes les courbes <strong>s'approchent de la droite horizontale</strong> <span class="math">y = 2</span>, c'est-à-dire de la valeur d'équilibre <span class="math">−b/a</span>.
+      </p>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Famille de courbes C fois e puissance moins x plus 2 convergentes vers la droite y égale 2">
+          <line x1="60" y1="250" x2="500" y2="250" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="510,250 498,244 498,256" style="fill:var(--text-dim)"/>
+          <line x1="70" y1="280" x2="70" y2="40" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="70,30 64,42 76,42" style="fill:var(--text-dim)"/>
+          <line x1="64" y1="162" x2="76" y2="162" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="58" y="167" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">2</text>
+          <text x="492" y="268" style="fill:var(--text-dim)" font-size="13" font-family="Inter">x</text>
+          <text x="80" y="44" style="fill:var(--text-dim)" font-size="13" font-family="Inter">y</text>
+          <line x1="70" y1="162" x2="470" y2="162" style="stroke:var(--accent)" stroke-width="2" stroke-dasharray="7 5"/>
+          <text x="380" y="154" style="fill:var(--accent)" font-size="12" font-weight="700" font-family="Inter">y = −b/a = 2</text>
+          <polyline points="70,30 92,59 115,82 138,100 160,113 205,133 250,144 295,151 340,155 430,160" style="fill:none;stroke:var(--accent-bright)" stroke-width="3"/>
+          <polyline points="70,118 92,128 115,135 138,141 160,146 205,152 250,156 295,158 340,160 430,161" style="fill:none;stroke:var(--green-bright)" stroke-width="2"/>
+          <polyline points="70,206 92,196 115,189 138,183 160,178 205,172 250,168 295,166 340,164 430,163" style="fill:none;stroke:var(--text-dim)" stroke-width="2" stroke-dasharray="6 5"/>
+          <text x="330" y="62" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">y = 3e^(−x) + 2</text>
+          <text x="392" y="136" style="fill:var(--green-bright)" font-size="12" font-family="Inter">y = e^(−x) + 2</text>
+          <text x="330" y="196" style="fill:var(--text-dim)" font-size="12" font-family="Inter">y = −e^(−x) + 2</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Les solutions de <span class="math">y' = −y + 2</span> : une famille <span class="math">y = C·e^(−x) + 2</span>. Quelle que soit la valeur de départ (C = 3 ; 1 ; −1), chaque courbe converge vers la droite <span class="math">y = 2 = −b/a</span> quand x → +∞ : le système « oublie » sa condition initiale et se stabilise à l'équilibre.</figcaption>
+      </figure>
+      <p class="lecture-text">
+        Le tableau chiffre cette convergence pour les trois courbes de la figure :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Solution</th><th><span class="math">y(0)</span></th><th><span class="math">y(1)</span></th><th><span class="math">y(2)</span></th><th><span class="math">y(4)</span></th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">y = 3e^(−x) + 2</span></td><td><span class="math">5</span></td><td><span class="math">≈ 3,10</span></td><td><span class="math">≈ 2,41</span></td><td><span class="math">≈ 2,05</span></td></tr>
+            <tr><td><span class="math">y = e^(−x) + 2</span></td><td><span class="math">3</span></td><td><span class="math">≈ 2,37</span></td><td><span class="math">≈ 2,14</span></td><td><span class="math">≈ 2,02</span></td></tr>
+            <tr><td><span class="math">y = −e^(−x) + 2</span></td><td><span class="math">1</span></td><td><span class="math">≈ 1,63</span></td><td><span class="math">≈ 1,86</span></td><td><span class="math">≈ 1,98</span></td></tr>
+          </tbody>
+        </table></div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">a &lt; 0&nbsp;&nbsp;⇒&nbsp;&nbsp;lim(x→+∞) (C·e^(ax) − b/a) = −b/a</div><div class="lecture-formula-desc">Car lim(x→+∞) e^(ax) = 0 lorsque a est négatif. La droite y = −b/a est asymptote horizontale à toutes les courbes de la famille. Si a &gt; 0, c'est l'inverse : les solutions divergent quand x → +∞.</div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Lire le graphique</div>
+          <p>Sur un dessin, l'asymptote horizontale <strong>est</strong> la solution particulière <span class="math">−b/a</span> : c'est elle qu'on « voit », pas la famille. Inversement, si l'énoncé donne une limite, tu peux en déduire <span class="math">b</span> ou <span class="math">a</span> : une limite égale à 4 pour <span class="math">y' = −2y + b</span> impose <span class="math">−b/(−2) = 4</span>, donc <span class="math">b = 8</span>.</p>
+        </div></div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header"><div class="lecture-section-num">07</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span><h2 class="lecture-section-title">L'essentiel de la partie</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tu sais désormais décomposer l'équation <span class="math">y' = ay + b</span> en deux morceaux, démontrer la formule générale et traiter une condition initiale. Toute la suite du chapitre réutilisera ce schéma « homogène + particulière ».
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La carte d'identité de l'équation y' = ay + b</div>
+        <div class="lecture-formula-hero-main">
+          y = C·e^(ax) − b/a<br>
+          y(0) = y₀&nbsp;&nbsp;⇒&nbsp;&nbsp;C = y₀ + b/a
+        </div>
+        <div class="lecture-formula-hero-desc">Famille infinie de solutions ; la condition initiale en 0 en choisit une et une seule, avec C = y₀ + b/a.</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><span class="math">y' = ay + b</span> se résout en ajoutant : <strong>solutions homogènes</strong> <span class="math">C·e^(ax)</span> + <strong>une solution particulière</strong>.</li>
+        <li>La solution particulière constante est <span class="math">y_p = −b/a</span> (avec <span class="math">a ≠ 0</span>) ; on la vérifie en substituant : <span class="math">a × (−b/a) + b = 0</span>.</li>
+        <li>Solution générale : <span class="math">y = C·e^(ax) − b/a</span>, C ∈ ℝ — l'exposant reste le coefficient a.</li>
+        <li>Démonstration : poser <span class="math">v = y + b/a</span> ramène à <span class="math">v' = a·v</span>, l'équation homogène.</li>
+        <li>Condition initiale <span class="math">y(0) = y₀</span> : <span class="math">C = y₀ + b/a</span>, donc <span class="math">y = (y₀ + b/a)·e^(ax) − b/a</span>.</li>
+        <li>Si <span class="math">a &lt; 0</span>, toutes les solutions convergent vers <span class="math">−b/a</span> quand x → +∞ : la droite <span class="math">y = −b/a</span> est asymptote horizontale.</li>
+        <li>Réflexe : toute réponse se vérifie en redérivant et en substituant — deux lignes qui sécurisent les points.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Rédaction attendue à l'examen</div>
+          <p>Une résolution complète tient en quatre lignes minimum : « les solutions de <span class="math">y' = ay + b</span> sont <span class="math">y = C·e^(ax) − b/a</span> », puis la substitution de la condition initiale, puis la valeur de C, puis la solution unique avec vérification. Sauter la solution générale coûte des points, même si le résultat final est juste.</p>
+        </div></div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Quelle est la solution générale de <span class="math">y' = 3y + 6</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) y = C·e^(3x) + 6</span><span>B) y = C·e^(3x) − 2</span><span>C) y = C·e^(2x) − 3</span><span>D) y = C·e^(−3x) − 2</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B.</strong> Ici a = 3 et b = 6, donc y_p = −b/a = −6/3 = −2, et l'exposant est a = 3 : y = C·e^(3x) − 2. A) oublie la division par a ; D) inverse le signe de l'exposant. Vérification : y' = 3C·e^(3x) et 3y + 6 = 3C·e^(3x) − 6 + 6 = 3C·e^(3x) ✓.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — On résout <span class="math">y' = −2y + 8</span> avec <span class="math">y(0) = 1</span>. La solution est :</p>
+      <div class="lecture-quiz-options"><span>A) y = −3e^(−2x) + 4</span><span>B) y = 3e^(2x) − 4</span><span>C) y = −3e^(−2x) − 4</span><span>D) y = −3e^(2x) + 4</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A.</strong> y_p = −8/(−2) = 4, donc y = C·e^(−2x) + 4. La condition initiale donne y(0) = C + 4 = 1, donc C = −3 : y = −3e^(−2x) + 4. Vérification : y' = 6e^(−2x) et −2y + 8 = 6e^(−2x) − 8 + 8 = 6e^(−2x) ✓ ; y(0) = 1 ✓.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Quand x → +∞, vers quelle valeur convergent les solutions de <span class="math">y' = −y + 5</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) 0</span><span>B) 5</span><span>C) −5</span><span>D) elles divergent</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B.</strong> Ici a = −1 &lt; 0, donc e^(−x) tend vers 0 et les solutions y = C·e^(−x) + 5 convergent toutes vers −b/a = 5. D) serait vrai si a était positif : les solutions divergeraient.</div></details>
+    </div></div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap"><div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[solution_particuliere]</strong> Une solution particulière de <span class="math">y' = ay + b</span> est la fonction constante <span class="math">y_p = −b/a</span> (avec <span class="math">a ≠ 0</span>)</li>
+      <li><strong>[solution_particuliere]</strong> Vérifier <span class="math">y_p</span> : dériver (<span class="math">y_p' = 0</span>) puis substituer (<span class="math">a × (−b/a) + b = 0</span>) — l'égalité est vraie pour tout x</li>
+      <li><strong>[solution_particuliere]</strong> Attention au signe : pour <span class="math">y' = 2y + 4</span>, <span class="math">y_p = −2</span> et non <span class="math">+2</span></li>
+      <li><strong>[eq_y_ayb]</strong> Les solutions de <span class="math">y' = ay + b</span> sont exactement <span class="math">y = C·e^(ax) − b/a</span>, C ∈ ℝ</li>
+      <li><strong>[eq_y_ayb]</strong> Démonstration : poser <span class="math">v = y + b/a</span> transforme l'équation en <span class="math">v' = a·v</span> (homogène)</li>
+      <li><strong>[eq_y_ayb]</strong> Condition initiale <span class="math">y(0) = y₀</span> : <span class="math">C = y₀ + b/a</span>, donc <span class="math">y = (y₀ + b/a)·e^(ax) − b/a</span></li>
+      <li><strong>[eq_y_ayb]</strong> C multiplie l'exponentielle ; le terme <span class="math">−b/a</span> s'ajoute à part, jamais sous l'exposant</li>
+      <li><strong>[eq_y_ayb]</strong> Si <span class="math">a &lt; 0</span> : toutes les courbes convergent vers <span class="math">y = −b/a</span> (asymptote horizontale) quand x → +∞</li>
+      <li><strong>[eq_y_ayb]</strong> Erreur n°1 : répondre <span class="math">C·e^(ax)</span> sans le <span class="math">−b/a</span> — la vérification le détecte en deux lignes</li>
+      <li><strong>[eq_y_ayb]</strong> Rédaction : solution générale avec C, substitution, valeur de C, solution unique, vérification</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end"><span class="lecture-end-icon">🎯</span><div class="lecture-end-text">Partie 2 terminée !</div><div class="lecture-end-sub">Passe à la partie suivante : et si le second membre devenait variable ? Bienvenue à y' = ay + f(x)</div>
+    <div class="lecture-end-divider"></div>
+  </div></div>

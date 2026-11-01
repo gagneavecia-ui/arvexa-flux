@@ -1,0 +1,416 @@
+<!-- ============================================================ -->
+<!-- PARTIE 4 : FICHE COMPLÈTE — APPLICATIONS                      -->
+<!-- Bloc 1 : synthese — Tableau de synthèse des indicateurs       -->
+<!-- Bloc 2 : methode_ajustement — La méthode en 6 étapes          -->
+<!-- Bloc 3 : exercice_type — Exercice type Bac (mil & pluie)      -->
+<!-- Bloc 4 : reflexes_bac — Réflexes et erreurs d'examen          -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 04 · Statistiques</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Fiche complète &amp; <em>applications</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Voici la fiche de révision du chapitre : tout ce qui est exigible, condensé et organisé pour la veille de l'épreuve. Un <strong>tableau de synthèse</strong> des indicateurs, la <strong>méthode d'ajustement linéaire en 6 étapes</strong>, un <strong>exercice type Bac complet</strong> — le rendement du mil selon la pluviométrie, tous calculs détaillés — et la liste des <strong>réflexes</strong> qui font la différence entre 10 et 16.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 4 blocs</span>
+      <span class="lecture-hero-meta-item">📊 5 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 blocs · 5 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Mode d'emploi de la fiche</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Bloc 1 · synthese — Les indicateurs en un tableau</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Bloc 2 · methode_ajustement — Ajustement linéaire en 6 étapes</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Bloc 3 · exercice_type — Rendement du mil &amp; pluviométrie</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Bloc 4 · reflexes_bac — Réflexes &amp; erreurs d'examen</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MODE D'EMPLOI -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Mode d'emploi</span>
+        <h2 class="lecture-section-title">Comment réviser avec cette fiche</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Cette fiche ne remplace pas les Parties 1 à 3 : elle les <strong>condense</strong> pour la révision active. Utilise-la en trois temps :
+      </p>
+
+      <ul class="lecture-list-elegant">
+        <li><strong>Relire</strong> le tableau de synthèse (section 01) en récitant chaque formule à voix haute, sans regarder.</li>
+        <li><strong>Dérouler</strong> la méthode en 6 étapes (section 02) sur une feuille blanche, de mémoire, puis comparer.</li>
+        <li><strong>Refaire</strong> l'exercice type Bac (section 03) sans regarder la solution — les valeurs sont choisies pour que chaque calcul « tombe » : si le tien ne tombe pas, c'est la méthode qu'il faut corriger.</li>
+      </ul>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">💡 La carte d'identité du chapitre</div>
+          <p>Un sujet de statistiques descriptives demande presque toujours la même chaîne : <strong>point moyen G → variance et covariance → droite des moindres carrés y = a·x + b → coefficient r → jugement → prévision</strong>. Maîtrise cette chaîne et tu couvres l'essentiel de l'épreuve.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : BLOC 1 · synthese — LES INDICATEURS -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bloc 1 · synthese</span>
+        <h2 class="lecture-section-title">Les indicateurs en un tableau</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tous les indicateurs du chapitre, chacun avec son rôle. Apprends chaque formule <strong>avec</strong> sa fonction : c'est ce couple formule-rôle que l'on te demande d'exploiter.
+      </p>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Indicateur</th><th>Formule</th><th>Ce qu'il mesure / quand l'utiliser</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Mode</strong></td>
+              <td><span class="math">valeur du plus grand nᵢ</span> (ou classe modale)</td>
+              <td>Valeur la plus fréquente. Seul indicateur possible pour un caractère qualitatif.</td>
+            </tr>
+            <tr>
+              <td><strong>Médiane</strong> <span class="math">Me</span></td>
+              <td>valeur de rang <span class="math">(N + 1)/2</span> si N impair ; moyenne des valeurs de rangs <span class="math">N/2</span> et <span class="math">N/2 + 1</span> si N pair (lecture dans l'ECC)</td>
+              <td>Partage la série <strong>ordonnée</strong> en deux moitiés. Insensible aux valeurs extrêmes (salaires, revenus).</td>
+            </tr>
+            <tr>
+              <td><strong>Fréquence</strong> <span class="math">fᵢ</span></td>
+              <td><span class="math">fᵢ = nᵢ / N</span></td>
+              <td>Part de la population ; <span class="math">Σ fᵢ = 1</span>. Permet de comparer deux enquêtes de tailles différentes.</td>
+            </tr>
+            <tr>
+              <td><strong>Quartiles</strong> <span class="math">Q₁</span>, <span class="math">Q₃</span></td>
+              <td><span class="math">EI = Q₃ − Q₁</span> ; étendue <span class="math">e = x_max − x_min</span></td>
+              <td>Coupes à 25 % et 75 % ; EI = amplitude du cœur (50 % central). L'étendue est simple mais fragile aux extrêmes.</td>
+            </tr>
+            <tr>
+              <td><strong>Moyenne</strong> <span class="math">x̄</span></td>
+              <td><span class="math">x̄ = (Σ nᵢ·xᵢ) / N = Σ fᵢ·xᵢ</span></td>
+              <td>Centre de gravité de la série. Utilise toutes les valeurs ; sensible aux extrêmes. Base de la variance.</td>
+            </tr>
+            <tr>
+              <td><strong>Variance</strong> <span class="math">V(x)</span></td>
+              <td><span class="math">V(x) = (Σ nᵢ·(xᵢ − x̄)²) / N = (Σ nᵢ·xᵢ²) / N − x̄²</span></td>
+              <td>Dispersion autour de la moyenne (unité au carré). La formule développée est la plus rapide.</td>
+            </tr>
+            <tr>
+              <td><strong>Écart-type</strong> <span class="math">σ</span></td>
+              <td><span class="math">σ = √(V(x))</span></td>
+              <td>Dispersion dans l'<strong>unité des données</strong>. σ petit = série homogène. Sert à comparer deux séries.</td>
+            </tr>
+            <tr>
+              <td><strong>Point moyen</strong> <span class="math">G</span></td>
+              <td><span class="math">G(x̄ ; ȳ)</span> avec <span class="math">x̄ = (Σ xᵢ) / n</span>, <span class="math">ȳ = (Σ yᵢ) / n</span></td>
+              <td>Centre de gravité du nuage (moyennes colonne par colonne). La droite des moindres carrés passe toujours par G.</td>
+            </tr>
+            <tr>
+              <td><strong>Covariance</strong> <span class="math">cov(x, y)</span></td>
+              <td><span class="math">cov(x, y) = (Σ nᵢ·xᵢ·yᵢ) / N − x̄·ȳ</span></td>
+              <td>Sens de la liaison : positive → nuage croissant, négative → décroissant.</td>
+            </tr>
+            <tr>
+              <td><strong>Corrélation</strong> <span class="math">r</span></td>
+              <td><span class="math">r = cov(x, y) / (σₓ·σᵧ)</span></td>
+              <td>Force et sens de la liaison rectiligne ; <span class="math">|r| ≥ 0,9</span> justifie l'ajustement.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Le duo à connaître les yeux fermés</div>
+        <div class="lecture-formula-hero-main">
+          x̄ = (Σ nᵢ·xᵢ) / N<br>
+          V(x) = (Σ nᵢ·xᵢ²) / N − x̄²<br>
+          σ = √(V(x))
+        </div>
+        <div class="lecture-formula-hero-desc">Rappels : fᵢ = nᵢ/N et Σ fᵢ = 1 ; pour une série en classes, on travaille avec les centres ; la moyenne des moyennes sans pondération par les effectifs est FAUSSE.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : BLOC 2 · methode_ajustement — LES 6 ÉTAPES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bloc 2 · methode_ajustement</span>
+        <h2 class="lecture-section-title">Ajustement linéaire : la méthode en 6 étapes</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Voici la procédure complète, du tableau brut à la prévision. Elle s'applique telle quelle à tout exercice de série double.
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Tracer le nuage</strong> des points <span class="math">Mᵢ(xᵢ ; yᵢ)</span> et juger son allure : allongé autour d'une droite → ajustement linéaire envisagé (sinon, le dire et s'abstenir).</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Calculer le point moyen</strong> : <span class="math">x̄ = (Σ xᵢ) / N</span>, <span class="math">ȳ = (Σ yᵢ) / N</span>, d'où <span class="math">G(x̄ ; ȳ)</span>.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Remplir le tableau de calcul</strong> (colonnes <span class="math">xᵢ²</span>, <span class="math">yᵢ²</span>, <span class="math">xᵢ·yᵢ</span>) puis calculer <span class="math">V(x) = (Σ xᵢ²) / N − x̄²</span>, <span class="math">V(y) = (Σ yᵢ²) / N − ȳ²</span> et <span class="math">cov(x, y) = (Σ xᵢ·yᵢ) / N − x̄·ȳ</span>.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Calculer la pente</strong> : <span class="math">a = cov(x, y) / V(x)</span>. Signe de a = signe de la covariance.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Calculer l'ordonnée à l'origine</strong> : <span class="math">b = ȳ − a·x̄</span>, et écrire <span class="math">D : y = a·x + b</span>. <strong>Contrôle systématique</strong> : <span class="math">G</span> appartient à <span class="math">D</span> (remplacer x par <span class="math">x̄</span> doit redonner <span class="math">ȳ</span>).</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Juger l'ajustement</strong> : <span class="math">σₓ = √(V(x))</span>, <span class="math">σᵧ = √(V(y))</span>, <span class="math">r = cov(x, y) / (σₓ·σᵧ)</span>. Si <span class="math">|r| ≥ 0,9</span> environ, l'ajustement est justifié → prévision par interpolation pour la valeur demandée.</p></div></div>
+      </div>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Modèle de tableau</th><th>xᵢ</th><th>yᵢ</th><th>xᵢ²</th><th>yᵢ²</th><th>xᵢ·yᵢ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Ligne i</td><td>…</td><td>…</td><td>…</td><td>…</td><td>…</td></tr>
+            <tr><td><strong>Sommes</strong></td><td><strong>Σ xᵢ</strong></td><td><strong>Σ yᵢ</strong></td><td><strong>Σ xᵢ²</strong></td><td><strong>Σ yᵢ²</strong></td><td><strong>Σ xᵢ·yᵢ</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La trousse à outils de l'ajustement</div>
+        <div class="lecture-formula-hero-main">
+          D : y = a·x + b<br>
+          a = cov(x, y) / V(x)<br>
+          b = ȳ − a·x̄<br>
+          r = cov(x, y) / (σₓ·σᵧ)
+        </div>
+        <div class="lecture-formula-hero-desc">Covariance : cov(x, y) = (Σ nᵢ·xᵢ·yᵢ) / N − x̄·ȳ. Propriétés : G(x̄ ; ȳ) est toujours sur D ; −1 ≤ r ≤ 1 ; signe de r = signe de a ; |r| ≥ 0,9 justifie l'ajustement.</div>
+      </div>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">G(x̄ ; ȳ) ∈ D ⇔ ȳ = a·x̄ + b</div>
+        <div class="lecture-formula-desc">Le contrôle n°1 de tout ajustement : la droite des moindres carrés passe TOUJOURS par le point moyen. Si ton (x̄ ; ȳ) ne vérifie pas l'équation, il y a une erreur de calcul — retrouve-la avant de prédire quoi que ce soit.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : BLOC 3 · exercice_type — MIL & PLUVIOMÉTRIE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bloc 3 · exercice_type</span>
+        
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Σnᵢ(xᵢ − x̄) = 0&nbsp;&nbsp;&nbsp;(contrôle réflexe des écarts)</div>
+        <div class="lecture-formula-desc">Si ta moyenne <span class="math">x̄</span> est juste, la somme des écarts pondérés s'annule EXACTEMENT. Un résultat non nul = erreur de calcul — à refaire avant de continuer. Le même contrôle vaut pour <span class="math">y</span> : <span class="math">Σnᵢ(yᵢ − ȳ) = 0</span>.</div>
+      </div>
+<h2 class="lecture-section-title">Exercice type Bac : rendement du mil &amp; pluviométrie</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">📋 Énoncé</div>
+        <div class="lecture-example-content"><p>Un service agricole étudie, sur <strong>6 années consécutives</strong> (2019 à 2024) dans une zone de maraîchage près de Niamey, la liaison entre la <strong>pluviométrie annuelle</strong> <span class="math">xᵢ</span> (en mm) et le <strong>rendement moyen du mil</strong> <span class="math">yᵢ</span> (en kg par hectare). Les données sont :</p></div>
+      </div>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Année</th><th>Pluviométrie xᵢ (mm)</th><th>Rendement yᵢ (kg/ha)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>2019</td><td>320</td><td>660</td></tr>
+            <tr><td>2020</td><td>340</td><td>600</td></tr>
+            <tr><td>2021</td><td>400</td><td>840</td></tr>
+            <tr><td>2022</td><td>440</td><td>960</td></tr>
+            <tr><td>2023</td><td>500</td><td>1140</td></tr>
+            <tr><td>2024</td><td>520</td><td>1200</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="lecture-text">
+        <strong>1. Allure du nuage.</strong> Les points <span class="math">Mᵢ(xᵢ ; yᵢ)</span> montent globalement de gauche à droite, avec un nuage assez allongé (noter le point (340 ; 600), légèrement bas) : un <strong>ajustement linéaire</strong> paraît envisageable. On le vérifiera par le coefficient <span class="math">r</span> à la question 5.
+      </p>
+
+      <p class="lecture-text">
+        <strong>2. Point moyen.</strong> Chaque année a le même poids, un calcul par ligne :
+      </p>
+      <p><span class="math">x̄ = (320 + 340 + 400 + 440 + 500 + 520) / 6</span><br>
+      <span class="math">x̄ = 2 520 / 6 = 420</span></p>
+      <p><span class="math">ȳ = (660 + 600 + 840 + 960 + 1140 + 1200) / 6</span><br>
+      <span class="math">ȳ = 5 400 / 6 = 900</span></p>
+      <p>Résultat sur sa propre ligne : <span class="math">G(420 ; 900)</span>.</p>
+
+      <p class="lecture-text">
+        <strong>3. Tableau de calcul.</strong> Chaque valeur apparaît une fois (<span class="math">N = 6</span>) :
+      </p>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>xᵢ</th><th>yᵢ</th><th>xᵢ²</th><th>yᵢ²</th><th>xᵢ·yᵢ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>320</td><td>660</td><td>102 400</td><td>435 600</td><td>211 200</td></tr>
+            <tr><td>340</td><td>600</td><td>115 600</td><td>360 000</td><td>204 000</td></tr>
+            <tr><td>400</td><td>840</td><td>160 000</td><td>705 600</td><td>336 000</td></tr>
+            <tr><td>440</td><td>960</td><td>193 600</td><td>921 600</td><td>422 400</td></tr>
+            <tr><td>500</td><td>1140</td><td>250 000</td><td>1 299 600</td><td>570 000</td></tr>
+            <tr><td>520</td><td>1200</td><td>270 400</td><td>1 440 000</td><td>624 000</td></tr>
+            <tr><td><strong>Σ = 2 520</strong></td><td><strong>Σ = 5 400</strong></td><td><strong>Σ = 1 092 000</strong></td><td><strong>Σ = 5 162 400</strong></td><td><strong>Σ = 2 367 600</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Variances</strong>, une transformation par ligne :</p>
+          <p><span class="math">V(x) = 1 092 000 / 6 − 420²</span><br>
+          <span class="math">V(x) = 182 000 − 176 400</span></p>
+          <p>Résultat sur sa propre ligne : <span class="math">V(x) = 5 600</span>, donc <span class="math">σₓ = √5 600 ≈ 74,83</span>.</p>
+          <p><span class="math">V(y) = 5 162 400 / 6 − 900²</span><br>
+          <span class="math">V(y) = 860 400 − 810 000</span></p>
+          <p>Résultat sur sa propre ligne : <span class="math">V(y) = 50 400</span>, donc <span class="math">σᵧ = √50 400 ≈ 224,50</span>.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Covariance</strong>, sur sa ligne :</p>
+          <p><span class="math">cov(x, y) = 2 367 600 / 6 − 420 × 900</span><br>
+          <span class="math">cov(x, y) = 394 600 − 378 000</span></p>
+          <p>Résultat sur sa propre ligne : <span class="math">cov(x, y) = 16 600</span>. Positive : la tendance est croissante.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Pente</strong>, sur sa ligne :</p>
+          <p><span class="math">a = cov(x, y) / V(x)</span><br>
+          <span class="math">a = 16 600 / 5 600 = 83/28</span></p>
+          <p>Soit <span class="math">a ≈ 2,96</span>. <strong>Garder la valeur exacte 83/28</strong> pour la suite !</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Ordonnée à l'origine</strong>, une transformation par ligne :</p>
+          <p><span class="math">b = ȳ − a·x̄</span><br>
+          <span class="math">b = 900 − (83/28) × 420</span><br>
+          <span class="math">b = 900 − 83 × 15</span><br>
+          <span class="math">b = 900 − 1 245 = −345</span></p>
+          <p>(car <span class="math">420 / 28 = 15</span>). L'équation finale, dans son bloc :</p>
+          <div class="lecture-formula-box">
+            <div class="lecture-formula-main">D : y = (83/28)·x − 345 ≈ 2,96·x − 345</div>
+            <div class="lecture-formula-desc">Droite des moindres carrés : le coefficient exact 83/28 et l'arrondi 2,96 coexistent, pour le calcul et pour la lecture.</div>
+          </div></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Contrôle systématique</strong>, une transformation par ligne :</p>
+          <p><span class="math">(83/28) × 420 = 1 245</span><br>
+          <span class="math">1 245 − 345 = 900 = ȳ</span> ✓</p>
+          <p>Le point moyen <span class="math">G(420 ; 900)</span> appartient bien à <span class="math">D</span>.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Coefficient de corrélation</strong>, une transformation par ligne :</p>
+          <p><span class="math">r = cov(x, y) / (σₓ·σᵧ)</span><br>
+          <span class="math">r = 16 600 / (√5 600 × √50 400)</span><br>
+          <span class="math">r = 16 600 / √282 240 000</span><br>
+          <span class="math">r = 16 600 / 16 800 = 83/84</span></p>
+          <p>Résultat sur sa propre ligne : <span class="math">r ≈ 0,99</span>. Comme <span class="math">|r| ≈ 0,99 ≥ 0,9</span>, la corrélation linéaire est <strong>forte et croissante</strong> : l'ajustement linéaire est <strong>justifié</strong>.</p>
+          <p>(Astuce de vérification : ici <span class="math">σᵧ / σₓ = √50 400 / √5 600</span> puis <span class="math">σᵧ / σₓ = √9 = 3</span>, donc <span class="math">a = 3r</span> ; or <span class="math">3 × (83/84) = 83/28</span> ✓.)</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p><strong>Prévision.</strong> Pour une pluviométrie de <span class="math">x = 480</span> mm (valeur <strong>dans</strong> le domaine observé [320 ; 520] : interpolation légitime) :</p>
+          <p><span class="math">y = (83/28) × 480 − 345</span><br>
+          <span class="math">y = 9 960 / 7 − 345</span><br>
+          <span class="math">y ≈ 1 422,86 − 345</span></p>
+          <p>Résultat sur sa propre ligne : <span class="math">y ≈ 1 077,86</span>. On prévoit un rendement d'environ <strong>1 078 kg/ha</strong>.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">8</div><div class="lecture-step-content"><p><strong>Interprétation en contexte.</strong> Dans la plage étudiée, chaque millimètre de pluie supplémentaire correspond, en moyenne, à environ 2,96 kg/ha de rendement en plus — une information directement utile au conseil agricole.</p></div></div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Le piège de l'arrondi trop précoce (vu dans cet exercice)</div>
+          <p>Si on arrondit <span class="math">a ≈ 2,96</span> avant de calculer b, on trouve :</p>
+          <p><span class="math">b = 900 − 2,96 × 420</span><br>
+          <span class="math">b = 900 − 1 243,2 = −343,2</span></p>
+          <p>au lieu de <span class="math">−345</span>, et la prévision devient <span class="math">2,96 × 480 − 345 ≈ 1 075,8</span> au lieu de <span class="math">≈ 1 078</span>. L'écart est petit ici, mais il peut coûter cher quand les nombres sont grands : <strong>valeurs exactes (fractions) jusqu'au dernier résultat</strong>, arrondi seulement à la fin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : BLOC 4 · reflexes_bac — RÉFLEXES & ERREURS -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bloc 4 · reflexes_bac</span>
+        <h2 class="lecture-section-title">Réflexes &amp; erreurs d'examen</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La statistique est un chapitre « à points » : les questions se ressemblent d'une année à l'autre et les mêmes réflexes paient. Voici la checklist à dérouler sur ta copie.
+      </p>
+
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">✅ Checklist — dans l'ordre, à chaque exercice</div>
+        <div class="lecture-rule-body">
+          <strong>1)</strong> Un seul <strong>tableau de calcul</strong> propre (colonnes xᵢ², yᵢ², xᵢ·yᵢ et leurs sommes) : il sert à V(x), V(y) et cov. <strong>2)</strong> Calculer x̄, ȳ et <span class="math">G(x̄ ; ȳ)</span> avant toute autre chose. <strong>3)</strong> Garder les <strong>valeurs exactes</strong> (fractions, racines) jusqu'au résultat final ; arrondir à la fin, en général 2 décimales. <strong>4)</strong> Vérifier que <span class="math">G</span> appartient à <span class="math">D</span> — contrôle systématique, souvent demandé explicitement. <strong>5)</strong> Vérifier que <span class="math">−1 ≤ r ≤ 1</span> et que <span class="math">r</span> a le même signe que <span class="math">a</span>. <strong>6)</strong> Conclure <strong>en contexte</strong> (mm, kg/ha, FCFA) avec une phrase.
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Les erreurs qui coûtent le plus de points</div>
+          <p><strong>Mélanger V(x) et cov(x, y)</strong> : la variance utilise la colonne <span class="math">xᵢ²</span>, la covariance la colonne <span class="math">xᵢ·yᵢ</span> — deux colonnes distinctes, jamais interchangeables. <strong>Oublier b = ȳ − a·x̄</strong> : écrire <span class="math">D : y = a·x</span> seul est faux, et b peut être négatif (il l'était dans l'exercice : <span class="math">b = −345</span>). <strong>Arrondir trop tôt</strong> : a arrondi → b décalé → prévision décalée. <strong>Extrapoler sans le dire</strong> : une prévision hors du domaine observé doit être signalée comme incertaine.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Dernières vérifications avant de rendre la copie</div>
+          <p>Effectifs : <span class="math">Σ nᵢ = N</span>. Fréquences : <span class="math">Σ fᵢ = 1</span>. Corrélation : <span class="math">−1 ≤ r ≤ 1</span>. Droite : <span class="math">a·x̄ + b = ȳ</span>. Unités annoncées : mm, kg/ha, points, FCFA. Si l'une de ces lignes tombe, l'erreur est localisée dans le calcul correspondant — cinq contrôles qui sauvent cinq points.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[synthese]</strong> Mode (plus grand nᵢ), médiane (rang (N + 1)/2 si impair), moyenne x̄ = (Σ nᵢ·xᵢ) / N, variance V(x) = (Σ nᵢ·xᵢ²) / N − x̄², écart-type σ = √(V(x))</li>
+      <li><strong>[synthese]</strong> Rôles : médiane = partage insensible aux extrêmes ; moyenne = centre de gravité ; σ = dispersion dans l'unité des données</li>
+      <li><strong>[methode_ajustement]</strong> 6 étapes : nuage → G(x̄ ; ȳ) → variances et covariance → a = cov(x, y) / V(x) → b = ȳ − a·x̄ → r et jugement</li>
+      <li><strong>[methode_ajustement]</strong> cov(x, y) = (Σ xᵢ·yᵢ) / N − x̄·ȳ ; r = cov(x, y) / (σₓ·σᵧ) ; −1 ≤ r ≤ 1 ; |r| ≥ 0,9 justifie l'ajustement</li>
+      <li><strong>[exercice_type]</strong> Mil &amp; pluie : G(420 ; 900), D : y = (83/28)·x − 345, r = 83/84 ≈ 0,99, prévision ≈ 1 078 kg/ha pour 480 mm</li>
+      <li><strong>[reflexes_bac]</strong> Valeurs exactes jusqu'au bout, arrondir à la fin, contrôler que G appartient à D, vérifier −1 ≤ r ≤ 1 et signe de r = signe de a</li>
+      <li><strong>[reflexes_bac]</strong> Ne pas mélanger les colonnes xᵢ² (variance) et xᵢ·yᵢ (covariance) ; ne jamais oublier b = ȳ − a·x̄</li>
+      <li><strong>[reflexes_bac]</strong> Interpolation dans le domaine observé = légitime ; extrapolation = à signaler ; conclure toujours avec les unités et une phrase</li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Fiche terminée — chapitre Statistiques bouclé !</div>
+    <div class="lecture-end-sub">Refais l'exercice type Bac de la section 03 sans regarder les solutions, puis passe au chapitre suivant</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

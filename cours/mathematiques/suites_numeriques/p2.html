@@ -1,0 +1,453 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · SUITES NUMÉRIQUES        -->
+<!-- PARTIE 2 : SUITE GÉOMÉTRIQUE & SENS DE VARIATION             -->
+<!-- Notion 1 : geometrique — Raison, terme général, somme        -->
+<!-- Notion 2 : variations — Comportement selon la raison q       -->
+<!-- Notion 3 : arithmetico_geometrique — Point fixe et formule   -->
+<!-- Notion 4 : interets — Intérêts composés                      -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 02 · Suites numériques</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Suite géométrique &amp; <em>Sens de variation</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      En Partie 1, on <strong>ajoutait</strong> ; ici, on <strong>multiplie</strong>. Une suite géométrique passe d'un terme au suivant en multipliant toujours par le même nombre — et c'est le moteur de tous les phénomènes de croissance composée. Cette partie couvre <strong>4 notions</strong> : la <strong>définition</strong> et le terme général, la <strong>somme</strong> des termes, le <strong>sens de variation</strong> selon la raison, puis les suites <strong>arithmético-géométriques</strong> et les <strong>intérêts composés</strong>, avec un exemple complet mené pas à pas.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 4 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Les intérêts qui produisent des intérêts</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · geometrique — Définition et terme général</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · geometrique — Somme des premiers termes</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · variations — Comportement selon la raison q</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 3 · arithmetico_geometrique — Le point fixe</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 3 · arithmetico_geometrique — Exemple complet pas à pas</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 4 · interets — Intérêts composés et graphique</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — Tableau comparatif et essentiel</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Les intérêts qui produisent des intérêts</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tu places <strong>10 000 F</strong> à <strong>5 % par an</strong>. Après un an : 10 500 F. Mais l'année suivante, les 5 % ne portent plus sur 10 000 F : ils portent sur 10 500 F, et rapportent 525 F. Puis 551,25 F l'année d'après… Les <strong>intérêts produisent eux-mêmes des intérêts</strong> : on parle d'intérêts composés. Chaque année, le capital est <strong>multiplié par le même nombre</strong>, 1,05.
+      </p>
+      <p class="lecture-text">
+        Ce « multiplicateur constant » est la signature des suites <strong>géométriques</strong> : elles décrivent la croissance d'un capital, d'une population, d'une bactérie… comme la décroissance d'un stock ou d'une dose. Ce chapitre te donne leurs deux formules magiques (terme général et somme), leur comportement, et l'outil roi du Bac : la transformation en suite géométrique d'une récurrence du type « chaque terme = multiple du précédent + une constante ».
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Définir</strong> une suite géométrique, écrire son terme général et calculer un terme lointain.</li>
+            <li><strong>Additionner</strong> ses termes avec la formule de la somme géométrique.</li>
+            <li><strong>Classer</strong> son sens de variation d'après la raison <span class="math">q</span>.</li>
+            <li><strong>Résoudre</strong> une récurrence <span class="math">uₙ₊₁ = a·uₙ + b</span> grâce au point fixe, et modéliser les intérêts composés.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · geometrique — DÉFINITION ET TERME GÉNÉRAL -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · geometrique</span>
+        <h2 class="lecture-section-title">Définition et terme général</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Miroir exact de la suite arithmétique : on remplace l'addition par la multiplication.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définition officielle — Suite géométrique</div>
+          <p>Une suite <span class="math">(uₙ)</span> est <strong>géométrique</strong> s'il existe un réel <span class="math">q</span> tel que, pour tout entier <span class="math">n</span> : <span class="math">uₙ₊₁ = q·uₙ</span>. Le réel <span class="math">q</span> s'appelle la <strong>raison</strong> de la suite : chaque terme vaut le précédent multiplié par <span class="math">q</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Le terme général — à connaître par cœur</div>
+        <div class="lecture-formula-hero-main">uₙ = u₀ × qⁿ</div>
+        <div class="lecture-formula-hero-desc">Si le premier terme est u₁, la formule devient uₙ = u₁ × q^(n − 1). Le rang n compte le nombre de multiplications par q effectuées depuis le départ.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Calcul du 5ᵉ terme (<span class="math">u₀ = 3</span>, <span class="math">q = 2</span>)</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On identifie les données : <span class="math">u₀ = 3</span> et <span class="math">q = 2</span> (en effet <span class="math">u₁/u₀ = 2</span> et <span class="math">u₂/u₁ = 2</span>).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On écrit le terme général :</p><p><span class="math">uₙ = u₀ × qⁿ</span></p><p><span class="math">uₙ = 3 × 2ⁿ</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On remplace <span class="math">n</span> par <span class="math">5</span> :</p><p><span class="math">u₅ = 3 × 2⁵</span></p><p><span class="math">u₅ = 3 × 32 = 96</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Vérification par la récurrence : <span class="math">u₁ = 6</span>, <span class="math">u₂ = 12</span>, <span class="math">u₃ = 24</span>, <span class="math">u₄ = 48</span>, puis <span class="math">48 × 2 = 96</span>. On retrouve bien <span class="math">u₅ = 96</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">uₙ₊₁/uₙ = q&nbsp;&nbsp;(pour uₙ ≠ 0)</div>
+        <div class="lecture-formula-desc">Critère de reconnaissance : une suite est géométrique si le QUOTIENT de deux termes consécutifs est constant. Pour l'arithmétique, on regardait la différence — ici, on regarde le quotient.</div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Ne confonds pas les deux formules de terme général : <span class="math">u₀ + n·r</span> (arithmétique, on AJOUTE) et <span class="math">u₀ × qⁿ</span> (géométrique, on MULTIPLIE). Et vérifie la raison sur <strong>deux</strong> quotients : <span class="math">u₁/u₀</span> ET <span class="math">u₂/u₁</span> — un seul quotient ne prouve pas la géométricité.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · geometrique — SOMME DES TERMES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · geometrique</span>
+        <h2 class="lecture-section-title">Somme des premiers termes</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Ici, pas de « moyenne des extrêmes » : les termes géométriques croissent trop vite. L'astuce est différente — on multiplie la somme par la raison et on soustrait, ce qui fait disparaître presque tous les termes. Résultat :
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La somme des termes d'une suite géométrique</div>
+        <div class="lecture-formula-hero-main">S = u₀ × (1 − q^(n + 1))/(1 − q)</div>
+        <div class="lecture-formula-hero-desc">Somme de u₀ à uₙ, soit n + 1 termes (q ≠ 1). Si la somme commence à u₁, remplace u₀ par u₁ et l'exposant n + 1 par n. Toujours vérifier q ≠ 1 avant d'appliquer !</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Calculer 1 + 2 + 4 + 8 + 16 + 32 + 64</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On reconnaît une suite géométrique de premier terme <span class="math">u₀ = 1</span> et de raison <span class="math">q = 2</span>, avec <span class="math">7</span> termes (du rang 0 au rang 6, car <span class="math">64 = 2⁶</span>).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On écrit la formule de la somme avec <span class="math">n = 6</span> :</p><p><span class="math">S = u₀ × (1 − q⁷)/(1 − q)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On substitue les valeurs, une ligne à la fois :</p><p><span class="math">S = 1 × (1 − 2⁷)/(1 − 2)</span></p><p><span class="math">S = (1 − 128)/(−1)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>On conclut :</p><p><span class="math">S = (−127)/(−1) = 127</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Vérification par addition directe : <span class="math">1 + 2 = 3</span>, <span class="math">3 + 4 = 7</span>, <span class="math">7 + 8 = 15</span>, <span class="math">15 + 16 = 31</span>, <span class="math">31 + 32 = 63</span>, <span class="math">63 + 64 = 127</span>. On retrouve bien <span class="math">127</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Deux pièges classiques : (1) l'<strong>exposant</strong> — pour une somme jusqu'à <span class="math">uₙ</span>, c'est <span class="math">q^(n + 1)</span>, car il y a <span class="math">n + 1</span> termes ; (2) le <strong>signe</strong> — écris la fraction proprement, sans intervertir numérateur et dénominateur :</p>
+          <p><span class="math">(1 − q^(n + 1))/(1 − q)</span></p>
+          <p>Et si <span class="math">q = 1</span>, la formule est interdite : tous les termes sont égaux, la somme est simplement <span class="math">(n + 1) × u₀</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Petite histoire des maths</div>
+        <div class="lecture-aside-content">
+          La légende de <strong>Sissa</strong> : l'inventeur du jeu d'échecs demande pour seule récompense 1 grain de blé sur la première case, 2 sur la deuxième, 4 sur la troisième… et ainsi de suite jusqu'à la 64ᵉ. Le roi accepte… sans savoir que la 64ᵉ case exige <span class="math">2⁶³</span> grains, et que la somme totale vaut <span class="math">2⁶⁴ − 1</span> grains — plus de 18 milliards de milliards, soit des siècles de récolte mondiale. La formule de la somme géométrique permet de le vérifier en une ligne.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · variations — COMPORTEMENT SELON q -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · variations</span>
+        <h2 class="lecture-section-title">Sens de variation : tout dépend de <span class="math">q</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Pour une suite arithmétique, le sens de variation se lit sur le signe de <span class="math">r</span>. Pour une suite géométrique à termes positifs, tout se lit sur la <strong>raison <span class="math">q</span></strong> : multiplier par plus que 1 agrandit, par moins que 1 réduit, par 1 ne change rien. Le tableau ci-dessous classe tous les cas de <span class="math">q</span>.
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Raison <span class="math">q</span></th><th>Comportement (si <span class="math">u₀ &gt; 0</span>)</th><th>Exemple</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">q &gt; 1</span></td><td>strictement croissante</td><td><span class="math">2ⁿ</span> : 1 ; 2 ; 4 ; 8…</td></tr>
+            <tr><td><span class="math">q = 1</span></td><td>constante</td><td><span class="math">5 ; 5 ; 5 ; 5…</span></td></tr>
+            <tr><td><span class="math">0 &lt; q &lt; 1</span></td><td>strictement décroissante</td><td><span class="math">(0,5)ⁿ</span> : 1 ; 0,5 ; 0,25…</td></tr>
+            <tr><td><span class="math">q = 0</span></td><td>termes nuls dès le rang 1</td><td><span class="math">3 ; 0 ; 0 ; 0…</span></td></tr>
+            <tr><td><span class="math">q &lt; 0</span></td><td>signes alternés : jamais monotone</td><td><span class="math">(−2)ⁿ</span> : 1 ; −2 ; 4…</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — La suite <span class="math">uₙ = (−2)ⁿ</span> a-t-elle un sens de variation ?</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On liste les premiers termes :</p><p><span class="math">u₀ = 1</span> ; <span class="math">u₁ = −2</span> ; <span class="math">u₂ = 4</span> ; <span class="math">u₃ = −8</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On regarde les différences : <span class="math">u₁ − u₀ = −3 &lt; 0</span> puis <span class="math">u₂ − u₁ = 6 &gt; 0</span> : le signe change.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Les signes alternent (+ ; − ; + ; −…) : la suite n'est <strong>ni croissante ni décroissante</strong>. Une raison négative interdit tout sens de variation.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">q &gt; 1 : suite ↗<br>q = 1 : suite →<br>0 &lt; q &lt; 1 : suite ↘<br>q &lt; 0 : zigzag</div>
+        <div class="lecture-formula-desc">Pour u₀ &gt; 0. Si u₀ &lt; 0, les inégalités se renversent : une géométrique de raison q &gt; 1 et de premier terme négatif est décroissante. Le cas q &lt; 0 reste un zigzag dans tous les cas.</div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Le cas u₀ &lt; 0</div>
+          <p>Le tableau ci-dessus suppose <span class="math">u₀ &gt; 0</span>. Si <span class="math">u₀ &lt; 0</span>, tout se renverse : <span class="math">q &gt; 1</span> donne une suite <strong>décroissante</strong> (multiplier un négatif par 2 le rend plus petit), et <span class="math">0 &lt; q &lt; 1</span> une suite croissante. Prends toujours deux secondes pour vérifier le signe du premier terme avant de conclure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 3 · arithmetico_geometrique — POINT FIXE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · arithmetico_geometrique</span>
+        <h2 class="lecture-section-title">Suites arithmético-géométriques : le point fixe</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Beaucoup de récurrences du Bac mélangent les deux opérations : « on multiplie, puis on ajoute ». Ces suites ne sont ni arithmétiques ni géométriques — mais un décalage bien choisi les rend géométriques.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définition — Suite arithmético-géométrique</div>
+          <p>Une suite <span class="math">(uₙ)</span> est <strong>arithmético-géométrique</strong> si elle est définie par <span class="math">uₙ₊₁ = a·uₙ + b</span> (avec <span class="math">a ≠ 0</span> et <span class="math">a ≠ 1</span>), et un premier terme <span class="math">u₀</span> donné. Le nombre <span class="math">ℓ</span> solution de <span class="math">ℓ = a·ℓ + b</span>, c'est-à-dire <span class="math">ℓ = b/(1 − a)</span>, s'appelle le <strong>point fixe</strong> de la récurrence.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">ℓ = b/(1 − a)<br>vₙ = uₙ − ℓ</div>
+        <div class="lecture-formula-desc">Point fixe et décalage : la suite vₙ = uₙ − ℓ est géométrique de raison a. C'est LE réflexe à poser dès que la récurrence contient « a·uₙ + b ».</div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode à retenir — Traiter uₙ₊₁ = a·uₙ + b</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>Étape 1</strong> : chercher le point fixe en résolvant <span class="math">ℓ = a·ℓ + b</span>, d'où <span class="math">ℓ = b/(1 − a)</span>.</li>
+            <li><strong>Étape 2</strong> : poser <span class="math">vₙ = uₙ − ℓ</span> et montrer que <span class="math">(vₙ)</span> est géométrique de raison <span class="math">a</span> (substitution + factorisation).</li>
+            <li><strong>Étape 3</strong> : écrire <span class="math">vₙ = (u₀ − ℓ) × aⁿ</span>, puis revenir à <span class="math">uₙ</span> avec <span class="math">uₙ = vₙ + ℓ</span>.</li>
+            <li><strong>Étape 4</strong> : vérifier la formule trouvée sur <span class="math">u₀</span>, <span class="math">u₁</span>, <span class="math">u₂</span> recalculés par la récurrence.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule d'arrivée — la plus rentable du chapitre</div>
+        <div class="lecture-formula-hero-main">uₙ = ℓ + (u₀ − ℓ) × aⁿ</div>
+        <div class="lecture-formula-hero-desc">Forme explicite d'une suite arithmético-géométrique uₙ₊₁ = a·uₙ + b, avec ℓ = b/(1 − a). Elle donne directement la limite : si |a| &lt; 1, alors aⁿ → 0 et uₙ → ℓ (Partie 3).</div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Ne saute aucune justification</div>
+          <p>Le point fixe ne se « devine » pas : il se calcule (<span class="math">ℓ = a·ℓ + b</span>), et le fait que <span class="math">(vₙ)</span> soit géométrique se <strong>démontre</strong> par substitution, comme dans l'exemple qui suit. Une formule finale posée sans cette chaîne ne rapporte pas les points de méthode — même si le résultat est juste.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 3 · arithmetico_geometrique — EXEMPLE COMPLET -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · arithmetico_geometrique</span>
+        <h2 class="lecture-section-title">Exemple complet, pas à pas</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Appliquons la méthode de A à Z sur un exemple de référence — celui-là même que tu retrouveras dans les annales. Chaque transformation occupe sa propre ligne.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — <span class="math">u₀ = 1</span> et <span class="math">uₙ₊₁ = 3uₙ + 4</span> : donner <span class="math">uₙ</span> en fonction de <span class="math">n</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On lit <span class="math">a = 3</span> et <span class="math">b = 4</span>. On cherche le point fixe, une ligne à la fois :</p><p><span class="math">ℓ = 3ℓ + 4</span></p><p><span class="math">ℓ − 3ℓ = 4</span></p><p><span class="math">−2ℓ = 4</span></p><p><span class="math">ℓ = −2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On pose la suite décalée :</p><p><span class="math">vₙ = uₙ − ℓ</span></p><p><span class="math">vₙ = uₙ + 2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On exprime <span class="math">vₙ₊₁</span> en remplaçant <span class="math">uₙ₊₁</span> par <span class="math">3uₙ + 4</span> :</p><p><span class="math">vₙ₊₁ = uₙ₊₁ + 2</span></p><p><span class="math">vₙ₊₁ = 3uₙ + 4 + 2</span></p><p><span class="math">vₙ₊₁ = 3uₙ + 6</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>On factorise par 3 pour faire apparaître <span class="math">vₙ</span> :</p><p><span class="math">vₙ₊₁ = 3(uₙ + 2)</span></p><p><span class="math">vₙ₊₁ = 3 × vₙ</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Donc <span class="math">(vₙ)</span> est <strong>géométrique de raison 3</strong>, avec <span class="math">v₀ = u₀ + 2</span>, soit :</p><p><span class="math">v₀ = 1 + 2 = 3</span></p><p><span class="math">vₙ = v₀ × 3ⁿ</span></p><p><span class="math">vₙ = 3 × 3ⁿ</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p>On revient à <span class="math">uₙ</span> :</p><p><span class="math">uₙ = vₙ − 2</span></p><p><span class="math">uₙ = −2 + 3 × 3ⁿ</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p>Vérification obligatoire, terme par terme :</p><p><span class="math">u₀ = −2 + 3 × 1 = 1</span> ✓</p><p><span class="math">u₁ = 3 × 1 + 4 = 7</span> et <span class="math">−2 + 3 × 3 = 7</span> ✓</p><p><span class="math">u₂ = 3 × 7 + 4 = 25</span> et <span class="math">−2 + 3 × 9 = 25</span> ✓</p><p>La formule est validée.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Écrire <span class="math">vₙ₊₁ = 3vₙ + 4</span> (on aurait oublié de décaler) ou conclure <span class="math">uₙ = 3 × 3ⁿ</span> sans retirer le <span class="math">ℓ</span>. La chaîne complète est : <span class="math">vₙ₊₁ = a·vₙ</span>, puis <span class="math">vₙ = (u₀ − ℓ) × aⁿ</span>, puis <span class="math">uₙ = ℓ + (u₀ − ℓ) × aⁿ</span>. Et la vérification sur <span class="math">u₀</span>, <span class="math">u₁</span>, <span class="math">u₂</span> n'est pas décorative : elle sauve la moitié des copies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 4 · interets — INTÉRÊTS COMPOSÉS + SVG -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · interets</span>
+        <h2 class="lecture-section-title">Intérêts composés : le modèle géométrique</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Un capital placé à un taux annuel <span class="math">t</span> (écrit en décimal : 5 % = 0,05) gagne chaque année <span class="math">t</span> fois sa valeur : il est donc <strong>multiplié par <span class="math">1 + t</span></strong> à chaque échéance. Le capital suit une suite géométrique de raison <span class="math">1 + t</span>.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Modèle des intérêts composés</div>
+          <p>Un capital <span class="math">C</span> placé à un taux annuel <span class="math">t</span> (intérêts composés) devient, après <span class="math">n</span> années : <span class="math">uₙ = C × (1 + t)ⁿ</span>. C'est une suite géométrique de premier terme <span class="math">C</span> et de raison <span class="math">q = 1 + t &gt; 1</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — 10 000 F placés à 5 % pendant 3 ans</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Modélisation (en milliers de F) : <span class="math">u₀ = 10</span> et <span class="math">uₙ₊₁ = 1,05·uₙ</span> — suite géométrique de raison <span class="math">1,05</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Terme général :</p><p><span class="math">uₙ = 10 × 1,05ⁿ</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On calcule les puissances, une par ligne :</p><p><span class="math">1,05² = 1,1025</span></p><p><span class="math">1,05³ = 1,1025 × 1,05 = 1,157625</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Après 3 ans :</p><p><span class="math">u₃ = 10 × 1,157625 = 11,57625</span></p></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Le capital vaut donc environ <strong>11 576 F</strong> après 3 ans. Remarque le mécanisme : la première année a rapporté 500 F, la deuxième 525 F, la troisième 551,25 F — les intérêts grossissent, car ils sont recalculés sur un capital qui a déjà grossi.
+      </p>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Points de la suite géométrique u n égale 2 puissance n sur une courbe exponentielle croissante">
+          <line x1="55" y1="290" x2="500" y2="290" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="508,290 496,284 496,296" style="fill:var(--text-dim)"/>
+          <line x1="70" y1="305" x2="70" y2="30" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="70,22 64,34 76,34" style="fill:var(--text-dim)"/>
+          <text x="490" y="308" style="fill:var(--text-dim)" font-size="12" font-family="Inter">n</text>
+          <text x="40" y="40" style="fill:var(--text-dim)" font-size="12" font-family="Inter">uₙ</text>
+          <text x="62" y="230" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">8</text>
+          <line x1="64" y1="226" x2="70" y2="226" style="stroke:var(--text-dim)" stroke-width="1"/>
+          <text x="62" y="166" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">16</text>
+          <line x1="64" y1="162" x2="70" y2="162" style="stroke:var(--text-dim)" stroke-width="1"/>
+          <text x="62" y="38" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">32</text>
+          <line x1="64" y1="34" x2="70" y2="34" style="stroke:var(--text-dim)" stroke-width="1"/>
+          <path d="M 100 282 L 137 279 L 175 274 L 212 267 L 250 258 L 287 245 L 325 226 L 362 200 L 400 162 L 437 109 L 475 34" style="stroke:var(--green-bright)" stroke-width="2.5" fill="none"/>
+          <circle cx="100" cy="282" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="175" cy="274" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="250" cy="258" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="325" cy="226" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="400" cy="162" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="475" cy="34" r="5" style="fill:var(--accent-bright)"/>
+          <text x="100" y="308" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">0</text>
+          <text x="175" y="308" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">1</text>
+          <text x="250" y="308" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">2</text>
+          <text x="325" y="308" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">3</text>
+          <text x="400" y="308" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">4</text>
+          <text x="475" y="308" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">5</text>
+          <text x="410" y="176" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">u₄ = 16</text>
+          <text x="442" y="26" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">u₅ = 32</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">La suite géométrique <span class="math">uₙ = 2ⁿ</span> (raison <span class="math">q = 2 &gt; 1</span>) : chaque pas multiplie par 2. Les points s'écartent de plus en plus de l'axe — c'est la <strong>croissance exponentielle</strong>, signature des suites géométriques de raison supérieure à 1.</figcaption>
+      </figure>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN — TABLEAU COMPARATIF -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">Arithmétique vs géométrique : le match</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Les deux grandes familles se répondent terme à terme. Ce tableau est ton premier réflexe de révision : savoir <strong>identifier le type</strong> d'une suite avant tout calcul.
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Critère</th><th>Arithmétique</th><th>Géométrique</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Relation</td><td><span class="math">uₙ₊₁ = uₙ + r</span></td><td><span class="math">uₙ₊₁ = q·uₙ</span></td></tr>
+            <tr><td>Opération</td><td>on ajoute <span class="math">r</span></td><td>on multiplie par <span class="math">q</span></td></tr>
+            <tr><td>Reconnaissance</td><td><span class="math">uₙ₊₁ − uₙ</span> constant</td><td><span class="math">uₙ₊₁/uₙ</span> constant</td></tr>
+            <tr><td>Terme général</td><td><span class="math">uₙ = u₀ + n·r</span></td><td><span class="math">uₙ = u₀ × qⁿ</span></td></tr>
+            <tr><td>Somme</td><td><span class="math">n × (u₁ + uₙ)/2</span></td><td><span class="math">u₀ × (1 − q^(n + 1))/(1 − q)</span></td></tr>
+            <tr><td>Variation</td><td>signe de <span class="math">r</span></td><td>position de <span class="math">q</span> devant 1</td></tr>
+            <tr><td>Graphique</td><td>points alignés</td><td>courbe exponentielle</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li>Géométrique : <span class="math">uₙ₊₁ = q·uₙ</span>, terme général <span class="math">uₙ = u₀ × qⁿ</span>, somme : voir la formule du tableau ci-dessus (exposant <span class="math">n + 1</span> pour <span class="math">n + 1</span> termes, <span class="math">q ≠ 1</span>).</li>
+        <li>Variation (pour <span class="math">u₀ &gt; 0</span>) : <span class="math">q &gt; 1</span> croissante, <span class="math">0 &lt; q &lt; 1</span> décroissante, <span class="math">q = 1</span> constante, <span class="math">q &lt; 0</span> jamais monotone.</li>
+        <li>Arithmético-géométrique <span class="math">uₙ₊₁ = a·uₙ + b</span> : point fixe <span class="math">ℓ = b/(1 − a)</span>, poser <span class="math">vₙ = uₙ − ℓ</span>, conclure <span class="math">uₙ = ℓ + (u₀ − ℓ) × aⁿ</span>.</li>
+        <li>Intérêts composés : <span class="math">uₙ = C × (1 + t)ⁿ</span> — suite géométrique de raison <span class="math">1 + t</span>.</li>
+        <li>La vérification finale sur <span class="math">u₀</span>, <span class="math">u₁</span>, <span class="math">u₂</span> recalculés par la récurrence est obligatoire : elle valide la formule.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Réflexe rédaction pour l'examen</div>
+          <p>Face à une récurrence, commence TOUJOURS par classer : écart constant → arithmétique ; quotient constant → géométrique ; forme <span class="math">a·uₙ + b</span> → arithmético-géométrique (point fixe). Une heure perdue à « essayer des choses » vient presque toujours d'un mauvais classement initial.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Une suite géométrique a pour premier terme <span class="math">u₀ = 5</span> et pour raison <span class="math">q = 3</span>. Que vaut <span class="math">u₄</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) 135</span><span>B) 405</span><span>C) 15</span><span>D) 625</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><p><strong>B) 405.</strong> Terme général :</p><p><span class="math">u₄ = u₀ × q⁴ = 5 × 3⁴</span></p><p><span class="math">u₄ = 5 × 81 = 405</span></p><p>Vérification : 5 ; 15 ; 45 ; 135 ; 405 — chaque terme est bien le triple du précédent.</p></div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Que vaut la somme <span class="math">1 + 3 + 9 + 27 + 81</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) 120</span><span>B) 121</span><span>C) 81</span><span>D) 243</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><p><strong>B) 121.</strong> Suite géométrique <span class="math">u₀ = 1</span>, <span class="math">q = 3</span>, cinq termes (<span class="math">n = 4</span>) :</p><p><span class="math">S = 1 × (1 − 3⁵)/(1 − 3)</span></p><p><span class="math">S = (1 − 243)/(−2)</span></p><p><span class="math">S = (−242)/(−2) = 121</span></p><p>Vérification directe : <span class="math">1 + 3 = 4</span> ; <span class="math">4 + 9 = 13</span> ; <span class="math">13 + 27 = 40</span> ; <span class="math">40 + 81 = 121</span>.</p></div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — La suite définie par <span class="math">uₙ₊₁ = 2uₙ − 4</span> a pour point fixe :</p>
+      <div class="lecture-quiz-options"><span>A) ℓ = 2</span><span>B) ℓ = −2</span><span>C) ℓ = 4</span><span>D) ℓ = 1</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><p><strong>C) ℓ = 4.</strong> On résout, une ligne à la fois :</p><p><span class="math">ℓ = 2ℓ − 4</span></p><p><span class="math">0 = ℓ − 4</span></p><p><span class="math">ℓ = 4</span></p><p>Ici <span class="math">a = 2</span> et <span class="math">b = −4</span> : la formule <span class="math">ℓ = b/(1 − a)</span> donne :</p><p><span class="math">ℓ = (−4)/(1 − 2)</span></p><p><span class="math">ℓ = (−4)/(−1) = 4</span></p><p>C'est vers cette valeur que la suite se stabilisera (voir Partie 3).</p></div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[geometrique]</strong> Géométrique ⇔ il existe <span class="math">q</span> tel que <span class="math">uₙ₊₁ = q·uₙ</span> pour tout <span class="math">n</span> ; <span class="math">q</span> est la raison (quotient constant)</li>
+      <li><strong>[geometrique]</strong> Terme général : <span class="math">uₙ = u₀ × qⁿ</span>, ou <span class="math">uₙ = u₁ × q^(n − 1)</span> si la suite commence à <span class="math">u₁</span></li>
+      <li><strong>[geometrique]</strong> Somme de <span class="math">u₀</span> à <span class="math">uₙ</span> avec <span class="math">q ≠ 1</span> :<br><span class="math">S = u₀ × (1 − q^(n + 1))/(1 − q)</span> — exposant <span class="math">n + 1</span> car <span class="math">n + 1</span> termes</li>
+      <li><strong>[variations]</strong> Pour <span class="math">u₀ &gt; 0</span> : <span class="math">q &gt; 1</span> croissante ; <span class="math">0 &lt; q &lt; 1</span> décroissante ; <span class="math">q = 1</span> constante ; <span class="math">q &lt; 0</span> signes alternés, jamais monotone</li>
+      <li><strong>[arithmetico_geometrique]</strong> <span class="math">uₙ₊₁ = a·uₙ + b</span> : point fixe <span class="math">ℓ = b/(1 − a)</span> ; <span class="math">vₙ = uₙ − ℓ</span> est géométrique de raison <span class="math">a</span></li>
+      <li><strong>[arithmetico_geometrique]</strong> Formule d'arrivée : <span class="math">uₙ = ℓ + (u₀ − ℓ) × aⁿ</span> — à vérifier sur <span class="math">u₀</span>, <span class="math">u₁</span>, <span class="math">u₂</span></li>
+      <li><strong>[interets]</strong> Intérêts composés : <span class="math">uₙ = C × (1 + t)ⁿ</span> — géométrique de raison <span class="math">1 + t</span> ; les intérêts produisent des intérêts</li>
+      <li><strong>[geometrique]</strong> Identifier le type AVANT de calculer : différence constante → arithmétique ; quotient constant → géométrique ; <span class="math">a·uₙ + b</span> → point fixe</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 2 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : convergence des suites et raisonnement par récurrence</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

@@ -1,0 +1,463 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · NOMBRES COMPLEXES        -->
+<!-- PARTIE 4 : FICHE COMPLÈTE DE RÉVISION                        -->
+<!-- MOIVRE · EULER · ÉQUATIONS · RACINES · GÉOMÉTRIE             -->
+<!-- Notion 1 : moivre_euler — Formules de Moivre et d'Euler      -->
+<!-- Notion 2 : equations — Second degré, racine carrée, racines  -->
+<!-- Notion 3 : geometrie — Transformations, distances, angles    -->
+<!-- Notion 4 : reflexes — Réflexes Bac et tableau de synthèse    -->
+<!-- Refonte présentation v2 : calculs éclatés ligne par ligne,   -->
+<!-- une formule majeure par bloc, fractions composées en bloc.   -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 04 · Nombres complexes</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Fiche complète : <em>Moivre, Euler &amp; géométrie</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Dernière partie du chapitre, pensée comme une <strong>fiche de révision condensée</strong> : toutes les formules majeures, toutes les méthodes, tous les réflexes d'examen. Elle couvre <strong>4 blocs</strong> : les formules de <strong>Moivre et d'Euler</strong>, la <strong>résolution d'équations</strong> dans <span class="math">ℂ</span> (second degré, racine carrée, racines n-ièmes), la <strong>géométrie complexe</strong> (transformations, distances, angles) et le <strong>tableau de synthèse</strong> à relire la veille de l'épreuve.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span>
+      <span class="lecture-hero-meta-item">🧮 4 notions</span>
+      <span class="lecture-hero-meta-item">📊 6 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 6 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Mode d'emploi de la fiche</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · moivre_euler — La formule de Moivre et ses applications</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · moivre_euler — Les formules d'Euler</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · equations — Second degré, racine carrée, racines n-ièmes</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 3 · geometrie — Transformations, distances et angles</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 4 · reflexes — Réflexes Bac et tableau de synthèse</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MODE D'EMPLOI -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Mode d'emploi</span>
+        <h2 class="lecture-section-title">Comment utiliser cette fiche</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Cette partie ne raconte pas d'histoire : elle <strong>condense</strong>. Les parties 1 à 3 ont construit les définitions et le sens ; ici, tout est mis à plat pour réviser vite et bien. Utilise-la en trois temps :
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Trois passages recommandés</div>
+          <ul class="lecture-list">
+            <li><strong>Passage 1 (compréhension)</strong> : relis chaque formule avec sa démonstration courte — rien n'est appris tant qu'on ne sait pas d'où ça vient.</li>
+            <li><strong>Passage 2 (mémorisation)</strong> : cache la colonne « formule » du tableau de synthèse (section 05) et récite-la.</li>
+            <li><strong>Passage 3 (entraînement)</strong> : refais les exemples types sans regarder la solution, puis passe aux exercices du chapitre.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Rappels des fondations utilisées partout dans cette fiche — les trois façades d'un même nombre complexe :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">
+          z = a + ib<br>
+          z = r(cos θ + i·sin θ)<br>
+          z = r·e^(iθ)<br>
+          avec r = |z| = √(a² + b²) ; cos θ = a/r ; sin θ = b/r
+        </div>
+        <div class="lecture-formula-desc">Forme algébrique, forme trigonométrique, forme exponentielle : trois façades du même nombre, avec <span class="math">i² = −1</span> en fondation.</div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · moivre_euler — FORMULE DE MOIVRE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · moivre_euler</span>
+        <h2 class="lecture-section-title">La formule de Moivre et ses applications</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        En élevant <span class="math">e^(iθ)</span> à la puissance <span class="math">n</span>, on a vu que l'argument se multiplie par <span class="math">n</span> : <span class="math">(e^(iθ))ⁿ = e^(i·nθ)</span>. En revenant aux cosinus et sinus, on obtient la formule de <strong>Moivre</strong> :
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Formule de Moivre — pour tout entier n</div>
+        <div class="lecture-formula-hero-main">(cos θ + i·sin θ)ⁿ = cos nθ + i·sin nθ</div>
+        <div class="lecture-formula-hero-desc">Module 1 conservé, argument multiplié par n. C'est le cas particulier r = 1 de zⁿ = rⁿ·e^(i·nθ).</div>
+      </div>
+      <p class="lecture-text">
+        Son usage principal : <strong>exprimer cos nθ et sin nθ en fonction de cos θ et sin θ</strong>. La méthode, toujours la même — développer, puis identifier les parties réelle et imaginaire. Démonstration pour n = 2 :
+      </p>
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On développe le carré (produit remarquable, avec <span class="math">i² = −1</span>) :</p><p><span class="math">(cos θ + i·sin θ)² = cos²θ − sin²θ + 2i·cos θ·sin θ</span></p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Par la formule de Moivre, ce même nombre vaut aussi :</p><p><span class="math">(cos θ + i·sin θ)² = cos 2θ + i·sin 2θ</span></p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Par unicité de la forme algébrique, on <strong>identifie</strong> partie réelle avec partie réelle, partie imaginaire avec partie imaginaire.</p></div></div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">
+          cos 2θ = cos²θ − sin²θ<br>
+          cos 2θ = 2cos²θ − 1<br>
+          cos 2θ = 1 − 2sin²θ<br>
+          sin 2θ = 2·sin θ·cos θ
+        </div>
+        <div class="lecture-formula-desc">Les deux dernières écritures de cos 2θ s'obtiennent avec cos²θ + sin²θ = 1. Formules de duplication — à savoir par cœur.</div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Même méthode avec n = 3 : on développe le cube :</p><p><span class="math">(cos θ + i·sin θ)³ = cos³θ + 3i·cos²θ·sin θ − 3cos θ·sin²θ − i·sin³θ</span></p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Par Moivre, il vaut aussi <span class="math">cos 3θ + i·sin 3θ</span> ; on identifie, puis on remplace <span class="math">sin²θ = 1 − cos²θ</span> (resp. <span class="math">cos²θ = 1 − sin²θ</span>) pour tout exprimer avec le seul cosinus (resp. le seul sinus).</p></div></div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">
+          cos 3θ = 4cos³θ − 3cos θ<br>
+          sin 3θ = 3·sin θ − 4·sin³θ
+        </div>
+        <div class="lecture-formula-desc">Formules de triplication — même méthode, un degré de plus.</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Vérification rapide de cos 2θ</div><div class="lecture-example-content">
+          <p class="lecture-text">Prenons <span class="math">θ = π/3</span> et appliquons la formule <span class="math">cos 2θ = 2cos²θ − 1</span> :</p>
+          <p><span class="math">cos 2θ = 2 × (1/2)² − 1</span></p>
+          <p><span class="math">cos 2θ = 2 × 1/4 − 1 = 1/2 − 1 = −1/2</span></p>
+          <p class="lecture-text">Et en effet <span class="math">cos(2π/3) = −1/2</span> : la formule est cohérente.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Rédaction attendue au Bac</div>
+          <p>La justification « on développe puis on identifie » doit être <strong>écrite</strong> : d'abord le développement complet, ensuite la phrase « par la formule de Moivre, ce complexe vaut aussi cos nθ + i·sin nθ », enfin l'identification. Un résultat de cos 2θ posé sans cette chaîne ne rapporte pas les points de méthode.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · moivre_euler — FORMULES D'EULER -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · moivre_euler</span>
+        <h2 class="lecture-section-title">Les formules d'Euler</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Avec <span class="math">e^(iθ) = cos θ + i·sin θ</span> et son analogue <span class="math">e^(−iθ) = cos θ − i·sin θ</span> (il suffit de remplacer θ par −θ, car cos est pair et sin impair), on combine les deux lignes :
+      </p>
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Addition</strong> — les sinus se compensent :</p><p><span class="math">e^(iθ) + e^(−iθ) = 2cos θ</span></p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Soustraction</strong> — les cosinus se compensent :</p><p><span class="math">e^(iθ) − e^(−iθ) = 2i·sin θ</span></p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On divise la première par 2 et la seconde par 2i — d'où les formules d'<strong>Euler</strong> :</p></div></div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">
+          cos θ = (e^(iθ) + e^(−iθ))/2<br>
+          sin θ = (e^(iθ) − e^(−iθ))/(2i)
+        </div>
+        <div class="lecture-formula-desc">Elles transforment les cosinus et sinus en exponentielles, où les produits deviennent des additions d'arguments. (Technique surtout utile en mathématiques supérieures, mais le principe est au programme comme prolongement de Moivre.)</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Vérification de cohérence</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Produit :</strong> les arguments se compensent, tout est cohérent :</p><p><span class="math">e^(iθ) · e^(−iθ) = e^(iθ − iθ) = e^(i0) = 1</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Somme :</strong> pour <span class="math">θ = π/3</span>, on retrouve bien :</p><p><span class="math">e^(iπ/3) + e^(−iπ/3) = 2 × 1/2 = 1</span></p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 À quoi servent les formules d'Euler ?</div>
+        <div class="lecture-rule-body">
+          Elles permettent notamment de <strong>linéariser</strong> des expressions comme <span class="math">cos²θ</span> ou <span class="math">cos θ·sin θ</span> : on remplace chaque cosinus par sa formule d'Euler, on développe, on revient aux cosinus et sinus. C'est le prolongement naturel de Moivre pour transformer les produits d'angles en sommes.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · equations — ÉQUATIONS DANS ℂ -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · equations</span>
+        <h2 class="lecture-section-title">Second degré, racine carrée et racines n-ièmes</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Dans <span class="math">ℂ</span>, toute équation polynomiale a des solutions : c'est ce qui fait la force du nouvel ensemble. Trois situations au programme.
+      </p>
+      <h3 class="lecture-subtitle">A. Équation du second degré à discriminant négatif</h3>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Racines de az² + bz + c = 0 lorsque Δ = b² − 4ac est négatif</div>
+          <p>Si <span class="math">Δ &lt; 0</span>, l'équation <span class="math">az² + bz + c = 0</span> (avec <span class="math">a ≠ 0</span>) admet <strong>deux racines conjuguées</strong> :</p>
+          <p><span class="math">z₁ = (−b + i·√(−Δ))/(2a)</span></p>
+          <p><span class="math">z₂ = (−b − i·√(−Δ))/(2a)</span></p>
+          <p>On remplace <span class="math">√Δ</span>, impossible dans <span class="math">ℝ</span>, par <span class="math">i·√(−Δ)</span> avec <span class="math">−Δ &gt; 0</span>. On vérifie ensuite les deux sommes et produits classiques :</p>
+          <p><span class="math">z₁ + z₂ = −b/a</span></p>
+          <p><span class="math">z₁·z₂ = c/a</span></p>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Résoudre z² − 2z + 5 = 0</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Discriminant :</strong></p><p><span class="math">Δ = (−2)² − 4 × 1 × 5</span></p><p><span class="math">Δ = 4 − 20 = −16 &lt; 0</span></p><p>Pas de solution réelle : il y aura deux solutions complexes conjuguées.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Racine carrée de −Δ :</strong> <span class="math">√(−Δ) = √16 = 4</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Formules avec a = 1 et b = −2 :</strong></p><p><span class="math">z = (2 ± 4i)/2</span></p><p><span class="math">z₁ = (2 + 4i)/2 = 1 + 2i</span></p><p><span class="math">z₂ = (2 − 4i)/2 = 1 − 2i</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Vérification avec z₁ :</strong></p><p><span class="math">(1 + 2i)² − 2(1 + 2i) + 5 = (−3 + 4i) − 2 − 4i + 5</span></p><p><span class="math">= (−3 − 2 + 5) + (4 − 4)i = 0</span></p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Un discriminant négatif ne signifie <strong>pas</strong> « pas de solution » : cela n'est vrai que dans <span class="math">ℝ</span>. Dans <span class="math">ℂ</span>, il y a toujours <strong>deux</strong> solutions, conjuguées l'une de l'autre. Et attention : on écrit <span class="math">i·√(−Δ)</span> avec <span class="math">−Δ &gt; 0</span> — jamais <span class="math">√(Δ)</span> avec Δ négatif.</p>
+        </div>
+      </div>
+      <h3 class="lecture-subtitle">B. Racine carrée d'un nombre complexe</h3>
+      <p class="lecture-text">
+        Chercher <span class="math">w</span> tel que <span class="math">w² = Z</span>. <strong>Méthode algébrique</strong> (à privilégier quand <span class="math">Z</span> est simple) : on pose <span class="math">w = x + iy</span> avec <span class="math">x ; y</span> réels, et le problème devient un <strong>système</strong> :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">
+          w² = x² − y² + 2i·xy<br>
+          x² − y² = Re(Z)<br>
+          2xy = Im(Z)<br>
+          x² + y² = |Z|
+        </div>
+        <div class="lecture-formula-desc">Ligne 1 : w² développé avec w = x + iy. Lignes 2 et 3 : identification des parties réelle et imaginaire avec Z. Ligne 4 : module au carré, qui se déduit des deux premières en les additionnant — c'est elle qui débloque le système. Il y a toujours DEUX solutions, opposées l'une de l'autre.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Résoudre w² = 3 + 4i</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On pose <span class="math">w = x + iy</span>. Le système s'écrit, une équation par ligne :</p><p><span class="math">x² − y² = 3</span></p><p><span class="math">2xy = 4&nbsp;&nbsp;soit&nbsp;&nbsp;xy = 2</span></p><p><span class="math">x² + y² = |3 + 4i| = 5</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On additionne les équations extrêmes :</p><p><span class="math">(x² − y²) + (x² + y²) = 3 + 5</span></p><p><span class="math">2x² = 8&nbsp;&nbsp;donc&nbsp;&nbsp;x² = 4</span></p><p><span class="math">x = 2&nbsp;&nbsp;ou&nbsp;&nbsp;x = −2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On soustrait ces deux mêmes équations :</p><p><span class="math">(x² + y²) − (x² − y²) = 5 − 3</span></p><p><span class="math">2y² = 2&nbsp;&nbsp;donc&nbsp;&nbsp;y² = 1</span></p><p><span class="math">y = 1&nbsp;&nbsp;ou&nbsp;&nbsp;y = −1</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>La condition <span class="math">xy = 2 &gt; 0</span> impose que <span class="math">x</span> et <span class="math">y</span> aient le <strong>même signe</strong> : il reste <span class="math">w = 2 + i</span> ou <span class="math">w = −2 − i</span>, c'est-à-dire <span class="math">w = ±(2 + i)</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Vérification :</strong></p><p><span class="math">(2 + i)² = 4 + 4i + i²</span></p><p><span class="math">= 4 + 4i − 1 = 3 + 4i</span></p><p>Les deux solutions sont <span class="math">S = {−2 − i ; 2 + i}</span>, bien opposées.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="lecture-text">
+        <strong>Méthode trigonométrique</strong> (quand l'argument est une valeur remarquable) : si <span class="math">Z = ρ·e^(iφ)</span>, alors les solutions de <span class="math">w² = Z</span> sont <span class="math">w = √ρ·e^(iφ/2)</span> et <span class="math">w = √ρ·e^(i(φ/2 + π))</span> : on prend la racine carrée du module et on <strong>divise l'argument par 2</strong> (les deux solutions diffèrent d'un demi-tour).
+      </p>
+      <h3 class="lecture-subtitle">C. Racines n-ièmes d'un nombre complexe</h3>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Racines n-ièmes</div>
+          <p>Soit <span class="math">Z = ρ·e^(iφ)</span> un complexe non nul. Les <strong>n racines n-ièmes</strong> de <span class="math">Z</span> — les solutions de <span class="math">wⁿ = Z</span> — sont les complexes :</p>
+          <p><span class="math">wₖ = ρ^(1/n) · e^(i(φ + 2kπ)/n)</span></p>
+          <p><span class="math">pour k = 0 ; 1 ; … ; n − 1</span></p>
+          <p>Elles ont toutes le <strong>même module</strong> <span class="math">ρ^(1/n)</span> et des arguments régulièrement espacés de <span class="math">2π/n</span> : leurs points images sont les sommets d'un <strong>polygone régulier à n côtés</strong>, inscrit dans le cercle de centre O et de rayon <span class="math">ρ^(1/n)</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple complet — Racines cubiques de 8</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On cherche les <span class="math">w</span> tels que <span class="math">w³ = 8</span>. Or, module 8 et argument 0 :</p><p><span class="math">8 = 8·e^(i0)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Module commun :</strong> <span class="math">8^(1/3) = 2</span>. <strong>Arguments :</strong> <span class="math">(0 + 2kπ)/3</span> pour <span class="math">k = 0 ; 1 ; 2</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Les trois racines, une par ligne :</strong></p><p><span class="math">w₀ = 2·e^(i0) = 2</span></p><p><span class="math">w₁ = 2·e^(2iπ/3) = 2(−1/2 + i·√3/2) = −1 + i√3</span></p><p><span class="math">w₂ = 2·e^(4iπ/3) = 2(−1/2 − i·√3/2) = −1 − i√3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Ces trois points, tous à distance 2 de O et espacés d'angles de <span class="math">2π/3</span>, forment un <strong>triangle équilatéral</strong>. Cas particulier : les racines n-ièmes de 1 sont <span class="math">e^(2ikπ/n)</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Les trois racines cubiques de 8 forment un triangle équilatéral inscrit dans le cercle de rayon 2">
+          <line x1="30" y1="160" x2="500" y2="160" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="508,160 496,154 496,166" style="fill:var(--text-dim)"/>
+          <line x1="260" y1="305" x2="260" y2="25" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="260,17 254,29 266,29" style="fill:var(--text-dim)"/>
+          <text x="398" y="182" style="fill:var(--text-dim)" font-size="11" font-family="Inter">axe des réels</text>
+          <text x="270" y="40" style="fill:var(--text-dim)" font-size="11" font-family="Inter">axe des imaginaires</text>
+          <circle cx="260" cy="160" r="100" style="fill:none;stroke:var(--accent)" stroke-width="2"/>
+          <polygon points="360,160 210,73 210,247" style="fill:none;stroke:var(--accent-bright)" stroke-width="2"/>
+          <circle cx="360" cy="160" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="210" cy="73" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="210" cy="247" r="5" style="fill:var(--accent-bright)"/>
+          <text x="305" y="150" style="fill:var(--text-dim)" font-size="12" font-family="Inter">2</text>
+          <text x="368" y="156" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter">w₀ = 2</text>
+          <text x="196" y="66" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="end">w₁ = −1 + i√3</text>
+          <text x="196" y="262" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="end">w₂ = −1 − i√3</text>
+          <path d="M 290 160 A 30 30 0 0 0 245 134" style="fill:none;stroke:var(--info)" stroke-width="2"/>
+          <text x="296" y="128" style="fill:var(--info)" font-size="12" font-weight="700" font-family="Inter">2π/3</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Les trois racines cubiques de <span class="math">8</span> : tous à distance <span class="math">2</span> de <span class="math">O</span>, arguments espacés de <span class="math">2π/3</span> — un triangle équilatéral inscrit dans le cercle de rayon <span class="math">2</span>.</figcaption>
+      </figure>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 3 · geometrie — GÉOMÉTRIE COMPLEXE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · geometrie</span>
+        <h2 class="lecture-section-title">Transformations, distances et angles</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Convention d'écriture pour toute cette section : le point <span class="math">A</span> du plan complexe a pour <strong>affixe</strong> le nombre complexe noté <span class="math">z(A)</span>. Le lien entre calculs sur les affixes et figures est alors total.
+      </p>
+      <h3 class="lecture-subtitle">A. Les trois transformations au programme</h3>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Translation de vecteur →b : z' = z + b</div>
+        <div class="lecture-formula-desc">L'image M' du point M(z) vérifie →MM' = →b : on ajoute l'affixe du vecteur.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Rotation de centre Ω d'affixe ω, d'angle θ : z' − ω = e^(iθ)·(z − ω)</div>
+        <div class="lecture-formula-desc">On retranche le centre, on applique la rotation « standard » (multiplier par e^(iθ) : garder la distance, tourner de θ), puis on remet le centre.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Homothétie de centre Ω d'affixe ω, de rapport k : z' − ω = k·(z − ω)</div>
+        <div class="lecture-formula-desc">Même structure que la rotation, avec k réel : les distances sont multipliées par |k|, le point reste sur la droite (ΩM).</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Rotation de centre O et d'angle π/2</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Le point <span class="math">M</span> d'affixe <span class="math">z = 2 + i</span> est transformé par la rotation de centre <span class="math">O</span> (donc <span class="math">ω = 0</span>) et d'angle <span class="math">π/2</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On applique la formule, une étape par ligne :</p><p><span class="math">z' = e^(iπ/2)·z</span></p><p><span class="math">z' = i(2 + i)</span></p><p><span class="math">z' = 2i + i² = −1 + 2i</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>L'image est le point d'affixe <span class="math">−1 + 2i</span> : même distance à O (<span class="math">√5</span>), direction tournée d'un quart de tour. Cohérent !</p></div></div>
+          </div>
+        </div>
+      </div>
+      <h3 class="lecture-subtitle">B. Distances et angles</h3>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Formule reine n° 1 — la distance</div>
+        <div class="lecture-formula-hero-main">AB = |z(B) − z(A)|</div>
+        <div class="lecture-formula-hero-desc">Le module de la différence des affixes : on soustrait, on prend le module, on obtient une longueur positive.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">
+          (→AB ; →AC) ≡ arg q [2π]<br>
+          avec q = (z(C) − z(A)) / (z(B) − z(A))
+        </div>
+        <div class="lecture-formula-desc">
+          <strong>Numérateur</strong> <span class="math">z(C) − z(A)</span> : l'affixe du vecteur →AC — on part de A, on arrive à C.
+          <strong>Dénominateur</strong> <span class="math">z(B) − z(A)</span> : l'affixe du vecteur →AB — on part de A, on arrive à B.
+          L'angle en A se lit sur le quotient des deux affixes (avec B ≠ A et C ≠ A).
+        </div>
+      </div>
+      <p class="lecture-text">
+        Ce quotient <span class="math">q</span> concentre toute l'information géométrique sur le triangle <span class="math">ABC</span> : son module donne le rapport des longueurs <span class="math">AC/AB</span>, son argument donne l'angle en A entre les vecteurs <span class="math">→AB</span> et <span class="math">→AC</span>. Deux cas particuliers à connaître par cœur :
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Alignement et orthogonalité</div>
+          <p>Soient <span class="math">A ; B ; C</span> trois points deux à deux distincts, et <span class="math">q</span> le quotient défini ci-dessus :</p>
+          <ul class="lecture-list">
+            <li><span class="math">A ; B ; C</span> sont <strong>alignés</strong> ⇔ <span class="math">q</span> est <strong>réel</strong> ⇔ <span class="math">arg(q) ≡ 0 [π]</span> (les vecteurs sont colinéaires, angle de 0 ou de π).</li>
+            <li>Les droites <span class="math">(AB)</span> et <span class="math">(AC)</span> sont <strong>perpendiculaires</strong> ⇔ <span class="math">q</span> est <strong>imaginaire pur</strong> ⇔ <span class="math">arg(q) ≡ π/2 [π]</span> (angle droit, à π près).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple complet — A, B, C sont-ils alignés ?</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Prenons <span class="math">z(A) = 0</span>, <span class="math">z(B) = 2 + i</span>, <span class="math">z(C) = 4 + 2i</span>. On forme le quotient :</p><p><span class="math">q = (z(C) − z(A)) / (z(B) − z(A)) = (4 + 2i)/(2 + i)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On multiplie numérateur et dénominateur par le conjugué <span class="math">2 − i</span> :</p><p><span class="math">q = ((4 + 2i) × (2 − i)) / ((2 + i) × (2 − i))</span></p><p><span class="math">q = (8 − 4i + 4i − 2i²) / (4 + 1)</span></p><p><span class="math">q = (8 + 2) / 5 = 2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><span class="math">q = 2</span> est un <strong>réel</strong> : les points <span class="math">A ; B ; C</span> sont alignés (et <span class="math">AC = 2·AB</span>, ce qui donne même la position de B sur [AC]).</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Réflexe rédaction pour l'examen</div>
+          <p>Pour une question d'alignement ou d'orthogonalité, la rédaction minimale est : (1) écrire le quotient des différences d'affixes ; (2) le calculer sous forme algébrique ; (3) conclure avec la nature du résultat (« réel, donc alignés » ou « imaginaire pur, donc angle droit »). Un simple « ça a l'air aligné sur le dessin » ne vaut rien.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 4 · reflexes — RÉFLEXES BAC ET SYNTHÈSE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · reflexes</span>
+        <h2 class="lecture-section-title">Réflexes Bac et tableau de synthèse</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Avant le tableau, les automatismes. Face à une question sur les complexes, le bon réflexe est presque toujours l'un de ceux-ci :
+      </p>
+      <ul class="lecture-list-elegant">
+        <li><strong>Quotient à simplifier</strong> → multiplier numérateur et dénominateur par le <strong>conjugué du dénominateur</strong>.</li>
+        <li><strong>Argument à déterminer</strong> → calculer <strong>d'abord le module</strong>, puis cosinus et sinus, puis vérifier le <strong>quadrant</strong> avec les deux signes.</li>
+        <li><strong>Forme trigonométrique demandée</strong> → exiger <span class="math">r &gt; 0</span> ; si le facteur est négatif, ajouter π à l'argument.</li>
+        <li><strong>Puissance de i</strong> → réduire l'exposant avec le reste de la division par 4 (cycle <span class="math">i ; −1 ; −i ; 1</span>).</li>
+        <li><strong>Puissance d'un complexe</strong> → passer en forme exponentielle : <span class="math">zⁿ = rⁿ·e^(i·nθ)</span>.</li>
+        <li><strong>cos nθ ou sin nθ à exprimer</strong> → formule de Moivre : développer <span class="math">(cos θ + i·sin θ)ⁿ</span> et identifier les parties.</li>
+        <li><strong>Équation du second degré avec Δ négatif</strong> → deux racines conjuguées :<br><span class="math">z = (−b ± i·√(−Δ))/(2a)</span></li>
+        <li><strong>Racine carrée d'un complexe</strong> → poser <span class="math">w = x + iy</span>, résoudre le système <span class="math">x² − y² = Re(Z)</span> ; <span class="math">2xy = Im(Z)</span> ; <span class="math">x² + y² = |Z|</span> — deux solutions opposées.</li>
+        <li><strong>Rotation ou homothétie</strong> → écrire la relation centrée : <span class="math">z' − ω = e^(iθ)·(z − ω)</span> ou <span class="math">z' − ω = k·(z − ω)</span>.</li>
+        <li><strong>Alignement / orthogonalité</strong> → étudier l'argument du quotient :<br><span class="math">q = (z(C) − z(A)) / (z(B) − z(A))</span><br>réel → alignés ; imaginaire pur → angle droit.</li>
+      </ul>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Objet</th><th>Formule</th><th>Réflexe de vérification</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Conjugué</td><td><span class="math">z̄ = a − ib</span></td><td>seul le signe de b change ; <span class="math">z·z̄ = a² + b²</span></td></tr>
+            <tr><td>Module</td><td><span class="math">|z| = √(a² + b²) = OM</span></td><td>réel positif ; <span class="math">|z·z'| = |z|·|z'|</span></td></tr>
+            <tr><td>Argument — cosinus</td><td><span class="math">cos θ = a/|z|</span></td><td>noter <span class="math">θ ≡</span> mesure [2π]</td></tr>
+            <tr><td>Argument — sinus</td><td><span class="math">sin θ = b/|z|</span></td><td>quadrant vérifié avec les signes</td></tr>
+            <tr><td>Forme algébrique</td><td><span class="math">z = a + ib</span></td><td>pour additionner et développer</td></tr>
+            <tr><td>Forme trigonométrique</td><td><span class="math">z = r(cos θ + i·sin θ)</span></td><td>avec <span class="math">r &gt; 0</span></td></tr>
+            <tr><td>Forme exponentielle</td><td><span class="math">z = r·e^(iθ)</span></td><td>avec <span class="math">r &gt; 0</span> et θ modulo 2π</td></tr>
+            <tr><td>Moivre</td><td><span class="math">(cos θ + i·sin θ)ⁿ = cos nθ + i·sin nθ</span></td><td>développer puis identifier</td></tr>
+            <tr><td>Euler — cosinus</td><td><span class="math">cos θ = (e^(iθ) + e^(−iθ))/2</span></td><td><span class="math">e^(iθ)·e^(−iθ) = 1</span></td></tr>
+            <tr><td>Euler — sinus</td><td><span class="math">sin θ = (e^(iθ) − e^(−iθ))/(2i)</span></td><td>ne pas oublier le i du dénominateur</td></tr>
+            <tr><td>Second degré</td><td><span class="math">z = (−b ± i·√(−Δ))/(2a)</span> si <span class="math">Δ &lt; 0</span></td><td>racines conjuguées ; <span class="math">z₁ + z₂ = −b/a</span></td></tr>
+            <tr><td>Racines n-ièmes</td><td><span class="math">wₖ = ρ^(1/n)·e^(i(φ + 2kπ)/n)</span></td><td>n solutions ; polygone régulier ; <span class="math">k = 0 ; … ; n − 1</span></td></tr>
+            <tr><td>Rotation</td><td><span class="math">z' − ω = e^(iθ)·(z − ω)</span></td><td>distances conservées</td></tr>
+            <tr><td>Homothétie</td><td><span class="math">z' − ω = k·(z − ω)</span></td><td>distances multipliées par <span class="math">|k|</span></td></tr>
+            <tr><td>Distance</td><td><span class="math">AB = |z(B) − z(A)|</span></td><td>module d'une différence</td></tr>
+            <tr><td>Angle</td><td><span class="math">(→AB ; →AC) ≡ arg((z(C) − z(A))/(z(B) − z(A))) [2π]</span></td><td>réel → alignés ; imaginaire pur → angle droit</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 La carte mentale du chapitre</div>
+          <p>Un complexe se voit de trois façons : <strong>algébrique</strong> <span class="math">a + ib</span> (pour additionner et développer), <strong>géométrique</strong> module + argument (pour mesurer et tourner), <strong>exponentielle</strong> <span class="math">r·e^(iθ)</span> (pour multiplier et élever à une puissance). Chaque exercice du Bac demande simplement de choisir la bonne façade — et de la changer proprement, justifications à l'appui.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[moivre_euler]</strong> Moivre : <span class="math">(cos θ + i·sin θ)ⁿ = cos nθ + i·sin nθ</span><br>d'où <span class="math">cos 2θ = 2cos²θ − 1</span>, <span class="math">sin 2θ = 2·sin θ·cos θ</span>, <span class="math">cos 3θ = 4cos³θ − 3cos θ</span></li>
+      <li><strong>[moivre_euler]</strong> Euler :<br><span class="math">cos θ = (e^(iθ) + e^(−iθ))/2</span><br><span class="math">sin θ = (e^(iθ) − e^(−iθ))/(2i)</span></li>
+      <li><strong>[equations]</strong> Second degré avec <span class="math">Δ &lt; 0</span> : deux racines conjuguées<br><span class="math">z = (−b ± i·√(−Δ))/(2a)</span><br>jamais « pas de solution » dans ℂ — toujours deux solutions</li>
+      <li><strong>[equations]</strong> Racine carrée : poser <span class="math">w = x + iy</span>, système <span class="math">x² − y² = a</span> ; <span class="math">2xy = b</span> ; <span class="math">x² + y² = |Z|</span> — deux solutions opposées (ou méthode trigonométrique : module en √, argument divisé par 2)</li>
+      <li><strong>[equations]</strong> Racines n-ièmes de <span class="math">Z = ρ·e^(iφ)</span> :<br><span class="math">wₖ = ρ^(1/n)·e^(i(φ + 2kπ)/n)</span> pour <span class="math">k = 0 ; … ; n − 1</span><br>sommets d'un polygone régulier</li>
+      <li><strong>[geometrie]</strong> Translation <span class="math">z' = z + b</span> ; rotation <span class="math">z' − ω = e^(iθ)·(z − ω)</span> ; homothétie <span class="math">z' − ω = k·(z − ω)</span></li>
+      <li><strong>[geometrie]</strong> <span class="math">AB = |z(B) − z(A)|</span> et<br><span class="math">(→AB ; →AC) ≡ arg((z(C) − z(A))/(z(B) − z(A))) [2π]</span></li>
+      <li><strong>[geometrie]</strong> Alignés ⇔ quotient réel (argument ≡ 0 [π]) ; perpendiculaires ⇔ quotient imaginaire pur (argument ≡ π/2 [π])</li>
+      <li><strong>[reflexes]</strong> Trois façades d'un complexe : algébrique (sommes), module + argument (géométrie), exponentielle (produits et puissances)</li>
+      <li><strong>[reflexes]</strong> Les justifications qui rapportent les points : module détaillé, quadrant vérifié, notation [2π], identification après Moivre</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Chapitre « Nombres complexes » terminé !</div>
+    <div class="lecture-end-sub">Direction les exercices du chapitre pour ancrer toutes ces formules — bonne chance pour l'épreuve !</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

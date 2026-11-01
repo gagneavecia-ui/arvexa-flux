@@ -1,0 +1,714 @@
+<!-- ============================================================ -->
+<!-- PARTIE 3 : DÉRIVABILITÉ, DÉRIVÉES ET OPÉRATIONS              -->
+<!-- Chapitre : Fonctions numériques — Terminale D                -->
+<!-- Notion 1 : derivabilite — Taux d'accroissement, nombre dérivé,-->
+<!--            sécante → tangente, tangente, non-dérivabilité    -->
+<!-- Notion 2 : derivees_usuelles — Tableau des dérivées usuelles -->
+<!-- Notion 3 : operations_derivees — Opérations (u+v)', (uv)',   -->
+<!--            (u/v)', (1/v)', composées e^u, ln u, uⁿ, √u et    -->
+<!--            quatre dérivations complètes pas à pas            -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 03 · Fonctions numériques</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Dérivabilité, dérivées &amp; <em>opérations</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      De combien varie <span class="math">f</span> quand <span class="math">x</span> bouge « d'un rien » ? Le <strong>taux d'accroissement</strong> mesure d'abord une variation moyenne ; sa <strong>limite</strong> — le <strong>nombre dérivé</strong> — transforme cette question en un calcul précis, dont la pente de la tangente est l'image géométrique. Cette partie installe <strong>3 notions</strong> : la <strong>dérivabilité en un point</strong> (taux, nombre dérivé, tangente, non-dérivabilité), le <strong>tableau des dérivées usuelles</strong>, puis le <strong>tableau des opérations et composées</strong> — avec quatre dérivations complètes, une transformation par étape.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 3 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">3 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — La pente qui se précise</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · derivabilite — Taux d'accroissement et nombre dérivé</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · derivabilite — Sécante, tangente et équation de la tangente</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 1 · derivabilite — Quand <span class="math">f</span> n'est pas dérivable</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · derivees_usuelles — Le tableau des dérivées usuelles</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 3 · operations_derivees — Le tableau des opérations et composées</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 3 · operations_derivees — Quatre dérivations complètes</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — L'essentiel de la partie</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">La pente qui se précise</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Une <strong>piste latéritique</strong> monte du village vers le marché. Entre les bornes kilométriques 2 et 5, elle grimpe de 90 m : sa <strong>pente moyenne</strong> vaut 90 m pour 3 km. Mais cette moyenne ne dit pas si la côte est raide <em>exactement</em> à la borne 3 — peut-être plate là, puis brutale juste après. Pour connaître la pente <strong>en un point précis</strong>, il faut rétrécir l'intervalle de mesure… et regarder vers quoi la pente moyenne <strong>tend</strong>.
+      </p>
+      <p class="lecture-text">
+        C'est exactement le programme de cette partie : le <strong>taux d'accroissement</strong> est la pente moyenne entre deux points ; sa <strong>limite</strong> quand l'écart tend vers 0 est le <strong>nombre dérivé</strong> — la pente instantanée, celle de la tangente. Et tout ce qui suit (variations, extremums, études de fonctions en partie 4) repose sur ce seul objet. Ici, pas d'histoire compliquée : du <strong>calcul</strong>, posé ligne par ligne.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Les trois questions de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Comment définir</strong> le nombre dérivé <span class="math">f'(a)</span> par une limite, et que devient-il sur le dessin ? (Notion 1)</li>
+            <li><strong>Quelles dérivées</strong> faut-il connaître par cœur, et avec quelles conditions de validité ? (Notion 2)</li>
+            <li><strong>Comment dériver</strong> une somme, un produit, un quotient, une composée — sans erreur et avec vérification ? (Notion 3)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Pour aller plus loin</div>
+        <div class="lecture-aside-content">
+          <strong>Newton</strong> et <strong>Leibniz</strong>, dans les années 1670, ont inventé indépendamment le calcul différentiel — et se sont disputé la paternité. Leibniz a imposé sa notation <span class="math">df/dx</span> ; Newton défendait un point sur la variable, <span class="math">f'(x)</span>, celui que tu utilises ici. La dispute durera un siècle… mais les deux notations disent la même chose : une <em>pente instantanée</em>.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · derivabilite — TAUX ET NOMBRE DÉRIVÉ -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · derivabilite</span>
+        <h2 class="lecture-section-title">Taux d'accroissement et nombre dérivé</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Partons du mesurable : entre <span class="math">x = a</span> et <span class="math">x = a + h</span> (avec <span class="math">h ≠ 0</span>), la fonction varie de <span class="math">f(a + h) − f(a)</span> pendant que la variable varie de <span class="math">h</span>. Le rapport des deux, posé sur sa ligne, est le taux d'accroissement :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">t(h) = (f(a + h) − f(a))/h</div>
+        <div class="lecture-formula-desc">Variation de f divisée par variation de x. Géométriquement, t(h) est la pente de la sécante passant par (a ; f(a)) et (a + h ; f(a + h)).</div>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition officielle — Dérivabilité en un point</div>
+          <p>La fonction <span class="math">f</span> est <strong>dérivable en</strong> <span class="math">a</span> lorsque le taux d'accroissement <span class="math">t(h)</span> admet une limite <strong>finie</strong> lorsque <span class="math">h</span> tend vers 0. Cette limite s'appelle le <strong>nombre dérivé</strong> de <span class="math">f</span> en <span class="math">a</span>, et se note <span class="math">f'(a)</span>.</p>
+          <p>Lorsque <span class="math">f</span> est dérivable en <strong>tout</strong> point d'un intervalle <span class="math">I</span>, la fonction qui à chaque <span class="math">x</span> de <span class="math">I</span> associe <span class="math">f'(x)</span> s'appelle la <strong>fonction dérivée</strong> de <span class="math">f</span>, notée <span class="math">f'</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La définition centrale de la partie</div>
+        <div class="lecture-formula-hero-main">f'(a) = lim(h→0) (f(a + h) − f(a))/h</div>
+        <div class="lecture-formula-hero-desc">Si cette limite existe et est finie, f est dérivable en a. Le nombre dérivé f'(a) est la pente de la tangente au point (a ; f(a)) — l'interprétation géométrique est en section 02.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">f'(a) = lim(x→a) (f(x) − f(a))/(x − a)</div>
+        <div class="lecture-formula-desc">La même définition, réécrite avec x qui tend vers a (en posant x = a + h). Les deux écritures sont équivalentes — choisis la plus pratique.</div>
+      </div>
+      <p class="lecture-text">
+        Voyons la méthode « par définition » sur deux calculs complets. Le schéma est toujours le même : écrire le taux, le <strong>simplifier</strong>, puis passer à la limite.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 1 — f(x) = x² en a = 3</div>
+        <div class="lecture-example-content"><p>Calculer <span class="math">f'(3)</span> par la définition.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p><strong>Écrire le taux d'accroissement</strong> entre 3 et 3 + h :</p>
+            <p><span class="math">t(h) = ((3 + h)² − 9)/h</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p><strong>Développer le carré</strong> :</p>
+            <p><span class="math">t(h) = (9 + 6h + h² − 9)/h</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p><strong>Simplifier</strong> (les 9 se compensent, on factorise par h) :</p>
+            <p><span class="math">t(h) = (6h + h²)/h = 6 + h</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content">
+            <p><strong>Passer à la limite</strong> quand h tend vers 0 :</p>
+            <p><span class="math">f'(3) = lim(h→0) (6 + h) = 6</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 2 — f(x) = 1/x en a = 2</div>
+        <div class="lecture-example-content"><p>Calculer <span class="math">f'(2)</span> par la définition.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p><strong>Écrire le taux</strong> :</p>
+            <p><span class="math">t(h) = (1/(2 + h) − 1/2)/h</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p><strong>Réduire au même dénominateur</strong> :</p>
+            <p><span class="math">1/(2 + h) − 1/2 = (2 − (2 + h))/(2(2 + h)) = −h/(2(2 + h))</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p><strong>Simplifier par h</strong> (valable car h ≠ 0) :</p>
+            <p><span class="math">t(h) = −h/(2h(2 + h)) = −1/(2(2 + h))</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content">
+            <p><strong>Passer à la limite</strong> :</p>
+            <p><span class="math">f'(2) = −1/(2 × 2) = −1/4</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Le piège classique</div>
+          <p>Ne remplace jamais <span class="math">f'(a)</span> par <span class="math">f(a)</span>, et n'écris jamais <span class="math">f(a + h) − f(a) = f(h)</span> : le taux compare <strong>deux valeurs de la même fonction</strong> en deux points proches, c'est lui qu'on divise par <span class="math">h</span>. Et surtout : la simplification par <span class="math">h</span> est légale car <span class="math">h ≠ 0</span> — c'est seulement <em>à la fin</em>, dans la limite, que <span class="math">h</span> devient 0.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · derivabilite — SÉCANTE ET TANGENTE   -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · derivabilite</span>
+        <h2 class="lecture-section-title">Sécante, tangente et équation de la tangente</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Quand <span class="math">h</span> rétrécit, le point <span class="math">M(a + h ; f(a + h))</span> glisse sur la courbe vers le point <span class="math">A(a ; f(a))</span>, et la sécante pivote vers une position limite : la <strong>tangente</strong>. Le nombre dérivé <span class="math">f'(a)</span> est exactement sa <strong>pente</strong>.
+      </p>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Une courbe, deux points A et M, la sécante passant par A et M, la tangente en A, et une flèche montrant M glissant vers A quand h tend vers 0">
+          <line x1="40" y1="262" x2="494" y2="262" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="500,262 490,258 490,266" style="fill:var(--text-dim)"/>
+          <line x1="90" y1="276" x2="90" y2="46" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="90,40 86,50 94,50" style="fill:var(--text-dim)"/>
+          <text x="496" y="256" style="fill:var(--text-dim)" font-size="11" font-family="Inter">x</text>
+          <text x="78" y="52" style="fill:var(--text-dim)" font-size="11" font-family="Inter">y</text>
+          <text x="76" y="278" style="fill:var(--text-dim)" font-size="11" font-family="Inter">O</text>
+          <text x="110" y="58" style="fill:var(--info)" font-size="12" font-weight="700" font-family="Inter">— sécante : pente t(h)</text>
+          <text x="110" y="78" style="fill:var(--green-bright)" font-size="12" font-weight="700" font-family="Inter">— tangente : pente f'(a)</text>
+          <path d="M 110 235 Q 320 260 460 35" style="fill:none;stroke:var(--accent-bright)" stroke-width="2.5"/>
+          <text x="446" y="60" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">Cf</text>
+          <line x1="234" y1="262" x2="450" y2="62" style="stroke:var(--info)" stroke-width="2"/>
+          <line x1="210" y1="259" x2="430" y2="115" style="stroke:var(--green-bright)" stroke-width="2"/>
+          <path d="M 390 128 Q 358 160 333 181" style="fill:none;stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <polygon points="326,187 330,178 335,184" style="fill:var(--text-dim)"/>
+          <text x="288" y="160" style="fill:var(--text-dim)" font-size="12" font-weight="700" font-family="Inter">h → 0</text>
+          <circle cx="320" cy="187" r="5" style="fill:var(--accent-bright)"/>
+          <text x="240" y="175" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter">A (a ; f(a))</text>
+          <circle cx="395" cy="122" r="5" style="fill:var(--info)"/>
+          <text x="400" y="112" style="fill:var(--info)" font-size="13" font-weight="700" font-family="Inter">M (a + h ; f(a + h))</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">La <strong>sécante</strong> (bleue) passe par <span class="math">A(a ; f(a))</span> et <span class="math">M(a + h ; f(a + h))</span> : sa pente est le taux <span class="math">t(h)</span>. Quand <span class="math">h → 0</span>, <span class="math">M</span> glisse le long de la courbe vers <span class="math">A</span> et la sécante pivote jusqu'à sa position limite : la <strong>tangente</strong> (verte), de pente <span class="math">f'(a)</span>, qui ne touche la courbe qu'en <span class="math">A</span>.</figcaption>
+      </figure>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Équation de la tangente au point d'abscisse a</div>
+        <div class="lecture-formula-hero-main">y = f'(a)(x − a) + f(a)</div>
+        <div class="lecture-formula-hero-desc">Droite de pente f'(a) passant par le point (a ; f(a)). Le réflexe complet : calculer f(a) et f'(a), remplacer dans la formule, réduire. À connaître par cœur.</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><span class="math">f'(a) &gt; 0</span> : la tangente <strong>monte</strong> (fonction localement croissante) ; <span class="math">f'(a) &lt; 0</span> : elle descend.</li>
+        <li><span class="math">f'(a) = 0</span> : tangente <strong>horizontale</strong>, d'équation <span class="math">y = f(a)</span> — le signal d'un possible extremum (partie 4).</li>
+        <li>La tangente n'est <strong>pas</strong> la courbe : elle l'épouse seulement au voisinage du point de contact.</li>
+      </ul>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple — Deux équations de tangente complètes</div>
+        <div class="lecture-example-content"><p>Donner l'équation réduite de la tangente à la courbe de <span class="math">f(x) = x²</span> en <span class="math">a = 3</span>, puis de <span class="math">g(x) = 1/x</span> en <span class="math">a = 2</span>.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p><strong>Courbe de x² en 3</strong> : on a <span class="math">f(3) = 9</span> et <span class="math">f'(3) = 6</span> (section 01), donc :</p>
+            <p><span class="math">y = 6(x − 3) + 9</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p><strong>Réduire</strong> :</p>
+            <p><span class="math">y = 6x − 18 + 9 = 6x − 9</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p><strong>Courbe de 1/x en 2</strong> : <span class="math">g(2) = 1/2</span> et <span class="math">g'(2) = −1/4</span> (section 01), donc :</p>
+            <p><span class="math">y = −1/4(x − 2) + 1/2 = −x/4 + 1</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content">
+            <p><strong>Conclusion</strong> : la première tangente monte (pente <span class="math">6 &gt; 0</span>), la seconde descend (pente <span class="math">−1/4 &lt; 0</span>) — cohérent avec l'allure des deux courbes. Vérification éclair : <span class="math">(3 ; 9)</span> vérifie <span class="math">y = 6x − 9</span>.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Écrire la tangente avec la mauvaise pente ou le mauvais point : la formule exige <strong>les deux</strong>, <span class="math">f'(a)</span> comme coefficient directeur et <span class="math">f(a)</span> comme ordonnée du point de contact. Inverser <span class="math">f(a)</span> et <span class="math">f'(a)</span>, ou oublier les parenthèses dans <span class="math">f'(a)(x − a)</span>, est l'erreur la plus chutée du chapitre. Termine toujours par le test du point : <span class="math">(a ; f(a))</span> doit vérifier l'équation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 1 · derivabilite — NON-DÉRIVABILITÉ      -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · derivabilite</span>
+        <h2 class="lecture-section-title">Quand f n'est pas dérivable</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La limite du taux peut <strong>ne pas exister</strong> ou ne pas être <strong>finie</strong>. Deux figures classiques à reconnaître, mention brève mais les contre-exemples reviennent souvent en QCM.
+      </p>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🔍 Cas 1 — Le point anguleux : f(x) = |x| en 0</div>
+        <div class="lecture-example-content">
+          <p>La courbe de <span class="math">f(x) = |x|</span> forme un « toit » en <span class="math">0</span>. Calculons les taux unilatéraux, chacun sur sa ligne :</p>
+          <p><span class="math">à droite (h &gt; 0) : (|h| − 0)/h = h/h = 1 → 1</span></p>
+          <p><span class="math">à gauche (h &lt; 0) : (|h| − 0)/h = (−h)/h = −1 → −1</span></p>
+          <p>Les deux limites existent mais sont <strong>différentes</strong> : <span class="math">f</span> n'est <strong>pas dérivable en 0</strong> — c'est un <strong>point anguleux</strong>, avec deux demi-tangentes de pentes <span class="math">1</span> et <span class="math">−1</span>. La fonction est pourtant <strong>continue</strong> en <span class="math">0</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🔍 Cas 2 — La tangente verticale : f(x) = √x en 0</div>
+        <div class="lecture-example-content">
+          <p>Pour <span class="math">f(x) = √x</span> en <span class="math">0</span>, le taux vaut :</p>
+          <p><span class="math">t(h) = (√h − 0)/h = √h/h = 1/√h</span></p>
+          <p>Quand <span class="math">h → 0⁺</span>, <span class="math">1/√h → +∞</span> : la limite n'est <strong>pas finie</strong>, donc <span class="math">f</span> n'est <strong>pas dérivable en 0</strong> — la courbe démarre le long de l'axe des ordonnées : <strong>tangente verticale</strong>.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>« <span class="math">f</span> est continue en <span class="math">a</span>, donc dérivable en <span class="math">a</span> » est <strong>faux</strong> : <span class="math">x ↦ |x|</span> est continue en <span class="math">0</span> sans y être dérivable. Le sens correct est <strong>dérivable ⇒ continue</strong>, jamais l'inverse. De même, une valeur interdite (dénominateur nul, <span class="math">ln</span> d'un négatif, racine d'un négatif) est un point où la dérivabilité ne se discute même pas.</p>
+        </div>
+      </div>
+      <div class="lecture-vocab-grid">
+        <div class="vocab-card">
+          <div class="vocab-symbol">📐</div>
+          <div class="vocab-name">Nombre dérivé</div>
+          <div class="vocab-notation">f'(a) : limite du taux, pente de la tangente</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">🚧</div>
+          <div class="vocab-name">Point anguleux</div>
+          <div class="vocab-notation">Deux demi-tangentes, exemple |x| en 0</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">📏</div>
+          <div class="vocab-name">Tangente verticale</div>
+          <div class="vocab-notation">Taux qui tend vers ±∞, exemple √x en 0</div>
+        </div>
+        <div class="vocab-card vocab-card-info">
+          <div class="vocab-symbol">⚠️</div>
+          <div class="vocab-name">Ordre des implications</div>
+          <div class="vocab-notation">Dérivable ⇒ continue ; la réciproque est fausse</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 2 · derivees_usuelles — TABLEAU          -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · derivees_usuelles</span>
+        <h2 class="lecture-section-title">Le tableau des dérivées usuelles</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Recalculer chaque dérivée par la définition serait trop long : on mémorise le tableau des <strong>dérivées usuelles</strong>. C'est la base de tout — une erreur ici, et toutes les dérivées qui suivent sont fausses. Chaque ligne porte sa <strong>condition de validité</strong>.
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Fonction f(x)</th><th>Dérivée f'(x)</th><th>Valable où</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">k</span> (constante)</td><td><span class="math">0</span></td><td><span class="math">ℝ</span></td></tr>
+            <tr><td><span class="math">xⁿ</span> (n entier ≥ 1)</td><td><span class="math">n·x^(n − 1)</span></td><td><span class="math">ℝ</span></td></tr>
+            <tr><td><span class="math">1/x</span></td><td><span class="math">−1/x²</span></td><td><span class="math">ℝ*</span></td></tr>
+            <tr><td><span class="math">√x</span></td><td><span class="math">1/(2√x)</span></td><td><span class="math">]0 ; +∞[</span></td></tr>
+            <tr><td><span class="math">e^x</span></td><td><span class="math">e^x</span></td><td><span class="math">ℝ</span></td></tr>
+            <tr><td><span class="math">ln x</span></td><td><span class="math">1/x</span></td><td><span class="math">]0 ; +∞[</span></td></tr>
+            <tr><td><span class="math">cos x</span></td><td><span class="math">−sin x</span></td><td><span class="math">ℝ</span></td></tr>
+            <tr><td><span class="math">sin x</span></td><td><span class="math">cos x</span></td><td><span class="math">ℝ</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">(ax + b)' = a&nbsp;&nbsp;·&nbsp;&nbsp;(k)' = 0</div>
+        <div class="lecture-formula-desc">Fonction affine et constante : les cas les plus simples, très utilisés comme blocs u et v dans les règles d'opérations de la section 05.</div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Mode d'emploi de la ligne xⁿ</div>
+        <div class="lecture-rule-body">
+          « Je <strong>descends l'exposant</strong> et je <strong>baisse d'un cran</strong> » :
+          <ul class="lecture-list">
+            <li><span class="math">(x³)' = 3x²</span> ; <span class="math">(x⁵)' = 5x⁴</span> ; <span class="math">x</span> tout court donne <span class="math">1</span> (car <span class="math">x = x¹</span>).</li>
+            <li>Les coefficients se conservent : <span class="math">(−2x²)' = −2 × 2x = −4x</span>.</li>
+            <li>Une somme de constantes se dérive en <span class="math">0</span> : seules les puissances de <span class="math">x</span> travaillent.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Les deux « moins » à ne pas perdre</div>
+          <p>Les deux pièges du tableau : <span class="math">(1/x)' = −1/x²</span> (le <strong>moins</strong> s'installe) et <span class="math">(cos x)' = −sin x</span> (le <strong>moins</strong> est sur le cosinus), alors que <span class="math">(sin x)' = cos x</span> reste positif. Récite-les par paires pour verrouiller les signes, et note que <span class="math">√x</span> et <span class="math">ln x</span> ne sont dérivables que sur <span class="math">]0 ; +∞[</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 3 · operations_derivees — TABLEAU        -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · operations_derivees</span>
+        <h2 class="lecture-section-title">Le tableau des opérations et composées</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La plupart des fonctions du Bac sont des <strong>assemblages</strong> : sommes, produits, quotients, composées. Chaque assemblage a sa règle — dans le tableau, <span class="math">u</span> et <span class="math">v</span> sont des fonctions dérivables, avec <span class="math">v(x) ≠ 0</span> pour les quotients et <span class="math">u(x) &gt; 0</span> pour <span class="math">ln u</span>.
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Assemblage</th><th>Dérivée</th><th>Remarque</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">u + v</span></td><td><span class="math">u' + v'</span></td><td>terme à terme, aucun piège</td></tr>
+            <tr><td><span class="math">u × v</span></td><td><span class="math">u'v + uv'</span></td><td>« dérivée fois l'autre, deux fois », symétrique</td></tr>
+            <tr><td><span class="math">1/v</span></td><td><span class="math">−v'/v²</span></td><td>le moins s'installe ; v ≠ 0</td></tr>
+            <tr><td><span class="math">u/v</span></td><td><span class="math">(u'v − uv')/v²</span></td><td>l'ordre compte : u'v − uv' ; v ≠ 0</td></tr>
+            <tr><td><span class="math">e^u</span></td><td><span class="math">u'·e^u</span></td><td>on multiplie par u'</td></tr>
+            <tr><td><span class="math">ln u</span></td><td><span class="math">u'/u</span></td><td>exige u &gt; 0</td></tr>
+            <tr><td><span class="math">uⁿ</span></td><td><span class="math">n·u'·u^(n − 1)</span></td><td>« descendre, dériver, baisser d'un cran »</td></tr>
+            <tr><td><span class="math">√u</span></td><td><span class="math">u'/(2√u)</span></td><td>cas n = 1/2 ; exige u &gt; 0</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Écrire <span class="math">(u × v)' = u' × v'</span> est <strong>faux</strong> : la dérivée d'un produit n'est <strong>pas</strong> le produit des dérivées. Test de contrôle avec <span class="math">u = v = x</span> : on doit retrouver <span class="math">(x²)' = 2x</span>, et la formule donne <span class="math">u'v + uv' = x + x = 2x</span> ✔ tandis que <span class="math">u' × v' = 1</span> ✘. Même vigilance pour le quotient : l'ordre <span class="math">u'v − uv'</span> n'est pas symétrique.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">(√u)' = u'/(2√u)</div>
+        <div class="lecture-formula-desc">Cas particulier de (uⁿ)' avec n = 1/2, valable pour u &gt; 0. C'est elle qui débloquera la dérivation de √(2x + 5) en section 06.</div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode — Dériver un assemblage en 4 gestes</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>Identifier la structure</strong> : somme ? produit ? quotient ? composée ?</li>
+            <li><strong>Nommer les blocs</strong> : poser <span class="math">u</span>, <span class="math">v</span> (et calculer <span class="math">u'</span>, <span class="math">v'</span> à part).</li>
+            <li><strong>Appliquer la formule</strong> du tableau, sans en inventer.</li>
+            <li><strong>Conclure avec le domaine</strong> : <span class="math">ln u</span> exige <span class="math">u &gt; 0</span>, <span class="math">u/v</span> exige <span class="math">v ≠ 0</span>, <span class="math">√u</span> exige <span class="math">u &gt; 0</span>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 3 · operations_derivees — DÉRIVATIONS    -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · operations_derivees</span>
+        <h2 class="lecture-section-title">Quatre dérivations complètes</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Appliquons le tableau sur quatre fonctions variées — un produit, un quotient, une composée logarithme, une racine. Le schéma de la section 05 se répète : structure, blocs, formule, domaine.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Dérivation 1 — un produit : f(x) = x²·e^x</div>
+        <div class="lecture-example-content"><p>Dériver <span class="math">f</span> sur <span class="math">ℝ</span>.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p><strong>Structure produit</strong> — nommer les blocs :</p>
+            <p><span class="math">u(x) = x² ; v(x) = e^x ; u'(x) = 2x ; v'(x) = e^x</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p><strong>Appliquer (uv)' = u'v + uv'</strong> :</p>
+            <p><span class="math">f'(x) = 2x·e^x + x²·e^x</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p><strong>Factoriser par e^x</strong> (toujours factoriser les produits avec e^x) :</p>
+            <p><span class="math">f'(x) = (x² + 2x)·e^x</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content">
+            <p><strong>Aller plus loin</strong> — factoriser par x :</p>
+            <p><span class="math">f'(x) = x(x + 2)·e^x</span></p>
+            <p>Le signe de <span class="math">f'</span> se lit alors sur <span class="math">x(x + 2)</span> (car <span class="math">e^x &gt; 0</span>) : exactement ce qu'il faudra pour le tableau de variations de la partie 4.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Dérivation 2 — un quotient : f(x) = (2x + 1)/(x − 3)</div>
+        <div class="lecture-example-content"><p>Dériver <span class="math">f</span> sur son domaine.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p><strong>Structure quotient</strong> — nommer les blocs et le domaine :</p>
+            <p><span class="math">u(x) = 2x + 1 ; v(x) = x − 3 ; u'(x) = 2 ; v'(x) = 1</span></p>
+            <p><span class="math">v(x) ≠ 0 ⇔ x ≠ 3 : domaine D = ℝ ∖ {3}</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p><strong>Appliquer (u/v)' = (u'v − uv')/v²</strong> :</p>
+            <p><span class="math">f'(x) = (2(x − 3) − (2x + 1) × 1)/(x − 3)²</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p><strong>Simplifier le numérateur</strong> :</p>
+            <p><span class="math">2(x − 3) − (2x + 1) = 2x − 6 − 2x − 1 = −7</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content">
+            <p><strong>Conclure avec le domaine</strong> :</p>
+            <p><span class="math">f'(x) = −7/(x − 3)²  pour x ≠ 3</span></p>
+            <p>Numérateur <span class="math">−7 &lt; 0</span>, dénominateur <span class="math">(x − 3)² &gt; 0</span> : <span class="math">f'</span> est <strong>toujours négative</strong> — la fonction est décroissante sur chacun de ses deux intervalles (partie 4).</p>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Dérivation 3 — une composée : f(x) = ln(x² + 1)</div>
+        <div class="lecture-example-content"><p>Dériver <span class="math">f</span> sur son domaine.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p><strong>Structure composée</strong> — poser le bloc intérieur et vérifier la condition :</p>
+            <p><span class="math">u(x) = x² + 1 ; u'(x) = 2x ; u(x) &gt; 0 pour tout x</span></p>
+            <p>Donc <span class="math">f</span> est dérivable sur <span class="math">ℝ</span> tout entier.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p><strong>Appliquer (ln u)' = u'/u</strong> :</p>
+            <p><span class="math">f'(x) = 2x/(x² + 1)</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p><strong>Lecture du signe</strong> : le dénominateur <span class="math">x² + 1 &gt; 0</span>, donc <span class="math">f'</span> a le signe de <span class="math">x</span> :</p>
+            <p><span class="math">f décroît sur ]−∞ ; 0] et croît sur [0 ; +∞[</span></p>
+            <p>Un minimum se prépare en <span class="math">0</span> — on l'exploitera en partie 4.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Dérivation 4 — une racine : f(x) = √(2x + 5)</div>
+        <div class="lecture-example-content"><p>Dériver <span class="math">f</span> sur son domaine.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p><strong>Structure racine de composée</strong> — poser le bloc intérieur et le domaine :</p>
+            <p><span class="math">u(x) = 2x + 5 ; u'(x) = 2 ; u(x) &gt; 0 ⇔ x &gt; −5/2</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p><strong>Appliquer (√u)' = u'/(2√u)</strong> :</p>
+            <p><span class="math">f'(x) = 2/(2√(2x + 5))</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p><strong>Simplifier</strong> (le 2 se compense) et conclure :</p>
+            <p><span class="math">f'(x) = 1/√(2x + 5)  pour x &gt; −5/2</span></p>
+            <p>Résultat <strong>toujours positif</strong> : la fonction est croissante sur <span class="math">]−5/2 ; +∞[</span>.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">💡 Le réflexe de vérification</div>
+          <p>Après chaque dérivation, fais le <strong>test de cohérence</strong> : les degrés baissent d'un cran (polynômes), les signes correspondent au tableau usuel, le domaine de <span class="math">f'</span> est inclus dans celui de <span class="math">f</span>, et — quand c'est possible — on peut <strong>redériver</strong> ou tester une valeur. Trente secondes de contrôle évitent l'erreur en cascade dans le tableau de variations de la partie 4.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">L'essentiel de la partie</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tu sais désormais fabriquer <span class="math">f'</span> : par la <strong>limite du taux</strong> quand il faut justifier, par le <strong>tableau des usuelles</strong> et les <strong>règles d'opérations</strong> dans tous les autres cas. La partie 4 transformera ce calcul en <strong>machine à décrire la courbe</strong> : variations, extremums, études complètes.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Les deux formules à emporter</div>
+        <div class="lecture-formula-hero-main">f'(a) = lim(h→0) (f(a + h) − f(a))/h&nbsp;&nbsp;·&nbsp;&nbsp;y = f'(a)(x − a) + f(a)</div>
+        <div class="lecture-formula-hero-desc">La définition (avec la condition « limite finie ») et la tangente (pente f'(a), point (a ; f(a))). Tout le reste du chapitre en découle.</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><strong>Taux d'accroissement</strong> : <span class="math">t(h) = (f(a + h) − f(a))/h</span>, pente de la sécante ; <span class="math">f</span> est dérivable en <span class="math">a</span> si ce taux a une limite <strong>finie</strong> quand <span class="math">h → 0</span>.</li>
+        <li><strong>Interprétation géométrique</strong> : <span class="math">f'(a)</span> est la pente de la tangente ; la sécante pivote vers la tangente quand <span class="math">h → 0</span>.</li>
+        <li><strong>Non-dérivabilité</strong> : point anguleux (<span class="math">|x|</span> en <span class="math">0</span>) ou tangente verticale (<span class="math">√x</span> en <span class="math">0</span>) ; <strong>dérivable ⇒ continue</strong>, la réciproque est fausse.</li>
+        <li><strong>Usuelles</strong> : <span class="math">(xⁿ)' = n·x^(n − 1)</span> ; <span class="math">(1/x)' = −1/x²</span> ; <span class="math">(√x)' = 1/(2√x)</span> ; <span class="math">(e^x)' = e^x</span> ; <span class="math">(ln x)' = 1/x</span> ; <span class="math">(cos x)' = −sin x</span> ; <span class="math">(sin x)' = cos x</span>.</li>
+        <li><strong>Opérations</strong> : <span class="math">(uv)' = u'v + uv'</span> ; <span class="math">(u/v)' = (u'v − uv')/v²</span> ; <span class="math">(1/v)' = −v'/v²</span> — jamais <span class="math">u' × v'</span>.</li>
+        <li><strong>Composées</strong> : multiplier par <span class="math">u'</span> — <span class="math">(e^u)' = u'·e^u</span> ; <span class="math">(ln u)' = u'/u</span> ; <span class="math">(uⁿ)' = n·u'·u^(n − 1)</span> ; <span class="math">(√u)' = u'/(2√u)</span>.</li>
+        <li><strong>Méthode</strong> : structure → blocs → formule → domaine, puis test de cohérence.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Réflexe rédaction pour l'examen</div>
+          <p>Une dérivée s'annonce toujours avec son <strong>domaine de validité</strong> : <span class="math">f'(x) = −7/(x − 3)²</span> pour <span class="math">x ≠ 3</span>, <span class="math">f'(x) = 1/√(2x + 5)</span> pour <span class="math">x &gt; −5/2</span>. Une dérivée juste sur un domaine non précisé perd des points — et en partie 4, c'est le domaine qui commande tout le tableau de variations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Si <span class="math">f(x) = x⁵</span>, alors <span class="math">f'(x)</span> vaut :</p>
+      <div class="lecture-quiz-options">
+        <span>A) <span class="math">4x⁵</span></span>
+        <span>B) <span class="math">5x⁴</span></span>
+        <span>C) <span class="math">x⁴/5</span></span>
+        <span>D) <span class="math">5x</span></span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) 5x⁴.</strong> Règle <span class="math">(xⁿ)' = n·x^(n − 1)</span> avec <span class="math">n = 5</span> : on descend l'exposant (5) et on baisse d'un cran (<span class="math">x⁴</span>).</div>
+      </details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Si <span class="math">f(x) = (2x + 1)/(x − 3)</span>, alors <span class="math">f'(x)</span> vaut :</p>
+      <div class="lecture-quiz-options">
+        <span>A) <span class="math">2</span></span>
+        <span>B) <span class="math">3/(x − 3)²</span></span>
+        <span>C) <span class="math">−7/(x − 3)²</span></span>
+        <span>D) <span class="math">−7/(x − 3)</span></span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>C) −7/(x − 3)².</strong> Avec <span class="math">u = 2x + 1</span> et <span class="math">v = x − 3</span> : <span class="math">(u'v − uv')/v² = (2(x − 3) − (2x + 1))/(x − 3)² = −7/(x − 3)²</span>. L'option D oublie le carré, l'option A oublie la formule du quotient.</div>
+      </details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Si <span class="math">f(x) = x²·e^x</span>, alors <span class="math">f'(x)</span> vaut :</p>
+      <div class="lecture-quiz-options">
+        <span>A) <span class="math">2x·e^x</span></span>
+        <span>B) <span class="math">(x² + 2x)·e^x</span></span>
+        <span>C) <span class="math">2x·e^(x²)</span></span>
+        <span>D) <span class="math">x·e^x</span></span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) (x² + 2x)·e^x.</strong> Produit avec <span class="math">u = x²</span>, <span class="math">v = e^x</span> : <span class="math">f' = u'v + uv' = 2x·e^x + x²·e^x = (x² + 2x)·e^x</span>. L'option A oublie le terme <span class="math">uv'</span> — c'est l'erreur <span class="math">u' × v'</span> déguisée.</div>
+      </details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[derivabilite]</strong> Taux d'accroissement <span class="math">t(h) = (f(a + h) − f(a))/h</span> (pente de la sécante) ; <span class="math">f</span> dérivable en <span class="math">a</span> ⇔ ce taux a une limite <strong>finie</strong> quand <span class="math">h → 0</span></li>
+      <li><strong>[derivabilite]</strong> <span class="math">f'(a) = lim(h→0) (f(a + h) − f(a))/h</span> ; la fonction <span class="math">x ↦ f'(x)</span> est la fonction dérivée <span class="math">f'</span></li>
+      <li><strong>[derivabilite]</strong> Tangente en <span class="math">a</span> : <span class="math">y = f'(a)(x − a) + f(a)</span> — pente <span class="math">f'(a)</span>, point <span class="math">(a ; f(a))</span>, test du point à la fin</li>
+      <li><strong>[derivabilite]</strong> Dérivable ⇒ continue ; réciproque fausse : <span class="math">|x|</span> en <span class="math">0</span> (point anguleux), <span class="math">√x</span> en <span class="math">0</span> (tangente verticale)</li>
+      <li><strong>[derivees_usuelles]</strong> <span class="math">(k)' = 0</span> ; <span class="math">(xⁿ)' = n·x^(n − 1)</span> ; <span class="math">(1/x)' = −1/x²</span> ; <span class="math">(√x)' = 1/(2√x)</span> ; <span class="math">(e^x)' = e^x</span> ; <span class="math">(ln x)' = 1/x</span> ; <span class="math">(cos x)' = −sin x</span> ; <span class="math">(sin x)' = cos x</span></li>
+      <li><strong>[derivees_usuelles]</strong> <span class="math">(ax + b)' = a</span> — et chaque dérivée porte sa condition de validité (<span class="math">]0 ; +∞[</span> pour √x et ln x)</li>
+      <li><strong>[operations_derivees]</strong> <span class="math">(u + v)' = u' + v'</span> ; <span class="math">(uv)' = u'v + uv'</span> ; <span class="math">(1/v)' = −v'/v²</span> ; <span class="math">(u/v)' = (u'v − uv')/v²</span> — jamais <span class="math">u' × v'</span></li>
+      <li><strong>[operations_derivees]</strong> Composées (multiplier par u') : <span class="math">(e^u)' = u'·e^u</span> ; <span class="math">(ln u)' = u'/u</span> ; <span class="math">(uⁿ)' = n·u'·u^(n − 1)</span> ; <span class="math">(√u)' = u'/(2√u)</span></li>
+      <li><strong>[operations_derivees]</strong> Méthode : structure → blocs u et v → formule → domaine ; modèles traités : <span class="math">(x²·e^x)' = (x² + 2x)·e^x</span>, <span class="math">((2x + 1)/(x − 3))' = −7/(x − 3)²</span>, <span class="math">(ln(x² + 1))' = 2x/(x² + 1)</span>, <span class="math">(√(2x + 5))' = 1/√(2x + 5)</span></li>
+      <li><strong>[operations_derivees]</strong> Factoriser le résultat (<span class="math">e^x</span>, <span class="math">x</span>) prépare le signe de <span class="math">f'</span> — donc le tableau de variations de la partie 4</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 3 terminée !</div>
+    <div class="lecture-end-sub">Termine par la fiche complète : variations, extremums et étude de fonctions</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

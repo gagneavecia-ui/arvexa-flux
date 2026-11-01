@@ -1,0 +1,533 @@
+<!-- ============================================================ -->
+<!-- PARTIE 3 : INTERPRÉTATION DES COURBES DE VARIATION (25 min)   -->
+<!-- Notion 1 : courbe_adn_temps — Quantité d'ADN par cellule      -->
+<!-- Notion 2 : courbe_synthese_adn — Taux de synthèse d'ADN       -->
+<!-- Notion 3 : methode_graphique — Lire un graphique en 5 étapes  -->
+<!-- Notion 4 : erreurs_courbes — Pièges d'interprétation          -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 03 · Cycle cellulaire</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Savoir lire les <em>courbes de variation</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Au Bac, le cycle cellulaire arrive presque toujours <em>enrobé dans un graphique</em> : quantité d'ADN en fonction du temps, taux de synthèse, zoom sur la mitose. Cette partie t'apprend à décoder ces courbes à travers <strong>4 notions</strong> : le <strong>graphique quantité d'ADN / temps</strong>, le <strong>taux de synthèse d'ADN</strong>, la <strong>méthode de lecture en 5 étapes</strong> et les <strong>erreurs typiques</strong> à ne jamais commettre.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧬 4 notions</span>
+      <span class="lecture-hero-meta-item">📚 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Les graphiques, langue préférée du Bac</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion · courbe_adn_temps — Graphique 1 : quantité d'ADN / temps</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion · courbe_synthese_adn — Graphique 2 : taux de synthèse d'ADN</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion · courbe_adn_temps — Graphique 3 : zoom sur la mitose</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion · methode_graphique — La méthode de lecture en 5 étapes</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion · methode_graphique — Application guidée complète</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion · erreurs_courbes — Les erreurs typiques d'interprétation</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Entraînement — À toi de jouer</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION                                       -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Les graphiques, langue préférée du Bac</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Comment un biologiste fait-il pour <strong>suivre</strong> la quantité d'ADN d'une population de cellules au fil des heures ? Il ne peut pas ouvrir une cellule à chaque minute ! Il utilise des techniques de dosage : par exemple, faire incorporer aux cellules de la <strong>thymidine radioactive</strong> (un constituant de l'ADN) — les cellules qui fabriquent de l'ADN deviennent radioactives, et l'on peut mesurer l'intensité du marquage au cours du temps. On peut aussi doser directement l'ADN par cellule à différents instants. Le résultat des mesures ? Une <strong>courbe</strong>.
+      </p>
+
+      <p class="lecture-text">
+        C'est cette courbe que l'examinateur te tendra : « Le document représente la quantité d'ADN par cellule en fonction du temps. Identifiez les phases du cycle et justifiez l'allure de la courbe. » Les points se gagnent par une <strong>lecture méthodique</strong> : savoir nommer chaque segment (plateau, rampe, chute), le rattacher à une phase, puis l'expliquer par un événement biologique. Bonne nouvelle : le nombre de courbes possibles est très réduit — il n'y en a en réalité que <strong>trois</strong>, et tu vas les connaître toutes.
+      </p>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Le contrat de cette partie</div>
+          <p>À la fin de cette partie, tu sauras : décrire n'importe quelle courbe du cycle avec le <strong>vocabulaire exact</strong> (plateau, rampe, pic, chute), la <strong>justifier segment par segment</strong> avec les bons événements (réplication, cytodiérèse), et éviter les <strong>7 erreurs classiques</strong> qui coûtent des points. C'est la partie la plus « examen » du chapitre — apprends-la comme une méthode, pas comme un récit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : courbe_adn_temps — GRAPHIQUE 1                   -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · courbe_adn_temps</span>
+        <h2 class="lecture-section-title">Graphique 1 : quantité d'ADN par cellule en fonction du temps</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        C'est LE graphique du chapitre. Axe vertical : <strong>quantité d'ADN par cellule</strong> (en unités arbitraires C, ou en pg). Axe horizontal : <strong>temps</strong>. La courbe ressemble à un escalier arrondi : un plateau bas, une rampe, un plateau haut, une chute, puis de nouveau un plateau bas.
+      </p>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 660 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graphique 1 : quantité d'ADN par cellule en fonction du temps avec les quatre segments annotés">
+          <text x="330" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">QUANTITÉ D'ADN PAR CELLULE (U.A.) EN FONCTION DU TEMPS</text>
+
+          <line x1="70" y1="205" x2="636" y2="205" style="stroke:var(--text-dim)" stroke-width="1.5"/> <polygon points="642,205 632,201 632,209" style="fill:var(--text-dim)"/> <line x1="70" y1="225" x2="70" y2="48" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="70,42 66,52 74,52" style="fill:var(--text-dim)"/>
+          <text x="640" y="222" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">temps</text>
+          <text x="62" y="38" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="end">ADN/cellule (U.A.)</text>
+
+          <line x1="70" y1="170" x2="630" y2="170" style="stroke:var(--border-soft)" stroke-width="1" stroke-dasharray="3 4"/> <line x1="70" y1="90" x2="630" y2="90" style="stroke:var(--border-soft)" stroke-width="1" stroke-dasharray="3 4"/>
+          <text x="64" y="174" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">2C</text>
+          <text x="64" y="94" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">4C</text>
+
+          <polyline points="80,170 250,170 420,90 540,90 565,170 625,170" fill="none" style="stroke:var(--accent-bright)" stroke-width="3" stroke-linejoin="round"/>
+
+          <circle cx="165" cy="170" r="5" style="fill:var(--green-bright)"/> <circle cx="335" cy="130" r="5" style="fill:var(--green-bright)"/> <circle cx="480" cy="90" r="5" style="fill:var(--green-bright)"/>
+          <circle cx="553" cy="130" r="5" style="fill:var(--danger-light)"/> <circle cx="595" cy="170" r="5" style="fill:var(--green-bright)"/>
+
+          <text x="165" y="152" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">① plateau 2C</text>
+          <text x="300" y="108" style="fill:var(--green-bright)" font-size="11.5" font-weight="700" font-family="Inter" text-anchor="middle">② rampe</text>
+          <text x="480" y="74" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">③ plateau 4C</text>
+          <text x="565" y="112" style="fill:var(--danger-light)" font-size="11.5" font-weight="700" font-family="Inter" text-anchor="middle">④ chute</text>
+          <text x="600" y="152" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">⑤ 2C</text>
+
+          <text x="350" y="248" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">U.A. = unités arbitraires (selon les sujets : C, pg, U, unités de radioactivité…)</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Le graphique n°1 du Bac : plateau (G1), rampe (S), plateau (G2 + mitose), chute (cytodiérèse), retour au plateau initial (cellules filles).</figcaption>
+      </figure>
+
+      <p class="lecture-text">
+        Chaque segment a <strong>une seule explication possible</strong>. Apprends ce tableau par cœur : c'est la clé de toutes les questions « justifiez l'allure de la courbe ».
+      </p>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Segment</th><th>Allure</th><th>Phase du cycle</th><th>Justification biologique</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>①</td><td>Plateau à <span class="math">2C</span></td><td>G1</td><td>Aucune réplication : chaque chromosome a 1 chromatide, l'ADN ne varie pas</td></tr>
+            <tr><td>②</td><td>Rampe montante</td><td>S</td><td>Réplication : les molécules d'ADN se copient une à une, la quantité double progressivement (<span class="math">2C → 4C</span>)</td></tr>
+            <tr><td>③</td><td>Plateau à <span class="math">4C</span></td><td>G2 puis M (prophase, métaphase, anaphase)</td><td>Réplication achevée ; les chromatides restent dans la cellule mère, donc la quantité par cellule ne change pas</td></tr>
+            <tr><td>④</td><td>Chute rapide à <span class="math">2C</span></td><td>Cytodiérèse (fin de M)</td><td>Le cytoplasme se partage : chaque cellule reçoit un lot complet, soit <span class="math">2C</span></td></tr>
+            <tr><td>⑤</td><td>Plateau à <span class="math">2C</span></td><td>G1 du cycle suivant</td><td>Les deux cellules filles recommencent un cycle avec la quantité initiale</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📖 La règle de lecture essentielle</div>
+          <p><strong>Un plateau</strong> signifie « rien ne se fait » (ou tout est déjà fait) ; <strong>une rampe</strong> signifie « synthèse en cours » ; <strong>une chute</strong> signifie « séparation en deux cellules ». Trois formes, trois événements — la courbe entière se déduit de là.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : courbe_synthese_adn — GRAPHIQUE 2                -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · courbe_synthese_adn</span>
+        <h2 class="lecture-section-title">Graphique 2 : le taux de synthèse d'ADN</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Deuxième courbe classique : on ne mesure plus la <em>quantité</em> d'ADN, mais la <strong>vitesse à laquelle la cellule fabrique de l'ADN</strong> — le <em>taux de synthèse</em> (par exemple par incorporation de thymidine radioactive). C'est une grandeur différente, et le graphique a une tout autre allure :
+      </p>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 660 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graphique 2 : taux de synthèse d'ADN en fonction du temps, nul sauf un pic pendant la phase S">
+          <text x="330" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">TAUX DE SYNTHÈSE D'ADN EN FONCTION DU TEMPS</text>
+
+          <line x1="70" y1="190" x2="636" y2="190" style="stroke:var(--text-dim)" stroke-width="1.5"/> <polygon points="642,190 632,186 632,194" style="fill:var(--text-dim)"/> <line x1="70" y1="205" x2="70" y2="48" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="70,42 66,52 74,52" style="fill:var(--text-dim)"/>
+          <text x="640" y="207" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">temps</text>
+          <text x="62" y="38" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="end">taux de synthèse</text>
+          <text x="62" y="194" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">0</text>
+
+          <polyline points="80,170 250,170 335,70 420,70 480,170 625,170" fill="none" style="stroke:var(--green-bright)" stroke-width="3" stroke-linejoin="round"/>
+
+          <line x1="250" y1="60" x2="250" y2="190" style="stroke:var(--text-dim)" stroke-width="1" stroke-dasharray="4 3"/> <line x1="480" y1="60" x2="480" y2="190" style="stroke:var(--text-dim)" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="250" y="212" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">début de S</text>
+          <text x="480" y="212" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">fin de S</text>
+
+          <text x="365" y="54" style="fill:var(--green-bright)" font-size="12" font-weight="700" font-family="Inter" text-anchor="middle">PIC pendant S</text>
+          <text x="150" y="156" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">taux nul : G1</text>
+          <text x="552" y="156" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">taux nul : G2 et M</text>
+
+          <text x="350" y="238" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">la cellule ne synthétise de l'ADN QUE pendant la phase S</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Le taux de synthèse est nul pendant G1, G2 et M : il ne devient significatif que pendant S, où il culmine (pic) puis retombe à zéro quand la réplication est achevée.</figcaption>
+      </figure>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📖 Définition — Taux de synthèse d'ADN</div>
+          <p>Le <strong>taux de synthèse d'ADN</strong> mesure la <strong>vitesse de fabrication</strong> de nouvel ADN par la cellule (quantité d'ADN produite par unité de temps). Il est <strong>maximal pendant la phase S</strong> (réplication active) et <strong>nul</strong> pendant les autres phases du cycle.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Fais le lien entre les deux graphiques : le taux de synthèse est <strong>grand là où la quantité augmente vite</strong> — c'est-à-dire sur la rampe du graphique 1. Le pic de synthèse se situe <em>pendant</em> la phase S, exactement sous la rampe. Ailleurs (plateaux), la quantité ne varie pas : le taux est nul.
+      </p>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">🚨 Ne confonds pas les DEUX courbes</div>
+          <p><strong>Quantité d'ADN</strong> = le « niveau d'eau » (il monte pendant S, reste haut pendant G2/M). <strong>Taux de synthèse</strong> = le « débit du robinet » (il ne coule que pendant S). Le taux de synthèse est déjà <strong>retombé à zéro</strong> quand la cellule est en G2 à <span class="math">4C</span> — le robinet est fermé, mais le bassin est plein ! Un élève qui place un pic de synthèse en G2 confond les deux graphiques.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : courbe_adn_temps — GRAPHIQUE 3 : ZOOM MITOSE     -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · courbe_adn_temps</span>
+        <h2 class="lecture-section-title">Graphique 3 : l'ADN pendant la mitose</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Certains sujets zooment sur la phase M seule : on suit la masse d'ADN d'une cellule qui entre en prophase et se divise. Ce graphique piège beaucoup d'élèves, car il montre que la courbe <strong>s'aplanit</strong> pendant presque toute la mitose :
+      </p>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 660 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zoom sur la mitose : plateau à 4C de la prophase à l'anaphase puis chute brutale à 2C lors de la cytodiérèse">
+          <text x="330" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">MASSE D'ADN D'UNE CELLULE PENDANT LA PHASE M (ZOOM)</text>
+
+          <line x1="70" y1="195" x2="636" y2="195" style="stroke:var(--text-dim)" stroke-width="1.5"/> <polygon points="642,195 632,191 632,199" style="fill:var(--text-dim)"/> <line x1="70" y1="210" x2="70" y2="48" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="70,42 66,52 74,52" style="fill:var(--text-dim)"/>
+          <text x="640" y="212" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">temps (phase M)</text>
+          <text x="62" y="38" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="end">ADN/cellule</text>
+
+          <line x1="70" y1="80" x2="630" y2="80" style="stroke:var(--border-soft)" stroke-width="1" stroke-dasharray="3 4"/> <line x1="70" y1="155" x2="630" y2="155" style="stroke:var(--border-soft)" stroke-width="1" stroke-dasharray="3 4"/>
+          <text x="64" y="84" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">4C</text>
+          <text x="64" y="159" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">2C</text>
+
+          <polyline points="80,80 470,80 520,155 625,155" fill="none" style="stroke:var(--accent-bright)" stroke-width="3" stroke-linejoin="round"/>
+
+          <line x1="200" y1="70" x2="200" y2="195" style="stroke:var(--text-dim)" stroke-width="1" stroke-dasharray="4 3"/> <line x1="330" y1="70" x2="330" y2="195" style="stroke:var(--text-dim)" stroke-width="1" stroke-dasharray="4 3"/> <line x1="470" y1="70" x2="470" y2="195" style="stroke:var(--text-dim)" stroke-width="1" stroke-dasharray="4 3"/>
+          <line x1="520" y1="70" x2="520" y2="195" style="stroke:var(--danger-light)" stroke-width="1" stroke-dasharray="4 3"/>
+
+          <text x="135" y="120" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">prophase</text>
+          <text x="265" y="120" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">métaphase</text>
+          <text x="400" y="120" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">anaphase</text>
+          <text x="585" y="120" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">télophase</text>
+
+          <text x="290" y="66" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">plateau à 4C : tout l'ADN reste dans la cellule mère</text>
+          <text x="545" y="140" style="fill:var(--danger-light)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">chute :</text>
+          <text x="560" y="176" style="fill:var(--danger-light)" font-size="11" font-weight="700" font-family="Inter">cytodiérèse</text>
+
+          <text x="330" y="236" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">la quantité d'ADN par cellule chute UNIQUEMENT au moment du partage du cytoplasme</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Pendant la mitose, la courbe est un long plateau à 4C : même en anaphase, les chromatides migrantes restent dans la cellule mère. La seule descente est la chute brutale de la cytodiérèse, qui coupe la cellule en deux cellules à 2C.</figcaption>
+      </figure>
+
+      <p class="lecture-text">
+        Pourquoi ce <strong>plateau</strong> pendant prophase, métaphase et anaphase ? Parce que l'axes vertical compte l'ADN <em>par cellule</em> : tant que la cellule mère n'est pas scindée en deux, tout son ADN (répliqué, <span class="math">4C</span>) reste compté dans une seule cellule — même si les chromatides s'éloignent l'une de l'autre. La <strong>chute</strong> n'intervient qu'à la <strong>cytodiérèse</strong> : d'un coup, une cellule à <span class="math">4C</span> devient deux cellules à <span class="math">2C</span>.
+      </p>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Aplanissement ≠ réplication ni dégradation</div>
+          <p>Le plateau pendant M ne veut dire ni « l'ADN se réplique » (c'est terminé depuis G2) ni « l'ADN se dégrade » : il veut dire que <strong>la quantité par cellule ne change pas</strong>. Et retiens le vocabulaire d'examen : la courbe « s'aplanit pendant M » — la division du patrimoine est une <strong>chute</strong>, pas une pente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : methode_graphique — MÉTHODE EN 5 ÉTAPES          -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · methode_graphique</span>
+        <h2 class="lecture-section-title">Lire un graphique du cycle en 5 étapes</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Face à n'importe quelle courbe du cycle cellulaire, applique toujours la <strong>même méthode</strong>, dans le même ordre. C'est elle qui transforme une question floue en réponse structurée — et qui rapporte les points de méthode, même si tu doutes de la biologie.
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">            <p class="lecture-text"><strong>Lis le titre, les axes et les unités.</strong> Que représente la grandeur de l'axe vertical — quantité d'ADN (C, pg, U.A.) ou taux de synthèse ? Quelle est l'unité de temps (heures, minutes) ? Cette étape décide de tout : quantité et taux n'ont PAS la même courbe.</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">            <p class="lecture-text"><strong>Décris l'allure globale.</strong> Repère et nomme les segments : plateaux (et leur valeur : 2C ? 4C ?), rampe(s), chute(s), pic(s). Utilise le vocabulaire exact — « la courbe présente un plateau à 2C, puis une rampe… ».</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">            <p class="lecture-text"><strong>Attribue les phases du cycle.</strong> Ramène chaque segment à une phase : plateau 2C = G1, rampe = S, plateau 4C = G2 + mitose, chute = cytodiérèse. Aide-toi des bornes temporelles et des durées données par l'énoncé.</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">4</div>
+          <div class="lecture-step-content">            <p class="lecture-text"><strong>Justifie chaque segment par l'événement biologique.</strong> C'est là que se gagnent les points : plateau = pas de réplication (1 chromatide) ; rampe = réplication progressive ; plateau 4C = ADN répliqué encore réuni dans la cellule mère ; chute = cytodiérèse, partage en deux lots.</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">5</div>
+          <div class="lecture-step-content">            <p class="lecture-text"><strong>Conclus en répondant à la question posée.</strong> Une phrase finale claire : « La réplication de l'ADN a donc lieu pendant la phase S, entre la 6ᵉ et la 14ᵉ heure du cycle. » Vérifie que ta conclusion reprend les mots de la question.</p></div>
+        </div>
+      </div>
+
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">Règle d'or du correcteur</div>
+        <div class="lecture-rule-body">
+          <p>Un correcteur attend <strong>trois choses</strong> : le nom de la phase, l'allure du segment, l'événement biologique. « Entre 6 h et 14 h, la courbe monte de 2C à 4C : c'est la phase S, pendant laquelle la réplication double progressivement la quantité d'ADN. » Une phrase comme celle-ci vaut presque à elle seule la question.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : methode_graphique — APPLICATION GUIDÉE           -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · methode_graphique</span>
+        <h2 class="lecture-section-title">Application guidée : analyser une courbe complète</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">📝 Exercice guidé — Type Bac</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text">
+            <strong>Énoncé.</strong> La courbe ci-dessous représente l'évolution de la quantité d'ADN par cellule (en picogrammes) dans une culture de cellules humaines, en fonction du temps. <strong>1)</strong> Identifiez les phases du cycle visibles sur la courbe en précisant leurs limites temporelles. <strong>2)</strong> Justifiez l'allure de chaque segment. <strong>3)</strong> Quelle est la quantité d'ADN de chaque cellule fille ?
+          </p>
+
+          <figure class="lecture-figure">
+            <svg viewBox="0 0 660 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbe de l'exercice guidé : quantité d'ADN en pg en fonction du temps en heures">
+              <text x="330" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">QUANTITÉ D'ADN PAR CELLULE (pg) EN FONCTION DU TEMPS (h)</text>
+
+              <line x1="70" y1="205" x2="636" y2="205" style="stroke:var(--text-dim)" stroke-width="1.5"/> <polygon points="642,205 632,201 632,209" style="fill:var(--text-dim)"/> <line x1="70" y1="225" x2="70" y2="48" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+              <polygon points="70,42 66,52 74,52" style="fill:var(--text-dim)"/>
+              <text x="640" y="222" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">temps (h)</text>
+              <text x="62" y="38" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="end">ADN/cellule (pg)</text>
+
+              <line x1="70" y1="170" x2="630" y2="170" style="stroke:var(--border-soft)" stroke-width="1" stroke-dasharray="3 4"/> <line x1="70" y1="90" x2="630" y2="90" style="stroke:var(--border-soft)" stroke-width="1" stroke-dasharray="3 4"/>
+              <text x="64" y="174" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">7</text>
+              <text x="64" y="94" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">14</text>
+
+              <polyline points="80,170 230,170 400,90 500,90 520,170 625,170" fill="none" style="stroke:var(--accent-bright)" stroke-width="3" stroke-linejoin="round"/>
+
+              <line x1="230" y1="60" x2="230" y2="205" style="stroke:var(--text-dim)" stroke-width="1" stroke-dasharray="4 3"/> <line x1="400" y1="60" x2="400" y2="205" style="stroke:var(--text-dim)" stroke-width="1" stroke-dasharray="4 3"/> <line x1="500" y1="60" x2="500" y2="205" style="stroke:var(--text-dim)" stroke-width="1" stroke-dasharray="4 3"/>
+
+              <text x="70" y="222" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter">0</text>
+              <text x="230" y="222" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">6</text>
+              <text x="400" y="222" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">14</text>
+              <text x="500" y="222" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">18</text>
+              <text x="625" y="222" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">24</text>
+
+              <text x="330" y="252" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">plateau à 7 pg · rampe de 6 h à 14 h · plateau à 14 pg · chute vers 18 h · plateau à 7 pg</text>
+            </svg>
+            <figcaption class="lecture-figure-caption">Le document de l'exercice. Prends deux minutes pour appliquer la méthode en 5 étapes avant d'ouvrir la correction.</figcaption>
+          </figure>
+
+          <details>
+            <summary>Voir la correction détaillée (méthode en 5 étapes)</summary>
+            <div class="lecture-quiz-answer">
+              <p><strong>Étape 1 — Axes et unités.</strong> Axe vertical : quantité d'ADN <em>par cellule</em>, en pg (7 et 14 pg = les valeurs de référence d'une cellule humaine). Axe horizontal : temps en heures. Il s'agit donc du graphique « quantité », pas « taux ».</p>
+              <p><strong>Étape 2 — Allure globale.</strong> Plateau à 7 pg (0 à 6 h), rampe montante (6 à 14 h), plateau à 14 pg (14 à 18 h), chute brutale vers 18 h, plateau à 7 pg (après 18 h).</p>
+              <p><strong>Étape 3 — Attribution des phases.</strong> Plateau 7 pg = <strong>phase G1</strong> (0–6 h) ; rampe = <strong>phase S</strong> (6–14 h, soit 8 h — cohérent avec S ≈ 8 h chez l'humain !) ; plateau 14 pg = <strong>phase G2</strong> puis <strong>mitose</strong> (14–18 h) ; chute vers 18 h = <strong>cytodiérèse</strong> ; dernier plateau = G1 des <strong>cellules filles</strong>.</p>
+              <p><strong>Étape 4 — Justification de chaque segment.</strong> De 0 à 6 h, aucune réplication : chaque chromosome a 1 chromatide, la quantité reste à 2C ≈ 7 pg. De 6 à 14 h, la réplication double progressivement la quantité d'ADN (7 → 14 pg). De 14 à 18 h, la réplication est achevée mais l'ADN reste dans la cellule mère : plateau à 4C ≈ 14 pg. Vers 18 h, la cytodiérèse partage le cytoplasme : la quantité chute brutalement.</p>
+              <p><strong>Étape 5 — Conclusion.</strong> Chaque cellule fille reçoit <span class="math">2C ≈ 7 pg</span> d'ADN, soit la quantité initiale de la cellule mère : le patrimoine génétique est intégralement transmis à chaque fille.</p>
+              <p style="color:var(--green-bright);margin-top:10px;"><strong>✅ Remarque de méthode :</strong> la durée de la rampe (8 h) et les valeurs (7/14 pg) recoupent exactement les données de référence — l'énoncé est auto-cohérent, et le vérifier t'aide à détecter tes erreurs de lecture.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : erreurs_courbes                                  -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · erreurs_courbes</span>
+        <h2 class="lecture-section-title">Les erreurs typiques d'interprétation</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Voici les sept glissades classiques — les erreurs qui reviennent copie après copie. Apprends-les comme une liste de contrôles : avant de rendre ta copie, vérifie que tu n'en as commis aucune.
+      </p>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">🚨 Les 7 pièges à éviter absolument</div>
+          <ul class="lecture-list">
+            <li><strong>1. « L'ADN double, donc les chromosomes doublent. »</strong> Faux : pendant S, la quantité d'ADN double mais le nombre de chromosomes reste 46 — ce sont les chromatides qui doublent.</li>
+            <li><strong>2. Placer la réplication ailleurs qu'en S.</strong> La rampe de la courbe « quantité » correspond TOUJOURS à la phase S — jamais à G1, G2 ou M.</li>
+            <li><strong>3. Dessiner une descente progressive pendant la mitose.</strong> La quantité d'ADN par cellule reste à 4C pendant presque toute la mitose, puis chute BRUTALEMENT à la cytodiérèse.</li>
+            <li><strong>4. Confondre plateau 4C et fin du cycle.</strong> Le plateau 4C précède la division : la cellule est en G2/mitose, pas « terminée ».</li>
+            <li><strong>5. Placer un pic de synthèse d'ADN en G2.</strong> Le taux de synthèse est nul en G2 : le robinet est fermé dès la fin de S.</li>
+            <li><strong>6. Oublier les unités.</strong> 7 et 14 pg, 2C et 4C, unités de radioactivité : recopie les unités de l'énoncé et garde-les cohérentes dans ta réponse.</li>
+            <li><strong>7. Décrire sans justifier.</strong> Énumérer « plateau, rampe, plateau, chute » sans nommer les phases ni les événements = la moitié des points perdus.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Le piège de la double lecture</div>
+          <p>Attention aux énoncés qui superposent les deux courbes (quantité ET taux de synthèse) sur le même graphique. Vérifie <em>quelle courbe</em> tu commentes : la courbe en rampe (quantité, pendant S) et la courbe en pic (taux, pendant S) ont des allures différentes mais la même phase. Écris explicitement « la courbe de quantité » ou « la courbe de taux » dans ta réponse.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : ENTRAÎNEMENT                                     -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Entraînement</span>
+        <h2 class="lecture-section-title">À toi de jouer</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-example">
+        <div class="lecture-example-label">Exercice 1 — Lire une courbe inconnue</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text">
+            Dans une souche de cellules dont le cycle dure <span class="math">16 h</span>, on mesure la quantité d'ADN par cellule : plateau à <span class="math">2C</span> de 0 à 5 h ; rampe de <span class="math">2C</span> à <span class="math">4C</span> de 5 à 9 h ; plateau à <span class="math">4C</span> de 9 à 15 h ; chute à <span class="math">2C</span> vers 15 h.
+          </p>
+          <p class="lecture-text">a) Quelle est la durée de la phase S dans ces cellules ? b) Que se passe-t-il entre 9 h et 15 h ? c) Quelle quantité d'ADN recevra chaque cellule fille ?</p>
+          <details>
+            <summary>Voir la solution</summary>
+            <div class="lecture-quiz-answer">
+              <p><strong>a)</strong> La rampe correspond à la phase S : elle s'étend de 5 h à 9 h, soit une durée de <span class="math">9 − 5 = 4 h</span>.</p>
+              <p><strong>b)</strong> De 9 h à 15 h, la courbe est un plateau à 4C : la réplication est achevée et l'ADN (sous forme de chromosomes à 2 chromatides) reste dans la cellule mère. Ces 6 heures correspondent à la phase G2 puis à la mitose (prophase, métaphase, anaphase).</p>
+              <p><strong>c)</strong> La chute vers 15 h correspond à la cytodiérèse : chaque cellule fille reçoit <span class="math">2C</span>, la quantité initiale.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">Exercice 2 — Vrai ou faux ? (justifie)</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text">
+            a) « Sur la courbe de quantité d'ADN, le plateau à 4C prouve que la cellule se réplique encore. » b) « Le taux de synthèse d'ADN d'une cellule en G2 est nul. » c) « La chute de la courbe de quantité d'ADN coïncide avec l'anaphase. »
+          </p>
+          <details>
+            <summary>Voir la solution</summary>
+            <div class="lecture-quiz-answer">
+              <p><strong>a) FAUX.</strong> Un plateau à 4C signifie que la quantité ne varie plus : la réplication est TERMINÉE (fin de S). La cellule est en G2 ou en mitose — elle ne se réplique plus.</p>
+              <p><strong>b) VRAI.</strong> La réplication a lieu uniquement pendant S. En G2, la cellule ne fabrique plus d'ADN : le taux de synthèse est nul, même si la quantité d'ADN est à son maximum (4C).</p>
+              <p><strong>c) FAUX.</strong> En anaphase, les chromatides se séparent mais restent dans la cellule mère : la quantité d'ADN par cellule reste à 4C. La chute n'intervient qu'à la <strong>cytodiérèse</strong> (fin de télophase), quand le cytoplasme se partage.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Sur un graphique « quantité d'ADN par cellule en fonction du temps », la rampe montante correspond à :</p>
+      <div class="lecture-quiz-options">
+        <span>A) la phase G1</span> <span>B) la phase S</span> <span>C) la phase G2</span>
+        <span>D) la phase M</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) la phase S.</strong> La rampe traduit la réplication : la quantité d'ADN augmente progressivement de 2C à 4C pendant la synthèse de novo d'ADN.</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Le taux de synthèse d'ADN d'une cellule est différent de zéro :</p>
+      <div class="lecture-quiz-options">
+        <span>A) pendant tout le cycle</span> <span>B) uniquement pendant G1</span> <span>C) uniquement pendant la phase S</span>
+        <span>D) uniquement pendant la mitose</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>C.</strong> La cellule ne fabrique de l'ADN que pendant la phase S : le taux culmine (pic) pendant S et est nul pendant G1, G2 et M.</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Sur la courbe de quantité d'ADN, la chute de 4C à 2C se produit :</p>
+      <div class="lecture-quiz-options">
+        <span>A) au début de la prophase</span> <span>B) pendant l'anaphase</span> <span>C) au moment de la cytodiérèse</span>
+        <span>D) pendant la phase G2</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>C.</strong> Tant que le cytoplasme n'est pas partagé, tout l'ADN reste compté dans une seule cellule (plateau à 4C). La chute brutale correspond à la cytodiérèse, qui donne deux cellules à 2C. (B est le piège classique : en anaphase, les chromatides migrent mais restent dans la même cellule.)</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[courbe_adn_temps]</strong> Le graphique quantité d'ADN / temps se décode en 5 segments : plateau 2C (G1) · rampe (S, réplication progressive) · plateau 4C (G2 + mitose) · chute brutale (cytodiérèse) · plateau 2C (cellules filles). Chaque segment = une phase + un événement.</li>
+      <li><strong>[courbe_adn_temps]</strong> Pendant la mitose, la courbe s'APLANIT à 4C : les chromatides migrantes restent dans la cellule mère. La seule descente est la chute de la cytodiérèse.</li>
+      <li><strong>[courbe_synthese_adn]</strong> Le taux de synthèse d'ADN (vitesse de fabrication) forme un PIC unique pendant S ; il est nul pendant G1, G2 et M. Ne pas confondre avec la courbe de quantité : pic ≠ rampe.</li>
+      <li><strong>[methode_graphique]</strong> Méthode en 5 étapes : 1) titre, axes, unités → 2) décrire l'allure (plateau/rampe/chute/pic) → 3) attribuer les phases → 4) justifier chaque segment par l'événement → 5) conclure en répondant à la question.</li>
+      <li><strong>[methode_graphique]</strong> Vocabulaire qui rapporte des points : plateau (rien ne se fait), rampe (synthèse en cours), chute (séparation en deux cellules), pic (vitesse maximale).</li>
+      <li><strong>[erreurs_courbes]</strong> Les 7 pièges : chromosomes qui doublent (faux !), réplication hors de S, descente progressive pendant M, plateau 4C lu comme fin de cycle, pic de synthèse en G2, unités oubliées, description sans justification.</li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 3 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie 4 : la fiche complète de révision du chapitre</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

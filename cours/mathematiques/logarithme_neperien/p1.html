@@ -1,0 +1,595 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · LOGARITHME NÉPÉRIEN      -->
+<!-- PARTIE 1 : DÉFINITION & PROPRIÉTÉS ALGÉBRIQUES               -->
+<!-- Notion 1 : ln, fonction réciproque de exp                    -->
+<!-- Notion 2 : domaine ]0 ; +∞[ et valeurs remarquables          -->
+<!-- Notion 3 : propriétés algébriques démontrées                 -->
+<!-- Notion 4 : calculs dirigés et simplifications d'expressions  -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 01 · Logarithme népérien</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Définition du logarithme népérien &amp; <em>propriétés algébriques</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      La fonction exponentielle fait <em>grandir</em> : intérêts composés, populations, bactéries… Mais comment retrouver l'exposant quand on connaît le résultat ? C'est le rôle du <strong>logarithme népérien</strong>, noté <span class="math">ln</span> : la fonction qui <strong>refait en sens inverse</strong> le travail de <span class="math">exp</span>. Cette partie définit <span class="math">ln</span> comme réciproque de l'exponentielle, installe son domaine <span class="math">]0 ; +∞[</span>, puis démontre ses <strong>propriétés algébriques</strong> — transformer un produit en somme, une puissance en facteur — avant de s'entraîner à des <strong>calculs dirigés</strong> typiques du Bac D.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span>
+      <span class="lecture-hero-meta-item">🧮 4 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Refaire ce que exp a défait</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>ln, fonction réciproque de l'exponentielle</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Domaine ]0 ; +∞[ et valeurs remarquables</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>La propriété maîtresse : ln(ab) = ln a + ln b</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Trois conséquences : ln(1/b), ln(a/b), ln(aⁿ)</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Pièges — ce que ln ne fait pas</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Calculs dirigés — simplifier et exprimer</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — la méthode du calcul dirigé</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- SECTION 0 : MOTIVATION -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Refaire ce que exp a défait</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Un capital placé à intérêts composés (au taux continu <span class="math">r</span>) est multiplié par <span class="math">e^r</span> chaque année ; une population urbaine peut être modélisée par <span class="math">N(t) = N₀ e^(0,03t)</span>. La fonction exponentielle répond à la question : <em>« je connais la durée, quel est le résultat ? »</em>. Mais bien souvent, la vraie question est l'inverse : <em>« je connais le résultat, quelle est la durée ? »</em>. En combien d'années mon capital triple-t-il ? Autrement dit : quel est le nombre <span class="math">t</span> tel que <span class="math">e^t = 3</span> ?
+      </p>
+
+      <p class="lecture-text">
+        Il nous faut une fonction capable de <strong>retrouver l'exposant</strong> : une sorte de « machine à remonter le temps » de l'exponentielle. Cette fonction existe, elle s'appelle le <strong>logarithme népérien</strong>, et on la note <span class="math">ln</span>.
+      </p>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Les questions de ce chapitre</div>
+          <ul class="lecture-list">
+            <li><strong>Comment définir</strong> proprement <span class="math">ln</span> à partir de <span class="math">exp</span>, et sur quel domaine ?</li>
+            <li><strong>Quelles valeurs</strong> faut-il connaître par cœur : <span class="math">ln 1</span>, <span class="math">ln e</span>, <span class="math">ln(eⁿ)</span> ?</li>
+            <li><strong>Comment transformer</strong> un produit <span class="math">ln(ab)</span> en somme <span class="math">ln a + ln b</span> — avec démonstration ?</li>
+            <li><strong>Comment simplifier</strong> une expression comme <span class="math">ln 8 + ln 9 − ln 72</span> en une valeur exacte ?</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Pour aller plus loin</div>
+        <div class="lecture-aside-content">
+          Le mot « logarithme » vient du grec <em>logos</em> (rapport) et <em>arithmos</em> (nombre). Il fut inventé vers 1614 par l'Écossais <strong>John Napier</strong> (Neper, d'où « logarithme népérien ») pour accélérer les calculs des astronomes : multiplier deux grands nombres revenait à <strong>additionner</strong> leurs logarithmes. Avant les calculatrices, des générations d'ingénieurs et de commerçants calculaient avec des tables de logarithmes et la règle à calcul — qui ne repose sur rien d'autre que la propriété <span class="math">ln(ab) = ln a + ln b</span> que tu vas démontrer dans cette partie !
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1 : LN, RÉCIPROQUE DE EXP -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · réciproque</span>
+        <h2 class="lecture-section-title">ln, fonction réciproque de l'exponentielle</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Souviens-toi du chapitre exponentielle : la fonction <span class="math">exp</span> est <strong>strictement croissante</strong> sur <span class="math">ℝ</span>, et ses valeurs remplissent tout l'intervalle <span class="math">]0 ; +∞[</span>. Conséquence précieuse : <strong>tout nombre strictement positif</strong> <span class="math">y</span> possède un <strong>unique</strong> antécédent <span class="math">x</span> par <span class="math">exp</span>, c'est-à-dire un unique réel <span class="math">x</span> tel que <span class="math">e^x = y</span>. Le logarithme népérien est précisément la fonction qui donne cet antécédent.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition officielle — Logarithme népérien</div>
+          <p>La fonction <strong>logarithme népérien</strong>, notée <span class="math">ln</span>, est définie sur <span class="math">]0 ; +∞[</span> : pour tout <span class="math">x &gt; 0</span>, <span class="math">ln(x)</span> est l'<strong>unique réel</strong> <span class="math">y</span> tel que <span class="math">e^y = x</span>. Autrement dit, <span class="math">ln</span> est la <strong>réciproque</strong> de la fonction <span class="math">exp</span> : chacune « défait » le travail de l'autre.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Cette relation de réciprocité se traduit par deux égalités à connaître <strong>par cœur</strong> — chacune sur sa ligne, avec son domaine :
+      </p>
+
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">À afficher au mur — la réciprocité ln ↔ exp</div>
+        <div class="lecture-formula-hero-main">ln(e^x) = x&nbsp;&nbsp;&nbsp;(pour tout x ∈ ℝ)<br>e^(ln x) = x&nbsp;&nbsp;&nbsp;(pour tout x &gt; 0)</div>
+        <div class="lecture-formula-hero-desc">Les deux égalités n'ont pas le même domaine : <span class="math">e^x</span> est toujours positif, donc <span class="math">ln(e^x)</span> existe pour tout <span class="math">x</span> ; mais <span class="math">ln x</span> n'existe que si <span class="math">x &gt; 0</span>.</div>
+      </div>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 312" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma de réciprocité : exp envoie un réel x sur e^x et ln ramène e^x vers x ; ln envoie un positif u sur ln u et exp ramène ln u vers u">
+          <text x="260" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">ln ET exp : CHACUN DÉFAIT LE TRAVAIL DE L'AUTRE</text>
+
+          <!-- ligne 1 : exp aller, ln retour -->
+          <rect x="60" y="48" width="130" height="52" rx="10" style="fill:none;stroke:var(--text-dim)" stroke-width="1.5"/> <text x="125" y="70" style="fill:var(--text-dim)" font-size="13" font-family="Inter" text-anchor="middle">x</text> <text x="125" y="88" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">réel quelconque</text>
+          <rect x="330" y="48" width="130" height="52" rx="10" style="fill:none;stroke:var(--accent-bright)" stroke-width="1.5"/> <text x="395" y="70" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">e^x</text> <text x="395" y="88" style="fill:var(--accent-bright)" font-size="10" font-family="Inter" text-anchor="middle">toujours &gt; 0</text>
+          <line x1="198" y1="64" x2="322" y2="64" style="stroke:var(--green-bright)" stroke-width="2"/> <polygon points="330,64 318,59 318,69" style="fill:var(--green-bright)"/> <text x="260" y="56" style="fill:var(--green-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">exp</text>
+          <line x1="322" y1="90" x2="198" y2="90" style="stroke:var(--info)" stroke-width="2"/> <polygon points="190,90 202,85 202,95" style="fill:var(--info)"/> <text x="260" y="112" style="fill:var(--info)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">ln(e^x) = x</text>
+
+          <!-- ligne 2 : ln aller, exp retour -->
+          <rect x="60" y="176" width="130" height="52" rx="10" style="fill:none;stroke:var(--text-dim)" stroke-width="1.5"/> <text x="125" y="198" style="fill:var(--text-dim)" font-size="13" font-family="Inter" text-anchor="middle">u</text> <text x="125" y="216" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">avec u &gt; 0</text>
+          <rect x="330" y="176" width="130" height="52" rx="10" style="fill:none;stroke:var(--accent-bright)" stroke-width="1.5"/> <text x="395" y="198" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">ln u</text> <text x="395" y="216" style="fill:var(--accent-bright)" font-size="10" font-family="Inter" text-anchor="middle">réel quelconque</text>
+          <line x1="198" y1="192" x2="322" y2="192" style="stroke:var(--green-bright)" stroke-width="2"/> <polygon points="330,192 318,187 318,197" style="fill:var(--green-bright)"/> <text x="260" y="184" style="fill:var(--green-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">ln</text>
+          <line x1="322" y1="218" x2="198" y2="218" style="stroke:var(--info)" stroke-width="2"/> <polygon points="190,218 202,213 202,223" style="fill:var(--info)"/> <text x="260" y="240" style="fill:var(--info)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">e^(ln u) = u</text>
+
+          <text x="260" y="288" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">Dans chaque cas, appliquer la fonction du retour redonne le nombre de départ.</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Schéma de la réciprocité : <span class="math">exp</span> et <span class="math">ln</span> « remontent » l'une l'autre, chacune sur son domaine — <span class="math">x</span> réel dans un sens, <span class="math">u &gt; 0</span> dans l'autre.</figcaption>
+      </figure>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">💡 Relations fondamentales (réciprocité)</div>
+          <ul class="lecture-list">
+            <li>Pour <strong>tout réel</strong> <span class="math">x</span> : <span class="math">ln(e^x) = x</span> — le log « remonte » l'exponentielle.</li>
+            <li>Pour <strong>tout réel strictement positif</strong> <span class="math">x</span> : <span class="math">e^(ln x) = x</span> — l'exponentielle « remonte » le log.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🔍 Premiers calculs avec la réciprocité</div>
+        <div class="lecture-example-content">
+          <ul class="lecture-list">
+            <li><span class="math">ln(e⁷) = 7</span> : le log de l'exponentielle redonne l'exposant.</li>
+            <li><span class="math">ln(e^(2x)) = 2x</span> : vaut pour tout réel <span class="math">x</span>, car <span class="math">e^(2x) &gt; 0</span>.</li>
+            <li><span class="math">e^(ln 9) = 9</span> : l'exponentielle du log redonne le nombre de départ.</li>
+            <li><span class="math">ln 3</span> est le nombre dont l'exponentielle vaut <span class="math">3</span> : on a bien <span class="math">e^(ln 3) = 3</span>. Ce nombre existe et est unique (environ <span class="math">1,10</span>), mais il ne s'écrit pas avec des entiers !</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ ln n'accepte que les nombres strictement positifs</div>
+          <p><span class="math">ln 0</span> n'existe pas (aucun réel <span class="math">y</span> n'a une exponentielle nulle), et <span class="math">ln(−2)</span>, <span class="math">ln(−0,5)</span> n'existent pas non plus. Avant <strong>tout</strong> calcul avec un logarithme, vérifie que ce qui est « dedans » est <strong>strictement positif</strong>. C'est le réflexe n° 1 du chapitre.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 : DOMAINE & VALEURS REMARQUABLES -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · domaine &amp; valeurs</span>
+        <h2 class="lecture-section-title">Domaine ]0 ; +∞[ et valeurs remarquables</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le domaine de <span class="math">ln</span> découle directement de sa définition : on ne peut poser la question <em>« e^y = x ? »</em> que si <span class="math">x</span> est strictement positif.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Domaine de définition</div>
+          <p>La fonction <span class="math">ln</span> est définie sur <span class="math">]0 ; +∞[</span> et <strong>seulement</strong> là. Pour tout réel <span class="math">x ≤ 0</span>, <span class="math">ln x</span> n'existe pas. Sur ta copie, écris le domaine <strong>avant</strong> de résoudre une équation ou de dériver.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Deux valeurs se lisent immédiatement sur la définition, et elles servent de <strong>points d'ancrage</strong> pour tout le reste :
+      </p>
+
+      <ul class="lecture-list-elegant">
+        <li><span class="math">ln 1 = 0</span>, car <span class="math">e⁰ = 1</span> : le logarithme de <span class="math">1</span> vaut toujours <span class="math">0</span>.</li>
+        <li><span class="math">ln e = 1</span>, car <span class="math">e¹ = e</span> : le logarithme de la base <span class="math">e</span> vaut <span class="math">1</span>.</li>
+        <li>Plus généralement, pour tout entier relatif <span class="math">n</span> : <span class="math">ln(eⁿ) = n</span>.</li>
+      </ul>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>x</th><th>1/e²</th><th>1/e</th><th>1</th><th>e</th><th>e²</th><th>e³</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ln x</strong></td><td>−2</td><td>−1</td><td>0</td><td>1</td><td>2</td><td>3</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Valeur remarquable</th><th>Pourquoi (retour à la définition)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">ln 1 = 0</span></td><td>car <span class="math">e⁰ = 1</span></td></tr>
+            <tr><td><span class="math">ln e = 1</span></td><td>car <span class="math">e¹ = e</span></td></tr>
+            <tr><td><span class="math">ln(eⁿ) = n</span></td><td>pour tout entier relatif <span class="math">n</span></td></tr>
+            <tr><td><span class="math">ln(1/e) = −1</span></td><td>car <span class="math">1/e = e⁻¹</span>, donc le log vaut l'exposant <span class="math">−1</span></td></tr>
+            <tr><td><span class="math">ln √e = 1/2</span></td><td>car <span class="math">√e = e^(1/2)</span> : la puissance <span class="math">1/2</span> ressort telle quelle</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-vocab-grid">
+        <div class="vocab-card">
+          <div class="vocab-symbol">ln</div>
+          <div class="vocab-name">Logarithme népérien</div>
+          <div class="vocab-notation">Réciproque de exp, définie sur ]0 ; +∞[</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">1</div>
+          <div class="vocab-name">Valeur pivot</div>
+          <div class="vocab-notation">ln 1 = 0 : tout produit valant 1 a un log nul</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">e</div>
+          <div class="vocab-name">Base naturelle</div>
+          <div class="vocab-notation">e ≈ 2,718 et ln e = 1</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">x &gt; 0</div>
+          <div class="vocab-name">Condition d'existence</div>
+          <div class="vocab-notation">ln x existe si et seulement si x &gt; 0</div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple travaillé — utiliser la réciprocité dans un calcul composé</div>
+        <div class="lecture-example-content">
+          <p>Simplifier les deux nombres <span class="math">A = e^(2 ln 3)</span> et <span class="math">B = ln(e⁵/e²)</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Écrire l'exposant autrement.</strong> Le nombre <span class="math">2 × ln 3</span> est le double du log :</p><p><span class="math">2 × ln 3 = ln 3 + ln 3</span></p><p><span class="math">ln 3 + ln 3 = ln(3 × 3) = ln 9</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Appliquer la réciprocité.</strong> Comme <span class="math">9 &gt; 0</span> :</p><p><span class="math">A = e^(2 ln 3)</span></p><p><span class="math">A = e^(ln 9) = 9</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Pour B, simplifier d'abord l'écriture.</strong> Quotient de puissances :</p><p><span class="math">e⁵ / e² = e^(5 − 2) = e³</span></p><p><span class="math">B = ln(e³) = 3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Conclure.</strong> <span class="math">A = 9</span> et <span class="math">B = 3</span> : aucune calculatrice n'a été nécessaire, seulement <span class="math">ln(e^x) = x</span> et <span class="math">e^(ln x) = x</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ La valeur 0 est dans le domaine interdit</div>
+          <p>Erreur classique de début de chapitre : croire que <span class="math">ln 0 = 0</span> parce que « le log de zéro, ça doit faire zéro ». Non ! <span class="math">ln 0</span> <strong>n'existe pas</strong>, et c'est <span class="math">ln 1 = 0</span> qui est vrai. De même <span class="math">ln 1</span> et <span class="math">ln e</span> ne se ressemblent pas : <span class="math">ln 1 = 0</span> mais <span class="math">ln e = 1</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 : LA PROPRIÉTÉ MAÎTRESSE -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · propriété maîtresse</span>
+        <h2 class="lecture-section-title">La propriété maîtresse : ln(ab) = ln a + ln b</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Voici la propriété qui a fait l'histoire des logarithmes : <strong>le log transforme les produits en sommes</strong>. Et ce n'est pas un truc observé « sur des exemples » : on peut la <strong>démontrer</strong> avec ce qu'on sait déjà. Un seul outil est nécessaire, et tu le connais : la fonction <span class="math">exp</span> est strictement croissante, donc <strong>deux réels égaux ont des exponentielles égales, et réciproquement</strong>. En langage mathématique : pour tous réels <span class="math">A</span> et <span class="math">B</span>, <span class="math">e^A = e^B ⇒ A = B</span>.
+      </p>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">💡 Théorème — logarithme d'un produit</div>
+          <p>Pour tous réels <span class="math">a &gt; 0</span> et <span class="math">b &gt; 0</span> : <span class="math">ln(ab) = ln a + ln b</span>.</p>
+          <p><strong>Hypothèses explicites :</strong> les deux nombres <span class="math">a</span> et <span class="math">b</span> doivent être <strong>strictement positifs</strong> (sinon les logarithmes n'existent pas). Rien d'autre n'est exigé.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Démonstration (à savoir refaire)</div>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Vérifier les domaines.</strong> Si <span class="math">a &gt; 0</span> et <span class="math">b &gt; 0</span>, alors <span class="math">ab &gt; 0</span> : les trois nombres <span class="math">ln a</span>, <span class="math">ln b</span> et <span class="math">ln(ab)</span> existent bien.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Passer à l'exponentielle à gauche.</strong> Comme <span class="math">ab &gt; 0</span>, la réciprocité donne :</p><p><span class="math">e^(ln(ab)) = ab</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Passer à l'exponentielle à droite.</strong> Avec <span class="math">e^(A+B) = e^A × e^B</span> :</p><p><span class="math">e^(ln a + ln b) = e^(ln a) × e^(ln b)</span></p><p><span class="math">e^(ln a) × e^(ln b) = a × b</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Conclure par injectivité de exp.</strong> Les deux membres ont la même exponentielle :</p><p><span class="math">e^(ln(ab)) = e^(ln a + ln b)</span></p><p>Comme <span class="math">e^A = e^B ⇒ A = B</span>, on en déduit <span class="math">ln(ab) = ln a + ln b</span>. ∎</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule maîtresse de la partie</div>
+        <div class="lecture-formula-hero-main">ln(ab) = ln a + ln b&nbsp;&nbsp;&nbsp;(a &gt; 0 et b &gt; 0)</div>
+        <div class="lecture-formula-hero-desc">« Le log d'un produit est la somme des logs. » Elle se généralise à trois facteurs ou plus : <span class="math">ln(abc) = ln a + ln b + ln c</span>.</div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🔍 Vérification numérique (pour se convaincre)</div>
+        <div class="lecture-example-content">
+          <p>Prenons <span class="math">a = 2</span> et <span class="math">b = 8</span> (tous deux &gt; 0), donc <span class="math">ab = 16</span>. D'un côté, la somme des logs :</p>
+          <p><span class="math">ln 2 + ln 8 ≈ 0,693 + 2,079 = 2,772</span></p>
+          <p>De l'autre, le log du produit :</p>
+          <p><span class="math">ln 16 ≈ 2,773</span></p>
+          <p>Écart de <span class="math">0,001</span> dû aux arrondis : la propriété est bien vérifiée — le log <em>additionne</em> au lieu de multiplier.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 : LES TROIS CONSÉQUENCES -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · conséquences</span>
+        <h2 class="lecture-section-title">Trois conséquences : ln(1/b), ln(a/b), ln(aⁿ)</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        De la formule maîtresse découlent trois propriétés qui couvrent presque tous les calculs du chapitre. Chacune se <strong>démontre</strong> en deux lignes : apprends les deux à la fois.
+      </p>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">💡 Théorème — les trois conséquences (a &gt; 0, b &gt; 0, n ∈ ℤ)</div>
+          <ul class="lecture-list">
+            <li><span class="math">ln(1/b) = −ln b</span> — le log d'un inverse est l'opposé du log.</li>
+            <li><span class="math">ln(a/b) = ln a − ln b</span> — le log d'un quotient est la différence des logs.</li>
+            <li><span class="math">ln(aⁿ) = n·ln a</span> — le log d'une puissance sort l'exposant en facteur (démontré ci-dessous pour <span class="math">n ∈ ℕ</span>, valable aussi pour tout réel <span class="math">n</span>).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">ln(a/b) = ln a − ln b&nbsp;&nbsp;&nbsp;(a &gt; 0 et b &gt; 0)</div>
+        <div class="lecture-formula-desc">La formule la plus utilisée du chapitre au Bac : « le log d'un quotient est la différence des logs ». Contrôle réflexe : <span class="math">ln(a/a) = ln 1 = 0</span> et <span class="math">ln a − ln a = 0</span> ✓.</div>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Démonstrations express</div>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Inverse.</strong> On part de <span class="math">b × (1/b) = 1</span>, puis on applique <span class="math">ln</span> :</p><p><span class="math">ln b + ln(1/b) = ln 1 = 0</span></p><p>D'où <span class="math">ln(1/b) = −ln b</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Quotient.</strong> On écrit <span class="math">a/b = a × (1/b)</span>, donc :</p><p><span class="math">ln(a/b) = ln a + ln(1/b)</span></p><p><span class="math">ln(a/b) = ln a − ln b</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Puissance, initialisation.</strong> Pour <span class="math">n = 0</span> :</p><p><span class="math">ln(a⁰) = ln 1 = 0</span></p><p><span class="math">0 = 0 × ln a</span> : la propriété est vraie.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Puissance, hérédité.</strong> Si <span class="math">ln(aⁿ) = n·ln a</span>, alors :</p><p><span class="math">ln(a^(n+1)) = ln(aⁿ × a) = ln(aⁿ) + ln a</span></p><p><span class="math">ln(aⁿ) + ln a = n·ln a + ln a = (n + 1)·ln a</span></p><p>Par récurrence, la propriété vaut pour tout <span class="math">n ∈ ℕ</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Puissance, exposant négatif.</strong> Si <span class="math">n &lt; 0</span>, alors <span class="math">aⁿ = 1/a^(−n)</span> avec <span class="math">−n &gt; 0</span>, donc :</p><p><span class="math">ln(aⁿ) = ln(1/a^(−n)) = −ln(a^(−n))</span></p><p><span class="math">−ln(a^(−n)) = −(−n)·ln a = n·ln a</span>. ∎</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Propriété</th><th>Condition</th><th>Exemple</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">ln(ab) = ln a + ln b</span></td><td><span class="math">a &gt; 0</span> et <span class="math">b &gt; 0</span></td><td><span class="math">ln 2 + ln 3 = ln 6</span></td></tr>
+            <tr><td><span class="math">ln(1/b) = −ln b</span></td><td><span class="math">b &gt; 0</span></td><td><span class="math">ln(1/e) = −ln e = −1</span></td></tr>
+            <tr><td><span class="math">ln(a/b) = ln a − ln b</span></td><td><span class="math">a &gt; 0</span> et <span class="math">b &gt; 0</span></td><td><span class="math">ln 10 − ln 5 = ln 2</span></td></tr>
+            <tr><td><span class="math">ln(aⁿ) = n·ln a</span></td><td><span class="math">a &gt; 0</span>, <span class="math">n</span> réel</td><td><span class="math">ln 9 = 2·ln 3</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple — valeurs instantanées avec e</div>
+        <div class="lecture-example-content">
+          <ul class="lecture-list">
+            <li><span class="math">ln(1/e) = −ln e = −1</span>.</li>
+            <li><span class="math">ln(e⁻³) = −3</span> (lecture directe de <span class="math">ln(eⁿ) = n</span>).</li>
+            <li><span class="math">ln √e = (1/2) × ln e = 1/2</span> : la puissance <span class="math">1/2</span> sort en facteur.</li>
+            <li><span class="math">ln(e²/e⁵) = 2 − 5 = −3</span> : différence des exposants, sans même simplifier la fraction.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 : PIÈGES -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Pièges · vigilance</span>
+        <h2 class="lecture-section-title">Pièges — ce que ln ne fait pas</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le cerveau adore transformer « log de produit » en « produit de logs », ou « log de somme » en « somme des logs ». Résiste ! Voici les trois contre-exemples à garder en tête pendant tout le chapitre.
+      </p>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ ln(a + b) ≠ ln a + ln b</div>
+          <p><strong>Le log d'une somme n'est pas la somme des logs.</strong> Contre-exemple avec <span class="math">a = b = 1</span> :</p>
+          <p><span class="math">ln(1 + 1) = ln 2 ≈ 0,693</span></p>
+          <p><span class="math">ln 1 + ln 1 = 0 + 0 = 0</span></p>
+          <p>Ce sont deux nombres différents ! La seule façon de traiter <span class="math">ln(a + b)</span>, c'est de <strong>factoriser</strong> (si <span class="math">a ≠ 0</span>) :</p>
+          <p><span class="math">ln(a + b) = ln(a(1 + b/a)) = ln a + ln(1 + b/a)</span></p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ ln(ab) ≠ ln a × ln b</div>
+          <p>La formule juste est <span class="math">ln(ab) = ln a + ln b</span> (une <em>somme</em>, pas un produit). Contre-exemple :</p>
+          <p><span class="math">ln 4 = 2·ln 2 ≈ 1,386</span></p>
+          <p><span class="math">ln 2 × ln 2 ≈ 0,480</span></p>
+          <p>Et pour tout dire, <span class="math">ln(aⁿ)</span> ne vaut <span class="math">n·ln a</span> qu'en sortant <span class="math">n</span> <strong>devant</strong> le log, jamais en le laissant dans la base.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">🚨 Les 4 erreurs qui coûtent des points au Bac</div>
+          <ul class="lecture-list">
+            <li>Écrire <span class="math">ln(a + b) = ln a + ln b</span> : <strong>faux</strong> (voir ci-dessus).</li>
+            <li>Écrire <span class="math">ln x = 0 ⇒ x = 0</span> : <strong>faux</strong>, la solution est <span class="math">x = 1</span> car <span class="math">ln 1 = 0</span> (et <span class="math">ln 0</span> n'existe pas !).</li>
+            <li>Oublier de vérifier <span class="math">x &gt; 0</span> avant d'écrire <span class="math">ln x</span> : une équation « résolue » hors du domaine perd tous ses points.</li>
+            <li>Confondre <span class="math">(ln x)²</span> (le log, au carré) et <span class="math">ln(x²)</span> (le log du carré) : <span class="math">ln(x²) = 2·ln x</span> si <span class="math">x &gt; 0</span>, mais <span class="math">(ln x)²</span> n'a aucune formule de simplification.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🔍 Vrai ou faux — entraîne ton œil</div>
+        <div class="lecture-example-content">
+          <ul class="lecture-list">
+            <li><span class="math">ln 2 + ln 3 = ln 6</span> : <strong>vrai</strong>, car <span class="math">2 × 3 = 6</span> (produit → somme).</li>
+            <li><span class="math">ln 2 + ln 3 = ln 5</span> : <strong>faux</strong>, le log ne transforme pas les sommes : <span class="math">ln(2 + 3) = ln 5</span> n'a rien à voir avec <span class="math">ln 2 + ln 3</span>.</li>
+            <li><span class="math">ln 10 − ln 5 = ln 2</span> : <strong>vrai</strong>, car <span class="math">10/5 = 2</span> (quotient → différence).</li>
+            <li><span class="math">ln 9 = 2·ln 3</span> : <strong>vrai</strong>, car <span class="math">9 = 3²</span> (puissance → facteur).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 : CALCULS DIRIGÉS -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Entraînement</span>
+        <h2 class="lecture-section-title">Calculs dirigés — simplifier et exprimer</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 1 — simplifier en une valeur exacte</div>
+        <div class="lecture-example-content">
+          <p>Simplifier <span class="math">A = ln 8 + ln 9 − ln 72</span>. On écrit le calcul ligne par ligne :</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Ligne 1 — l'expression.</strong> Tous les nombres sont positifs, les propriétés s'appliquent :</p><p><span class="math">A = ln 8 + ln 9 − ln 72</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Ligne 2 — le regroupement.</strong> <span class="math">ln 8 + ln 9 = ln(8 × 9) = ln 72</span>, donc :</p><p><span class="math">A = ln(8 × 9) − ln 72</span></p><p><span class="math">A = ln 72 − ln 72</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Ligne 3 — le résultat.</strong></p><p><span class="math">A = ln 72 − ln 72</span></p><p><span class="math">A = ln 1 = 0</span></p><p>Le résultat est un nombre <strong>sans aucun logarithme</strong> : c'est le signe d'un calcul dirigé réussi.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 2 — exprimer en fonction de ln 3 et ln 5</div>
+        <div class="lecture-example-content">
+          <p>Exprimer <span class="math">ln 75</span> en fonction de <span class="math">ln 3</span> et <span class="math">ln 5</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Décomposer 75 en facteurs premiers.</strong></p><p><span class="math">75 = 3 × 25 = 3 × 5²</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Appliquer produit puis puissance.</strong></p><p><span class="math">ln 75 = ln(3 × 5²) = ln 3 + ln 5²</span></p><p><span class="math">ln 75 = ln 3 + 2 × ln 5</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Conclure.</strong> <span class="math">ln 75 = 2 × ln 5 + ln 3</span>. Contrôle rapide :</p><p><span class="math">2 × 1,609 + 1,099 ≈ 4,317</span></p><p><span class="math">ln 75 ≈ 4,317</span> ✓</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 3 — avec des inconnues ln 2 = a et ln 3 = b</div>
+        <div class="lecture-example-content">
+          <p>On pose <span class="math">a = ln 2</span> et <span class="math">b = ln 3</span>. Exprimer <span class="math">ln 12</span>, <span class="math">ln(2/3)</span> et <span class="math">ln √8</span> en fonction de <span class="math">a</span> et <span class="math">b</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>ln 12.</strong> On décompose <span class="math">12 = 2² × 3</span>, puis :</p><p><span class="math">ln 12 = ln(2²) + ln 3</span></p><p><span class="math">ln 12 = 2a + b</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>ln(2/3).</strong> Quotient :</p><p><span class="math">ln(2/3) = ln 2 − ln 3 = a − b</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>ln √8.</strong> On écrit <span class="math">√8 = 8^(1/2)</span>, donc :</p><p><span class="math">ln √8 = (1/2) × ln 8</span></p><p>Or <span class="math">8 = 2³</span>, donc <span class="math">ln 8 = 3 × ln 2 = 3a</span> et :</p><p><span class="math">ln √8 = 3a/2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Bilan.</strong> <span class="math">ln 12 = 2a + b</span> ; <span class="math">ln(2/3) = a − b</span> ; <span class="math">ln √8 = 3a/2</span>. Remarque : <span class="math">a ≈ 0,693</span> et <span class="math">b ≈ 1,099</span>, donc :</p><p><span class="math">2a + b ≈ 2,485 = ln 12</span> ✓</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 4 — mélange exp et ln</div>
+        <div class="lecture-example-content">
+          <p>Simplifier <span class="math">B = e^(1 + ln 5)</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Séparer l'exposant.</strong> Comme <span class="math">ln e = 1</span> :</p><p><span class="math">1 + ln 5 = ln e + ln 5</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Reconstituer un log de produit.</strong></p><p><span class="math">ln e + ln 5 = ln(e × 5) = ln(5e)</span></p><p><span class="math">B = e^(ln(5e))</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Conclure par réciprocité.</strong></p><p><span class="math">B = 5e</span></p><p>Variante équivalente : <span class="math">e^(1 + ln 5) = e¹ × e^(ln 5) = e × 5</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 : BILAN -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">La méthode du calcul dirigé en 3 étapes</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tous les exercices « simplifier » ou « exprimer en fonction de » du chapitre suivent la même mécanique. Retiens-la une fois pour toutes.
+      </p>
+
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode — Calcul dirigé avec ln</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>(1)</strong> Vérifier que tous les nombres concernés sont <strong>strictement positifs</strong>.</li>
+            <li><strong>(2)</strong> Décomposer chaque nombre en <strong>produits et puissances</strong> de facteurs simples (facteurs premiers, puissances de e), puis appliquer <span class="math">ln(ab) = ln a + ln b</span>, <span class="math">ln(a/b) = ln a − ln b</span> et <span class="math">ln(aⁿ) = n·ln a</span>.</li>
+            <li><strong>(3)</strong> Regrouper les termes semblables et conclure ; contrôler (valeur numérique approchée, ou retour à la définition).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">ln 1 = 0<br>ln e = 1<br>ln(e^x) = x&nbsp;&nbsp;(pour tout x)<br>e^(ln x) = x&nbsp;&nbsp;(pour x &gt; 0)</div>
+        <div class="lecture-formula-desc">Les quatre réflexes de la réciprocité : ils servent à la fois pour les calculs dirigés et pour vérifier une équation résolue.</div>
+      </div>
+
+      <ul class="lecture-list-elegant">
+        <li><span class="math">ln</span> est la <strong>réciproque</strong> de <span class="math">exp</span> : chacun défait l'autre, sur les bons domaines.</li>
+        <li>Domaine de <span class="math">ln</span> : <span class="math">]0 ; +∞[</span> — jamais de log d'un nombre ≤ 0.</li>
+        <li><span class="math">ln(ab) = ln a + ln b</span>, <span class="math">ln(1/b) = −ln b</span>, <span class="math">ln(a/b) = ln a − ln b</span>, <span class="math">ln(aⁿ) = n·ln a</span>.</li>
+        <li><span class="math">ln(a + b)</span> ne se simplifie <strong>pas</strong> en <span class="math">ln a + ln b</span> : factorise avant de prendre le log.</li>
+        <li>Un calcul dirigé réussi se termine souvent par <span class="math">ln 1 = 0</span> ou par une expression du type <span class="math">2·ln 5 + ln 3</span>.</li>
+      </ul>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Rédaction type pour l'examen</div>
+          <p>Chaque fois que tu appliques une propriété algébrique, cite les <strong>conditions</strong> : « comme <span class="math">a &gt; 0</span> et <span class="math">b &gt; 0</span>, on a <span class="math">ln(ab) = ln a + ln b</span> ». Une propriété utilisée sans ses hypothèses est une propriété mal utilisée — et le correcteur le voit immédiatement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — La valeur exacte de ln 6 + ln(1/2) − ln 3 est :</p>
+      <div class="lecture-quiz-options"><span>A) 0</span><span>B) ln 3</span><span>C) ln 6</span><span>D) −ln 3</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) 0.</strong> On regroupe : <span class="math">ln 6 + ln(1/2) = ln(6 × 1/2) = ln 3</span>, puis <span class="math">ln 3 − ln 3 = ln 1 = 0</span>. Variante équivalente : <span class="math">ln 6 − ln 2 − ln 3 = ln(6/(2 × 3))</span>, puis <span class="math">ln(6/(2 × 3)) = ln 1 = 0</span>. L'erreur classique consiste à transformer <span class="math">ln(1/2)</span> en <span class="math">−ln 2</span> puis à oublier de tout regrouper avant de conclure.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Le nombre e^(3 ln 2) est égal à :</p>
+      <div class="lecture-quiz-options"><span>A) 6</span><span>B) 8</span><span>C) 2 ln 3</span><span>D) e³ × 2</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) 8.</strong> <span class="math">3 × ln 2 = ln 2³ = ln 8</span>, donc <span class="math">e^(3 ln 2) = e^(ln 8) = 8</span> (réciprocité, avec <span class="math">8 &gt; 0</span>). Répondre 6, c'est multiplier l'exposant par la base au lieu d'appliquer <span class="math">ln(aⁿ) = n·ln a</span> dans l'autre sens.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — En fonction de ln 3 et ln 5, le nombre ln 45 vaut :</p>
+      <div class="lecture-quiz-options"><span>A) 2 × ln 3 + ln 5</span><span>B) ln 3 + ln 5</span><span>C) 3 × ln 5</span><span>D) 9 × ln 3 + ln 5</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) 2 × ln 3 + ln 5.</strong> <span class="math">45 = 9 × 5 = 3² × 5</span>, donc <span class="math">ln 45 = ln 3² + ln 5 = 2 × ln 3 + ln 5</span>. Contrôle : <span class="math">2 × 1,099 + 1,609 ≈ 3,807 = ln 45</span> ✓.</div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[definition]</strong> Le <strong>logarithme népérien</strong> <span class="math">ln</span> est la réciproque de <span class="math">exp</span> : pour <span class="math">x &gt; 0</span>, <span class="math">ln x</span> est l'unique réel <span class="math">y</span> tel que <span class="math">e^y = x</span></li>
+      <li><strong>[reciprocite]</strong> <span class="math">ln(e^x) = x</span> pour tout réel <span class="math">x</span> ; <span class="math">e^(ln x) = x</span> pour tout <span class="math">x &gt; 0</span></li>
+      <li><strong>[domaine]</strong> <span class="math">ln</span> est défini sur <span class="math">]0 ; +∞[</span> uniquement : <span class="math">ln 0</span> et les logs de négatifs n'existent pas</li>
+      <li><strong>[valeurs]</strong> <span class="math">ln 1 = 0</span> ; <span class="math">ln e = 1</span> ; <span class="math">ln(eⁿ) = n</span> ; <span class="math">ln(1/e) = −1</span> ; <span class="math">ln √e = 1/2</span></li>
+      <li><strong>[proprietes]</strong> Pour <span class="math">a &gt; 0</span>, <span class="math">b &gt; 0</span> : <span class="math">ln(ab) = ln a + ln b</span> ; <span class="math">ln(1/b) = −ln b</span> ; <span class="math">ln(a/b) = ln a − ln b</span> ; <span class="math">ln(aⁿ) = n·ln a</span></li>
+      <li><strong>[proprietes]</strong> Ces propriétés se <strong>démontrent</strong> avec la réciprocité et l'injectivité de exp (<span class="math">e^A = e^B ⇒ A = B</span>)</li>
+      <li><strong>[pieges]</strong> <span class="math">ln(a + b) ≠ ln a + ln b</span> ; <span class="math">ln(ab) ≠ ln a × ln b</span> ; <span class="math">ln x = 0 ⇔ x = 1</span> (pas x = 0 !)</li>
+      <li><strong>[pieges]</strong> Ne pas confondre <span class="math">(ln x)²</span> et <span class="math">ln(x²) = 2 ln x</span> (pour x &gt; 0)</li>
+      <li><strong>[calculs]</strong> Calcul dirigé : décomposer en facteurs premiers, transformer produits/quotients/puissances, regrouper — objectif : éliminer les logs ou ne garder que ceux demandés</li>
+      <li><strong>[methode]</strong> Rédaction Bac : citer les conditions a &gt; 0, b &gt; 0 avant chaque propriété, et contrôler le résultat (valeur approchée ou retour à la définition)</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 1 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : dériver ln et ln(u), et trouver enfin des primitives de 1/x</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

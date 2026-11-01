@@ -1,0 +1,525 @@
+<!-- ============================================================ -->
+<!-- PARTIE 2 : CODE GÉNÉTIQUE ET TRADUCTION (4 NOTIONS)           -->
+<!-- Notion 1 : codon — Le codon, mot de 3 lettres de l'ARNm       -->
+<!-- Notion 2 : code_genetique — 64 codons, 20 acides aminés       -->
+<!-- Notion 3 : arn_transfert — L'ARNt et son anticodon            -->
+<!-- Notion 4 : traduction — Du message à la protéine              -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 02 · Expression des gènes</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Code génétique et <em>Traduction</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      L'ARNm est écrit dans une langue à 4 lettres ; les protéines sont écrites dans une langue à 20 mots. Pour passer de l'une à l'autre, la cellule possède un <strong>dictionnaire</strong> — le code génétique — et une <strong>usine</strong> — le ribosome. Cette partie déroule <strong>4 notions</strong> : le <strong>codon</strong>, le <strong>code génétique</strong> et ses propriétés, l'<strong>ARN de transfert</strong> et son anticodon, et la <strong>traduction</strong> pas à pas.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item"><i class="fas fa-clock"></i> 25 min</span>
+      <span class="lecture-hero-meta-item"><i class="fas fa-cubes"></i> 4 notions</span>
+      <span class="lecture-hero-meta-item"><i class="fas fa-layer-group"></i> 7 sections</span>
+      <span class="lecture-hero-meta-item"><i class="fas fa-graduation-cap"></i> Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 7 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Faire dialoguer deux langues</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · codon — Le codon : mot de trois lettres</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 2 · code_genetique — 64 codons, 20 acides aminés</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · code_genetique — Les trois propriétés du code</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 3 · arn_transfert — L'ARNt, traducteur à double face</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 4 · traduction — Le mécanisme : initiation, élongation, terminaison</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Fiche méthode — Lire un code génétique fourni</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Faire dialoguer deux langues</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Imagine un message écrit en hébreu et un lecteur qui ne comprend que le haoussa. Pour que le message passe, il faut un <strong>dictionnaire</strong> et un <strong>interprète</strong>. Dans la cellule, c'est exactement la situation : l'ARNm, sorti du noyau à la fin de la partie 1, est écrit dans l'alphabet à 4 lettres <span class="math">A — U — G — C</span>. Or ce que le cytoplasme doit fabriquer, c'est une protéine, c'est-à-dire une suite d'<strong>acides aminés</strong> — et il n'existe que 20 acides aminés différents.
+      </p>
+
+      <p class="lecture-text">
+        Comment une suite de lettres A, U, G, C devient-elle une suite de méthionine, d'alanine, de tryptophane ? C'est le problème du <strong>code génétique</strong> (les mots de la langue ADN) et de la <strong>traduction</strong> (la fabrication de la protéine). Deux questions vont nous guider :
+      </p>
+
+      <ul class="lecture-list">
+        <li>Comment regrouper les 4 lettres de l'ARNm pour former des « mots » assez nombreux pour désigner 20 acides aminés ?</li>
+        <li>Quelle machine lit ces mots et quel outil assemble les acides aminés dans le bon ordre ?</li>
+      </ul>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">La grande idée de la partie</div>
+          <p>Les mots de l'ARNm sont des <strong>triplets de nucléotides</strong> appelés <strong>codons</strong>. Chaque codon désigne un acide aminé précis — ou un signal d'arrêt. Des transporteurs, les <strong>ARNt</strong>, apportent au <strong>ribosome</strong> les acides aminés correspondants, et la chaîne protéique s'édifie : c'est la <strong>traduction</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · LE CODON -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · codon</span>
+        <h2 class="lecture-section-title">Le codon : mot de trois lettres</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Commençons par un petit calcul, très apprécié des examinateurs. Avec des mots d'<strong>une</strong> lettre, on ne forme que 4 mots (A, U, G, C) — insuffisant pour 20 acides aminés. Avec des mots de <strong>deux</strong> lettres : <span class="math">4² = 16</span> combinaisons — encore insuffisant. Avec des mots de <strong>trois</strong> lettres : <span class="math">4³ = 64</span> combinaisons — largement suffisant. La nature a choisi cette dernière solution :
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition officielle — codon</div>
+          <p>Un <strong>codon</strong> est un <strong>triplet de nucléotides de l'ARN messager</strong> qui désigne un acide aminé précis (ou un signal de début ou de fin de lecture). Comme il y a 4 sortes de nucléotides, on obtient <span class="math">4³ = 64</span> codons possibles.</p>
+        </div>
+      </div>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">1 codon = 3 nucléotides de l'ARNm · nombre de codons possibles : <span class="math">4³ = 64</span></div>
+        <div class="lecture-formula-desc">Exemple : dans l'ARNm <span class="math">AUG GCU UGG</span>, on lit trois codons — AUG, puis GCU, puis UGG. La lecture se fait depuis le codon de départ, par groupes de trois, sans chevauchement.</div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-title">⚠️ Piège — le décalage d'une lettre</div>
+        <p>Si l'on commence la lecture <strong>au mauvais endroit</strong>, tous les triplets changent ! Dans <span class="math">AUG GCU UGG UGA</span>, une lecture décalée d'une lettre donnerait UGG, CUU, GGU… n'importe quoi. La lecture démarre toujours au <strong>même codon</strong> et avance de trois en trois. C'est ce qu'on appelle le <strong>cadre de lecture</strong>.</p>
+      </div>
+
+      <p class="lecture-text">
+        Vérifie toi-même sur l'ARNm de la partie 1 : <span class="math">AUG GCU UGG UGA</span> se découpe en quatre codons bien alignés, comme des wagons d'un même train. Chacun de ces wagons va recevoir sa traduction dans la section suivante.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 2 · LE CODE GÉNÉTIQUE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · code_genetique</span>
+        <h2 class="lecture-section-title">64 codons, 20 acides aminés</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le dictionnaire qui relie les 64 codons aux 20 acides aminés s'appelle le <strong>code génétique</strong>. Il est entièrement déterminé : face à un codon donné, il n'y a qu'une seule réponse possible.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition officielle — code génétique</div>
+          <p>Le <strong>code génétique</strong> est le système de correspondance entre les <strong>codons de l'ARNm</strong> et les <strong>acides aminés</strong> qu'ils désignent. Il comprend <span class="math">4³ = 64</span> codons : <strong>61 codons</strong> codent les <strong>20 acides aminés</strong>, <strong>1 codon start</strong> (<span class="math">AUG</span> = méthionine) initie la traduction, et <strong>3 codons stop</strong> (<span class="math">UAA</span>, <span class="math">UAG</span>, <span class="math">UGA</span>) y mettent fin.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">Trois familles de codons à ne jamais mélanger :</p>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Famille</th><th>Codons</th><th>Rôle</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Codon start</td><td><span class="math">AUG</span></td><td>initie la lecture de l'ARNm ; code aussi la <strong>méthionine</strong> (premier acide aminé du polypeptide)</td></tr>
+            <tr><td>Codons stop</td><td><span class="math">UAA</span> · <span class="math">UAG</span> · <span class="math">UGA</span></td><td>terminent la traduction ; ne codent <strong>aucun</strong> acide aminé</td></tr>
+            <tr><td>Codons des acides aminés</td><td>les 60 autres (plus AUG)</td><td>chacun désigne un acide aminé précis, parmi les 20</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-title">Erreur fréquente — les codons stop</div>
+        <p>Écrire « le codon stop ajoute le dernier acide aminé » est une erreur condamnée au Bac : les codons stop <strong>ne codent aucun acide aminé</strong>. Aucun ARNt ne les reconnaît — ils font simplement sortir le polypeptide terminé de la machine (section 5). Et ne confonds pas : <span class="math">UGA</span> est un stop, mais <span class="math">UGG</span> code le tryptophane — deux triplets très proches, deux sorts très différents !</p>
+      </div>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">Exemple — la correspondance en action</div>
+        <div class="lecture-example-content">
+          <p>Le codon <span class="math">GCU</span> désigne l'alanine ; le codon <span class="math">UGG</span> désigne le tryptophane. Le même codon désigne <strong>toujours</strong> le même acide aminé, aujourd'hui comme demain, chez le zébu comme chez le niébé : le code génétique est une table fixe, inscrite dans tout le vivant (section 3).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · PROPRIÉTÉS DU CODE GÉNÉTIQUE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · code_genetique</span>
+        <h2 class="lecture-section-title">Les trois propriétés du code</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le code génétique possède trois propriétés que les épreuves adorent demander. Tu dois savoir les nommer, les définir et donner un exemple de chacune :
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <span class="lecture-step-number">1</span>
+          <div class="lecture-step-content">
+            <strong>Le code est dégénéré (ou redondant)</strong>
+            <p>plusieurs codons <strong>différents</strong> peuvent désigner le <strong>même</strong> acide aminé : les codons <span class="math">GCU</span>, <span class="math">GCC</span>, <span class="math">GCA</span> et <span class="math">GCG</span> codent tous les quatre l'alanine ; la leucine est même codée par 6 codons. C'est la redondance qui explique le compte : 61 codons « utiles » pour seulement 20 acides aminés.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">2</span>
+          <div class="lecture-step-content">
+            <strong>Le code est non ambigu</strong>
+            <p>un codon <strong>donné</strong> désigne <strong>un seul</strong> acide aminé, toujours le même : <span class="math">GCU</span> vaut alanine, point. La flèche « codon → acide aminé » n'a qu'une seule réponse ; c'est « acide aminé → codon » qui peut en avoir plusieurs.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">3</span>
+          <div class="lecture-step-content">
+            <strong>Le code est universel</strong>
+            <p>le même codon désigne le même acide aminé chez <strong>tous</strong> les êtres vivants : bactérie, mil, zébu, homme. Un gène humain lu par une bactérie produit la protéine humaine attendue.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-title">⚠️ Piège — dégénéré ≠ ambigu</div>
+        <p>Beaucoup d'élèves inversent les deux mots. Retiens le sens des flèches : <strong>plusieurs codons → un seul AA</strong> = code <strong>dégénéré</strong> ; <strong>un codon → un seul AA, jamais deux</strong> = code <strong>non ambigu</strong>. Si tu écris « le code est ambigu », tu affirmes qu'un codon donne deux acides aminés différents — c'est faux et lourdement sanctionné.</p>
+      </div>
+
+      <aside class="lecture-aside">
+        <div class="lecture-aside-content">
+          <div class="lecture-aside-label">Application — l'insuline d'origine bactérienne</div>
+          <p>L'universalité du code a changé la médecine : le gène humain de l'<strong>insuline</strong> a été introduit dans des bactéries, qui le transcrivent puis le traduisent en véritable insuline humaine — car bactéries et humains lisent le code de la même façon. Des millions de personnes diabétiques, au Niger comme ailleurs, s'injectent ainsi une insuline produite par des bactéries. Même argument pour l'hormone de croissance et plusieurs vaccins.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 3 · L'ARN DE TRANSFERT -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · arn_transfert</span>
+        <h2 class="lecture-section-title">L'ARNt, traducteur à double face</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Reste à résoudre une énigme pratique : les codons parlent la langue des nucléotides, les acides aminés ne la parlent pas. Qui fait le lien ? Une famille d'ARN un peu spéciale, les <strong>ARN de transfert (ARNt)</strong>, véritables interprètes bilingues : ils savent à la fois <strong>lire</strong> un codon et <strong>porter</strong> un acide aminé.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition officielle — ARN de transfert</div>
+          <p>Un <strong>ARN de transfert (ARNt)</strong> est une petite molécule d'ARN, repliée en forme de trèfle, qui porte à l'une de ses extrémités un <strong>acide aminé</strong> bien précis et qui possède, à l'autre extrémité, un <strong>anticodon</strong> : triplet complémentaire du codon de l'ARNm correspondant. Chaque ARNt joue le rôle d'un <strong>adaptateur</strong> entre codon et acide aminé.</p>
+        </div>
+      </div>
+
+      <div class="lecture-vocab-grid">
+        <div>
+          <strong>Anticodon</strong> : triplet de nucléotides porté par l'<strong>ARNt</strong>, complémentaire du codon de l'ARNm (<span class="math">A↔U</span>, <span class="math">G↔C</span>).
+        </div>
+        <div>
+          <strong>ARNt</strong> : ARN de transfert ; porte un acide aminé d'un côté, un anticodon de l'autre — un ARNt par famille de codons.
+        </div>
+        <div>
+          <strong>Liaison peptidique</strong> : liaison qui unit deux acides aminés voisins le long de la chaîne ; elle se forme sur le ribosome pendant l'élongation.
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Voici comment fonctionne l'appariement codon–anticodon. Face au codon <span class="math">GCU</span> de l'ARNm, l'ARNt porte l'anticodon <span class="math">CGA</span> (complémentaire : <span class="math">G↔C</span>, <span class="math">C↔G</span>, <span class="math">U↔A</span>) et l'acide aminé <strong>alanine</strong> qu'il transporte vient s'ajouter à la chaîne. L'anticodon « sonde » le codon, l'acide aminé est livré, et le traducteur repart chercher une nouvelle cargaison.
+      </p>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-title">Erreur fréquente — codon et anticodon confondus</div>
+        <p>Le <strong>codon</strong> est sur l'<strong>ARNm</strong> ; l'<strong>anticodon</strong> est sur l'<strong>ARNt</strong> — et il est <strong>complémentaire</strong> du codon, jamais identique ! Face à <span class="math">AUG</span>, l'anticodon est <span class="math">UAC</span> (et non AUG). Ce mélange des rôles est l'erreur la plus fréquente des copies de Terminale D : écris systématiquement à côté de qui est quoi.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 4 · MÉCANISME DE LA TRADUCTION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · traduction</span>
+        <h2 class="lecture-section-title">Le mécanisme : initiation, élongation, terminaison</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tout est en place : le message (ARNm), le dictionnaire (code génétique), les interprètes (ARNt) et l'usine (<strong>ribosome</strong>, organe du cytoplasme fait de deux sous-unités qui enserrent l'ARNm). La <strong>traduction</strong> peut commencer :
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition officielle — traduction</div>
+          <p>La <strong>traduction</strong> est la synthèse, dans le <strong>cytoplasme</strong>, d'un <strong>polypeptide</strong> par lecture de l'<strong>ARNm codon par codon</strong>, sur le <strong>ribosome</strong>, grâce aux <strong>ARNt</strong> qui apportent les acides aminés correspondants. Elle s'achève à la rencontre d'un <strong>codon stop</strong>, où le polypeptide est libéré.</p>
+        </div>
+      </div>
+
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <span class="lecture-step-number">1</span>
+          <div class="lecture-step-content">
+            <strong>Initiation — la machine se met en place</strong>
+            <p>le ribosome se fixe sur l'ARNm au niveau du <strong>codon start</strong> <span class="math">AUG</span>. Le premier ARNt, porteur de <strong>méthionine</strong>, s'installe : son anticodon <span class="math">UAC</span> s'apparie au codon de départ.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">2</span>
+          <div class="lecture-step-content">
+            <strong>Élongation — la chaîne s'allonge codon par codon</strong>
+            <p>le ribosome avance de codon en codon ; à chaque étape, un nouvel ARNt s'apparie par son anticodon et dépose son acide aminé, qu'une <strong>liaison peptidique</strong> soude au précédent. Les ARNt « vides » repartent dans le cytoplasme se recharger. Le polypeptide, suspendu au ribosome, s'allonge dans l'ordre exact des codons.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">3</span>
+          <div class="lecture-step-content">
+            <strong>Terminaison — le polypeptide est libéré</strong>
+            <p>le ribosome atteint un <strong>codon stop</strong> (<span class="math">UAA</span>, <span class="math">UAG</span> ou <span class="math">UGA</span>) : aucun ARNt ne peut s'y apparier, la lecture s'arrête, le <strong>polypeptide</strong> est libéré, et l'ARNm et le ribosome se séparent. L'ARNm peut encore servir à plusieurs traductions.</p>
+          </div>
+        </div>
+      </div>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ribosome traduisant un ARNm avec des ARNt apportant les acides aminés">
+          <text x="260" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">LA TRADUCTION SUR LE RIBOSOME</text>
+
+          <!-- ARNm -->
+          <line x1="40" y1="200" x2="480" y2="200" style="stroke:var(--green-bright)" stroke-width="2.5"/>
+          <polygon points="480,200 470,195 470,205" style="fill:var(--green-bright)"/>
+          <text x="464" y="222" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter">sens 5′ → 3′</text>
+
+          <!-- Codons -->
+          <g fill="none" style="stroke:var(--green-bright)" stroke-width="1.6">
+            <rect x="90" y="184" width="56" height="32" rx="6"/>
+            <rect x="154" y="184" width="56" height="32" rx="6"/>
+            <rect x="218" y="184" width="56" height="32" rx="6"/>
+            <rect x="282" y="184" width="56" height="32" rx="6" stroke-dasharray="4 3"/>
+          </g>
+          <text x="118" y="205" style="fill:var(--green-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">AUG</text>
+          <text x="182" y="205" style="fill:var(--green-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">GCU</text>
+          <text x="246" y="205" style="fill:var(--green-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">UGG</text>
+          <text x="310" y="205" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">UGA</text>
+          <text x="118" y="232" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter" text-anchor="middle">start</text>
+          <text x="310" y="232" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter" text-anchor="middle">stop</text>
+
+          <!-- Ribosome -->
+          <ellipse cx="200" cy="150" rx="92" ry="34" fill="rgba(224,184,74,0.08)" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <text x="200" y="128" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">Ribosome (grande sous-unité)</text>
+          <text x="200" y="252" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">petite sous-unité</text>
+
+          <!-- Polypeptide -->
+          <g fill="none" style="stroke:var(--green-bright)" stroke-width="2">
+            <path d="M 140 120 C 120 90, 130 66, 152 52"/>
+          </g>
+          <circle cx="160" cy="50" r="8" fill="none" style="stroke:var(--green-bright)" stroke-width="2"/>
+          <circle cx="178" cy="58" r="8" fill="none" style="stroke:var(--green-bright)" stroke-width="2"/>
+          <circle cx="196" cy="64" r="8" fill="none" style="stroke:var(--green-bright)" stroke-width="2"/>
+          <text x="240" y="60" style="fill:var(--green-bright)" font-size="10.5" font-weight="700" font-family="Inter">polypeptide en croissance</text>
+
+          <!-- ARNt en place -->
+          <g style="stroke:var(--text-light)" stroke-width="2" fill="none">
+            <path d="M 182 182 C 182 162, 190 152, 204 146"/>
+          </g>
+          <text x="150" y="168" style="fill:var(--text-light)" font-size="10" font-weight="700" font-family="Inter">ARNt</text>
+          <text x="150" y="180" style="fill:var(--text-dim)" font-size="9" font-family="Inter">anticodon CGA</text>
+          <text x="150" y="192" style="fill:var(--text-dim)" font-size="9" font-family="Inter">+ alanine</text>
+
+          <!-- ARNt arrivant -->
+          <g style="stroke:var(--text-light)" stroke-width="2" fill="none" stroke-dasharray="4 3">
+            <path d="M 350 90 C 320 110, 300 140, 285 176"/>
+          </g>
+          <circle cx="358" cy="84" r="8" fill="rgba(58,182,126,0.15)" style="stroke:var(--green-bright)" stroke-width="2"/>
+          <text x="372" y="88" style="fill:var(--green-bright)" font-size="9.5" font-family="Inter">tryptophane</text>
+          <text x="372" y="102" style="fill:var(--text-dim)" font-size="9" font-family="Inter">ARNt anticodon ACC</text>
+
+          <text x="260" y="300" style="fill:var(--text-dim)" font-size="11.5" font-weight="700" font-family="Inter" text-anchor="middle">Chaque codon reçoit son ARNt : la chaîne d'acides aminés suit l'ordre du message</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Le ribosome glisse le long de l'ARNm. À chaque codon correspond un ARNt dont l'anticodon s'apparie au codon ; l'acide aminé transporté est ajouté à la chaîne par une liaison peptidique. Au codon stop, le polypeptide est libéré.</figcaption>
+      </figure>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-title">⚠️ Piège — l'ordre vient de l'ARNm</div>
+        <p>L'ordre des acides aminés du polypeptide est imposé par l'<strong>ordre des codons de l'ARNm</strong>, donc par l'ordre des nucléotides du gène : c'est la <strong>colinéarité</strong>. Les ARNt ne décident de rien : ils obéissent à la complémentarité codon–anticodon. Le ribosome, lui, ne choisit pas la séquence — il ne fait que mettre les partenaires en contact.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : FICHE MÉTHODE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Fiche méthode</span>
+        <h2 class="lecture-section-title">Lire un code génétique fourni</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Au Bac, le code génétique complet n'est pas à apprendre par cœur : un <strong>extrait</strong> (mini-tableau) est fourni dans l'énoncé. Ton travail consiste à le lire sans erreur. Entraînons-nous sur l'ARNm obtenu en partie 1 :
+      </p>
+
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🎓 Exemple complet résolu — de l'ARNm au polypeptide</div>
+        <div class="lecture-example-content">
+          <p><strong>Données :</strong> ARNm <span class="math">AUG GCU UGG UGA</span> (5′ → 3′). Extrait du code génétique fourni : <span class="math">AUG</span> = méthionine (codon start) · <span class="math">GCU</span> = alanine · <span class="math">UGG</span> = tryptophane · <span class="math">UGA</span> = codon stop.</p>
+          <p><strong>Étape 1 — Découper en codons :</strong> <span class="math">AUG / GCU / UGG / UGA</span> — quatre triplets alignés depuis le codon start.</p>
+          <p><strong>Étape 2 — Traduire chaque codon grâce au tableau :</strong> <span class="math">AUG</span> → méthionine · <span class="math">GCU</span> → alanine · <span class="math">UGG</span> → tryptophane · <span class="math">UGA</span> → stop (aucun acide aminé).</p>
+          <p><strong>Étape 3 — Rédiger la réponse :</strong> la traduction démarre au codon start AUG et s'arrête au codon stop UGA ; le polypeptide synthétisé est <strong>méthionine — alanine — tryptophane</strong>.</p>
+          <p><strong>Bonus — les anticodons :</strong> les ARNt correspondants portaient les anticodons <span class="math">UAC</span>, <span class="math">CGA</span> et <span class="math">ACC</span> — complémentaires, lettre par lettre, des codons AUG, GCU et UGG.</p>
+        </div>
+      </div>
+
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <span class="lecture-step-number">1</span>
+          <div class="lecture-step-content">
+            <strong>Repérer le codon start</strong>
+            <p>la lecture commence à <span class="math">AUG</span> — jamais avant, jamais une lettre plus loin.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">2</span>
+          <div class="lecture-step-content">
+            <strong>Traduire codon par codon</strong>
+            <p>en lisant le tableau fourni <strong>uniquement</strong> : ne tente jamais un codon de mémoire, la table fournie fait foi.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">3</span>
+          <div class="lecture-step-content">
+            <strong>S'arrêter au codon stop</strong>
+            <p>le stop ne fait pas partie du polypeptide : on ne l'écrit pas dans la liste des acides aminés, on l'annonce comme signal de fin.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">4</span>
+          <div class="lecture-step-content">
+            <strong>Relier par des tirets et nommer</strong>
+            <p>« méthionine — alanine — tryptophane » : c'est le <strong>polypeptide</strong>, futur protéine une fois repliée (partie 3).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-title">⚠️ Vérification éclair</div>
+        <p>Avant de rendre : mes codons font-ils tous <strong>3 lettres</strong> ? Ai-je écrit des <strong>U</strong> (et pas des T) ? Mon polypeptide commence-t-il par la <strong>méthionine</strong> et s'arrête-t-il <strong>au stop</strong> ? Mes anticodons sont-ils complémentaires (et non identiques) des codons ?</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Un codon est un triplet de nucléotides porté par :</p>
+      <div class="lecture-quiz-options">
+        <span>A) l'ADN</span>
+        <span>B) l'ARN messager</span>
+        <span>C) l'ARN de transfert</span>
+        <span>D) le ribosome</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) l'ARN messager.</strong> Le codon est sur l'ARNm. Le triplet porté par l'ARNt s'appelle l'<strong>anticodon</strong> — la confusion codon/anticodon est l'erreur n°1 du chapitre.</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Le codon AUG joue le rôle de :</p>
+      <div class="lecture-quiz-options">
+        <span>A) codon stop, il ne code rien</span>
+        <span>B) codon start ; il code la méthionine</span>
+        <span>C) codon start ; il code le tryptophane</span>
+        <span>D) anticodon du premier ARNt</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) codon start ; il code la méthionine.</strong> AUG initie la lecture et désigne en même temps la méthionine, premier acide aminé de tout polypeptide. (Tryptophane = UGG ; les stops sont UAA, UAG, UGA.)</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Un ARNt porte l'anticodon ACC. Face à quel codon s'apparie-t-il, et quel acide aminé transporte-t-il si le tableau donne UGG = tryptophane ?</p>
+      <div class="lecture-quiz-options">
+        <span>A) codon ACC — tryptophane</span>
+        <span>B) codon UGG — tryptophane</span>
+        <span>C) codon UGG — alanine</span>
+        <span>D) codon TGG — tryptophane</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) codon UGG — tryptophane.</strong> L'anticodon est complémentaire du codon : A↔U, C↔G, C↔G, donc ACC s'apparie à UGG. Et l'ARNt transporte toujours l'acide aminé <strong>codé par ce codon</strong>. (D est piégé : pas de T dans l'ARN !)</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[codon]</strong> Un codon = 3 nucléotides de l'ARNm ; 4 bases → <span class="math">4³ = 64</span> codons possibles, lus par triplets depuis le codon start, sans chevauchement</li>
+      <li><strong>[code_genetique]</strong> Le code génétique est la correspondance codon → acide aminé : 61 codons codent les 20 acides aminés, AUG (méthionine) est le codon start, UAA/UAG/UGA sont les 3 codons stop (aucun acide aminé)</li>
+      <li><strong>[code_genetique]</strong> Trois propriétés : <strong>dégénéré</strong> (plusieurs codons → même AA), <strong>non ambigu</strong> (un codon → un seul AA), <strong>universel</strong> (même code chez tous les êtres vivants)</li>
+      <li><strong>[arn_transfert]</strong> L'ARNt porte d'un côté un acide aminé précis, de l'autre un <strong>anticodon</strong> complémentaire du codon : c'est l'adaptateur entre les deux langues</li>
+      <li><strong>[arn_transfert]</strong> Anticodon = sur l'ARNt, complémentaire du codon (AUG → anticodon UAC) — ne pas confondre les deux triplets</li>
+      <li><strong>[traduction]</strong> La traduction est la synthèse d'un polypeptide dans le cytoplasme, sur le ribosome, par lecture codon par codon de l'ARNm grâce aux ARNt</li>
+      <li><strong>[traduction]</strong> Trois étapes : <strong>initiation</strong> (AUG, ARNt-méthionine), <strong>élongation</strong> (appariement codon-anticodon, liaison peptidique), <strong>terminaison</strong> (codon stop, polypeptide libéré)</li>
+      <li><strong>[traduction]</strong> L'ordre des acides aminés reflète l'ordre des codons de l'ARNm, donc des nucléotides du gène : c'est la colinéarité</li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 2 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie 3 : le schéma complet de l'expression d'un gène et la régulation</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

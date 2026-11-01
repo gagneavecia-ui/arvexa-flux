@@ -1,0 +1,521 @@
+<!-- ============================================================ -->
+<!-- PARTIE 1 : LA MÉIOSE — DEUX DIVISIONS SUCCESSIVES              -->
+<!-- Notion 1 : definition_meiose — Définition et vue d'ensemble    -->
+<!-- Notion 2 : meiose_i — La division réductionnelle               -->
+<!-- Notion 3 : meiose_ii — La division équationnelle               -->
+<!-- Notion 4 : resultat_meiose — Bilan : quatre cellules haploïdes -->
+<!-- Notion 5 : meiose_vs_mitose — Méiose et mitose face à face     -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 01 · La méiose</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      La méiose : <em>deux divisions</em> successives
+    </h1>
+    <p class="lecture-hero-intro">
+      Chacune de tes cellules porte 46 chromosomes, mais tes gamètes n'en transmettent que 23 : comment une cellule fait-elle pour diviser son capital génétique par deux ? La réponse tient en un mécanisme fondamental : la <strong>méiose</strong>. Cette partie te guide à travers <strong>5 notions</strong> : la <strong>définition de la méiose</strong>, sa première division dite <strong>réductionnelle</strong>, sa seconde division dite <strong>équationnelle</strong>, le <strong>bilan des quatre cellules</strong> produites, puis la comparaison avec la <strong>mitose</strong>.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧬 5 notions</span>
+      <span class="lecture-hero-meta-item">📚 7 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">5 notions · 7 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Pourquoi diviser par deux ?</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion · definition_meiose — La méiose en un coup d'œil</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion · meiose_i — Prophase I : appariement et crossing-over</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion · meiose_i — Métaphase, anaphase et télophase I</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion · meiose_ii — La seconde division, équationnelle</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion · resultat_meiose — Bilan : quatre cellules haploïdes</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion · meiose_vs_mitose — Méiose et mitose face à face</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Pourquoi diviser par deux ?</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Partons d'un constat simple. Chez l'Homme, chaque cellule du corps contient <span class="math">2n = 46</span> chromosomes : 23 venus du père, 23 venus de la mère. Or un bébé naît de la fusion d'un spermatozoïde et d'un ovule. Imagine maintenant que ces deux gamètes possèdent chacun 46 chromosomes…
+      </p>
+      <p class="lecture-text">
+        Le zygote (première cellule du nouvel individu) en compterait <span class="math">46 + 46 = 92</span> ! Et à la génération suivante 184, puis 368… Au bout de quelques générations, le nombre de chromosomes exploserait : la vie telle qu'on la connaît serait impossible. La nature a donc inventé une division spéciale, qui <strong>réduit de moitié</strong> le nombre de chromosomes avant la formation des gamètes : la <strong>méiose</strong>.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📖 L'idée en une phrase</div>
+          <p>Une cellule diploïde (<span class="math">2n</span>) subit <strong>deux divisions cellulaires successives</strong> et donne <strong>quatre cellules haploïdes</strong> (<span class="math">n</span>) — les futures cellules reproductrices. C'est le fil rouge de tout ce chapitre.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Dans cette partie, on démonte la mécanique phase par phase, comme un moteur : d'abord la première division (méiose I), puis la seconde (méiose II), et enfin la comparaison avec la mitose que tu connais déjà grâce au chapitre sur le cycle cellulaire.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION · definition_meiose -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · definition_meiose</span>
+        <h2 class="lecture-section-title">La méiose en un coup d'œil</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Avant de plonger dans les détails, fixons le vocabulaire. Quatre mots reviendront sans cesse : ils doivent être parfaitement clairs.
+      </p>
+
+      <div class="lecture-vocab-grid">
+        <div><strong>Diploïde (<span class="math">2n</span>)</strong> — cellule possédant deux exemplaires de chaque chromosome : un paternel, un maternel (46 chez l'Homme).</div>
+        <div><strong>Haploïde (<span class="math">n</span>)</strong> — cellule ne possédant qu'un seul exemplaire de chaque chromosome (23 chez l'Homme).</div>
+        <div><strong>Chromosomes homologues</strong> — les deux exemplaires d'une même paire : mêmes gènes au même ordre, l'un paternel, l'autre maternel, mais pas forcément les mêmes allèles.</div>
+        <div><strong>Chromatides sœurs</strong> — les deux copies rigoureusement identiques d'un même chromosome, reliées au centromère après la réplication de l'ADN.</div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📖 Définition — La méiose</div>
+          <p>La <strong>méiose</strong> est l'ensemble de <strong>deux divisions cellulaires successives</strong> — la méiose I (réductionnelle) et la méiose II (équationnelle) — qui, à partir d'une cellule-mère diploïde (<span class="math">2n</span>), conduit à <strong>quatre cellules-filles haploïdes</strong> (<span class="math">n</span>), génétiquement différentes entre elles. Elle se déroule dans les <strong>gonades</strong> (testicules et ovaires) au cours de la gamétogenèse.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Retiens le schéma global : une seule cellule de départ, deux divisions, quatre cellules d'arrivée. Les deux divisions ont chacune leur rôle, et le nom qu'on leur donne résume tout.
+      </p>
+
+      <!-- SVG : vue d'ensemble 2n -> 4n? non : 1 cellule 2n -> 2 cellules n -> 4 cellules n -->
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vue d'ensemble de la méiose : une cellule 2n donne deux cellules n à deux chromatides puis quatre cellules n à une chromatide">
+          <text x="280" y="24" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">VUE D'ENSEMBLE : 1 CELLULE (2n) → 4 CELLULES (n)</text>
+
+          <!-- cellule mère -->
+          <rect x="25" y="115" width="110" height="90" rx="14" fill="rgba(224,184,74,0.06)" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+          <text x="80" y="148" style="fill:var(--text-light)" font-size="12.5" font-weight="700" font-family="Inter" text-anchor="middle">Cellule-mère</text>
+          <text x="80" y="172" style="fill:var(--accent-bright)" font-size="15" font-weight="700" font-family="Inter" text-anchor="middle">2n</text>
+          <text x="80" y="192" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter" text-anchor="middle">46 chromosomes</text>
+
+          <!-- flèche 1 -->
+          <line x1="140" y1="160" x2="195" y2="160" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <polygon points="195,160 185,155 185,165" style="fill:var(--accent-bright)"/>
+          <text x="168" y="140" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">Méiose I</text>
+          <text x="168" y="186" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">réductionnelle</text>
+
+          <!-- deux cellules n -->
+          <rect x="200" y="72" width="95" height="66" rx="12" fill="rgba(58,182,126,0.06)" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+          <text x="247" y="103" style="fill:var(--green-bright)" font-size="14" font-weight="700" font-family="Inter" text-anchor="middle">n</text>
+          <text x="247" y="125" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter" text-anchor="middle">à 2 chromatides</text>
+          <rect x="200" y="182" width="95" height="66" rx="12" fill="rgba(58,182,126,0.06)" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+          <text x="247" y="213" style="fill:var(--green-bright)" font-size="14" font-weight="700" font-family="Inter" text-anchor="middle">n</text>
+          <text x="247" y="235" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter" text-anchor="middle">à 2 chromatides</text>
+
+          <!-- flèche 2 -->
+          <line x1="300" y1="160" x2="355" y2="160" style="stroke:var(--green-bright)" stroke-width="2"/>
+          <polygon points="355,160 345,155 345,165" style="fill:var(--green-bright)"/>
+          <text x="328" y="140" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">Méiose II</text>
+          <text x="328" y="186" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">équationnelle</text>
+
+          <!-- quatre cellules n -->
+          <rect x="360" y="50" width="85" height="56" rx="10" fill="rgba(58,182,126,0.06)" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+          <text x="402" y="84" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">n</text>
+          <rect x="360" y="114" width="85" height="56" rx="10" fill="rgba(58,182,126,0.06)" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+          <text x="402" y="148" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">n</text>
+          <rect x="360" y="178" width="85" height="56" rx="10" fill="rgba(58,182,126,0.06)" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+          <text x="402" y="212" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">n</text>
+          <rect x="360" y="242" width="85" height="56" rx="10" fill="rgba(58,182,126,0.06)" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+          <text x="402" y="276" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">n</text>
+
+          <text x="515" y="168" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle" transform="rotate(-90 515 168)">GAMÈTES</text>
+          <text x="280" y="318" style="fill:var(--text-light)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">4 cellules haploïdes (n) — toutes génétiquement différentes</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">La méiose I réduit le nombre de chromosomes (2n → n) ; la méiose II sépare les chromatides. Au total : 1 cellule diploïde donne 4 cellules haploïdes.</figcaption>
+      </figure>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ n compte des chromosomes, pas des chromatides</div>
+          <p>Le symbole <span class="math">n</span> désigne le <strong>nombre de chromosomes</strong> (on compte les centromères), jamais le nombre de chromatides. Un gamète humain est <span class="math">n = 23</span> chromosomes ; le nombre de chromatides, lui, varie selon la phase — c'est justement le piège de la fin de méiose I, qu'on verra plus bas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION · meiose_i — PROPHASE I -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · meiose_i</span>
+        <h2 class="lecture-section-title">Prophase I : appariement et crossing-over</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La méiose I est la division <strong>réductionnelle</strong> : elle fait passer la cellule de <span class="math">2n</span> à <span class="math">n</span>. Mais avant de diviser, elle fait quelque chose qu'aucune mitose ne fait : elle fait <strong>se rencontrer les chromosomes homologues</strong>. Tout se joue pendant la prophase I, la phase la plus longue et la plus importante de toute la méiose.
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p class="lecture-text"><strong>Condensation.</strong> L'ADN, répliqué pendant l'interphase, s'enroule fortement : chaque chromosome devient visible sous la forme de deux <strong>chromatides-sœurs</strong> identiques réunies au centromère.</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p class="lecture-text"><strong>Appariement (synapsis).</strong> Chaque chromosome se colle <strong>gène contre gène</strong> à son homologue (le paternel contre le maternel). Ce couple étroitement associé forme un <strong>bivalent</strong>.</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div>
+          <div class="lecture-step-content"><p class="lecture-text"><strong>Crossing-over.</strong> Au point de contact (le <strong>chiasma</strong>), deux <strong>chromatides non-sœurs</strong> — une de chaque homologue — échangent des fragments d'ADN : c'est la <strong>recombinaison génétique</strong>.</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">4</div>
+          <div class="lecture-step-content"><p class="lecture-text"><strong>Fin de prophase.</strong> L'enveloppe du noyau disparaît, le fuseau de division se met en place : la cellule est prête pour la métaphase I.</p></div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📖 Définition — Bivalent (ou tétrade)</div>
+          <p>Un <strong>bivalent</strong> est le couple formé par <strong>deux chromosomes homologues appariés</strong> pendant la prophase I. Comme chaque chromosome y est à 2 chromatides, le bivalent compte <strong>4 chromatides</strong> : d'où son autre nom, <strong>tétrades</strong> (« tétra » = quatre).</p>
+        </div>
+      </div>
+
+      <!-- SVG : crossing-over -->
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 560 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Crossing-over entre deux chromatides non-sœurs d'un bivalent pendant la prophase I">
+          <text x="280" y="24" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">CROSSING-OVER : ÉCHANGE ENTRE CHROMATIDES NON-SŒURS</text>
+
+          <!-- chromosome paternel : 2 chromatides -->
+          <rect x="130" y="60" width="16" height="130" rx="8" fill="rgba(224,184,74,0.10)" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+          <rect x="164" y="60" width="16" height="130" rx="8" fill="rgba(224,184,74,0.10)" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+          <line x1="138" y1="60" x2="138" y2="190" style="stroke:var(--accent-bright)" stroke-width="1"/>
+          <line x1="172" y1="60" x2="172" y2="190" style="stroke:var(--accent-bright)" stroke-width="1"/>
+          <text x="155" y="212" style="fill:var(--accent-bright)" font-size="10.5" font-family="Inter" text-anchor="middle">Chromosome paternel</text>
+
+          <!-- chromosome maternel : 2 chromatides -->
+          <rect x="250" y="60" width="16" height="130" rx="8" fill="rgba(58,182,126,0.08)" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+          <rect x="284" y="60" width="16" height="130" rx="8" fill="rgba(58,182,126,0.08)" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+          <line x1="258" y1="60" x2="258" y2="190" style="stroke:var(--green-bright)" stroke-width="1"/>
+          <line x1="292" y1="60" x2="292" y2="190" style="stroke:var(--green-bright)" stroke-width="1"/>
+          <text x="275" y="212" style="fill:var(--green-bright)" font-size="10.5" font-family="Inter" text-anchor="middle">Chromosome maternel</text>
+
+          <!-- chiasma : croisement des non-sœurs -->
+          <path d="M 180 95 C 210 95 220 130 250 130" fill="none" style="stroke:var(--danger-light)" stroke-width="2" stroke-dasharray="4 3"/>
+          <path d="M 250 95 C 220 95 210 130 180 130" fill="none" style="stroke:var(--danger-light)" stroke-width="2" stroke-dasharray="4 3"/>
+          <circle cx="215" cy="113" r="12" fill="none" style="stroke:var(--danger-light)" stroke-width="1.5"/>
+          <text x="215" y="40" style="fill:var(--danger-light)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">Chiasma : échange de fragments</text>
+          <text x="215" y="245" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">Bivalent = 4 chromatides · seules les non-sœurs s'échangent des fragments</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Pendant la prophase I, deux chromatides non-sœurs (une paternelle, une maternelle) échangent des fragments : les chromosomes deviennent recombinés.</figcaption>
+      </figure>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Le crossing-over a lieu pendant la prophase I — et seulement là</div>
+          <p>Piège d'examen très fréquent : le crossing-over ne peut se produire que lorsque les homologues sont <strong>appariés</strong>, c'est-à-dire <strong>pendant la prophase I</strong>. À la prophase II, les homologues ont déjà été séparés : aucun appariement, donc aucun crossing-over possible. Si tu écris « crossing-over à la métaphase I » ou « à la prophase II », c'est faux.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION · meiose_i — META / ANA / TELOPHASE I -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · meiose_i</span>
+        <h2 class="lecture-section-title">Métaphase, anaphase et télophase I</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        L'appariement est terminé ; il faut maintenant <strong>répartir les homologues</strong>. C'est le rôle des trois phases suivantes de la méiose I. Suis bien ce qui voyage vers quel pôle : c'est là que se joue la réduction.
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p class="lecture-text"><strong>Métaphase I.</strong> Les <strong>bivalents</strong> s'alignent sur la <strong>plaque équatoriale</strong> de la cellule. Chaque chromosome homologue est orienté au hasard vers l'un des deux pôles — on verra en partie 2 que ce hasard est une mine de diversité.</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p class="lecture-text"><strong>Anaphase I.</strong> Les fibres du fuseau tirent : les <strong>deux chromosomes de chaque bivalent se séparent</strong> et migrent vers les pôles opposés. Attention : chaque chromosome garde ses <strong>2 chromatides</strong> — ce sont les homologues qui se séparent, pas les chromatides-sœurs.</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div>
+          <div class="lecture-step-content"><p class="lecture-text"><strong>Télophase I.</strong> Deux cellules se forment (la cytoplasmie se partage). Chacune contient <span class="math">n</span> chromosomes, mais chaque chromosome est encore formé de <strong>2 chromatides-sœurs</strong>.</p></div>
+        </div>
+      </div>
+
+      <!-- SVG : metaphase I puis anaphase I -->
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 560 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="À la métaphase I les bivalents sont sur la plaque équatoriale ; à l'anaphase I les homologues se séparent mais les chromatides sœurs restent attachées">
+          <text x="280" y="24" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">MÉIOSE I : LES HOMOLOGUES SE SÉPARENT</text>
+
+          <!-- panneau métaphase I -->
+          <rect x="20" y="40" width="240" height="190" rx="12" fill="rgba(255,255,255,0.015)" style="stroke:var(--border-soft)"/>
+          <text x="140" y="62" style="fill:var(--text-light)" font-size="12" font-weight="700" font-family="Inter" text-anchor="middle">Métaphase I</text>
+          <line x1="45" y1="150" x2="235" y2="150" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <!-- bivalent 1 (accent) vertical -->
+          <rect x="78" y="112" width="12" height="34" rx="6" fill="rgba(224,184,74,0.12)" style="stroke:var(--accent-bright)" stroke-width="1.2"/>
+          <rect x="108" y="112" width="12" height="34" rx="6" fill="rgba(224,184,74,0.12)" style="stroke:var(--accent-bright)" stroke-width="1.2"/>
+          <text x="99" y="170" style="fill:var(--accent-bright)" font-size="9.5" font-family="Inter" text-anchor="middle">bivalent 1</text>
+          <!-- bivalent 2 (green) vertical -->
+          <rect x="158" y="112" width="12" height="34" rx="6" fill="rgba(58,182,126,0.10)" style="stroke:var(--green-bright)" stroke-width="1.2"/>
+          <rect x="188" y="112" width="12" height="34" rx="6" fill="rgba(58,182,126,0.10)" style="stroke:var(--green-bright)" stroke-width="1.2"/>
+          <text x="179" y="170" style="fill:var(--green-bright)" font-size="9.5" font-family="Inter" text-anchor="middle">bivalent 2</text>
+          <text x="140" y="205" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter" text-anchor="middle">bivalents sur la plaque équatoriale</text>
+
+          <!-- panneau anaphase I -->
+          <rect x="300" y="40" width="240" height="190" rx="12" fill="rgba(255,255,255,0.015)" style="stroke:var(--border-soft)"/>
+          <text x="420" y="62" style="fill:var(--text-light)" font-size="12" font-weight="700" font-family="Inter" text-anchor="middle">Anaphase I</text>
+          <!-- vers pôle haut : chromosomes à 2 chromatides -->
+          <rect x="340" y="80" width="12" height="30" rx="6" fill="rgba(224,184,74,0.12)" style="stroke:var(--accent-bright)" stroke-width="1.2"/>
+          <rect x="468" y="80" width="12" height="30" rx="6" fill="rgba(58,182,126,0.10)" style="stroke:var(--green-bright)" stroke-width="1.2"/>
+          <!-- vers pôle bas -->
+          <rect x="340" y="150" width="12" height="30" rx="6" fill="rgba(224,184,74,0.12)" style="stroke:var(--accent-bright)" stroke-width="1.2"/>
+          <rect x="468" y="150" width="12" height="30" rx="6" fill="rgba(58,182,126,0.10)" style="stroke:var(--green-bright)" stroke-width="1.2"/>
+          <!-- flèches de migration -->
+          <line x1="346" y1="118" x2="346" y2="145" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+          <polygon points="346,150 342,142 350,142" style="fill:var(--accent-bright)"/>
+          <line x1="474" y1="142" x2="474" y2="115" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+          <polygon points="474,110 470,118 478,118" style="fill:var(--green-bright)"/>
+          <text x="420" y="205" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter" text-anchor="middle">homologues séparés · chromatides sœurs solidaires</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">À l'anaphase I, chaque chromosome migre entier vers un pôle : ses deux chromatides-sœurs restent solidaires. Seuls les homologues se séparent.</figcaption>
+      </figure>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">🚨 Erreur fréquente au Bac — la fin de la méiose I</div>
+          <p>À la fin de la méiose I, chaque cellule contient <strong>n chromosomes, mais chacun à 2 chromatides</strong>. La cellule est déjà haploïde (le nombre de chromosomes a été réduit), mais l'ADN n'est pas encore partagé. Écrire « n chromosomes à 1 chromatide » à ce stade est l'erreur classique qui coûte des points. La réduction du nombre de chromatides, c'est l'affaire de la méiose II.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION · meiose_ii -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · meiose_ii</span>
+        <h2 class="lecture-section-title">La méiose II : une division équationnelle</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Après la méiose I, chaque cellule est haploïde mais ses chromosomes sont encore « doubles ». La méiose II va <strong>séparer les chromatides-sœurs</strong>, exactement comme le ferait une mitose — mais dans des cellules déjà haploïdes. Elle est dite <strong>équationnelle</strong> car le nombre de chromosomes ne change pas : <span class="math">n → n</span>.
+      </p>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Pas de nouvelle réplication entre les deux divisions</div>
+          <p>Entre la méiose I et la méiose II, l'ADN <strong>ne se réplique PAS</strong>. Les chromatides séparées à l'anaphase II sont celles qui ont été formées <strong>avant la méiose I</strong>, pendant l'interphase. C'est une différence majeure avec deux mitoses successives.</p>
+        </div>
+      </div>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p class="lecture-text"><strong>Prophase II.</strong> Brève : les chromosomes se recondensent, l'enveloppe du noyau disparaît et le fuseau se reforme dans chacune des deux cellules haploïdes.</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p class="lecture-text"><strong>Métaphase II.</strong> Les <span class="math">n</span> chromosomes (à 2 chromatides) s'alignent <strong>individuellement</strong> sur la plaque équatoriale — plus de bivalents, les homologues ne sont plus ensemble.</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div>
+          <div class="lecture-step-content"><p class="lecture-text"><strong>Anaphase II.</strong> Les centromères se clivent : les <strong>chromatides-sœurs se séparent</strong> enfin et migrent vers les pôles opposés, devenant des chromosomes simples.</p></div>
+        </div>
+        <div class="lecture-step"><div class="lecture-step-number">4</div>
+          <div class="lecture-step-content"><p class="lecture-text"><strong>Télophase II.</strong> Quatre cellules se forment : chacune possède <span class="math">n</span> chromosomes, chacun réduit à <strong>1 chromatide</strong>. La méiose est terminée.</p></div>
+        </div>
+      </div>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Méiose II = division équationnelle : n → n</div>
+        <div class="lecture-formula-desc">Elle sépare les chromatides-sœurs, comme une mitose — mais dans des cellules déjà haploïdes. Le nombre de chromosomes ne change pas ; seule la quantité d'ADN est partagée.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION · resultat_meiose -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · resultat_meiose</span>
+        <h2 class="lecture-section-title">Bilan : quatre cellules haploïdes différentes</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">L'équation de la méiose</div>
+        <div class="lecture-formula-hero-main">1 cellule (2n) → 4 cellules (n), génétiquement différentes</div>
+        <div class="lecture-formula-hero-desc">Méiose I réductionnelle (2n → n, séparation des homologues) puis méiose II équationnelle (séparation des chromatides-sœurs). Chez l'Homme : 1 cellule à 46 chromosomes → 4 cellules à 23 chromosomes simples.</div>
+      </div>
+
+      <p class="lecture-text">
+        Les quatre cellules issues de la méiose ne sont <strong>jamais identiques</strong> : leurs chromosomes ont été mélangés par le crossing-over (partie 2) et par la répartition indépendante des homologues. Ce sont elles qui deviendront, après différenciation, les <strong>gamètes</strong> — l'objet du brassage génétique (partie 2) et de la fécondation (partie 3).
+      </p>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">✅ Les 4 points du bilan</div>
+          <p><strong>1.</strong> Deux divisions successives (I réductionnelle, II équationnelle) pour une seule réplication préalable de l'ADN. <strong>2.</strong> Réduction du nombre de chromosomes : <span class="math">2n → n</span>. <strong>3.</strong> Quatre cellules-filles au lieu de deux. <strong>4.</strong> Cellules génétiquement différentes entre elles et différentes de la cellule-mère.</p>
+        </div>
+      </div>
+
+      <aside class="lecture-aside">
+        <div class="lecture-aside-label">🔍 Chez l'Homme : 4 spermatozoïdes, mais 1 seul ovule</div>
+        <div class="lecture-aside-content"><p class="lecture-text">Chez l'homme (spermatogenèse), les 4 cellules haploïdes deviennent 4 spermatozoïdes. Chez la femme (ovogenèse), la division est inégale : une seule cellule concentre le cytoplasme et devient l'ovule, les 3 autres minuscules sont les <strong>globules polaires</strong>, dégénérés.</p></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION · meiose_vs_mitose -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · meiose_vs_mitose</span>
+        <h2 class="lecture-section-title">Méiose et mitose face à face</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La mitose (chapitre « Cycle cellulaire ») et la méiose partent toutes deux d'une cellule dont l'ADN a été répliqué — mais elles n'aboutissent pas du tout au même résultat. Le tableau de comparaison est un grand classique d'examen : apprends-le ligne par ligne.
+      </p>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Critère</th><th>Mitose</th><th>Méiose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Cellules concernées</td><td>Cellules somatiques (du corps)</td><td>Cellules des gonades (testicules, ovaires)</td></tr>
+            <tr><td>Nombre de divisions</td><td>Une seule</td><td>Deux successives (I et II)</td></tr>
+            <tr><td>Cellules-filles produites</td><td>2</td><td>4</td></tr>
+            <tr><td>Nombre de chromosomes</td><td>2n → 2n (conservé)</td><td>2n → n (réduit de moitié)</td></tr>
+            <tr><td>Appariement des homologues</td><td>Absent</td><td>Présent (bivalents, prophase I)</td></tr>
+            <tr><td>Crossing-over</td><td>Absent</td><td>Présent (prophase I)</td></tr>
+            <tr><td>Cellules-filles entre elles</td><td>Identiques (et identiques à la mère)</td><td>Différentes (et différentes de la mère)</td></tr>
+            <tr><td>Rôle</td><td>Croissance, réparation, reproduction conforme</td><td>Formation des gamètes, reproduction sexuée</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">🚨 La confusion à ne jamais faire</div>
+          <p>Ne dis jamais que la méiose « sépare les chromatides comme la mitose, mais en quatre fois ». La méiose I sépare les <strong>chromosomes homologues</strong> ; la méiose II sépare les <strong>chromatides-sœurs</strong>. Seule la méiose II ressemble à une mitose.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — À la fin de la méiose I, chaque cellule-fille contient :</p>
+      <div class="lecture-quiz-options">
+        <span>A) n chromosomes, chacun à 1 chromatide</span>
+        <span>B) n chromosomes, chacun à 2 chromatides</span>
+        <span>C) 2n chromosomes, chacun à 1 chromatide</span>
+        <span>D) 2n chromosomes, chacun à 2 chromatides</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B.</strong> L'anaphase I sépare les homologues : le nombre de chromosomes passe de 2n à n. Mais les chromatides-sœurs, elles, ne se séparent qu'à l'anaphase II — d'où n chromosomes à 2 chromatides. (C'est le piège n°1 de la méiose.)</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Le crossing-over, échange de fragments d'ADN, se produit :</p>
+      <div class="lecture-quiz-options">
+        <span>A) pendant la prophase I</span>
+        <span>B) pendant la métaphase II</span>
+        <span>C) pendant l'anaphase I</span>
+        <span>D) pendant l'interphase</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>A.</strong> Le crossing-over exige que les homologues soient appariés en bivalents, ce qui n'arrive que pendant la prophase I, au niveau des chiasmas, entre chromatides non-sœurs.</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Pourquoi la méiose II est-elle dite « équationnelle » ?</p>
+      <div class="lecture-quiz-options">
+        <span>A) parce qu'elle réduit de moitié le nombre de chromosomes</span>
+        <span>B) parce qu'elle conserve le nombre de chromosomes (n → n)</span>
+        <span>C) parce qu'elle double la quantité d'ADN</span>
+        <span>D) parce qu'elle produit des cellules diploïdes</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B.</strong> « Équationnelle » = le nombre de chromosomes reste le même, comme une équation : n = n. Elle sépare les chromatides-sœurs, exactement comme une mitose, mais dans des cellules déjà haploïdes. (La réduction, elle, a lieu en méiose I : division réductionnelle.)</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[definition_meiose]</strong> La méiose = deux divisions cellulaires successives (I réductionnelle, II équationnelle) : 1 cellule diploïde (2n) → 4 cellules haploïdes (n), génétiquement différentes. Elle se déroule dans les gonades.</li>
+      <li><strong>[definition_meiose]</strong> Vocabulaire : homologues (même paire, un paternel + un maternel), chromatides-sœurs (copies identiques d'un même chromosome), bivalent = tétrade (2 homologues appariés = 4 chromatides).</li>
+      <li><strong>[meiose_i]</strong> Prophase I : condensation, appariement des homologues en bivalents, puis crossing-over entre chromatides non-sœurs au niveau des chiasmas → chromosomes recombinés.</li>
+      <li><strong>[meiose_i]</strong> Métaphase I : bivalents alignés sur la plaque équatoriale. Anaphase I : séparation des homologues vers les pôles — les chromatides-sœurs restent attachées. Télophase I : 2 cellules n, chromosomes à 2 chromatides.</li>
+      <li><strong>[meiose_ii]</strong> La méiose II est équationnelle (n → n) : elle ressemble à une mitose et sépare les chromatides-sœurs. Aucune réplication d'ADN entre les deux divisions.</li>
+      <li><strong>[resultat_meiose]</strong> Bilan : 4 cellules haploïdes (n) à 1 chromatide par chromosome, toutes génétiquement différentes — futures gamètes (4 spermatozoïdes chez l'homme ; 1 ovule + 3 globules polaires chez la femme).</li>
+      <li><strong>[meiose_vs_mitose]</strong> Mitose : 1 division, 2 cellules 2n identiques (somatiques). Méiose : 2 divisions, 4 cellules n différentes (reproductrices), avec appariement et crossing-over.</li>
+      <li><strong>[meiose_vs_mitose]</strong> Pièges : fin de méiose I = n chromosomes à 2 chromatides ; crossing-over = prophase I uniquement ; méiose I sépare les homologues, méiose II sépare les chromatides-sœurs.</li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 1 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie 2 : les brassages génétiques, moteurs de la diversité des gamètes</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

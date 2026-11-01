@@ -1,0 +1,561 @@
+<!-- ============================================================ -->
+<!-- PARTIE 3 : VARIABLE ALÉATOIRE — VARIANCE & ÉCART-TYPE         -->
+<!-- Notion 1 : variance — V(X) = Σpᵢ(xᵢ − E(X))² = E(X²) − (E(X))² -->
+<!-- Notion 2 : ecart_type — σ(X) = √V(X), dispersion, comparaison -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 03 · Variable aléatoire</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Variance &amp; <em>écart-type</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Deux jeux peuvent promettre le même gain moyen et ne pas présenter du tout le même <em>risque</em>. Après l'espérance, qui donne le centre de la loi, il faut une mesure de la <strong>dispersion des valeurs autour de ce centre</strong> : c'est la variance <span class="math">V(X)</span>, et sa version lisible, l'écart-type <span class="math">σ(X) = √V(X)</span>. Cette partie couvre <strong>2 notions</strong> : la variance (ses <strong>deux formules</strong>, le calcul pas à pas sur le dé, ses propriétés) et l'écart-type (définition, interprétation, comparaison de deux jeux de même espérance).
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span>
+      <span class="lecture-hero-meta-item">🧮 2 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">2 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Deux jeux, même gain moyen : lequel choisir ?</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · variance — Définir V(X) = Σpᵢ(xᵢ − E(X))²</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · variance — La seconde formule : V(X) = E(X²) − (E(X))²</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 1 · variance — Exemple complet : la variance du dé</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · ecart_type — Définir et interpréter σ(X) = √V(X)</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 1 · variance — Propriétés : V(aX + b) et V(X + b)</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 1 · variance — Comparer deux jeux de même espérance</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — La chaîne de calcul et les pièges</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Deux jeux, même gain moyen : lequel choisir ?</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Reprenons les deux jeux de la motivation précédente et calculons leurs espérances. <strong>Jeu A</strong> : gain de <span class="math">0</span> ou <span class="math">4</span>, chacun avec la probabilité <span class="math">1/2</span> — donc <span class="math">E(A) = 0 × 1/2 + 4 × 1/2 = 2</span>. <strong>Jeu B</strong> : gain de <span class="math">1</span> ou <span class="math">3</span>, chacun avec la probabilité <span class="math">1/2</span> — donc <span class="math">E(B) = 1 × 1/2 + 3 × 1/2 = 2</span>.
+      </p>
+      <p class="lecture-text">
+        Même espérance : <span class="math">2</span> pour les deux jeux. Sont-ils pour autant équivalents ? Non : le jeu A fait osciller ton gain entre <strong>tout perdre</strong> (0) et 4, très loin autour de 2 ; le jeu B reste toujours <strong>proche de 2</strong> (1 ou 3). L'espérance ne « voit » pas cette différence : il manque un nombre qui mesure <strong>à quel point les valeurs s'écartent de la moyenne</strong>. Ce nombre, c'est la variance — et son écart-type.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Les trois objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Calculer</strong> <span class="math">V(X)</span> avec la définition <span class="math">Σpᵢ(xᵢ − E(X))²</span> et la formule rapide <span class="math">E(X²) − (E(X))²</span>.</li>
+            <li><strong>Traduire</strong> la variance en écart-type <span class="math">σ(X) = √V(X)</span>, dans la même unité que <span class="math">X</span>.</li>
+            <li><strong>Décider</strong> : comparer deux jeux (ou deux séries) de même espérance à l'aide de leurs variances, et connaître les propriétés <span class="math">V(aX + b)</span> et <span class="math">V(X + b)</span>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Pour aller plus loin</div>
+        <div class="lecture-aside-content">
+          L'idée d'« espérance des carrés des écarts » fut mise au point par <strong>Jakob Bernoulli</strong> (Ars Conjectandi, publié en 1713) et l'usage systématique de l'écart-type par <strong>Karl Pearson</strong> vers 1894. Aujourd'hui, aucune compagnie d'assurance ni banque ne prête un franc sans regarder à la fois l'espérance <em>et</em> la dispersion du risque.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : DÉFINIR V(X) -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · variance</span>
+        <h2 class="lecture-section-title">Définir V(X) = Σpᵢ(xᵢ − E(X))²</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Comment mesurer « l'écart moyen » des valeurs <span class="math">xᵢ</span> à l'espérance <span class="math">E(X)</span> ? Un simple <span class="math">Σpᵢ(xᵢ − E(X))</span> donnerait toujours <span class="math">0</span> : les écarts au-dessus de la moyenne compensent exactement les écarts en dessous. L'astuce est d'<strong>élever les écarts au carré</strong> pour que tout devienne positif, puis de pondérer par les probabilités.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition officielle — Variance</div>
+          <p>Soit <span class="math">X</span> une variable aléatoire d'espérance <span class="math">E(X)</span>. La <strong>variance</strong> de <span class="math">X</span> est le réel :</p>
+          <p><span class="math">V(X) = p₁·(x₁ − E(X))² + p₂·(x₂ − E(X))² + … + pₙ·(xₙ − E(X))²</span></p>
+          <p><span class="math">V(X) = Σpᵢ·(xᵢ − E(X))²</span></p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule majeure de la partie</div>
+        <div class="lecture-formula-hero-main">V(X) = Σpᵢ·(xᵢ − E(X))²</div>
+        <div class="lecture-formula-hero-desc">Moyenne pondérée des <strong>carrés des écarts</strong> à l'espérance. Conséquence immédiate : <span class="math">V(X) ≥ 0</span> pour toute variable aléatoire.</div>
+      </div>
+      <p class="lecture-text">
+        La mécanique de calcul en trois opérations par valeur : <strong>écart</strong> (<span class="math">xᵢ − E(X)</span>), puis <strong>carré</strong> (<span class="math">(xᵢ − E(X))²</span>), puis <strong>pondération</strong> (<span class="math">× pᵢ</span>) ; enfin on additionne le tout. La variance est « plus grande » quand les valeurs s'éloignent de l'espérance, « petite » quand elles s'en approchent.
+      </p>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Trois pièges de la définition</div>
+          <ul class="lecture-list">
+            <li>On soustrait <strong>d'abord</strong>, on élève <strong>ensuite</strong> au carré : <span class="math">(xᵢ − E(X))²</span>, pas <span class="math">xᵢ² − (E(X))²</span>.</li>
+            <li>Chaque écart au carré est pondéré par <span class="math">pᵢ</span> : oublier les <span class="math">pᵢ</span> est l'erreur la plus fréquente.</li>
+            <li>Le résultat est <strong>toujours positif ou nul</strong> : si tu trouves <span class="math">V(X) &lt; 0</span>, il y a une erreur de calcul quelque part.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🔍 Cas extrême — X constante</div>
+        <div class="lecture-example-content">
+          <p>Si <span class="math">X</span> ne prend qu'une seule valeur <span class="math">k</span> (avec la probabilité <span class="math">1</span>), alors <span class="math">E(X) = k</span> et chaque écart vaut <span class="math">0</span> : <span class="math">V(X) = 0</span>. Réciproquement, <span class="math">V(X) = 0</span> oblige toutes les valeurs à coïncider avec l'espérance : <strong>une variance nulle signifie « aucune dispersion »</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : LA SECONDE FORMULE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · variance</span>
+        <h2 class="lecture-section-title">La seconde formule : V(X) = E(X²) − (E(X))²</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La définition demande de calculer <span class="math">E(X)</span>, puis chaque écart, puis chaque carré : c'est long et il faut garder beaucoup de décimales intermédiaires. Il existe une seconde écriture, équivalente, bien plus économique au calcul.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Théorème — Formule de König–Huygens</div>
+          <p>Pour toute variable aléatoire <span class="math">X</span> :</p>
+          <p><span class="math">V(X) = E(X²) − (E(X))²</span></p>
+          <p>où <span class="math">E(X²) = Σpᵢ·xᵢ²</span> (l'espérance des <em>carrés</em> des valeurs). Cette formule donne exactement le même résultat que la définition.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">V(X) = E(X²) − (E(X))²</div>
+        <div class="lecture-formula-desc">La formule la plus rapide au calcul. Conseil pratique : on calcule <span class="math">E(X)</span> (carrés inutiles à ce stade), puis <span class="math">E(X²)</span> en élevant <em>d'abord</em> chaque valeur au carré, puis on soustrait. Deux lignes, sans écarts intermédiaires.</div>
+      </div>
+      <p class="lecture-text">
+        Comment ça marche ? On développe <span class="math">(xᵢ − E(X))² = xᵢ² − 2·E(X)·xᵢ + (E(X))²</span>, on multiplie par <span class="math">pᵢ</span>, on somme — et grâce à <span class="math">Σpᵢ = 1</span> et <span class="math">Σpᵢ·xᵢ = E(X)</span>, tout se simplifie en <span class="math">E(X²) − (E(X))²</span>. Tu n'as pas à refaire ce calcul en examen, mais tu vois pourquoi la seconde formule est légitime.
+      </p>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p><strong><span class="math">E(X²) ≠ (E(X))²</span></strong> — c'est l'erreur n°1 de ce chapitre. <span class="math">E(X²)</span> est la moyenne des <em>carrés</em> des valeurs ; <span class="math">(E(X))²</span> est le carré de la moyenne. Pour le dé : <span class="math">E(X²) = 91/6 ≈ 15,17</span> alors que <span class="math">(E(X))² = 3,5² = 12,25</span>. Élever au carré puis moyenner n'est pas moyner puis élever au carré.</p>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Mini-exemple — Jeu à deux issues</div>
+        <div class="lecture-example-content">
+          <p>Jeu A de la motivation : <span class="math">X</span> = gain, valeurs <span class="math">0</span> et <span class="math">4</span>, chacune avec la probabilité <span class="math">1/2</span>. D'abord l'espérance :</p>
+          <p><span class="math">E(X) = 0 × 1/2 + 4 × 1/2</span></p>
+          <p><span class="math">E(X) = 2</span></p>
+          <p>Puis l'espérance des carrés, ligne par ligne :</p>
+          <p><span class="math">E(X²) = 0² × 1/2 + 4² × 1/2</span></p>
+          <p><span class="math">E(X²) = 0 + 16/2</span></p>
+          <p><span class="math">E(X²) = 8</span></p>
+          <p>Enfin la variance, une étape par ligne :</p>
+          <p><span class="math">V(X) = E(X²) − (E(X))²</span></p>
+          <p><span class="math">V(X) = 8 − 2²</span></p>
+          <p><span class="math">V(X) = 8 − 4</span></p>
+          <p><span class="math">V(X) = 4</span></p>
+          <p>Trois lignes, aucun écart intermédiaire — voilà pourquoi on adopte cette formule dès que les valeurs ne sont pas triviales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : EXEMPLE COMPLET — LA VARIANCE DU DÉ -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · variance</span>
+        <h2 class="lecture-section-title">Exemple complet : la variance du dé</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Faisons le calcul des <strong>deux manières</strong> sur la même variable — le résultat d'un dé cubique équilibré — pour vérifier qu'elles coïncident. On sait déjà (partie 2) que <span class="math">E(X) = 21/6 = 3,5</span>.
+      </p>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Méthode 1 — Par la définition Σpᵢ(xᵢ − E(X))²</div>
+        <div class="lecture-example-content">
+          <p>Le tableau de calcul de <span class="math">V(X)</span>, une ligne par valeur (colonnes <span class="math">xᵢ</span> / écart / carré / <span class="math">pᵢ</span>) :</p>
+          <div class="lecture-table">
+            <table>
+              <thead>
+                <tr><th>Valeur xᵢ</th><th>Écart xᵢ − E(X)</th><th>Carré (xᵢ − E(X))²</th><th>Probabilité pᵢ</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>−2,5</td><td>6,25</td><td>1/6</td></tr>
+                <tr><td>2</td><td>−1,5</td><td>2,25</td><td>1/6</td></tr>
+                <tr><td>3</td><td>−0,5</td><td>0,25</td><td>1/6</td></tr>
+                <tr><td>4</td><td>0,5</td><td>0,25</td><td>1/6</td></tr>
+                <tr><td>5</td><td>1,5</td><td>2,25</td><td>1/6</td></tr>
+                <tr><td>6</td><td>2,5</td><td>6,25</td><td>1/6</td></tr>
+                <tr><td><strong>Total</strong></td><td><strong>0</strong></td><td><strong>17,5</strong></td><td><strong>1</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Remarque : la somme des écarts vaut <span class="math">0</span> (ils se compensent) — c'est bien le <em>carré</em> de l'écart qu'il faut moyenner. On termine le calcul ligne par ligne :</p>
+          <p><span class="math">V(X) = (6,25 + 2,25 + 0,25 + 0,25 + 2,25 + 6,25)/6</span></p>
+          <p><span class="math">V(X) = 17,5/6</span></p>
+          <p><span class="math">V(X) = 35/12</span></p>
+          <p><span class="math">V(X) ≈ 2,92</span></p>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Méthode 2 — Par la formule de König–Huygens</div>
+        <div class="lecture-example-content">
+          <p>Le tableau des carrés, une ligne par valeur (colonnes <span class="math">xᵢ</span> / <span class="math">xᵢ²</span> / <span class="math">pᵢ</span>) :</p>
+          <div class="lecture-table">
+            <table>
+              <thead>
+                <tr><th>Valeur xᵢ</th><th>Carré xᵢ²</th><th>Probabilité pᵢ</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1</td><td>1</td><td>1/6</td></tr>
+                <tr><td>2</td><td>4</td><td>1/6</td></tr>
+                <tr><td>3</td><td>9</td><td>1/6</td></tr>
+                <tr><td>4</td><td>16</td><td>1/6</td></tr>
+                <tr><td>5</td><td>25</td><td>1/6</td></tr>
+                <tr><td>6</td><td>36</td><td>1/6</td></tr>
+                <tr><td><strong>Total</strong></td><td><strong>91</strong></td><td><strong>1</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="lecture-steps">
+            <div class="lecture-step">
+              <div class="lecture-step-number">1</div>
+              <div class="lecture-step-content"><p><strong>Espérance des carrés.</strong></p>
+                <p><span class="math">E(X²) = (1 + 4 + 9 + 16 + 25 + 36)/6</span></p>
+                <p><span class="math">E(X²) = 91/6 ≈ 15,17</span></p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">2</div>
+              <div class="lecture-step-content"><p><strong>Soustraire le carré de l'espérance.</strong></p>
+                <p><span class="math">V(X) = E(X²) − (E(X))²</span></p>
+                <p><span class="math">V(X) = 91/6 − 3,5²</span></p>
+                <p><span class="math">V(X) = 91/6 − 12,25</span></p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">3</div>
+              <div class="lecture-step-content"><p><strong>Conclure</strong>, en fractions :</p>
+                <p><span class="math">91/6 − 49/4 = 182/12 − 147/12</span></p>
+                <p><span class="math">V(X) = 35/12 ≈ 2,92</span> ✓ — le même résultat, obtenu sans calculer aucun écart.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Le verdict des deux méthodes</div>
+        <div class="lecture-rule-body">
+          Les deux voies donnent <span class="math">V(X) = 35/12 ≈ 2,92</span>. Mais compare l'effort : la méthode 2 demande de <strong>rajouter six carrés</strong>, la méthode 1 de gérer <strong>six écarts puis six carrés avec décimales</strong>. En examen, la formule <span class="math">E(X²) − (E(X))²</span> est presque toujours la plus sûre ; garde la définition pour vérifier ou pour les petites lois.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : ÉCART-TYPE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · ecart_type</span>
+        <h2 class="lecture-section-title">Définir et interpréter σ(X) = √V(X)</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Un inconvénient de la variance : elle est exprimée dans l'<strong>unité au carré</strong> de <span class="math">X</span> (des « francs carrés », des « points carrés »…), à cause des carrés d'écarts. Pour retrouver une grandeur comparable aux valeurs elles-mêmes, on prend la racine carrée.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition officielle — Écart-type</div>
+          <p>L'<strong>écart-type</strong> de <span class="math">X</span> est le réel positif : <span class="math">σ(X) = √V(X)</span> (lettre grecque « sigma » minuscule). Il est exprimé dans la <strong>même unité que X</strong> et mesure la dispersion des valeurs autour de l'espérance.</p>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple — Écart-type du dé</div>
+        <div class="lecture-example-content">
+          <p><span class="math">σ(X) = √(35/12) ≈ √2,92 ≈ 1,71</span>.</p>
+          <p><strong>Lecture</strong> : les résultats d'un lancer de dé s'écartent en moyenne d'environ <span class="math">1,7</span> point de leur moyenne <span class="math">3,5</span>. C'est cohérent avec le tableau : les faces 3 et 4 sont proches du centre, les faces 1 et 6 en sont à 2,5.</p>
+        </div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><strong>Variance</strong> : pratique pour les calculs (linéarité, formule de König–Huygens), mais en unité carrée.</li>
+        <li><strong>Écart-type</strong> : pratique pour l'interprétation et la <strong>comparaison</strong> de deux variables — on compare toujours des écarts-types, exprimés comme les données.</li>
+        <li><strong>Ordre du calcul</strong> à retenir : <span class="math">E(X)</span>, puis <span class="math">E(X²)</span>, puis <span class="math">V(X) = E(X²) − (E(X))²</span>, puis <span class="math">σ(X) = √V(X)</span>.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Racine en dernier</div>
+          <p>Ne prends la racine carrée <strong>qu'à la toute fin</strong> : <span class="math">σ(X) = √V(X)</span>, et jamais <span class="math">V(X) = (σ(X))²</span> avant d'avoir fini les calculs de variance. Et ne confonds pas : prendre la racine carrée divise la « taille » du nombre, donc <span class="math">σ(X) ≤ √(E(X²))</span> — aucun rapport direct entre <span class="math">σ(X)</span> et <span class="math">E(X)</span> : le dé a une espérance de <span class="math">3,5</span> pour un écart-type de <span class="math">1,71</span>, les deux nombres sont indépendants dans leur ordre de grandeur.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : PROPRIÉTÉS -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · variance</span>
+        <h2 class="lecture-section-title">Propriétés : V(aX + b) et V(X + b)</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Comme l'espérance, la variance a des propriétés de calcul — mais attention, elles ne sont pas identiques : le carré introduit des coefficients <strong>au carré</strong>, et le décalage <span class="math">b</span> disparaît.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Théorème — Propriétés de la variance</div>
+          <p>Pour toute variable aléatoire <span class="math">X</span> et tous réels <span class="math">a</span> et <span class="math">b</span> :</p>
+          <ul class="lecture-list">
+            <li><span class="math">V(aX + b) = a²·V(X)</span> ;</li>
+            <li>en particulier <span class="math">V(X + b) = V(X)</span> : <strong>translater</strong> les valeurs ne change pas la dispersion ;</li>
+            <li>et <span class="math">σ(aX) = |a|·σ(X)</span> pour l'écart-type.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">V(aX + b) = a²·V(X)<br>V(X + b) = V(X)</div>
+        <div class="lecture-formula-desc">À coller à côté de E(aX + b) = a·E(X) + b : l'espérance suit a et b, la variance suit a² et IGNORE b — c'est la signature de la dispersion.</div>
+      </div>
+      <p class="lecture-text">
+        Ces résultats sont intuitifs : si tu doubles toutes les valeurs d'un jeu, les écarts doublent aussi, donc les <em>carrés</em> d'écarts quadruplent — d'où le facteur <span class="math">a²</span>. Si tu ajoutes <span class="math">b</span> à toutes les valeurs, tout le « paquet » se déplace sans se dilater : la dispersion, elle, ne bouge pas, et l'espérance avance de <span class="math">b</span> (<span class="math">E(X + b) = E(X) + b</span>).
+      </p>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemples — Sur le dé (V(X) = 35/12, σ(X) ≈ 1,71)</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step">
+              <div class="lecture-step-number">1</div>
+              <div class="lecture-step-content"><p><strong>Doubler les valeurs.</strong> Pour <span class="math">2X</span> :</p>
+                <p><span class="math">V(2X) = 2² × V(X)</span></p>
+                <p><span class="math">V(2X) = 4 × 35/12</span></p>
+                <p><span class="math">V(2X) = 35/3 ≈ 11,67</span></p>
+                <p>Et pour l'écart-type : <span class="math">σ(2X) = 2 × 1,71 ≈ 3,42</span> — quadruple variance, double écart-type.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">2</div>
+              <div class="lecture-step-content"><p><strong>Décaler les valeurs.</strong> Pour <span class="math">X + 5</span> : <span class="math">V(X + 5) = V(X) = 35/12 ≈ 2,92</span> — l'espérance passe à <span class="math">8,5</span>, mais la dispersion est inchangée.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">3</div>
+              <div class="lecture-step-content"><p><strong>Changer le signe.</strong> Pour <span class="math">−X</span> : <span class="math">V(−X) = (−1)² × V(X) = V(X)</span> — retourner les valeurs ne change pas leur étalement.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Écrire <span class="math">V(2X) = 2·V(X)</span> : <strong>faux</strong>, le coefficient s'élève au carré — <span class="math">V(2X) = 4·V(X)</span>. De même, ajouter un <span class="math">b</span> dans <span class="math">V(aX + b)</span> ne multiplie <em>rien</em> : le <span class="math">b</span> disparaît. Compare avec l'espérance (<span class="math">E(aX + b) = a·E(X) + b</span>) et note bien la différence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : COMPARER DEUX JEUX -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · variance</span>
+        <h2 class="lecture-section-title">Comparer deux jeux de même espérance</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Nous avons maintenant tous les outils pour trancher la question posée en motivation : <strong>Jeu A</strong> (gain <span class="math">0</span> ou <span class="math">4</span>, chacun avec la probabilité <span class="math">1/2</span>) contre <strong>Jeu B</strong> (gain <span class="math">1</span> ou <span class="math">3</span>, chacun avec la probabilité <span class="math">1/2</span>).
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Calculer les deux espérances</strong> : même distribution de gain moyen ? Si oui, la comparaison continue à l'étape 2.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Calculer V(X) pour chaque jeu</strong> : par la définition ou par König–Huygens, au choix — les deux donnent le même résultat.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Passer aux écarts-types</strong> : <span class="math">σ = √V</span> — même unité que le gain, donc directement comparables.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Comparer les σ</strong> : le plus petit σ signale les gains les plus regroupés autour de l'espérance.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Conclure</strong> : à même espérance, le jeu le moins dispersé (plus petit σ) est le plus « sûr » ; le plus dispersé est le plus « risqué ».</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Interpréter</strong> en contexte : un épargnant prudent préfère le petit σ ; qui veut tenter un gros gain accepte le grand σ. Aucun jeu n'est « meilleur » : tout dépend du risque accepté.</p></div></div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Même espérance, variances différentes</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step">
+              <div class="lecture-step-number">1</div>
+              <div class="lecture-step-content"><p><strong>Espérances.</strong> <span class="math">E(A) = 0 × 1/2 + 4 × 1/2 = 2</span> et <span class="math">E(B) = 1 × 1/2 + 3 × 1/2 = 2</span> : les deux jeux promettent le même gain moyen.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">2</div>
+              <div class="lecture-step-content"><p><strong>Jeu A.</strong> <span class="math">E(A²) = 0² × 1/2 + 4² × 1/2 = 8</span>, donc <span class="math">V(A) = 8 − 2² = 4</span> et <span class="math">σ(A) = √4 = 2</span>.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">3</div>
+              <div class="lecture-step-content"><p><strong>Jeu B.</strong> L'espérance des carrés, ligne par ligne :</p>
+                <p><span class="math">E(B²) = 1² × 1/2 + 3² × 1/2</span></p>
+                <p><span class="math">E(B²) = 0,5 + 4,5</span></p>
+                <p><span class="math">E(B²) = 5</span></p>
+                <p>Donc <span class="math">V(B) = 5 − 2² = 1</span> et <span class="math">σ(B) = √1 = 1</span>.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">4</div>
+              <div class="lecture-step-content"><p><strong>Conclure.</strong> <span class="math">V(A) = 4 &gt; V(B) = 1</span> : le jeu A est deux fois plus dispersé que le jeu B. À gain moyen égal, <strong>le jeu B est le plus « sûr »</strong> : son gain reste toujours à 1 unité de la moyenne, tandis que le jeu A peut tomber à 0 (perte de tout l'écart).</p></div>
+            </div>
+          </div>
+          <div class="lecture-table">
+            <table>
+              <thead>
+                <tr><th>Mesure</th><th>Jeu A (0 ou 4)</th><th>Jeu B (1 ou 3)</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Espérance E</td><td>2</td><td>2</td></tr>
+                <tr><td>Variance V</td><td>4</td><td>1</td></tr>
+                <tr><td>Écart-type σ</td><td>2</td><td>1</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Règle de décision</div>
+        <div class="lecture-rule-body">
+          Deux jeux (ou deux séries statistiques) de <strong>même espérance</strong> : celui qui a la <strong>plus petite variance</strong> (donc le plus petit écart-type) est le <strong>moins dispersé</strong>, le plus régulier, le plus « sûr ». Celui qui a la plus grande variance est le plus risqué — qui peut être recherché (pour un gain maximal) ou redouté (pour un risque maximal), selon le point de vue.
+        </div>
+      </div>
+      <p class="lecture-text">
+        Cette comparaison est exactement celle que fait un assureur entre deux contrats, un agriculteur entre deux variétés de mil aux rendements moyens égaux, ou un joueur prudent entre deux mises. L'espérance dit « combien en moyenne » ; la variance dit « à quel prix en incertitude ».
+      </p>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">La chaîne de calcul et les pièges</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Toute question de variance se traite avec la même chaîne de calcul, dans cet ordre.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Les formules de la partie</div>
+        <div class="lecture-formula-hero-main">
+          V(X) = Σpᵢ·(xᵢ − E(X))²<br>
+          V(X) = E(X²) − (E(X))²<br>
+          σ(X) = √V(X)<br>
+          V(aX + b) = a²·V(X)
+        </div>
+        <div class="lecture-formula-hero-desc">Définition et formule rapide donnent le même <span class="math">V(X) ≥ 0</span> ; l'écart-type remet la dispersion dans l'unité de <span class="math">X</span>.</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><strong>Chaîne de calcul</strong> : <span class="math">E(X) → E(X²) → V(X) = E(X²) − (E(X))² → σ(X) = √V(X)</span>.</li>
+        <li><strong>Repère numérique</strong> : dé équilibré — <span class="math">E(X) = 3,5</span>, <span class="math">V(X) = 35/12 ≈ 2,92</span>, <span class="math">σ(X) ≈ 1,71</span>.</li>
+        <li><strong>Propriétés</strong> : <span class="math">V(X + b) = V(X)</span> et <span class="math">V(aX) = a²·V(X)</span> ; le décalage disparaît, le coefficient se met au carré.</li>
+        <li><strong>Décision</strong> : même espérance, la plus petite variance = le moins dispersé, le plus sûr ; <span class="math">V(X) = 0</span> ⇔ <span class="math">X</span> constante.</li>
+        <li><strong>Comparaison des jeux A/B</strong> : <span class="math">E = 2</span> pour les deux, mais <span class="math">V(A) = 4</span> contre <span class="math">V(B) = 1</span> — B est plus régulier.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Rédaction type pour l'examen</div>
+          <p>Une question « calculer la variance et l'écart-type » exige : <strong>E(X) d'abord</strong> (avec son calcul), <strong>la formule utilisée explicitement</strong> (écris <span class="math">V(X) = E(X²) − (E(X))²</span> avant de l'appliquer), le <strong>résultat exact</strong> de la variance (garde la fraction : <span class="math">35/12</span>), puis <strong>σ avec la racine et un ordre de grandeur</strong> (<span class="math">≈ 1,71</span>). Et souviens-toi : un résultat négatif ou un écart-type « au carré » dans la phrase finale sont des signaux d'alarme.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Une variable aléatoire X a pour variance V(X) = 9. Son écart-type σ(X) vaut :</p>
+      <div class="lecture-quiz-options">
+        <span>A) 3</span>
+        <span>B) 9</span>
+        <span>C) 81</span>
+        <span>D) 4,5</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>A) 3.</strong> <span class="math">σ(X) = √V(X) = √9 = 3</span>. L'option C) 81 vient du réflexe erroné « carré » : c'est <span class="math">V(X)</span> qui est le carré de <span class="math">σ(X)</span>, pas l'inverse.</div>
+      </details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — La quantité E(X²) − (E(X))² est égale à :</p>
+      <div class="lecture-quiz-options">
+        <span>A) E(X)</span>
+        <span>B) V(X)</span>
+        <span>C) σ(X)</span>
+        <span>D) toujours 0</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) V(X).</strong> C'est la formule de König–Huygens : <span class="math">V(X) = E(X²) − (E(X))²</span>. Attention, elle n'est jamais nulle sauf si <span class="math">X</span> est constante, et <span class="math">E(X²) ≠ (E(X))²</span> en général.</div>
+      </details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Si V(X) = 4, alors V(3X) vaut :</p>
+      <div class="lecture-quiz-options">
+        <span>A) 12</span>
+        <span>B) 4</span>
+        <span>C) 36</span>
+        <span>D) 9</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>C) 36.</strong> <span class="math">V(3X) = 3² × V(X) = 9 × 4 = 36</span> (et <span class="math">σ(3X) = 3 × 2 = 6</span>). L'option A) 12 applique à tort le facteur <span class="math">3</span> au lieu de <span class="math">3²</span> — réflexe hérité de l'espérance, où lui <span class="math">E(3X) = 3·E(X)</span>.</div>
+      </details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[variance]</strong> Définition : <span class="math">V(X) = Σpᵢ·(xᵢ − E(X))²</span> — moyenne pondérée des carrés des écarts à l'espérance, toujours <span class="math">≥ 0</span></li>
+      <li><strong>[variance]</strong> Formule rapide de König–Huygens : <span class="math">V(X) = E(X²) − (E(X))²</span> avec <span class="math">E(X²) = Σpᵢ·xᵢ²</span> — la plus rapide au calcul</li>
+      <li><strong>[variance]</strong> <span class="math">E(X²) ≠ (E(X))²</span> : moyenne des carrés ≠ carré de la moyenne</li>
+      <li><strong>[variance]</strong> Propriétés : <span class="math">V(aX + b) = a²·V(X)</span> ; <span class="math">V(X + b) = V(X)</span> ; <span class="math">V(X) = 0</span> ⇔ <span class="math">X</span> constante</li>
+      <li><strong>[variance]</strong> Repère : dé équilibré — <span class="math">E(X) = 3,5</span>, <span class="math">V(X) = 35/12 ≈ 2,92</span></li>
+      <li><strong>[ecart_type]</strong> Définition : <span class="math">σ(X) = √V(X)</span>, même unité que <span class="math">X</span> ; dé : <span class="math">σ ≈ 1,71</span></li>
+      <li><strong>[ecart_type]</strong> <span class="math">σ(aX) = |a|·σ(X)</span> : doubler les valeurs double l'écart-type</li>
+      <li><strong>[ecart_type]</strong> Comparaison : même espérance → le plus petit σ est le moins dispersé, le plus « sûr » (jeux A/B : σ = 2 contre σ = 1)</li>
+      <li><strong>[methode]</strong> Ordre du calcul : <span class="math">E(X) → E(X²) → V(X) → σ(X)</span> ; jamais de variance négative</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 3 terminée !</div>
+    <div class="lecture-end-sub">Passe à la fiche complète : loi binomiale, loi normale et réflexes Bac</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

@@ -1,0 +1,548 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · LOGARITHME NÉPÉRIEN      -->
+<!-- PARTIE 2 : DÉRIVÉE DE ln ET DE ln(u)                         -->
+<!-- Notion 1 : dérivée de ln — (ln x)' = 1/x, tangentes          -->
+<!-- Notion 2 : dérivée de ln(u) — (ln u)' = u'/u, cas malins     -->
+<!-- Notion 3 : primitives — ln x pour 1/x, ln(u) pour u'/u       -->
+<!-- Notion 4 : domaine de dérivation — la condition u > 0        -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 02 · Logarithme népérien</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Dérivée de ln &amp; <em>dérivée de ln(u)</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Une fonction échappait depuis longtemps à nos réflexes de calcul : <span class="math">1/x</span>, qui n'avait aucune primitive connue parmi les fonctions usuelles. Cette partie règle le problème en deux formules : la <strong>dérivée de ln</strong> est <span class="math">1/x</span>, et la <strong>dérivée de ln(u)</strong> est <span class="math">u'/u</span>. Elle couvre <strong>4 notions</strong> : la <strong>dérivée</strong> de <span class="math">ln</span> (démontrée) et ses tangentes, la <strong>formule clé</strong> de la composée avec ses exemples type, les <strong>primitives</strong> de <span class="math">1/x</span> et de <span class="math">u'/u</span>, enfin la <strong>condition <span class="math">u &gt; 0</span></strong> qui commande tout le chapitre.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span>
+      <span class="lecture-hero-meta-item">🧮 4 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — La primitive introuvable</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · dérivée — (ln x)' = 1/x, avec démonstration</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · tangentes — en 1 et en e</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · composée — la formule clé (ln u)' = u'/u</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · cas malins — ln(kx), x ln x, (ln x)/x</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 3 · primitives — ln x et ln(u)</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 4 · domaine — vérifier u &gt; 0 avant tout</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — la méthode de dérivation en 3 étapes</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">La primitive introuvable</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La dérivée est le moteur de l'analyse : elle donne les <strong>variations</strong> d'une fonction (utile pour savoir si une population croît vite ou lentement), les <strong>tangentes</strong>, et elle prépare le <strong>tableau de variations</strong>, pièce maîtresse de tout exercice d'étude de fonction — sujet garanti au Bac D. Or, jusqu'ici, une fonction résistait à tous nos réflexes : <span class="math">1/x</span>. Toutes les fonctions usuelles avaient une primitive connue… sauf elle.
+      </p>
+      <p class="lecture-text">
+        Ce chapitre règle les deux problèmes d'un coup : la dérivée de <span class="math">ln</span> est <span class="math">1/x</span> — donc <span class="math">ln</span> est une primitive de <span class="math">1/x</span> — et la formule de la composée ouvre la porte à toute une famille de calculs.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Démontrer</strong> que la dérivée de <span class="math">ln</span> est <span class="math">1/x</span>, et tracer ses tangentes.</li>
+            <li><strong>Dériver</strong> une composée comme <span class="math">ln(x² + 1)</span> ou <span class="math">ln(3x + 5)</span>, une ligne par étape.</li>
+            <li><strong>Primitiver</strong> <span class="math">1/x</span> et <span class="math">u'/u</span>, avec la constante corrective.</li>
+            <li><strong>Maîtriser le piège</strong> n° 1 : la condition <span class="math">u &gt; 0</span> avant tout calcul.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Pour aller plus loin</div>
+        <div class="lecture-aside-content">
+          Vers 1647, le mathématicien <strong>Grégoire de Saint-Vincent</strong> étudiait l'aire sous l'hyperbole d'équation <span class="math">y = 1/x</span>. Ses successeurs découvrirent avec stupéfaction que cette aire se comporte exactement comme un logarithme : <strong>le logarithme népérien mesure des aires</strong>. Cette découverte explique pourquoi <span class="math">ln</span> est la primitive de <span class="math">1/x</span> — et pourquoi cette primitive était introuvable parmi les fonctions usuelles.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · DÉRIVÉE DE ln -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · dérivée</span>
+        <h2 class="lecture-section-title">La dérivée de ln, démontrée</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Partons de la définition de la dérivée : le taux d'accroissement de <span class="math">ln</span> entre <span class="math">x</span> et <span class="math">x + h</span> s'écrit <span class="math">T(h)</span>. La partie 1 nous permet de le transformer, puis de le laisser tendre vers <span class="math">0</span>.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 Théorème — fonction dérivée de ln</div>
+          <p>La fonction <span class="math">ln</span> est <strong>dérivable sur <span class="math">]0 ; +∞[</span></strong> et, pour tout <span class="math">x &gt; 0</span> : <span class="math">(ln x)' = 1/x</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Démonstration (par le taux d'accroissement)</div>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Écrire le taux.</strong> <span class="math">T(h) = (ln(x + h) − ln x) / h</span>, pour <span class="math">x &gt; 0</span> et <span class="math">h</span> tel que <span class="math">x + h &gt; 0</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Transformer la différence de logs.</strong></p><p><span class="math">ln(x + h) − ln x = ln((x + h)/x)</span></p><p><span class="math">ln((x + h)/x) = ln(1 + h/x)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Changer de variable.</strong> Posons <span class="math">u = h/x</span> : alors <span class="math">T(h) = (1/x) × ln(1 + u) / u</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Faire tendre h vers 0.</strong> Quand <span class="math">h → 0</span>, on a <span class="math">u → 0</span> ; on admet <span class="math">lim(u→0) ln(1 + u)/u = 1</span>, d'où <span class="math">T(h) → 1/x</span> : <span class="math">(ln x)' = 1/x</span>. ∎</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule n° 1 de la partie</div>
+        <div class="lecture-formula-hero-main">(ln x)' = 1/x&nbsp;&nbsp;&nbsp;pour tout x &gt; 0</div>
+        <div class="lecture-formula-hero-desc">Conséquence immédiate : 1/x &gt; 0 sur ]0 ; +∞[, donc ln est strictement croissante — résultat exploité en partie 3.</div>
+      </div>
+      <p class="lecture-text">
+        La limite utilisée dans la démonstration est cohérente avec l'approximation <span class="math">ln(1 + u) ≈ u</span> quand <span class="math">u</span> est proche de <span class="math">0</span> : par exemple <span class="math">ln 1,001 ≈ 0,000999</span>, très proche de <span class="math">0,001</span>.
+      </p>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ 1/x, mais seulement à droite de zéro</div>
+          <p>La dérivée <span class="math">1/x</span> n'existe pas en <span class="math">x = 0</span>… et le logarithme non plus. La formule n'est valable que sur <span class="math">]0 ; +∞[</span> : c'est le domaine de <span class="math">ln</span> qui commande, toujours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · TANGENTES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · tangentes</span>
+        <h2 class="lecture-section-title">Nombres dérivés et tangentes</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Avec une dérivée, on retrouve tous les réflexes du chapitre « dérivation » : nombre dérivé, équation de tangente. Rappel : la tangente au point d'abscisse <span class="math">a</span> a pour équation <span class="math">y = f'(a)(x − a) + f(a)</span>.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 1 — tangente au point d'abscisse 1</div>
+        <div class="lecture-example-content">
+          <p>Déterminer la tangente à la courbe de <span class="math">ln</span> au point d'abscisse <span class="math">1</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Point de contact.</strong> <span class="math">f(1) = ln 1 = 0</span> : la courbe passe par <span class="math">(1 ; 0)</span>, sur l'axe des abscisses.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Pente.</strong> <span class="math">f'(1) = 1/1 = 1</span> : la tangente monte avec une pente de <span class="math">1</span> (angle de 45°).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Équation, une ligne à la fois.</strong></p><p><span class="math">y = 1 × (x − 1) + 0</span></p><p><span class="math">y = x − 1</span></p><p>Cette droite accompagne la courbe de <span class="math">ln</span> partout : on la retrouve en partie 3 (position relative).</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 2 — tangente au point d'abscisse e</div>
+        <div class="lecture-example-content">
+          <p>Même question au point d'abscisse <span class="math">e</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Point de contact.</strong> <span class="math">f(e) = ln e = 1</span> : point <span class="math">(e ; 1)</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Pente.</strong> <span class="math">f'(e) = 1/e</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Équation, une ligne à la fois.</strong></p><p><span class="math">y = (1/e) × (x − e) + 1</span></p><p><span class="math">y = x/e</span></p><p>La tangente passe par l'origine ! Contrôle : pour <span class="math">x = e</span>, on a <span class="math">y = e/e = 1</span> ✓.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbe du logarithme népérien avec ses deux tangentes : en abscisse 1, la droite y égale x moins un de pente 1 ; en abscisse e, la droite y égale x sur e de pente 1 sur e">
+          <text x="260" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">LES DEUX TANGENTES DE LA COURBE DE ln</text>
+          <!-- axe des ordonnées (asymptote visuelle) -->
+          <line x1="150" y1="300" x2="150" y2="45" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="150,38 146,48 154,48" style="fill:var(--text-dim)"/>
+          <text x="136" y="52" style="fill:var(--text-dim)" font-size="11" font-family="Inter">y</text>
+          <!-- axe des abscisses -->
+          <line x1="60" y1="165" x2="494" y2="165" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="500,165 490,161 490,169" style="fill:var(--text-dim)"/>
+          <text x="506" y="169" style="fill:var(--text-dim)" font-size="11" font-family="Inter">x</text>
+          <text x="141" y="181" style="fill:var(--text-dim)" font-size="11" font-family="Inter">O</text>
+          <!-- tangente en 1 : y = x − 1 (pente 1) -->
+          <line x1="162" y1="193" x2="294" y2="61" style="stroke:var(--text-dim)" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <text x="298" y="60" style="fill:var(--text-dim)" font-size="10" font-family="Inter">T₁ : y = x − 1</text>
+          <!-- tangente en e : y = x/e (pente 1/e) -->
+          <line x1="200" y1="147" x2="460" y2="51" style="stroke:var(--info)" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <text x="414" y="40" style="fill:var(--info)" font-size="10" font-family="Inter">T₂ : y = x/e</text>
+          <!-- courbe de ln -->
+          <path d="M 152 268 C 154 246, 157 224, 163 206 C 169 189, 178 173, 190 165 C 202 157, 216 143, 231 137 C 246 131, 252 127, 259 125 C 285 116, 320 104, 360 96 C 395 89, 425 86, 470 81" style="fill:none;stroke:var(--accent-bright)" stroke-width="2.5"/>
+          <text x="478" y="76" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">ln</text>
+          <!-- points de contact -->
+          <circle cx="190" cy="165" r="4.5" style="fill:var(--info)"/>
+          <text x="184" y="182" style="fill:var(--info)" font-size="11" font-weight="700" font-family="Inter">1</text>
+          <circle cx="259" cy="125" r="4.5" style="fill:var(--info)"/>
+          <text x="266" y="122" style="fill:var(--info)" font-size="11" font-weight="700" font-family="Inter">e</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Les deux tangentes de la courbe de <span class="math">ln</span> : en <span class="math">1</span>, la droite <span class="math">y = x − 1</span> (pente <span class="math">1</span>) ; en <span class="math">e</span>, la droite <span class="math">y = x/e</span> (pente <span class="math">1/e</span>). Plus on va vers la droite, plus la tangente s'aplatit — la pente <span class="math">1/x</span> diminue.</figcaption>
+      </figure>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🔍 Lecture d'un nombre dérivé — vitesse d'estimation</div>
+        <div class="lecture-example-content">
+          <p><span class="math">f'(2) = 1/2 = 0,5</span> : autour de <span class="math">x = 2</span>, si l'abscisse augmente de <span class="math">0,1</span>, le logarithme augmente d'environ <span class="math">0,5 × 0,1 = 0,05</span>. Contrôle : <span class="math">ln 2 ≈ 0,693</span> et <span class="math">ln 2,1 ≈ 0,742</span>, soit une hausse de <span class="math">0,049 ≈ 0,05</span> ✓. Plus <span class="math">x</span> grandit, plus <span class="math">1/x</span> diminue : le logarithme croît <strong>de plus en plus lentement</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · LA FORMULE CLÉ (ln u)' = u'/u -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · composée</span>
+        <h2 class="lecture-section-title">La formule clé : dériver ln(u)</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        En pratique, on dérive rarement <span class="math">ln x</span> tout seul : le logarithme enveloppe une expression comme <span class="math">x² + 1</span> ou <span class="math">3x + 5</span>. La règle de dérivation des composées donne la formule la plus utilisée du chapitre.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Théorème — dérivée de ln(u)</div>
+          <p>Soit <span class="math">u</span> une fonction <strong>dérivable</strong> et <strong>strictement positive</strong> sur un intervalle <span class="math">I</span>. Alors la fonction <span class="math">f</span> définie par <span class="math">f(x) = ln(u(x))</span> est dérivable sur <span class="math">I</span>, et : <span class="math">f'(x) = u'(x)/u(x)</span>.</p>
+          <p><strong>Hypothèses explicites :</strong> <span class="math">u</span> dérivable sur <span class="math">I</span> <strong>et</strong> <span class="math">u(x) &gt; 0</span> pour tout <span class="math">x</span> de <span class="math">I</span>. Si l'une manque, la formule ne s'applique pas.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule n° 2 de la partie — (u dérivable et u &gt; 0)</div>
+        <div class="lecture-formula-hero-main">(ln u)' = u'/u</div>
+        <div class="lecture-formula-hero-desc">La dérivée « récupère » le u' au numérateur. Cas particulier : u(x) = x redonne (ln x)' = 1/x.</div>
+      </div>
+      <p class="lecture-text">
+        La méthode se résume à quatre gestes, dans cet ordre : écrire <span class="math">u</span>, dériver <span class="math">u'</span>, appliquer <span class="math">u'/u</span>, conclure par le <strong>domaine</strong> <span class="math">u &gt; 0</span>. Le tableau montre les quatre cas les plus fréquents :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Fonction f</th><th>u(x)</th><th>u'(x)</th><th>f'(x) = u'/u</th><th>Domaine (u &gt; 0)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">ln(x² + 1)</span></td><td><span class="math">x² + 1</span></td><td><span class="math">2x</span></td><td><span class="math">2x/(x² + 1)</span></td><td><span class="math">ℝ</span> (car <span class="math">x² + 1 ≥ 1</span>)</td></tr>
+            <tr><td><span class="math">ln(3x + 5)</span></td><td><span class="math">3x + 5</span></td><td><span class="math">3</span></td><td><span class="math">3/(3x + 5)</span></td><td><span class="math">]−5/3 ; +∞[</span></td></tr>
+            <tr><td><span class="math">ln(5 − 2x)</span></td><td><span class="math">5 − 2x</span></td><td><span class="math">−2</span></td><td><span class="math">−2/(5 − 2x)</span></td><td><span class="math">]−∞ ; 5/2[</span></td></tr>
+            <tr><td><span class="math">2 × ln x</span></td><td><span class="math">x</span></td><td><span class="math">1</span></td><td><span class="math">2/x</span></td><td><span class="math">]0 ; +∞[</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — dériver f(x) = ln(x² + 1)</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Écrire u.</strong> Ici <span class="math">u(x) = x² + 1</span>, dérivable sur <span class="math">ℝ</span> tout entier.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Dériver u.</strong></p><p><span class="math">u'(x) = 2x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Appliquer la formule.</strong></p><p><span class="math">f'(x) = u'(x)/u(x)</span></p><p><span class="math">f'(x) = 2x/(x² + 1)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Conclure par le domaine.</strong> Comme <span class="math">x² ≥ 0</span>, on a <span class="math">u(x) ≥ 1 &gt; 0</span> sur <span class="math">ℝ</span> tout entier : le résultat est valable partout.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Lire le résultat.</strong> <span class="math">f'</span> est négatif sur <span class="math">]−∞ ; 0[</span>, nul en <span class="math">0</span>, positif sur <span class="math">]0 ; +∞[</span> : la courbe descend jusqu'au point <span class="math">(0 ; 0)</span>, puis monte.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple — dériver f(x) = ln(3x + 5)</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Écrire u.</strong> <span class="math">u(x) = 3x + 5</span>, dérivable sur <span class="math">ℝ</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Dériver u.</strong></p><p><span class="math">u'(x) = 3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Appliquer la formule.</strong></p><p><span class="math">f'(x) = 3/(3x + 5)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Conclure par le domaine.</strong></p><p><span class="math">3x + 5 &gt; 0 ⇔ x &gt; −5/3</span></p><p>On travaille sur <span class="math">]−5/3 ; +∞[</span>, et seulement là.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Signer.</strong> Sur le domaine, <span class="math">3 &gt; 0</span> et <span class="math">3x + 5 &gt; 0</span> : <span class="math">f'(x) &gt; 0</span> — la fonction est strictement croissante.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 2 · CAS MALINS -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · cas malins</span>
+        <h2 class="lecture-section-title">Cas malins : ln(kx), x ln x, (ln x)/x</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Trois fonctions reviennent tout le temps en exercice, et chacune réserve une petite surprise. Traite-les comme des modèles : mêmes gestes, mêmes justifications.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Le cas ln(kx) — une dérivée inattendue</div>
+          <p>Pour <span class="math">k &gt; 0</span> et <span class="math">x &gt; 0</span>, la propriété du produit donne <span class="math">ln(kx) = ln k + ln x</span>. En dérivant, le terme <span class="math">ln k</span> (constant) disparaît : <span class="math">(ln(kx))' = 1/x</span>.</p>
+          <p>La formule <span class="math">u'/u</span> confirme, une ligne à la fois :</p>
+          <p><span class="math">u = kx</span> et <span class="math">u' = k</span></p>
+          <p><span class="math">u'/u = k/(kx) = 1/x</span> ✓</p>
+          <p><strong>ln(kx) et ln x ont exactement la même dérivée</strong> — elles ne diffèrent que d'une constante <span class="math">ln k</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — dériver f(x) = x ln x</div>
+        <div class="lecture-example-content">
+          <p>C'est un <strong>produit</strong> (et non une composée) : on applique <span class="math">(uv)' = u'v + uv'</span> avec <span class="math">u(x) = x</span> et <span class="math">v(x) = ln x</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Domaine.</strong> <span class="math">ln x</span> exige <span class="math">x &gt; 0</span> : on travaille sur <span class="math">]0 ; +∞[</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Dériver le produit.</strong></p><p><span class="math">f'(x) = 1 × ln x + x × (1/x)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Simplifier.</strong></p><p><span class="math">f'(x) = ln x + 1</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Exploiter.</strong></p><p><span class="math">f'(x) &gt; 0 ⇔ ln x &gt; −1 ⇔ x &gt; 1/e</span></p><p>La fonction décroît sur <span class="math">]0 ; 1/e]</span> puis croît — un classique des tableaux de variations.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple — dériver f(x) = (ln x)/x</div>
+        <div class="lecture-example-content">
+          <p>C'est un <strong>quotient</strong> : <span class="math">(u/v)' = (u'v − uv')/v²</span> avec <span class="math">u(x) = ln x</span>, <span class="math">v(x) = x</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Domaine.</strong> <span class="math">x &gt; 0</span> (pour <span class="math">ln x</span>) et <span class="math">x ≠ 0</span> (pour la division) : au final <span class="math">]0 ; +∞[</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Appliquer la formule.</strong></p><p><span class="math">f'(x) = ((1/x) × x − ln x × 1) / x²</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Simplifier et exploiter.</strong></p><p><span class="math">f'(x) = (1 − ln x)/x²</span></p><p>Positive si <span class="math">x &lt; e</span>, négative après — maximum en <span class="math">(e ; 1/e)</span>, car <span class="math">f(e) = 1/e</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">🚨 ln(x²) et 2 ln x : jumeaux trompeurs</div>
+          <p>Pour <span class="math">x &gt; 0</span> : <span class="math">ln(x²) = 2·ln x</span> (la puissance sort en facteur) — mêmes fonctions, dérivée commune <span class="math">2/x</span>.</p>
+          <p>Mais pour <span class="math">x &lt; 0</span>, <span class="math">ln(x²)</span> <strong>existe encore</strong> (car <span class="math">x² &gt; 0</span>) alors que <span class="math">2·ln x</span> <strong>n'existe pas</strong> ! Les deux écritures n'ont pas le même domaine : <span class="math">ℝ*</span> pour l'une, <span class="math">]0 ; +∞[</span> pour l'autre. Écris toujours le domaine avant d'appliquer l'égalité.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 3 · PRIMITIVES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · primitives</span>
+        <h2 class="lecture-section-title">Primitives : ln x et ln(u)</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Retournons la dérivée dans l'autre sens. Rappel : <span class="math">F</span> est une <strong>primitive</strong> de <span class="math">f</span> sur un intervalle <span class="math">I</span> lorsque <span class="math">F'(x) = f(x)</span> pour tout <span class="math">x</span> de <span class="math">I</span>. La formule <span class="math">(ln x)' = 1/x</span> répond enfin à la question laissée ouverte depuis le chapitre « primitives ».
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 Théorème — les deux primitives du chapitre</div>
+          <ul class="lecture-list">
+            <li>Sur <span class="math">]0 ; +∞[</span>, les primitives de <span class="math">x ↦ 1/x</span> sont les fonctions <span class="math">x ↦ ln x + C</span>, où <span class="math">C</span> est une constante réelle.</li>
+            <li>Si <span class="math">u</span> est dérivable et <strong>strictement positive</strong> sur <span class="math">I</span>, alors <span class="math">x ↦ ln(u(x))</span> est une primitive de <span class="math">x ↦ u'(x)/u(x)</span> sur <span class="math">I</span>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Le duo de primitives à connaître par cœur</div>
+        <div class="lecture-formula-hero-main">1/x&nbsp;→&nbsp;ln x + C<br>u'/u&nbsp;→&nbsp;ln(u) + C</div>
+        <div class="lecture-formula-hero-desc">La flèche se lit « a pour primitive », avec x &gt; 0 et u &gt; 0 sur l'intervalle. La constante C s'ajoute toujours : il y a une infinité de primitives, qui diffèrent d'une constante.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">∫ (u'/u) dx = ln(u) + C&nbsp;&nbsp;&nbsp;(u &gt; 0 sur l'intervalle)</div>
+        <div class="lecture-formula-desc">La condition u &gt; 0 est indispensable : sans elle, ln(u) n'existe pas et il faut d'abord chercher le domaine.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 1 — la forme u'/u la plus directe</div>
+        <div class="lecture-example-content">
+          <p>Chercher une primitive de <span class="math">f(x) = 2x/(x² + 1)</span> sur <span class="math">ℝ</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Reconnaître la forme.</strong> Posons <span class="math">u(x) = x² + 1</span> : alors <span class="math">u'(x) = 2x</span> et <span class="math">f(x) = u'/u</span>, avec <span class="math">u &gt; 0</span> sur <span class="math">ℝ</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Primitiver.</strong></p><p><span class="math">F(x) = ln(x² + 1)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Vérifier.</strong> <span class="math">F'(x) = 2x/(x² + 1) = f(x)</span> ✓. Toutes les primitives sont <span class="math">ln(x² + 1) + C</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 2 — faire apparaître u' grâce à une constante</div>
+        <div class="lecture-example-content">
+          <p>Chercher une primitive de <span class="math">f(x) = x/(x² + 1)</span> sur <span class="math">ℝ</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Comparer à u'.</strong> On voudrait <span class="math">u' = 2x</span> au numérateur, mais il n'y a que <span class="math">x</span> : il manque le facteur <span class="math">1/2</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Réécrire.</strong></p><p><span class="math">f(x) = (1/2) × 2x/(x² + 1)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Conclure et vérifier.</strong> <span class="math">F(x) = (1/2)·ln(x² + 1)</span>, et <span class="math">F'(x) = x/(x² + 1)</span> ✓.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 3 — avec un dénominateur affine</div>
+        <div class="lecture-example-content">
+          <p>Chercher une primitive de <span class="math">f(x) = 1/(3x + 5)</span> sur <span class="math">]−5/3 ; +∞[</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Poser u et vérifier.</strong> <span class="math">u(x) = 3x + 5 &gt; 0</span> sur <span class="math">]−5/3 ; +∞[</span> (et seulement là), avec <span class="math">u'(x) = 3</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Corriger la constante.</strong></p><p><span class="math">f(x) = (1/3) × 3/(3x + 5) = (1/3) × u'/u</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Conclure.</strong> <span class="math">F(x) = (1/3)·ln(3x + 5)</span>, définie uniquement sur <span class="math">]−5/3 ; +∞[</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 4 — vérifier que le trinôme est toujours positif</div>
+        <div class="lecture-example-content">
+          <p>Chercher une primitive de <span class="math">f(x) = (2x − 3)/(x² − 3x + 5)</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Poser u et contrôler son signe.</strong> <span class="math">u(x) = x² − 3x + 5</span> avec <span class="math">u'(x) = 2x − 3</span> : la forme <span class="math">u'/u</span> est parfaite. Son discriminant vaut <span class="math">Δ = 9 − 20 = −11 &lt; 0</span> et <span class="math">a = 1 &gt; 0</span> : <span class="math">u(x) &gt; 0</span> pour tout réel.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Conclure.</strong> <span class="math">F(x) = ln(x² − 3x + 5)</span>, valable sur <span class="math">ℝ</span> tout entier.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Le réflexe de vérification</div>
+          <p>Après chaque primitive, <strong>dérive ta réponse</strong> : tu dois retrouver exactement la fonction de départ. C'est un contrôle en dix secondes qui sauve la moitié des points d'un exercice de primitives.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 4 · DOMAINE u > 0 -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · domaine</span>
+        <h2 class="lecture-section-title">Domaines : vérifier u &gt; 0 avant tout</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Voici LE réflexe du chapitre : <span class="math">ln(u(x))</span> n'existe que là où <span class="math">u(x) &gt; 0</span>. Avant de dériver, de primitiver ou de dresser un tableau, on <strong>résout d'abord</strong> l'inéquation <span class="math">u(x) &gt; 0</span>.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Règle d'existence</div>
+          <p>La fonction <span class="math">x ↦ ln(u(x))</span> est définie sur l'ensemble des <span class="math">x</span> tels que <span class="math">u(x) &gt; 0</span>. C'est aussi (là où <span class="math">u</span> est dérivable) son <strong>domaine de dérivabilité</strong>. Dériver <span class="math">ln(u)</span> hors de ce domaine est une erreur éliminatoire.</p>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Fonction</th><th>Condition u &gt; 0</th><th>Domaine d'existence</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">ln x</span></td><td><span class="math">x &gt; 0</span></td><td><span class="math">]0 ; +∞[</span></td></tr>
+            <tr><td><span class="math">ln(x − 3)</span></td><td><span class="math">x − 3 &gt; 0</span></td><td><span class="math">]3 ; +∞[</span></td></tr>
+            <tr><td><span class="math">ln(4 − x²)</span></td><td><span class="math">−2 &lt; x &lt; 2</span></td><td><span class="math">]−2 ; 2[</span></td></tr>
+            <tr><td><span class="math">ln(x² + 1)</span></td><td>toujours vraie</td><td><span class="math">ℝ</span></td></tr>
+            <tr><td><span class="math">ln((x − 1)(x + 2))</span></td><td>produit <span class="math">&gt; 0</span></td><td><span class="math">]−∞ ; −2[ ∪ ]1 ; +∞[</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — domaine puis dérivée de f(x) = ln(4 − x²)</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Écrire u.</strong> <span class="math">u(x) = 4 − x²</span>, dérivable sur <span class="math">ℝ</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Dériver u.</strong></p><p><span class="math">u'(x) = −2x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Appliquer la formule.</strong></p><p><span class="math">f'(x) = −2x/(4 − x²)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Conclure par le domaine, une condition par ligne.</strong></p><p><span class="math">4 − x² &gt; 0 ⇔ x² &lt; 4</span></p><p><span class="math">x² &lt; 4 ⇔ −2 &lt; x &lt; 2</span></p><p>(la parabole est positive entre ses racines <span class="math">−2</span> et <span class="math">2</span>) : tout est valable sur <span class="math">]−2 ; 2[</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Signer.</strong> Sur le domaine, <span class="math">f'(x)</span> a le signe de <span class="math">−2x</span> : positive sur <span class="math">]−2 ; 0[</span>, négative sur <span class="math">]0 ; 2[</span> — maximum en <span class="math">0</span>, valant <span class="math">ln 4</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">🚨 Le piège du domaine oublié</div>
+          <p>Écrire « <span class="math">f(x) = ln(4 − x²)</span> donc <span class="math">f'(x) = −2x/(4 − x²)</span> sur <span class="math">ℝ</span> » est <strong>doublement faux</strong> : la formule ne vaut que sur <span class="math">]−2 ; 2[</span>, et en dehors, <span class="math">f</span> n'existe même pas. Au Bac, la recherche du domaine est une question à part entière — elle rapporte des points et sécurise toute la suite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">La méthode de dérivation en 3 étapes</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Qu'il s'agisse de dériver ou de primitiver, la marche à suivre est la même. Retiens-la comme une chorégraphie en trois temps.
+      </p>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode — Dériver (ou primitiver) une fonction avec ln</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>(1) Domaine d'abord</strong> : résoudre <span class="math">u(x) &gt; 0</span>.</li>
+            <li><strong>(2) Identifier la structure</strong> : composée <span class="math">ln(u)</span> → dérivée <span class="math">u'/u</span> ; produit ou quotient → formules correspondantes avec <span class="math">1/x</span>. Pour une primitive : chercher la forme <span class="math">u'/u</span> (avec <span class="math">u &gt; 0</span>), constante corrective comprise.</li>
+            <li><strong>(3) Vérifier</strong> : dériver la primitive trouvée, ou contrôler le signe de la dérivée obtenue.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Le trio gagnant de la partie</div>
+        <div class="lecture-formula-hero-main">(ln x)' = 1/x<br>(ln u)' = u'/u<br>u'/u&nbsp;→&nbsp;ln(u) + C</div>
+        <div class="lecture-formula-hero-desc">Chaque formule porte sa condition : x &gt; 0, u &gt; 0 — ne les sépare jamais sur ta copie.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">(x · ln x)' = ln x + 1<br>((ln x)/x)' = (1 − ln x)/x²</div>
+        <div class="lecture-formula-desc">Les deux résultats de produits et quotients à reconnaître au premier coup d'œil en exercice — tous deux établis sur ]0 ; +∞[.</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><span class="math">ln</span> est dérivable sur <span class="math">]0 ; +∞[</span> et <span class="math">(ln x)' = 1/x &gt; 0</span> : strictement croissante, avec <span class="math">f'(1) = 1</span> et <span class="math">f'(e) = 1/e</span>.</li>
+        <li><span class="math">ln(kx)</span> et <span class="math">ln x</span> ont la même dérivée <span class="math">1/x</span>.</li>
+        <li>Primitives : <span class="math">ln x + C</span> pour <span class="math">1/x</span> sur <span class="math">]0 ; +∞[</span> ; <span class="math">ln(u) + C</span> pour <span class="math">u'/u</span> avec <span class="math">u &gt; 0</span>.</li>
+        <li>Constante corrective : pour <span class="math">k · u'/u</span>, la primitive est <span class="math">k · ln(u)</span> — exemple : <span class="math">x/(x² + 1)</span> a pour primitive <span class="math">(1/2)·ln(x² + 1)</span>.</li>
+        <li>Le domaine se résout <strong>avant</strong> tout calcul : <span class="math">u(x) &gt; 0</span>.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Rédaction type pour l'examen</div>
+          <p>Une dérivation avec ln bien rédigée contient : le <strong>domaine</strong> (« <span class="math">f</span> est définie sur <span class="math">I</span> car <span class="math">u &gt; 0</span> sur <span class="math">I</span> »), le calcul de <span class="math">u'</span>, puis l'application de la formule avec sa <strong>condition</strong>. Le signe de <span class="math">f'</span> se conclut toujours en citant le signe de <span class="math">u</span> et celui de <span class="math">u'</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — La fonction f(x) = ln(2x + 4) est définie sur :</p>
+      <div class="lecture-quiz-options"><span>A) ℝ</span><span>B) ]0 ; +∞[</span><span>C) ]−2 ; +∞[</span><span>D) ]2 ; +∞[</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>C) ]−2 ; +∞[.</strong> Il faut <span class="math">2x + 4 &gt; 0</span>, soit <span class="math">x &gt; −4/2 = −2</span>. Répondre ]0 ; +∞[, c'est confondre la condition sur <span class="math">x</span> avec celle sur <span class="math">u(x)</span>.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Si f(x) = ln(x² + 1), alors f'(x) = :</p>
+      <div class="lecture-quiz-options"><span>A) 1/(x² + 1)</span><span>B) 2x/(x² + 1)</span><span>C) 2/(x² + 1)</span><span>D) 1/x</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) 2x/(x² + 1).</strong> Ici <span class="math">u = x² + 1</span> et <span class="math">u' = 2x</span>, donc <span class="math">f' = u'/u</span>. L'option A, c'est « oublier » de dériver <span class="math">u</span> ; l'option D, c'est appliquer <span class="math">1/x</span> sans passer par <span class="math">u</span>.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Une primitive de f(x) = 3/(3x + 1) sur ]−1/3 ; +∞[ est :</p>
+      <div class="lecture-quiz-options"><span>A) 3 ln(3x + 1)</span><span>B) ln(3x + 1)</span><span>C) (1/3) ln(3x + 1)</span><span>D) −1/(3x + 1)²</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) ln(3x + 1).</strong> En effet <span class="math">(ln(3x + 1))' = 3/(3x + 1)</span> exactement : le <span class="math">u' = 3</span> est déjà présent au numérateur, aucune constante corrective n'est nécessaire. Vérifie toujours en dérivant !</div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[derivee]</strong> <span class="math">ln</span> est dérivable sur <span class="math">]0 ; +∞[</span> et <span class="math">(ln x)' = 1/x</span> — démonstration par taux d'accroissement</li>
+      <li><strong>[derivee]</strong> Conséquence : <span class="math">1/x &gt; 0</span>, donc <span class="math">ln</span> est <strong>strictement croissante</strong> sur <span class="math">]0 ; +∞[</span></li>
+      <li><strong>[tangentes]</strong> Tangente en <span class="math">1</span> : <span class="math">y = x − 1</span> ; tangente en <span class="math">e</span> : <span class="math">y = x/e</span></li>
+      <li><strong>[composee]</strong> Si <span class="math">u</span> est dérivable et <strong>strictement positive</strong> sur <span class="math">I</span> : <span class="math">(ln u)' = u'/u</span></li>
+      <li><strong>[composee]</strong> Exemples types : <span class="math">ln(x² + 1)</span> a pour dérivée <span class="math">2x/(x² + 1)</span> sur <span class="math">ℝ</span> ; <span class="math">ln(3x + 5)</span> a pour dérivée <span class="math">3/(3x + 5)</span> sur <span class="math">]−5/3 ; +∞[</span></li>
+      <li><strong>[cas_malin]</strong> <span class="math">ln(kx)</span> et <span class="math">ln x</span> ont la même dérivée <span class="math">1/x</span> ; <span class="math">(x · ln x)' = ln x + 1</span> ; <span class="math">((ln x)/x)' = (1 − ln x)/x²</span></li>
+      <li><strong>[primitives]</strong> Primitives de <span class="math">1/x</span> sur <span class="math">]0 ; +∞[</span> : <span class="math">ln x + C</span> ; primitives de <span class="math">u'/u</span> (<span class="math">u &gt; 0</span>) : <span class="math">ln(u) + C</span></li>
+      <li><strong>[primitives]</strong> Constante corrective : pour <span class="math">k · u'/u</span>, la primitive est <span class="math">k · ln(u)</span> (exemple : <span class="math">x/(x² + 1)</span> → <span class="math">(1/2)·ln(x² + 1)</span>)</li>
+      <li><strong>[domaine]</strong> <span class="math">ln(u(x))</span> existe et se dérive uniquement là où <span class="math">u(x) &gt; 0</span> : résoudre cette inéquation AVANT tout calcul</li>
+      <li><strong>[methode]</strong> Toujours vérifier une primitive en la dérivant, et rédiger dans l'ordre : domaine → u' → formule → signe</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 2 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : limites aux bornes, tableau de variations et étude complète d'une fonction avec ln</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

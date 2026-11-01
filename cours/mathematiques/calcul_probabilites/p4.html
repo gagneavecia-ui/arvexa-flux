@@ -1,0 +1,346 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · CALCUL DE PROBABILITÉS   -->
+<!-- PARTIE 4 : FICHE COMPLÈTE — BAYES & INDÉPENDANCE             -->
+<!-- BAYES · INDÉPENDANCE · ÉPREUVES · GRANDE TABLE DE SYNTHÈSE   -->
+<!-- Notion 1 : bayes — La formule de Bayes (remonter la cause)   -->
+<!-- Notion 2 : independance — Indépendance ≠ incompatibilité     -->
+<!-- Notion 3 : epreuves — Épreuves indépendantes successives     -->
+<!-- Notion 4 : synthese — Réflexes Bac et grande table           -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 04 · Calcul de probabilités</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Fiche complète : <em>Bayes &amp; indépendance</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Dernière partie du chapitre, pensée comme une <strong>fiche de révision condensée</strong> : les deux formules finales du programme, tous les réflexes, la grande table de synthèse. Elle couvre <strong>4 blocs</strong> : la <strong>formule de Bayes</strong> (remonter de l'effet à la cause), l'<strong>indépendance</strong> de deux événements — et le piège majeur qui la distingue de l'incompatibilité —, les <strong>épreuves indépendantes</strong> successives, puis le <strong>tableau de synthèse</strong> à relire la veille de l'épreuve.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 4 notions</span>
+      <span class="lecture-hero-meta-item">📊 6 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 6 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Mode d'emploi de la fiche</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · bayes — La formule de Bayes</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 2 · independance — Indépendance de deux événements</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · independance — Indépendance ≠ incompatibilité</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 3 · epreuves — Épreuves indépendantes successives</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 4 · synthese — Réflexes Bac et grande table de synthèse</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MODE D'EMPLOI                                   -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Mode d'emploi</span>
+        <h2 class="lecture-section-title">Comment utiliser cette fiche</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Cette partie ne raconte pas d'histoire : elle <strong>condense</strong>. Les parties 1 à 3 ont construit les définitions et le sens ; ici, tout est mis à plat pour réviser vite et bien. Utilise-la en trois temps :
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Trois passages recommandés</div>
+          <ul class="lecture-list">
+            <li><strong>Passage 1 (compréhension)</strong> : relis chaque formule avec son exemple — rien n'est appris tant qu'on ne sait pas d'où ça vient.</li>
+            <li><strong>Passage 2 (mémorisation)</strong> : cache la colonne « formule » de la grande table (section 05) et récite-la.</li>
+            <li><strong>Passage 3 (entraînement)</strong> : refais les deux exemples types sans regarder la solution, puis passe aux exercices du chapitre.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Rappels des fondations utilisées partout : <span class="math">P(A) = card(A)/card(Ω)</span> en équiprobabilité ; <span class="math">P(Ā) = 1 − P(A)</span> ; <span class="math">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</span> ; <span class="math">P(B/A) = P(A ∩ B)/P(A)</span> ; <span class="math">P(A) = Σ P(Bᵢ) × P(A/Bᵢ)</span> pour une partition <span class="math">B₁ ; … ; Bₙ</span>.
+      </p>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · bayes — LA FORMULE DE BAYES          -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · bayes</span>
+        <h2 class="lecture-section-title">La formule de Bayes : remonter la cause</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Les probabilités totales vont des <strong>causes</strong> vers l'<strong>effet</strong> : causes <span class="math">B₁ ; … ; Bₙ</span> → effet <span class="math">A</span>. Bayes fait le chemin inverse : l'effet <span class="math">A</span> s'est produit — quelle cause est responsable ? On cherche <span class="math">P(Bₖ/A)</span>, une probabilité « à l'envers » de l'arbre.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Formule de Bayes — avec partition <span class="math">B₁ ; … ; Bₙ</span></div>
+        <div class="lecture-formula-hero-main">P(Bₖ/A) = (P(Bₖ) × P(A/Bₖ))/P(A)</div>
+        <div class="lecture-formula-hero-desc">Numérateur : la feuille du chemin Bₖ → A. Dénominateur : P(A), calculée par les probabilités totales. C'est le quotient d'une feuille par la somme des feuilles compatibles avec A.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Les deux machines</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text">Une usine fabrique des pièces avec deux machines : <span class="math">M₁</span> produit 60 % des pièces et 2 % de ses pièces sont défectueuses ; <span class="math">M₂</span> produit 40 % des pièces et 5 % de ses pièces sont défectueuses. Une pièce prélevée au hasard est défectueuse. Quelle est la probabilité qu'elle vienne de <span class="math">M₁</span> ?</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Données :</strong> <span class="math">P(M₁) = 0,60</span>, <span class="math">P(M₂) = 0,40</span> (somme = 1 ✓) ; <span class="math">P(D/M₁) = 0,02</span>, <span class="math">P(D/M₂) = 0,05</span>, où <span class="math">D</span> = « pièce défectueuse ».</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Étape 1 — probabilités totales :</strong> <span class="math">P(D) = P(M₁) × P(D/M₁) + P(M₂) × P(D/M₂)</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Chaque morceau : <span class="math">0,60 × 0,02 = 0,012</span> et <span class="math">0,40 × 0,05 = 0,020</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Somme : <span class="math">P(D) = 0,012 + 0,020 = 0,032</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Étape 2 — Bayes :</strong> <span class="math">P(M₁/D) = (P(M₁) × P(D/M₁))/P(D) = (0,60 × 0,02)/0,032 = 0,012/0,032</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><span class="math">0,012/0,032 = 12/32 = 3/8 = 0,375</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p><strong>Interprétation :</strong> bien que <span class="math">M₁</span> produise le plus, elle n'explique que 37,5 % des défectueuses ; on vérifie <span class="math">P(M₂/D) = 0,020/0,032 = 20/32 = 5/8 = 0,625</span>, et <span class="math">0,375 + 0,625 = 1</span>. ✓</p></div></div></div>
+        </div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arbre pondéré des deux machines : M1 et M2 au premier niveau, D et D̄ au second, avec produits des feuilles">
+          <circle cx="70" cy="150" r="6" style="fill:var(--text-dim)"/>
+          <text x="34" y="176" style="fill:var(--text-dim)" font-size="12" font-family="Inter">usine</text>
+          <line x1="76" y1="144" x2="240" y2="70" style="stroke:var(--accent-bright)" stroke-width="2.5"/>
+          <line x1="76" y1="156" x2="240" y2="230" style="stroke:var(--text-dim)" stroke-width="2.5"/>
+          <text x="120" y="92" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">0,60</text>
+          <text x="120" y="212" style="fill:var(--text-dim)" font-size="12" font-weight="700" font-family="Inter">0,40</text>
+          <circle cx="246" cy="66" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="246" cy="234" r="5" style="fill:var(--text-dim)"/>
+          <text x="232" y="48" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter">M₁</text>
+          <text x="232" y="260" style="fill:var(--text-dim)" font-size="13" font-weight="700" font-family="Inter">M₂</text>
+          <line x1="251" y1="62" x2="430" y2="34" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <line x1="251" y1="70" x2="430" y2="110" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <line x1="251" y1="230" x2="430" y2="190" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <line x1="251" y1="238" x2="430" y2="272" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="300" y="36" style="fill:var(--accent-bright)" font-size="12" font-family="Inter">0,02</text>
+          <text x="300" y="106" style="fill:var(--text-dim)" font-size="12" font-family="Inter">0,98</text>
+          <text x="300" y="182" style="fill:var(--accent-bright)" font-size="12" font-family="Inter">0,05</text>
+          <text x="300" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter">0,95</text>
+          <circle cx="436" cy="33" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="436" cy="111" r="5" style="fill:var(--text-dim)"/>
+          <circle cx="436" cy="189" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="436" cy="273" r="5" style="fill:var(--text-dim)"/>
+          <text x="448" y="38" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">0,012</text>
+          <text x="448" y="116" style="fill:var(--text-dim)" font-size="12" font-weight="700" font-family="Inter">0,588</text>
+          <text x="448" y="194" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">0,020</text>
+          <text x="448" y="278" style="fill:var(--text-dim)" font-size="12" font-weight="700" font-family="Inter">0,380</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">L'arbre des deux machines : les quatre feuilles valent <span class="math">0,012 + 0,588 + 0,020 + 0,380 = 1</span>. ✓ Bayes compare la feuille <span class="math">0,012</span> (M₁ → D) à la somme des feuilles menant à <span class="math">D</span>, soit <span class="math">0,012 + 0,020 = 0,032</span>.</figcaption>
+      </figure>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Réflexe rédaction pour l'examen</div>
+          <p>Toute question de Bayes exige <strong>deux étapes écrites</strong> : d'abord le dénominateur <span class="math">P(A)</span> par probabilités totales, ensuite la formule <span class="math">P(Bₖ/A) = (P(Bₖ) × P(A/Bₖ))/P(A)</span>. Poser directement le quotient final sans ces deux lignes fait perdre les points de méthode.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 2 · independance — DÉFINITION            -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · independance</span>
+        <h2 class="lecture-section-title">Indépendance de deux événements</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Deux événements sont <strong>indépendants</strong> lorsque la réalisation de l'un ne change rien à la probabilité de l'autre : savoir que <span class="math">A</span> s'est produit n'apporte <strong>aucune information</strong> sur <span class="math">B</span>.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définition officielle — Indépendance</div>
+          <p>Deux événements <span class="math">A</span> et <span class="math">B</span> de probabilités non nulles sont <strong>indépendants</strong> lorsque :</p>
+          <p><span class="math">P(A ∩ B) = P(A) × P(B)</span></p>
+          <p>Autrement dit <span class="math">P(B/A) = P(B)</span> et <span class="math">P(A/B) = P(A)</span> : l'information ne change rien.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule de l'indépendance</div>
+        <div class="lecture-formula-hero-main">P(A ∩ B) = P(A) × P(B)</div>
+        <div class="lecture-formula-hero-desc">À utiliser dans les deux sens : pour TESTER une indépendance (comparer le produit à l'intersection), ou pour CALCULER une intersection sans conditionnelle.</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Tester l'indépendance au dé</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><span class="math">A</span> = « obtenir un nombre pair » : <span class="math">P(A) = 3/6 = 1/2</span> ; <span class="math">B</span> = « obtenir un multiple de 3 » = <span class="math">{3 ; 6}</span> : <span class="math">P(B) = 2/6 = 1/3</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Intersection : <span class="math">A ∩ B = {6}</span>, donc <span class="math">P(A ∩ B) = 1/6</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Produit : <span class="math">P(A) × P(B) = 1/2 × 1/3 = 1/6</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><span class="math">P(A ∩ B) = P(A) × P(B)</span> : les deux événements sont <strong>indépendants</strong>. ✓ (Et <span class="math">P(B/A) = (1/6)/(1/2) = 1/3 = P(B)</span>.)</p></div></div></div>
+        </div>
+      </div>
+      <p class="lecture-text">
+        L'indépendance se <strong>transmet aux contraires</strong> : si <span class="math">A</span> et <span class="math">B</span> sont indépendants, alors <span class="math">Ā</span> et <span class="math">B</span> le sont aussi, ainsi que <span class="math">A</span> et <span class="math">B̄</span>, et <span class="math">Ā</span> et <span class="math">B̄</span>. Vérifions-le sur l'exemple précédent :
+      </p>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Vérification — Les contraires sont-ils indépendants ?</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Ā et B :</strong> <span class="math">Ā ∩ B = {3}</span> donc <span class="math">P(Ā ∩ B) = 1/6</span> ; et <span class="math">P(Ā) × P(B) = 1/2 × 1/3 = 1/6</span>. Égalité : ✓</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>A et B̄ :</strong> <span class="math">A ∩ B̄ = {2 ; 4}</span> donc <span class="math">P(A ∩ B̄) = 2/6 = 1/3</span> ; et <span class="math">P(A) × P(B̄) = 1/2 × 2/3 = 1/3</span>. Égalité : ✓</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Conclusion :</strong> si l'information « pair » ne change pas la probabilité de « multiple de 3 », elle ne change pas non plus celle de « impair » ni de « non multiple de 3 ». C'est logique — et désormais vérifié.</p></div></div></div>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">A, B indépendants ⇒ Ā/B&nbsp;;&nbsp;A/B̄&nbsp;;&nbsp;Ā/B̄</div>
+        <div class="lecture-formula-desc">Les trois couples de contraires restent indépendants — démontré par le calcul dans l'exemple ci-dessus. Utile pour « aucun » : P(aucun succès) = P(échec 1) × P(échec 2).</div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · independance — ≠ INCOMPATIBILITÉ     -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · independance</span>
+        <h2 class="lecture-section-title">Le grand piège : indépendance ≠ incompatibilité</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Ces deux mots ont l'air de dire la même chose. Ils disent <strong>n'importe quoi</strong> : l'incompatibilité est une question d'<strong>issues communes</strong>, l'indépendance est une question d'<strong>information</strong>. Le tableau qui les oppose est à savoir refaire de mémoire :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Critère</th><th>Incompatibles</th><th>Indépendants</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Définition</td><td><span class="math">A ∩ B = ∅</span></td><td><span class="math">P(A ∩ B) = P(A) × P(B)</span></td></tr>
+            <tr><td>Question posée</td><td>« peuvent-ils arriver ensemble ? »</td><td>« l'un change-t-il les chances de l'autre ? »</td></tr>
+            <tr><td>En calcul</td><td><span class="math">P(A ∩ B) = 0</span></td><td><span class="math">P(A ∩ B)</span> vaut le produit (généralement ≠ 0)</td></tr>
+            <tr><td>Sur un dé</td><td>« obtenir 5 » et « obtenir 6 » : jamais ensemble</td><td>« pair » et « multiple de 3 » : le 6 ne surprend personne</td></tr>
+            <tr><td>Conclusion type</td><td>si <span class="math">P(A) &gt; 0</span> et <span class="math">P(B) &gt; 0</span> : <strong>jamais</strong> indépendants</td><td>deux indépendants de probas non nulles <strong>ne sont pas</strong> incompatibles</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Le calcul du piège — « obtenir 5 » et « obtenir 6 »</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><span class="math">A</span> = « obtenir 5 » : <span class="math">P(A) = 1/6</span> ; <span class="math">B</span> = « obtenir 6 » : <span class="math">P(B) = 1/6</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Intersection : <span class="math">A ∩ B = ∅</span> (un dé ne donne pas 5 <strong>et</strong> 6), donc <span class="math">P(A ∩ B) = 0</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Produit : <span class="math">P(A) × P(B) = 1/6 × 1/6 = 1/36</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><span class="math">0 ≠ 1/36</span> : la définition de l'indépendance n'est pas satisfaite. <strong>Incompatibles mais pas indépendants</strong> — bien au contraire : si A se réalise, B devient impossible.</p></div></div></div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac — le PIÈGE majeur du chapitre</div>
+          <p>Répondre « incompatibles donc indépendants » coûte la question entière. Deux événements de probabilités non nulles qui sont incompatibles ne sont <strong>jamais</strong> indépendants : ici <span class="math">0 ≠ 1/36</span>. Et à l'inverse, « pair » et « multiple de 3 » sont indépendants <strong>et</strong> compatibles (le 6). Les deux notions n'ont aucun lien de dépendance logique.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 3 · epreuves — ÉPREUVES INDÉPENDANTES    -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · epreuves</span>
+        <h2 class="lecture-section-title">Épreuves indépendantes : la multiplication directe</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Lorsqu'on <strong>répète une même épreuve</strong> (lancers de dés, de pièces, tirages <strong>avec remise</strong>), les résultats de la seconde ne dépendent pas du premier : les épreuves sont <strong>indépendantes</strong>. La probabilité d'une suite d'issues se calcule alors par <strong>multiplication directe</strong>, sans aucune probabilité conditionnelle — l'arbre porte les mêmes poids à chaque niveau.
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">épreuves indépendantes ⇒ P(suite) = produit des probabilités</div>
+        <div class="lecture-formula-desc">Avec remise ou épreuves distinctes : P(x₁ ∩ x₂) = P(x₁) × P(x₂). Sans remise (Partie 3) : P(x₁ ∩ x₂) = P(x₁) × P(x₂/x₁) — la composition change, on reste conditionnel.</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Deux lancers d'un dé (indépendants)</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Double six :</strong> <span class="math">P(6 puis 6) = 1/6 × 1/6 = 1/36</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Aucun six :</strong> <span class="math">P = 5/6 × 5/6 = (5/6)² = 25/36</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Au moins un six :</strong> <span class="math">P = 1 − (5/6)² = 1 − 25/36 = 11/36</span> — on retrouve le résultat de la Partie 2. ✓</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Épreuves différentes :</strong> une pièce puis un dé — <span class="math">P(pile puis pair) = 1/2 × 1/2 = 1/4</span> : l'indépendance vaut aussi entre épreuves distinctes.</p></div></div></div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Remise ou pas de remise : la question qui décide de tout</div>
+          <p>Lors d'un tirage de boules, demande-toi d'abord : <strong>avec ou sans remise ?</strong> Avec remise → épreuves indépendantes, multiplication directe. Sans remise → conditionnel, la composition change (<span class="math">4/10 × 3/9</span>). C'est souvent LA première question d'un exercice de Bac.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 4 · synthese — RÉFLEXES + GRANDE TABLE   -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · synthese</span>
+        <h2 class="lecture-section-title">Réflexes Bac et grande table de synthèse</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Avant la table, les automatismes. Face à une question de probabilités, le bon réflexe est presque toujours l'un de ceux-ci :
+      </p>
+      <ul class="lecture-list-elegant">
+        <li><strong>« Au moins un »</strong> → passer au contraire « aucun » : <span class="math">1 − P(aucun)</span>.</li>
+        <li><strong>« Ou »</strong> → réunion <span class="math">P(A) + P(B) − P(A ∩ B)</span> ; vérifier d'abord si <span class="math">A ∩ B = ∅</span> (addition directe).</li>
+        <li><strong>« Sachant que »</strong> → conditionnelle <span class="math">P(B/A) = P(A ∩ B)/P(A)</span> — écrire la formule avant de remplacer.</li>
+        <li><strong>Enchaînement d'épreuves</strong> → dessiner l'arbre ; produits le long des branches, addition des feuilles, <span class="math">Σ</span> des feuilles = 1.</li>
+        <li><strong>« Quelle est la cause ? »</strong> → Bayes : dénominateur = probabilités totales, numérateur = la feuille de la branche visée.</li>
+      </ul>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Objet</th><th>Formule</th><th>Astuce / vérification</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Équiprobabilité</td><td><span class="math">P(A) = card(A)/card(Ω)</span></td><td>vérifier l'équiprobabilité AVANT d'appliquer</td></tr>
+            <tr><td>Événement contraire</td><td><span class="math">P(Ā) = 1 − P(A)</span></td><td><span class="math">P(A) + P(Ā) = 1</span> en toute circonstance</td></tr>
+            <tr><td>Réunion (cas général)</td><td><span class="math">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</span></td><td>l'intersection est comptée deux fois dans la somme</td></tr>
+            <tr><td>Réunion (incompatibles)</td><td><span class="math">P(A ∪ B) = P(A) + P(B)</span></td><td>légal seulement si <span class="math">A ∩ B = ∅</span></td></tr>
+            <tr><td>« Au moins un »</td><td><span class="math">P = 1 − P(aucun)</span></td><td>ex. : <span class="math">1 − (5/6)² = 11/36</span></td></tr>
+            <tr><td>Conditionnelle</td><td><span class="math">P(B/A) = P(A ∩ B)/P(A)</span></td><td>exige <span class="math">P(A) &gt; 0</span> ; ≠ <span class="math">P(A ∩ B)</span></td></tr>
+            <tr><td>Règle des produits</td><td><span class="math">P(A ∩ B) = P(A) × P(B/A)</span></td><td>produit le long d'un chemin d'arbre</td></tr>
+            <tr><td>Probabilités totales</td><td><span class="math">P(A) = Σ P(Bᵢ) × P(A/Bᵢ)</span></td><td><span class="math">Bᵢ</span> en partition ; <span class="math">Σ P(Bᵢ) = 1</span></td></tr>
+            <tr><td>Formule de Bayes</td><td><span class="math">P(Bₖ/A) = (P(Bₖ) × P(A/Bₖ))/P(A)</span></td><td>dénominateur = probabilités totales ; <span class="math">Σ P(Bₖ/A) = 1</span></td></tr>
+            <tr><td>Indépendance</td><td><span class="math">P(A ∩ B) = P(A) × P(B)</span></td><td>se transmet aux contraires ; ≠ incompatibilité !</td></tr>
+            <tr><td>Incompatibilité</td><td><span class="math">P(A ∩ B) = 0</span></td><td>« 5 » et « 6 » au dé : <span class="math">0 ≠ 1/36</span> — pas indépendants</td></tr>
+            <tr><td>Épreuves indépendantes</td><td><span class="math">P(suite) = produit des probabilités</span></td><td>avec remise ou épreuves distinctes ; sans remise → conditionnel</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 La carte mentale du chapitre</div>
+          <p>Deux questions ouvrent chaque exercice : <strong>« l'information change-t-elle les chances ? »</strong> (sans remise, « sachant que » → conditionnelle et arbre) ou <strong>« rien ne change »</strong> (avec remise, épreuves distinctes → multiplication directe). Ensuite : produit pour « et », addition pour « ou » (corrigée de l'intersection), contraire pour « au moins un », Bayes pour remonter à la cause — et partout, les contrôles <span class="math">0 ≤ P ≤ 1</span>, <span class="math">Σ = 1</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[bayes]</strong> <span class="math">P(Bₖ/A) = (P(Bₖ) × P(A/Bₖ))/P(A)</span> — le dénominateur <span class="math">P(A)</span> se calcule d'abord par probabilités totales</li>
+      <li><strong>[bayes]</strong> Machines : <span class="math">P(D) = 0,60 × 0,02 + 0,40 × 0,05 = 0,032</span> puis <span class="math">P(M₁/D) = 0,012/0,032 = 3/8 = 0,375</span></li>
+      <li><strong>[independance]</strong> <span class="math">P(A ∩ B) = P(A) × P(B)</span> : l'information ne change rien (<span class="math">P(B/A) = P(B)</span>)</li>
+      <li><strong>[independance]</strong> Indépendance se transmet aux contraires : <span class="math">Ā/B</span>, <span class="math">A/B̄</span>, <span class="math">Ā/B̄</span></li>
+      <li><strong>[independance]</strong> Indépendance ≠ incompatibilité : « 5 » et « 6 » au dé, <span class="math">P(A ∩ B) = 0</span> mais <span class="math">P(A) × P(B) = 1/36 ≠ 0</span></li>
+      <li><strong>[epreuves]</strong> Épreuves indépendantes (avec remise, dés, pièces) : multiplication directe — <span class="math">P(6 puis 6) = 1/36</span></li>
+      <li><strong>[reflexes]</strong> Mots-clés → formules : « ou » réunion, « et » intersection, « sachant que » conditionnelle, « au moins un » contraire, « quelle cause » Bayes</li>
+      <li><strong>[synthese]</strong> Contrôles permanents : <span class="math">0 ≤ P ≤ 1</span>, somme des feuilles = 1, <span class="math">Σ P(Bᵢ) = 1</span>, <span class="math">Σ P(Bₖ/A) = 1</span></li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Chapitre « Calcul de probabilités » terminé !</div>
+    <div class="lecture-end-sub">Direction les exercices du chapitre pour ancrer toutes ces formules — bonne chance pour l'épreuve !</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

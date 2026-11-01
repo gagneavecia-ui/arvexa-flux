@@ -1,0 +1,500 @@
+<!-- ============================================================ -->
+<!-- PARTIE 2 : LE CROSSING-OVER — BRASSAGE INTRACHROMOSOMIQUE     -->
+<!-- (3 NOTIONS)                                                   -->
+<!-- Notion 1 : crossing_over — définition, chiasma, prophase I     -->
+<!-- Notion 2 : chromosomes_recombinants — gamètes parentaux et     -->
+<!--            recombinants                                        -->
+<!-- Notion 3 : genes_lies — distance entre gènes (simplifié)       -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 02 · Brassage des gènes</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Le crossing-over, brassage <em>intrachromosomique</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Le brassage interchromosomique mélange des chromosomes entiers… mais que se passe-t-il quand deux gènes voyagent sur le <strong>même</strong> chromosome ? Il faut un second mécanisme : le <strong>crossing-over</strong>. Cette partie développe <strong>3 notions</strong> : la <strong>définition du crossing-over</strong> et du chiasma pendant la prophase I, la production de <strong>chromosomes recombinants</strong>, et le rôle de la <strong>distance entre gènes</strong>.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧬 3 notions</span>
+      <span class="lecture-hero-meta-item">📚 7 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">3 notions · 7 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Quand les gènes voyagent ensemble</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Rappel — La prophase I en zoom : le bivalent</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · crossing_over — Définition et chiasma</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 1 · Le mécanisme et son schéma</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · chromosomes_recombinants — Gamètes parentaux et recombinants</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Comparaison — Les deux brassages face à face</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 3 · genes_lies — Distance entre gènes</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Quand les gènes voyagent ensemble</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Dans la partie 1, le brassage interchromosomique redistribuait des <strong>chromosomes entiers</strong>. Mais il a une limite : deux gènes situés sur le <strong>même chromosome</strong> suivent forcément le même chemin. Imagine un père qui porte sur un même chromosome les allèles <span class="math">A</span> et <span class="math">B</span>, et une mère qui porte <span class="math">a</span> et <span class="math">b</span> sur les homologues. Sans autre mécanisme, leurs gamètes ne pourraient contenir que <span class="math">AB</span> ou <span class="math">ab</span> — et ces deux allèles resteraient « collés » génération après génération.
+      </p>
+      <p class="lecture-text">
+        Or, dans la réalité, on observe des descendants portant <span class="math">Ab</span> ou <span class="math">aB</span> : les allèles d'un même chromosome ont pu être <strong>séparés et réassociés</strong>. Il manque donc un mécanisme — et il se cache dans la prophase I.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">La question directrice</div>
+          <p>Comment la méiose parvient-elle à mélanger les allèles <strong>à l'intérieur d'un même chromosome</strong>, alors que le brassage interchromosomique ne mélange que des chromosomes entiers ?</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : RAPPEL — PROPHASE I EN ZOOM -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Rappel indispensable</span>
+        <h2 class="lecture-section-title">La prophase I en zoom : le bivalent</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Pour comprendre le crossing-over, il faut zoomer sur le moment où les chromosomes homologues se font face. Trois repères suffisent :
+      </p>
+      <ul class="lecture-list">
+        <li><strong>Duplication préalable :</strong> dès l'interphase, l'ADN s'est dupliqué. Chaque chromosome est formé de <strong>deux chromatides sœurs</strong>, identiques entre elles, reliées au niveau du centromère.</li>
+        <li><strong>Appariement (synapse) :</strong> pendant la prophase I, les chromosomes homologues se reconnaissent et s'accolent gène pour gène, locus pour locus. C'est un appariement <strong>étroit et précis</strong>.</li>
+        <li><strong>Le bivalent (ou tétrade) :</strong> le couple d'homologues ainsi apparié rassemble <strong>4 chromatides</strong> — d'où son autre nom de « tétrade ».</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Distinction essentielle — sœurs vs non-sœurs</div>
+          <p>Deux chromatides d'un <strong>même</strong> chromosome sont dites <strong>sœurs</strong> (elles sont identiques). Deux chromatides appartenant à des <strong>chromosomes homologues différents</strong> sont dites <strong>non-sœurs</strong> (elles portent des allèles potentiellement différents : <span class="math">A</span> contre <span class="math">a</span>). C'est entre chromatides <strong>non-sœurs</strong> que se produit le crossing-over.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Un échange entre sœurs ne servirait à rien</div>
+          <p>Un échange de fragments entre chromatides <em>sœurs</em> serait invisible : elles portent les mêmes allèles. Seul l'échange entre chromatides <strong>non-sœurs</strong> crée des combinaisons nouvelles — c'est pourquoi la définition du crossing-over précise toujours « chromatides non-sœurs de chromosomes homologues ».</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 — DEFINITION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · crossing_over</span>
+        <h2 class="lecture-section-title">Définition du crossing-over et chiasma</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition — crossing-over (brassage intrachromosomique)</div>
+          <p>Le <strong>crossing-over</strong>, ou <strong>brassage intrachromosomique</strong>, est l'<strong>échange réciproque de fragments</strong> entre deux <strong>chromatides non-sœurs</strong> de chromosomes homologues appariés, pendant la <strong>prophase I</strong> de la méiose. Il se matérialise par un point de croisement visible appelé <strong>chiasma</strong>.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition — chiasma</div>
+          <p>Le <strong>chiasma</strong> (pluriel : chiasmas) est le point de contact en forme de croix où deux chromatides non-sœurs appariées se sont croisées et échangé des fragments. On peut l'observer au microscope pendant la prophase I.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Retiens la logique du nom : « <em>inter</em>-chromosomique » = mélange <strong>entre</strong> chromosomes différents (chromosomes entiers) ; « <em>intra</em>-chromosomique » = mélange <strong>dans</strong> un même chromosome (par échange de fragments entre ses homologues). Deux brassages, deux échelles — et une même conséquence : de nouvelles combinaisons d'allèles.
+      </p>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Le piège des deux phases</div>
+          <p><strong>Crossing-over = prophase I.</strong> <strong>Brassage interchromosomique = métaphase I → anaphase I.</strong> Les deux brassages se produisent tous les deux pendant la méiose I, mais à des phases différentes. Le correcteur repère cette confusion en une seconde : apprends-les par cœur, chacun avec sa phase.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : MECANISME ET SCHEMA -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · Mécanisme</span>
+        <h2 class="lecture-section-title">Le crossing-over étape par étape</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Appariement :</strong> les chromosomes homologues (l'un portant <span class="math">AB</span>, l'autre <span class="math">ab</span>) s'accolent locus pour locus. Chacun a 2 chromatides : le bivalent compte 4 chromatides.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Enjambement :</strong> deux chromatides <strong>non-sœurs</strong> (une de chaque homologue) se croisent en un point situé entre les deux gènes.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Cassure :</strong> au même niveau, sur les deux chromatides croisées, l'ADN est coupé. Le point de croisement devient visible : c'est le <strong>chiasma</strong>.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Échange et soudure :</strong> les fragments distaux (au-delà du chiasma) sont échangés <strong>réciproquement</strong> puis resoudés : la chromatide qui portait <span class="math">AB</span> se termine maintenant par <span class="math">b</span>, et celle qui portait <span class="math">ab</span> se termine par <span class="math">B</span>.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">5</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Distribution :</strong> à l'anaphase I puis à la méiose II, les 4 chromatides partent dans 4 gamètes : <span class="math">AB</span>, <span class="math">ab</span> (parentaux) et <span class="math">Ab</span>, <span class="math">aB</span> (recombinants).</p>
+          </div>
+        </div>
+      </div>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 560 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma d'un crossing-over entre chromatides non-sœurs portant les allèles A B et a b donnant des gamètes parentaux et recombinants">
+          <text x="280" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">CROSSING-OVER ENTRE CHROMATIDES NON-SŒURS</text>
+
+          <!-- Homologue 1 -->
+          <text x="150" y="44" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">homologue 1 (paternel)</text>
+          <rect x="60" y="55" width="180" height="9" rx="4" style="fill:var(--accent-bright)"/>
+          <rect x="60" y="68" width="180" height="9" rx="4" style="fill:var(--accent-bright)"/>
+
+          <!-- Alleles homologue 1 -->
+          <circle cx="95" cy="66" r="13" style="fill:var(--accent)" />
+          <text x="95" y="70" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">A</text>
+          <circle cx="205" cy="66" r="13" style="fill:var(--accent)" />
+          <text x="205" y="70" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">B</text>
+
+          <!-- Homologue 2 -->
+          <rect x="60" y="182" width="180" height="9" rx="4" style="fill:var(--green-bright)"/>
+          <rect x="60" y="195" width="180" height="9" rx="4" style="fill:var(--green-bright)"/>
+          <text x="150" y="222" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">homologue 2 (maternel)</text>
+
+          <!-- Alleles homologue 2 -->
+          <circle cx="95" cy="193" r="13" style="fill:var(--green-bright)" />
+          <text x="95" y="197" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">a</text>
+          <circle cx="205" cy="193" r="13" style="fill:var(--green-bright)" />
+          <text x="205" y="197" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">b</text>
+
+          <!-- Chiasma -->
+          <line x1="95" y1="80" x2="205" y2="180" style="stroke:var(--danger-light)" stroke-width="2"/>
+          <line x1="205" y1="80" x2="95" y2="180" style="stroke:var(--danger-light)" stroke-width="2"/>
+          <circle cx="150" cy="130" r="4.5" style="fill:var(--danger-light)"/>
+          <text x="164" y="134" style="fill:var(--danger-light)" font-size="10.5" font-weight="700" font-family="Inter">chiasma : échange réciproque de fragments</text>
+
+          <!-- Fleche vers les gametes -->
+          <line x1="150" y1="238" x2="150" y2="256" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="150,262 145,252 155,252" style="fill:var(--text-dim)"/>
+          <text x="280" y="252" style="fill:var(--text-dim)" font-size="10" font-family="Inter">après méiose I et méiose II : 4 types de gamètes</text>
+
+          <!-- Gametes -->
+          <text x="105" y="286" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" style="fill:var(--text-light)">AB</text>
+          <rect x="60" y="292" width="90" height="8" rx="4" style="fill:var(--accent-bright)"/>
+          <text x="105" y="316" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter" text-anchor="middle">parental</text>
+
+          <text x="235" y="286" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" style="fill:var(--text-light)">ab</text>
+          <rect x="190" y="292" width="90" height="8" rx="4" style="fill:var(--green-bright)"/>
+          <text x="235" y="316" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter" text-anchor="middle">parental</text>
+
+          <text x="365" y="286" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" style="fill:var(--text-light)">Ab</text>
+          <rect x="320" y="292" width="45" height="8" rx="4" style="fill:var(--accent-bright)"/>
+          <rect x="365" y="292" width="45" height="8" rx="4" style="fill:var(--green-bright)"/>
+          <text x="365" y="316" style="fill:var(--danger-light)" font-size="9.5" font-weight="700" font-family="Inter" text-anchor="middle">recombinant</text>
+
+          <text x="495" y="286" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" style="fill:var(--text-light)">aB</text>
+          <rect x="450" y="292" width="45" height="8" rx="4" style="fill:var(--green-bright)"/>
+          <rect x="495" y="292" width="45" height="8" rx="4" style="fill:var(--accent-bright)"/>
+          <text x="495" y="316" style="fill:var(--danger-light)" font-size="9.5" font-weight="700" font-family="Inter" text-anchor="middle">recombinant</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Le crossing-over entre deux chromatides non-sœurs (A B et a b) produit, outre les gamètes parentaux (AB, ab), des gamètes recombinants (Ab, aB) — les barres bicolores montrent les fragments échangés.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 2 — CHROMOSOMES RECOMBINANTS -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · chromosomes_recombinants</span>
+        <h2 class="lecture-section-title">Gamètes parentaux et gamètes recombinants</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition — chromosome recombinant</div>
+          <p>Un <strong>chromosome recombinant</strong> (ou chromatide recombinante) est un chromosome issu d'un crossing-over, qui porte une <strong>nouvelle association d'allèles</strong>, différente des combinaisons parentales. Les gamètes qui en sont porteurs sont dits <strong>recombinants</strong> ; les autres, <strong>parentaux</strong>.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Voilà la grande conséquence du crossing-over : la <strong>recombinaison des allèles sur un même chromosome</strong>. Alors que le brassage interchromosomique associe des chromosomes différents entre eux, le crossing-over réarrange les allèles <strong>à l'intérieur</strong> d'un chromosome donné. Reprenons les pois de la partie 1, mais plaçons cette fois les deux gènes sur le <strong>même chromosome</strong> :
+      </p>
+
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧬 Exemple — deux gènes sur un même chromosome (pois, simplifié)</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text">
+            Une plante (<span class="math">Cc Ff</span>) porte le gène Couleur (<span class="math">C</span> jaune / <span class="math">c</span> vert) <strong>et</strong> le gène Forme (<span class="math">F</span> lisse / <span class="math">f</span> ridé) sur la même paire d'homologues : le chromosome paternel porte <span class="math">C</span> et <span class="math">F</span>, le chromosome maternel porte <span class="math">c</span> et <span class="math">f</span>.
+          </p>
+          <ul class="lecture-list">
+            <li><strong>Sans crossing-over :</strong> les deux gènes voyagent ensemble → seulement 2 types de gamètes : <span class="math">CF</span> et <span class="math">cf</span> (parentaux).</li>
+            <li><strong>Avec un crossing-over entre les deux gènes :</strong> les fragments portant les gènes sont échangés → apparaissent en plus <span class="math">Cf</span> et <span class="math">cF</span> (recombinants) : graines <strong>jaunes ridées</strong> et <strong>vertes lisses</strong>, absentes de la génération précédente.</li>
+          </ul>
+          <p class="lecture-text">
+            Le crossing-over a donc <strong>augmenté la diversité des gamètes</strong> : 2 types devenus 4. C'est le complément indispensable du brassage interchromosomique.
+          </p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p><strong>« Cf est un allèle nouveau » — faux !</strong> <span class="math">C</span> et <span class="math">f</span> existaient déjà, séparés : le crossing-over ne crée <strong>aucun allèle nouveau</strong>, il crée une <strong>association nouvelle</strong> d'allèles. De plus, ne dis jamais « crossing-over entre chromosomes non homologues » : l'échange n'a lieu qu'entre homologues appariés, sinon les fragments ne pourraient pas s'aligner.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : COMPARAISON DES DEUX BRASSAGES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Synthèse comparée</span>
+        <h2 class="lecture-section-title">Les deux brassages face à face</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Les deux mécanismes sont complémentaires mais bien distincts. Ce tableau est l'un des plus rentables du chapitre : apprends-le ligne par ligne.
+      </p>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Critère</th><th>Brassage interchromosomique</th><th>Crossing-over (brassage intrachromosomique)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Moment dans la méiose</td><td>métaphase I → anaphase I</td><td>prophase I</td></tr>
+            <tr><td>Structures concernées</td><td>chromosomes homologues (paires entières)</td><td>chromatides non-sœurs d'un bivalent</td></tr>
+            <tr><td>Mécanisme</td><td>orientation au hasard puis séparation indépendante des homologues</td><td>cassure et échange réciproque de fragments au niveau du chiasma</td></tr>
+            <tr><td>Ce qui est mélangé</td><td>des chromosomes entiers, paternels et maternels</td><td>des allèles portés par un même chromosome</td></tr>
+            <tr><td>Résultat</td><td>gamètes à combinaisons variées de chromosomes parentaux</td><td>chromosomes recombinants, gamètes recombinants</td></tr>
+            <tr><td>Nouveaux allèles ?</td><td>non — nouvelles combinaisons seulement</td><td>non — nouvelles combinaisons seulement</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">Phrase clé à connaître par cœur</div>
+        <div class="lecture-rule-body">
+          <p class="lecture-text">« Le brassage interchromosomique redistribue des <strong>chromosomes entiers</strong> entre les gamètes ; le crossing-over redistribue des <strong>allèles à l'intérieur d'un même chromosome</strong>. Ensemble, ils multiplient les combinaisons génétiques des gamètes. »</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 3 — GENES LIES ET DISTANCE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · genes_lies</span>
+        <h2 class="lecture-section-title">Distance entre gènes et fréquence des recombinants</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition — gènes liés</div>
+          <p>Deux gènes situés sur un <strong>même chromosome</strong> (même paire d'homologues) sont dits <strong>liés</strong> : ils tendent à être transmis <strong>ensemble</strong>, car le brassage interchromosomique ne peut pas les séparer.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Mais « tendre à » n'est pas « toujours » : seul le crossing-over peut les séparer, et son efficacité dépend de la <strong>distance</strong> qui les sépare sur le chromosome. La logique est simple : un chiasma peut se former n'importe où sur le bivalent ; plus deux gènes sont <strong>éloignés</strong> l'un de l'autre, plus il y a de « place » entre eux pour qu'un chiasma se forme — donc plus de gamètes recombinants. À l'inverse, deux gènes très <strong>proches</strong> sont rarement séparés par un chiasma.
+      </p>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 560 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Distance entre gènes sur un chromosome et fréquence du crossing-over">
+          <text x="280" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">DISTANCE ENTRE GÈNES ET CROSSING-OVER</text>
+
+          <rect x="40" y="38" width="480" height="16" rx="8" style="fill:var(--border-soft)"/>
+          <line x1="80" y1="32" x2="80" y2="60" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <text x="80" y="26" style="fill:var(--text-light)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">gène A</text>
+          <line x1="150" y1="32" x2="150" y2="60" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <text x="150" y="26" style="fill:var(--text-light)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">gène B</text>
+          <line x1="470" y1="32" x2="470" y2="60" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <text x="470" y="26" style="fill:var(--text-light)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">gène C</text>
+
+          <line x1="80" y1="80" x2="150" y2="80" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+          <polygon points="80,80 88,76 88,84" style="fill:var(--green-bright)"/>
+          <polygon points="150,80 142,76 142,84" style="fill:var(--green-bright)"/>
+          <text x="160" y="84" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter">gènes proches : peu de crossing-over → gènes très liés, recombinants rares</text>
+
+          <line x1="80" y1="115" x2="470" y2="115" style="stroke:var(--danger-light)" stroke-width="1.5"/>
+          <polygon points="80,115 88,111 88,119" style="fill:var(--danger-light)"/>
+          <polygon points="470,115 462,111 462,119" style="fill:var(--danger-light)"/>
+          <text x="275" y="134" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">gènes éloignés : beaucoup de crossing-over → recombinants fréquents</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Plus les gènes sont éloignés sur le chromosome, plus un chiasma peut se former entre eux, et plus les gamètes recombinants sont nombreux.</figcaption>
+      </figure>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">📊 Exemple chiffré simplifié — 100 gamètes produits</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text">
+            Un individu <span class="math">Cc Ff</span> avec les deux gènes sur le même chromosome (chromosomes <span class="math">CF</span> et <span class="math">cf</span>). Sur 100 gamètes :
+          </p>
+          <div class="lecture-table">
+            <table>
+              <thead>
+                <tr><th>Situation des gènes</th><th>CF</th><th>cf</th><th>Cf</th><th>cF</th><th>Recombinants</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Gènes très proches</td><td>46</td><td>46</td><td>4</td><td>4</td><td>8 %</td></tr>
+                <tr><td>Gènes très éloignés</td><td>30</td><td>30</td><td>20</td><td>20</td><td>40 %</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="lecture-text">
+            Plus la distance augmente, plus les recombinants se multiplient — au point que des gènes très éloignés se comportent presque comme s'ils étaient sur des chromosomes différents. Les gènes proches, eux, restent solidaires : c'est ce qu'on appelle la <strong>liaison génétique</strong>.
+          </p>
+        </div>
+      </div>
+
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🔍 Pour aller plus loin</div>
+        <div class="lecture-aside-content">
+          <p class="lecture-text">Chez l'humain, on observe en moyenne un à deux chiasmas par paire de chromosomes homologues à chaque méiose : le crossing-over n'est pas un accident rare, mais un événement fréquent et indispensable au bon déroulement de la méiose. La fréquence des recombinants a même servi, au XXᵉ siècle, à construire les premières « cartes » des chromosomes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QCM D'ENTRAINEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Le crossing-over s'effectue entre :</p>
+      <div class="lecture-quiz-options">
+        <span>A) deux chromatides sœurs d'un même chromosome</span>
+        <span>B) deux chromatides non-sœurs de chromosomes homologues</span>
+        <span>C) deux chromosomes non homologues</span>
+        <span>D) un chromosome et son centromère</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) deux chromatides non-sœurs de chromosomes homologues.</strong> Entre sœurs, l'échange serait invisible (allèles identiques) ; entre non-homologues, les fragments ne peuvent pas s'aligner. La définition complète précise toujours : chromatides non-sœurs d'homologues appariés, en prophase I.</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Pendant quelle phase de la méiose le crossing-over se produit-il ?</p>
+      <div class="lecture-quiz-options">
+        <span>A) prophase I</span>
+        <span>B) métaphase I</span>
+        <span>C) anaphase II</span>
+        <span>D) interphase</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>A) prophase I.</strong> C'est pendant la prophase I que les homologues sont appariés : c'est la seule phase où l'échange de fragments entre chromatides non-sœurs est possible. (Métaphase I = brassage interchromosomique — ne pas inverser !)</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Deux gènes très proches l'un de l'autre sur un même chromosome donnent :</p>
+      <div class="lecture-quiz-options">
+        <span>A) beaucoup de gamètes recombinants</span>
+        <span>B) peu de gamètes recombinants</span>
+        <span>C) toujours 50 % de recombinants</span>
+        <span>D) des gamètes dépourvus de ces gènes</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) peu de gamètes recombinants.</strong> Gènes proches = peu de place pour un chiasma entre eux = liaison forte = transmission quasi toujours ensemble. Plus ils s'éloignent, plus la fréquence des recombinants augmente.</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== RECAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[crossing_over]</strong> Le crossing-over (brassage intrachromosomique) est l'échange réciproque de fragments entre deux chromatides non-sœurs de chromosomes homologues appariés, pendant la prophase I.</li>
+      <li><strong>[chiasma]</strong> Le chiasma est le point de croisement visible où s'est produit l'échange ; il ne se forme que dans un bivalent apparié.</li>
+      <li><strong>[crossing_over]</strong> Deux moments à ne jamais confondre : crossing-over = prophase I ; brassage interchromosomique = métaphase I → anaphase I.</li>
+      <li><strong>[chromosomes_recombinants]</strong> Conséquence : recombinaison des allèles sur un même chromosome — gamètes parentaux (AB, ab) et recombinants (Ab, aB).</li>
+      <li><strong>[chromosomes_recombinants]</strong> Le crossing-over ne crée aucun allèle nouveau : il crée de nouvelles associations d'allèles existants.</li>
+      <li><strong>[comparaison_brassages]</strong> Interchromosomique = mélange de chromosomes entiers ; intrachromosomique = mélange d'allèles dans un même chromosome : deux mécanismes complémentaires.</li>
+      <li><strong>[genes_lies]</strong> Gènes sur un même chromosome = gènes liés : ils tendent à être transmis ensemble.</li>
+      <li><strong>[genes_lies]</strong> Distance : gènes proches = peu de crossing-over (recombinants rares) ; gènes éloignés = beaucoup de crossing-over (recombinants fréquents).</li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 2 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : ce que les deux brassages, réunis, font de chaque individu — et de l'espèce.</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

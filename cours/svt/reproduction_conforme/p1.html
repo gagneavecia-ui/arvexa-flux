@@ -1,0 +1,548 @@
+<!-- ============================================================ -->
+<!-- PARTIE 1 : MÉCANISME DE LA RÉPLICATION DE L'ADN (4 NOTIONS)   -->
+<!-- Notion 1 · definition_replication : copier l'ADN avant de     -->
+<!--            se diviser (phase S de l'interphase)               -->
+<!-- Notion 2 · semi_conservatif : l'hypothèse de Watson et Crick  -->
+<!-- Notion 3 · meselson_stahl : la preuve expérimentale (1958)    -->
+<!-- Notion 4 · mecanisme_replication : déroulement de la double   -->
+<!--            hélice, matrices, appariement A—T et C≡G           -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 01 · La reproduction conforme</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Le mécanisme de la <em>réplication de l'ADN</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Avant de se diviser, une cellule doit résoudre un problème vital : <strong>copier la totalité de son ADN</strong>, sans perdre ni altérer une seule information. Cette partie répond à quatre questions dans l'ordre : <strong>quand</strong> la cellule copie-t-elle son ADN (la <strong>définition de la réplication</strong> et la phase S), <strong>selon quel modèle</strong> (l'<strong>hypothèse semi-conservative</strong> de Watson et Crick face à ses rivales), <strong>comment ce modèle a été prouvé</strong> (l'<strong>expérience de Meselson et Stahl</strong>, 1958), et enfin <strong>comment la copie s'exécute</strong> concrètement, du déroulement de la double hélice jusqu'à l'appariement A—T et C≡G.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧬 4 notions</span>
+      <span class="lecture-hero-meta-item">📊 7 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 7 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Pourquoi copier l'ADN avant de se diviser ?</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · definition_replication — La réplication et la phase S</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 2 · semi_conservatif — Les trois hypothèses de la copie</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 3 · meselson_stahl — L'expérience de Meselson et Stahl (1958)</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 4 · mecanisme_replication — Le mécanisme pas à pas</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 4 (suite) — Appariement A—T / C≡G et sens de réplication</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Bilan visuel — De la molécule mère aux deux molécules filles</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION                                        -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Pourquoi copier l'ADN avant de se diviser ?</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Une cellule de ta peau qui se divise donne <strong>deux nouvelles cellules</strong>. Chacune de ces cellules devra fonctionner, grandir et éventuellement se diviser à son tour. Pour cela, elle a besoin de la <strong>totalité du plan de construction</strong> de l'organisme : l'information génétique, portée par l'ADN. La règle est donc absolue :
+      </p>
+
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">Règle d'or</div>
+        <div class="lecture-rule-body">
+          <p class="lecture-text"><strong>Aucune division cellulaire sans copie préalable de l'ADN.</strong> Une cellule qui se diviserait sans avoir dupliqué son ADN transmettrait un génome incomplet : ses cellules filles seraient condamnées. La copie — la <strong>réplication</strong> — est donc la toute première étape de toute reproduction cellulaire.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        L'analogie est simple : avant de remettre un document à deux personnes différentes, tu en fais d'abord <strong>une photocopie par personne</strong>. La cellule fait de même : elle photocopie son ADN, <em>puis</em> elle se divise et distribue une copie à chaque cellule fille. Tout ce chapitre explore cette « photocopie biologique » — remarquablement fidèle : dans chacune de tes cellules, les 2 mètres d'ADN des 46 chromosomes sont copiés en quelques heures, avec environ une seule erreur sur un milliard de nucléotides. Chez la bactérie <em>E. coli</em>, la copie complète du génome prend moins de 45 minutes.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · DEFINITION_REPLICATION                 -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · definition_replication</span>
+        <h2 class="lecture-section-title">La réplication : copier l'ADN pendant la phase S</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition — la réplication de l'ADN</div>
+          <p>La <strong>réplication</strong> (ou <strong>duplication</strong>) de l'ADN est le mécanisme par lequel une molécule d'ADN mère donne <strong>deux molécules filles identiques entre elles et identiques à la molécule mère</strong>, chacune conservant une chaîne de la molécule initiale. Elle a lieu dans le noyau, <strong>pendant la phase S de l'interphase</strong>, c'est-à-dire <strong>avant la division cellulaire</strong>.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Où se situe exactement la phase S ? Le cycle de vie d'une cellule comprend l'<strong>interphase</strong> — la longue période de préparation — et la phase de division (la mitose, partie 2). L'interphase elle-même se découpe en trois phases successives :
+      </p>
+
+      <ul class="lecture-list">
+        <li><span class="math">G₁</span> (première phase de croissance) : la cellule augmente de taille et fabrique ses constituants ;</li>
+        <li><span class="math">S</span> (phase de <em>synthèse</em>) : <strong>tout l'ADN est répliqué</strong> — c'est la phase qui nous intéresse ici ;</li>
+        <li><span class="math">G₂</span> (seconde phase de croissance) : la cellule vérifie l'ADN copié et fabrique le matériel de division.</li>
+      </ul>
+
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">Ce que voit le cytologiste</div>
+        <div class="lecture-example-content">
+          <p>Avant la phase S, un chromosome est un filament unique : il porte <strong>1 chromatide</strong>. Après la réplication, le même chromosome porte <strong>2 chromatides-sœurs</strong> — deux copies identiques, jointes au niveau du <strong>centromère</strong>. Le chromosome n'a pas « doublé » : c'est <em>une seule</em> molécule d'ADN dupliquée, encore tenue ensemble. La quantité totale d'ADN de la cellule, elle, a bien doublé.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Le piège n°1 de tout le chapitre</div>
+          <p>La réplication a lieu <strong>pendant l'interphase (phase S)</strong>, donc <strong>AVANT</strong> la mitose — jamais pendant la division. Une erreur fréquente au Bac : écrire que « l'ADN est copié en prophase ». Faux ! En prophase, la copie est <strong> déjà terminée</strong> : les chromosomes visibles portent déjà leurs 2 chromatides-sœurs, témoins de la réplication achevée en phase S.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 2 · SEMI_CONSERVATIF                       -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · semi_conservatif</span>
+        <h2 class="lecture-section-title">Les trois hypothèses : comment l'ADN se copie-t-il ?</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        En 1953, <strong>Watson et Crick</strong> découvrent la structure en <strong>double hélice</strong> de l'ADN : deux chaînes complémentaires, maintenues par des liaisons hydrogène entre les bases (A en face de T, C en face de G). Dès leur publication, ils proposent une idée lumineuse : <strong>chaque chaîne peut servir de modèle</strong> pour reconstruire la chaîne complémentaire qui lui fait face. Mais comment vérifier que la copie fonctionne réellement ainsi ? Trois hypothèses entrent en compétition :
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition — l'hypothèse semi-conservative</div>
+          <p>La réplication est dite <strong>semi-conservative</strong> lorsque chaque molécule fille d'ADN conserve <strong>une chaîne de la molécule mère</strong> (l'ancienne) et porte <strong>une chaîne néoformée</strong> (la neuve), complémentaire de la première. On « conserve » la moitié de chaque molécule initiale : d'où le préfixe <em>semi-</em>.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Les deux hypothèses rivales se distinguent par le sort réservé aux chaînes anciennes :
+      </p>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Hypothèse</th><th>Idée centrale</th><th>Ce que contient chaque molécule fille</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Semi-conservative</strong> (Watson et Crick)</td><td>Les deux chaînes mères se séparent ; chacune sert de matrice.</td><td>1 chaîne ancienne + 1 chaîne néoformée</td></tr>
+            <tr><td><strong>Conservative</strong></td><td>La molécule mère reste intacte et sert de modèle sans s'ouvrir.</td><td>1 molécule entièrement neuve ; la mère reste entièrement ancienne</td></tr>
+            <tr><td><strong>Dispersée</strong></td><td>La molécule est coupée en fragments, mêlés puis recopiés.</td><td>Des segments anciens et neufs mélangés sur chaque chaîne</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Ne pas confondre les noms</div>
+          <p><strong>Conservative</strong> et <strong>semi-conservative</strong> ne sont pas synonymes ! Dans l'hypothèse <em>conservative</em>, la molécule mère sort <strong>entière</strong> de la réplication (les deux chaînes anciennes restent ensemble). Dans l'hypothèse <em>semi-conservative</em>, la molécule mère est <strong>ouverte</strong> et chaque chaîne part dans une molécule fille différente. Au Bac, écrire « semi-conservative » quand le schéma montre une molécule mère intacte est une erreur rédhibitoire.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 3 · MESELSON_STAHL                         -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · meselson_stahl</span>
+        <h2 class="lecture-section-title">L'expérience de Meselson et Stahl (1958) : la preuve</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        L'astuce géniale de <strong>Meselson et Stahl</strong> : marquer l'ADN avec de l'azote <strong>lourd</strong>, le <span class="math">¹⁵N</span>, puis suivre le devenir de ce marquage au fil des générations. Ils choisissent la bactérie <em>Escherichia coli</em>, qui se multiplie très rapidement — une génération toutes les 20 minutes environ.
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Cultiver les bactéries sur milieu au ¹⁵N.</strong> Toutes les bases azotées de l'ADN bactérien incorporent l'azote lourd : tout l'ADN devient « lourd » (<span class="math">¹⁵N/¹⁵N</span>).</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Transférer brutalement les bactéries en milieu ordinaire au ¹⁴N.</strong> À partir de cet instant, tout ADN nouvellement fabriqué incorpore de l'azote léger. On note l'instant du transfert : génération 0.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Prélever des échantillons</strong> après 1 génération, puis après 2 générations de division.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Centrifuger l'ADN extrait</strong> en gradient de densité (chlorure de césium) : l'ADN migre et forme une bande à la hauteur correspondant à sa densité. L'ADN lourd <span class="math">¹⁵N/¹⁵N</span>, le plus dense, forme une bande <strong>en bas</strong> du tube ; l'ADN léger <span class="math">¹⁴N/¹⁴N</span>, une bande <strong>en haut</strong> ; l'ADN mixte <span class="math">¹⁵N/¹⁴N</span>, une bande <strong>au milieu</strong>.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">5</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Lire les bandes</strong> : leur nombre et leur position permettent de reconnaître quelles molécules existent à chaque génération — donc de trancher entre les trois hypothèses.</p>
+          </div>
+        </div>
+      </div>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tubes de centrifugation de Meselson et Stahl : une bande lourde, puis une bande intermédiaire, puis deux bandes">
+          <text x="260" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">LECTURE DES TUBES DE CENTRIFUGATION</text>
+
+          <!-- Tube 1 : génération 0 -->
+          <rect x="88" y="44" width="44" height="170" rx="16" fill="rgba(255,255,255,0.02)" style="stroke:var(--border-soft)" stroke-width="1.5"/>
+          <ellipse cx="110" cy="188" rx="26" ry="7" fill="rgba(224,184,74,0.9)"/>
+          <text x="110" y="236" style="fill:var(--text-light)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">Génération 0</text>
+          <text x="110" y="252" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">1 bande lourde</text>
+
+          <!-- Tube 2 : génération 1 -->
+          <rect x="238" y="44" width="44" height="170" rx="16" fill="rgba(255,255,255,0.02)" style="stroke:var(--border-soft)" stroke-width="1.5"/>
+          <ellipse cx="260" cy="126" rx="26" ry="7" fill="rgba(58,182,126,0.85)"/>
+          <text x="260" y="236" style="fill:var(--text-light)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">Génération 1</text>
+          <text x="260" y="252" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">1 seule bande intermédiaire</text>
+
+          <!-- Tube 3 : génération 2 -->
+          <rect x="388" y="44" width="44" height="170" rx="16" fill="rgba(255,255,255,0.02)" style="stroke:var(--border-soft)" stroke-width="1.5"/>
+          <ellipse cx="410" cy="126" rx="26" ry="7" fill="rgba(58,182,126,0.85)"/>
+          <ellipse cx="410" cy="88" rx="26" ry="7" fill="rgba(120,170,235,0.9)"/>
+          <text x="410" y="236" style="fill:var(--text-light)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">Génération 2</text>
+          <text x="410" y="252" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">2 bandes : intermédiaire + légère</text>
+
+          <text x="497" y="92" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter">¹⁴N/¹⁴N</text>
+          <text x="497" y="130" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter">¹⁵N/¹⁴N</text>
+          <text x="497" y="192" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter">¹⁵N/¹⁵N</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Après centrifugation, la position des bandes d'ADN révèle la composition en azote lourd (¹⁵N) ou léger (¹⁴N) des molécules, génération après génération.</figcaption>
+      </figure>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Observation</th><th>Ce qu'elle signifie</th><th>Hypothèse éliminée</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Génération 0 : une seule bande lourde</td><td>Tout l'ADN est <span class="math">¹⁵N/¹⁵N</span> — c'est le témoin du départ.</td><td>aucune (point de référence)</td></tr>
+            <tr><td>Génération 1 : <strong>une seule</strong> bande intermédiaire</td><td>Toutes les molécules sont mixtes <span class="math">¹⁵N/¹⁴N</span>. Or l'hypothèse conservative prévoyait <strong>deux bandes</strong> (lourde + légère).</td><td><strong>conservative</strong> ✗</td></tr>
+            <tr><td>Génération 2 : <strong>deux</strong> bandes (intermédiaire + légère)</td><td>Il existe des molécules mixtes <span class="math">¹⁵N/¹⁴N</span> ET des molécules légères <span class="math">¹⁴N/¹⁴N</span>. Or l'hypothèse dispersée prévoyait <strong>une seule bande</strong>, de plus en plus légère.</td><td><strong>dispersée</strong> ✗</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Conclusion de l'expérience</div>
+          <p>Les résultats de Meselson et Stahl ne sont compatibles qu'avec l'<strong>hypothèse semi-conservative de Watson et Crick</strong> : chaque molécule fille d'ADN conserve une chaîne de la molécule mère et reçoit une chaîne néoformée. La réplication de l'ADN est <strong>semi-conservative</strong> — c'est désormais un fait établi, plus une hypothèse.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>La bande <strong>intermédiaire</strong> de la génération 1 ne prouve PAS l'hypothèse dispersée ! Intermédiaire signifie : chaque molécule contient <strong>une chaîne entière lourde et une chaîne entière légère</strong> (structure mixte). L'hypothèse dispersée, elle, prédit des molécules contenant des <strong>fragments</strong> lourds et légers <em>mêlés sur une même chaîne</em>. Seule l'observation de la génération 2 (deux bandes distinctes) permet d'éliminer l'hypothèse dispersée.</p>
+        </div>
+      </div>
+
+      <aside class="lecture-aside">
+        <div class="lecture-aside-content">
+          <div class="lecture-aside-label">Un peu d'histoire</div>
+          <p>Publiée en 1958, cette expérience est souvent qualifiée d'<strong>« expérience la plus élégante de la biologie »</strong> : avec trois tubes de centrifugation, elle a tranché définitivement un débat qui animait toute la biologie moléculaire naissante. Matthew Meselson et Franklin Stahl n'avaient alors que 27 et 31 ans.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 4 · MECANISME_REPLICATION                  -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · mecanisme_replication</span>
+        <h2 class="lecture-section-title">Le mécanisme pas à pas : de l'ouverture à la copie</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Voyons maintenant <strong>comment la machine s'exécute</strong>, dans l'ordre. Le programme retient quatre gestes essentiels — ouvrir la double hélice, exposer les matrices, apparier les nucléotides complémentaires, souder — pilotés par des enzymes (hélicase, ADN polymérase).
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Ouvrir la double hélice.</strong> La réplication commence en un point précis de la molécule, l'<strong>origine de réplication</strong> : les deux chaînes se séparent progressivement par rupture des liaisons hydrogène entre les bases.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Dérouler et exposer les matrices.</strong> Chaque chaîne ancienne, désormais isolée, présente librement ses bases : elle joue le rôle de <strong>matrice</strong> (de modèle) qui va imposer la séquence de la chaîne à fabriquer.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Apparier les nucléotides libres.</strong> Des désoxyribonucléotides libres du noyau viennent se placer en face de chaque base de la matrice, selon la règle de complémentarité : <span class="math">A—T</span> et <span class="math">C≡G</span>. Aucune autre combinaison n'est permise.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Souder les nucléotides entre eux.</strong> L'<strong>ADN polymérase</strong> relie les nucléotides ainsi alignés (liaisons sucre-phosphate) : une chaîne <strong>néoformée</strong> s'allonge le long de chaque matrice. Quand les fourches se rejoignent, chaque chaîne ancienne s'est reconstruit une compagne : il y a désormais <strong>deux molécules filles identiques</strong> à la molécule mère.</p>
+          </div>
+        </div>
+      </div>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fourche de réplication : la double hélice s'ouvre et chaque chaîne ancienne sert de matrice à une chaîne néoformée">
+          <defs>
+            <marker id="arvRep1" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7" fill="none" style="stroke:var(--green-bright)" stroke-width="1.3"/>
+            </marker>
+          </defs>
+          <text x="260" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">LA FOURCHE DE RÉPLICATION</text>
+
+          <!-- Fourche -->
+          <line x1="168" y1="60" x2="168" y2="210" style="stroke:var(--text-dim)" stroke-width="1" stroke-dasharray="3 4"/>
+          <text x="168" y="46" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">fourche</text>
+
+          <!-- Zone ouverte : chaînes anciennes -->
+          <rect x="196" y="74" width="298" height="8" rx="3" style="fill:var(--accent-bright)"/>
+          <rect x="196" y="178" width="298" height="8" rx="3" style="fill:var(--blue)"/>
+          <text x="212" y="66" style="fill:var(--accent-bright)" font-size="9.5" font-family="Inter">chaîne ancienne = matrice</text>
+
+          <!-- Chaînes néoformées (en pointillés) -->
+          <rect x="196" y="100" width="298" height="8" rx="3" style="fill:var(--green-bright)" stroke-dasharray="6 3" opacity="0.85"/>
+          <rect x="196" y="152" width="298" height="8" rx="3" style="fill:var(--green-bright)" stroke-dasharray="6 3" opacity="0.85"/>
+          <text x="212" y="146" style="fill:var(--green-bright)" font-size="9.5" font-family="Inter">chaîne néoformée (complémentaire)</text>
+
+          <!-- Flèche du sens de réplication -->
+          <line x1="196" y1="222" x2="480" y2="222" style="stroke:var(--green-bright)" stroke-width="1.5" marker-end="url(#arvRep1)"/>
+          <text x="338" y="214" style="fill:var(--green-bright)" font-size="10" font-family="Inter" text-anchor="middle">sens de progression de la copie →</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">À la fourche, les deux chaînes anciennes (or et bleu) se séparent ; chacune sert de matrice à une chaîne néoformée (verte, en pointillés) apparée base à base.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : APPARIEMENT ET SENS                               -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · mecanisme_replication (suite)</span>
+        <h2 class="lecture-section-title">L'appariement A—T / C≡G, garant de la fidélité</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Pourquoi la copie est-elle si fidèle ? Parce que la matrice <strong>dicte</strong> la séquence : une chaîne qui porte un A ne peut recevoir en face qu'un T, une chaîne qui porte un C qu'un G. La complémentarité des bases transforme chaque chaîne ancienne en machine à reconstituer exactement sa compagne d'origine.
+      </p>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">A — T (2 liaisons hydrogène) &nbsp;·&nbsp; C ≡ G (3 liaisons hydrogène)</div>
+        <div class="lecture-formula-desc">Les seuls appariements possibles : l'adénine fait toujours face à la thymine, la cytosine toujours à la guanine. C'est la règle de complémentarité.</div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Notion clé — la complémentarité assure l'identité</div>
+          <p>La séquence de chaque chaîne néoformée est <strong>imposée</strong> par la séquence de sa matrice. Deux molécules construites sur les matrices d'une même molécule mère sont donc <strong>identiques entre elles et identiques à la molécule mère</strong> : c'est la définition même de la réplication.</p>
+        </div>
+      </div>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">Exemple — écrire la chaîne complémentaire</div>
+        <div class="lecture-example-content">
+          <p>Si la matrice porte la séquence <span class="math">T A C G A T</span>, la chaîne néoformée porte obligatoirement <span class="math">A T G C T A</span> : chaque T reçoit un A, chaque A reçoit un T, chaque C reçoit un G, chaque G reçoit un C.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur de débutant à bannir</div>
+          <p><strong>A ne s'apparie jamais avec G, ni C avec T.</strong> Si tu écris « A—G » ou « C—T » dans une copie, toute la démonstration s'effondre. Fixe bien le réflexe : <span class="math">A—T</span> (2 liaisons hydrogène) et <span class="math">C≡G</span> (3 liaisons hydrogène), uniquement. Attention aussi : dans l'ADN, la base U (uracile) n'existe pas — elle est réservée à l'ARN.</p>
+        </div>
+      </div>
+
+      <h3 class="lecture-subtitle">Dans quel sens la réplication progresse-t-elle ?</h3>
+        <p class="lecture-text">
+          L'ouverture débute à une <strong>origine de réplication</strong>, et la copie progresse <strong>dans les deux sens</strong> à partir de ce point : chaque origine engendre deux fourches qui s'éloignent l'une de l'autre — on dit que la réplication est <strong>bidirectionnelle</strong>. Chez <em>E. coli</em>, une seule origine suffit pour tout le chromosome circulaire ; dans une cellule humaine, des dizaines de milliers d'origines fonctionnent en même temps, car la quantité d'ADN à copier est énorme. La vitesse atteint environ 1 000 nucléotides par seconde chez la bactérie.
+        </p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : BILAN VISUEL                                      -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">De la molécule mère aux deux molécules filles</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Une molécule mère donne deux molécules filles identiques, chacune avec une chaîne ancienne et une chaîne neuve">
+          <defs>
+            <marker id="arvRep2" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+              <path d="M0,0 L7,3.5 L0,7" fill="none" style="stroke:var(--text-dim)" stroke-width="1.3"/>
+            </marker>
+          </defs>
+          <text x="260" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">RÉSULTAT DE LA RÉPLICATION</text>
+
+          <!-- Molécule mère -->
+          <rect x="30" y="80" width="120" height="9" rx="3" style="fill:var(--accent-bright)"/>
+          <rect x="30" y="98" width="120" height="9" rx="3" style="fill:var(--blue)"/>
+          <text x="90" y="132" style="fill:var(--text-light)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">molécule mère</text>
+          <text x="90" y="148" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter" text-anchor="middle">2 chaînes anciennes</text>
+
+          <!-- Flèche -->
+          <line x1="164" y1="94" x2="212" y2="94" style="stroke:var(--text-dim)" stroke-width="1.5" marker-end="url(#arvRep2)"/>
+
+          <!-- Molécule fille 1 -->
+          <rect x="234" y="48" width="120" height="9" rx="3" style="fill:var(--accent-bright)"/>
+          <rect x="234" y="66" width="120" height="9" rx="3" style="fill:var(--green-bright)" opacity="0.85"/>
+          <text x="294" y="46" style="fill:var(--text-light)" font-size="10.5" font-family="Inter" text-anchor="middle">molécule fille 1</text>
+
+          <!-- Molécule fille 2 -->
+          <rect x="234" y="118" width="120" height="9" rx="3" style="fill:var(--blue)"/>
+          <rect x="234" y="136" width="120" height="9" rx="3" style="fill:var(--green-bright)" opacity="0.85"/>
+          <text x="294" y="168" style="fill:var(--text-light)" font-size="10.5" font-family="Inter" text-anchor="middle">molécule fille 2</text>
+
+          <text x="260" y="196" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle" font-style="italic">Chaque fille = 1 chaîne ancienne + 1 chaîne neuve : la réplication est semi-conservative</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Les deux molécules filles sont identiques entre elles et à la molécule mère : chacune conserve une chaîne ancienne et reçoit une chaîne néoformée.</figcaption>
+      </figure>
+
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">À retenir — l'équation de la réplication</div>
+        <div class="lecture-formula-hero-main">1 molécule d'ADN (2 chaînes) → 2 molécules identiques (1 chaîne ancienne + 1 chaîne neuve chacune)</div>
+        <div class="lecture-formula-hero-desc">Réplication semi-conservative, démontrée par Meselson et Stahl (1958), réalisée pendant la phase S de l'interphase.</div>
+      </div>
+
+      <ul class="lecture-list">
+        <li><strong>Comment ?</strong> Ouverture de la double hélice, chaque chaîne sert de matrice, appariement <span class="math">A—T</span> et <span class="math">C≡G</span>, soudure par l'ADN polymérase.</li>
+        <li><strong>Résultat</strong> : 2 molécules filles identiques entre elles et à la molécule mère.</li>
+        <li><strong>Conséquence</strong> : après la phase S, chaque chromosome porte 2 chromatides-sœurs — les copies qui seront distribuées aux cellules filles lors de la mitose (partie 2).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — La réplication de l'ADN a lieu :</p>
+      <div class="lecture-quiz-options">
+        <span>A) pendant la prophase de la mitose</span>
+        <span>B) pendant la phase S de l'interphase, avant la division</span>
+        <span>C) pendant l'anaphase, quand les chromatides migrent</span>
+        <span>D) juste après la division cellulaire</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B.</strong> La réplication se déroule pendant la phase S (synthèse) de l'interphase, donc AVANT la mitose. En prophase, la copie est déjà terminée : les chromosomes portent déjà 2 chromatides-sœurs. (C'est le piège le plus fréquent du chapitre !)</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Après une réplication semi-conservative, chaque molécule fille contient :</p>
+      <div class="lecture-quiz-options">
+        <span>A) deux chaînes néoformées</span>
+        <span>B) une chaîne de la molécule mère et une chaîne néoformée</span>
+        <span>C) des fragments anciens et neufs mélangés sur chaque chaîne</span>
+        <span>D) la moitié de l'information génétique de la molécule mère</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B.</strong> Semi-conservatif = on conserve une moitié (une chaîne ancienne) et on reconstruit l'autre. (A correspond à l'hypothèse conservative vue côté fille neuve, C à l'hypothèse dispersée — toutes deux éliminées par Meselson et Stahl. D est absurde : chaque molécule fille porte TOUTE l'information.)</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Dans l'expérience de Meselson et Stahl, après 2 générations, la centrifugation révèle :</p>
+      <div class="lecture-quiz-options">
+        <span>A) une seule bande légère</span>
+        <span>B) une seule bande intermédiaire</span>
+        <span>C) deux bandes : une intermédiaire et une légère</span>
+        <span>D) trois bandes : lourde, intermédiaire et légère</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>C.</strong> Après 2 générations, il coexiste des molécules mixtes ¹⁵N/¹⁴N (bande intermédiaire) et des molécules ¹⁴N/¹⁴N (bande légère). Cette double bande élimine l'hypothèse dispersée (qui prévoyait une seule bande de plus en plus légère) ; l'hypothèse conservative avait déjà été éliminée à la génération 1. Conclusion : semi-conservatif.</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[definition_replication]</strong> La réplication (duplication) de l'ADN produit 2 molécules filles identiques entre elles et identiques à la molécule mère ; elle a lieu dans le noyau pendant la phase S de l'interphase, AVANT la division</li>
+      <li><strong>[definition_replication]</strong> Après la phase S, chaque chromosome porte 2 chromatides-sœurs jointes au centromère ; la quantité d'ADN de la cellule a doublé</li>
+      <li><strong>[semi_conservatif]</strong> Hypothèse de Watson et Crick (1953) : chaque chaîne de la molécule mère sert de matrice ; chaque molécule fille = 1 chaîne ancienne + 1 chaîne néoformée</li>
+      <li><strong>[semi_conservatif]</strong> Trois hypothèses étaient en compétition : semi-conservative, conservative (mère intacte + molécule entièrement neuve), dispersée (fragments mêlés)</li>
+      <li><strong>[meselson_stahl]</strong> Protocole : E. coli sur ¹⁵N (ADN lourd) → transfert sur ¹⁴N → prélèvements à chaque génération → centrifugation en gradient de densité</li>
+      <li><strong>[meselson_stahl]</strong> Génération 1 : une seule bande intermédiaire → conservative éliminée ; génération 2 : deux bandes (intermédiaire + légère) → dispersée éliminée ; conclusion : la réplication est semi-conservative</li>
+      <li><strong>[mecanisme_replication]</strong> Mécanisme : ouverture de la double hélice à l'origine de réplication → séparation des chaînes → chaque chaîne sert de matrice → appariement des nucléotides libres → soudure par l'ADN polymérase → 2 molécules filles</li>
+      <li><strong>[mecanisme_replication]</strong> Complémentarité stricte : A—T (2 liaisons hydrogène) et C≡G (3 liaisons hydrogène) — c'est elle qui garantit la fidélité de la copie</li>
+      <li><strong>[mecanisme_replication]</strong> La réplication est bidirectionnelle : elle progresse dans les deux sens à partir de chaque origine, le long de la fourche de réplication</li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 1 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie 2 : la mitose, ou comment la cellule distribue les copies à ses filles</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

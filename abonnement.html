@@ -1,0 +1,2805 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+    <title>ARVEXA — Abonnement Premium</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0A0A">
+<script>(function(){try{if(localStorage.getItem('arvexa-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}})();</script>
+<script src="theme.js"></script><script src="arvexa-contact.js"></script><script src="arvexa-i18n.js" defer></script>
+  <meta name="description" content="ARVEXA School - Abonnement Premium">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="stylesheet" href="perf.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="arvexa-ui.css">
+  <style>
+    /* ============================================================
+       ROOT — Design system ARVEXA (harmonisé avec matiere.html)
+       ============================================================ */
+    :root {
+      --primary: #1A3A2A;
+      --primary-dark: #0A1A12;
+      --primary-light: #2A5A3A;
+      --accent: #B8860B;
+      --accent-bright: #E0B84A;
+      --accent-dim: rgba(184, 134, 11, 0.08);
+      --success: #2D7D5A;
+      --success-light: #3AB67E;
+      --danger: #B85C3A;
+      --danger-light: #E07A5F;
+      --warning: #D4A017;
+      --info: #4AAFE0;
+      --bg-dark: #0A0A0A;
+      --bg-surface: #141414;
+      --bg-card: rgba(20, 20, 20, 0.7);
+      --text-light: #F5F0E8;
+      --text-dim: #A0A090;
+      --text-muted: #7A7A6A;
+      --card-border: rgba(184, 134, 11, 0.06);
+      --card-border-hover: rgba(224, 184, 74, 0.22);
+      --transition: all 0.28s cubic-bezier(0.25, 1, 0.5, 1);
+      --transition-fast: all 0.18s ease;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+      --radius: 16px;
+      --radius-lg: 20px;
+      --sidebar-width: 280px;
+      --header-height: 64px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; width: 100%; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      width: 100%;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ===== BACKGROUND ===== */
+    .gradient-bg {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+      background: radial-gradient(ellipse 40% 30% at 30% 15%, rgba(184, 134, 11,  0.16) 0%, transparent 70%),
+                  radial-gradient(ellipse 35% 25% at 75% 85%, rgba(184, 134, 11, 0.05) 0%, transparent 60%),
+                  linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-deep) 100%);
+    }
+    .glow {
+      position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: -1;
+      opacity: 0.12;
+    }
+    .glow-1 { width: 350px; height: 350px; background: rgba(184, 134, 11, 0.18); top: -80px; right: -80px; }
+    .glow-2 { width: 200px; height: 200px; background: rgba(184,134,11,0.05); bottom: 0; left: 0; }
+
+    .sidebar-overlay {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+      background: rgba(0,0,0,0.6); z-index: 99; opacity: 0; transition: opacity 0.3s ease;
+    }
+    .sidebar-overlay.active { display: block; opacity: 1; }
+
+    /* ============================================================
+       SIDEBAR
+       ============================================================ */
+    .sidebar {
+      position: fixed; top: 0; left: -280px; width: 280px; height: 100vh;
+      background: rgba(var(--rgb-veil), 0.97); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-right: 1px solid rgba(224, 184, 74, 0.06);
+      padding: calc(24px + var(--safe-top)) 16px calc(24px + var(--safe-bottom));
+      display: flex; flex-direction: column; z-index: 100;
+      overflow-y: auto; transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .sidebar.open { left: 0; }
+    .sidebar .logo {
+      display: flex; align-items: center; text-decoration: none; color: var(--text-light);
+      font-size: 20px; font-weight: 700; font-family: 'Playfair Display', 'Georgia', serif;
+      letter-spacing: 2px; padding-bottom: 20px; margin-bottom: 16px;
+      border-bottom: 1px solid rgba(var(--rgb-soft), 0.04);
+    }
+    .sidebar .logo span {
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright), var(--accent));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; font-style: italic;
+      margin-left: 4px;
+    }
+    .sidebar .nav { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    .sidebar .nav a {
+      display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 10px;
+      color: var(--text-dim); text-decoration: none; transition: var(--transition-fast);
+      font-size: 13px; font-weight: 500;
+    }
+    .sidebar .nav a i { width: 20px; text-align: center; font-size: 15px; }
+    .sidebar .nav a:hover { color: var(--text-light); background: rgba(var(--rgb-soft), 0.03); }
+    .sidebar .nav a.active { color: var(--text-light); background: rgba(224, 184, 74, 0.08); border: 1px solid rgba(224, 184, 74, 0.12); }
+    .sidebar .nav a.active i { color: var(--accent-bright); }
+    .sidebar .nav a.avis-link {
+      color: var(--accent-bright);
+      background: rgba(184, 134, 11, 0.06);
+      border: 1px solid rgba(184, 134, 11, 0.12);
+      margin-top: 4px;
+    }
+    .sidebar .nav a.avis-link:hover {
+      background: rgba(184, 134, 11, 0.12);
+      color: var(--accent-bright);
+    }
+    .sidebar .nav-divider { height: 1px; background: rgba(var(--rgb-soft), 0.04); margin: 6px 0; }
+    .sidebar .nav-bottom { margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(var(--rgb-soft), 0.04); }
+    .sidebar .nav-bottom a { color: var(--text-muted); font-size: 12px; }
+    .sidebar .nav-bottom a:hover { color: var(--text-dim); }
+
+    /* ============================================================
+       MAIN / HEADER (harmonisé)
+       ============================================================ */
+    .main-content { flex: 1; width: 100%; min-height: 100vh; padding-bottom: 32px; }
+
+    .header {
+      position: sticky; top: 0; z-index: 50; display: flex; align-items: center;
+      justify-content: space-between; padding: calc(10px + var(--safe-top)) 16px 10px;
+      background: rgba(var(--rgb-veil), 0.92);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(224, 184, 74, 0.10);
+      gap: 12px; min-height: 60px;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: -1px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(224, 184, 74, 0.35), transparent);
+      pointer-events: none;
+    }
+    .header .header-left { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+    .brand-mark {
+      display: inline-flex;
+      align-items: baseline;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: var(--text-light);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .brand-mark span {
+      color: var(--accent-bright);
+      font-style: italic;
+      margin-left: 1px;
+    }
+    .header-divider {
+      width: 1px; height: 20px;
+      background: rgba(var(--rgb-soft), 0.08);
+      flex-shrink: 0;
+    }
+    .header .menu-toggle {
+      display: flex; align-items: center; justify-content: center; width: 38px; height: 38px;
+      border-radius: 10px; border: 1px solid rgba(var(--rgb-soft), 0.06); background: transparent;
+      color: var(--text-dim); cursor: pointer; transition: var(--transition-fast); font-size: 15px;
+      flex-shrink: 0;
+    }
+    .header .menu-toggle:hover {
+      border-color: rgba(224, 184, 74, 0.30);
+      color: var(--accent-bright);
+      background: rgba(224, 184, 74, 0.05);
+    }
+    .header .page-title {
+      font-size: clamp(13px, 1.6vw, 15px); font-weight: 600; color: var(--text-light);
+      font-family: 'Playfair Display', serif;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      min-width: 0;
+      letter-spacing: -0.01em;
+    }
+    .header .page-title i { color: var(--accent-bright); margin-right: 6px; font-size: 13px; }
+    .header .header-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .header .header-actions button {
+      width: 38px; height: 38px; border-radius: 10px;
+      border: 1px solid rgba(var(--rgb-soft), 0.06);
+      background: transparent; color: var(--text-dim);
+      cursor: pointer; transition: var(--transition-fast); font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .header .header-actions button:hover {
+      color: var(--accent-bright);
+      border-color: rgba(224, 184, 74, 0.30);
+      background: rgba(224, 184, 74, 0.05);
+    }
+
+    .container { max-width: 820px; margin: 0 auto; padding: 18px 16px 40px; }
+
+    /* ============================================================
+       ÉCRANS
+       ============================================================ */
+    .screen { display: none; }
+    .screen.active { display: block; animation: fadeIn 0.35s ease; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       HERO SECTION
+       ============================================================ */
+    .hero-section {
+      text-align: center;
+      padding: 12px 0 8px;
+    }
+    .hero-section .hero-badge {
+      display: inline-block;
+      padding: 5px 16px;
+      border-radius: 999px;
+      background: rgba(224, 184, 74, 0.08);
+      border: 1px solid rgba(224, 184, 74, 0.20);
+      color: var(--accent-bright);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+    }
+    .hero-section .hero-badge i { margin-right: 4px; }
+    .hero-section h1 {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+      color: var(--text-light);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .hero-section h1 span { color: var(--accent-bright); }
+    .hero-section .hero-sub {
+      font-size: clamp(14px, 1.8vw, 16px);
+      color: var(--text-dim);
+      margin-top: 8px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.65;
+    }
+    .hero-section .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-section .hero-stats .stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .hero-section .hero-stats .stat i { color: var(--accent-bright); }
+    .hero-section .hero-stats .stat strong { color: var(--text-light); }
+
+    /* ============================================================
+       STATUS SECTION
+       ============================================================ */
+    .status-section {
+      background: rgba(var(--rgb-soft), 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin: 16px 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .status-section .status-left { display: flex; align-items: center; gap: 12px; }
+    .status-section .status-left .status-icon {
+      width: 42px; height: 42px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-size: 18px;
+      flex-shrink: 0;
+    }
+    .status-section .status-left .status-icon.free { background: rgba(var(--rgb-soft), 0.04); color: var(--text-muted); }
+    .status-section .status-left .status-icon.premium { background: rgba(224,184,74,0.10); color: var(--accent-bright); }
+    .status-section .status-left .status-icon.expired { background: rgba(184,92,58,0.10); color: var(--danger-light); }
+    .status-section .status-left .status-icon.pending { background: rgba(212,160,23,0.12); color: var(--warning); }
+    .status-section .status-text .status-title { font-size: 14px; font-weight: 600; color: var(--text-light); }
+    .status-section .status-text .status-sub { font-size: 12.5px; color: var(--text-dim); }
+    .status-section .status-right .status-badge {
+      padding: 4px 14px; border-radius: 999px; font-size: 11px; font-weight: 600;
+    }
+    .status-section .status-right .status-badge.free { background: rgba(var(--rgb-soft), 0.04); color: var(--text-muted); border: 1px solid rgba(var(--rgb-soft), 0.08); }
+    .status-section .status-right .status-badge.premium { background: rgba(224,184,74,0.12); color: var(--accent-bright); border: 1px solid rgba(224,184,74,0.22); }
+    .status-section .status-right .status-badge.expired { background: rgba(184,92,58,0.12); color: var(--danger-light); border: 1px solid rgba(184,92,58,0.22); }
+    .status-section .status-right .status-badge.pending { background: rgba(212,160,23,0.12); color: var(--warning); border: 1px solid rgba(212,160,23,0.22); }
+
+    /* ============================================================
+       CARTE PRINCIPALE
+       ============================================================ */
+    .sub-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .sub-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(224, 184, 74, 0.55), transparent);
+    }
+
+    /* ============================================================
+       TOGGLE
+       ============================================================ */
+    .toggle-container {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; margin-bottom: 20px;
+    }
+    .toggle-label {
+      font-size: 14px; font-weight: 500; color: var(--text-muted);
+      cursor: pointer; transition: var(--transition-fast); user-select: none;
+      padding: 5px 10px; border-radius: 10px;
+    }
+    .toggle-label.active { color: var(--text-light); font-weight: 600; background: rgba(var(--rgb-soft), 0.04); }
+    .toggle-label.premium-active { color: var(--accent-bright); font-weight: 700; background: rgba(224,184,74,0.08); }
+    .toggle-switch {
+      width: 56px; height: 30px; background: rgba(var(--rgb-soft), 0.06);
+      border-radius: 999px; cursor: pointer; position: relative;
+      transition: var(--transition-fast); border: 1px solid rgba(var(--rgb-soft), 0.08);
+      flex-shrink: 0;
+    }
+    .toggle-switch.active { background: rgba(224, 184, 74, 0.20); border-color: rgba(224, 184, 74, 0.30); }
+    .toggle-switch .thumb {
+      width: 24px; height: 24px; background: var(--accent);
+      border-radius: 50%; position: absolute; top: 2px; left: 2px;
+      transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .toggle-switch.active .thumb { left: 28px; background: var(--accent-bright); }
+
+    /* ============================================================
+       PRIX
+       ============================================================ */
+    .price-display { text-align: center; padding: 12px 0 8px; }
+    .price-display .price-row {
+      display: flex; align-items: baseline; justify-content: center;
+      gap: 8px; flex-wrap: wrap;
+    }
+    .price-display .amount {
+      font-size: 44px; font-weight: 800;
+      font-family: 'Playfair Display', serif; color: var(--text-light);
+      letter-spacing: -0.02em;
+    }
+    .price-display .amount span { color: var(--accent-bright); }
+    .price-display .period { font-size: 16px; color: var(--text-dim); font-weight: 400; }
+    .price-display .price-original {
+      font-size: 18px; color: var(--text-muted);
+      text-decoration: line-through; font-weight: 400;
+    }
+    .price-display .price-sub {
+      font-size: 13px; color: var(--text-muted); margin-top: 6px;
+    }
+    .price-display .price-sub i { color: var(--accent-bright); margin-right: 4px; }
+    .price-display .price-sub strong { color: var(--text-light); }
+    .price-display .economy-badge {
+      display: inline-block; font-size: 12px; font-weight: 600;
+      color: var(--success-light); background: rgba(45,125,90,0.10);
+      padding: 5px 16px; border-radius: 999px; margin-top: 8px;
+      border: 1px solid rgba(45,125,90,0.22);
+    }
+    .price-display .economy-badge i { margin-right: 4px; }
+    .price-display .popular-badge {
+      display: inline-block; font-size: 10px; font-weight: 700;
+      color: var(--on-gold); background: var(--accent-bright);
+      padding: 2px 10px; border-radius: 999px; margin-left: 4px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .price-display .popular-badge i { margin-right: 3px; }
+
+    /* ============================================================
+       BÉNÉFICES
+       ============================================================ */
+    .benefits-section {
+      margin: 20px 0 22px; padding: 18px 0;
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+    }
+    .benefits-section .benefits-title {
+      font-size: 13px; font-weight: 600; color: var(--text-light);
+      margin-bottom: 14px; text-align: center;
+    }
+    .benefits-section .benefits-title span { color: var(--accent-bright); }
+    .benefits-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 10px 16px;
+    }
+    .benefits-grid .item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: var(--text-dim); padding: 6px 0;
+      transition: var(--transition-fast);
+    }
+    .benefits-grid .item:hover { color: var(--text-light); }
+    .benefits-grid .item .icon {
+      width: 32px; height: 32px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; flex-shrink: 0;
+    }
+    .benefits-grid .item .icon.gold { background: rgba(224,184,74,0.10); color: var(--accent-bright); border: 1px solid rgba(224,184,74,0.18); }
+    .benefits-grid .item .icon.green { background: rgba(45,125,90,0.10); color: var(--success-light); border: 1px solid rgba(45,125,90,0.20); }
+    .benefits-grid .item .icon.blue { background: rgba(74,175,224,0.10); color: var(--info); border: 1px solid rgba(74,175,224,0.20); }
+    .benefits-grid .item .icon.purple { background: rgba(155,89,182,0.10); color: var(--accent-purple); border: 1px solid rgba(155,89,182,0.20); }
+    .benefits-grid .item .icon.orange { background: rgba(212,160,23,0.10); color: var(--warning-bright); border: 1px solid rgba(212,160,23,0.20); }
+    .benefits-grid .item .icon.red { background: rgba(184,92,58,0.10); color: var(--danger-light); border: 1px solid rgba(184,92,58,0.20); }
+    .benefits-grid .item .text {
+      display: flex; flex-direction: column;
+    }
+    .benefits-grid .item .text .name {
+      font-size: 13px; font-weight: 500; color: var(--text-light);
+    }
+    .benefits-grid .item .text .desc {
+      font-size: 11px; color: var(--text-muted);
+    }
+
+    /* ============================================================
+       BOUTONS D'ABONNEMENT (harmonisés)
+       ============================================================ */
+    .subscribe-section { margin-top: 4px; }
+
+    .dual-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .btn-subscribe-auto,
+    .btn-subscribe-manual {
+      padding: 15px 18px;
+      border-radius: 16px;
+      border: none;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.22s ease, background-color 0.22s ease, border-color 0.22s ease;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 54px;
+      touch-action: manipulation;
+    }
+    .btn-subscribe-auto {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--on-gold);
+      box-shadow: 0 4px 16px rgba(224, 184, 74, 0.22);
+    }
+    .btn-subscribe-auto:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(224, 184, 74, 0.38);
+    }
+    .btn-subscribe-auto:active:not(:disabled) { transform: translateY(0) scale(0.99); }
+    .btn-subscribe-auto:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .btn-subscribe-manual {
+      background: rgba(37, 211, 102, 0.08);
+      color: #25D366;
+      border: 1.5px solid rgba(37, 211, 102, 0.30);
+    }
+    .btn-subscribe-manual:hover {
+      background: rgba(37, 211, 102, 0.14);
+      border-color: rgba(37, 211, 102, 0.50);
+      transform: translateY(-2px);
+    }
+    .btn-subscribe-manual:active { transform: translateY(0) scale(0.99); }
+
+    @media (max-width: 420px) { .dual-actions { grid-template-columns: 1fr; } }
+
+    .subscribe-section .secure-badges {
+      display: flex; justify-content: center; gap: 20px;
+      margin-top: 12px; flex-wrap: wrap;
+    }
+    .subscribe-section .secure-badges .badge {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11.5px; color: var(--text-muted);
+    }
+    .subscribe-section .secure-badges .badge i { color: var(--success-light); font-size: 12px; }
+
+    /* ============================================================
+       ÉCRAN EN ATTENTE
+       ============================================================ */
+    .pending-screen-content {
+      text-align: center;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      min-height: 60vh;
+      justify-content: center;
+    }
+    .pending-icon-wrap {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: rgba(212,160,23,0.10);
+      border: 2px solid rgba(212,160,23,0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+      color: var(--warning);
+    }
+    .pending-screen-content h1 {
+      font-size: clamp(22px, 4vw, 28px);
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      color: var(--text-light);
+    }
+    .pending-screen-content p {
+      font-size: clamp(13px, 1.5vw, 15px);
+      color: var(--text-dim);
+      max-width: 460px;
+      line-height: 1.7;
+    }
+    .pending-screen-content p strong { color: var(--accent-bright); }
+
+    .pending-info-card {
+      background: rgba(var(--rgb-soft), 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      max-width: 400px;
+      width: 100%;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .pending-info-card .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      gap: 10px;
+    }
+    .pending-info-card .info-row .label {
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pending-info-card .info-row .label i { color: var(--accent-bright); font-size: 12px; }
+    .pending-info-card .info-row .value {
+      color: var(--text-light);
+      font-weight: 600;
+      text-align: right;
+      word-break: break-all;
+    }
+    .pending-info-card .info-row .value.ref {
+      font-family: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+      font-size: 12px;
+      color: var(--accent-bright);
+      letter-spacing: 0.5px;
+    }
+
+    .pending-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 400px;
+      width: 100%;
+      margin-top: 8px;
+    }
+    .pending-actions .btn-action {
+      padding: 14px 20px;
+      border-radius: 16px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      min-height: 50px;
+      touch-action: manipulation;
+    }
+    .pending-actions .btn-action:active { transform: scale(0.99); }
+    .pending-actions .btn-action.primary {
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff;
+    }
+    .pending-actions .btn-action.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(37, 211, 102, 0.30);
+    }
+    .pending-actions .btn-action.secondary {
+      background: rgba(var(--rgb-soft), 0.04);
+      color: var(--text-dim);
+      border: 1px solid rgba(var(--rgb-soft), 0.08);
+    }
+    .pending-actions .btn-action.secondary:hover {
+      background: rgba(var(--rgb-soft), 0.08);
+      color: var(--text-light);
+      transform: translateY(-1px);
+    }
+
+    /* ============================================================
+       ÉCRAN PREMIUM
+       ============================================================ */
+    .premium-screen-content {
+      text-align: center;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .premium-crown-wrap {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(224,184,74,0.15), rgba(184,134,11,0.08));
+      border: 2px solid rgba(224,184,74,0.30);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 50px;
+      box-shadow: 0 0 30px rgba(224,184,74,0.10);
+    }
+    .premium-screen-content h1 {
+      font-size: clamp(24px, 4.5vw, 32px);
+      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+      color: var(--text-light);
+      line-height: 1.2;
+    }
+    .premium-screen-content h1 span {
+      color: var(--accent-bright);
+    }
+    .premium-screen-content .premium-sub {
+      font-size: clamp(13px, 1.5vw, 15px);
+      color: var(--text-dim);
+      max-width: 460px;
+      line-height: 1.7;
+    }
+
+    .premium-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      max-width: 500px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    .premium-info-card {
+      background: rgba(var(--rgb-soft), 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: var(--transition-fast);
+    }
+    .premium-info-card:hover {
+      border-color: rgba(224,184,74,0.22);
+      background: rgba(224,184,74,0.04);
+    }
+    .premium-info-card .pic-icon {
+      font-size: 20px;
+      color: var(--accent-bright);
+      margin-bottom: 2px;
+    }
+    .premium-info-card .pic-value {
+      font-size: clamp(14px, 1.6vw, 17px);
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      color: var(--text-light);
+      line-height: 1.2;
+      text-align: center;
+    }
+    .premium-info-card .pic-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .premium-countdown {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: rgba(224,184,74,0.06);
+      border: 1px solid rgba(224,184,74,0.15);
+      font-size: 14px;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+    .premium-countdown strong {
+      color: var(--accent-bright);
+      font-size: 17px;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+    }
+    .premium-countdown.warning {
+      background: rgba(212,160,23,0.08);
+      border-color: rgba(212,160,23,0.22);
+    }
+    .premium-countdown.warning strong { color: var(--warning); }
+    .premium-countdown.critical {
+      background: rgba(184,92,58,0.08);
+      border-color: rgba(184,92,58,0.22);
+    }
+    .premium-countdown.critical strong { color: var(--danger-light); }
+
+    .premium-benefits {
+      max-width: 500px;
+      width: 100%;
+      margin-top: 16px;
+      background: rgba(var(--rgb-soft), 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      text-align: left;
+    }
+    .premium-benefits .pb-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-bright);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .premium-benefits .pb-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .premium-benefits .pb-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-light);
+    }
+    .premium-benefits .pb-item i {
+      color: var(--success-light);
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .premium-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 400px;
+      width: 100%;
+      margin-top: 16px;
+    }
+    .premium-actions .btn-action {
+      padding: 14px 20px;
+      border-radius: 16px;
+      border: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      min-height: 50px;
+      touch-action: manipulation;
+    }
+    .premium-actions .btn-action:active { transform: scale(0.99); }
+    .premium-actions .btn-action.primary {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--on-gold);
+    }
+    .premium-actions .btn-action.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(224,184,74,0.25);
+    }
+    .premium-actions .btn-action.secondary {
+      background: rgba(var(--rgb-soft), 0.04);
+      color: var(--text-dim);
+      border: 1px solid rgba(var(--rgb-soft), 0.08);
+    }
+    .premium-actions .btn-action.secondary:hover {
+      background: rgba(var(--rgb-soft), 0.08);
+      color: var(--text-light);
+      transform: translateY(-1px);
+    }
+
+    /* ============================================================
+       ÉCRAN EXPIRÉ
+       ============================================================ */
+    .expired-screen-content {
+      text-align: center;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      min-height: 60vh;
+      justify-content: center;
+    }
+    .expired-icon-wrap {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: rgba(184,92,58,0.10);
+      border: 2px solid rgba(184,92,58,0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 44px;
+      color: var(--danger-light);
+    }
+    .expired-screen-content h1 {
+      font-size: clamp(22px, 4vw, 28px);
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      color: var(--text-light);
+    }
+    .expired-screen-content p {
+      font-size: clamp(13px, 1.5vw, 15px);
+      color: var(--text-dim);
+      max-width: 460px;
+      line-height: 1.7;
+    }
+    .expired-screen-content .expired-info {
+      background: rgba(var(--rgb-soft), 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 14px 20px;
+      font-size: 13px;
+      color: var(--text-dim);
+      max-width: 400px;
+    }
+    .expired-screen-content .expired-info strong { color: var(--danger-light); }
+
+    /* ============================================================
+       MODAL PAIEMENT (harmonisé)
+       ============================================================ */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 300; display: none;
+      align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .modal-overlay.show { display: flex; animation: fadeIn 0.25s ease; }
+
+    .modal {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 28px 24px;
+      max-width: 480px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      animation: slideUp 0.28s ease;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      border-radius: 20px 20px 0 0;
+      background: linear-gradient(90deg, transparent, rgba(224, 184, 74, 0.55), transparent);
+      z-index: 2;
+    }
+    .modal .close-btn {
+      position: absolute; top: 12px; right: 16px;
+      background: none; border: none;
+      color: var(--text-muted); font-size: 20px;
+      cursor: pointer; transition: var(--transition-fast);
+      z-index: 3;
+    }
+    .modal .close-btn:hover { color: var(--text-light); }
+
+    .modal .modal-title {
+      font-size: 20px; font-weight: 700;
+      font-family: 'Playfair Display', serif;
+      color: var(--text-light); margin-bottom: 4px;
+    }
+    .modal .modal-title span { color: var(--accent-bright); }
+    .modal .modal-sub {
+      font-size: 13px; color: var(--text-dim); margin-bottom: 20px;
+    }
+
+    .recap {
+      background: rgba(var(--rgb-soft), 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 14px 16px; margin-bottom: 16px;
+    }
+    .recap .row {
+      display: flex; justify-content: space-between;
+      padding: 4px 0; font-size: 13px; color: var(--text-dim);
+    }
+    .recap .row .label { color: var(--text-muted); }
+    .recap .row .value { color: var(--text-light); }
+    .recap .total {
+      border-top: 1px solid rgba(var(--rgb-soft), 0.06);
+      padding-top: 10px; margin-top: 6px;
+      font-size: 16px; font-weight: 700;
+    }
+    .recap .total .value { color: var(--accent-bright); }
+    .recap .saving {
+      border-top: 1px solid rgba(45,125,90,0.15);
+      padding-top: 8px; margin-top: 4px;
+      font-size: 13px; font-weight: 600;
+    }
+    .recap .saving .value { color: var(--success-light); }
+
+    /* Modes de paiement */
+    .payment-section {
+      margin-bottom: 16px;
+      padding: 14px 16px;
+      background: rgba(224, 184, 74, 0.03);
+      border: 1px solid rgba(224, 184, 74, 0.12);
+      border-radius: 12px;
+    }
+    .payment-section .ps-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-bright);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .payment-section .ps-title i { font-size: 13px; }
+
+    .payment-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .payment-logo-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 10px;
+      border-radius: 10px;
+      border: 2px solid var(--card-border);
+      background: rgba(var(--rgb-soft), 0.04);
+      cursor: pointer;
+      transition: var(--transition-fast);
+      flex: 1;
+      min-width: 80px;
+      max-width: 120px;
+      position: relative;
+    }
+    .payment-logo-btn:hover {
+      border-color: rgba(224, 184, 74, 0.30);
+      background: rgba(224, 184, 74, 0.06);
+    }
+    .payment-logo-btn.active {
+      border-color: var(--accent-bright);
+      background: rgba(224, 184, 74, 0.10);
+      box-shadow: 0 0 0 3px rgba(224, 184, 74, 0.15);
+    }
+    .payment-logo-btn.active::after {
+      content: '✓';
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-bright);
+      color: var(--on-gold);
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .payment-logo-btn img {
+      height: 30px;
+      width: auto;
+      max-width: 90px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .qr-zone {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 16px;
+      background: var(--block-bg);
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+    }
+    .qr-zone .qr-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-bright);
+      text-align: center;
+    }
+    .qr-zone .qr-image-wrap {
+      background: #FFFFFF;
+      padding: 10px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+    .qr-zone .qr-image-wrap img {
+      width: 180px;
+      height: 180px;
+      display: block;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    .qr-zone .qr-hint {
+      font-size: 11.5px;
+      color: var(--text-dim);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .qr-zone .qr-hint strong {
+      color: var(--text-light);
+      font-family: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+      letter-spacing: 0.5px;
+    }
+
+    .qr-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 20px;
+      background: var(--block-bg);
+      border: 1px dashed rgba(var(--rgb-soft), 0.10);
+      border-radius: 12px;
+      text-align: center;
+    }
+    .qr-placeholder i {
+      font-size: 32px;
+      color: var(--text-muted);
+      opacity: 0.5;
+    }
+    .qr-placeholder p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    .modal .form-group { margin-bottom: 14px; }
+    .modal .form-group label {
+      display: block; font-size: 12px; font-weight: 500;
+      color: var(--text-dim); margin-bottom: 4px;
+    }
+    .modal .form-group input {
+      width: 100%; padding: 11px 14px; border-radius: 10px;
+      border: 1px solid var(--card-border);
+      background: rgba(var(--rgb-soft), 0.04); color: var(--text-light);
+      font-size: 14px; font-family: 'Inter', sans-serif;
+      outline: none; transition: var(--transition-fast);
+    }
+    .modal .form-group input:focus {
+      border-color: rgba(224, 184, 74, 0.55);
+      background: rgba(224, 184, 74, 0.03);
+      box-shadow: 0 0 0 3px rgba(224, 184, 74, 0.10);
+    }
+    .modal .form-group input::placeholder { color: var(--text-muted); }
+
+    .payment-instructions {
+      background: rgba(224, 184, 74, 0.04);
+      border: 1px solid rgba(224, 184, 74, 0.10);
+      border-radius: 10px; padding: 12px 14px; margin-bottom: 16px;
+    }
+    .payment-instructions .title {
+      font-size: 12px; font-weight: 600;
+      color: var(--accent-bright); margin-bottom: 4px;
+    }
+    .payment-instructions .text {
+      font-size: 12px; color: var(--text-dim); line-height: 1.6;
+    }
+    .payment-instructions .text strong { color: var(--text-light); }
+
+    .modal .btn-confirm {
+      width: 100%; padding: 15px; border-radius: 16px; border: none;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff; font-size: 15px; font-weight: 700;
+      cursor: pointer; transition: transform 0.18s ease, box-shadow 0.22s ease;
+      font-family: 'Inter', sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px;
+      min-height: 54px;
+      touch-action: manipulation;
+    }
+    .modal .btn-confirm:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 30px rgba(37, 211, 102, 0.25);
+    }
+    .modal .btn-confirm:active:not(:disabled) { transform: scale(0.99); }
+    .modal .btn-confirm:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+      background: linear-gradient(135deg, #555, #333);
+      box-shadow: none;
+    }
+    .modal .btn-confirm .spinner {
+      display: none; width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: #fff; border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    .modal .btn-confirm.loading .spinner { display: block; }
+    .modal .btn-confirm.loading .btn-text { display: none; }
+    .modal .btn-confirm.loading .btn-icon { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .modal .btn-cancel {
+      width: 100%; padding: 12px; border-radius: 16px;
+      border: 1px solid rgba(var(--rgb-soft), 0.08);
+      background: transparent; color: var(--text-muted);
+      font-size: 13px; font-weight: 500; cursor: pointer;
+      transition: var(--transition-fast); font-family: 'Inter', sans-serif;
+      margin-top: 8px;
+    }
+    .modal .btn-cancel:hover { border-color: rgba(var(--rgb-soft), 0.14); color: var(--text-light); }
+
+    .modal .secure-text {
+      text-align: center; font-size: 11px;
+      color: var(--text-muted); margin-top: 12px;
+    }
+    .modal .secure-text i { color: var(--success-light); margin-right: 4px; }
+
+    /* ============================================================
+       SUPPORT
+       ============================================================ */
+    .support-section {
+      text-align: center; margin-top: 20px;
+      padding: 14px 16px;
+      background: rgba(var(--rgb-soft), 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+    }
+    .support-section .support-title {
+      font-size: 12px; font-weight: 500; color: var(--text-dim);
+    }
+    .support-section .support-title i { color: var(--accent-bright); }
+    .support-section .support-title strong { color: var(--text-light); }
+    .support-section .support-wa {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 6px; color: var(--success); font-weight: 600;
+      font-size: 14px; text-decoration: none;
+    }
+    .support-section .support-wa:hover { opacity: 0.8; }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (min-width: 768px) {
+      .sidebar { left: 0; display: flex; }
+      .sidebar-overlay { display: none !important; }
+      .main-content { margin-left: var(--sidebar-width); }
+      .header .menu-toggle { display: none; }
+      .sub-card { padding: 32px 28px; }
+    }
+
+    @media (max-width: 767px) {
+      .sidebar { left: -280px; }
+      .sidebar.open { left: 0; }
+      .container { padding: 14px 12px 24px; }
+      .sub-card { padding: 22px 18px; }
+      .price-display .amount { font-size: 34px; }
+      .benefits-grid { grid-template-columns: 1fr 1fr; gap: 6px 10px; }
+      .benefits-grid .item { font-size: 12.5px; padding: 5px 0; }
+      .benefits-grid .item .text .name { font-size: 12.5px; }
+      .benefits-grid .item .text .desc { font-size: 10.5px; }
+      .modal { padding: 22px 18px; }
+      .status-section { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .status-section .status-right { align-self: flex-start; }
+      .hero-section h1 { font-size: 26px; }
+      .premium-info-grid { gap: 8px; }
+      .premium-info-card { padding: 12px 6px; }
+      .premium-info-card .pic-value { font-size: 14px; }
+      .premium-info-card .pic-label { font-size: 9px; }
+      .premium-countdown { padding: 10px 18px; font-size: 13px; }
+      .premium-countdown strong { font-size: 15px; }
+      .qr-zone .qr-image-wrap img { width: 160px; height: 160px; }
+    }
+
+    @media (max-width: 640px) {
+      .brand-mark { font-size: 11.5px; }
+      .hero-section h1 { font-size: 26px; }
+      .hero-section .hero-sub { font-size: 14px; }
+      .price-display .amount { font-size: 30px; }
+      .benefits-grid { grid-template-columns: 1fr 1fr; gap: 6px 10px; }
+      .benefits-grid .item { font-size: 12px; }
+      .benefits-grid .item .text .name { font-size: 12px; }
+      .benefits-grid .item .text .desc { font-size: 10px; }
+      .sub-card { padding: 22px 18px; }
+      .premium-info-grid { gap: 8px; }
+      .premium-info-card { padding: 12px 8px; }
+      .premium-info-card .pic-value { font-size: 14px; }
+      .premium-info-card .pic-label { font-size: 9px; }
+      .modal { padding: 22px 18px; }
+      .qr-zone .qr-image-wrap img { width: 160px; height: 160px; }
+    }
+
+    @media (max-width: 480px) {
+      .header { padding: 8px 12px; padding-top: calc(8px + var(--safe-top)); min-height: 54px; }
+      .header .page-title { font-size: 13px; max-width: 160px; }
+      .header .menu-toggle { width: 34px; height: 34px; font-size: 13px; }
+      .header .header-actions button { width: 34px; height: 34px; font-size: 13px; }
+      .price-display .amount { font-size: 26px; }
+      .benefits-grid { grid-template-columns: 1fr 1fr; gap: 4px 8px; }
+      .benefits-grid .item .icon { width: 26px; height: 26px; font-size: 11px; }
+      .benefits-grid .item .text .name { font-size: 11.5px; }
+      .benefits-grid .item .text .desc { font-size: 9.5px; }
+      .subscribe-section .secure-badges { gap: 10px; }
+      .subscribe-section .secure-badges .badge { font-size: 10.5px; }
+      .btn-subscribe-auto, .btn-subscribe-manual { font-size: 13px; padding: 13px 14px; }
+      .hero-section .hero-stats { gap: 12px; }
+      .hero-section .hero-stats .stat { font-size: 11.5px; }
+      .status-section .status-text .status-title { font-size: 13px; }
+      .status-section .status-text .status-sub { font-size: 11.5px; }
+
+      .pending-icon-wrap { width: 80px; height: 80px; font-size: 36px; }
+      .pending-info-card { padding: 14px 16px; }
+      .pending-info-card .info-row { font-size: 12px; }
+
+      .premium-crown-wrap { width: 90px; height: 90px; font-size: 40px; }
+
+      .premium-info-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+      .premium-info-card { padding: 10px 4px; }
+      .premium-info-card .pic-icon { font-size: 16px; margin-bottom: 2px; }
+      .premium-info-card .pic-value { font-size: 11px; line-height: 1.2; }
+      .premium-info-card .pic-label { font-size: 8px; letter-spacing: 0.3px; }
+
+      .premium-benefits { padding: 16px 18px; }
+      .premium-benefits .pb-item { font-size: 13px; }
+
+      .payment-logo-btn { padding: 5px 8px; min-width: 70px; }
+      .payment-logo-btn img { height: 26px; max-width: 75px; }
+      .qr-zone { padding: 12px; }
+      .qr-zone .qr-image-wrap { padding: 8px; }
+      .qr-zone .qr-image-wrap img { width: 140px; height: 140px; }
+    }
+
+    @media (max-width: 380px) {
+      .brand-mark { display: none; }
+      .header-divider { display: none; }
+      .benefits-grid { grid-template-columns: 1fr; gap: 4px; }
+      .toggle-label { font-size: 12px; }
+      .toggle-switch { width: 50px; height: 26px; }
+      .toggle-switch .thumb { width: 20px; height: 20px; top: 2px; left: 2px; }
+      .toggle-switch.active .thumb { left: 26px; }
+      .payment-logo-btn img { height: 24px; max-width: 65px; }
+      .qr-zone .qr-image-wrap img { width: 120px; height: 120px; }
+
+      .premium-info-grid { grid-template-columns: repeat(3, 1fr); gap: 4px; }
+      .premium-info-card { padding: 8px 3px; }
+      .premium-info-card .pic-icon { font-size: 14px; }
+      .premium-info-card .pic-value { font-size: 10px; }
+      .premium-info-card .pic-label { font-size: 7px; }
+    }
+
+    /* ============================================================
+       ACCESSIBILITÉ
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .glow,
+      .screen.active,
+      .modal-overlay.show,
+      .modal {
+        animation: none !important;
+      }
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(224, 184, 74, 0.25); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(224, 184, 74, 0.45); }
+  </style>
+  <script src="analytics.js"></script>
+  <script src="register-sw.js" defer></script>
+  <!-- ⚡ ARVEXA FLUX v1 — navigation instantanée -->
+  <script src="flux-router.js?v=flux1" defer></script>
+</head>
+<body>
+
+<!-- ===== BACKGROUND ===== -->
+<div class="gradient-bg"></div>
+<div class="glow glow-1"></div>
+<div class="glow glow-2"></div>
+
+<!-- ===== OVERLAY ===== -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <a href="index.html" class="logo">ARVEX<span>A School</span></a>
+  <nav class="nav">
+    <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+    <a href="profil.html"><i class="fas fa-user"></i> Mon profil</a>
+    <a href="abonnement.html" class="active"><i class="fas fa-crown"></i> Mon abonnement</a>
+    <a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a>
+    <a href="arv-progress.html"><i class="fas fa-graduation-cap"></i> Arv-progress</a>
+    <a href="outils.html"><i class="fas fa-toolbox"></i> Outils</a>
+    <div class="nav-divider"></div>
+    <a href="index.html?avis=1" class="avis-link"><i class="fas fa-star"></i> Donner mon avis</a>
+    <div class="nav-divider"></div>
+    <div class="nav-bottom">
+      <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+    </div>
+  </nav>
+</aside>
+
+<!-- ===== MAIN ===== -->
+<div class="main-content">
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-left">
+      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <span class="header-divider" aria-hidden="true"></span>
+      <h1 class="page-title"><i class="fas fa-crown"></i> Mon abonnement</h1>
+    </div>
+    <div class="header-actions">
+      <button id="notifBtn" aria-label="Notifications">
+        <i class="fas fa-bell"></i>
+      </button>
+      <button id="profileBtn" aria-label="Profil">
+        <i class="fas fa-user"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== CONTAINER ===== -->
+  <div class="container">
+
+    <!-- ÉCRAN 1 — GRATUIT -->
+    <div class="screen" id="screenFree">
+
+      <div class="hero-section">
+        <div class="hero-badge"><i class="fas fa-fire"></i> Rejoins les étudiants qui réussissent</div>
+        <h1>👑 Passe à <span>Premium</span> et débloque tout</h1>
+        <p class="hero-sub">Accède à tous les chapitres, exercices et corrections pour préparer ton BAC en toute confiance !</p>
+        <div class="hero-stats">
+          <span class="stat"><i class="fas fa-check-circle"></i> <strong>100%</strong> des chapitres</span>
+          <span class="stat"><i class="fas fa-check-circle"></i> <strong>Toutes</strong> les corrections</span>
+          <span class="stat"><i class="fas fa-check-circle"></i> <strong>Tous</strong> les outils</span>
+        </div>
+      </div>
+
+      <div class="status-section">
+        <div class="status-left">
+          <div class="status-icon free"><i class="fas fa-unlock"></i></div>
+          <div class="status-text">
+            <div class="status-title">🔓 Compte gratuit</div>
+            <div class="status-sub">Tu as accès à une partie du contenu. Passe à Premium !</div>
+          </div>
+        </div>
+        <div class="status-right">
+          <span class="status-badge free">Gratuit</span>
+        </div>
+      </div>
+
+      <div class="sub-card">
+
+        <div class="toggle-container">
+          <span class="toggle-label active" id="labelMonthly">📅 Mensuel</span>
+          <div class="toggle-switch" id="toggleSwitch">
+            <div class="thumb"></div>
+          </div>
+          <span class="toggle-label" id="labelAnnual">📅 Annuel <span class="popular-badge"><i class="fas fa-star"></i></span></span>
+        </div>
+
+        <div class="price-display">
+          <div class="price-row">
+            <span class="price-original" id="priceOriginal" style="display:none;">18 000 FCFA</span>
+            <span class="amount"><span id="priceAmount">2 000</span></span>
+            <span class="period" id="pricePeriod">/ mois</span>
+          </div>
+          <div class="price-sub" id="priceSub">
+            <i class="fas fa-star"></i> Paiement mensuel, flexible et sans engagement
+          </div>
+          <div class="economy-badge" id="economyBadge" style="display:none;">
+            <i class="fas fa-tag"></i> <span id="economyText">Économise 6 000 FCFA</span>
+          </div>
+        </div>
+
+        <div class="benefits-section">
+          <div class="benefits-title">✨ Ce que tu obtiens avec <span>Premium</span></div>
+          <div class="benefits-grid">
+            <div class="item">
+              <div class="icon gold"><i class="fas fa-book-open"></i></div>
+              <div class="text">
+                <span class="name">Tous les chapitres</span>
+                <span class="desc">Accès illimité à toutes les matières</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="icon green"><i class="fas fa-pen-to-square"></i></div>
+              <div class="text">
+                <span class="name">Exercices corrigés</span>
+                <span class="desc">Tous les exercices avec corrections</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="icon purple"><i class="fas fa-stopwatch"></i></div>
+              <div class="text">
+                <span class="name">Mode Examen illimité</span>
+                <span class="desc">Épreuves à volonté (2/jour en gratuit)</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="icon orange"><i class="fas fa-robot"></i></div>
+              <div class="text">
+                <span class="name">ARV Assistant</span>
+                <span class="desc">60 questions/jour au lieu de 10</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="icon blue"><i class="fas fa-chalkboard-user"></i></div>
+              <div class="text">
+                <span class="name">Réviseur illimité</span>
+                <span class="desc">Fiches, flashcards et quiz à volonté</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="icon red"><i class="fas fa-route"></i></div>
+              <div class="text">
+                <span class="name">Planificateur IA</span>
+                <span class="desc">Programme de révision sur mesure</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="icon green"><i class="fas fa-graduation-cap"></i></div>
+              <div class="text">
+                <span class="name">Cahier sans limite</span>
+                <span class="desc">Cours par photo ou voix, lacunes détectées</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="icon gold"><i class="fas fa-chart-line"></i></div>
+              <div class="text">
+                <span class="name">Historiques et suivi</span>
+                <span class="desc">Tes épreuves et fiches conservées</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subscribe-section">
+          <div class="dual-actions">
+            <button class="btn-subscribe-auto" id="subscribeAutoBtn">
+              <i class="fas fa-bolt"></i>
+              <span>Paiement auto</span>
+            </button>
+            <button class="btn-subscribe-manual" id="subscribeManualBtn">
+              <i class="fab fa-whatsapp"></i>
+              <span>Paiement manuel</span>
+            </button>
+          </div>
+          <div class="secure-badges">
+            <span class="badge"><i class="fas fa-lock"></i> Paiement sécurisé</span>
+            <span class="badge"><i class="fas fa-bolt"></i> Activation rapide</span>
+            <span class="badge"><i class="fas fa-rotate-left"></i> Pas d'engagement</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="support-section">
+        <div class="support-title">
+          <i class="fas fa-headset"></i> Une question ? Notre équipe est là pour t'aider
+        </div>
+        <a href="https://wa.me/22774872082" target="_blank" rel="noopener noreferrer" class="support-wa">
+          <i class="fab fa-whatsapp"></i> <span data-contact-phone>+227 74 87 20 82</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- ÉCRAN 2 — EN ATTENTE -->
+    <div class="screen" id="screenPending">
+      <div class="pending-screen-content">
+        <div class="pending-icon-wrap">
+          <i class="fas fa-hourglass-half"></i>
+        </div>
+
+        <h1>⏳ Demande en attente</h1>
+        <p>
+          Nous vérifions ton paiement. Tu recevras une <strong>notification</strong>
+          dès que ton abonnement sera activé.
+        </p>
+
+        <div class="pending-info-card">
+          <div class="info-row">
+            <span class="label"><i class="fas fa-receipt"></i> Référence</span>
+            <span class="value ref" id="pendingRef">—</span>
+          </div>
+          <div class="info-row">
+            <span class="label"><i class="fas fa-calendar"></i> Forfait</span>
+            <span class="value" id="pendingPlan">—</span>
+          </div>
+          <div class="info-row">
+            <span class="label"><i class="fas fa-coins"></i> Montant</span>
+            <span class="value" id="pendingAmount">—</span>
+          </div>
+          <div class="info-row">
+            <span class="label"><i class="fas fa-clock"></i> Envoyée</span>
+            <span class="value" id="pendingDate">—</span>
+          </div>
+        </div>
+
+        <div class="pending-actions">
+          <a href="https://wa.me/22774872082" target="_blank" rel="noopener noreferrer" class="btn-action primary">
+            <i class="fab fa-whatsapp"></i> Contacter le support
+          </a>
+          <a href="index.html" class="btn-action secondary">
+            <i class="fas fa-home"></i> Retour à l'accueil
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉCRAN 3 — PREMIUM -->
+    <div class="screen" id="screenPremium">
+      <div class="premium-screen-content">
+        <div class="premium-crown-wrap">👑</div>
+
+        <h1>Premium <span>actif</span> !</h1>
+        <p class="premium-sub">
+          Félicitations ! Tu as maintenant accès à <strong style="color:var(--accent-bright)">tous</strong>
+          les contenus ARVEXA School.
+        </p>
+
+        <div class="premium-info-grid">
+          <div class="premium-info-card">
+            <div class="pic-icon">📅</div>
+            <div class="pic-value" id="premiumPlan">—</div>
+            <div class="pic-label">Forfait</div>
+          </div>
+          <div class="premium-info-card">
+            <div class="pic-icon">🚀</div>
+            <div class="pic-value" id="premiumStartDate">—</div>
+            <div class="pic-label">Début</div>
+          </div>
+          <div class="premium-info-card">
+            <div class="pic-icon">🏁</div>
+            <div class="pic-value" id="premiumEndDate">—</div>
+            <div class="pic-label">Fin</div>
+          </div>
+        </div>
+
+        <div class="premium-countdown" id="premiumCountdown">
+          <i class="fas fa-hourglass-half"></i>
+          <span>Il te reste <strong id="premiumDaysLeft">—</strong> jours</span>
+        </div>
+
+        <div class="premium-benefits">
+          <div class="pb-title"><i class="fas fa-check-circle"></i> Tu as débloqué</div>
+          <div class="pb-list">
+            <div class="pb-item"><i class="fas fa-check"></i> Tous les chapitres de toutes les matières</div>
+            <div class="pb-item"><i class="fas fa-check"></i> Tous les exercices et leurs corrections</div>
+            <div class="pb-item"><i class="fas fa-check"></i> Mode Examen illimité (épreuves à volonté)</div>
+            <div class="pb-item"><i class="fas fa-check"></i> ARV Assistant : 60 questions par jour</div>
+            <div class="pb-item"><i class="fas fa-check"></i> Réviseur illimité : fiches, flashcards, quiz</div>
+            <div class="pb-item"><i class="fas fa-check"></i> Planificateur IA : programme sur mesure</div>
+            <div class="pb-item"><i class="fas fa-check"></i> Cahier ARV-PROGRESS sans limite</div>
+            <div class="pb-item"><i class="fas fa-check"></i> Historiques d'épreuves et suivi de progression</div>
+          </div>
+        </div>
+
+        <div class="premium-actions">
+          <a href="https://wa.me/22774872082" target="_blank" rel="noopener noreferrer" class="btn-action secondary">
+            <i class="fab fa-whatsapp"></i> Support
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÉCRAN 4 — EXPIRÉ -->
+    <div class="screen" id="screenExpired">
+      <div class="expired-screen-content">
+        <div class="expired-icon-wrap">
+          <i class="fas fa-clock"></i>
+        </div>
+
+        <h1>⏳ Abonnement expiré</h1>
+        <p>
+          Ton abonnement Premium a pris fin. Renouvelle-le pour continuer à profiter
+          de tous les contenus ARVEXA School.
+        </p>
+
+        <div class="expired-info" id="expiredInfo" style="display:none;">
+          Ton abonnement a expiré le <strong id="expiredDate">—</strong>
+        </div>
+
+        <div class="pending-actions">
+          <button type="button" class="btn-action primary" id="renewBtn">
+            <i class="fas fa-redo"></i> Renouveler mon abonnement
+          </button>
+          <a href="https://wa.me/22774872082" target="_blank" rel="noopener noreferrer" class="btn-action secondary">
+            <i class="fab fa-whatsapp"></i> Contacter le support
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== MODAL PAIEMENT ===== -->
+<div class="modal-overlay" id="paymentModal">
+  <div class="modal">
+    <button class="close-btn" id="closeModal" aria-label="Fermer"><i class="fas fa-times"></i></button>
+
+    <div class="modal-title">💳 Confirmation de <span>paiement</span></div>
+    <div class="modal-sub">Vérifie les informations avant de confirmer.</div>
+
+    <div class="recap" id="recapContainer">
+      <div class="row">
+        <span class="label">📅 Forfait</span>
+        <span class="value" id="recapPlan">Mensuel</span>
+      </div>
+      <div class="row" id="recapPriceRow">
+        <span class="label">💰 Prix</span>
+        <span class="value" id="recapPrice">2 000 FCFA</span>
+      </div>
+      <div class="row total">
+        <span class="label">💰 Total à payer</span>
+        <span class="value" id="recapTotal">2 000 FCFA</span>
+      </div>
+      <div class="row saving" id="recapSavingRow" style="display:none;">
+        <span class="label">💡 Économie réalisée</span>
+        <span class="value" id="recapSaving">0 FCFA</span>
+      </div>
+    </div>
+
+    <div class="payment-section">
+      <div class="ps-title">
+        <i class="fas fa-credit-card"></i> Choisis ton mode de paiement
+      </div>
+
+      <div class="payment-logos">
+        <button type="button" class="payment-logo-btn" data-method="mynita">
+          <img src="mynita.png" alt="Mynita" loading="lazy" onerror="this.style.display='none';this.parentNode.innerHTML+='<span style=\'font-size:11px;color:#fff\'>Mynita</span>'">
+        </button>
+        <button type="button" class="payment-logo-btn" data-method="wave">
+          <img src="wave.png" alt="Wave" loading="lazy" onerror="this.style.display='none';this.parentNode.innerHTML+='<span style=\'font-size:11px;color:#fff\'>Wave</span>'">
+        </button>
+        <button type="button" class="payment-logo-btn" data-method="amanata">
+          <img src="amanata.png" alt="Amanata" loading="lazy" onerror="this.style.display='none';this.parentNode.innerHTML+='<span style=\'font-size:11px;color:#fff\'>Amanata</span>'">
+        </button>
+      </div>
+
+      <div id="qrZone">
+        <div class="qr-placeholder">
+          <i class="fas fa-qrcode"></i>
+          <p>Choisis un mode de paiement pour voir le QR code</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="fullNameInput">👤 Nom complet</label>
+      <input type="text" id="fullNameInput" placeholder="Jean Dupont">
+    </div>
+
+    <div class="form-group">
+      <label for="whatsappInput">📱 Numéro WhatsApp</label>
+      <input type="tel" id="whatsappInput" placeholder="97 00 00 00" maxlength="10">
+    </div>
+
+    <div class="payment-instructions">
+      <div class="title">📝 Comment payer</div>
+      <div class="text">
+        <strong>1️⃣</strong> Scanne le QR code ou envoie au <strong data-contact-phone>+227 74 87 20 82</strong><br>
+        <strong>2️⃣</strong> Prends une <strong>capture d'écran</strong><br>
+        <strong>3️⃣</strong> Clique sur <strong>"Confirmer et envoyer"</strong><br>
+        <strong>4️⃣</strong> Envoie la capture dans la conversation WhatsApp<br>
+        <strong>5️⃣</strong> Activation dans les <strong>minutes</strong> qui suivent
+      </div>
+    </div>
+
+    <button class="btn-confirm" id="confirmPaymentBtn" disabled>
+      <span class="btn-icon"><i class="fab fa-whatsapp"></i></span>
+      <span class="btn-text">Choisis un mode de paiement</span>
+      <span class="spinner"></span>
+    </button>
+
+    <button class="btn-cancel" id="cancelModal">Annuler</button>
+
+    <div class="secure-text">
+      <i class="fas fa-lock"></i> Paiement manuel · Activation après confirmation
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SCRIPTS                                                       -->
+<!-- ============================================================ -->
+<script type="importmap">
+{
+  "imports": {
+    "firebase/app": "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js",
+    "firebase/auth": "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js",
+    "firebase/firestore": "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js"
+  }
+}
+</script>
+
+<script type="module">
+// ================================================================
+// ABONNEMENT — Version harmonisée (code promo retiré)
+// ================================================================
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import {
+  initializeFirestore,
+  persistentLocalCache,
+  persistentSingleTabManager,
+  doc,
+  updateDoc,
+  onSnapshot,
+  serverTimestamp,
+  collection,
+  addDoc
+} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+// ================================================================
+// FIREBASE
+// ================================================================
+const firebaseConfig = {
+  apiKey: "AIzaSyDHscOXw3rLuhV6z1Cny-bdYCumqpnG7QE",
+  authDomain: "arvexa-fbf10.firebaseapp.com",
+  projectId: "arvexa-fbf10",
+  storageBucket: "arvexa-fbf10.firebasestorage.app",
+  messagingSenderId: "920108330053",
+  appId: "1:920108330053:web:f532d71cbc2c824bc7472c"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const db = (window.__ARVEXA_DB_SHARED__ !== undefined ? window.__ARVEXA_DB_SHARED__ : (window.__ARVEXA_DB_SHARED__ = initializeFirestore(app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentSingleTabManager()
+  })
+})));
+
+try {
+  await setPersistence(auth, browserLocalPersistence);
+} catch (e) {
+  console.warn('[Auth] Persistance locale indisponible :', e.code || e.message);
+}
+
+// ================================================================
+// CONFIG
+// ================================================================
+const PRICES = {
+  monthly: 2000,
+  annual: 18000
+};
+
+const SUPPORT_WHATSAPP = (window.ARVEXA_CONTACT || {}).phoneRaw || '22774872082';
+const ADMIN_API_URL = 'https://admin-89.vercel.app/api/admin';
+
+// ================================================================
+// MODES DE PAIEMENT
+// ================================================================
+const PAYMENT_METHODS = {
+  mynita: {
+    name: 'Mynita',
+    logo: 'mynita.png',
+    qr: 'mynita_qr.png',
+    color: '#FF6B00'
+  },
+  wave: {
+    name: 'Wave',
+    logo: 'wave.png',
+    qr: 'wave_qr.png',
+    color: '#1DC3F0'
+  },
+  amanata: {
+    name: 'Amanata',
+    logo: 'amanata.png',
+    qr: 'amanata_qr.png',
+    color: '#00A651'
+  }
+};
+
+// ================================================================
+// SESSION / CACHE
+// ================================================================
+const SESSION_KEY = 'arvexa_session';
+const USER_DATA_KEY = 'arvexa_user_data';
+const LAST_UID_KEY = 'arvexa_last_uid';
+const RENEW_FLAG_KEY = 'arvexa_renew_intent';
+
+function saveSession(user) {
+  if (!user) return;
+  try {
+    const data = {
+      uid: user.uid,
+      email: user.email,
+      lastActive: Date.now()
+    };
+    localStorage.setItem(SESSION_KEY, JSON.stringify(data));
+    localStorage.setItem(LAST_UID_KEY, user.uid);
+  } catch (e) {}
+}
+
+function clearSession() {
+  try {
+    localStorage.removeItem(SESSION_KEY);
+    localStorage.removeItem(USER_DATA_KEY);
+    localStorage.removeItem(LAST_UID_KEY);
+    sessionStorage.removeItem(SESSION_KEY);
+  } catch (e) {}
+}
+
+function getCachedUserData(uid) {
+  try {
+    const raw = localStorage.getItem(USER_DATA_KEY);
+    if (!raw) return null;
+    const cached = JSON.parse(raw);
+    if (cached._uid && cached._uid !== uid) {
+      localStorage.removeItem(USER_DATA_KEY);
+      return null;
+    }
+    return cached;
+  } catch (e) { return null; }
+}
+
+function saveUserDataToCache(data, uid) {
+  try {
+    localStorage.setItem(USER_DATA_KEY, JSON.stringify({
+      ...data,
+      _uid: uid,
+      _cachedAt: Date.now()
+    }));
+  } catch (e) {}
+}
+
+// ================================================================
+// DOM
+// ================================================================
+const toggleSwitch = document.getElementById('toggleSwitch');
+const labelMonthly = document.getElementById('labelMonthly');
+const labelAnnual = document.getElementById('labelAnnual');
+const priceAmount = document.getElementById('priceAmount');
+const pricePeriod = document.getElementById('pricePeriod');
+const priceOriginal = document.getElementById('priceOriginal');
+const priceSub = document.getElementById('priceSub');
+const economyBadge = document.getElementById('economyBadge');
+const economyText = document.getElementById('economyText');
+
+const modal = document.getElementById('paymentModal');
+const closeModalBtn = document.getElementById('closeModal');
+const cancelModalBtn = document.getElementById('cancelModal');
+const recapPlan = document.getElementById('recapPlan');
+const recapPrice = document.getElementById('recapPrice');
+const recapTotal = document.getElementById('recapTotal');
+const recapSavingRow = document.getElementById('recapSavingRow');
+const recapSaving = document.getElementById('recapSaving');
+const fullNameInput = document.getElementById('fullNameInput');
+const whatsappInput = document.getElementById('whatsappInput');
+const confirmBtn = document.getElementById('confirmPaymentBtn');
+const qrZone = document.getElementById('qrZone');
+
+const screenFree = document.getElementById('screenFree');
+const screenPending = document.getElementById('screenPending');
+const screenPremium = document.getElementById('screenPremium');
+const screenExpired = document.getElementById('screenExpired');
+
+// ================================================================
+// ÉTAT
+// ================================================================
+let currentPlan = 'monthly';
+let selectedPaymentMethod = null;
+let userData = null;
+let currentUser = null;
+let isSubscribing = false;
+let unsubscribeUser = null;
+let currentUid = null;
+
+// ================================================================
+// UTILITAIRE — TIMESTAMP
+// ================================================================
+function toDate(value) {
+  if (!value) return null;
+  if (typeof value.toDate === 'function') return value.toDate();
+  if (value.seconds !== undefined) return new Date(value.seconds * 1000);
+  if (value._seconds !== undefined) return new Date(value._seconds * 1000);
+  const date = value instanceof Date ? value : new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+// ================================================================
+// ÉTAT UTILISATEUR
+// ================================================================
+function getUserState(data) {
+  if (!data) return 'free';
+
+  const status = data.subscriptionStatus || 'none';
+  const endDate = toDate(data.subscriptionEndDate);
+
+  if (status === 'pending') return 'pending';
+
+  const hasPremium = data.premium === true ||
+                     data.isUnlocked === true ||
+                     data.hasDeposited === true;
+
+  if (hasPremium && endDate) {
+    return endDate.getTime() > Date.now() ? 'premium' : 'expired';
+  }
+
+  if (status === 'expired') return 'expired';
+  if (hasPremium && !endDate) return 'premium';
+
+  return 'free';
+}
+
+// ================================================================
+// AFFICHER UN ÉCRAN
+// ================================================================
+function showScreen(screenName) {
+  [screenFree, screenPending, screenPremium, screenExpired].forEach(s => {
+    s.classList.remove('active');
+  });
+
+  const screens = {
+    free: screenFree,
+    pending: screenPending,
+    premium: screenPremium,
+    expired: screenExpired
+  };
+
+  const target = screens[screenName];
+  if (target) {
+    target.classList.add('active');
+  }
+}
+
+// ================================================================
+// RENDU DES ÉCRANS
+// ================================================================
+function renderPendingScreen(data) {
+  document.getElementById('pendingRef').textContent = data.subscriptionRequestId || '—';
+
+  const planLabels = { monthly: '📱 Mensuel', annual: '📅 Annuel' };
+  document.getElementById('pendingPlan').textContent = planLabels[data.subscriptionPlan] || '—';
+
+  document.getElementById('pendingAmount').textContent =
+    data.subscriptionPrice ? data.subscriptionPrice.toLocaleString('fr-FR') + ' FCFA' : '—';
+
+  const reqDate = toDate(data.subscriptionRequestDate);
+  document.getElementById('pendingDate').textContent = reqDate
+    ? reqDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+    : '—';
+}
+
+function renderPremiumScreen(data) {
+  const startDate = toDate(data.subscriptionStartDate);
+  const endDate = toDate(data.subscriptionEndDate);
+
+  const planLabels = { monthly: 'Mensuel', annual: 'Annuel' };
+  document.getElementById('premiumPlan').textContent = planLabels[data.subscriptionPlan] || 'Premium';
+
+  document.getElementById('premiumStartDate').textContent = startDate
+    ? startDate.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: '2-digit' }) : '—';
+
+  document.getElementById('premiumEndDate').textContent = endDate
+    ? endDate.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: '2-digit' }) : '—';
+
+  const countdownEl = document.getElementById('premiumCountdown');
+  const daysLeftEl = document.getElementById('premiumDaysLeft');
+
+  if (endDate) {
+    const daysLeft = Math.ceil((endDate - new Date()) / (1000 * 60 * 60 * 24));
+
+    if (daysLeft <= 0) {
+      daysLeftEl.textContent = '0';
+      countdownEl.className = 'premium-countdown critical';
+    } else if (daysLeft <= 7) {
+      daysLeftEl.textContent = daysLeft;
+      countdownEl.className = 'premium-countdown critical';
+    } else if (daysLeft <= 30) {
+      daysLeftEl.textContent = daysLeft;
+      countdownEl.className = 'premium-countdown warning';
+    } else {
+      daysLeftEl.textContent = daysLeft;
+      countdownEl.className = 'premium-countdown';
+    }
+  } else {
+    daysLeftEl.textContent = '∞';
+    countdownEl.className = 'premium-countdown';
+    countdownEl.querySelector('span').innerHTML = 'Accès <strong>à vie</strong>';
+  }
+}
+
+function renderExpiredScreen(data) {
+  const endDate = toDate(data.subscriptionEndDate);
+  const expiredInfo = document.getElementById('expiredInfo');
+
+  if (endDate) {
+    expiredInfo.style.display = 'block';
+    document.getElementById('expiredDate').textContent =
+      endDate.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+  } else {
+    expiredInfo.style.display = 'none';
+  }
+}
+
+function routeToScreen(data) {
+  userData = data;
+  const state = getUserState(data);
+
+  try {
+    const renewIntent = localStorage.getItem(RENEW_FLAG_KEY);
+    if (renewIntent === 'true' && state === 'expired') {
+      showScreen('free');
+      if (data && fullNameInput) {
+        const fullName = data.fullName || ((data.firstName || '') + ' ' + (data.lastName || '')).trim();
+        if (fullName && !fullNameInput.value) fullNameInput.value = fullName;
+        if (data.phone && !whatsappInput.value) whatsappInput.value = data.phone;
+      }
+      return;
+    }
+  } catch (e) {}
+
+  switch (state) {
+    case 'pending':
+      renderPendingScreen(data);
+      showScreen('pending');
+      break;
+    case 'premium':
+      try { localStorage.removeItem(RENEW_FLAG_KEY); } catch (e) {}
+      renderPremiumScreen(data);
+      showScreen('premium');
+      break;
+    case 'expired':
+      renderExpiredScreen(data);
+      showScreen('expired');
+      break;
+    default:
+      showScreen('free');
+      if (data && fullNameInput) {
+        const fullName = data.fullName || ((data.firstName || '') + ' ' + (data.lastName || '')).trim();
+        if (fullName && !fullNameInput.value) fullNameInput.value = fullName;
+        if (data.phone && !whatsappInput.value) whatsappInput.value = data.phone;
+      }
+  }
+}
+
+// ================================================================
+// PRIX (sans réduction — code promo retiré)
+// ================================================================
+function getPrice() {
+  const price = PRICES[currentPlan];
+  return { original: price, final: price, discount: 0 };
+}
+
+function getSavings() {
+  const display = getPrice();
+  const saving = display.original - display.final;
+  let extraSaving = 0;
+  if (currentPlan === 'annual') {
+    const monthlyTotal = PRICES.monthly * 12;
+    extraSaving = monthlyTotal - display.original;
+  }
+  return { saving, extraSaving, totalSaving: saving + extraSaving };
+}
+
+function updateDisplay() {
+  const display = getPrice();
+  const savings = getSavings();
+  const isAnnual = currentPlan === 'annual';
+
+  priceAmount.textContent = display.final.toLocaleString('fr-FR');
+  pricePeriod.textContent = isAnnual ? '/ an' : '/ mois';
+
+  priceOriginal.style.display = 'none';
+
+  if (isAnnual) {
+    const monthlyPrice = Math.round(display.final / 12);
+    priceSub.innerHTML = `<i class="fas fa-star"></i> Soit <strong>${monthlyPrice.toLocaleString('fr-FR')} FCFA</strong> / mois — Économie de <strong>${savings.totalSaving.toLocaleString('fr-FR')} FCFA</strong>`;
+  } else {
+    priceSub.innerHTML = '<i class="fas fa-star"></i> Paiement mensuel, flexible et sans engagement';
+  }
+
+  if (savings.totalSaving > 0) {
+    economyBadge.style.display = 'inline-block';
+    economyBadge.className = 'economy-badge';
+    economyText.textContent = `🎉 Économise ${savings.totalSaving.toLocaleString('fr-FR')} FCFA`;
+  } else {
+    economyBadge.style.display = 'none';
+  }
+
+  toggleSwitch.classList.toggle('active', isAnnual);
+  labelMonthly.classList.toggle('active', !isAnnual);
+  labelMonthly.classList.toggle('premium-active', isAnnual);
+  labelAnnual.classList.toggle('active', isAnnual);
+  labelAnnual.classList.toggle('premium-active', !isAnnual);
+
+  updateRecap();
+}
+
+function updateRecap() {
+  const planName = currentPlan === 'monthly' ? 'Mensuel' : 'Annuel';
+  const display = getPrice();
+  const savings = getSavings();
+
+  recapPlan.textContent = planName;
+  recapPrice.textContent = display.original.toLocaleString('fr-FR') + ' FCFA';
+  recapTotal.textContent = display.final.toLocaleString('fr-FR') + ' FCFA';
+
+  if (savings.totalSaving > 0) {
+    recapSavingRow.style.display = 'flex';
+    recapSaving.textContent = savings.totalSaving.toLocaleString('fr-FR') + ' FCFA';
+  } else {
+    recapSavingRow.style.display = 'none';
+  }
+}
+
+// ================================================================
+// SÉLECTION MODE DE PAIEMENT
+// ================================================================
+function selectPaymentMethod(methodKey) {
+  selectedPaymentMethod = methodKey;
+
+  document.querySelectorAll('.payment-logo-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.method === methodKey);
+  });
+
+  renderQR(methodKey);
+  updateConfirmButtonState();
+}
+
+function renderQR(methodKey) {
+  const method = PAYMENT_METHODS[methodKey];
+  if (!method) return;
+
+  qrZone.innerHTML = `
+    <div class="qr-zone">
+      <div class="qr-label">📱 Scanne avec ${method.name}</div>
+      <div class="qr-image-wrap">
+        <img src="${method.qr}" alt="QR code ${method.name}" loading="lazy" onerror="this.parentNode.innerHTML='<div style=\'padding:20px;text-align:center;color:#333;font-size:12px;font-weight:600\'>QR ${method.name}<br>Indisponible</div>'">
+      </div>
+      <div class="qr-hint">
+        Ou envoie le montant au<br>
+        <strong data-contact-phone>+227 74 87 20 82</strong>
+      </div>
+    </div>
+  `;
+}
+
+function updateConfirmButtonState() {
+  const hasMethod = selectedPaymentMethod !== null;
+
+  if (!hasMethod) {
+    confirmBtn.disabled = true;
+    confirmBtn.querySelector('.btn-text').textContent = 'Choisis un mode de paiement';
+  } else {
+    confirmBtn.disabled = false;
+    confirmBtn.querySelector('.btn-text').textContent = 'Confirmer et envoyer sur WhatsApp';
+  }
+}
+
+// ================================================================
+// MODAL
+// ================================================================
+function openModal() {
+  if (!currentUser) {
+    window.location.replace('login.html');
+    return;
+  }
+
+  if (userData) {
+    const fullName = userData.fullName || ((userData.firstName || '') + ' ' + (userData.lastName || '')).trim();
+    if (fullName && !fullNameInput.value) fullNameInput.value = fullName;
+    if (userData.phone && !whatsappInput.value) whatsappInput.value = userData.phone;
+  }
+
+  selectedPaymentMethod = null;
+  document.querySelectorAll('.payment-logo-btn').forEach(btn => btn.classList.remove('active'));
+  qrZone.innerHTML = `
+    <div class="qr-placeholder">
+      <i class="fas fa-qrcode"></i>
+      <p>Choisis un mode de paiement pour voir le QR code</p>
+    </div>
+  `;
+
+  updateRecap();
+  updateConfirmButtonState();
+
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  modal.classList.remove('show');
+  document.body.style.overflow = '';
+  confirmBtn.classList.remove('loading');
+  confirmBtn.disabled = false;
+}
+
+// ================================================================
+// IDENTIFIANT
+// ================================================================
+function generateRequestId() {
+  const timestamp = Date.now().toString(36).toUpperCase();
+  const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+  return 'ARV-' + timestamp + '-' + random;
+}
+
+// ================================================================
+// ENVOI WHATSAPP + FIRESTORE + NOTIFICATION ADMIN
+// ================================================================
+async function sendToWhatsApp() {
+  if (isSubscribing) return;
+
+  const fullName = fullNameInput.value.trim();
+  const whatsapp = whatsappInput.value.trim().replace(/\s/g, '');
+  const display = getPrice();
+  const planName = currentPlan === 'monthly' ? 'Mensuel' : 'Annuel';
+  const requestId = generateRequestId();
+
+  if (!selectedPaymentMethod) {
+    window.arvexaConfirm({
+      title: 'Mode de paiement',
+      message: 'Choisis d\'abord un <strong>mode de paiement</strong> pour continuer.',
+      icon: '💳',
+      confirmText: 'OK',
+      showCancel: false,
+      variant: 'primary'
+    });
+    return;
+  }
+
+  if (!fullName) {
+    fullNameInput.focus();
+    return;
+  }
+
+  if (!whatsapp || whatsapp.length < 8) {
+    whatsappInput.focus();
+    return;
+  }
+
+  isSubscribing = true;
+  confirmBtn.classList.add('loading');
+  confirmBtn.disabled = true;
+
+  let message = '👋 Bonjour ARVEXA School, je veux m\'abonner au Premium (' + planName + ') — ' + display.final.toLocaleString('fr-FR') + ' FCFA.\n';
+  message += '🔖 Réf : ' + requestId + '\n';
+  message += '👤 Nom : ' + fullName;
+
+  const saved = await saveSubscriptionRequest(fullName, whatsapp, display, requestId, selectedPaymentMethod);
+  if (!saved) {
+    isSubscribing = false;
+    confirmBtn.classList.remove('loading');
+    confirmBtn.disabled = false;
+    return;
+  }
+
+  notifyAdminPush(fullName, display, requestId, planName).catch((e) => {
+    console.warn('Push admin failed:', e.message);
+  });
+
+  const encodedMessage = encodeURIComponent(message);
+  const waUrl = 'https://wa.me/' + SUPPORT_WHATSAPP + '?text=' + encodedMessage;
+  window.open(waUrl, '_blank', 'noopener,noreferrer');
+
+  setTimeout(() => {
+    closeModal();
+    isSubscribing = false;
+
+    try { localStorage.removeItem(RENEW_FLAG_KEY); } catch (e) {}
+
+    if (userData) {
+      userData.subscriptionStatus = 'pending';
+      userData.subscriptionPlan = currentPlan;
+      userData.subscriptionPrice = display.final;
+      userData.subscriptionRequestId = requestId;
+      userData.subscriptionRequestDate = new Date();
+      userData.subscriptionPaymentMethod = selectedPaymentMethod;
+    }
+    renderPendingScreen(userData || {});
+    showScreen('pending');
+  }, 600);
+}
+
+// ================================================================
+// SAUVEGARDE FIRESTORE
+// ================================================================
+async function saveSubscriptionRequest(fullName, whatsapp, display, requestId, paymentMethod) {
+  if (!currentUser) return false;
+  try {
+    await updateDoc(doc(db, 'users', currentUser.uid), {
+      subscriptionStatus: 'pending',
+      subscriptionPlan: currentPlan,
+      subscriptionPrice: display.final,
+      subscriptionOriginalPrice: display.original,
+      subscriptionRequestId: requestId,
+      subscriptionRequestDate: serverTimestamp(),
+      subscriptionFullName: fullName,
+      subscriptionWhatsapp: whatsapp,
+      subscriptionPaymentMethod: paymentMethod
+    });
+
+    try {
+      await addDoc(collection(db, 'admin_notifications'), {
+        kind: 'subscription_request',
+        title: '💳 Nouvelle demande Premium',
+        message: `${fullName} — ${currentPlan === 'annual' ? 'Annuel' : 'Mensuel'} · ${display.final.toLocaleString('fr-FR')} FCFA`,
+        userUid: currentUser.uid,
+        userEmail: currentUser.email || '',
+        userName: fullName,
+        userWhatsapp: whatsapp,
+        plan: currentPlan,
+        planLabel: currentPlan === 'annual' ? 'Annuel' : 'Mensuel',
+        price: display.final,
+        originalPrice: display.original,
+        paymentMethod,
+        requestId,
+        type: 'warning',
+        read: false,
+        createdAt: serverTimestamp()
+      });
+    } catch (e) {
+      console.warn('Impossible de créer la notification admin :', e.message);
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Erreur saveSubscriptionRequest:', error);
+    return false;
+  }
+}
+
+// ================================================================
+// PUSH FCM VERS L'ADMIN
+// ================================================================
+async function notifyAdminPush(fullName, display, requestId, planName) {
+  if (!currentUser) return;
+  try {
+    const token = await currentUser.getIdToken();
+    const res = await fetch(ADMIN_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        action: 'notifyNewSubscriptionRequest',
+        userUid: currentUser.uid,
+        userName: fullName,
+        plan: currentPlan,
+        planLabel: planName,
+        price: display.final,
+        requestId
+      })
+    });
+    if (!res.ok) {
+      const data = await res.json().catch(() => null);
+      throw new Error(data?.error || 'API error ' + res.status);
+    }
+    console.log('✅ Push admin envoyé');
+  } catch (e) {
+    console.warn('Push admin échoué:', e.message);
+  }
+}
+
+// ================================================================
+// ÉVÉNEMENTS
+// ================================================================
+toggleSwitch.addEventListener('click', () => {
+  currentPlan = currentPlan === 'monthly' ? 'annual' : 'monthly';
+  updateDisplay();
+});
+
+labelMonthly.addEventListener('click', () => {
+  if (currentPlan === 'annual') {
+    currentPlan = 'monthly';
+    updateDisplay();
+  }
+});
+
+labelAnnual.addEventListener('click', () => {
+  if (currentPlan === 'monthly') {
+    currentPlan = 'annual';
+    updateDisplay();
+  }
+});
+
+document.querySelectorAll('.payment-logo-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    selectPaymentMethod(btn.dataset.method);
+  });
+});
+
+fullNameInput.addEventListener('input', updateConfirmButtonState);
+whatsappInput.addEventListener('input', updateConfirmButtonState);
+
+closeModalBtn.addEventListener('click', closeModal);
+cancelModalBtn.addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) closeModal();
+});
+
+// ================================================================
+// DEUX FLUX D'ABONNEMENT
+// ================================================================
+const subscribeAutoBtn = document.getElementById('subscribeAutoBtn');
+const subscribeManualBtn = document.getElementById('subscribeManualBtn');
+
+// ================================================================
+// FLUX AUTOMATIQUE (SasPay)
+// ================================================================
+subscribeAutoBtn.addEventListener('click', async () => {
+  if (!currentUser) { window.location.replace('login.html'); return; }
+
+  subscribeAutoBtn.disabled = true;
+  const originalHTML = subscribeAutoBtn.innerHTML;
+  subscribeAutoBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Redirection…</span>';
+
+  try {
+    const finalAmount = getPrice().final;
+    const userEmail = currentUser.email || 'eleve@arvexaschool.com';
+    const userName = userData?.fullName || userData?.firstName || 'Élève ARVEXA';
+
+    const res = await fetch('/api/creer-checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      // ✅ SEC — clientAmount supprimé : le montant est calculé et garanti
+      // côté serveur (creer-checkout), le navigateur ne peut plus le négocier.
+      body: JSON.stringify({
+        uid: currentUser.uid,
+        plan: currentPlan,
+        customerEmail: userEmail,
+        customerName: userName
+      })
+    });
+
+    const textResponse = await res.text();
+    let data;
+    try {
+      data = JSON.parse(textResponse);
+    } catch (e) {
+      console.error('Réponse non-JSON :', textResponse);
+      throw new Error('Erreur serveur. Vérifiez les logs Vercel.');
+    }
+
+    if (!res.ok || !data.ok) {
+      const detail = data.sasPayRaw ? JSON.stringify(data.sasPayRaw) : data.error;
+      throw new Error(detail || 'Erreur lors de la création du paiement.');
+    }
+
+    // ✅ SEC — la référence de checkout est désormais enregistrée côté serveur
+    // (creer-checkout écrit saspayPendingCheckouts + users/{uid} via le SDK admin),
+    // ce qui permet au webhook de vérifier le montant réellement payé.
+    // L'écriture client a été retirée : les règles Firestore l'interdisent.
+
+    window.location.href = data.checkoutUrl;
+
+  } catch (err) {
+    console.error(err);
+    window.arvexaConfirm({
+      title: 'Erreur de paiement',
+      message: 'Une erreur est survenue : <strong>' + String(err.message || 'inconnue').replace(/[&<>"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])) + '</strong>',
+      icon: '❌',
+      confirmText: 'OK',
+      showCancel: false,
+      variant: 'danger'
+    });
+    subscribeAutoBtn.disabled = false;
+    subscribeAutoBtn.innerHTML = originalHTML;
+  }
+});
+
+// ---------- FLUX MANUEL (WhatsApp + QR) ----------
+subscribeManualBtn.addEventListener('click', () => {
+  if (!currentUser) { window.location.replace('login.html'); return; }
+  openModal();
+});
+
+// ---------- Retour SasPay ----------
+const urlParams = new URLSearchParams(window.location.search);
+const statut = urlParams.get('statut');
+if (statut === 'succes') {
+  // ✅ Modale uniforme (même modèle que index.html)
+  window.history.replaceState({}, '', window.location.pathname);
+  setTimeout(() => {
+    window.arvexaConfirm({
+      title: 'Paiement reçu',
+      message: 'Ton abonnement sera <strong>activé dans quelques instants</strong>. Reviens sur cette page dans un instant.',
+      icon: '✅',
+      confirmText: 'Parfait !',
+      showCancel: false,
+      variant: 'primary'
+    });
+  }, 500);
+} else if (statut === 'annule') {
+  window.history.replaceState({}, '', window.location.pathname);
+  setTimeout(() => {
+    window.arvexaConfirm({
+      title: 'Paiement annulé',
+      message: 'Tu peux <strong>réessayer</strong> quand tu veux.',
+      icon: 'ℹ️',
+      confirmText: 'OK',
+      showCancel: false,
+      variant: 'primary'
+    });
+  }, 500);
+}
+
+confirmBtn.addEventListener('click', sendToWhatsApp);
+
+// ⚡ Bouton "Renouveler"
+document.getElementById('renewBtn')?.addEventListener('click', () => {
+  try { localStorage.setItem(RENEW_FLAG_KEY, 'true'); } catch (e) {}
+  showScreen('free');
+});
+
+// ================================================================
+// DÉCONNEXION
+// ================================================================
+let isRedirecting = false;
+
+async function performLogout() {
+  isRedirecting = true;
+  if (unsubscribeUser) unsubscribeUser();
+  clearSession();
+  try { await signOut(auth); } catch (e) {}
+  window.location.replace('auth-choice.html');
+}
+
+document.getElementById('logoutBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+  // ✅ Modale uniforme (même modèle que index.html)
+  if (window.arvexaLogout) { window.arvexaLogout(); return; }
+  performLogout(); // filet de sécurité si le module n'est pas chargé
+});
+
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('active');
+});
+
+document.getElementById('sidebarOverlay').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('active');
+});
+
+document.getElementById('notifBtn').addEventListener('click', () => {
+  window.location.href = 'notifications.html';
+});
+
+document.getElementById('profileBtn').addEventListener('click', () => {
+  window.location.href = 'profil.html';
+});
+
+// ================================================================
+// CHARGEMENT UTILISATEUR
+// ================================================================
+function loadUserData(user) {
+  if (unsubscribeUser) {
+    unsubscribeUser();
+    unsubscribeUser = null;
+  }
+
+  const userRef = doc(db, 'users', user.uid);
+
+  unsubscribeUser = onSnapshot(userRef,
+    (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        saveUserDataToCache(data, user.uid);
+        routeToScreen(data);
+      } else {
+        const cached = getCachedUserData(user.uid);
+        if (cached) {
+          routeToScreen(cached);
+        } else {
+          showScreen('free');
+        }
+      }
+    },
+    (error) => {
+      const cached = getCachedUserData(user.uid);
+      if (cached) {
+        routeToScreen(cached);
+      } else {
+        showScreen('free');
+      }
+    }
+  );
+}
+
+// ================================================================
+// AUTH ROBUSTE — Anti-flash
+// ================================================================
+let isAuthResolved = false;
+let graceTimer = null;
+let maxTimer = null;
+
+function redirectToLogin() {
+  if (isRedirecting) return;
+  isRedirecting = true;
+  try {
+    sessionStorage.setItem('redirectAfterLogin', window.location.pathname);
+  } catch (e) {}
+  window.location.replace('login.html');
+}
+
+function initAuthGuard(onAuthenticated) {
+  auth.onAuthStateChanged((user) => {
+    if (isAuthResolved) {
+      if (user && user.uid !== currentUid) {
+        currentUid = user.uid;
+        currentUser = user;
+        saveSession(user);
+        onAuthenticated(user);
+      } else if (!user && currentUid) {
+        currentUid = null;
+        currentUser = null;
+        clearSession();
+        redirectToLogin();
+      }
+      return;
+    }
+
+    if (!user) {
+      if (graceTimer) clearTimeout(graceTimer);
+      graceTimer = setTimeout(() => {
+        if (isAuthResolved) return;
+        if (auth.currentUser) return;
+
+        const hasSession = localStorage.getItem(SESSION_KEY);
+        const hasUserData = localStorage.getItem(USER_DATA_KEY);
+
+        if ((hasSession || hasUserData) && !navigator.onLine) {
+          setTimeout(() => {
+            if (auth.currentUser) return;
+            if (!isAuthResolved) redirectToLogin();
+          }, 1500);
+          return;
+        }
+
+        if (hasSession && hasUserData) {
+          setTimeout(() => {
+            if (auth.currentUser) return;
+            if (!isAuthResolved) redirectToLogin();
+          }, 1500);
+          return;
+        }
+
+        redirectToLogin();
+      }, 600);
+      return;
+    }
+
+    if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+    if (maxTimer) { clearTimeout(maxTimer); maxTimer = null; }
+
+    isAuthResolved = true;
+    currentUid = user.uid;
+    currentUser = user;
+    saveSession(user);
+    onAuthenticated(user);
+  });
+
+  maxTimer = setTimeout(() => {
+    if (isAuthResolved) return;
+    if (auth.currentUser) {
+      isAuthResolved = true;
+      currentUid = auth.currentUser.uid;
+      currentUser = auth.currentUser;
+      saveSession(auth.currentUser);
+      onAuthenticated(auth.currentUser);
+    } else {
+      redirectToLogin();
+    }
+  }, 5000);
+}
+
+// ================================================================
+// LANCER LA PROTECTION
+// ================================================================
+initAuthGuard(async (user) => {
+  const cached = getCachedUserData(user.uid);
+  if (cached) {
+    routeToScreen(cached);
+  } else {
+    showScreen('free');
+  }
+
+  loadUserData(user);
+});
+
+// ================================================================
+// INIT
+// ================================================================
+updateDisplay();
+
+console.log('🚀 ARVEXA — Abonnement (harmonisé, code promo retiré)');
+</script>
+<script type="module" src="./arvexa-confirm.js"></script>
+</body>
+</html>

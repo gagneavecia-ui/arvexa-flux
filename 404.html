@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0A0A">
+<script>(function(){try{if(localStorage.getItem('arvexa-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}})();</script>
+<script src="theme.js"></script><script src="arvexa-i18n.js" defer></script>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Page introuvable — ARVEXA School">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="manifest" href="manifest.json">
+  <title>Page introuvable | ARVEXA School</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="arvexa-ui.css">
+  <style>
+    /* ============================================================
+       ROOT — Palette ARVEXA
+       ============================================================ */
+    :root {
+      color-scheme: dark;
+      --accent: #B8860B;
+      --accent-bright: #E0B84A;
+      --accent-dim: rgba(184, 134, 11, 0.08);
+      --danger: #B85C3A;
+      --bg-dark: #0A0A0A;
+      --bg-surface: #141414;
+      --text-light: #F5F0E8;
+      --text-dim: #8A8A7A;
+      --text-muted: #5A5A4A;
+      --border-soft: rgba(255, 255, 255, 0.05);
+      --transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    /* ============================================================
+       RESET
+       ============================================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      width: 100%;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+      min-height: 100dvh;
+      width: 100%;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--safe-top) + 24px) 24px calc(var(--safe-bottom) + 24px);
+      text-align: center;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ============================================================
+       BACKGROUND
+       ============================================================ */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 40% 30% at 30% 20%, rgba(184, 134, 11,  0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 35% 25% at 75% 85%, rgba(184, 134, 11, 0.06) 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-deep) 100%);
+    }
+
+    .glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.15;
+      animation: glowFloat 12s ease-in-out infinite alternate;
+    }
+    .glow-1 {
+      width: 320px; height: 320px;
+      background: rgba(184, 134, 11,  0.25);
+      top: -100px; right: -100px;
+    }
+    .glow-2 {
+      width: 220px; height: 220px;
+      background: rgba(184, 134, 11, 0.08);
+      bottom: -60px; left: -60px;
+      animation-delay: -6s;
+    }
+
+    @keyframes glowFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(30px, -20px) scale(1.1); }
+    }
+
+    /* ============================================================
+       CONTAINER
+       ============================================================ */
+    .container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      max-width: 420px;
+      width: 100%;
+      animation: fadeIn 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       ICÔNE 404
+       ============================================================ */
+    .error-icon {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .error-icon::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 134, 11, 0.18) 0%, transparent 70%);
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+
+    .error-number {
+      font-family: var(--font-serif);
+      font-size: 88px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 0 16px rgba(224, 184, 74, 0.35));
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============================================================
+       TITRE
+       ============================================================ */
+    .title {
+      font-family: var(--font-serif);
+      font-size: clamp(26px, 6vw, 34px);
+      font-weight: 700;
+      color: var(--text-light);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin: 0;
+    }
+
+    .title em {
+      color: var(--accent-bright);
+      font-style: italic;
+    }
+
+    /* ============================================================
+       MESSAGE
+       ============================================================ */
+    .message {
+      font-size: clamp(14px, 1.8vw, 15px);
+      color: var(--text-dim);
+      line-height: 1.7;
+      max-width: 360px;
+      margin: 0;
+    }
+
+    /* ============================================================
+       ACTIONS
+       ============================================================ */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      max-width: 320px;
+      margin-top: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border-radius: 999px;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 14.5px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      min-height: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--shimmer), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--on-gold);
+      box-shadow: 0 4px 20px rgba(184, 134, 11, 0.25);
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(184, 134, 11, 0.4);
+    }
+
+    .btn.primary:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn.secondary {
+      background: rgba(var(--rgb-soft), 0.04);
+      color: var(--text-dim);
+      border: 1px solid var(--border-soft);
+    }
+
+    .btn.secondary:hover {
+      background: rgba(var(--rgb-soft), 0.08);
+      color: var(--text-light);
+      border-color: rgba(184, 134, 11, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .btn.secondary:active {
+      transform: scale(0.98);
+    }
+
+    .btn i {
+      font-size: 14px;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      position: fixed;
+      bottom: calc(var(--safe-bottom) + 20px);
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 0 20px;
+      pointer-events: none;
+    }
+
+    .footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+      pointer-events: auto;
+    }
+
+    .footer a:hover {
+      color: var(--accent-bright);
+    }
+
+    .footer span {
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright), var(--accent));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-style: italic;
+      font-weight: 700;
+      animation: shimmer 4s linear infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 480px) {
+      .error-icon {
+        width: 120px;
+        height: 120px;
+      }
+      .error-number {
+        font-size: 72px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .error-icon {
+        width: 100px;
+        height: 100px;
+      }
+      .error-number {
+        font-size: 60px;
+      }
+      .title {
+        font-size: 22px;
+      }
+      .btn {
+        padding: 12px 20px;
+        font-size: 13.5px;
+        min-height: 46px;
+      }
+    }
+
+    /* ============================================================
+       ACCESSIBILITÉ
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
+  </style>
+  <!-- ⚡ ARVEXA FLUX v1 — navigation instantanée -->
+  <script src="flux-router.js?v=flux1" defer></script>
+</head>
+<body>
+
+  <!-- ===== BACKGROUND ===== -->
+  <div class="bg-layer"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <!-- ===== CONTAINER ===== -->
+  <main class="container">
+
+    <!-- ICÔNE 404 -->
+    <div class="error-icon">
+      <span class="error-number">404</span>
+    </div>
+
+    <!-- TITRE -->
+    <h1 class="title">
+      Page <em>introuvable</em>
+    </h1>
+
+    <!-- MESSAGE -->
+    <p class="message">
+      Cette page n'existe pas, a été déplacée ou n'est plus disponible.
+    </p>
+
+    <!-- ACTIONS -->
+    <div class="actions">
+      <a href="index.html" class="btn primary">
+        <i class="fas fa-home"></i>
+        Retour à l'accueil
+      </a>
+      <button class="btn secondary" onclick="history.back()">
+        <i class="fas fa-arrow-left"></i>
+        Page précédente
+      </button>
+    </div>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <span>ARVEXA School</span> — Préparation BAC
+  </div>
+
+</body>
+</html>

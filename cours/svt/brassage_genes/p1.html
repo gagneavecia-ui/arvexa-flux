@@ -1,0 +1,512 @@
+<!-- ============================================================ -->
+<!-- PARTIE 1 : LE BRASSAGE INTERCHROMOSOMIQUE (3 NOTIONS)         -->
+<!-- Notion 1 : brassage_interchromosomique — définition et moment -->
+<!-- Notion 2 : nombre_gametes_2n — de 2 paires de chromosomes à 2ⁿ -->
+<!-- Notion 3 : recombinaison_caracteres — nouvelles associations   -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 01 · Brassage des gènes</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Le brassage <em>interchromosomique</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Dans une même fratrie, chaque enfant est unique : comment une simple division cellulaire peut-elle fabriquer autant de variété ? La première réponse s'appelle le <strong>brassage interchromosomique</strong>. Cette partie développe <strong>3 notions</strong> : la <strong>définition et le moment</strong> du brassage interchromosomique pendant la méiose I, le <strong>nombre de types de gamètes possibles (2ⁿ)</strong>, et sa conséquence majeure : la <strong>recombinaison des caractères</strong> portés par des chromosomes différents.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span>
+      <span class="lecture-hero-meta-item">🧬 3 notions</span>
+      <span class="lecture-hero-meta-item">📚 7 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">3 notions · 7 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Tous différents, pourquoi ?</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Rappel — Chromosomes homologues et méiose</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · brassage_interchromosomique — Définition et moment</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 1 · Exemple pédagogique — 2 paires de chromosomes</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · nombre_gametes_2n — La généralisation 2ⁿ</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 3 · recombinaison_caracteres — L'exemple des pois</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Pièges d'examen et méthode</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Tous différents, pourquoi ?</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Regarde autour de toi une famille nombreuse : le père et la mère sont les mêmes pour tous les enfants, et pourtant aucun ne ressemble exactement aux autres — ni par le visage, ni par le groupe sanguin, ni parfois par la taille. Comment est-ce possible ? Chaque enfant s'est construit à partir d'<strong>un spermatozoïde et d'un ovule</strong>. Si tous les gamètes étaient identiques, tous les enfants d'un couple seraient identiques…
+      </p>
+      <p class="lecture-text">
+        Le secret tient en deux mots : les gamètes sont fabriqués par la <strong>méiose</strong>, et cette division spéciale <em>mélange</em> le patrimoine paternel et le patrimoine maternel. Ce mélange porte un nom : le <strong>brassage génétique</strong>. Il se décompose en deux mécanismes complémentaires — le brassage <strong>interchromosomique</strong>, objet de cette partie, et le <strong>crossing-over</strong> (ou brassage intrachromosomique), objet de la partie suivante.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">La question directrice</div>
+          <p>Comment la méiose, à partir d'une cellule à <span class="math">2n</span> chromosomes, fabrique-t-elle des gamètes tous différents, chacun porteur d'un mélange original de chromosomes paternels et maternels ?</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : RAPPEL -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Rappel indispensable</span>
+        <h2 class="lecture-section-title">Chromosomes homologues et méiose</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Avant de comprendre le brassage, il faut avoir en tête deux repères du programme : les <strong>chromosomes homologues</strong> et le déroulement de la <strong>méiose</strong>.
+      </p>
+
+      <h3 class="lecture-subtitle">Les chromosomes homologues</h3>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition — chromosomes homologues</div>
+          <p>Dans une cellule diploïde, les <strong>chromosomes homologues</strong> forment une paire de chromosomes de même taille et de même forme, portant les <strong>mêmes gènes aux mêmes emplacements (locus)</strong> : l'un provient du père (chromosome <em>paternel</em>), l'autre de la mère (chromosome <em>maternel</em>).</p>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Chez l'être humain, le caryotype compte <span class="math">2n = 46</span> chromosomes, soit <span class="math">n = 23</span> paires d'homologues. Attention à la notation : <span class="math">2n</span> désigne le nombre de chromosomes d'une cellule somatique (diploïde), tandis que <span class="math">n</span> est le nombre de <em>paires</em> — c'est aussi le nombre de chromosomes d'un gamète (cellule haploïde). Cette lettre <span class="math">n</span> va devenir ta meilleure amie dans quelques sections.
+      </p>
+
+      <h3 class="lecture-subtitle">La méiose en 4 repères</h3>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Avant la méiose (interphase) :</strong> l'ADN s'est dupliqué. Chaque chromosome est donc constitué de <strong>deux chromatides sœurs</strong>, rigoureusement identiques.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Prophase I :</strong> les chromosomes homologues se reconnaissent et <strong>s'apparient</strong> : chaque couple (bivalent) réunit ainsi 4 chromatides.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Métaphase I puis anaphase I :</strong> les bivalents s'alignent sur le plan équatorial, puis les chromosomes homologues de chaque paire <strong>se séparent</strong> et migrent vers les pôles opposés. C'est ici que se joue le brassage interchromosomique (section 02).</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Méiose II :</strong> les chromatides de chaque chromosome se séparent à leur tour. Bilan : <strong>4 cellules haploïdes (n)</strong> — les futures gamètes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Rappel piège</div>
+          <p>La réduction du nombre de chromosomes (passage de <span class="math">2n</span> à <span class="math">n</span>) a lieu lors de la <strong>première</strong> division (anaphase I), car on sépare des chromosomes <em>entiers</em>. La deuxième division sépare des chromatides déjà présentes : elle ne change ni le nombre, ni les combinaisons.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 — DEFINITION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · brassage_interchromosomique</span>
+        <h2 class="lecture-section-title">Définition et moment du brassage</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        À la métaphase I, chaque paire d'homologues se place sur le plan équatorial. Mais voici le point essentiel : <strong>rien n'impose l'orientation</strong> de chaque paire. Le chromosome paternel peut se placer d'un côté comme de l'autre, et chaque paire choisit son orientation <em>indépendamment</em> des autres paires. C'est ce hasard qui crée le mélange.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition — brassage interchromosomique</div>
+          <p>Le <strong>brassage interchromosomique</strong> est la <strong>répartition indépendante (au hasard)</strong> des chromosomes homologues d'origine paternelle et maternelle lors de la <strong>métaphase I</strong> de la méiose — chaque chromosome s'oriente au hasard de part et d'autre du plan équatorial — suivie de leur <strong>séparation à l'anaphase I</strong>. Il engendre des gamètes portant des <strong>combinaisons variées de chromosomes paternels et maternels</strong>.</p>
+        </div>
+      </div>
+
+      <h3 class="lecture-subtitle">Le mécanisme en 4 étapes</h3>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Appariement (prophase I) :</strong> chaque paire d'homologues forme un bivalent qui ira s'aligner d'un seul tenant sur le plan équatorial.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Orientation au hasard (métaphase I) :</strong> pour chaque paire, les deux orientations possibles (paternel « en haut » ou maternel « en haut ») sont équiprobables, et les paires s'orientent <strong>indépendamment les unes des autres</strong>.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Séparation (anaphase I) :</strong> les homologues de chaque paire migrent vers des pôles opposés. Chaque pôle reçoit un tirage au sort : un chromosome de <em>chaque</em> paire, paternel ou maternel.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content">
+            <p class="lecture-text"><strong>Distribution (méiose II) :</strong> les 4 cellules finales héritent de ces combinaisons. Résultat : des gamètes qui mélangent chromosomes paternels et maternels dans des proportions variées.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Ne pas confondre les moments !</div>
+          <p>Le brassage <strong>interchromosomique</strong> se produit à la <strong>métaphase I → anaphase I</strong>. La <strong>prophase I</strong>, elle, héberge un autre mécanisme : le <strong>crossing-over</strong> (partie 2). Confondre ces deux moments est l'erreur la plus sanctionnée au Bac — écris toujours le nom de la phase à côté du nom du mécanisme.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : EXEMPLE A 2 PAIRES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · Exemple pédagogique</span>
+        <h2 class="lecture-section-title">2 paires de chromosomes : 4 types de gamètes</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Prenons le cas le plus simple imaginable : une cellule avec <strong>2 paires de chromosomes</strong> (<span class="math">n = 2</span>). Appelons <strong>G₁</strong> le grand chromosome paternel et <strong>G₂</strong> le grand chromosome maternel ; <strong>P₁</strong> le petit chromosome paternel et <strong>P₂</strong> le petit chromosome maternel. À la métaphase I, deux dispositions au moins sont possibles :
+      </p>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 560 310" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Deux dispositions possibles des deux paires de chromosomes à la métaphase I donnant quatre types de gamètes">
+          <text x="280" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">MÉTAPHASE I : 2 PAIRES, ORIENTATIONS AU HASARD</text>
+
+          <!-- Disposition 1 -->
+          <text x="140" y="48" style="fill:var(--text-light)" font-size="12" font-weight="700" font-family="Inter" text-anchor="middle">Disposition 1</text>
+          <line x1="25" y1="120" x2="255" y2="120" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <text x="18" y="124" style="fill:var(--text-dim)" font-size="9" font-family="Inter">éq.</text>
+
+          <rect x="45" y="94" width="85" height="14" rx="5" style="fill:var(--accent-bright)"/>
+          <text x="87" y="105" font-size="10" font-weight="700" font-family="Inter" text-anchor="middle">G₁</text>
+          <rect x="45" y="132" width="85" height="14" rx="5" style="fill:var(--green-bright)"/>
+          <text x="87" y="143" font-size="10" font-weight="700" font-family="Inter" text-anchor="middle">G₂</text>
+
+          <rect x="160" y="94" width="85" height="14" rx="5" style="fill:var(--accent-bright)"/>
+          <text x="202" y="105" font-size="10" font-weight="700" font-family="Inter" text-anchor="middle">P₁</text>
+          <rect x="160" y="132" width="85" height="14" rx="5" style="fill:var(--green-bright)"/>
+          <text x="202" y="143" font-size="10" font-weight="700" font-family="Inter" text-anchor="middle">P₂</text>
+
+          <text x="140" y="180" style="fill:var(--text-light)" font-size="11" font-family="Inter" text-anchor="middle">Gamètes : G₁P₁ et G₂P₂</text>
+
+          <!-- Disposition 2 -->
+          <text x="420" y="48" style="fill:var(--text-light)" font-size="12" font-weight="700" font-family="Inter" text-anchor="middle">Disposition 2</text>
+          <line x1="295" y1="120" x2="525" y2="120" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="5 4"/>
+          <text x="288" y="124" style="fill:var(--text-dim)" font-size="9" font-family="Inter">éq.</text>
+
+          <rect x="315" y="94" width="85" height="14" rx="5" style="fill:var(--accent-bright)"/>
+          <text x="357" y="105" font-size="10" font-weight="700" font-family="Inter" text-anchor="middle">G₁</text>
+          <rect x="315" y="132" width="85" height="14" rx="5" style="fill:var(--green-bright)"/>
+          <text x="357" y="143" font-size="10" font-weight="700" font-family="Inter" text-anchor="middle">G₂</text>
+
+          <rect x="430" y="94" width="85" height="14" rx="5" style="fill:var(--green-bright)"/>
+          <text x="472" y="105" font-size="10" font-weight="700" font-family="Inter" text-anchor="middle">P₂</text>
+          <rect x="430" y="132" width="85" height="14" rx="5" style="fill:var(--accent-bright)"/>
+          <text x="472" y="143" font-size="10" font-weight="700" font-family="Inter" text-anchor="middle">P₁</text>
+
+          <text x="420" y="180" style="fill:var(--text-light)" font-size="11" font-family="Inter" text-anchor="middle">Gamètes : G₁P₂ et G₂P₁</text>
+
+          <!-- Conclusion -->
+          <text x="280" y="225" style="fill:var(--accent-bright)" font-size="12.5" font-weight="700" font-family="Inter" text-anchor="middle">4 types de gamètes au total : G₁P₁ · G₂P₂ · G₁P₂ · G₂P₁</text>
+
+          <!-- Legende -->
+          <rect x="120" y="262" width="16" height="10" rx="3" style="fill:var(--accent-bright)"/>
+          <text x="142" y="271" style="fill:var(--text-dim)" font-size="10" font-family="Inter">chromosome paternel</text>
+          <rect x="300" y="262" width="16" height="10" rx="3" style="fill:var(--green-bright)"/>
+          <text x="322" y="271" style="fill:var(--text-dim)" font-size="10" font-family="Inter">chromosome maternel</text>
+          <text x="280" y="296" style="fill:var(--text-dim)" font-size="10" font-family="Inter" text-anchor="middle">Chaque disposition donne deux catégories complémentaires de gamètes.</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Avec 2 paires d'homologues, le hasard de l'orientation à la métaphase I produit 4 types de gamètes : 2² = 4.</figcaption>
+      </figure>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Dispositions possibles à la métaphase I</th><th>Gamète 1</th><th>Gamète 2</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Disposition 1</td><td>G₁ + P₁</td><td>G₂ + P₂</td></tr>
+            <tr><td>Disposition 2</td><td>G₁ + P₂</td><td>G₂ + P₁</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="lecture-text">
+        Chaque gamète contient <strong>un chromosome de chaque paire</strong> (il est bien haploïde), mais pas toujours le même membre de la paire : c'est cela, le mélange. Et note bien : la méiose II se contente de séparer les chromatides — elle ne crée <strong>aucune combinaison nouvelle</strong>.
+      </p>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">n = 2 paires → 2² = 4 types de gamètes</div>
+        <div class="lecture-formula-desc">Chaque paire ajoute un facteur 2 : le nombre de combinaisons double à chaque paire supplémentaire.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : GENERALISATION 2^n -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · nombre_gametes_2n</span>
+        <h2 class="lecture-section-title">La généralisation : 2ⁿ types de gamètes</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Ce qui marche pour 2 paires marche pour n'importe quel nombre de paires. Chaque paire offre <strong>2 orientations possibles</strong>, et les orientations des différentes paires sont <strong>indépendantes</strong>. Pour <span class="math">n</span> paires, on multiplie donc : <span class="math">2 × 2 × … × 2 = 2ⁿ</span>.
+      </p>
+
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Formule majeure de la partie</div>
+        <div class="lecture-formula-hero-main">Nombre de types de gamètes = 2ⁿ</div>
+        <div class="lecture-formula-hero-desc">avec n = nombre de paires de chromosomes homologues — brassage interchromosomique seul, sans crossing-over.</div>
+      </div>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Espèce / cas</th><th>n (paires)</th><th>Types de gamètes (2ⁿ)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Exemple de cours</td><td>1</td><td>2¹ = 2</td></tr>
+            <tr><td>Exemple de cours</td><td>2</td><td>2² = 4</td></tr>
+            <tr><td>Petite espèce imaginaire</td><td>3</td><td>2³ = 8</td></tr>
+            <tr><td>Être humain</td><td>23</td><td>2²³ = 8 388 608 ≈ 8,4 millions</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="lecture-text">
+        Fais bien le calcul pour l'humain : <span class="math">2²³ = 8 388 608</span>. Un seul individu — toi par exemple — peut théoriquement produire <strong>plus de 8 millions de spermatozoïdes génétiquement différents</strong> par le seul jeu de l'orientation des chromosomes. Et ce chiffre ne compte pas encore le crossing-over…
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">À retenir absolument</div>
+          <p><span class="math">2ⁿ</span> = nombre de types de gamètes dus au brassage interchromosomique, avec <span class="math">n</span> = nombre de <strong>paires</strong> de chromosomes. Ne confonds jamais <span class="math">2ⁿ</span> (types de gamètes) et <span class="math">2n</span> (nombre de chromosomes d'une cellule diploïde) : la différence tient à la position du 2 !</p>
+        </div>
+      </div>
+
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🔍 Pour aller plus loin</div>
+        <div class="lecture-aside-content">
+          <p class="lecture-text">Chez l'humain, ce sont 23 paires qui s'orientent au hasard — sans compter les chromosomes sexuels X et Y, dont la séparation détermine le sexe. La diversité potentielle est donc colossale avant même d'ajouter le crossing-over, qui la rend pratiquement illimitée (parties 2 et 3).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : CONSEQUENCE — RECOMBINAISON DES CARACTERES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · recombinaison_caracteres</span>
+        <h2 class="lecture-section-title">Des caractères recombinés : l'exemple des pois</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Conséquence — recombinaison des caractères</div>
+          <p>Le brassage interchromosomique produit une <strong>recombinaison des caractères</strong> : des allèles portés par des <strong>chromosomes différents</strong>, hérités des deux parents, se retrouvent <strong>associés dans un même gamète</strong> — puis dans un même individu — dans des combinaisons qui n'existaient pas chez les parents.</p>
+        </div>
+      </div>
+
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧬 Exemple concret — les pois de Mendel (simplifié)</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text">
+            Chez le pois, deux gènes faciles à observer : le gène <strong>Couleur</strong> de la graine (allèle <span class="math">C</span> jaune, dominant ; allèle <span class="math">c</span> vert) et le gène <strong>Forme</strong> (allèle <span class="math">F</span> lisse, dominant ; allèle <span class="math">f</span> ridé). Plaçons-les sur <strong>deux paires différentes</strong> : le gène Couleur sur la paire I, le gène Forme sur la paire II.
+          </p>
+          <p class="lecture-text">
+            Une plante doublement hétérozygote (<span class="math">Cc Ff</span>) possède : sur la paire I un chromosome porteur de <span class="math">C</span> et son homologue porteur de <span class="math">c</span> ; sur la paire II un chromosome porteur de <span class="math">F</span> et son homologue porteur de <span class="math">f</span>. Par brassage interchromosomique, elle produit <strong>4 types de gamètes</strong> :
+          </p>
+          <div class="lecture-table">
+            <table>
+              <thead>
+                <tr><th>Gamète</th><th>Allèles réunis</th><th>Caractères associés</th><th>Statut</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>CF</td><td>C et F</td><td>graine jaune lisse</td><td>combinaison « parentale »</td></tr>
+                <tr><td>cf</td><td>c et f</td><td>graine verte ridée</td><td>combinaison « parentale »</td></tr>
+                <tr><td>Cf</td><td>C et f</td><td>graine jaune ridée</td><td><strong>nouvelle combinaison</strong></td></tr>
+                <tr><td>cF</td><td>c et F</td><td>graine verte lisse</td><td><strong>nouvelle combinaison</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="lecture-text">
+            Les gamètes <strong>Cf</strong> et <strong>cF</strong> réunissent des allèles qui n'étaient pas ensemble chez les parents : c'est la recombinaison des caractères. À la fécondation, ces gamètes engendrent des descendants <strong>jaunes ridés</strong> ou <strong>verts lisses</strong> — des phénotypes nouveaux dans la lignée. C'est exactement ce que Mendel avait observé en croisant ses pois : la ségrégation indépendante de deux paires de caractères s'explique aujourd'hui par l'indépendance de deux paires de chromosomes.
+          </p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ La condition essentielle</div>
+          <p>Cette recombinaison ne vaut que pour des gènes portés par des <strong>chromosomes différents</strong>. Si les deux gènes sont sur le <em>même</em> chromosome, l'orientation des paires ne peut plus les séparer : il faut alors un autre mécanisme, le crossing-over (partie 2).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : PIEGES ET METHODE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Méthode</span>
+        <h2 class="lecture-section-title">Pièges d'examen et rédaction type</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Les 3 erreurs fréquentes au Bac</div>
+          <p><strong>1. Placer le brassage en prophase I.</strong> Non : l'orientation au hasard des paires a lieu à la métaphase I, la séparation à l'anaphase I. La prophase I, c'est l'appariement… et le crossing-over.</p>
+          <p><strong>2. Confondre 2ⁿ et 2n.</strong> <span class="math">2n = 46</span> chez l'humain (chromosomes de la cellule somatique) ; <span class="math">2ⁿ = 2²³ ≈ 8,4 millions</span> (types de gamètes).</p>
+          <p><strong>3. Dire que le brassage « crée de nouveaux gènes ».</strong> Jamais ! Le brassage crée de <strong>nouvelles combinaisons d'allèles déjà existants</strong>. Seule la mutation crée de nouveaux allèles.</p>
+        </div>
+      </div>
+
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">Rédaction type à connaître</div>
+        <div class="lecture-rule-body">
+          <p class="lecture-text">« À la métaphase I, les chromosomes homologues de chaque paire s'orientent au hasard de part et d'autre du plan équatorial, indépendamment les uns des autres ; à l'anaphase I, ils se séparent. Les gamètes reçoivent ainsi des combinaisons variées de chromosomes paternels et maternels : c'est le brassage interchromosomique, source de recombinaison des caractères portés par des chromosomes différents. »</p>
+        </div>
+      </div>
+
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🔍 Un peu d'histoire</div>
+        <div class="lecture-aside-content">
+          <p class="lecture-text">En 1866, le moine autrichien Gregor Mendel publie ses « Expériences sur l'hybridation des plantes », réalisées sur le pois. La régularité de ses proportions (9 : 3 : 3 : 1 en seconde génération de croisement) intriguait les savants… Le brassage interchromosomique, découvert bien plus tard avec la méiose, en est l'explication chromosomique.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QCM D'ENTRAINEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Le brassage interchromosomique se produit :</p>
+      <div class="lecture-quiz-options">
+        <span>A) pendant la prophase I</span>
+        <span>B) pendant la métaphase I puis l'anaphase I</span>
+        <span>C) pendant la méiose II</span>
+        <span>D) lors de la fécondation</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) métaphase I puis anaphase I.</strong> Orientation au hasard des paires sur le plan équatorial (métaphase I), puis séparation des homologues (anaphase I). La prophase I correspond au crossing-over, la fécondation est un hasard… mais pas un brassage de la méiose.</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Une espèce possède n = 3 paires de chromosomes. Sans crossing-over, le nombre de types de gamètes différents est :</p>
+      <div class="lecture-quiz-options">
+        <span>A) 3</span>
+        <span>B) 6</span>
+        <span>C) 8</span>
+        <span>D) 9</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>C) 8.</strong> Formule : 2ⁿ avec n = nombre de paires → 2³ = 2 × 2 × 2 = 8. (D est le piège 3² : on multiplie des facteurs 2, on n'élève n au carré !)</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Le brassage interchromosomique crée :</p>
+      <div class="lecture-quiz-options">
+        <span>A) de nouveaux allèles</span>
+        <span>B) de nouvelles associations d'allèles portés par des chromosomes différents</span>
+        <span>C) de nouveaux chromosomes par échange de fragments</span>
+        <span>D) des gamètes tous identiques</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) de nouvelles associations d'allèles.</strong> Le brassage mélange des chromosomes entiers (donc les allèles qu'ils portent) sans rien inventer : ni nouveaux allèles (A, faux — c'est la mutation), ni nouveaux chromosomes par fragments (C, faux — c'est le crossing-over).</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== RECAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[meiose_rappel]</strong> Méiose : 2 divisions successives → 4 cellules haploïdes (n) ; la réduction 2n → n a lieu à l'anaphase I, quand les homologues se séparent.</li>
+      <li><strong>[brassage_interchromosomique]</strong> Répartition indépendante (au hasard) des chromosomes homologues paternels et maternels à la métaphase I, suivie de leur séparation à l'anaphase I : chaque gamète reçoit un mélange original de chromosomes parentaux.</li>
+      <li><strong>[brassage_interchromosomique]</strong> Moment à écrire : métaphase I → anaphase I (méiose I) — PAS la prophase I (c'est le crossing-over) et PAS la fécondation.</li>
+      <li><strong>[nombre_gametes_2n]</strong> n paires de chromosomes → 2ⁿ types de gamètes (brassage interchromosomique seul) : n = 2 → 4 ; n = 3 → 8 ; n = 23 (humain) → 8 388 608 ≈ 8,4 millions.</li>
+      <li><strong>[nombre_gametes_2n]</strong> Ne pas confondre 2ⁿ (types de gamètes) et 2n (chromosomes d'une cellule diploïde).</li>
+      <li><strong>[recombinaison_caracteres]</strong> Conséquence : recombinaison des caractères — des allèles portés par des chromosomes différents s'associent dans un même gamète (pois : CF, cf, Cf, cF).</li>
+      <li><strong>[recombinaison_caracteres]</strong> Le brassage ne crée jamais de nouveaux allèles : il crée de nouvelles combinaisons d'allèles existants.</li>
+      <li><strong>[recombinaison_caracteres]</strong> Condition : les gènes doivent être sur des chromosomes différents — sinon, voir le crossing-over (partie 2).</li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 1 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : le crossing-over — quand les chromosomes échangent des fragments.</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

@@ -1,0 +1,471 @@
+<!-- ============================================================ -->
+<!-- PARTIE 4 : FICHE COMPLÈTE — APPLICATIONS GÉOMÉTRIQUES        -->
+<!-- Chapitre : Similitudes planes directes — Mathématiques       -->
+<!-- Classe : Terminale D (Niger)                                 -->
+<!-- Fiche de révision : méthode type Bac (2 points → 2 images) · -->
+<!--           points invariants · images de figures · triangles  -->
+<!--           semblables · tableau des écritures complexes ·     -->
+<!--           réflexes Bac et erreurs fréquentes                 -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 04 · Similitudes planes directes</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Fiche complète — <em>Applications géométriques</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Cette fiche condense tout le chapitre en <strong>5 outils</strong> prêts pour l'examen : la <strong>méthode type Bac</strong> pour déterminer une similitude à partir de deux points et de leurs images, l'exploitation des <strong>points invariants</strong>, les <strong>applications géométriques</strong> (images de figures, triangles semblables), le <strong>tableau de synthèse</strong> des écritures complexes, et la liste des <strong>réflexes et erreurs</strong> qui font la différence le jour J.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span>
+      <span class="lecture-hero-meta-item">🧮 5 outils</span>
+      <span class="lecture-hero-meta-item">📊 6 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette fiche</span>
+      <span class="lecture-toc-count">5 outils · 6 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Mode d'emploi — utiliser cette fiche</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Outil 1 · methode_bac — Déterminer une similitude (2 points → 2 images)</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Outil 2 · invariants — Le point invariant et le centre</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Outil 3 · geometrie — Images de figures et triangles semblables</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Outil 4 · synthese — Tableau des écritures complexes</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Outil 5 · reflexes — Réflexes Bac et erreurs à éviter</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MODE D'EMPLOI -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Mode d'emploi</span>
+        <h2 class="lecture-section-title">Utiliser cette fiche</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Cette fiche ne remplace pas les parties 1 à 3 : elle les <strong>compresse</strong> sous forme d'outils mobilisables en quelques secondes. Utilise-la ainsi : relis-la entièrement la veille d'un devoir, puis, après le devoir, retourne à l'outil correspondant à chaque question manquée.
+      </p>
+
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Le kit minimal — quatre formules qui répondent à presque tout</div>
+        <div class="lecture-formula-hero-main">z' = az + b&nbsp; (a ≠ 0)<br>ω = b/(1 − a)<br>k = |a|<br>θ = arg(a)</div>
+        <div class="lecture-formula-hero-desc">Écriture complexe, centre, rapport, angle : avec ces quatre objets tu identifies, calcules et vérifies toute similitude directe (si a = 1 : translation, aucun centre). Déroule ensuite les outils dans l'ordre du sommaire : déterminer S, exploiter le centre, travailler sur les figures, reconnaître chaque écriture, éviter les pièges.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : OUTIL 1 · methode_bac -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Outil 1 · methode_bac</span>
+        <h2 class="lecture-section-title">Déterminer une similitude (2 points → 2 images)</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Énoncé type : « <em>Soit S la similitude directe qui transforme A en A' et B en B'. Déterminer son écriture complexe.</em> » On pose <span class="math">S : z' = az + b</span> et on résout un système 2×2 en <span class="math">a</span> et <span class="math">b</span>.
+      </p>
+
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 La méthode en une ligne</div>
+        <div class="lecture-rule-body">
+          <p>On écrit le système :</p>
+          <p><span class="math">a·z_A + b = z'_A</span> &nbsp;et&nbsp; <span class="math">a·z_B + b = z'_B</span></p>
+          <p>Par soustraction, <span class="math">b</span> disparaît :</p>
+          <p><span class="math">a = (z'_A − z'_B)/(z_A − z_B)</span></p>
+          <p><span class="math">b = z'_A − a·z_A</span></p>
+          <p>Toujours finir par la <strong>vérification</strong> sur le second point.</p>
+        </div>
+      </div>
+
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple type Bac — A(1) ↦ A'(2 + i) et B(2) ↦ B'(4 + 3i)</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step">
+              <div class="lecture-step-number">1</div>
+              <div class="lecture-step-content">
+                <p><strong>Système</strong>, ligne par ligne :</p>
+                <p><span class="math">a + b = 2 + i</span></p>
+                <p><span class="math">2·a + b = 4 + 3i</span></p>
+              </div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">2</div>
+              <div class="lecture-step-content">
+                <p><strong>Soustraction</strong> (ligne 2 − ligne 1) :</p>
+                <p><span class="math">a·(2 − 1) = (4 + 3i) − (2 + i)</span></p>
+                <p><span class="math">a = 2 + 2i</span></p>
+              </div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">3</div>
+              <div class="lecture-step-content">
+                <p><strong>Report</strong> :</p>
+                <p><span class="math">b = (2 + i) − (2 + 2i) × 1 = −i</span></p>
+                <p>D'où <span class="math">S : z' = (2 + 2i)·z − i</span>.</p>
+              </div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">4</div>
+              <div class="lecture-step-content">
+                <p><strong>Vérification sur B</strong> :</p>
+                <p><span class="math">(2 + 2i) × 2 − i = 4 + 4i − i = 4 + 3i</span> ✓</p>
+              </div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">5</div>
+              <div class="lecture-step-content">
+                <p><strong>Éléments caractéristiques</strong> :</p>
+                <p><span class="math">k = |2 + 2i| = 2√2</span></p>
+                <p><span class="math">θ = arg(2 + 2i) = π/4</span></p>
+                <p><strong>Centre</strong>, ligne par ligne :</p>
+                <p><span class="math">1 − a = 1 − (2 + 2i) = −1 − 2i</span></p>
+                <p><span class="math">ω = −i/(1 − 2 − 2i) = −i/(−1 − 2i)</span></p>
+                <p><span class="math">ω = ((−i) × (−1 + 2i))/((−1 − 2i) × (−1 + 2i))</span></p>
+                <p><span class="math">ω = (−i)·(−1 + 2i)/5</span></p>
+                <p><span class="math">ω = (2 + i)/5 = 0,4 + 0,2i</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Variantes d'énoncé</div>
+          <p>Si l'énoncé donne le <strong>rapport ET l'angle</strong> en plus d'un couple (A, A') : construire <span class="math">a = k·e^(iθ)</span> puis <span class="math">b = z'_A − a·z_A</span>. Si l'énoncé donne seulement <em>un</em> couple (A, A') : signaler que l'information est <strong>insuffisante</strong> — il manque une condition sur <span class="math">a</span> ou un second couple.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : OUTIL 2 · invariants -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Outil 2 · invariants</span>
+        <h2 class="lecture-section-title">Le point invariant et le centre</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le point invariant est le point qui vérifie <span class="math">z = a·z + b</span> : c'est le centre de la similitude (dès que <span class="math">a ≠ 1</span>). Trois usages au Bac : le <strong>trouver</strong>, le <strong>vérifier</strong>, ou l'utiliser pour <strong>identifier</strong> une transformation.
+      </p>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">z = a·z + b<br>z = b/(1 − a)&nbsp; (a ≠ 1)</div>
+        <div class="lecture-formula-desc">Unique point invariant = centre Ω. Si a = 1 : translation, aucun point invariant (sauf identité si b = 0). Toujours vérifier a ≠ 1 avant de diviser.</div>
+      </div>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple éclair</div>
+        <div class="lecture-example-content">
+          <p><span class="math">S : z' = 2·z + 3</span> : centre, ligne par ligne :</p>
+          <p><span class="math">ω = 3/(1 − 2) = 3/(−1)</span></p>
+          <p><span class="math">ω = −3</span></p>
+          <p>Vérification : <span class="math">2 × (−3) + 3 = −3</span> ✓. Avec la forme réduite <span class="math">z' + 3 = 2·(z + 3)</span>, on identifie d'un coup d'œil : homothétie de centre <span class="math">Ω(−3)</span> et de rapport 2.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Le réflexe de vérification universel</div>
+          <p>Après tout calcul de centre ou d'écriture, <strong>reporte l'affixe trouvée dans la formule</strong> : si <span class="math">a·ω + b ≠ ω</span>, il y a une erreur de calcul. Ce contrôle de dix secondes sauve plusieurs points à chaque devoir.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : OUTIL 3 · geometrie -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Outil 3 · geometrie</span>
+        <h2 class="lecture-section-title">Images de figures et triangles semblables</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        <strong>Construire l'image d'une figure</strong> : comme une similitude conserve l'alignement, il suffit de calculer les images des <strong>points de repère</strong> (sommets, centres) puis de tracer. L'image d'un triangle de sommets <span class="math">A</span>, <span class="math">B</span>, <span class="math">C</span> est le triangle <span class="math">A'B'C'</span> ; l'image d'un cercle de centre <span class="math">C</span> et de rayon <span class="math">r</span> est le cercle de centre <span class="math">C'</span> et de rayon <span class="math">k × r</span>.
+      </p>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">cercle de centre C, rayon r ⇒ cercle de centre C' (image de C), rayon k × r</div>
+        <div class="lecture-formula-desc">Un seul point de repère suffit pour le cercle : son centre. L'image du rayon est k × r car la similitude multiplie toutes les distances par k.</div>
+      </div>
+
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple — image du triangle A(1), B(3), C(1 + 2i) par S : z' = (1 + i)·z + 2</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step">
+              <div class="lecture-step-number">1</div>
+              <div class="lecture-step-content">
+                <p><span class="math">z'_A = (1 + i) × 1 + 2 = 3 + i</span></p>
+                <p>→ <span class="math">A'(3 + i)</span>.</p>
+              </div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">2</div>
+              <div class="lecture-step-content">
+                <p><span class="math">z'_B = (1 + i) × 3 + 2 = 3 + 3i + 2</span></p>
+                <p><span class="math">= 5 + 3i</span></p>
+                <p>→ <span class="math">B'(5 + 3i)</span>.</p>
+              </div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">3</div>
+              <div class="lecture-step-content">
+                <p><span class="math">z'_C = (1 + i)·(1 + 2i) + 2 = 1 + 2i + i + 2i² + 2</span></p>
+                <p><span class="math">= 1 + 3i</span></p>
+                <p>→ <span class="math">C'(1 + 3i)</span>.</p>
+              </div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">4</div>
+              <div class="lecture-step-content">
+                <p><strong>On trace</strong> le triangle <span class="math">A'B'C'</span> : c'est l'image de <span class="math">ABC</span>, agrandi d'un facteur <span class="math">k = √2</span> et tourné de <span class="math">π/4</span> autour du centre <span class="math">Ω(2i)</span>. Contrôle du centre, ligne par ligne :</p>
+                <p><span class="math">1 − a = 1 − (1 + i) = −i</span></p>
+                <p><span class="math">ω = 2/(1 − (1 + i)) = 2/(−i)</span></p>
+                <p><span class="math">ω = 2i</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Le triangle ABC et son image A'B'C' par la similitude z' = (1 + i)·z + 2, de centre Oméga d'affixe 2i">
+          <text x="210" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">ABC ET SON IMAGE A'B'C'</text>
+          <polygon points="110,200 210,200 110,100" style="fill:none;stroke:var(--accent)" stroke-width="2.5"/>
+          <polygon points="210,150 310,50 110,50" style="fill:none;stroke:var(--green-bright)" stroke-width="2.5"/>
+          <line x1="60" y1="100" x2="110" y2="200" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="60" y1="100" x2="210" y2="150" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <circle cx="60" cy="100" r="3.5" style="fill:var(--accent-bright)"/>
+          <circle cx="110" cy="200" r="3" style="fill:var(--accent)"/>
+          <circle cx="210" cy="200" r="3" style="fill:var(--accent)"/>
+          <circle cx="110" cy="100" r="3" style="fill:var(--accent)"/>
+          <circle cx="210" cy="150" r="3" style="fill:var(--green-bright)"/>
+          <circle cx="310" cy="50" r="3" style="fill:var(--green-bright)"/>
+          <circle cx="110" cy="50" r="3" style="fill:var(--green-bright)"/>
+          <text x="44" y="105" style="fill:var(--text-dim)" font-size="11" font-family="Inter">Ω(2i)</text>
+          <text x="100" y="218" style="fill:var(--text-dim)" font-size="11" font-family="Inter">A</text>
+          <text x="206" y="218" style="fill:var(--text-dim)" font-size="11" font-family="Inter">B</text>
+          <text x="86" y="103" style="fill:var(--text-dim)" font-size="11" font-family="Inter">C</text>
+          <text x="218" y="148" style="fill:var(--text-dim)" font-size="11" font-family="Inter">A'</text>
+          <text x="318" y="46" style="fill:var(--text-dim)" font-size="11" font-family="Inter">B'</text>
+          <text x="88" y="46" style="fill:var(--text-dim)" font-size="11" font-family="Inter">C'</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Le triangle <span class="math">A'B'C'</span> est l'image de <span class="math">ABC</span> par <span class="math">S : z' = (1 + i)·z + 2</span> : côtés multipliés par <span class="math">√2</span>, directions tournées de <span class="math">π/4</span>, le tout autour du centre <span class="math">Ω(2i)</span>.</figcaption>
+      </figure>
+
+      <p class="lecture-text">
+        <strong>Montrer que deux triangles sont semblables</strong> : exhiber une similitude qui envoie l'un sur l'autre. Méthode : déterminer <span class="math">S</span> à partir des deux premiers sommets, puis <strong>vérifier</strong> qu'elle envoie le troisième sur le troisième.
+      </p>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple — A'B'C' (ci-dessus) est-il semblable à ABC ?</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step">
+              <div class="lecture-step-number">1</div>
+              <div class="lecture-step-content">
+                <p><strong>Déterminer S à partir de A et B</strong>, ligne par ligne :</p>
+                <p><span class="math">a = (z'_A − z'_B)/(z_A − z_B)</span></p>
+                <p><span class="math">a = ((3 + i) − (5 + 3i))/(1 − 3)</span></p>
+                <p><span class="math">a = (−2 − 2i)/(−2) = 1 + i</span></p>
+                <p>puis <span class="math">b = z'_A − a·z_A</span>, soit <span class="math">b = 3 + i − (1 + i) = 2</span>.</p>
+              </div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">2</div>
+              <div class="lecture-step-content">
+                <p><strong>Vérifier le troisième sommet</strong> :</p>
+                <p><span class="math">(1 + i)·(1 + 2i) + 2 = 1 + 2i + i − 2 + 2</span></p>
+                <p><span class="math">= 1 + 3i = z'_C</span> ✓</p>
+                <p>— S envoie bien C sur C'.</p>
+              </div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">3</div>
+              <div class="lecture-step-content">
+                <p><strong>Conclure</strong> : la similitude directe <span class="math">z' = (1 + i)·z + 2</span> (<span class="math">a = 1 + i ≠ 0</span>) transforme <span class="math">ABC</span> en <span class="math">A'B'C'</span> : les triangles sont <strong>semblables</strong>, de rapport <span class="math">√2</span> et d'angle <span class="math">π/4</span>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ La vérification du 3e sommet est obligatoire</div>
+          <p>Deux points et leurs images déterminent <em>toujours</em> une similitude — mais rien ne prouve qu'elle envoie le troisième sommet au bon endroit ! Sans l'étape de vérification, la conclusion « semblables » est infondée : c'est exactement ce que le correcteur attend de toi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : OUTIL 4 · synthese -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Outil 4 · synthese</span>
+        <h2 class="lecture-section-title">Tableau des écritures complexes</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le tableau à connaître <strong>par cœur</strong> : il relie chaque transformation du programme à son écriture complexe et à ses éléments caractéristiques (pour un centre <span class="math">Ω</span> d'affixe <span class="math">ω</span>).
+      </p>
+
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Les deux clés de lecture du tableau</div>
+        <div class="lecture-formula-hero-main">k = |a|<br>θ = arg(a) (à 2π près)</div>
+        <div class="lecture-formula-hero-desc">De n'importe quelle écriture z' = az + b : le module de a donne le rapport, l'argument de a donne l'angle. Tout le reste du tableau se déduit de ces deux lectures.</div>
+      </div>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Transformation</th><th>Écriture complexe</th><th>Coefficient a</th><th>k</th><th>θ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Translation de vecteur d'affixe <span class="math">b</span></td><td><span class="math">z' = z + b</span></td><td><span class="math">1</span></td><td><span class="math">1</span></td><td><span class="math">0</span></td></tr>
+            <tr><td>Rotation de centre <span class="math">Ω</span>, d'angle <span class="math">θ</span></td><td><span class="math">z' = e^(iθ)·(z − ω) + ω</span></td><td><span class="math">e^(iθ)</span></td><td><span class="math">1</span></td><td><span class="math">θ</span></td></tr>
+            <tr><td>Symétrie centrale de centre <span class="math">Ω</span></td><td><span class="math">z' = −z + 2ω</span></td><td><span class="math">−1</span></td><td><span class="math">1</span></td><td><span class="math">π</span></td></tr>
+            <tr><td>Homothétie de centre <span class="math">Ω</span>, de rapport <span class="math">k</span></td><td><span class="math">z' = k·(z − ω) + ω</span></td><td><span class="math">k</span> (réel &gt; 0)</td><td><span class="math">k</span></td><td><span class="math">0</span></td></tr>
+            <tr><td>Similitude directe de centre <span class="math">Ω</span>, de rapport <span class="math">k</span>, d'angle <span class="math">θ</span></td><td><span class="math">z' = az + b</span> avec <span class="math">a = k·e^(iθ)</span></td><td><span class="math">a</span></td><td><span class="math">|a|</span></td><td><span class="math">arg(a)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="lecture-text">
+        Lecture utile du tableau : la symétrie centrale est la <strong>rotation d'angle <span class="math">π</span></strong> (d'où <span class="math">a = −1</span> : <span class="math">z' = −(z − ω) + ω = −z + 2ω</span>) ; l'homothétie est la similitude d'<strong>angle nul</strong> ; la rotation est la similitude de <strong>rapport 1</strong>. Toutes sont des cas particuliers de <span class="math">z' = az + b</span>.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Comment utiliser ce tableau à l'examen</div>
+          <p>Énoncé du type « montrer que l'application <span class="math">z' = …</span> est une rotation (une homothétie, une symétrie centrale…) » : on <strong>calcule la forme réduite</strong> <span class="math">z' − ω = a·(z − ω)</span>, puis on lit <span class="math">a</span> dans la colonne « coefficient » du tableau pour nommer la transformation. C'est la démarche attendue, rédigée dans cet ordre.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : OUTIL 5 · reflexes                               -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Outil 5 · reflexes</span>
+        <h2 class="lecture-section-title">Réflexes Bac et erreurs à éviter</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La différence entre une copie moyenne et une bonne copie tient souvent à des <strong>réflexes</strong>. Voici les cinq réflexes du chapitre, puis les erreurs que les correcteurs voient chaque année.
+      </p>
+
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Les 5 réflexes du jour J</div>
+        <div class="lecture-rule-body">
+          <strong>1.</strong> « Nature de la transformation ? » → calculer <span class="math">|a|</span> et <span class="math">arg(a)</span>, passer par la forme réduite.<br>
+          <strong>2.</strong> « Déterminer la similitude ? » → deux informations : soit rapport + angle + un couple, soit deux couples (système).<br>
+          <strong>3.</strong> « Image d'une figure ? » → images des points de repère, puis tracer (cercle : centre + rayon × <span class="math">k</span>).<br>
+          <strong>4.</strong> « Semblables ? » → exhiber S et <strong>vérifier le 3ᵉ point</strong>.<br>
+          <strong>5.</strong> Toujours <strong>vérifier</strong> : centre invariant, second point correct, division par le conjugué bien menée.
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur n°1 — oublier a ≠ 0</div>
+          <p><span class="math">z' = 0·z + b</span> n'est pas une similitude : tout le plan s'écrase sur un point. Devant toute écriture <span class="math">z' = az + b</span>, la phrase d'ouverture attendue est : « comme <span class="math">a ≠ 0</span>, c'est l'écriture complexe d'une similitude directe de rapport <span class="math">|a|</span> et d'angle <span class="math">arg(a)</span> ».</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur n°2 — confondre rapport et angle</div>
+          <p>Le rapport est <span class="math">k = |a|</span> : un <strong>module</strong>, toujours positif. L'angle est <span class="math">θ = arg(a)</span> : un <strong>argument</strong>, défini modulo <span class="math">2π</span>. Écrire « rapport <span class="math">−3</span> » ou prendre l'argument pour un module (ex. : pour <span class="math">a = √3 + i</span>, répondre rapport <span class="math">√3</span> au lieu de <span class="math">2</span>) sont des fautes classiques.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur n°3 — le centre mal calculé</div>
+          <p>Trois variantes du même accident : utiliser <span class="math">b/(a − 1)</span> au lieu de <span class="math">b/(1 − a)</span> (signe) ; utiliser <span class="math">b/(1 + a)</span> ; ou oublier de multiplier par le <strong>conjugué</strong> du dénominateur lors de la division de complexes. Contrôle systématique : <span class="math">a·ω + b = ω</span>.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Erreur n°4 — chercher un centre quand a = 1</div>
+          <p>Pour une translation (<span class="math">a = 1</span>), la formule <span class="math">b/(1 − a)</span> divise par zéro : il n'y a <strong>pas de centre</strong>. Si la composée de deux similitudes donne <span class="math">a₂·a₁ = 1</span>, conclure directement « translation de vecteur d'affixe <span class="math">a₂·b₁ + b₂</span> » sans chercher plus loin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 La fiche en dix lignes</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[methode_bac]</strong> Deux couples (A, A'), (B, B') : <span class="math">a = (z'_A − z'_B)/(z_A − z_B)</span>, <span class="math">b = z'_A − a·z_A</span>, puis vérification</li>
+      <li><strong>[methode_bac]</strong> Un couple + rapport et angle : <span class="math">a = k·e^(iθ)</span>, <span class="math">b = z'_A − a·z_A</span> — un seul couple ne suffit jamais</li>
+      <li><strong>[invariant]</strong> Point invariant : <span class="math">z = a·z + b</span> ⇔ <span class="math">z = b/(1 − a)</span> (<span class="math">a ≠ 1</span>) — c'est le centre <span class="math">Ω</span> ; toujours vérifier <span class="math">a·ω + b = ω</span></li>
+      <li><strong>[geometrie]</strong> Image d'une figure : images des sommets/centre + rayon × <span class="math">k</span> pour un cercle</li>
+      <li><strong>[geometrie]</strong> Triangles semblables : déterminer S sur deux sommets, vérifier le troisième, conclure avec rapport et angle</li>
+      <li><strong>[synthese]</strong> <span class="math">z' = az + b</span> unifie tout : translation (<span class="math">a = 1</span>), rotation (<span class="math">|a| = 1</span>), symétrie centrale (<span class="math">a = −1</span>), homothétie (<span class="math">a</span> réel &gt; 0), similitude (<span class="math">a = k·e^(iθ)</span>)</li>
+      <li><strong>[synthese]</strong> Forme réduite <span class="math">z' − ω = a·(z − ω)</span> : l'outil d'identification et de vérification</li>
+      <li><strong>[reflexes]</strong> Les quatre formules : <span class="math">z' = az + b</span> · <span class="math">ω = b/(1 − a)</span> · <span class="math">k = |a|</span> · <span class="math">θ = arg(a)</span> — et la condition <span class="math">a ≠ 0</span></li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Fiche terminée !</div>
+    <div class="lecture-end-sub">Relis cette fiche la veille de chaque évaluation — et refais les exemples sans regarder les solutions</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

@@ -1,0 +1,471 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · SIMILITUDES PLANES       -->
+<!-- PARTIE 2 : RAPPORT, ANGLE & CENTRE                           -->
+<!-- Notion 1 : rapport_angle — k = |a| et θ = arg(a)             -->
+<!-- Notion 2 : centre — point invariant ω = b/(1 − a), forme     -->
+<!--             réduite z' − ω = a(z − ω)                        -->
+<!-- Notion 3 : determination — 2 points et images, éléments      -->
+<!--             caractéristiques complets                        -->
+<!-- Notion 4 : proprietes — ce que la similitude conserve        -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 02 · Similitudes planes directes</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Rapport, angle &amp; <em>le centre Ω</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Dans <span class="math">z' = az + b</span>, tout se joue sur le nombre <span class="math">a</span> : c'est lui qui <strong>agrandit</strong> et qui <strong>fait tourner</strong>. Cette partie t'apprend à le lire avec <strong>4 notions</strong> : le <strong>rapport</strong> <span class="math">k = |a|</span> et l'<strong>angle</strong> <span class="math">θ = arg(a)</span>, le <strong>point invariant</strong> <span class="math">Ω</span> (le centre, seul point qui ne bouge pas), la <strong>forme réduite</strong> qui recentre tous les calculs, et la <strong>détermination complète</strong> d'une similitude à partir de points et de leurs images — la question reine du Bac.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 4 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Où est le moteur, où est le pivot ?</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · rapport_angle — Lire <span class="math">k = |a|</span> et <span class="math">θ = arg(a)</span></span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 2 · centre — Le point invariant et <span class="math">ω = b/(1 − a)</span></span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · centre — La forme réduite <span class="math">z' − ω = a(z − ω)</span></span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 3 · determination — Déterminer S avec 2 points et leurs images</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 3 · determination — Éléments caractéristiques complets</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 4 · proprietes — Ce que la similitude conserve</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — L'essentiel de la partie</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Où est le moteur, où est le pivot ?</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le faïencier qui orne ses carreaux procède toujours de la même façon : il plante un <strong>pivot</strong> (le compas), il <strong>tourne</strong> d'un certain angle, et il <strong>ouvre le compas</strong> d'un certain facteur. Résultat : le motif est reproduit, plus grand ou plus petit, tourné — et le point du compas, lui, n'a pas bougé.
+      </p>
+      <p class="lecture-text">
+        Toute similitude directe raconte cette même histoire, et l'écriture <span class="math">z' = az + b</span> cache les trois informations : <strong>de combien on agrandit</strong> (le rapport <span class="math">k</span>), <strong>de quel angle on tourne</strong> (l'angle <span class="math">θ</span>), et <strong>où est le pivot</strong> (le centre <span class="math">Ω</span>). Cette partie montre qu'elles se lisent toutes les trois dans les coefficients <span class="math">a</span> et <span class="math">b</span>.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Lire</strong> le rapport <span class="math">k = |a|</span> et l'angle <span class="math">θ = arg(a)</span> dans l'écriture complexe.</li>
+            <li><strong>Trouver</strong> le centre <span class="math">Ω</span> d'affixe <span class="math">ω = b/(1 − a)</span> et écrire la forme réduite <span class="math">z' − ω = a(z − ω)</span>.</li>
+            <li><strong>Déterminer</strong> complètement une similitude (écriture, rapport, angle, centre) à partir de deux points et de leurs images.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Pour aller plus loin</div>
+        <div class="lecture-aside-content">
+          Le compas du dessineur réalise exactement la forme réduite : depuis le pivot, tout point du motif s'éloigne d'un facteur fixé et pivote d'un angle fixé. Le calcul <span class="math">z' − ω = a(z − ω)</span> n'est rien d'autre que cette phrase, mise en équations.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · rapport_angle — k = |a| ET θ = arg(a) -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · rapport_angle</span>
+        <h2 class="lecture-section-title">Lire le rapport et l'angle dans <span class="math">a</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Multiplier un complexe par <span class="math">a</span>, c'est multiplier son <strong>module</strong> par <span class="math">|a|</span> et ajouter <span class="math">arg(a)</span> à son <strong>argument</strong> (chapitre Nombres complexes). Ajouter <span class="math">b</span>, ensuite, ne change ni module ni argument du « mouvement » : c'est un simple glissement. D'où le résultat central :
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Les deux lectures à faire dès que tu vois z' = az + b</div>
+        <div class="lecture-formula-hero-main">k = |a|<br>θ = arg(a)</div>
+        <div class="lecture-formula-hero-desc">La similitude z' = az + b multiplie les distances par |a| et tourne les directions de arg(a). Le nombre b ne joue AUCUN rôle dans k et θ.</div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Pourquoi ces deux lectures ?</div>
+        <div class="lecture-rule-body">
+          Pour deux points <span class="math">M</span> et <span class="math">N</span> d'images <span class="math">M'</span> et <span class="math">N'</span> : <span class="math">z'(M) − z'(N) = a × (z(M) − z(N))</span> — les <span class="math">b</span> se compensent ! Donc la distance <span class="math">M'N'</span> vaut <span class="math">|a| × MN</span> (distances multipliées par <span class="math">|a|</span>) et le vecteur <span class="math">→M'N'</span> est tourné de <span class="math">arg(a)</span> (angles ajoutés). Les deux propriétés de la définition sont retrouvées.
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Valeur de a</th><th>Rapport k = |a|</th><th>Angle θ = arg(a)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">1 + i</span></td><td><span class="math">√2</span></td><td><span class="math">π/4</span></td></tr>
+            <tr><td><span class="math">i</span></td><td><span class="math">1</span></td><td><span class="math">π/2</span></td></tr>
+            <tr><td><span class="math">3</span></td><td><span class="math">3</span></td><td><span class="math">0</span></td></tr>
+            <tr><td><span class="math">−2i</span></td><td><span class="math">2</span></td><td><span class="math">−π/2</span></td></tr>
+            <tr><td><span class="math">1 − i√3</span></td><td><span class="math">2</span></td><td><span class="math">−π/3</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Rapport et angle de z' = (1 + i)·z + 2</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Ici <span class="math">a = 1 + i</span> (le nombre <span class="math">b = 2</span> n'intervient pas dans <span class="math">k</span> et <span class="math">θ</span>).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Rapport :</p><p><span class="math">k = |1 + i| = √(1² + 1²)</span></p><p><span class="math">k = √2</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Angle : <span class="math">Re(a) = 1 &gt; 0</span> et <span class="math">Im(a) = 1 &gt; 0</span>, parties égales → <span class="math">θ = arg(1 + i) = π/4</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Conclusion : <span class="math">S</span> multiplie toutes les distances par <span class="math">√2</span> et tourne toutes les directions de <span class="math">π/4</span> (45°).</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Le quadrant décide de l'angle</div>
+          <p>Ne te fie pas à la seule tangente : <span class="math">Im(a)/Re(a) = 1</span> convient aussi bien pour <span class="math">1 + i</span> (angle <span class="math">π/4</span>) que pour <span class="math">−1 − i</span> (angle <span class="math">−3π/4</span>) ! Vérifie toujours les <strong>signes</strong> de <span class="math">Re(a)</span> et <span class="math">Im(a)</span> avant d'annoncer <span class="math">θ</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 2 · centre — LE POINT INVARIANT -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · centre</span>
+        <h2 class="lecture-section-title">Le point invariant et <span class="math">ω = b/(1 − a)</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Un point est <strong>invariant</strong> (ou <strong>fixe</strong>) s'il est sa propre image. Pour une similitude directe de rapport <span class="math">k ≠ 1</span>, ce point existe, est unique, et s'appelle le <strong>centre</strong> <span class="math">Ω</span>. Trouvons son affixe <span class="math">ω</span> par le calcul — démonstration à savoir refaire.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Démonstration — Chercher les invariants de z' = az + b</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On cherche <span class="math">z</span> tel que <span class="math">z' = z</span>, c'est-à-dire <span class="math">z = az + b</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On regroupe : <span class="math">z − az = b</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On factorise : <span class="math">z(1 − a) = b</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Si <span class="math">a ≠ 1</span> : on divise — <span class="math">z = b/(1 − a)</span>. Il existe un <strong>unique</strong> point invariant.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Si <span class="math">a = 1</span> : l'équation devient <span class="math">0 × z = b</span> — si <span class="math">b ≠ 0</span>, <strong>aucune</strong> solution (une translation n'a aucun point fixe) ; si <span class="math">b = 0</span>, tous les points sont fixes (identité).</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">L'affixe du centre — à condition que a ≠ 1</div>
+        <div class="lecture-formula-hero-main">ω = b/(1 − a)&nbsp;&nbsp;(a ≠ 1)</div>
+        <div class="lecture-formula-hero-desc">Le centre Ω d'affixe ω est l'unique point invariant de la similitude z' = az + b. Division INTERDITE si a = 1 (translation) : le dénominateur serait nul.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Centre de z' = (1 + i)·z + 2 − i</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Ici <span class="math">a = 1 + i ≠ 1</span> et <span class="math">b = 2 − i</span> : on peut appliquer la formule.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><span class="math">ω = (2 − i)/(1 − (1 + i)) = (2 − i)/(−i)</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On multiplie numérateur et dénominateur par <span class="math">i</span> :</p><p><span class="math">ω = (2 − i) × i/((−i) × i) = (2i − i²)/(−i²)</span></p><p><span class="math">ω = (2i + 1)/1</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Donc <span class="math">ω = 1 + 2i</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Vérification (le centre est bien invariant) : <span class="math">(1 + i)·(1 + 2i) + 2 − i = −1 + 3i + 2 − i = 1 + 2i</span> ✓.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Écrire <span class="math">ω = b/(1 − a)</span> alors que <span class="math">a = 1</span> est une <strong>division par zéro</strong>, sanctionnée à coup sûr. Si <span class="math">a = 1</span>, la similitude est une translation : elle n'a <strong>aucun</strong> point invariant (quand <span class="math">b ≠ 0</span>). Avant d'appliquer la formule, écris la vérification « <span class="math">a ≠ 1</span> ».</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · centre — LA FORME RÉDUITE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · centre</span>
+        <h2 class="lecture-section-title">La forme réduite <span class="math">z' − ω = a(z − ω)</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Les deux écritures de la même similitude se déduisent l'une de l'autre. Passons de <span class="math">z' = az + b</span> à la forme dite <strong>réduite</strong> (ou centrée), qui met le centre en scène :
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Démonstration — De z' = az + b à la forme réduite</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Partons de <span class="math">z' = az + b</span>, avec <span class="math">ω = b/(1 − a)</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>La formule du centre redonne <span class="math">b = ω(1 − a)</span> (on multiplie par <span class="math">1 − a</span>).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On remplace : <span class="math">z' − ω = az + ω(1 − a) − ω</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>On simplifie : <span class="math">z' − ω = az − aω = a(z − ω)</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La forme réduite — le compas mis en équations</div>
+        <div class="lecture-formula-hero-main">z' − ω = a(z − ω)</div>
+        <div class="lecture-formula-hero-desc">Depuis le centre Ω, tout se passe comme si on multipliait par a seul : la distance à Ω est multipliée par |a| et la direction pivote de arg(a). C'est l'écriture qui fait les figures.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">ΩM' = |a| × ΩM<br>(→ΩM ; →ΩM') ≡ arg(a) [2π]</div>
+        <div class="lecture-formula-desc">Lecture géométrique de la forme réduite, pour tout M ≠ Ω : exactement la définition de la Partie 1, avec k = |a| et θ = arg(a).</div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Depuis le centre Ω, deux points M1 et M2 tournent du même angle theta et s'éloignent d'un facteur k">
+          <line x1="120" y1="240" x2="221" y2="201" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="230,200 221,208 218,200" style="fill:var(--text-dim)"/>
+          <line x1="120" y1="240" x2="299" y2="221" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="310,220 300,225 299,217" style="fill:var(--text-dim)"/>
+          <line x1="120" y1="240" x2="184" y2="99" style="stroke:var(--accent)" stroke-width="2.5"/>
+          <polygon points="189,92 188,104 181,100" style="fill:var(--accent)"/>
+          <line x1="120" y1="240" x2="280" y2="39" style="stroke:var(--green-bright)" stroke-width="2.5"/>
+          <polygon points="288,32 284,43 278,38" style="fill:var(--green-bright)"/>
+          <path d="M 176,219 A 60 60 0 0 0 145,185" style="fill:none;stroke:var(--text-dim)" stroke-width="1.5"/>
+          <text x="158" y="204" style="fill:var(--text-dim)" font-size="12" font-family="Inter" font-style="italic">θ</text>
+          <path d="M 197,232 A 78 78 0 0 0 169,179" style="fill:none;stroke:var(--text-dim)" stroke-width="1.5"/>
+          <text x="200" y="210" style="fill:var(--text-dim)" font-size="12" font-family="Inter" font-style="italic">θ</text>
+          <circle cx="120" cy="240" r="5" style="fill:var(--text-dim)"/>
+          <circle cx="230" cy="200" r="4.5" style="fill:var(--text-dim)"/>
+          <circle cx="310" cy="220" r="4.5" style="fill:var(--text-dim)"/>
+          <circle cx="189" cy="92" r="4.5" style="fill:var(--accent)"/>
+          <circle cx="288" cy="32" r="4.5" style="fill:var(--green-bright)"/>
+          <text x="100" y="260" style="fill:var(--text-dim)" font-size="14" font-weight="700" font-family="Inter">Ω</text>
+          <text x="238" y="204" style="fill:var(--text-dim)" font-size="13" font-weight="700" font-family="Inter">M₁</text>
+          <text x="318" y="228" style="fill:var(--text-dim)" font-size="13" font-weight="700" font-family="Inter">M₂</text>
+          <text x="146" y="84" style="fill:var(--accent)" font-size="13" font-weight="700" font-family="Inter">M'₁</text>
+          <text x="296" y="28" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter">M'₂</text>
+          <text x="150" y="132" style="fill:var(--text-dim)" font-size="11" font-family="Inter">ΩM' = k × ΩM, même angle θ pour tous</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Vu depuis <span class="math">Ω</span>, chaque point tourne du <strong>même angle</strong> <span class="math">θ = arg(a)</span> et s'éloigne du <strong>même facteur</strong> <span class="math">k = |a|</span> : ici <span class="math">θ = 45°</span> et <span class="math">k = 1,4</span>. C'est toute la puissance de la forme réduite : un seul moteur <span class="math">a</span> pour tous les points.</figcaption>
+      </figure>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Réflexe de rédaction</div>
+          <p>Pour passer à la forme réduite, on <strong>retranche ω des deux côtés</strong> : <span class="math">z' − ω</span> à gauche, <span class="math">z − ω</span> à droite. Oublier de retrancher <span class="math">ω</span> dans le membre de gauche est l'erreur classique qui fait dévier toute la question suivante.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 3 · determination — 2 POINTS ET IMAGES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · determination</span>
+        <h2 class="lecture-section-title">Déterminer <span class="math">S</span> avec 2 points et leurs images</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        L'écriture <span class="math">z' = az + b</span> contient <strong>deux inconnues</strong> (<span class="math">a</span> et <span class="math">b</span>) : il faut donc <strong>deux informations</strong>, c'est-à-dire deux points dont on connaît les images. On obtient un système que l'on résout astucieusement par différence :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">a = (z'(A) − z'(B))/(z(A) − z(B))<br>b = z'(A) − a × z(A)</div>
+        <div class="lecture-formula-desc">Le quotient s'obtient en soustrayant les deux équations (les b se compensent) ; MÊME ordre des points au numérateur et au dénominateur. Puis b se retrouve par substitution avec le point A. Condition : A ≠ B.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — S envoie A(1) sur 2 + i et B(3) sur 4 + 3i</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Données : <span class="math">z(A) = 1 ↦ z'(A) = 2 + i</span> et <span class="math">z(B) = 3 ↦ z'(B) = 4 + 3i</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On forme le quotient : <span class="math">a = ((2 + i) − (4 + 3i))/(1 − 3)</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Numérateur : <span class="math">(2 + i) − (4 + 3i) = −2 − 2i</span> ; dénominateur : <span class="math">1 − 3 = −2</span>. Donc <span class="math">a = (−2 − 2i)/(−2) = 1 + i</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>On retrouve <span class="math">b</span> avec le point <span class="math">A</span> :</p><p><span class="math">b = z'(A) − a × z(A)</span></p><p><span class="math">b = (2 + i) − (1 + i) × 1 = 1</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Conclusion : <span class="math">S</span> a pour écriture <span class="math">z' = (1 + i)·z + 1</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p>Vérification avec <span class="math">B</span> : <span class="math">(1 + i) × 3 + 1 = 3 + 3i + 1 = 4 + 3i</span> ✓ — les deux données sont respectées.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>L'ordre des points doit être <strong>identique</strong> au numérateur et au dénominateur : <span class="math">(z'(A) − z'(B))/(z(A) − z(B))</span>. Si tu inverses un seul étage, tu obtiens <span class="math">1/a</span> au lieu de <span class="math">a</span> : rapport divisé par <span class="math">k²</span> et angle changé en <span class="math">−θ</span>. Et rappelle la condition <span class="math">A ≠ B</span>, sinon le quotient est impossible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 3 · determination — ÉLÉMENTS CARACTÉRISTIQUES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · determination</span>
+        <h2 class="lecture-section-title">Éléments caractéristiques complets : l'exemple type</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Voici la question classique de l'épreuve : « Préciser la nature et les <strong>éléments caractéristiques</strong> de la similitude <span class="math">S</span> ». La réponse complète donne la nature, le rapport, l'angle et le centre — dans cet ordre, chacun justifié.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Tous les éléments de z' = (1 + i)·z + 2 − i</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On lit <span class="math">a = 1 + i</span> et <span class="math">b = 2 − i</span>, avec <span class="math">a ≠ 0</span> : <span class="math">S</span> est une similitude directe.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Nature : <span class="math">a ≠ 1</span> (pas une translation), <span class="math">|a| = √2 ≠ 1</span> (pas une rotation), <span class="math">a</span> non réel (pas une homothétie) → similitude directe <strong>générale</strong>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Rapport :</p><p><span class="math">k = |1 + i| = √(1² + 1²)</span></p><p><span class="math">k = √2</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Angle : <span class="math">Re(a) = 1 &gt; 0</span> et <span class="math">Im(a) = 1 &gt; 0</span> égaux → <span class="math">θ = arg(1 + i) = π/4</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Centre : <span class="math">ω = (2 − i)/(1 − (1 + i)) = (2 − i)/(−i)</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p>On multiplie numérateur et dénominateur par <span class="math">i</span> :</p><p><span class="math">ω = (2 − i) × i/((−i) × i) = (2i − i²)/1</span></p><p><span class="math">ω = 1 + 2i</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p>Contrôle : <span class="math">(1 + i)·(1 + 2i) + 2 − i = −1 + 3i + 2 − i = 1 + 2i</span> — le centre est bien invariant ✓.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">S = similitude directe de centre Ω(1 + 2i), de rapport √2 et d'angle π/4</div>
+        <div class="lecture-formula-desc">La phrase de conclusion type : nature + centre + rapport + angle. Sur la figure, S agrandit d'un facteur √2 ≈ 1,41 et pivote de 45° autour de Ω.</div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Sur la figure</div>
+        <div class="lecture-aside-content">
+          Ce rapport <span class="math">√2</span> apparaît partout en géométrie : c'est le facteur d'agrandissement de la diagonale d'un carré. Un motif tracé dans un carré et repris dans le carré « en diagonale » est exactement multiplié par <span class="math">√2</span> et tourné de <span class="math">45°</span> — la similitude de cet exemple, sans le savoir.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 4 · proprietes — CE QUE LA SIMILITUDE CONSERVE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · proprietes</span>
+        <h2 class="lecture-section-title">Ce que la similitude conserve</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Multiplier toutes les distances par <span class="math">k</span> et tourner toutes les directions du même angle <span class="math">θ</span> a des conséquences très concrètes sur les figures. Ce qui compte pour l'examen : savoir <strong>ce qui est conservé</strong> et <strong>ce qui change</strong>.
+      </p>
+      <ul class="lecture-list-elegant">
+        <li><strong>L'alignement</strong> : trois points alignés ont des images alignées (une direction tournée reste une direction).</li>
+        <li><strong>Les milieux</strong> : l'image du milieu de <span class="math">[MN]</span> est le milieu de <span class="math">[M'N']</span>.</li>
+        <li><strong>Les angles orientés</strong> : toutes les mesures d'angles sont conservées (perpendicularité et parallélisme incluses).</li>
+        <li><strong>Les cercles</strong> : un cercle de centre <span class="math">C</span> et de rayon <span class="math">R</span> a pour image le cercle de centre <span class="math">C'</span> et de rayon <span class="math">k × R</span>.</li>
+        <li><strong>Les rapports de distances</strong> : <span class="math">M'N'/P'Q' = MN/PQ</span> — les figures deviennent <strong>semblables</strong> (mêmes angles, côtés proportionnels).</li>
+      </ul>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">M'N' = k × MN&nbsp;&nbsp;(pour tous points M, N)</div>
+        <div class="lecture-formula-desc">LA formule des longueurs : toute distance est multipliée par k. Avec AB = 3 et k = √2, on aura A'B' = √2 × 3 = 3√2 ≈ 4,24.</div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Objet</th><th>Deviient…</th><th>Ce qui est conservé</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Distance MN</td><td><span class="math">M'N' = k × MN</span></td><td>le rapport des distances</td></tr>
+            <tr><td>Angle orienté</td><td>angle de même mesure</td><td>la mesure (perpendicularité, parallélisme)</td></tr>
+            <tr><td>Points alignés</td><td>points alignés</td><td>l'alignement</td></tr>
+            <tr><td>Milieu de [MN]</td><td>milieu de [M'N']</td><td>la qualité de milieu</td></tr>
+            <tr><td>Cercle (C, R)</td><td>cercle (C', k × R)</td><td>la circularité</td></tr>
+            <tr><td>Triangle ABC</td><td>triangle semblable A'B'C'</td><td>les angles, la forme</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Les longueurs d'un triangle</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Un triangle a pour côtés <span class="math">AB = 3</span>, <span class="math">BC = 4</span>, <span class="math">CA = 5</span> ; la similitude a pour rapport <span class="math">k = √2</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Les côtés images valent <span class="math">A'B' = 3√2</span>, <span class="math">B'C' = 4√2</span>, <span class="math">C'A' = 5√2</span> : chaque longueur est multipliée par <span class="math">√2</span>, les angles sont inchangés.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Distances : conservées ou non ?</div>
+          <p>Les distances ne sont conservées que si <span class="math">k = 1</span> (isométrie). Pour <span class="math">k ≠ 1</span>, ce sont les <strong>rapports</strong> de distances qui survivent : <span class="math">A'B'/A'C' = AB/AC</span>. Ne conclus jamais « les longueurs sont conservées » sans avoir vérifié <span class="math">k = 1</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">L'essentiel de la partie</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tu disposes maintenant du trio complet — rapport, angle, centre — et de la méthode de détermination. La Partie 3 rangera les cas particuliers et apprendra à <strong>composer</strong> les similitudes entre elles.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La carte d'identité de la partie</div>
+        <div class="lecture-formula-hero-main">k = |a|<br>θ = arg(a)<br>ω = b/(1 − a)<br>z' − ω = a(z − ω)</div>
+        <div class="lecture-formula-hero-desc">Quatre formules qui se lisent d'un coup d'œil dans z' = az + b — et la détermination par le quotient (z'(A) − z'(B))/(z(A) − z(B)) comme méthode reine.</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><strong>Rapport et angle</strong> : <span class="math">k = |a| &gt; 0</span> et <span class="math">θ = arg(a)</span> — le nombre <span class="math">b</span> n'y change rien.</li>
+        <li><strong>Centre</strong> : point invariant, unique dès que <span class="math">a ≠ 1</span>, d'affixe <span class="math">ω = b/(1 − a)</span> — division interdite si <span class="math">a = 1</span> (translation, aucun point fixe).</li>
+        <li><strong>Forme réduite</strong> : <span class="math">z' − ω = a(z − ω)</span> — depuis <span class="math">Ω</span>, un seul moteur <span class="math">a</span> pour tous les points.</li>
+        <li><strong>Détermination</strong> : deux points et leurs images donnent <span class="math">a</span> par le quotient, puis <span class="math">b</span> par substitution — avec vérification sur le second point.</li>
+        <li><strong>Conservations</strong> : alignement, milieux, angles orientés, cercles ; les distances sont multipliées par <span class="math">k</span> (<span class="math">M'N' = k × MN</span>).</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Réflexe rédaction pour l'examen</div>
+          <p>Chaque formule vient avec sa condition : <span class="math">a ≠ 0</span> pour l'écriture, <span class="math">a ≠ 1</span> pour le centre, <span class="math">A ≠ B</span> pour le quotient. Une formule employée sans sa condition est une demi-réponse — écris la condition, c'est un point entier.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Pour <span class="math">z' = (1 + i)·z + 2 − i</span>, le rapport de la similitude vaut :</p>
+      <div class="lecture-quiz-options"><span>A) 1</span><span>B) √2</span><span>C) 2</span><span>D) π/4</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) √2.</strong> <span class="math">k = |a| = |1 + i|</span>, puis <span class="math">k = √(1² + 1²) = √2</span>. Le nombre b = 2 − i n'intervient pas dans le rapport. (π/4 est l'angle, pas le rapport !)</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Quel est le point invariant de <span class="math">z' = 3·z − 6</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) 3</span><span>B) −3</span><span>C) −2</span><span>D) 2</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) 3.</strong> Ligne par ligne :<br><span class="math">ω = b/(1 − a) = (−6)/(1 − 3)</span><br><span class="math">ω = (−6)/(−2) = 3</span><br>Vérification : <span class="math">3 × 3 − 6 = 3</span> ✓. (Ici a = 3 réel &gt; 0 : c'est même l'homothétie de centre le point d'affixe 3 et de rapport 3.)</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Une similitude envoie <span class="math">A(1)</span> sur <span class="math">2 + i</span> et <span class="math">B(3)</span> sur <span class="math">4 + 3i</span>. Que vaut <span class="math">a</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) 1 + i</span><span>B) 1 − i</span><span>C) −1 + i</span><span>D) 2 + i</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) 1 + i.</strong> Ligne par ligne :<br><span class="math">a = (z'(A) − z'(B))/(z(A) − z(B))</span><br><span class="math">a = ((2 + i) − (4 + 3i))/(1 − 3)</span><br><span class="math">a = (−2 − 2i)/(−2) = 1 + i</span><br>Même ordre des points aux deux étages — et on vérifie b avec B.</div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[rapport_angle]</strong> Dans <span class="math">z' = az + b</span> : rapport <span class="math">k = |a|</span> et angle <span class="math">θ = arg(a)</span> — <span class="math">b</span> n'y change rien</li>
+      <li><strong>[rapport_angle]</strong> L'angle se détermine avec le quadrant : vérifier les signes de <span class="math">Re(a)</span> et <span class="math">Im(a)</span></li>
+      <li><strong>[centre]</strong> Invariant : <span class="math">z = az + b</span> donne <span class="math">z(1 − a) = b</span>, donc <span class="math">ω = b/(1 − a)</span> si <span class="math">a ≠ 1</span></li>
+      <li><strong>[centre]</strong> Si <span class="math">a = 1</span> (translation, <span class="math">b ≠ 0</span>) : AUCUN point invariant — division par (1 − a) interdite</li>
+      <li><strong>[centre]</strong> Forme réduite : <span class="math">z' − ω = a(z − ω)</span> — depuis Ω, distances × |a| et directions tournées de arg(a)</li>
+      <li><strong>[determination]</strong> Deux points et leurs images : <span class="math">a = (z'(A) − z'(B))/(z(A) − z(B))</span>, puis <span class="math">b = z'(A) − a × z(A)</span></li>
+      <li><strong>[determination]</strong> Même ordre des points au numérateur et au dénominateur ; vérifier avec le second point ; conditions <span class="math">A ≠ B</span></li>
+      <li><strong>[proprietes]</strong> La similitude conserve alignement, milieux, angles orientés, cercles (rayon × k) et les rapports de distances</li>
+      <li><strong>[proprietes]</strong> Les distances sont multipliées par <span class="math">k</span> : <span class="math">M'N' = k × MN</span> — conservées seulement si <span class="math">k = 1</span></li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 2 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : cas particuliers et composition des similitudes</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

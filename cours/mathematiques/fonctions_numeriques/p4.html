@@ -1,0 +1,495 @@
+<!-- ============================================================ -->
+<!-- PARTIE 4 : FICHE COMPLÈTE — VARIATIONS, EXTREMUMS, ÉTUDE     -->
+<!-- Chapitre : Fonctions numériques — Terminale D                -->
+<!-- Notion 1 : signe_derivee — Signe de f' et variations,        -->
+<!--            tableau de variations en lecture-table            -->
+<!-- Notion 2 : extremums_locaux — Extremum local, critère        -->
+<!-- Notion 3 : etude_complete — Méthode d'étude en 6 étapes,     -->
+<!--            exemple condensé f(x) = x³ − 3x                   -->
+<!-- Notion 4 : reflexes — Réflexes Bac et grande table de        -->
+<!--            synthèse du chapitre                              -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 04 · Fonctions numériques</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Fiche complète : <em>variations &amp; étude complète</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Dernière étape du chapitre : transformer la dérivée en <strong>machine à décrire la courbe</strong> — montées, descentes, sommets. Cette <strong>fiche de révision condensée</strong> (15 minutes) rassemble l'essentiel : le <strong>lien entre le signe de <span class="math">f'</span> et les variations</strong>, le <strong>tableau de variations</strong> en lecture-table, les <strong>extremums locaux</strong>, la <strong>méthode d'étude complète en 6 étapes</strong> avec un exemple entièrement traité (<span class="math">f(x) = x³ − 3x</span>), puis les <strong>réflexes Bac</strong> et la <strong>grande table de synthèse</strong> du chapitre.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 15 min</span>
+      <span class="lecture-hero-meta-item">🧮 4 notions</span>
+      <span class="lecture-hero-meta-item">📊 6 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette fiche</span>
+      <span class="lecture-toc-count">4 notions · 6 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Mode d'emploi — La fiche express</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · signe_derivee — Le théorème fondamental et le tableau de variations</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 2 · extremums_locaux — Extremums locaux</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 3 · etude_complete — La méthode d'étude en 6 étapes</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 3 · etude_complete — Exemple condensé : <span class="math">f(x) = x³ − 3x</span></span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 4 · reflexes — Réflexes Bac et grande table de synthèse</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MODE D'EMPLOI -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Mode d'emploi</span>
+        <h2 class="lecture-section-title">La fiche express</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Au Bac, la question reine du chapitre est : « <strong>Étudier les variations de <span class="math">f</span> et dresser son tableau de variations</strong> ». Tout y passe : domaine et limites (partie 1), continuité et bijection (partie 2), dérivées et opérations (partie 3). Cette fiche assemble le tout en une <strong>méthode de 6 étapes</strong>, avec un exemple traité de bout en bout et la table de synthèse à relire la veille de l'épreuve.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Le théorème maître de la fiche</div>
+        <div class="lecture-formula-hero-main">f'(x) &gt; 0 sur I ⇒ f strictement croissante sur I&nbsp;&nbsp;·&nbsp;&nbsp;f'(x) &lt; 0 sur I ⇒ f strictement décroissante sur I</div>
+        <div class="lecture-formula-hero-desc">La dérivée est le « détecteur de pente » : son signe commande les variations de f. Le cas f'(x) = 0 partout donne f constante. Tout le reste de la fiche en découle.</div>
+      </div>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Trois passages recommandés</div>
+          <ul class="lecture-list">
+            <li><strong>Passage 1 (compréhension)</strong> : relis le théorème et l'exemple traité section 04 — rien n'est appris tant qu'on n'a pas refait le calcul.</li>
+            <li><strong>Passage 2 (mémorisation)</strong> : cache la colonne « formule » de la grande table (section 05) et récite-la.</li>
+            <li><strong>Passage 3 (entraînement)</strong> : refais l'exemple <span class="math">x³ − 3x</span> sans le corrigé, puis passe aux exercices du chapitre.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · signe_derivee — THÉORÈME + TABLEAU   -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · signe_derivee</span>
+        <h2 class="lecture-section-title">Le théorème fondamental et le tableau de variations</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Voici l'énoncé exact à restituer, avec son hypothèse et son cas limite :
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📘 Théorème (énoncé exact)</div>
+          <p>Soit <span class="math">f</span> une fonction <strong>dérivable sur un intervalle</strong> <span class="math">I</span>.</p>
+          <ul class="lecture-list">
+            <li>Si <span class="math">f'(x) &gt; 0</span> pour tout <span class="math">x</span> de <span class="math">I</span>, alors <span class="math">f</span> est <strong>strictement croissante</strong> sur <span class="math">I</span>.</li>
+            <li>Si <span class="math">f'(x) &lt; 0</span> pour tout <span class="math">x</span> de <span class="math">I</span>, alors <span class="math">f</span> est <strong>strictement décroissante</strong> sur <span class="math">I</span>.</li>
+            <li>Si <span class="math">f'(x) = 0</span> pour tout <span class="math">x</span> de <span class="math">I</span>, alors <span class="math">f</span> est <strong>constante</strong> sur <span class="math">I</span>.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Intuition : <span class="math">f'(x)</span> mesure la pente de la tangente en <span class="math">x</span>. Pentes positives partout → la courbe monte partout → fonction croissante. C'est ce théorème qui justifie la méthode standard : <strong>pour étudier les variations de <span class="math">f</span>, on étudie le signe de <span class="math">f'</span></strong>.
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">f' ≥ 0 sur I et f' = 0 seulement en des points isolés ⇒ f strictement croissante sur I</div>
+        <div class="lecture-formula-desc">Nuance utile : l'annulation en quelques points isolés ne casse pas la stricte croissance. Exemple : f(x) = x³ a f'(x) = 3x² ≥ 0, nul seulement en 0, et f est strictement croissante sur ℝ.</div>
+      </div>
+      <p class="lecture-text">
+        Le <strong>tableau de variations</strong> condense tout en trois lignes, à construire dans cet ordre :
+      </p>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Construction ligne par ligne</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>Ligne 1 (x)</strong> : bornes de l'intervalle d'étude + valeurs où <span class="math">f'(x) = 0</span>.</li>
+            <li><strong>Ligne 2 (f'(x))</strong> : signe de <span class="math">f'</span> sur chaque intervalle (tableau de signes classique).</li>
+            <li><strong>Ligne 3 (f(x))</strong> : flèche <span class="math">↗</span> sous un « + », flèche <span class="math">↘</span> sous un « − », et les <strong>limites ou valeurs</strong> aux bornes — jamais oubliées.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 1 — tableau de variations de f(x) = x²</div>
+        <div class="lecture-example-content"><p>Dresser le tableau de variations de <span class="math">f(x) = x²</span> sur <span class="math">ℝ</span>.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p><strong>Calculer la dérivée</strong> :</p>
+            <p><span class="math">f'(x) = 2x</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p><strong>Étudier son signe</strong> (s'annule en <span class="math">0</span>) :</p>
+            <p><span class="math">2x &lt; 0 pour x &lt; 0 ; f'(0) = 0 ; 2x &gt; 0 pour x &gt; 0</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p><strong>Dresser le tableau</strong> (lecture-table x / f'(x) / f(x)) :</p>
+            <div class="lecture-table">
+              <table>
+                <thead>
+                  <tr><th>x</th><th>−∞</th><th></th><th>0</th><th></th><th>+∞</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><span class="math">f'(x)</span></td><td colspan="2"><span class="math">−</span></td><td><span class="math">0</span></td><td colspan="2"><span class="math">+</span></td></tr>
+                  <tr><td><span class="math">f(x)</span></td><td colspan="2"><span class="math">+∞ ↘</span></td><td><span class="math">0</span></td><td colspan="2"><span class="math">↗ +∞</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content">
+            <p><strong>Lire le tableau</strong> : <span class="math">f</span> décroît sur <span class="math">]−∞ ; 0]</span>, croît sur <span class="math">[0 ; +∞[</span>, avec un <strong>minimum</strong> <span class="math">0</span> atteint en <span class="math">0</span> — cohérent avec la parabole et ses limites <span class="math">+∞</span> des deux côtés.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 2 — la droite g(x) = −2x + 5</div>
+        <div class="lecture-example-content"><p>Déterminer les variations de <span class="math">g</span> sur <span class="math">ℝ</span>.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p><strong>Dérivée et signe</strong> :</p>
+            <p><span class="math">g'(x) = −2 &lt; 0 pour tout x</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p><strong>Conclusion</strong> : <span class="math">g</span> est <strong>strictement décroissante</strong> sur <span class="math">ℝ</span> — une droite de pente négative, sans extremum.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Le tableau se « coupe » aux valeurs interdites</div>
+          <p>Si le domaine a un trou (exemple <span class="math">(2x + 1)/(x − 3)</span> de la partie 3, interdit en <span class="math">3</span>), le tableau comporte une <strong>double barre</strong> à la valeur interdite et chaque intervalle se traite séparément — avec ses propres limites aux bornes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 2 · extremums_locaux                     -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · extremums_locaux</span>
+        <h2 class="lecture-section-title">Extremums locaux</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Dans le tableau de <span class="math">x³ − 3x</span> (section 04), la courbe culmine en <span class="math">(−1 ; 2)</span> puis plonge : <span class="math">2</span> est un <strong>maximum local</strong>, et <span class="math">−2</span> un <strong>minimum local</strong>. Voici la définition précise, puis le critère qui permet de les trouver.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition officielle — Extremum local</div>
+          <p><span class="math">f</span> admet un <strong>maximum local</strong> en <span class="math">a</span> s'il existe un intervalle ouvert autour de <span class="math">a</span> où, pour tout <span class="math">x</span>, <span class="math">f(x) ≤ f(a)</span> ; <strong>minimum local</strong> si <span class="math">f(x) ≥ f(a)</span> sur cet intervalle.</p>
+        </div>
+      </div>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">extremum local en a ⇔ f'(a) = 0 ET f' change de signe en a</div>
+        <div class="lecture-formula-desc">Pour f dérivable : maximum local si f' passe de + à −, minimum local si f' passe de − à +. Les deux conditions sont nécessaires : annulation seule = aucun extremum garanti.</div>
+      </div>
+
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p><strong>Résoudre f'(x) = 0</strong> : les solutions sont les seules candidates à un extremum local.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p><strong>Étudier le signe de f' autour de chaque candidate</strong> : changement de signe → extremum (+ → − : maximum ; − → + : minimum) ; pas de changement → pas d'extremum.</p>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac — f'(a) = 0 ne suffit pas !</div>
+          <p>Contre-exemple célèbre : <span class="math">f(x) = x³</span>. On a <span class="math">f'(0) = 3 × 0² = 0</span>, mais <span class="math">f'</span> est <strong>positive des deux côtés</strong> de <span class="math">0</span> — pas de changement de signe, <span class="math">f</span> reste strictement croissante : <strong>aucun extremum</strong> en <span class="math">0</span>. Vérifie toujours le <em>changement de signe</em> de <span class="math">f'</span>, pas seulement l'annulation.</p>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Deux précisions de vocabulaire : un extremum <strong>local</strong> est un sommet du voisinage — pas forcément le plus haut de tout l'intervalle (c'est l'extremum <strong>absolu</strong>). Et au point d'extremum, la tangente est <strong>horizontale</strong> : son équation est <span class="math">y = f(a)</span>, puisque <span class="math">f'(a) = 0</span>.
+      </p>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 3 · etude_complete — MÉTHODE EN 6 ÉTAPES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · etude_complete</span>
+        <h2 class="lecture-section-title">La méthode d'étude complète en 6 étapes</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Face à « étudier <span class="math">f</span> », le plan est toujours le même — et l'ordre est celui du barème, car chaque étape s'appuie sur la précédente et recycle une partie du chapitre (limites p1, bijection p2, dérivées p3).
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La méthode d'étude complète</div>
+        <div class="lecture-formula-hero-main">① Domaine → ② Limites &amp; asymptotes → ③ Dérivée &amp; signe → ④ Tableau de variations → ⑤ Tangentes remarquables → ⑥ Équations f(x) = k</div>
+        <div class="lecture-formula-hero-desc">L'ordre est celui du barème : le domaine filtre tout, les limites remplissent les bornes du tableau, le signe de f' remplit le milieu, la bijection conclut sur f(x) = k.</div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Les 6 étapes, une par une</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>① Domaine</strong> : valeurs interdites (dénominateur nul, <span class="math">ln</span> d'un négatif, racine d'un négatif). Tout le reste se joue sur ce domaine.</li>
+            <li><strong>② Limites et asymptotes</strong> : en <span class="math">±∞</span> et aux bornes interdites ; limite finie en <span class="math">±∞</span> → asymptote horizontale, limite infinie en <span class="math">a</span> → asymptote verticale.</li>
+            <li><strong>③ Dérivée et signe</strong> : calculer <span class="math">f'</span> (partie 3), la <strong>factoriser</strong>, puis étudier son signe sur le domaine.</li>
+            <li><strong>④ Tableau de variations</strong> : lignes x / f'(x) / f(x), avec limites aux bornes et valeurs aux zéros de <span class="math">f'</span>.</li>
+            <li><strong>⑤ Tangentes remarquables</strong> : tangentes <strong>horizontales</strong> aux extremums ; tangente en 0 ou aux points demandés avec <span class="math">y = f'(a)(x − a) + f(a)</span>.</li>
+            <li><strong>⑥ Équations f(x) = k</strong> : existence par le TVI, <strong>unicité</strong> par la stricte monotonie — c'est le théorème de la bijection.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">f continue et strictement monotone sur [a ; b] ⇒ bijection de [a ; b] sur [f(a) ; f(b)]</div>
+        <div class="lecture-formula-desc">Rappel de la partie 2 : pour tout k compris entre f(a) et f(b), l'équation f(x) = k admet une UNIQUE solution dans [a ; b]. Les deux hypothèses se citent : continuité (existence) et stricte monotonie (unicité).</div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ La dérivée se factorise AVANT le tableau</div>
+          <p>Un signe de <span class="math">f'</span> se fait sur une forme <strong>factorisée</strong> : <span class="math">3(x − 1)(x + 1)</span>, pas <span class="math">3x² − 3</span>. Développer puis deviner le signe d'un trinôme non factorisé est la source d'erreurs n°1 de l'étape ③ — factorise d'abord, fais un tableau de signes ensuite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 3 · etude_complete — EXEMPLE CONDENSÉ    -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · etude_complete</span>
+        <h2 class="lecture-section-title">Exemple condensé complet : f(x) = x³ − 3x</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Étude complète — f(x) = x³ − 3x selon les 6 étapes</div>
+        <div class="lecture-example-content"><p>Étudier la fonction <span class="math">f(x) = x³ − 3x</span> : domaine, limites, dérivée, tableau, extremums, tangentes et équations <span class="math">f(x) = k</span>.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content">
+            <p><strong>① Domaine</strong> : un polynôme est défini partout :</p>
+            <p><span class="math">D = ℝ</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content">
+            <p><strong>② Limites</strong> (terme dominant <span class="math">x³</span>) :</p>
+            <p><span class="math">lim(x→−∞) f(x) = −∞&nbsp;&nbsp;;&nbsp;&nbsp;lim(x→+∞) f(x) = +∞</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content">
+            <p><strong>③ Dérivée</strong>, puis factorisation immédiate :</p>
+            <p><span class="math">f'(x) = 3x² − 3 = 3(x − 1)(x + 1)</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content">
+            <p><strong>Signe de f'</strong> (produit, s'annule en <span class="math">−1</span> et <span class="math">1</span>) — contrôle par points-test :</p>
+            <p><span class="math">f'(−2) = 9 &gt; 0 ; f'(0) = −3 &lt; 0 ; f'(2) = 9 &gt; 0</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">5</div>
+          <div class="lecture-step-content">
+            <p><strong>④ Tableau de variations</strong> (valeurs <span class="math">f(−1) = 2</span> et <span class="math">f(1) = −2</span>) :</p>
+            <div class="lecture-table">
+              <table>
+                <thead>
+                  <tr><th>x</th><th>−∞</th><th></th><th>−1</th><th></th><th>1</th><th></th><th>+∞</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><span class="math">f'(x)</span></td><td colspan="2"><span class="math">+</span></td><td><span class="math">0</span></td><td><span class="math">−</span></td><td><span class="math">0</span></td><td colspan="2"><span class="math">+</span></td></tr>
+                  <tr><td><span class="math">f(x)</span></td><td colspan="2"><span class="math">−∞ ↗</span></td><td><span class="math">2</span></td><td><span class="math">↘</span></td><td><span class="math">−2</span></td><td colspan="2"><span class="math">↗ +∞</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">6</div>
+          <div class="lecture-step-content">
+            <p><strong>Extremums</strong> (f' s'annule EN changeant de signe) :</p>
+            <p><span class="math">maximum local : 2 atteint en −1 (f' : + puis −)</span></p>
+            <p><span class="math">minimum local : −2 atteint en 1 (f' : − puis +)</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">7</div>
+          <div class="lecture-step-content">
+            <p><strong>⑤ Tangentes remarquables</strong> : <span class="math">f'(−1) = f'(1) = 0</span>, donc tangentes <strong>horizontales</strong> :</p>
+            <p><span class="math">y = 2 en (−1 ; 2)&nbsp;&nbsp;;&nbsp;&nbsp;y = −2 en (1 ; −2)</span></p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">8</div>
+          <div class="lecture-step-content">
+            <p><strong>⑥ Équations f(x) = k</strong> : sur <span class="math">[−1 ; 1]</span>, <span class="math">f</span> est continue et strictement décroissante de <span class="math">2</span> à <span class="math">−2</span> : bijection de <span class="math">[−1 ; 1]</span> sur <span class="math">[−2 ; 2]</span>. Donc pour tout <span class="math">k ∈ [−2 ; 2]</span>, l'équation <span class="math">f(x) = k</span> admet une <strong>unique</strong> solution dans <span class="math">[−1 ; 1]</span>. Par exemple, pour <span class="math">k = 0</span> :</p>
+            <p><span class="math">x³ − 3x = 0 ⇔ x(x² − 3) = 0 ⇔ x = 0 ou x = ±√3</span></p>
+            <p>La solution dans <span class="math">[−1 ; 1]</span> est bien unique : <span class="math">0</span> (les deux autres sortent de l'intervalle — une par branche monotone).</p>
+          </div>
+        </div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbe de f égale x cubique moins 3x : maximum local 2 en moins 1, minimum local moins 2 en 1, tangentes horizontales en pointillé, trois intersections avec l'axe des x">
+          <line x1="40" y1="150" x2="494" y2="150" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="500,150 490,146 490,154" style="fill:var(--text-dim)"/>
+          <line x1="260" y1="270" x2="260" y2="36" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="260,30 256,40 264,40" style="fill:var(--text-dim)"/>
+          <text x="496" y="144" style="fill:var(--text-dim)" font-size="11" font-family="Inter">x</text>
+          <text x="270" y="42" style="fill:var(--text-dim)" font-size="11" font-family="Inter">y</text>
+          <text x="248" y="166" style="fill:var(--text-dim)" font-size="11" font-family="Inter">O</text>
+          <text x="200" y="166" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">−1</text>
+          <text x="320" y="166" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">1</text>
+          <text x="248" y="36" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">2</text>
+          <text x="248" y="274" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">−2</text>
+          <line x1="200" y1="40" x2="200" y2="144" style="stroke:var(--text-dim)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="320" y1="156" x2="320" y2="264" style="stroke:var(--text-dim)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="160" y1="30" x2="240" y2="30" style="stroke:var(--info)" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <line x1="280" y1="270" x2="360" y2="270" style="stroke:var(--info)" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <path d="M 140 270 C 172 226 172 30 200 30 C 222 30 240 90 260 150 C 280 210 298 270 320 270 C 342 270 356 118 380 30" style="fill:none;stroke:var(--accent-bright)" stroke-width="2.5"/>
+          <text x="392" y="66" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">Cf</text>
+          <circle cx="156" cy="150" r="3.5" style="fill:var(--green-bright)"/>
+          <circle cx="364" cy="150" r="3.5" style="fill:var(--green-bright)"/>
+          <text x="140" y="140" style="fill:var(--green-bright)" font-size="11" font-weight="700" font-family="Inter">−√3</text>
+          <text x="368" y="140" style="fill:var(--green-bright)" font-size="11" font-weight="700" font-family="Inter">√3</text>
+          <circle cx="200" cy="30" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="320" cy="270" r="5" style="fill:var(--accent-bright)"/>
+          <text x="118" y="20" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">max local (−1 ; 2)</text>
+          <text x="328" y="288" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">min local (1 ; −2)</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Allure de la courbe de <span class="math">f(x) = x³ − 3x</span> : <strong>maximum local</strong> <span class="math">2</span> en <span class="math">−1</span> et <strong>minimum local</strong> <span class="math">−2</span> en <span class="math">1</span>, tangentes horizontales en pointillé. La courbe coupe l'axe des abscisses en <span class="math">−√3</span>, <span class="math">0</span> et <span class="math">√3</span> — les trois solutions de <span class="math">f(x) = 0</span>, une par branche monotone.</figcaption>
+      </figure>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">f(x) = 0 ⇔ x = −√3 ; 0 ; √3</div>
+        <div class="lecture-formula-desc">Vérification de cohérence : trois zéros, un par branche du tableau (croissante, décroissante, croissante). Si ton tableau n'avait qu'une branche, un tel triple zéro serait impossible — le dessin et le tableau doivent raconter la même histoire.</div>
+      </div>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">💡 Vérification de cohérence (30 secondes qui sauvent)</div>
+          <p>Contrôle croisé : <span class="math">f(0) = 0</span> figure bien dans la branche décroissante (entre <span class="math">2</span> et <span class="math">−2</span>) ✔ ; les limites <span class="math">−∞</span> et <span class="math">+∞</span> correspondent aux flèches extrêmes ✔ ; <span class="math">f'(0) = −3 &lt; 0</span> correspond à la flèche <span class="math">↘</span> autour de <span class="math">0</span> ✔. Un tableau incohérent avec ces trois points signale une erreur de dérivée ou de limite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 4 · reflexes — SYNTHÈSE                  -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · reflexes</span>
+        <h2 class="lecture-section-title">Réflexes Bac et grande table de synthèse</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Les erreurs qui coûtent le plus de points sont des <strong>oublis d'étape</strong>, pas des difficultés de calcul. Les trois réflexes d'or, puis la grande table.
+      </p>
+      <ul class="lecture-list-elegant">
+        <li><strong>Le domaine d'abord, toujours</strong> : avant de dériver, demander ce qu'on a le droit d'écrire (<span class="math">ln(2x − 5)</span> exige <span class="math">x &gt; 5/2</span> ; <span class="math">1/(x − 3)</span> exige <span class="math">x ≠ 3</span>). Une dérivée juste sur un mauvais domaine est une réponse fausse.</li>
+        <li><strong>Les limites avant le tableau</strong> : elles remplissent les extrémités de la 3ᵉ ligne, livrent les asymptotes et rendent le tableau vérifiable. Un tableau sans limites aux bornes est incomplet.</li>
+        <li><strong>Vérifier en redérivant</strong> : refaire la dérivée à l'envers, tester un point (<span class="math">f'(0)</span>, <span class="math">f'(2)</span>…), contrôler que le dessin, le tableau et les zéros de <span class="math">f</span> racontent la même histoire.</li>
+        <li><strong>Extremum : deux conditions, pas une</strong> : <span class="math">f'(a) = 0</span> <em>et</em> changement de signe de <span class="math">f'</span> (souviens-toi de <span class="math">x³</span> en <span class="math">0</span>).</li>
+        <li><strong>f(x) = k : existence ET unicité</strong> : existence par le TVI (continuité), unicité par la stricte monotonie (bijection) — puis encadrement de la solution par balayage au pas 0,1 si l'énoncé le demande.</li>
+        <li><strong>Citer les hypothèses</strong> : « <span class="math">f</span> continue et strictement croissante sur <span class="math">[a ; b]</span>, donc d'après le théorème de la bijection… ». La conclusion seule ne rapporte pas tous les points.</li>
+      </ul>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Objet</th><th>Formule</th><th>Astuce de vérification</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Puissance</td><td><span class="math">(xⁿ)' = n·x^(n − 1)</span></td><td>descendre l'exposant, baisser d'un cran</td></tr>
+            <tr><td>Quotient et racine</td><td><span class="math">(1/x)' = −1/x² ; (√x)' = 1/(2√x)</span></td><td>le moins sur 1/x ; √x dérivable sur <span class="math">]0 ; +∞[</span></td></tr>
+            <tr><td>e^x et ln x</td><td><span class="math">(e^x)' = e^x ; (ln x)' = 1/x</span></td><td>e^x est sa propre dérivée ; ln x exige <span class="math">x &gt; 0</span></td></tr>
+            <tr><td>cos et sin</td><td><span class="math">(cos x)' = −sin x ; (sin x)' = cos x</span></td><td>le moins est sur le cosinus</td></tr>
+            <tr><td>Produit</td><td><span class="math">(uv)' = u'v + uv'</span></td><td>tester <span class="math">u = v = x</span> : on retrouve <span class="math">2x</span></td></tr>
+            <tr><td>Quotient</td><td><span class="math">(u/v)' = (u'v − uv')/v²</span></td><td>ordre <span class="math">u'v − uv'</span> ; <span class="math">v ≠ 0</span></td></tr>
+            <tr><td>Composées</td><td><span class="math">(e^u)' = u'·e^u ; (ln u)' = u'/u ; (uⁿ)' = n·u'·u^(n − 1)</span></td><td>ne jamais oublier le facteur <span class="math">u'</span></td></tr>
+            <tr><td>Tangente</td><td><span class="math">y = f'(a)(x − a) + f(a)</span></td><td>le point <span class="math">(a ; f(a))</span> doit vérifier l'équation</td></tr>
+            <tr><td>Variations</td><td><span class="math">f' &gt; 0 ⇒ f ↗ ; f' &lt; 0 ⇒ f ↘</span></td><td>point-test <span class="math">f'(0)</span>, <span class="math">f'(2)</span> pour contrôler</td></tr>
+            <tr><td>Extremum</td><td><span class="math">f'(a) = 0</span> ET changement de signe</td><td><span class="math">x³</span> en <span class="math">0</span> : <span class="math">f'(0) = 0</span> sans extremum</td></tr>
+            <tr><td>TVI</td><td><span class="math">f</span> continue sur <span class="math">[a ; b]</span>, <span class="math">k</span> entre <span class="math">f(a)</span> et <span class="math">f(b)</span> ⇒ <span class="math">∃ c : f(c) = k</span></td><td>existence seule, pas unicité</td></tr>
+            <tr><td>Bijection</td><td>+ stricte monotonie ⇒ solution <strong>unique</strong> de <span class="math">f(x) = k</span></td><td>citer continuité ET stricte monotonie</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">💡 La carte mentale du chapitre</div>
+          <p>Une étude de fonction est une <strong>chaîne</strong> : le <strong>domaine</strong> dit où on travaille, les <strong>limites</strong> disent où vont les bornes, la <strong>dérivée factorisée</strong> dit où la courbe monte et descend, le <strong>tableau</strong> assemble le tout, et la <strong>bijection</strong> transforme chaque branche monotone en garantie de solution unique pour <span class="math">f(x) = k</span>. Casse un maillon, et tout le reste s'écroule — respecte l'ordre des 6 étapes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[signe_derivee]</strong> <span class="math">f' &gt; 0</span> sur <span class="math">I</span> ⇒ <span class="math">f</span> strictement croissante ; <span class="math">f' &lt; 0</span> ⇒ strictement décroissante ; <span class="math">f' = 0</span> partout ⇒ constante</li>
+      <li><strong>[signe_derivee]</strong> <span class="math">f' ≥ 0</span> avec annulation en points isolés ⇒ stricte croissance conservée (exemple <span class="math">x³</span>)</li>
+      <li><strong>[signe_derivee]</strong> Tableau de variations : ligne <span class="math">x</span> (bornes + zéros de <span class="math">f'</span>), ligne signe de <span class="math">f'</span>, ligne flèches <span class="math">↗ ↘</span> avec limites et valeurs aux bornes</li>
+      <li><strong>[signe_derivee]</strong> Valeur interdite = double barre : le tableau se coupe et chaque intervalle se traite séparément</li>
+      <li><strong>[extremums_locaux]</strong> Extremum local en <span class="math">a</span> ⇔ <span class="math">f'(a) = 0</span> ET <span class="math">f'</span> change de signe en <span class="math">a</span> (max : + puis − ; min : − puis +) ; tangente horizontale <span class="math">y = f(a)</span></li>
+      <li><strong>[extremums_locaux]</strong> <span class="math">f'(a) = 0</span> seul ne suffit pas : <span class="math">x³</span> en <span class="math">0</span> n'a aucun extremum</li>
+      <li><strong>[etude_complete]</strong> 6 étapes : ① domaine → ② limites &amp; asymptotes → ③ dérivée factorisée &amp; signe → ④ tableau de variations → ⑤ tangentes remarquables → ⑥ équations <span class="math">f(x) = k</span></li>
+      <li><strong>[etude_complete]</strong> Modèle traité : <span class="math">f(x) = x³ − 3x</span>, <span class="math">f' = 3(x − 1)(x + 1)</span>, max local <span class="math">2</span> en <span class="math">−1</span>, min local <span class="math">−2</span> en <span class="math">1</span>, zéros <span class="math">−√3 ; 0 ; √3</span></li>
+      <li><strong>[etude_complete]</strong> Sur chaque branche : bijection ⇒ solution <strong>unique</strong> de <span class="math">f(x) = k</span> dès que <span class="math">k</span> est dans l'intervalle image</li>
+      <li><strong>[reflexes]</strong> Domaine d'abord, limites avant le tableau, dérivée factorisée avant le signe, vérification en redérivant, hypothèses citées avant de conclure</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 4 terminée — chapitre complet !</div>
+    <div class="lecture-end-sub">Refais l'exemple x³ − 3x sans le corrigé, puis passe aux exercices du chapitre — bonne chance pour l'épreuve !</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

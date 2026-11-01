@@ -1,0 +1,511 @@
+<!-- ============================================================ -->
+<!-- PARTIE 3 : NOTION DE GÈNE ET D'ALLÈLE                         -->
+<!-- Notion 1 : gene_allele — Gène, locus, allèles                 -->
+<!-- Notion 2 : homozygote_heterozygote — Génotype, dominant /     -->
+<!--            récessif, exemple de la drépanocytose              -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 03 · L'information génétique</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Notion de <em>gène et d'allèle</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Un même alphabet ADN, des caractères différents d'un individu à l'autre : comment ? Cette partie introduit les <strong>2 notions</strong> centrales de la génétique : le <strong>gène</strong> (portion d'ADN localisée à un locus précis et commandant un caractère) et ses <strong>allèles</strong> (versions différentes du même gène), avec les notions d'<strong>homozygote</strong> et d'<strong>hétérozygote</strong> — illustrées par un exemple majeur au Niger : la <strong>drépanocytose</strong>.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧬 2 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">2 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Pourquoi les enfants d'une même famille sont-ils différents ?</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · gene_allele — Le gène : une portion d'ADN qui commande un caractère</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · gene_allele — Le locus : l'adresse du gène</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · gene_allele — Les allèles : versions différentes d'un même gène</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · homozygote_heterozygote — Homozygote et hétérozygote</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 2 · homozygote_heterozygote — Allèle dominant, allèle récessif</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Étude de cas — Le gène de la drépanocytose (allèles A et S)</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — Relation gène-caractère et réflexes de notation</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Pourquoi les enfants d'une même famille sont-ils différents ?</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Deux frères, mêmes parents, même maison, même nourriture au tôle — et pourtant : l'un est grand, l'autre moins ; l'un a les yeux très foncés, l'autre un peu moins ; l'un porte le groupe sanguin du père, l'autre celui de la mère. Les enfants d'une même famille <strong>se ressemblent sans être identiques</strong>. Pourquoi ?
+      </p>
+      <p class="lecture-text">
+        Nous savons déjà que chaque enfant a reçu <strong>un exemplaire de chaque chromosome de son père et un de sa mère</strong> (Partie 2). Mais que portent ces chromosomes ? Comment une séquence d'ADN peut-elle « commander » la couleur des yeux ou la forme des globules rouges ? La réponse tient en trois mots-clés que cette partie va définir avec précision : <strong>gène</strong>, <strong>locus</strong>, <strong>allèle</strong>.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">💡 Objectifs de la partie</div>
+          <p>À la fin de cette partie, tu sauras : définir un gène et un allèle, localiser un gène à un locus, écrire le génotype d'un individu (AA, Aa, aa, AS…), distinguer dominant et récessif, et expliquer la drépanocytose avec ses trois génotypes AA, AS et SS.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · gene_allele — LE GÈNE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · gene_allele</span>
+        <h2 class="lecture-section-title">Le gène : une portion d'ADN qui commande un caractère</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        L'ADN d'un chromosome est un long texte. Tout ce texte ne parle pas de la même chose : certains passages codent des protéines, d'autres jouent des rôles de réglage. Les passages qui <strong>commandent des caractères</strong> portent un nom :
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition officielle — Gène</div>
+          <p>Un <strong>gène</strong> est une <strong>portion d'ADN localisée à un endroit précis sur un chromosome</strong>, appelé <strong>locus</strong>, qui <strong>commande un caractère héréditaire</strong> de l'individu (le plus souvent en déterminant la synthèse d'un <strong>polypeptide</strong>, c'est-à-dire d'une protéine).</p>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Décomposons cette définition : un gène est d'abord de l'<strong>ADN</strong> (une séquence de nucléotides A, T, C, G) ; c'est une <strong>portion</strong> seulement du chromosome, pas tout le chromosome ; et cette portion <strong>agit</strong> : elle oriente la fabrication d'un polypeptide, et c'est ce polypeptide (protéine, enzyme, pigment…) qui réalise le caractère. La chaîne logique est donc :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">gène (ADN) → polypeptide (protéine) → caractère</div>
+        <div class="lecture-formula-desc">Exemple : le gène de l'hémoglobine → hémoglobine (protéine du sang) → capacité à transporter l'oxygène.</div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🔬 Exemples de gènes</div>
+        <div class="lecture-example-content"><p>Le gène de l'<strong>hémoglobine</strong> (groupe de gènes Hb) commande la protéine qui transporte l'oxygène dans le sang ; des gènes de pigments commandent la couleur des yeux et de la peau ; chez le mil, des gènes commandent la précocité de floraison ; chez le zébu, des gènes participent à la forme des cornes et à la résistance à la trypanosomiase.</p></div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Ne confonds jamais <strong>chromosome</strong> et <strong>gène</strong> ! Un chromosome est une <em>bâton d'ADN entier</em> (chez l'humain, 46 par cellule somatique) ; un gène n'est qu'une <em>petite portion</em> de cette ADN. Un chromosome porte des <strong>milliers de gènes</strong>, chacun à sa place précise. Écrire « un chromosome commande un caractère » est faux : c'est le <strong>gène</strong> qui commande.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · gene_allele — LE LOCUS -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · gene_allele</span>
+        <h2 class="lecture-section-title">Le locus : l'adresse du gène</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition — Locus</div>
+          <p>Le <strong>locus</strong> (pluriel : loci) est la <strong>position d'un gène sur un chromosome</strong> — son « adresse » sur le chromosome. Un gène donné occupe <strong>le même locus sur les deux chromosomes homologues</strong>.</p>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Image-toi un long axe de bus (le chromosome) : chaque gène est un <strong>arrêt</strong> bien défini, toujours au même endroit. Sur les deux chromosomes homologues d'une paire, l'arrêt existe <strong>aux deux extrémités identiques</strong> : le gène du groupe sanguin est au même locus sur les deux homologues. Ce qui peut différer, c'est la <em>version du texte</em> portée à cet arrêt — c'est justement la notion d'allèle (section 03).
+      </p>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Paire de chromosomes homologues avec les mêmes loci">
+          <text x="260" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">LES HOMOLOGUES PORTENT LES GÈNES AUX MÊMES LOCI</text>
+          <g style="fill:var(--accent);stroke:var(--accent-bright)" stroke-width="1.5">
+            <rect x="150" y="45" width="26" height="170" rx="12"/>
+            <rect x="330" y="45" width="26" height="170" rx="12"/>
+          </g>
+          <g font-family="Inter" font-size="11" font-weight="700" text-anchor="middle">
+            <rect x="140" y="75" width="46" height="18" rx="9" style="fill:var(--green-bright)" opacity="0.85"/>
+            <rect x="320" y="75" width="46" height="18" rx="9" style="fill:var(--green-bright)" opacity="0.85"/>
+            <text x="163" y="88" style="fill:var(--text-light)">G1</text>
+            <text x="343" y="88" style="fill:var(--text-light)">G1</text>
+            <rect x="140" y="122" width="46" height="18" rx="9" style="fill:var(--info)" opacity="0.85"/>
+            <rect x="320" y="122" width="46" height="18" rx="9" style="fill:var(--info)" opacity="0.85"/>
+            <text x="163" y="135" style="fill:var(--text-light)">G2</text>
+            <text x="343" y="135" style="fill:var(--text-light)">G2</text>
+            <rect x="140" y="169" width="46" height="18" rx="9" style="fill:var(--danger-light)" opacity="0.85"/>
+            <rect x="320" y="169" width="46" height="18" rx="9" style="fill:var(--danger-light)" opacity="0.85"/>
+            <text x="163" y="182" style="fill:var(--text-light)">G3</text>
+            <text x="343" y="182" style="fill:var(--text-light)">G3</text>
+          </g>
+          <text x="163" y="238" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">homologue d'origine paternelle</text>
+          <text x="343" y="238" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">homologue d'origine maternelle</text>
+          <text x="260" y="62" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">même paire · mêmes loci (G1, G2, G3)</text>
+          <text x="66" y="88" style="fill:var(--green-bright)" font-size="10.5" font-family="Inter">locus du gène G1 →</text>
+          <text x="66" y="135" style="fill:var(--info)" font-size="10.5" font-family="Inter">locus du gène G2 →</text>
+          <text x="66" y="182" style="fill:var(--danger-light)" font-size="10.5" font-family="Inter">locus du gène G3 →</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Chaque gène occupe une position précise (locus) sur le chromosome. Les deux homologues portent les mêmes gènes aux mêmes loci — les versions peuvent différer.</figcaption>
+      </figure>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Piège de vocabulaire</div>
+          <p>Le locus est une <strong>position</strong>, pas une molécule. On dit : « le gène Hb occupe le locus 15.5 sur le chromosome 11 ». Ne confonds pas non plus <strong>locus</strong> (l'adresse) et <strong>allèle</strong> (le contenu de l'adresse) — deux termes qui arrivent tout de suite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · gene_allele — LES ALLÈLES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · gene_allele</span>
+        <h2 class="lecture-section-title">Les allèles : versions différentes d'un même gène</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition officielle — Allèle</div>
+          <p>Les <strong>allèles</strong> sont les <strong>versions différentes d'un même gène</strong> : des séquences d'ADN légèrement différentes occupant le <strong>même locus</strong> et commandant des <strong>variations du même caractère</strong>. Un individu diploïde possède <strong>au maximum 2 allèles par gène</strong> (un par homologue) ; l'espèce, elle, peut en posséder beaucoup.</p>
+        </div>
+      </div>
+      <p class="lecture-text">
+        D'où viennent ces versions différentes ? Des <strong>mutations</strong> : au fil des générations, la séquence d'un gène peut changer (une lettre A, T, C, G remplacée par une autre, par exemple). La version originale et la version mutée deviennent deux <strong>allèles</strong> du même gène. Elles commandent le <em>même type</em> de caractère, mais des <em>variations</em> différentes.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">📚 Analogie — le même arrêt, des textes différents</div>
+        <div class="lecture-example-content"><p>Reprends l'image du chromosome-axe de bus. Au locus du gène « couleur de robe », le texte peut être écrit en « version A » (robe unie) ou en « version B » (robe pie) : même arrêt, même sujet, mais deux formulations. C'est l'existence de plusieurs allèles qui explique la <strong>diversité</strong> des caractères au sein de l'espèce — et au sein des familles.</p></div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Deux allèles d'un même gène : séquences légèrement différentes au même locus">
+          <text x="260" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">UN GÈNE, PLUSIEURS ALLÈLES (SÉQUENCES DIFFÉRENTES)</text>
+          <text x="60" y="62" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter">allèle A</text>
+          <rect x="150" y="42" width="300" height="30" rx="6" fill="none" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+          <text x="300" y="62" font-size="14" font-weight="700" font-family="Inter" text-anchor="middle" style="fill:var(--green-bright)">… A T G G C A T C A A G …</text>
+          <text x="60" y="112" style="fill:var(--danger-light)" font-size="13" font-weight="700" font-family="Inter">allèle S</text>
+          <rect x="150" y="92" width="300" height="30" rx="6" fill="none" style="stroke:var(--danger-light)" stroke-width="1.5"/>
+          <text x="300" y="112" font-size="14" font-weight="700" font-family="Inter" text-anchor="middle" style="fill:var(--danger-light)">… A T G G <tspan style="fill:var(--accent-bright)" text-decoration="underline">T</tspan> A T C A A G …</text>
+          <text x="300" y="142" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle" font-style="italic">un seul nucléotide change → un allèle différent (mutation)</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Deux allèles du gène de l'hémoglobine : une seule lettre change dans la séquence (mutation), et le caractère s'en trouve modifié.</figcaption>
+      </figure>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>L'allèle n'est <strong>pas un autre gène</strong> ! A et S sont deux allèles du <strong>même</strong> gène (l'hémoglobine), au même locus. La phrase correcte : « A et S sont deux allèles du gène de l'hémoglobine ». Ne jamais écrire « le gène A et le gène S ».</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 2 · homozygote_heterozygote -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · homozygote_heterozygote</span>
+        <h2 class="lecture-section-title">Homozygote et hétérozygote : écrire le génotype</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Puisque chaque individu diploïde possède deux homologues, il possède <strong>deux allèles</strong> pour chaque gène — un reçu du père, un reçu de la mère. Cette <strong>paire d'allèles</strong> constitue son <strong>génotype</strong> pour ce gène. Deux cas sont possibles :
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définitions officielles</div>
+          <p>Un individu est <strong>homozygote</strong> pour un gène si ses deux allèles sont <strong>identiques</strong> (génotypes <span class="math">AA</span> ou <span class="math">aa</span>). Il est <strong>hétérozygote</strong> si ses deux allèles sont <strong>différents</strong> (génotype <span class="math">Aa</span>).</p>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Génotype</th><th>Nature</th><th>Allèles reçus</th><th>Gamètes produits</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">AA</span></td><td>homozygote</td><td>A (père) + A (mère)</td><td>tous portent A</td></tr>
+            <tr><td><span class="math">aa</span></td><td>homozygote</td><td>a (père) + a (mère)</td><td>tous portent a</td></tr>
+            <tr><td><span class="math">Aa</span></td><td>hétérozygote</td><td>A (père) + a (mère)</td><td>50 % portent A, 50 % portent a</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lecture-text">
+        La convention d'écriture est simple : on écrit les deux lettres <strong>côte à côte</strong>, la lettre de l'allèle dominant en majuscule, celle de l'allèle récessif en minuscule (<span class="math">Aa</span>, jamais <span class="math">aA</span>). Cette paire de lettres est le <strong>génotype</strong> ; le caractère visible qu'elle produit est le <strong>phénotype</strong>.
+      </p>
+      <div class="lecture-vocab-grid">
+        <div class="vocab-card">
+          <div class="vocab-symbol">AA</div>
+          <div class="vocab-name">Homozygote dominant</div>
+          <div class="vocab-notation">Deux allèles A identiques</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">aa</div>
+          <div class="vocab-name">Homozygote récessif</div>
+          <div class="vocab-notation">Deux allèles a identiques</div>
+        </div>
+        <div class="vocab-card vocab-card-success">
+          <div class="vocab-symbol">Aa</div>
+          <div class="vocab-name">Hétérozygote</div>
+          <div class="vocab-notation">Un allèle A et un allèle a</div>
+        </div>
+        <div class="vocab-card vocab-card-info">
+          <div class="vocab-symbol">👁️</div>
+          <div class="vocab-name">Phénotype</div>
+          <div class="vocab-notation">Caractère observable résultant</div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Piège de notation</div>
+          <p>Les deux lettres d'un génotype parlent d'<strong>un seul gène</strong>. <span class="math">Aa</span> ne signifie pas « le gène A et le gène a » mais « deux allèles du <em>même</em> gène ». De plus, un individu ne possède que <strong>2 allèles au maximum</strong> par gène, même si l'espèce entière en possède 5 ou 10 : ne mélange jamais le niveau individu et le niveau population !</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 2 · DOMINANT / RÉCESSIF -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · homozygote_heterozygote</span>
+        <h2 class="lecture-section-title">Allèle dominant, allèle récessif</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Lorsqu'un individu hétérozygote porte deux allèles différents, <strong>les deux ne s'expriment pas toujours de la même façon</strong> dans le phénotype. C'est la distinction <strong>dominant / récessif</strong>, qu'on approfondira au chapitre sur le croisement :
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définitions officielles</div>
+          <p>Un allèle est <strong>dominant</strong> s'il s'exprime même à l'état hétérozygote : l'individu <span class="math">Aa</span> montre le caractère porté par A. Un allèle est <strong>récessif</strong> s'il ne s'exprime <strong>qu'à l'état homozygote</strong> : le caractère porté par a n'apparaît que chez l'individu <span class="math">aa</span>.</p>
+        </div>
+      </div>
+      <p class="lecture-text">
+        En notation, l'allèle dominant prend la <strong>majuscule</strong>, le récessif la <strong>minuscule</strong>. Exemple : si A (robe grise du zébu) est dominant sur a (robe noire), alors <span class="math">AA</span> et <span class="math">Aa</span> ont tous deux une robe grise ; seul <span class="math">aa</span> a une robe noire. Un hétérozygote <em>porte</em> l'allèle récessif sans le <em>montrer</em> : c'est un « porteur », capable de le transmettre à ses enfants.
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">AA → caractère A · Aa → caractère A (dominant) · aa → caractère a (récessif)</div>
+        <div class="lecture-formula-desc">Le récessif « saute » une génération : il peut être porté par des Aa invisibles et réapparaître chez un descendant aa.</div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ « Dominant » ne veut pas dire « fréquent »</div>
+          <p>Un allèle dominant n'est pas forcément le plus répandu dans la population, et « dominant » ne signifie pas « plus fort » ni « meilleur » : cela veut simplement dire qu'il <strong>masque l'expression</strong> de l'autre allèle chez l'hétérozygote. Des maladies génétiques graves peuvent être dues à des allèles <em>dominants</em> !</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : ÉTUDE DE CAS — DRÉPANOCYTOSE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Étude de cas · génétique et santé publique</span>
+        <h2 class="lecture-section-title">Le gène de la drépanocytose (allèles A et S)</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La <strong>drépanocytose</strong> (anémie falciforme) est la maladie génétique la plus fréquente en Afrique de l'Ouest, notamment au Niger. Elle est due à une <strong>mutation</strong> du gène qui commande la fabrication de l'<strong>hémoglobine</strong>, la protéine du sang qui transporte l'oxygène. Ce gène existe sous deux allèles principaux :
+      </p>
+      <ul class="lecture-list-elegant">
+        <li>L'allèle <strong>A</strong> (allèle normal) → hémoglobine normale, globules rouges ronds et souples.</li>
+        <li>L'allèle <strong>S</strong> (allèle muté) → hémoglobine anormale qui, en manquant d'oxygène, déforme le globule rouge en <strong>faucille</strong> (d'où le nom <em>falciforme</em>) ; les globules sont rigides, se détruisent vite et bouchent les vaisseaux.</li>
+      </ul>
+      <p class="lecture-text">
+        L'allèle S est <strong>récessif</strong> vis-à-vis de la maladie. Trois génotypes, trois phénotypes :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Génotype</th><th>Nature</th><th>Phénotype (sang)</th><th>État de santé</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">AA</span></td><td>homozygote</td><td>hémoglobine normale uniquement</td><td>individu sain</td></tr>
+            <tr><td><span class="math">AS</span></td><td>hétérozygote</td><td>hémoglobine A + hémoglobine S</td><td><strong>porteur sain</strong> (trait drépanocytaire) : pas de maladie, transmet S</td></tr>
+            <tr><td><span class="math">SS</span></td><td>homozygote</td><td>hémoglobine S uniquement</td><td><strong>drépanocytaire</strong> : anémie, crises douloureuses, suivi médical nécessaire</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lecture-text">
+        Comment un enfant peut-il naître drépanocytaire <span class="math">SS</span> de parents porteurs sains <span class="math">AS</span> ? Suis le mécanisme de la transmission :
+      </p>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p>Chaque parent <span class="math">AS</span> possède un allèle A sur un homologue et l'allèle S sur l'autre, au même locus.</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p>Chaque gamète (par la méiose) ne reçoit <strong>qu'un seul</strong> des deux homologues : il porte soit A, soit S — les deux avec la même probabilité.</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content"><p>La fécondation réunit au hasard un gamète du père et un de la mère : <span class="math">AA</span> (1/4), <span class="math">AS</span> (2/4), <span class="math">SS</span> (1/4).</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content"><p>Conclusion : un enfant sur quatre peut naître drépanocytaire — même si aucun des deux parents n'est malade ! D'où l'importance du dépistage et du conseil génétique avant le mariage, dans les régions où l'allèle S est fréquent.</p></div>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Pourquoi l'allèle S est-il si fréquent au Niger ?</div>
+        <div class="lecture-aside-content">
+          Parce que les porteurs sains <span class="math">AS</span> résistent mieux au <strong>paludisme</strong>, très présent dans notre région : l'hétérozygote a un avantage de survie. Le paludisme a donc « favorisé » le maintien de l'allèle S — un bel exemple de lien entre génétique, environnement et santé. En contrepartie, les mariages entre porteurs augmentent le risque d'enfants <span class="math">SS</span>.
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Un individu <span class="math">AS</span> n'est <strong>pas malade</strong> : c'est un <strong>porteur sain</strong>. Écrire « AS = drépanocytaire » ou « un parent SS transmet forcément la maladie à tous ses enfants » est faux : des parents <span class="math">AS</span> × <span class="math">AA</span> ne peuvent avoir aucun enfant <span class="math">SS</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">Relation gène-caractère et réflexes de notation</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La chaîne complète du chapitre</div>
+        <div class="lecture-formula-hero-main">IG → gène (locus sur chromosome) → allèles → génotype → polypeptide → caractère</div>
+        <div class="lecture-formula-hero-desc">Le gène commande le caractère ; les allèles en modulent la version ; le génotype (paire d'allèles) fixe le phénotype.</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><strong>Gène</strong> = portion d'ADN à un <strong>locus</strong> précis, commandant un caractère (via un polypeptide).</li>
+        <li><strong>Allèles</strong> = versions différentes d'un même gène (issues de mutations), au même locus.</li>
+        <li><strong>Homologues</strong> = mêmes gènes aux mêmes loci ; chaque individu a <strong>2 allèles par gène</strong>.</li>
+        <li><strong>Homozygote</strong> <span class="math">AA</span>/<span class="math">aa</span> : allèles identiques ; <strong>hétérozygote</strong> <span class="math">Aa</span> : allèles différents.</li>
+        <li><strong>Dominant</strong> (majuscule) : s'exprime aussi en <span class="math">Aa</span> ; <strong>récessif</strong> (minuscule) : ne s'exprime qu'en <span class="math">aa</span>.</li>
+        <li><strong>Drépanocytose</strong> : gène Hb, allèles A et S ; <span class="math">AA</span> sain, <span class="math">AS</span> porteur sain, <span class="math">SS</span> malade.</li>
+      </ul>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Règle de notation (à appliquer systématiquement)</div>
+        <div class="lecture-rule-body">
+          1) Identifier le <strong>gène</strong> concerné. 2) Nommer ses allèles (A/a, ou A/S pour la drépanocytose). 3) Écrire le génotype en <strong>deux lettres côte à côte</strong> (dominant en majuscule en premier). 4) Déduire le <strong>phénotype</strong>. 5) Pour une transmission : penser « chaque gamète ne reçoit qu'un allèle, la fécondation réunit deux allèles au hasard ».
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Les quatre interdits de la partie</div>
+          <p>1) « Le gène A et le gène S » (faux : ce sont deux <strong>allèles</strong> du même gène). 2) « Un chromosome commande un caractère » (faux : un <strong>gène</strong> le fait). 3) « AS est malade » (faux : <strong>porteur sain</strong>). 4) « L'espèce a 2 allèles par gène » (faux : c'est l'<strong>individu</strong> qui en a 2 au maximum ; l'espèce en a souvent beaucoup).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Un gène est :</p>
+      <div class="lecture-quiz-options">
+        <span>A) un chromosome entier</span>
+        <span>B) une portion d'ADN située à un locus précis et commandant un caractère</span>
+        <span>C) une protéine du sang</span>
+        <span>D) la totalité de l'ADN d'un individu</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) une portion d'ADN à un locus précis, commandant un caractère.</strong> Un chromosome porte des milliers de gènes (A est trop grand) ; le gène commande un polypeptide (C confond avec le produit) ; l'ensemble de l'ADN (D) c'est le génome, pas un gène.</div>
+      </details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Un individu dont le génotype est Aa pour un gène est :</p>
+      <div class="lecture-quiz-options">
+        <span>A) homozygote</span>
+        <span>B) hétérozygote</span>
+        <span>C) haploïde</span>
+        <span>D) drépanocytaire</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) hétérozygote.</strong> Ses deux allèles (A et a) sont différents. Homozygote = deux allèles identiques (AA ou aa) ; haploïde = un seul exemplaire de chaque chromosome (gamète) ; la drépanocytose nécessite le génotype SS.</div>
+      </details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Deux parents porteurs sains (AS) pour le gène de l'hémoglobine attendent un enfant. Quelle est la probabilité que cet enfant soit drépanocytaire (SS) ?</p>
+      <div class="lecture-quiz-options">
+        <span>A) 0</span>
+        <span>B) 1/4</span>
+        <span>C) 1/2</span>
+        <span>D) 3/4</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) 1/4.</strong> Chaque parent produit 50 % de gamètes A et 50 % de gamètes S. Croisement : AA (1/4), AS (2/4), SS (1/4). L'enfant SS ne peut naître que si les DEUX parents transmettent l'allèle S — d'où l'intérêt du conseil génétique.</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[gene_allele]</strong> Un <strong>gène</strong> est une portion d'ADN localisée à un <strong>locus</strong> précis sur un chromosome, commandant un caractère (souvent via un polypeptide)</li>
+      <li><strong>[gene_allele]</strong> Le <strong>locus</strong> est la position du gène ; les deux chromosomes homologues portent le même gène au même locus</li>
+      <li><strong>[gene_allele]</strong> Les <strong>allèles</strong> sont des versions différentes d'un même gène (séquences légèrement différentes, issues de mutations) — un individu en a 2 au maximum, l'espèce peut en avoir plusieurs</li>
+      <li><strong>[gene_allele]</strong> Chaîne : <span class="math">gène → polypeptide → caractère</span> — ne jamais confondre chromosome, gène et allèle</li>
+      <li><strong>[homozygote_heterozygote]</strong> Homozygote : deux allèles identiques (<span class="math">AA</span> ou <span class="math">aa</span>) ; hétérozygote : allèles différents (<span class="math">Aa</span>)</li>
+      <li><strong>[homozygote_heterozygote]</strong> Dominant (majuscule) : s'exprime aussi chez l'hétérozygote ; récessif (minuscule) : ne s'exprime qu'à l'état homozygote</li>
+      <li><strong>[homozygote_heterozygote]</strong> Drépanocytose : gène de l'hémoglobine, allèle A (normal) et allèle S (muté, récessif) ; <span class="math">AA</span> sain, <span class="math">AS</span> porteur sain (résistant au paludisme), <span class="math">SS</span> malade</li>
+      <li><strong>[homozygote_heterozygote]</strong> Transmission : chaque gamète reçoit un seul allèle de la paire ; <span class="math">AS × AS → 1/4 AA, 1/2 AS, 1/4 SS</span></li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 3 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : fiche complète de révision</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

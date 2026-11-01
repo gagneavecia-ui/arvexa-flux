@@ -1,0 +1,441 @@
+<!-- ============================================================ -->
+<!-- PARTIE 4 — Fiche complète — Relation ln/exp, Équations & Applications (reciproque_ln_exp, equations_exp, applications_exp, reflexes) -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · FONCTION EXPONENTIELLE   -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 04 · Fonction exponentielle</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Fiche complète — <em>Relation ln/exp</em>, équations &amp; applications
+    </h1>
+    <p class="lecture-hero-intro">
+      Dernière partie du chapitre, pensée comme une <strong>fiche de révision condensée</strong> : les deux formules majeures en ouverture, la grande table de synthèse à la fin, et entre les deux la machine complète en marche. Elle couvre <strong>4 blocs</strong> : la <strong>relation réciproque ln/exp</strong> avec sa symétrie <span class="math">y = x</span> et les équations de référence, le <strong>changement de variable</strong> (avec son piège célèbre) et les inéquations, les <strong>applications</strong> — intérêts composés, population, temps de doublement — puis la <strong>grande table de synthèse</strong> et les 5 réflexes Bac à relire la veille de l'épreuve.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 4 notions</span>
+      <span class="lecture-hero-meta-item">📊 6 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 6 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Mode d'emploi de la fiche</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · reciproque_ln_exp — exp &amp; ln réciproques, équations</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 2 · equations_exp — Changement de variable &amp; inéquations</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 3 · applications_exp — Intérêts composés, population, doublement</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 4 · reflexes — La grande table de synthèse &amp; ln vs exp</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 4 · reflexes — Les 5 réflexes Bac</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MODE D'EMPLOI                                    -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Mode d'emploi</span>
+        <h2 class="lecture-section-title">Comment utiliser cette fiche</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Cette partie ne raconte pas d'histoire : elle <strong>condense</strong>. Les parties 1 à 3 ont construit la fonction ; ici, tout est mis à plat pour réviser vite et bien, puis faire tourner la machine sur les questions d'examen — équations, inéquations, petits problèmes concrets. Utilise-la en trois temps :
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Trois passages recommandés</div>
+          <ul class="lecture-list">
+            <li><strong>Passage 1 (compréhension)</strong> : refais chaque exemple en cachant la solution — rien n'est acquis tant qu'un calcul ne se déroule pas seul.</li>
+            <li><strong>Passage 2 (mémorisation)</strong> : cache la colonne « formule » de la grande table (section 04) et récite-la ligne par ligne.</li>
+            <li><strong>Passage 3 (entraînement)</strong> : relis les 5 réflexes Bac (section 05) la veille de l'épreuve, puis passe aux exercices du chapitre.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Fondations utilisées partout : <span class="math">exp</span> est définie sur tout <span class="math">ℝ</span>, <span class="math">e⁰ = 1</span>, <span class="math">e ≈ 2,718</span>, <span class="math">e^x &gt; 0</span> pour tout <span class="math">x</span>, et <span class="math">exp</span> est <strong>strictement croissante</strong> (donc bijective de <span class="math">ℝ</span> sur <span class="math">]0 ; +∞[</span>). Tout le reste du chapitre découle des deux formules majeures ci-dessous :
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Formule majeure n°1 — l'algèbre du chapitre</div>
+        <div class="lecture-formula-hero-main">e^(a + b) = e^a · e^b</div>
+        <div class="lecture-formula-hero-desc">Multiplier des exponentielles revient à additionner les exposants. Elle simplifie, factorise, et fournit le carré <span class="math">(e^x)² = e^(2x)</span>, clé du changement de variable de la section 02.</div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Formule majeure n°2 — l'analyse du chapitre</div>
+        <div class="lecture-formula-hero-main">(e^u)' = u'·e^u</div>
+        <div class="lecture-formula-hero-desc">Lue de gauche à droite, elle dérive ; lue de droite à gauche, elle intègre (<span class="math">u'·e^u</span> a pour primitive <span class="math">e^u</span>). Une seule formule, deux sens de lecture.</div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · reciproque_ln_exp                     -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · reciproque_ln_exp</span>
+        <h2 class="lecture-section-title">exp &amp; ln réciproques, équations de référence</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        exp et ln se « défont » l'une l'autre : appliquer l'une puis l'autre rend le nombre de départ. C'est la définition même de fonctions <strong>réciproques</strong> — et c'est ce qui permet de résoudre les équations.
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">exp(ln x) = x&nbsp;&nbsp;(x &gt; 0)</div>
+        <div class="lecture-formula-desc">Premier sens de la réciproque. La condition se lit sur le domaine : ln n'accepte que des nombres strictement positifs, donc ce sens exige <span class="math">x &gt; 0</span>.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">ln(e^x) = x&nbsp;&nbsp;(tout x ∈ ℝ)</div>
+        <div class="lecture-formula-desc">Second sens : <span class="math">e^x</span> est toujours positif — donc ln peut toujours le recevoir, pour n'importe quel réel <span class="math">x</span>.</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Contrôle rapide de la réciproque</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Sens exp ∘ ln :</strong></p><p><span class="math">exp(ln 5) = 5</span></p><p>Vérification : <span class="math">ln 5 ≈ 1,609</span> puis <span class="math">e^(1,609) ≈ 5,000</span>. ✅</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Sens ln ∘ exp :</strong></p><p><span class="math">ln(e³) = 3</span></p><p>Vérification : <span class="math">e³ ≈ 20,09</span> puis <span class="math">ln 20,09 ≈ 3,000</span>. ✅</p></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Sur la figure, cette réciproque se <strong>voit</strong> : les deux courbes sont le reflet l'une de l'autre dans le miroir de la droite <span class="math">y = x</span>. Chaque point <span class="math">(x ; e^x)</span> de exp a son jumeau <span class="math">(e^x ; x)</span> sur ln.
+      </p>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbes de exp et de ln symétriques par rapport à la droite y = x, avec les points A(0 ; 1), A'(1 ; 0), B(1 ; e) et B'(e ; 1)">
+          <line x1="24" y1="180" x2="504" y2="180" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="504,180 492,174 492,186" style="fill:var(--text-dim)"/>
+          <line x1="220" y1="304" x2="220" y2="20" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="220,20 214,32 226,32" style="fill:var(--text-dim)"/>
+          <text x="496" y="200" style="fill:var(--text-dim)" font-size="12" font-family="Inter">x</text>
+          <text x="232" y="30" style="fill:var(--text-dim)" font-size="12" font-family="Inter">y</text>
+          <text x="208" y="196" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">O</text>
+          <line x1="260" y1="176" x2="260" y2="184" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="256" y="198" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">1</text>
+          <line x1="300" y1="176" x2="300" y2="184" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="296" y="198" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">2</text>
+          <line x1="216" y1="140" x2="224" y2="140" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="210" y="144" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">1</text>
+          <line x1="216" y1="100" x2="224" y2="100" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="210" y="104" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">2</text>
+          <line x1="180" y1="220" x2="364" y2="36" style="stroke:var(--text-dim)" stroke-width="2" stroke-dasharray="7 7"/>
+          <text x="368" y="34" style="fill:var(--text-dim)" font-size="12" font-family="Inter">y = x</text>
+          <line x1="220" y1="140" x2="260" y2="180" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <line x1="260" y1="71" x2="329" y2="140" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <path d="M 142 175 C 168 170, 196 158, 220 140 C 238 121, 250 93, 260 71 C 266 55, 271 34, 276 18" style="fill:none;stroke:var(--accent-bright)" stroke-width="3"/>
+          <text x="282" y="44" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter">exp</text>
+          <path d="M 228 246 C 232 233, 236 219, 242 207 C 250 193, 255 185, 260 180 C 280 164, 300 152, 329 140 C 352 133, 372 128, 388 123" style="fill:none;stroke:currentColor" stroke-width="3"/>
+          <text x="394" y="128" style="fill:currentColor" font-size="13" font-weight="700" font-family="Inter">ln</text>
+          <circle cx="220" cy="140" r="4" style="fill:var(--accent-bright)"/>
+          <text x="228" y="136" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">A(0 ; 1)</text>
+          <circle cx="260" cy="71" r="4" style="fill:var(--accent-bright)"/>
+          <text x="268" y="66" style="fill:var(--accent-bright)" font-size="12" font-family="Inter">B(1 ; e)</text>
+          <circle cx="260" cy="180" r="4" style="fill:currentColor"/>
+          <text x="274" y="198" style="fill:currentColor" font-size="12" font-family="Inter">A′(1 ; 0)</text>
+          <circle cx="329" cy="140" r="4" style="fill:currentColor"/>
+          <text x="337" y="154" style="fill:currentColor" font-size="12" font-family="Inter">B′(e ; 1)</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Les courbes de <span class="math">exp</span> et de <span class="math">ln</span> sont <strong>symétriques par rapport à la droite <span class="math">y = x</span></strong> (en pointillés) : <span class="math">A(0 ; 1)</span> a pour miroir <span class="math">A′(1 ; 0)</span>, et <span class="math">B(1 ; e)</span> a pour miroir <span class="math">B′(e ; 1)</span>. C'est l'image géométrique de la relation réciproque.</figcaption>
+      </figure>
+      <h3 class="lecture-subtitle">Résoudre avec la réciproque</h3>
+      <p class="lecture-text">
+        Les équations de référence du chapitre s'obtiennent en appliquant ln ou exp <strong>des deux côtés</strong>, avec une justification d'hypothèse :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">e^x = a ⇔ x = ln a&nbsp;&nbsp;(a &gt; 0)</div>
+        <div class="lecture-formula-desc">On applique ln (strictement croissante) des deux côtés — à condition que <span class="math">a</span> soit strictement positif.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">e^x = e^b ⇔ x = b</div>
+        <div class="lecture-formula-desc">exp est injective : des exponentielles égales ont des exposants égaux. Dans l'autre sens : <span class="math">ln x = b ⇔ x = e^b</span>, toujours valable car <span class="math">e^b &gt; 0</span>.</div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Équation</th><th>Solution</th><th>Condition / raison</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">e^x = a</span></td><td><span class="math">x = ln a</span></td><td><span class="math">a &gt; 0</span></td></tr>
+            <tr><td><span class="math">e^x = a</span> avec <span class="math">a ≤ 0</span></td><td>aucune solution</td><td><span class="math">e^x &gt; 0</span> toujours : <span class="math">S = ∅</span></td></tr>
+            <tr><td><span class="math">e^x = e^b</span></td><td><span class="math">x = b</span></td><td>exp strictement croissante (injective)</td></tr>
+            <tr><td><span class="math">ln x = b</span></td><td><span class="math">x = e^b</span></td><td>toujours, car <span class="math">e^b &gt; 0</span></td></tr>
+            <tr><td><span class="math">e^(kx) = a</span></td><td><span class="math">x = (ln a) / k</span></td><td><span class="math">k ≠ 0</span> et <span class="math">a &gt; 0</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Trois équations types et un contre-exemple</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Résoudre e^x = 8.</strong> Le second membre est positif, on applique ln :</p><p><span class="math">e^x = 8 ⇔ x = ln 8</span></p><p><span class="math">ln 8 = ln(2³) = 3 ln 2</span></p><p>Conclusion : <span class="math">S = {3 ln 2}</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Résoudre ln x = −2.</strong> On applique exp des deux côtés :</p><p><span class="math">x = e^(−2)</span></p><p><span class="math">x = 1 / e²</span></p><p>La solution est bien positive ✅ : <span class="math">S = {1 / e²}</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Résoudre e^(3x) = 5.</strong> On applique ln :</p><p><span class="math">3x = ln 5 ⇔ x = (ln 5) / 3</span></p><p>Conclusion : <span class="math">S = {(ln 5) / 3}</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Contre-exemple :</strong> <span class="math">e^x = −4</span>. Le second membre est négatif :</p><p><span class="math">S = ∅</span></p><p>Aucun ln à poser — voir l'encadré ci-dessous.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Résoudre <span class="math">e^x = −4</span> en écrivant <span class="math">x = ln(−4)</span> : c'est <strong>doublement faux</strong> — ln n'accepte qu'un argument strictement positif, et <span class="math">e^x</span> n'est jamais négatif. La bonne réponse : <strong>aucune solution</strong>, <span class="math">S = ∅</span>. Avant d'appliquer ln, regarde toujours le <strong>signe du second membre</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 2 · equations_exp                         -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · equations_exp</span>
+        <h2 class="lecture-section-title">Changement de variable &amp; inéquations</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Quand l'équation mêle <span class="math">e^(2x)</span> et <span class="math">e^x</span>, elle cache un <strong>trinôme</strong>. La technique : poser <span class="math">X = e^x</span>, résoudre en <span class="math">X</span>, puis revenir à <span class="math">x</span> — avec un <strong>contrôle de positivité obligatoire</strong>, car <span class="math">X = e^x &gt; 0</span>.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Résoudre dans ℝ : <span class="math">e^(2x) − 3·e^x + 2 = 0</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Repérer le carré.</strong> Le terme en <span class="math">e^(2x)</span> se réécrit :</p><p><span class="math">e^(2x) = (e^x)²</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Poser la nouvelle inconnue</strong> (avec sa condition de positivité) :</p><p><span class="math">X = e^x&nbsp;&nbsp;(donc X &gt; 0 pour tout x réel)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Substituer.</strong> L'équation devient :</p><p><span class="math">X² − 3X + 2 = 0</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Calculer le discriminant :</strong></p><p><span class="math">Δ = (−3)² − 4 × 1 × 2</span></p><p><span class="math">Δ = 9 − 8 = 1</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>En déduire les racines en X :</strong></p><p><span class="math">X₁ = (3 − 1) / 2 = 1</span></p><p><span class="math">X₂ = (3 + 1) / 2 = 2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Contrôler X &gt; 0</strong> (le piège du chapitre) : <span class="math">1 &gt; 0</span> ✅ et <span class="math">2 &gt; 0</span> ✅ — aucune racine à rejeter ici.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p><strong>Revenir à x</strong> avec <span class="math">e^x = a ⇔ x = ln a</span> :</p><p><span class="math">e^x = 1 ⇔ x = 0</span></p><p><span class="math">e^x = 2 ⇔ x = ln 2</span></p><p>Conclusion : <span class="math">S = {0 ; ln 2}</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">8</div><div class="lecture-step-content"><p><strong>Vérifier</strong> (pour <span class="math">x = ln 2</span>) :</p><p><span class="math">e^(2 ln 2) − 3·e^(ln 2) + 2</span></p><p><span class="math">= 4 − 6 + 2 = 0</span> ✅</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac — garder une racine négative</div>
+          <p>Dans le changement de variable, <span class="math">X = e^x</span> est <strong>strictement positif</strong> : toute racine <span class="math">X ≤ 0</span> du trinôme est <strong>toujours rejetée</strong>. Garder <span class="math">X = −2</span> et répondre <span class="math">x = ln(−2)</span> annule toute la question. Écris noir sur blanc l'étape « contrôle : X &gt; 0 » — c'est elle qui rapporte les points.</p>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 2 — Résoudre <span class="math">e^(2x) − e^x − 6 = 0</span> (une racine rejetée)</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On pose <span class="math">X = e^x</span> (donc <span class="math">X &gt; 0</span>) ; l'équation devient :</p><p><span class="math">X² − X − 6 = 0</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Discriminant :</strong></p><p><span class="math">Δ = (−1)² − 4 × 1 × (−6)</span></p><p><span class="math">Δ = 1 + 24 = 25</span></p><p>donc <span class="math">√Δ = 5</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Racines :</strong></p><p><span class="math">X = (1 ± 5) / 2</span></p><p>soit <span class="math">X = 3</span> ou <span class="math">X = −2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Rejet obligatoire :</strong> <span class="math">X = −2 &lt; 0</span> est impossible car <span class="math">X = e^x &gt; 0</span>. Il reste :</p><p><span class="math">e^x = 3 ⇔ x = ln 3</span></p><p>donc <span class="math">S = {ln 3}</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <h3 class="lecture-subtitle">Les inéquations — même logique</h3>
+      <p class="lecture-text">
+        exp étant <strong>strictement croissante</strong>, passer au ln <strong>conserve l'ordre</strong> — c'est tout ce qu'il faut savoir.
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">e^x &gt; a ⇔ x &gt; ln a&nbsp;&nbsp;(a &gt; 0)</div>
+        <div class="lecture-formula-desc">Le sens de l'inégalité traverse la réciproque sans se retourner, car exp (comme ln) est strictement croissante. Avec une égalité d'exponentielles : <span class="math">e^x ≤ e^b ⇔ x ≤ b</span>. Seule vigilance : un coefficient négatif devant x (voir l'exemple).</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple 3 — Deux inéquations types</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Cas direct :</strong></p><p><span class="math">e^x &gt; 7 ⇔ x &gt; ln 7</span></p><p>donc <span class="math">S = ]ln 7 ; +∞[</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Exposant négatif :</strong></p><p><span class="math">e^(−2x) ≤ 9 ⇔ −2x ≤ ln 9</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Diviser par −2 renverse l'inégalité :</strong></p><p><span class="math">x ≥ −(ln 9) / 2 = −ln 3</span>&nbsp;&nbsp;(car <span class="math">ln 9 = 2 ln 3</span>)</p><p>Conclusion : <span class="math">S = [−ln 3 ; +∞[</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 3 · applications_exp                      -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · applications_exp</span>
+        <h2 class="lecture-section-title">Intérêts composés, population, temps de doublement</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tous les problèmes concrets du chapitre reposent sur le même schéma : une quantité <strong>multipliée</strong> à chaque pas de temps, que la réciproque ln transforme en <strong>équation résoluble</strong>.
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">N(t) = N₀·e^(kt)</div>
+        <div class="lecture-formula-desc"><span class="math">N₀</span> est la valeur à <span class="math">t = 0</span> ; <span class="math">k &gt; 0</span> donne une croissance, <span class="math">k &lt; 0</span> une décroissance. Avec un taux annuel t (intérêts composés par périodes) : <span class="math">Cₙ = C₀ × (1 + t)ⁿ</span>. Les calculs de doublement réunissent les deux modèles.</div>
+      </div>
+      <h3 class="lecture-subtitle">A. Intérêts composés — quand le capital double-t-il ?</h3>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Application 1 — 10 000 F placés à 5 % par an</div>
+        <div class="lecture-example-content">
+          <p>Un capital de <span class="math">C₀ = 10 000 F</span> est placé à <span class="math">5 %</span> par an, intérêts composés : <span class="math">Cₙ = C₀ × 1,05ⁿ</span>. Au bout de combien d'années <span class="math">n</span> le capital a-t-il <strong>doublé</strong> ?</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Mettre en équation le doublement :</strong></p><p><span class="math">Cₙ ≥ 2 × C₀ ⇔ 1,05ⁿ ≥ 2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Appliquer ln</strong> (croissante, l'ordre est conservé) :</p><p><span class="math">n × ln 1,05 ≥ ln 2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Diviser</strong> par <span class="math">ln 1,05 &gt; 0</span> :</p><p><span class="math">n ≥ (ln 2) / (ln 1,05) ≈ 14,2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Arrondir à l'entier supérieur</strong> (n est un nombre d'années) : <span class="math">1,05¹⁴ ≈ 1,98 &lt; 2</span> mais <span class="math">1,05¹⁵ ≈ 2,08 ≥ 2</span>. Le capital double au bout de <strong>15 années</strong>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <h3 class="lecture-subtitle">B. Croissance d'une population</h3>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Application 2 — Population de 2 millions, k = 0,03 an⁻¹</div>
+        <div class="lecture-example-content">
+          <p>Une population suit <span class="math">N(t) = N₀·e^(kt)</span> avec <span class="math">N₀ = 2</span> millions et <span class="math">k = 0,03</span> an⁻¹. Que vaut <span class="math">N</span> après 10 ans ?</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Substituer les valeurs :</strong></p><p><span class="math">N(10) = 2 × e^(0,03 × 10)</span></p><p><span class="math">N(10) = 2 × e^(0,3)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Calculer :</strong></p><p><span class="math">e^(0,3) ≈ 1,350</span></p><p><span class="math">N(10) ≈ 2 × 1,350 = 2,70</span> millions</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Interpréter :</strong> <span class="math">2,70 / 2 = 1,35</span> — la population a gagné environ <strong>35 %</strong> en 10 ans. ✅</p></div></div>
+          </div>
+        </div>
+      </div>
+      <h3 class="lecture-subtitle">C. Temps de doublement (et demi-vie)</h3>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">t = (ln 2) / k</div>
+        <div class="lecture-formula-desc">Temps de doublement (croissance, <span class="math">k &gt; 0</span>) : la quantité passe de <span class="math">N₀</span> à <span class="math">2N₀</span>.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">t₁/₂ = (ln 2) / λ</div>
+        <div class="lecture-formula-desc">Demi-vie (décroissance radioactive, <span class="math">λ &gt; 0</span>) : il reste <span class="math">N₀/2</span>. Même calcul dans les deux cas, avec <span class="math">ln 2 ≈ 0,693</span>.</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Application 3 — Doublement de la population précédente</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Mettre en équation :</strong></p><p><span class="math">N(t) = 2 × N₀ ⇔ e^(kt) = 2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Appliquer ln :</strong></p><p><span class="math">kt = ln 2 ⇔ t = (ln 2) / k</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Calculer</strong> avec <span class="math">k = 0,03</span> :</p><p><span class="math">t ≈ 0,693 / 0,03 ≈ 23,1 ans</span></p><p>Cohérent avec l'application 2 : +35 % en 10 ans, doublement vers 23 ans. ✅</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Variante demi-vie :</strong> pour <span class="math">λ = 0,10</span> j⁻¹ :</p><p><span class="math">t₁/₂ ≈ 0,693 / 0,10 ≈ 6,9</span> jours</p><p>Après 3 demi-vies, il reste <span class="math">(1/2)³ = 1/8</span> de la quantité initiale, soit 12,5 %.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 4 · reflexes — GRANDE TABLE DE SYNTHÈSE   -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · reflexes</span>
+        <h2 class="lecture-section-title">La grande table de synthèse &amp; ln vs exp</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tout le chapitre en deux tableaux : la <strong>grande table de synthèse</strong> (12 lignes objet / formule / astuce) puis le <strong>face-à-face ln vs exp</strong>. Objectif : savoir réciter chaque ligne sans regarder — c'est l'exercice le plus rentable de la veille d'épreuve.
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Objet</th><th>Formule</th><th>Astuce de vérification</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Réciproque</td><td><span class="math">exp(ln x) = x (x &gt; 0) ; ln(e^x) = x</span></td><td>vérifier le domaine avant d'appliquer</td></tr>
+            <tr><td>Produit</td><td><span class="math">e^(a + b) = e^a · e^b</span></td><td>jamais <span class="math">e^(a + b) = e^a + e^b</span> !</td></tr>
+            <tr><td>Inverse &amp; quotient</td><td><span class="math">e^(−a) = 1 / e^a ; e^(a − b) = e^a / e^b</span></td><td>contrôle : <span class="math">e^a / e^a = e⁰ = 1</span></td></tr>
+            <tr><td>Puissance</td><td><span class="math">(e^a)ⁿ = e^(na)</span></td><td><span class="math">(e^x)² = e^(2x)</span> : clé du changement de variable</td></tr>
+            <tr><td>Dérivées</td><td><span class="math">(e^x)' = e^x ; (e^u)' = u'·e^u</span></td><td>repérer u' en facteur avant de dériver</td></tr>
+            <tr><td>Primitives</td><td><span class="math">∫e^x dx = e^x + c ; ∫u'·e^u dx = e^u + c</span></td><td>vérifier en dérivant, jamais « à l'œil »</td></tr>
+            <tr><td>Limites</td><td><span class="math">lim(x→−∞) e^x = 0 ; lim(x→+∞) e^x = +∞</span></td><td>asymptote <span class="math">y = 0</span> en <span class="math">−∞</span></td></tr>
+            <tr><td>Croissances comparées</td><td><span class="math">e^x/xⁿ → +∞ ; x·e^(−x) → 0 (en +∞)</span></td><td>nommer le théorème dans la copie</td></tr>
+            <tr><td>Taux en 0</td><td><span class="math">lim(x→0) (e^x − 1)/x = 1</span></td><td>nombre dérivé <span class="math">f'(0) = 1</span> ; tangente <span class="math">y = x + 1</span></td></tr>
+            <tr><td>Équations</td><td><span class="math">e^x = a ⇔ x = ln a (a &gt; 0) ; e^x = e^b ⇔ x = b</span></td><td>si <span class="math">a ≤ 0</span> : <span class="math">S = ∅</span></td></tr>
+            <tr><td>Changement de variable</td><td><span class="math">X = e^x, donc X &gt; 0</span></td><td>rejeter toute racine <span class="math">X ≤ 0</span></td></tr>
+            <tr><td>Inéquations &amp; signe</td><td><span class="math">e^x &gt; a ⇔ x &gt; ln a (a &gt; 0) ; e^x &gt; 0</span></td><td>÷ par un négatif renverse l'inégalité</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="lecture-subtitle">Face-à-face : ln vs exp, ligne à ligne</h3>
+      <p class="lecture-text">
+        Les deux fonctions miroir du programme, vues côte à côte. Ce tableau et la figure de la section 01 se répondent : la symétrie <span class="math">y = x</span> échange systématiquement <span class="math">x</span> et <span class="math">y</span>.
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Point de comparaison</th><th>ln</th><th>exp</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Ensemble de définition</td><td><span class="math">]0 ; +∞[</span></td><td><span class="math">ℝ</span></td></tr>
+            <tr><td>Valeur de départ</td><td><span class="math">ln 1 = 0</span></td><td><span class="math">e⁰ = 1</span></td></tr>
+            <tr><td>Valeur en e</td><td><span class="math">ln e = 1</span></td><td><span class="math">e¹ = e ≈ 2,718</span></td></tr>
+            <tr><td>Limite « en bas »</td><td><span class="math">lim(x→0⁺) ln x = −∞</span></td><td><span class="math">lim(x→−∞) e^x = 0</span></td></tr>
+            <tr><td>Limite « en haut »</td><td><span class="math">lim(x→+∞) ln x = +∞</span></td><td><span class="math">lim(x→+∞) e^x = +∞</span></td></tr>
+            <tr><td>Dérivée</td><td><span class="math">(ln x)' = 1/x</span></td><td><span class="math">(e^x)' = e^x</span></td></tr>
+            <tr><td>Équation de référence</td><td><span class="math">ln x = b ⇔ x = e^b</span></td><td><span class="math">e^x = a ⇔ x = ln a (a &gt; 0)</span></td></tr>
+            <tr><td>Point remarquable</td><td><span class="math">passe par (1 ; 0)</span></td><td><span class="math">passe par (0 ; 1)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 La carte mentale du chapitre</div>
+          <p>Une seule idée tient tout : <strong>exp et ln se renvoient l'une l'autre</strong> (symétrie <span class="math">y = x</span>). Les équations consistent à <strong>passer d'un côté à l'autre</strong> ; les applications sont ces mêmes équations où l'inconnue s'appelle <span class="math">t</span>, le temps ; et l'analyse repose sur le fait que exp est <strong>sa propre dérivée</strong>. Maîtrise la réciproque, et les deux tableaux ci-dessus n'auront plus de secrets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 4 · reflexes — LES 5 RÉFLEXES BAC         -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · reflexes</span>
+        <h2 class="lecture-section-title">Les 5 réflexes Bac</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Face à une question sur exp, le bon réflexe est presque toujours l'un de ces cinq. Apprends-les dans l'ordre : les premiers coûtent des points entiers, les derniers raffinent la rédaction.
+      </p>
+      <ul class="lecture-list-elegant">
+        <li><strong>1. Signe d'abord.</strong> Devant <span class="math">e^x = a</span> : si <span class="math">a ≤ 0</span>, stop — <span class="math">S = ∅</span> car <span class="math">e^x &gt; 0</span> ; si <span class="math">a &gt; 0</span>, réponse <span class="math">x = ln a</span>.</li>
+        <li><strong>2. Trinôme en e^x.</strong> Poser <span class="math">X = e^x</span>, résoudre le trinôme en <span class="math">X</span>, <strong>rejeter toute racine <span class="math">X ≤ 0</span></strong>, puis revenir avec <span class="math">x = ln X</span>.</li>
+        <li><strong>3. Inéquation.</strong> Invoquer la <strong>stricte croissance</strong> de exp pour passer au ln sans retourner l'inégalité ; attention au renversement si l'on divise par un négatif.</li>
+        <li><strong>4. Dérivée ou primitive.</strong> <span class="math">(e^u)' = u'·e^u</span> dans les deux sens : dériver en multipliant par <span class="math">u'</span>, intégrer en <strong>reconnaissant</strong> <span class="math">u'</span> en facteur — et vérifier une primitive en la dérivant.</li>
+        <li><strong>5. Forme indéterminée.</strong> Devant <span class="math">∞/∞</span> ou <span class="math">∞ × 0</span> avec exp : croissances comparées (<span class="math">e^x / xⁿ → +∞</span>, <span class="math">x·e^(−x) → 0</span>), <strong>citées par leur nom</strong> dans la copie.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Les trois fautes qui coûtent le plus de points</div>
+          <p><strong>(1)</strong> Oublier le facteur <span class="math">u'</span> dans <span class="math">(e^u)'</span>. <strong>(2)</strong> Garder une racine <span class="math">X ≤ 0</span> du trinôme en <span class="math">X = e^x</span>. <strong>(3)</strong> Écrire <span class="math">e^(a + b) = e^a + e^b</span>. Relis ta copie en chassant ces trois fautes avant de rendre : c'est le gain de points le plus rapide du chapitre.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Rédaction qui rapporte des points</div>
+          <p>Chaque passage au ln ou à exp doit être <strong>justifié en une ligne</strong> : « comme <span class="math">a &gt; 0</span>, on applique ln, strictement croissante » ; « comme <span class="math">X = e^x &gt; 0</span>, la racine <span class="math">X = −2</span> est rejetée » ; « d'après les croissances comparées… ». Un résultat sans justification d'hypothèse ne rapporte rien, même juste.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[reciproque_ln_exp]</strong> <span class="math">exp(ln x) = x</span> (<span class="math">x &gt; 0</span>) et <span class="math">ln(e^x) = x</span> (tout <span class="math">x</span>) — courbes symétriques par rapport à <span class="math">y = x</span></li>
+      <li><strong>[reciproque_ln_exp]</strong> <span class="math">e^x = a ⇔ x = ln a</span> (<span class="math">a &gt; 0</span>) ; <span class="math">e^x = e^b ⇔ x = b</span> ; <span class="math">ln x = b ⇔ x = e^b</span> (toujours)</li>
+      <li><strong>[reciproque_ln_exp]</strong> Si <span class="math">a ≤ 0</span>, l'équation <span class="math">e^x = a</span> n'a <strong>aucune solution</strong> : <span class="math">S = ∅</span></li>
+      <li><strong>[equations_exp]</strong> Trinôme en <span class="math">e^x</span> : poser <span class="math">X = e^x &gt; 0</span>, résoudre, <strong>rejeter <span class="math">X ≤ 0</span></strong>, revenir à <span class="math">x = ln X</span></li>
+      <li><strong>[equations_exp]</strong> Inéquations : la stricte croissance conserve l'ordre ; diviser par un négatif <strong>renverse</strong> l'inégalité</li>
+      <li><strong>[applications_exp]</strong> Intérêts composés : <span class="math">Cₙ = C₀ × (1 + t)ⁿ</span> ; doublement : <span class="math">n ≥ (ln 2) / (ln(1 + t))</span></li>
+      <li><strong>[applications_exp]</strong> Croissance <span class="math">N(t) = N₀·e^(kt)</span> ; temps de doublement <span class="math">t = (ln 2) / k</span> ; demi-vie <span class="math">t₁/₂ = (ln 2) / λ</span></li>
+      <li><strong>[reflexes]</strong> La grande table de synthèse (section 04) : 12 lignes objet / formule / astuce à réciter sans regarder</li>
+      <li><strong>[reflexes]</strong> ln vs exp : miroir parfait — <span class="math">ln 1 = 0</span> ↔ <span class="math">e⁰ = 1</span>, <span class="math">]0 ; +∞[</span> ↔ <span class="math">ℝ</span>, dérivées <span class="math">1/x</span> ↔ <span class="math">e^x</span></li>
+      <li><strong>[reflexes]</strong> Les trois fautes fatales : oublier <span class="math">u'</span>, garder <span class="math">X ≤ 0</span>, distribuer exp sur les sommes</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 4 terminée — chapitre « Fonction exponentielle » bouclé !</div>
+    <div class="lecture-end-sub">Refais les exemples sans regarder les solutions, récite la grande table, puis enchaîne sur les exercices du chapitre — bonne chance pour l'épreuve !</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

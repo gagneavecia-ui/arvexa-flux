@@ -1,0 +1,430 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · ÉQUATIONS DIFFÉRENTIELLES -->
+<!-- PARTIE 4 : FICHE COMPLÈTE — CONDITIONS INITIALES & APPLICATIONS -->
+<!-- Notion 1 : methode — la méthode universelle en 4 étapes       -->
+<!-- Notion 2 : synthese — les 3 types d'équations, les limites    -->
+<!-- Notion 3 : applications — désintégration, demi-vie, N₀/2ⁿ     -->
+<!-- Notion 4 : reflexes — exercice type Bac, grande table         -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge"><span class="lecture-hero-icon">📘</span><span class="lecture-hero-label">Partie 04 · Équations différentielles</span></div>
+    <h1 class="lecture-hero-title">
+      Fiche complète : <em>conditions initiales &amp; applications</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Dernière partie du chapitre, pensée comme une <strong>fiche de révision condensée</strong> : la <strong>méthode universelle en 4 étapes</strong> qui résout toutes les équations du programme, le <strong>tableau de synthèse</strong> des trois types d'équations, puis les <strong>applications</strong> classiques du Bac — désintégration radioactive et <strong>demi-vie</strong>. Un <strong>exercice type Bac complet</strong> et la <strong>grande table de synthèse</strong> clôturent le chapitre.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span><span class="lecture-hero-meta-item">🧮 4 notions</span>
+      <span class="lecture-hero-meta-item">📊 6 sections</span><span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header"><span>Dans cette partie</span><span class="lecture-toc-count">4 notions · 6 sections</span></div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Mode d'emploi de la fiche</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · methode — La méthode universelle en 4 étapes</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 2 · synthese — Les 3 types d'équations et leurs limites</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 3 · applications — Désintégration et demi-vie</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 4 · reflexes — Exercice type Bac complet</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 4 · reflexes — Réflexes Bac et grande table de synthèse</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MODE D'EMPLOI -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header"><div class="lecture-section-num">00</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Mode d'emploi</span><h2 class="lecture-section-title">Comment utiliser cette fiche</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Cette partie ne raconte pas d'histoire : elle <strong>condense</strong>. Les parties 1 à 3 ont construit les définitions, les théorèmes et les démonstrations ; ici, tout est mis à plat pour réviser vite et bien — formules majeures, méthode unique, applications et réflexes d'examen.
+      </p>
+      <div class="lecture-callout lecture-callout-gold"><div class="lecture-callout-body"><div class="lecture-callout-title">Trois passages recommandés</div>
+          <ul class="lecture-list">
+            <li><strong>Passage 1 (compréhension)</strong> : refais la méthode en 4 étapes sur un exemple papier, section 01 — rien n'est acquis tant qu'on n'a pas déroulé la chaîne complète.</li>
+            <li><strong>Passage 2 (mémorisation)</strong> : cache la colonne « solution » du tableau des 3 types (section 02) et de la grande table (section 05), et récite-les.</li>
+            <li><strong>Passage 3 (entraînement)</strong> : refais l'exercice type Bac (section 04) sans regarder la solution, puis passe aux exercices du chapitre.</li>
+          </ul>
+        </div></div>
+      <p class="lecture-text">
+        Rappels des fondations utilisées partout : <span class="math">(e^(u))' = u'·e^(u)</span> ; <span class="math">lim(x→+∞) e^(ax) = 0</span> si <span class="math">a &lt; 0</span> ; <span class="math">e^(0) = 1</span> ; <span class="math">ln 2 ≈ 0,693</span>.
+      </p>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · methode — MÉTHODE UNIVERSELLE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header"><div class="lecture-section-num">01</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · methode</span><h2 class="lecture-section-title">La méthode universelle en 4 étapes</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Toutes les équations du chapitre se résolvent avec la <strong>même chaîne de 4 étapes</strong>, dans cet ordre et sans en sauter aucune :
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La structure de toutes les solutions du chapitre</div>
+        <div class="lecture-formula-hero-main">y = y_p + C·e^(ax)</div>
+        <div class="lecture-formula-hero-desc">Une solution particulière y_p (elle dépend du second membre) + les solutions homogènes C·e^(ax) (l'exposant est toujours le coefficient a de l'équation). La condition initiale fixe ensuite C.</div>
+      </div>
+      <div class="lecture-rule"><div class="lecture-rule-label">🧠 Méthode universelle — les 4 étapes dans l'ordre</div><div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>Étape 1 — Homogène</strong> : résoudre <span class="math">y' = ay</span>, c'est-à-dire écrire <span class="math">C·e^(ax)</span>.</li>
+            <li><strong>Étape 2 — Particulière</strong> : trouver <span class="math">y_p</span> — constante <span class="math">−b/a</span> si le second membre est b, identification si c'est <span class="math">f(x)</span>.</li>
+            <li><strong>Étape 3 — Somme</strong> : écrire la solution générale <span class="math">y = y_p + C·e^(ax)</span>, C ∈ ℝ.</li>
+            <li><strong>Étape 4 — Condition initiale</strong> : substituer, calculer C, conclure, puis <strong>vérifier en redérivant</strong>.</li>
+          </ul>
+        </div></div>
+      <div class="lecture-example lecture-example-featured"><div class="lecture-example-label">🧮 La méthode en action — Résoudre <span class="math">y' = 2y + 8</span> avec <span class="math">y(0) = 5</span></div><div class="lecture-example-content">          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content">
+                <p><strong>Étape 1 — Homogène</strong> : <span class="math">a = 2</span>, donc :</p>
+                <p><span class="math">y_h = C·e^(2x)</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content">
+                <p><strong>Étape 2 — Particulière</strong> (constante) :</p>
+                <p><span class="math">y_p = −b/a = −8/2</span>, donc <span class="math">y_p = −4</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content">
+                <p><strong>Étape 3 — Somme</strong> :</p>
+                <p><span class="math">y = C·e^(2x) − 4</span>,&nbsp;&nbsp;C ∈ ℝ</p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content">
+                <p><strong>Étape 4 — Condition initiale : substitution</strong> — on exprime y(0) :</p>
+                <p><span class="math">y(0) = C − 4</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content">
+                <p><strong>Résolution de C</strong> — la condition impose <span class="math">y(0) = 5</span> :</p>
+                <p><span class="math">C − 4 = 5&nbsp;&nbsp;⇒&nbsp;&nbsp;C = 9</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content">
+                <p><strong>Solution unique</strong> :</p>
+                <p><span class="math">y = 9e^(2x) − 4</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content">
+                <p><strong>Vérification</strong> — trois lignes :</p>
+                <p>On calcule y' : <span class="math">y' = 18e^(2x)</span></p>
+                <p>On calcule 2y + 8 : <span class="math">2y + 8 = 2 × 9 × e^(2x) − 8 + 8 = 18e^(2x)</span></p>
+                <p>Comparaison : <span class="math">y' = 2y + 8</span> pour tout x, et <span class="math">y(0) = 9 − 4 = 5</span> ✓ ✅</p>
+              </div></div>
+          </div></div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">y(0) = y₀&nbsp;&nbsp;⇒&nbsp;&nbsp;y = (y₀ + b/a)·e^(ax) − b/a</div><div class="lecture-formula-desc">Pour y' = ay + b : la constante vaut C = y₀ + b/a. À connaître, mais en sachant la retrouver par les 4 étapes — c'est la retrouver qui rapporte les points.</div>
+      </div></div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 2 · synthese — LES 3 TYPES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header"><div class="lecture-section-num">02</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · synthese</span><h2 class="lecture-section-title">Les 3 types d'équations et leurs limites</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le programme de Terminale D tient en <strong>trois types</strong> d'équations. Tous partagent la même solution homogène <span class="math">C·e^(ax)</span> ; seule la solution particulière change :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Type</th><th>Solution particulière</th><th>Solution générale</th><th>Exemple</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">y' = ay</span></td><td><span class="math">y_p = 0</span></td><td><span class="math">y = C·e^(ax)</span></td><td><span class="math">y' = 3y</span> → <span class="math">C·e^(3x)</span></td></tr>
+            <tr><td><span class="math">y' = ay + b</span> (<span class="math">a ≠ 0</span>)</td><td><span class="math">y_p = −b/a</span></td><td><span class="math">y = C·e^(ax) − b/a</span></td><td><span class="math">y' = 2y + 4</span> → <span class="math">C·e^(2x) − 2</span></td></tr>
+            <tr><td><span class="math">y' = ay + f(x)</span></td><td><span class="math">y_p</span> par identification</td><td><span class="math">y = y_p + C·e^(ax)</span></td><td><span class="math">y' = y + e^(2x)</span> → <span class="math">y_p + C·e^(x)</span></td></tr>
+          </tbody>
+        </table></div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule star du type 2 — la plus utilisée au Bac</div>
+        <div class="lecture-formula-hero-main">y' = ay + b&nbsp;&nbsp;⇔&nbsp;&nbsp;y = C·e^(ax) − b/a</div>
+        <div class="lecture-formula-hero-desc">a ≠ 0. L'exposant est le coefficient a ; la constante −b/a est la valeur d'équilibre. Avec y(0) = y₀ : C = y₀ + b/a.</div>
+      </div>
+      <p class="lecture-text">
+        Le comportement à l'infini se lit sur le signe de <span class="math">a</span> — c'est une question d'argumentation fréquente au Bac :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Signe de a</th><th>Comportement quand x → +∞</th><th>Argument à écrire</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">a &lt; 0</span></td><td>convergence vers <span class="math">y_p</span></td><td><span class="math">lim e^(ax) = 0</span>, donc <span class="math">lim y = y_p</span></td></tr>
+            <tr><td><span class="math">a &gt; 0</span></td><td>divergence</td><td><span class="math">lim e^(ax) = +∞</span>, donc <span class="math">lim y = ±∞</span></td></tr>
+          </tbody>
+        </table></div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">a &lt; 0&nbsp;&nbsp;⇒&nbsp;&nbsp;lim(x→+∞) y(x) = y_p</div><div class="lecture-formula-desc">Le régime transitoire C·e^(ax) s'éteint, il ne reste que la solution particulière : c'est le « régime permanent ». La droite (ou courbe) y = y_p est asymptote à toutes les solutions.</div>
+      </div></div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 3 · applications — DÉSINTÉGRATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header"><div class="lecture-section-num">03</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · applications</span><h2 class="lecture-section-title">Désintégration et demi-vie</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        L'application reine du chapitre : la <strong>radioactivité</strong>. Un échantillon contient <span class="math">N₀</span> noyaux instables à l'instant 0 ; le nombre <span class="math">N(t)</span> de noyaux restants obéit à <span class="math">N' = −λN</span> (plus il y en a, plus il s'en désintègre), avec <span class="math">λ &gt; 0</span> la constante radioactive. La partie 1 donne immédiatement :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">N(t) = N₀·e^(−λt)</div><div class="lecture-formula-desc">Cas particulier de y' = ay avec a = −λ et condition initiale N(0) = N₀. La décroissance est exponentielle : N ne s'annule jamais, mais tend vers 0.</div>
+      </div>
+      <p class="lecture-text">
+        Pour mesurer la vitesse de décroissance, on utilise la <strong>demi-vie</strong> <span class="math">t½</span> : le temps au bout duquel <strong>la moitié</strong> des noyaux s'est désintégrée, c'est-à-dire <span class="math">N(t½) = N₀/2</span>. Voici le calcul à savoir refaire :
+      </p>
+      <div class="lecture-example lecture-example-featured"><div class="lecture-example-label">🧮 Démonstration — Établir <span class="math">t½ = ln 2/λ</span></div><div class="lecture-example-content">          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content">
+                <p>Par définition de la demi-vie :</p>
+                <p><span class="math">N(t½) = N₀/2</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content">
+                <p>On remplace N par son expression :</p>
+                <p><span class="math">N₀·e^(−λt½) = N₀/2</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content">
+                <p>On simplifie par <span class="math">N₀</span> (non nul) :</p>
+                <p><span class="math">e^(−λt½) = 1/2 = e^(−ln 2)</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content">
+                <p>Par identification des exposants :</p>
+                <p><span class="math">−λt½ = −ln 2&nbsp;&nbsp;⇒&nbsp;&nbsp;t½ = ln 2/λ</span></p>
+              </div></div>
+          </div></div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule de la demi-vie — à connaître par cœur</div>
+        <div class="lecture-formula-hero-main">t½ = ln 2/λ</div>
+        <div class="lecture-formula-hero-desc">Ne dépend pas de N₀ : tous les échantillons d'un même élément ont la même demi-vie. Réciproquement, si l'énoncé donne t½, on en tire λ = ln 2/t½.</div>
+      </div>
+      <p class="lecture-text">
+        De la demi-vie découle une règle de calcul mental très utile : à chaque demi-vie, la quantité est <strong>divisée par 2</strong>. Après n demi-vies, il reste :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">N = N₀/2ⁿ&nbsp;&nbsp;après&nbsp;&nbsp;n&nbsp;&nbsp;demi-vies</div><div class="lecture-formula-desc">Chaque période t½ divise par 2 : 2 demi-vies divisent par 4, 3 demi-vies par 8, etc. Vérification : N₀/2ⁿ → 0 quand n → +∞, cohérent avec la décroissance exponentielle.</div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbe de désintégration radioactive : exponentielle décroissante qui passe par les paliers N0, N0 sur 2, N0 sur 4, avec la demi-vie marquée sur l'axe du temps">
+          <line x1="60" y1="280" x2="500" y2="280" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="510,280 498,274 498,286" style="fill:var(--text-dim)"/>
+          <line x1="70" y1="300" x2="70" y2="50" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="70,40 64,52 76,52" style="fill:var(--text-dim)"/>
+          <text x="492" y="298" style="fill:var(--text-dim)" font-size="13" font-family="Inter">t</text>
+          <text x="82" y="56" style="fill:var(--text-dim)" font-size="13" font-family="Inter">N(t)</text>
+          <line x1="70" y1="70" x2="480" y2="70" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="6 5"/>
+          <line x1="70" y1="175" x2="480" y2="175" style="stroke:var(--green-bright)" stroke-width="1.5" stroke-dasharray="6 5"/>
+          <line x1="70" y1="228" x2="480" y2="228" style="stroke:var(--green-bright)" stroke-width="1.5" stroke-dasharray="6 5"/>
+          <text x="62" y="75" style="fill:var(--text-dim)" font-size="13" font-weight="700" font-family="Inter" text-anchor="end">N₀</text>
+          <text x="62" y="180" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="end">N₀/2</text>
+          <text x="62" y="233" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="end">N₀/4</text>
+          <line x1="230" y1="175" x2="230" y2="280" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <line x1="390" y1="228" x2="390" y2="280" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <polyline points="70,70 110,103 150,132 190,155 230,175 270,192 310,206 350,218 390,228 430,236 470,243 500,248" style="fill:none;stroke:var(--accent-bright)" stroke-width="3"/>
+          <circle cx="70" cy="70" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="230" cy="175" r="5" style="fill:var(--green-bright)"/>
+          <circle cx="390" cy="228" r="5" style="fill:var(--green-bright)"/>
+          <text x="88" y="66" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter">N(t) = N₀·e^(−λt)</text>
+          <text x="230" y="298" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">t½</text>
+          <text x="390" y="298" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">2 × t½</text>
+          <text x="300" y="140" style="fill:var(--text-dim)" font-size="12" font-family="Inter">chaque t½ : ÷ 2</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">La courbe de désintégration : une exponentielle décroissante qui franchit les paliers <span class="math">N₀</span> → <span class="math">N₀/2</span> → <span class="math">N₀/4</span> — chacun exactement une demi-vie <span class="math">t½</span> après le précédent. La courbe s'approche de l'axe du temps sans jamais l'atteindre.</figcaption>
+      </figure>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Application — Un échantillon de 80 g de carbone 14 (<span class="math">t½ ≈ 5 730 ans</span>)</div><div class="lecture-example-content">          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content">
+                <p>Après 1 demi-vie (5 730 ans) :</p>
+                <p><span class="math">N = 80/2 = 40 g</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content">
+                <p>Après 2 demi-vies (11 460 ans) :</p>
+                <p><span class="math">N = 80/2² = 20 g</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content">
+                <p>Après 3 demi-vies (17 190 ans) :</p>
+                <p><span class="math">N = 80/2³ = 10 g</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content">
+                <p>Formule générale après n demi-vies :</p>
+                <p><span class="math">N = 80/2ⁿ = 80·2^(−n)</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Après 4 demi-vies (22 920 ans) : <span class="math">N = 80/2⁴ = 5 g</span>. Chaque période divise par 2 — et il restera toujours un peu de carbone 14, jamais zéro exactement.</p></div></div>
+          </div></div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Nombre de demi-vies n</th><th>Temps écoulé (ans)</th><th>Masse restante</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">0</span></td><td><span class="math">0</span></td><td><span class="math">80 g</span></td></tr>
+            <tr><td><span class="math">1</span></td><td><span class="math">≈ 5 730</span></td><td><span class="math">40 g</span></td></tr>
+            <tr><td><span class="math">2</span></td><td><span class="math">≈ 11 460</span></td><td><span class="math">20 g</span></td></tr>
+            <tr><td><span class="math">3</span></td><td><span class="math">≈ 17 190</span></td><td><span class="math">10 g</span></td></tr>
+            <tr><td><span class="math">4</span></td><td><span class="math">≈ 22 920</span></td><td><span class="math">5 g</span></td></tr>
+          </tbody>
+        </table></div>
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Deux pièges de la demi-vie</div>
+          <p>1) Ne confonds pas « après une demi-vie il reste la moitié » avec « la demi-vie est la moitié de la durée de vie » : il n'y a <strong>pas</strong> de durée de vie totale, la décroissance est exponentielle. 2) Le nombre de demi-vies n'est pas toujours entier : pour <span class="math">N(t) = N₀/4</span>, il faut n = 2 demi-vies, mais pour <span class="math">N₀/3</span>, il faut résoudre <span class="math">e^(−λt) = 1/3</span> avec le logarithme.</p>
+        </div></div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 4 · reflexes — EXERCICE TYPE BAC -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header"><div class="lecture-section-num">04</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · reflexes</span><h2 class="lecture-section-title">Exercice type Bac complet</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-gold"><div class="lecture-callout-body"><div class="lecture-callout-title">📗 Énoncé — Population d'une réserve piscicole</div>
+          <p>La population <span class="math">P(t)</span> d'une réserve de poissons, exprimée en individus, est modélisée pour <span class="math">t ≥ 0</span> (t en années) par l'équation différentielle <span class="math">P' = −0,05·P + 20</span>, où la mortalité est proportionnelle à la population (5 % par an) et la réserve est réapprovisionnée à raison de 20 individus par an. À l'instant 0, <span class="math">P(0) = 1 000</span>.</p>
+          <p><strong>1)</strong> Résoudre l'équation. <strong>2)</strong> Vérifier la solution. <strong>3)</strong> Déterminer <span class="math">lim(t→+∞) P(t)</span> et interpréter. <strong>4)</strong> Au bout de combien de temps la population atteint-elle 700 individus ?</p>
+        </div></div>
+      <div class="lecture-example lecture-example-featured"><div class="lecture-example-label">🧮 Question 1 et 2 — Résoudre et vérifier</div><div class="lecture-example-content">          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Identifier</strong> : l'équation est de la forme <span class="math">y' = ay + b</span> avec <span class="math">a = −0,05</span> et <span class="math">b = 20</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content">
+                <p><strong>Étape 1 — Homogène</strong> :</p>
+                <p><span class="math">P_h = C·e^(−0,05t)</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content">
+                <p><strong>Étape 2 — Particulière constante</strong> :</p>
+                <p><span class="math">y_p = −b/a = −20/(−0,05)</span>, donc <span class="math">y_p = 400</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content">
+                <p><strong>Étape 3 — Somme</strong> :</p>
+                <p><span class="math">P(t) = C·e^(−0,05t) + 400</span>,&nbsp;&nbsp;C ∈ ℝ</p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content">
+                <p><strong>Étape 4 — Condition initiale : substitution</strong> — on exprime P(0) :</p>
+                <p><span class="math">P(0) = C + 400</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content">
+                <p><strong>Résolution de C</strong> — la condition impose <span class="math">P(0) = 1 000</span> :</p>
+                <p><span class="math">C + 400 = 1 000&nbsp;&nbsp;⇒&nbsp;&nbsp;C = 600</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content">
+                <p><strong>Solution unique</strong> :</p>
+                <p><span class="math">P(t) = 600e^(−0,05t) + 400</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">8</div><div class="lecture-step-content">
+                <p><strong>Vérification</strong> — trois lignes :</p>
+                <p>On calcule P' : <span class="math">P'(t) = 600 × (−0,05) × e^(−0,05t) = −30e^(−0,05t)</span></p>
+                <p>On calcule −0,05·P + 20 : <span class="math">−0,05·P + 20 = −30e^(−0,05t) − 20 + 20 = −30e^(−0,05t)</span></p>
+                <p>Comparaison : <span class="math">P' = −0,05·P + 20</span> pour tout t, et <span class="math">P(0) = 600 + 400 = 1 000</span> ✓ ✅</p>
+              </div></div>
+          </div></div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Questions 3 et 4 — Limite et temps de passage à 700</div><div class="lecture-example-content">          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content">
+                <p><strong>Limite</strong> : comme <span class="math">−0,05 &lt; 0</span> :</p>
+                <p><span class="math">lim(t→+∞) e^(−0,05t) = 0</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content">
+                <p>Donc :</p>
+                <p><span class="math">lim(t→+∞) P(t) = 400</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Interprétation</strong> : quelle que soit la population de départ, la réserve se stabilise à 400 individus — la valeur d'équilibre <span class="math">−b/a</span>. Ici le transitoire <span class="math">600e^(−0,05t)</span> représente l'excès qui s'éteint.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content">
+                <p><strong>Temps de passage à 700</strong> : on résout :</p>
+                <p><span class="math">600e^(−0,05t) + 400 = 700&nbsp;&nbsp;⇔&nbsp;&nbsp;e^(−0,05t) = 0,5</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content">
+                <p>On applique ln :</p>
+                <p><span class="math">−0,05t = ln(0,5) = −ln 2</span></p>
+                <p><span class="math">t = ln 2/0,05 = 20·ln 2 ≈ 13,9</span></p>
+              </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p>La population atteint 700 individus au bout d'environ <strong>13,9 ans</strong>. Remarque : <span class="math">t = ln 2/0,05</span> est exactement la demi-vie du modèle — l'écart à l'équilibre (600 individus au départ) est divisé par 2 tous les 13,9 ans : 1 000 → 700 (à 400 + 300) → 550 → …</p></div></div>
+          </div></div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger"><div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac — le signe de b</div>
+          <p>Ici l'équation s'écrit <span class="math">P' = −0,05·P + 20</span> : le coefficient a est <strong>négatif</strong> et b <strong>positif</strong>, donc <span class="math">y_p = −20/(−0,05) = +400</span>. Beaucoup de candidats écrivent <span class="math">−400</span> par réflexe. Pose toujours a et b explicitement, calcule <span class="math">−b/a</span>, puis contrôle le signe : une valeur d'équilibre doit être <strong>positive</strong> ici (une population négative n'a pas de sens — bon indice de vérification !).</p>
+        </div></div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 4 · reflexes — RÉFLEXES ET GRANDE TABLE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header"><div class="lecture-section-num">05</div><div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · reflexes</span><h2 class="lecture-section-title">Réflexes Bac et grande table de synthèse</h2>
+      </div></div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Avant le tableau, les automatismes. Face à une équation différentielle du chapitre, le bon réflexe est presque toujours l'un de ceux-ci :
+      </p>
+      <ul class="lecture-list-elegant">
+        <li><strong>Mettre l'équation sous forme canonique</strong> <span class="math">y' = ay + b</span> (ou <span class="math">+ f(x)</span>) et lire a et b — le signe de a commande tout.</li>
+        <li><strong>Toute résolution commence par l'homogène</strong> : écrire <span class="math">C·e^(ax)</span> avant de chercher <span class="math">y_p</span>.</li>
+        <li><strong>Chercher y_p</strong> : constante <span class="math">−b/a</span> si second membre constant ; identification si <span class="math">f(x)</span> (polynôme complet, <span class="math">λ·e^(μx)</span> si <span class="math">μ ≠ a</span>, <span class="math">λ·x·e^(ax)</span> si <span class="math">μ = a</span>, paire cosinus + sinus sinon).</li>
+        <li><strong>Condition initiale APRÈS la solution générale</strong> : substituer, résoudre C, conclure. Jamais avant.</li>
+        <li><strong>Vérifier en redérivant</strong> : dériver ta solution, substituer dans l'équation, constater l'égalité — deux lignes qui sécurisent la question entière.</li>
+        <li><strong>Une limite demandée</strong> → raisonner sur <span class="math">lim e^(ax)</span> selon le signe de a ; la limite vaut <span class="math">y_p</span> si <span class="math">a &lt; 0</span>.</li>
+        <li><strong>Une valeur t donnée</strong> (« quand la population atteint-elle… ») → poser l'équation <span class="math">y(t) = valeur</span>, isoler l'exponentielle, appliquer ln.</li>
+        <li><strong>Unités</strong> : λ s'exprime en « par an » (ou par jour…), t½ en années (ou jours) — cohérence vérifiée par <span class="math">t½ = ln 2/λ</span>.</li>
+      </ul>
+      <p class="lecture-text">
+        La table de synthèse des trois types d'équations — type, solution générale, méthode. Trois lignes à savoir réciter :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Type d'équation</th><th>Solution générale</th><th>Méthode</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">y' = ay</span></td><td><span class="math">y = C·e^(ax)</span></td><td>théorème direct : l'exposant est le coefficient a</td></tr>
+            <tr><td><span class="math">y' = ay + b</span></td><td><span class="math">y = C·e^(ax) − b/a</span></td><td>homogène + particulière constante <span class="math">y_p = −b/a</span></td></tr>
+            <tr><td><span class="math">y' = ay + f(x)</span></td><td><span class="math">y = y_p + C·e^(ax)</span></td><td>homogène + <span class="math">y_p</span> fabriquée par identification</td></tr>
+          </tbody>
+        </table></div>
+      <p class="lecture-text">
+        Et voici la <strong>grande table de synthèse</strong> du chapitre — objet, formule, astuce de vérification. À relire la veille de l'épreuve :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Objet</th><th>Formule</th><th>Astuce de vérification</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Homogène</td><td><span class="math">y' = ay ⇔ y = C·e^(ax)</span></td><td>dériver : l'exposant redonne a</td></tr>
+            <tr><td>Second membre constant</td><td><span class="math">y' = ay + b ⇔ y = C·e^(ax) − b/a</span></td><td><span class="math">y_p' = 0</span> et <span class="math">a·(−b/a) + b = 0</span></td></tr>
+            <tr><td>Second membre variable</td><td><span class="math">y = y_p + C·e^(ax)</span></td><td>substituer <span class="math">y_p</span> dans l'équation</td></tr>
+            <tr><td>y_p polynôme</td><td>même degré que f, complet</td><td>identification terme à terme, puis re-substitution</td></tr>
+            <tr><td>y_p exponentielle</td><td><span class="math">λ·e^(μx)</span> si <span class="math">μ ≠ a</span> ; <span class="math">k·x·e^(ax)</span> si <span class="math">μ = a</span></td><td>le cas μ = a force le facteur x</td></tr>
+            <tr><td>y_p trigo</td><td><span class="math">A·cos(βx) + B·sin(βx)</span></td><td>jamais un seul terme (la dérivée change sin ↔ cos)</td></tr>
+            <tr><td>Condition initiale</td><td><span class="math">y(0) = y₀ ⇒ C = y₀ − y_p(0)</span></td><td><span class="math">e^(0) = 1</span> : C se lit en x = 0</td></tr>
+            <tr><td>Limite</td><td><span class="math">a &lt; 0 ⇒ lim y = y_p</span></td><td>le transitoire <span class="math">C·e^(ax)</span> s'éteint</td></tr>
+            <tr><td>Désintégration</td><td><span class="math">N(t) = N₀·e^(−λt)</span>, <span class="math">λ &gt; 0</span></td><td><span class="math">N(0) = N₀</span> et N décroît</td></tr>
+            <tr><td>Demi-vie</td><td><span class="math">t½ = ln 2/λ</span></td><td><span class="math">N(t½) = N₀·e^(−ln 2) = N₀/2</span></td></tr>
+            <tr><td>Après n demi-vies</td><td><span class="math">N = N₀/2ⁿ</span></td><td>chaque période divise par 2</td></tr>
+            <tr><td>Temps de passage</td><td><span class="math">y(t) = v</span> : isoler l'exponentielle puis ln</td><td><span class="math">t = (1/a)·(ln(v − y_p) − ln(y₀ − y_p))</span></td></tr>
+          </tbody>
+        </table></div>
+      <div class="lecture-callout lecture-callout-gold"><div class="lecture-callout-body"><div class="lecture-callout-title">💡 La carte mentale du chapitre</div>
+          <p>Trois équations, un seul squelette : <strong>solutions homogènes</strong> <span class="math">C·e^(ax)</span> (l'exposant est toujours le coefficient a) + <strong>une solution particulière</strong> (0, ou <span class="math">−b/a</span>, ou fabriquée par identification) + <strong>une condition initiale</strong> qui fixe C. Et le réflexe qui relie tout : <strong>vérifier en redérivant</strong> — c'est la seule étape qui te protège, quelle que soit la question.</p>
+        </div></div>
+    </div>
+  </section>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap"><div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[methode]</strong> Méthode universelle en 4 étapes : homogène → particulière → somme → condition initiale</li>
+      <li><strong>[methode]</strong> Structure commune : <span class="math">y = y_p + C·e^(ax)</span> ; la condition initiale fixe C (substituer <span class="math">e^(0) = 1</span>)</li>
+      <li><strong>[synthese]</strong> <span class="math">y' = ay</span> → <span class="math">C·e^(ax)</span> ; <span class="math">y' = ay + b</span> → <span class="math">C·e^(ax) − b/a</span> ; <span class="math">y' = ay + f(x)</span> → <span class="math">y_p + C·e^(ax)</span></li>
+      <li><strong>[synthese]</strong> <span class="math">a &lt; 0</span> : les solutions convergent vers <span class="math">y_p</span> (régime permanent) ; <span class="math">a &gt; 0</span> : elles divergent</li>
+      <li><strong>[applications]</strong> Désintégration : <span class="math">N(t) = N₀·e^(−λt)</span> avec <span class="math">λ &gt; 0</span> — décroissance exponentielle</li>
+      <li><strong>[applications]</strong> Demi-vie : <span class="math">t½ = ln 2/λ</span>, indépendante de <span class="math">N₀</span> ; réciproquement <span class="math">λ = ln 2/t½</span></li>
+      <li><strong>[applications]</strong> Après n demi-vies : <span class="math">N = N₀/2ⁿ</span> — chaque période divise la masse par 2</li>
+      <li><strong>[reflexes]</strong> Lire a et b sur la forme canonique ; condition initiale APRÈS la solution générale</li>
+      <li><strong>[reflexes]</strong> Cas piège : f = k·e^(ax) → y_p = k·x·e^(ax) ; f trigo → paire cosinus + sinus</li>
+      <li><strong>[reflexes]</strong> Le réflexe qui sauve tout : vérifier en redérivant et en substituant — à chaque question</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end"><span class="lecture-end-icon">🎯</span><div class="lecture-end-text">Chapitre « Équations différentielles » terminé !</div><div class="lecture-end-sub">Direction les exercices du chapitre pour ancrer la méthode en 4 étapes — et bonne chance pour l'épreuve !</div>
+    <div class="lecture-end-divider"></div>
+  </div></div>

@@ -1,0 +1,493 @@
+<!-- ============================================================ -->
+<!-- PARTIE 2 — Dérivée de exp et de exp(u) (derivee, produit, primitives) -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · FONCTION EXPONENTIELLE   -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 02 · Fonction exponentielle</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Dérivée de <span class="math">exp</span> <em>et de exp(u)</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Voici le cœur du chapitre : la fonction <span class="math">exp</span> est <strong>sa propre dérivée</strong>, une singularité qu'aucune autre fonction du programme ne partage (à un facteur près). Cette partie couvre <strong>3 notions</strong> : la <strong>dérivée</strong> de <span class="math">e^x</span> puis la règle générale <span class="math">(e^u)' = u'·e^u</span>, la <strong>dérivée des produits</strong> où exp apparaît en facteur, et enfin les <strong>primitives</strong> de <span class="math">e^x</span> et de <span class="math">u'·e^u</span> — les trois automatismes les plus rentables de l'épreuve.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span>
+      <span class="lecture-hero-meta-item">🧮 3 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">3 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — À quelle vitesse grandit-on ?</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · derivee — <span class="math">(e^x)' = e^x</span> : sa propre dérivée</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · derivee — <span class="math">(e^u)' = u'·e^u</span> : la règle générale</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 1 · derivee — Trois dérivées en série</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · produit — Dérivée d'un produit avec exp</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 3 · primitives — Primitive de <span class="math">e^x</span> et de <span class="math">u'·e^u</span></span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 3 · primitives — Trois primitives en série</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — L'essentiel de la partie</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">À quelle vitesse grandit-on ?</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Un démographe ne se contente pas de savoir qu'une population croît : il veut connaître sa <strong>vitesse de croissance</strong> à chaque instant. Or pour une population en croissance exponentielle, la vitesse de croissance est <strong>proportionnelle à la population elle-même</strong> : deux fois plus d'habitants, deux fois plus de naissances. Traduit en langage de dérivées, si <span class="math">P(t)</span> désigne la population à l'instant <span class="math">t</span>, alors <span class="math">P'(t)</span> est proportionnel à <span class="math">P(t)</span> — et la fonction qui réalise exactement cette propriété est <span class="math">e^t</span>.
+      </p>
+      <p class="lecture-text">
+        D'où la question centrale de cette partie : <strong>comment dériver</strong> une expression contenant <span class="math">e^x</span>, ou <span class="math">e^u</span> avec <span class="math">u</span> une expression quelconque ? Et dans l'autre sens : <strong>comment trouver une primitive</strong> quand on reconnaît une exponentielle ? Les réponses tiennent en deux formules et une méthode de reconnaissance — tout le reste est de l'entraînement, que nous ferons ligne par ligne.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Retenir</strong> les deux formules de dérivation : <span class="math">(e^x)' = e^x</span> et <span class="math">(e^u)' = u'·e^u</span>.</li>
+            <li><strong>Dériver</strong> des produits du type <span class="math">x·e^x</span> ou <span class="math">(2x + 1)·e^x</span> sans faute.</li>
+            <li><strong>Trouver</strong> une primitive de <span class="math">e^x</span>, de <span class="math">e^(3x)</span> et des expressions <span class="math">u'·e^u</span> (comme <span class="math">2x·e^(x²)</span>).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Petite histoire des sciences</div>
+        <div class="lecture-aside-content">
+          Chercher une fonction égale à sa propre dérivée, c'est résoudre l'équation <span class="math">y' = y</span>. Euler a montré au XVIIIᵉ siècle que la solution est unique dès qu'on impose <span class="math">f(0) = 1</span> : c'est <span class="math">e^x</span>. Cette équation décrit aussi la désintégration radioactive (avec <span class="math">y' = −λy</span>), le refroidissement du thé, et la croissance de la dette à intérêts composés. Une seule équation différentielle, un empire d'applications — et une seule fonction à sa hauteur : <span class="math">exp</span>.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · derivee — (e^x)' = e^x               -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · derivee</span>
+        <h2 class="lecture-section-title"><span class="math">(e^x)' = e^x</span> : la fonction qui est sa propre dérivée</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Toutes les fonctions que tu connais « perdent quelque chose » en dérivant : <span class="math">x³</span> devient <span class="math">3x²</span>, <span class="math">ln x</span> devient <span class="math">1 / x</span>. La fonction exponentielle, elle, ne perd rien — elle se recopie elle-même. C'est son trait de génie, et la raison de son rôle central en modélisation.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Théorème officiel — Dérivée de exp</div>
+          <p>La fonction <span class="math">exp</span> est dérivable sur <span class="math">ℝ</span> et sa fonction dérivée est <span class="math">exp</span> elle-même : pour tout réel <span class="math">x</span>, <span class="math">exp'(x) = exp(x)</span>, c'est-à-dire <span class="math">(e^x)' = e^x</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule la plus courte du programme</div>
+        <div class="lecture-formula-hero-main">(e^x)' = e^x</div>
+        <div class="lecture-formula-hero-desc">La fonction qui est sa propre dérivée : dériver <span class="math">e^x</span> ne change rien. Conséquence directe : <span class="math">(k·e^x)' = k·e^x</span> pour tout réel <span class="math">k</span>.</div>
+      </div>
+      <p class="lecture-text">
+        Regarde ce que « sa propre dérivée » veut dire sur le dessin : la <strong>pente de la tangente</strong> au point d'abscisse <span class="math">x</span> est exactement la hauteur <span class="math">e^x</span> de la courbe à cet endroit.
+      </p>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbe de la fonction exponentielle avec ses tangentes : pente 1 en (0 ; 1) et pente e ≈ 2,7 en (1 ; e)">
+          <line x1="16" y1="250" x2="500" y2="250" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="500,250 488,244 488,256" style="fill:var(--text-dim)"/>
+          <line x1="140" y1="310" x2="140" y2="16" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="140,16 134,28 146,28" style="fill:var(--text-dim)"/>
+          <text x="490" y="270" style="fill:var(--text-dim)" font-size="12" font-family="Inter">x</text>
+          <text x="152" y="28" style="fill:var(--text-dim)" font-size="12" font-family="Inter">y</text>
+          <text x="126" y="266" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">O</text>
+          <line x1="200" y1="245" x2="200" y2="255" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="196" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">1</text>
+          <line x1="260" y1="245" x2="260" y2="255" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="256" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">2</text>
+          <line x1="135" y1="174" x2="145" y2="174" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="134" y="178" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">e ≈ 2,7</text>
+          <path d="M 60 247 C 100 244, 120 238, 140 222 C 160 206, 180 192, 200 174 C 220 156, 245 95, 260 43 C 264 31, 267 20, 269 10" style="fill:none;stroke:var(--accent-bright)" stroke-width="3"/>
+          <line x1="100" y1="241" x2="180" y2="204" style="stroke:var(--accent)" stroke-width="2" stroke-dasharray="6 4"/>
+          <line x1="170" y1="212" x2="230" y2="136" style="stroke:var(--accent)" stroke-width="2" stroke-dasharray="6 4"/>
+          <circle cx="140" cy="222" r="5" style="fill:var(--accent-bright)"/>
+          <text x="146" y="244" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">A(0 ; 1)</text>
+          <circle cx="200" cy="174" r="5" style="fill:var(--accent-bright)"/>
+          <text x="192" y="162" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter" text-anchor="end">B(1 ; e)</text>
+          <text x="98" y="228" style="fill:var(--accent)" font-size="12" font-family="Inter" text-anchor="end">pente = 1</text>
+          <text x="238" y="132" style="fill:var(--accent)" font-size="12" font-family="Inter">pente ≈ 2,7</text>
+          <text x="320" y="224" style="fill:var(--text-dim)" font-size="12" font-family="Inter">en chaque point,</text>
+          <text x="320" y="242" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">la pente vaut e^x</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">La pente de la tangente en <span class="math">x</span> vaut <span class="math">e^x</span> : en <span class="math">A(0 ; 1)</span> elle vaut <span class="math">1</span>, en <span class="math">B(1 ; e)</span> elle vaut <span class="math">e ≈ 2,7</span>. La courbe « porte » sa propre dérivée.</figcaption>
+      </figure>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Une dérivée de somme</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On dérive, sur <span class="math">ℝ</span> :</p><p><span class="math">f(x) = 7·e^x − 3x² + 5</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Terme à terme — l'exponentielle se recopie, le carré perd un degré :</p><p><span class="math">(7·e^x)' = 7·e^x</span></p><p><span class="math">(−3x²)' = −6x</span></p><p><span class="math">(5)' = 0</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On additionne les trois résultats :</p><p><span class="math">f'(x) = 7·e^x − 6x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Conclusion : l'exponentielle est restée intacte, seule la partie polynomiale a changé.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Ne pas mélanger</div>
+          <p><span class="math">(e^x)' = e^x</span> mais <span class="math">(2·e^x)' = 2·e^x</span> et surtout <span class="math">(e^(2x))' ≠ e^(2x)</span> ! Dès que l'exposant n'est plus <em>x</em> tout seul, c'est la règle générale de la section suivante qui s'applique — et un facteur apparaît.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · derivee — (e^u)' = u'·e^u            -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · derivee</span>
+        <h2 class="lecture-section-title"><span class="math">(e^u)' = u'·e^u</span> : la règle générale</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Quand l'exposant est une expression <span class="math">u(x)</span> — <span class="math">e^(3x)</span>, <span class="math">e^(−2x + 5)</span>, <span class="math">e^(x²)</span>… — on dérive en deux gestes : <strong>dériver l'exposant</strong>, puis <strong>coller l'exponentielle</strong>.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Théorème officiel — Dérivée de e^u</div>
+          <p>Soit <span class="math">u</span> une fonction dérivable sur un intervalle <span class="math">I</span>. La fonction <span class="math">x ↦ e^(u(x))</span> est dérivable sur <span class="math">I</span> et sa dérivée vaut <span class="math">(e^(u(x)))' = u'(x)·e^(u(x))</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La règle à coller au-dessus de ton brouillon</div>
+        <div class="lecture-formula-hero-main">(e^u)' = u'·e^u</div>
+        <div class="lecture-formula-hero-desc">Dériver <span class="math">e^u</span> = multiplier par <span class="math">u'</span>. Si <span class="math">u'</span> est constant, la dérivée est simplement ce coefficient devant la même exponentielle.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Dériver <span class="math">f(x) = e^(3x)</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On identifie l'exposant :</p><p><span class="math">u(x) = 3x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On dérive l'exposant :</p><p><span class="math">u'(x) = 3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On applique la règle :</p><p><span class="math">f'(x) = u'(x)·e^(u(x))</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>On remplace <span class="math">u'</span> et <span class="math">u</span> par leurs valeurs :</p><p><span class="math">f'(x) = 3·e^(3x)</span></p><p>Conclusion : on a <strong>multiplié par u'</strong> — c'est le facteur qui manque à ceux qui écrivent <span class="math">f'(x) = e^(3x)</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac — le piège du facteur u'</div>
+          <p>Oublier de <strong>multiplier par u'</strong> est l'erreur n°1 du chapitre : <span class="math">(e^(3x))' = 3·e^(3x)</span>, <strong>jamais</strong> <span class="math">e^(3x)</span> tout seul. Test de contrôle : dérive ta réponse mentalement — si tu dérives <span class="math">3·e^(3x)</span>, tu retrouves <span class="math">9·e^(3x)</span>, pas <span class="math">3·e^(3x)</span> : chaque dérivation ajoute un facteur, rien ne « reste pareil » sauf <span class="math">e^x</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 1 · derivee — TROIS DÉRIVÉES EN SÉRIE    -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · derivee</span>
+        <h2 class="lecture-section-title">Trois dérivées en série</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Entraînons le réflexe sur trois formes types : exposant <strong>affine à coefficient négatif</strong>, exposant <strong>carré</strong>, et exposant affine <strong>avec coefficient devant</strong>.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 1 — Dériver <span class="math">f(x) = e^(−2x + 5)</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Exposant et sa dérivée :</p><p><span class="math">u(x) = −2x + 5</span></p><p><span class="math">u'(x) = −2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On applique la règle :</p><p><span class="math">f'(x) = u'(x)·e^(u(x))</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On remplace :</p><p><span class="math">f'(x) = −2·e^(−2x + 5)</span></p><p>Conclusion : ici <span class="math">f</span> est <strong>décroissante</strong> (dérivée négative) : l'exposant décroissant renverse la croissance.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 2 — Dériver <span class="math">f(x) = e^(x²)</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Exposant et sa dérivée :</p><p><span class="math">u(x) = x²</span></p><p><span class="math">u'(x) = 2x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On applique la règle :</p><p><span class="math">f'(x) = 2x·e^(x²)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Conclusion : <span class="math">f'(x) = 2x·e^(x²)</span> — s'annule en <span class="math">x = 0</span> seulement, car <span class="math">e^(x²) &gt; 0</span> toujours.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 3 — Dériver <span class="math">f(x) = 5·e^(4x − 7)</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Exposant et sa dérivée :</p><p><span class="math">u(x) = 4x − 7</span></p><p><span class="math">u'(x) = 4</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On dérive le produit par 5 aussi — le facteur 5 reste, <span class="math">u' = 4</span> s'ajoute :</p><p><span class="math">f'(x) = 5 × 4 × e^(4x − 7)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On multiplie les deux coefficients :</p><p><span class="math">5 × 4 = 20</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Conclusion :</p><p><span class="math">f'(x) = 20·e^(4x − 7)</span></p><p>Les deux facteurs (5 et <span class="math">u' = 4</span>) se multiplient devant.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Fonction <span class="math">f(x)</span></th><th>Exposant <span class="math">u(x)</span></th><th><span class="math">u'(x)</span></th><th>Dérivée <span class="math">f'(x)</span></th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">e^x</span></td><td><span class="math">x</span></td><td><span class="math">1</span></td><td><span class="math">e^x</span></td></tr>
+            <tr><td><span class="math">e^(2x)</span></td><td><span class="math">2x</span></td><td><span class="math">2</span></td><td><span class="math">2·e^(2x)</span></td></tr>
+            <tr><td><span class="math">e^(−x)</span></td><td><span class="math">−x</span></td><td><span class="math">−1</span></td><td><span class="math">−e^(−x)</span></td></tr>
+            <tr><td><span class="math">e^(kx + b)</span></td><td><span class="math">kx + b</span></td><td><span class="math">k</span></td><td><span class="math">k·e^(kx + b)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 2 · produit — DÉRIVÉE D'UN PRODUIT       -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · produit</span>
+        <h2 class="lecture-section-title">Dérivée d'un produit avec exp</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Quand l'exponentielle est <strong>multipliée</strong> par une autre expression — <span class="math">x·e^x</span>, <span class="math">(2x + 1)·e^x</span>… — la règle du produit <span class="math">(uv)' = u'v + uv'</span> s'applique, et le miracle habituel se produit : la dérivée se <strong>factorise</strong> par <span class="math">e^x</span>.
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">(uv)' = u'·v + u·v'</div>
+        <div class="lecture-formula-desc">La règle du produit, à connaître sans hésiter. Avec un facteur <span class="math">e^x</span>, elle donne <span class="math">(u·e^x)' = u'·e^x + u·e^x</span>, puis la factorisation : <span class="math">(u' + u)·e^x</span>.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet 1 — Dériver <span class="math">f(x) = x·e^x</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On pose les deux facteurs :</p><p><span class="math">u(x) = x</span>&nbsp;&nbsp;et&nbsp;&nbsp;<span class="math">v(x) = e^x</span></p><p><span class="math">u'(x) = 1</span>&nbsp;&nbsp;et&nbsp;&nbsp;<span class="math">v'(x) = e^x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On applique la règle du produit :</p><p><span class="math">f'(x) = 1·e^x + x·e^x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On factorise par <span class="math">e^x</span> :</p><p><span class="math">f'(x) = e^x(1 + x)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Conclusion :</p><p><span class="math">f'(x) = e^x(x + 1)</span></p><p>Comme <span class="math">e^x &gt; 0</span>, le signe de <span class="math">f'</span> est celui de <span class="math">(x + 1)</span> : minimum en <span class="math">x = −1</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet 2 — Dériver <span class="math">f(x) = (2x + 1)·e^x</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On pose les deux facteurs :</p><p><span class="math">u(x) = 2x + 1</span>&nbsp;&nbsp;et&nbsp;&nbsp;<span class="math">v(x) = e^x</span></p><p><span class="math">u'(x) = 2</span>&nbsp;&nbsp;et&nbsp;&nbsp;<span class="math">v'(x) = e^x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On applique la règle du produit :</p><p><span class="math">f'(x) = 2·e^x + (2x + 1)·e^x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On factorise par <span class="math">e^x</span> :</p><p><span class="math">f'(x) = (2 + 2x + 1)·e^x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>On réduit la parenthèse : <span class="math">2 + 2x + 1 = 2x + 3</span>, donc :</p><p><span class="math">f'(x) = (2x + 3)·e^x</span></p><p>Cette dérivée est l'étape clé de l'étude complète de la Partie 3. ✅</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Écrire <span class="math">(x·e^x)' = 1·e^x = e^x</span> en dérivant « chaque facteur à part » est <strong>faux</strong> : il manque le terme <span class="math">x·e^x</span>. La règle du produit donne <strong>deux</strong> termes, puis on factorise. Une dérivée de produit jamais factorisée est aussi une rédaction incomplète aux yeux du correcteur.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 3 · primitives — PRIMITIVE DE e^x, u'e^u -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · primitives</span>
+        <h2 class="lecture-section-title">Primitive de <span class="math">e^x</span> et de <span class="math">u'·e^u</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        On renverse le point de vue : si <span class="math">(e^x)' = e^x</span>, alors <span class="math">e^x</span> est sa propre <strong>primitive</strong>. Et la règle <span class="math">(e^u)' = u'·e^u</span>, lue de droite à gauche, fournit la primitive de toutes les expressions de la forme <span class="math">u'·e^u</span>.
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Une primitive de e^x est e^x + c</div>
+        <div class="lecture-formula-desc">Avec <span class="math">c</span> réel quelconque. La dérivée de <span class="math">e^x + c</span> est bien <span class="math">e^x</span>, quel que soit <span class="math">c</span> : les primitives diffèrent d'une constante.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Une primitive de k·e^x est k·e^x + c</div>
+        <div class="lecture-formula-desc">Même raison : dériver <span class="math">k·e^x</span> redonne <span class="math">k·e^x</span>, et la constante <span class="math">c</span> s'ajoute à la fin.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Une primitive de u'·e^u est e^u + c</div>
+        <div class="lecture-formula-desc">Lecture inverse de <span class="math">(e^u)' = u'·e^u</span>. À condition de reconnaître EXACTEMENT le facteur <span class="math">u'</span> devant l'exponentielle.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Trouver une primitive de <span class="math">f(x) = 2x·e^(x²)</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On repère l'exponentielle et son exposant :</p><p><span class="math">u(x) = x²</span></p><p><span class="math">u'(x) = 2x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On compare au facteur devant :</p><p><span class="math">2x·e^(x²) = u'(x)·e^(u(x))</span></p><p>✅ La forme exacte est reconnue.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On applique la règle :</p><p><span class="math">F(x) = e^(u(x))</span></p><p><span class="math">F(x) = e^(x²)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>On vérifie en dérivant :</p><p><span class="math">F'(x) = 2x·e^(x²)</span></p><p><span class="math">F'(x) = f(x)</span> ✅</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Conclusion : l'ensemble des primitives est</p><p><span class="math">F(x) = e^(x²) + c</span></p><p>avec <span class="math">c</span> réel.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Le réflexe de vérification</div>
+          <p>Une primitive se vérifie <strong>en dérivant</strong>, jamais en « ayant l'air juste ». Après chaque primitive, ajoute la ligne « on vérifie : <span class="math">F'(x) = … = f(x)</span> ». C'est deux secondes, zéro risque, et le correcteur valorise la vérification.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 3 · primitives — TROIS PRIMITIVES SÉRIE  -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · primitives</span>
+        <h2 class="lecture-section-title">Trois primitives en série</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Trois formes à maîtriser : l'exponentielle <strong>à coefficient</strong> (attention au facteur qui apparaît), la forme <strong>u'·e^u à reconstituer</strong>, et la forme <strong>exacte</strong> toute prête.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 1 — Primitive de <span class="math">f(x) = e^(3x)</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Ce n'est <strong>pas</strong> la forme <span class="math">u'·e^u</span> (il manque le 3) : on ajuste par une constante <span class="math">k</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On cherche <span class="math">k</span> tel que la dérivée de <span class="math">k·e^(3x)</span> vaille <span class="math">e^(3x)</span>. Or :</p><p><span class="math">(k·e^(3x))' = 3k·e^(3x)</span></p><p>Il faut donc <span class="math">3k = 1</span>, c'est-à-dire :</p><p><span class="math">k = 1/3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Conclusion : une primitive est</p><p><span class="math">F(x) = (1/3)·e^(3x)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Vérification :</strong></p><p><span class="math">F'(x) = (1/3) × 3·e^(3x)</span></p><p><span class="math">F'(x) = e^(3x)</span> ✅</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 2 — Primitive de <span class="math">f(x) = x·e^(x²)</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Avec <span class="math">u(x) = x²</span>, on a <span class="math">u'(x) = 2x</span> : le facteur présent n'est que <span class="math">x</span>, soit <strong>la moitié</strong> de <span class="math">u'</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On fait apparaître <span class="math">u'</span> en sortant le facteur <span class="math">1/2</span> :</p><p><span class="math">x·e^(x²) = (1/2) × 2x·e^(x²)</span></p><p><span class="math">x·e^(x²) = (1/2) × u'(x)·e^(u(x))</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Conclusion : une primitive est</p><p><span class="math">F(x) = (1/2)·e^(x²)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Vérification :</strong></p><p><span class="math">F'(x) = (1/2) × 2x·e^(x²)</span></p><p><span class="math">F'(x) = x·e^(x²)</span> ✅</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 3 — Primitive de <span class="math">f(x) = (2x + 1)·e^(x² + x)</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Exposant et sa dérivée :</p><p><span class="math">u(x) = x² + x</span></p><p><span class="math">u'(x) = 2x + 1</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Le facteur devant l'exponentielle est <strong>exactement</strong> <span class="math">u'(x)</span> : forme <span class="math">u'·e^u</span> reconnue.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Conclusion : une primitive est</p><p><span class="math">F(x) = e^(x² + x)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Vérification :</strong></p><p><span class="math">F'(x) = (2x + 1)·e^(x² + x)</span></p><p><span class="math">F'(x) = f(x)</span> ✅</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Écrire que la primitive de <span class="math">e^(3x)</span> est <span class="math">e^(3x)</span> est faux : en dérivant on retrouve <span class="math">3·e^(3x)</span>, trois fois trop. Retiens la règle générale : une primitive de <span class="math">e^(kx + b)</span> est <span class="math">(1/k)·e^(kx + b)</span> — le facteur <span class="math">1/k</span> compense la dérivation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN                                           -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">L'essentiel de la partie</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Trois formules, deux méthodes, un réflexe de vérification : voilà tout le stock de la partie. Le tableau ci-dessous est ta fiche mémoire — recopie-le et recite-le.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Le trio à connaître par cœur</div>
+        <div class="lecture-formula-hero-main">(e^x)' = e^x<br>(e^u)' = u'·e^u<br>primitive de u'·e^u : e^u + c</div>
+        <div class="lecture-formula-hero-desc">Dériver : multiplier par <span class="math">u'</span>. Intégrer : reconnaître <span class="math">u'·e^u</span>. Les deux règles sont la même formule lue dans les deux sens.</div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Expression <span class="math">f(x)</span></th><th>Dérivée <span class="math">f'(x)</span></th><th>Une primitive <span class="math">F(x)</span></th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">e^x</span></td><td><span class="math">e^x</span></td><td><span class="math">e^x + c</span></td></tr>
+            <tr><td><span class="math">k·e^x</span></td><td><span class="math">k·e^x</span></td><td><span class="math">k·e^x + c</span></td></tr>
+            <tr><td><span class="math">e^(kx + b)</span></td><td><span class="math">k·e^(kx + b)</span></td><td><span class="math">(1/k)·e^(kx + b) + c</span> (avec <span class="math">k ≠ 0</span>)</td></tr>
+            <tr><td><span class="math">e^(u(x))</span></td><td><span class="math">u'(x)·e^(u(x))</span></td><td>— (si le facteur u' manque, on ajuste comme en section 06)</td></tr>
+            <tr><td><span class="math">u'(x)·e^(u(x))</span></td><td>—</td><td><span class="math">e^(u(x)) + c</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><span class="math">(e^x)' = e^x</span> : exp est sa propre dérivée — aucune autre fonction du programme ne fait cela (à un facteur multiplicatif près).</li>
+        <li><span class="math">(e^u)' = u'·e^u</span> : ne jamais oublier le facteur <span class="math">u'</span>, surtout quand il vaut −2, 4 ou 2x.</li>
+        <li>Produit avec exp : <span class="math">(uv)' = u'v + uv'</span>, puis <strong>factorisation</strong> par l'exponentielle (<span class="math">x·e^x → e^x(x + 1)</span>).</li>
+        <li>Primitive de <span class="math">e^(kx + b)</span> : diviser par <span class="math">k</span> — primitive de <span class="math">e^(3x)</span> est <span class="math">(1/3)·e^(3x)</span>.</li>
+        <li>Forme <span class="math">u'·e^u</span> : la primitive est <span class="math">e^u + c</span> ; si le facteur est une <strong>fraction</strong> de u', multiplier par la constante qui convient avant d'intégrer.</li>
+        <li>Chaque primitive se vérifie <strong>en dérivant</strong> — la vérification est notée, ne la saute pas.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Réflexe rédaction pour l'examen</div>
+          <p>Avant d'intégrer une expression avec exponentielle, écris la phrase-clé : « on reconnaît la forme <span class="math">u'·e^u</span> avec <span class="math">u(x) = …</span> et <span class="math">u'(x) = …</span> ». Cette ligne justifie la primitive et vaut les points de méthode, même si le reste du calcul est résumé.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Soit <span class="math">f(x) = e^(−5x)</span>. Que vaut <span class="math">f'(x)</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) e^(−5x)</span><span>B) −5e^(−5x)</span><span>C) 5e^(−5x)</span><span>D) −5e^(−4x)</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) −5e^(−5x).</strong> Ici u(x) = −5x, donc u'(x) = −5 et (e^u)' = u'·e^u donne −5e^(−5x). L'option A est le piège classique : il manque le facteur u'.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Une primitive de <span class="math">g(x) = 3e^(3x)</span> est :</p>
+      <div class="lecture-quiz-options"><span>A) e^(3x) + c</span><span>B) 3e^(3x) + c</span><span>C) (1/3)e^(3x) + c</span><span>D) 9e^(3x) + c</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) e^(3x) + c.</strong> Vérification : (e^(3x))' = 3e^(3x) = g(x). ✅ L'option B est fausse car (3e^(3x))' = 9e^(3x) ; l'option C donnerait (1/3) × 3e^(3x) = e^(3x), qui n'est pas g(x).</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Soit <span class="math">f(x) = x²·e^x</span>. Que vaut <span class="math">f'(x)</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) 2x·e^x</span><span>B) (x² + 2x)e^x</span><span>C) (2x + 1)e^x</span><span>D) x²·e^(x + 1)</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) (x² + 2x)e^x.</strong> Produit avec u(x) = x² et v(x) = e^x : f'(x) = 2x·e^x + x²·e^x, puis on factorise par e^x : f'(x) = (x² + 2x)e^x. L'option A n'est que le premier terme de la somme.</div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[derivee]</strong> <span class="math">(e^x)' = e^x</span> : la fonction exponentielle est sa propre dérivée, elle est dérivable sur ℝ</li>
+      <li><strong>[derivee]</strong> <span class="math">(e^u)' = u'·e^u</span> : dériver e^u = multiplier par u' — le piège n°1 du chapitre</li>
+      <li><strong>[derivee]</strong> Pour un exposant affine : <span class="math">(e^(kx + b))' = k·e^(kx + b)</span>, en particulier <span class="math">(e^(−2x + 5))' = −2·e^(−2x + 5)</span></li>
+      <li><strong>[produit]</strong> <span class="math">(uv)' = u'v + uv'</span> puis factorisation par l'exponentielle : <span class="math">(x·e^x)' = e^x(x + 1)</span> et <span class="math">((2x + 1)·e^x)' = (2x + 3)·e^x</span></li>
+      <li><strong>[produit]</strong> On ne dérive jamais « chaque facteur à part » : la règle du produit donne deux termes</li>
+      <li><strong>[primitives]</strong> Une primitive de <span class="math">e^x</span> est <span class="math">e^x + c</span> ; de <span class="math">k·e^x</span> : <span class="math">k·e^x + c</span></li>
+      <li><strong>[primitives]</strong> Une primitive de <span class="math">e^(kx + b)</span> est <span class="math">(1/k)·e^(kx + b) + c</span> — jamais <span class="math">e^(kx + b)</span> si <span class="math">k ≠ 1</span></li>
+      <li><strong>[primitives]</strong> Une primitive de <span class="math">u'·e^u</span> est <span class="math">e^u + c</span> : exemples <span class="math">2x·e^(x²) → e^(x²)</span> et <span class="math">x·e^(x²) → (1/2)·e^(x²)</span></li>
+      <li><strong>[primitives]</strong> Si le facteur n'est pas exactement u', on le complète avec une constante (ex. <span class="math">x = (1/2)·2x</span>)</li>
+      <li><strong>[primitives]</strong> Toute primitive se vérifie en dérivant — la vérification rapporte la confiance du correcteur</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 2 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : limites, croissances comparées et étude complète</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

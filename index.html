@@ -1,0 +1,3895 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+    <title>ARVEXA School — Accueil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0A0A">
+<script>(function(){try{if(localStorage.getItem('arvexa-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}})();</script>
+<script src="theme.js"></script><script src="arvexa-i18n.js" defer></script>
+<script src="arvexa-sync.js" defer></script><!-- ✅ v8.0 sync Firebase des progressions (par compte) -->
+  <meta name="description" content="ARVEXA School - Tableau de bord">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="stylesheet" href="perf.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="analytics.js"></script>
+  <script src="register-sw.js" defer></script>
+  <script src="offline.js" defer></script>
+
+<!-- ✅ TUTORIEL ARVEXA — injection directe -->
+<script>
+(function() {
+  'use strict';
+
+  var path = window.location.pathname.toLowerCase();
+  var SKIP = ['login', 'register', 'forgot-password', 'auth-choice',
+              'onboarding.html', 'conditions', 'confidentialite',
+              'offline', '404', 'diagnostic'];
+  for (var i = 0; i < SKIP.length; i++) {
+    if (path.indexOf(SKIP[i]) !== -1) return;
+  }
+
+  try {
+    if (localStorage.getItem('arvexa_tour_completed_v1') === '1') return;
+  } catch (e) { return; }
+
+  if (!document.querySelector('link[data-arvexa-tour-css]')) {
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'tour-styles.css';
+    link.setAttribute('data-arvexa-tour-css', '1');
+    document.head.appendChild(link);
+  }
+
+  var script = document.createElement('script');
+  script.id = 'arvexaTourScript';
+  script.src = 'onboarding-tour.js';
+  script.defer = true;
+  script.onerror = function() {
+    console.warn('[Tour] Impossible de charger onboarding-tour.js');
+  };
+  document.head.appendChild(script);
+})();
+</script>
+  <script src="register-fcm-sw.js" defer></script>
+  <script src="bac-date.js"></script>
+
+  <link rel="stylesheet" href="arvexa-ui.css">
+  <style>
+    /* ============================================================
+       ROOT — Design system ARVEXA
+       ============================================================ */
+    :root {
+      --primary: #1A3A2A;
+      --primary-dark: #0A1A12;
+      --primary-light: #2A5A3A;
+      --accent: #B8860B;
+      --accent-bright: #E0B84A;
+      --accent-dim: rgba(184, 134, 11, 0.08);
+      --success: #2D7D5A;
+      --success-light: #3AB67E;
+      --danger: #B85C3A;
+      --bg-dark: #0A0A0A;
+      --bg-surface: #141414;
+      --bg-card: rgba(20, 20, 20, 0.7);
+      --text-light: #F5F0E8;
+      --text-dim: #8A8A7A;
+      --text-muted: #5A5A4A;
+      --card-border: rgba(184, 134, 11, 0.06);
+      --transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --radius: 16px;
+      --sidebar-width: 280px;
+      --header-height: 64px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; width: 100%; overflow-x: hidden; }
+    body {
+      font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      width: 100%;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+    }
+
+    /* ============================================================
+       BACKGROUND (statique)
+       ============================================================ */
+    .gradient-bg {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+      background: radial-gradient(ellipse 40% 30% at 30% 15%, rgba(184, 134, 11, 0.10) 0%, transparent 70%),
+                  radial-gradient(ellipse 35% 25% at 75% 85%, rgba(184, 134, 11, 0.05) 0%, transparent 60%),
+                  linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-deep) 100%);
+    }
+    .glow {
+      position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: -1;
+      opacity: 0.12;
+    }
+    .glow-1 { width: 350px; height: 350px; background: rgba(184,134,11,0.14); top: -80px; right: -80px; }
+    .glow-2 { width: 200px; height: 200px; background: rgba(184,134,11,0.05); bottom: 0; left: 0; }
+    .glow-3 { width: 250px; height: 250px; background: rgba(184,134,11,0.08); top: 30%; left: 60%; transform: translate(-50%,-50%); }
+
+    .sidebar-overlay {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+      background: rgba(0,0,0,0.6); z-index: 99; opacity: 0; transition: opacity 0.3s ease;
+    }
+    .sidebar-overlay.active { display: block; opacity: 1; }
+
+    /* ============================================================
+       SIDEBAR (inchangée)
+       ============================================================ */
+    .sidebar {
+      position: fixed; top: 0; left: -280px; width: 280px; height: 100vh;
+      background: rgba(var(--rgb-veil), 0.97); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-right: 1px solid rgba(184, 134, 11, 0.06);
+      padding: calc(24px + var(--safe-top)) 16px calc(24px + var(--safe-bottom));
+      display: flex; flex-direction: column; z-index: 100;
+      overflow-y: auto; transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .sidebar.open { left: 0; }
+    .sidebar .logo {
+      display: flex; align-items: center; text-decoration: none; color: var(--text-light);
+      font-size: 20px; font-weight: 700; font-family: 'Playfair Display', 'Georgia', serif;
+      letter-spacing: 2px; padding-bottom: 20px; margin-bottom: 16px;
+      border-bottom: 1px solid rgba(var(--rgb-soft), 0.04);
+    }
+    .sidebar .logo span {
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright), var(--accent));
+      background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; font-style: italic;
+      margin-left: 4px;
+    }
+    .sidebar .nav { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    .sidebar .nav a {
+      display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 10px;
+      color: var(--text-dim); text-decoration: none; transition: var(--transition);
+      font-size: 13px; font-weight: 500;
+    }
+    .sidebar .nav a i { width: 20px; text-align: center; font-size: 15px; }
+    .sidebar .nav a:hover { color: var(--text-light); background: rgba(var(--rgb-soft), 0.03); }
+    .sidebar .nav a.active { color: var(--text-light); background: rgba(184, 134, 11, 0.08); border: 1px solid rgba(184, 134, 11, 0.08); }
+    .sidebar .nav a.active i { color: var(--accent); }
+    .sidebar .nav a.avis-link {
+      color: var(--accent-bright);
+      background: rgba(184, 134, 11, 0.06);
+      border: 1px solid rgba(184, 134, 11, 0.12);
+      margin-top: 4px;
+    }
+    .sidebar .nav a.avis-link:hover {
+      background: rgba(184, 134, 11, 0.12);
+      color: var(--accent-bright);
+    }
+    .sidebar .nav-divider { height: 1px; background: rgba(var(--rgb-soft), 0.04); margin: 6px 0; }
+    .sidebar .nav-bottom { margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(var(--rgb-soft), 0.04); }
+    .sidebar .nav-bottom a { color: var(--text-muted); font-size: 12px; }
+    .sidebar .nav-bottom a:hover { color: var(--text-dim); }
+
+    /* ============================================================
+       MAIN
+       ============================================================ */
+    .main-content { flex: 1; width: 100%; min-height: 100vh; padding-bottom: 32px; }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .header {
+      position: sticky; top: 0; z-index: 50; display: flex; align-items: center;
+      justify-content: space-between; padding: calc(10px + var(--safe-top)) 16px 10px;
+      background: rgba(var(--rgb-veil), 0.92);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(184, 134, 11, 0.06);
+      gap: 12px; min-height: var(--header-height);
+    }
+    .header .header-left { display: flex; align-items: center; gap: 12px; }
+    .header .menu-toggle {
+      display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;
+      border-radius: 10px; border: 1px solid rgba(var(--rgb-soft), 0.05); background: transparent;
+      color: var(--text-dim); cursor: pointer; transition: var(--transition); font-size: 16px;
+    }
+    .header .menu-toggle:hover { border-color: rgba(184, 134, 11, 0.14); color: var(--text-light); }
+    .header .greeting {
+      display: flex; align-items: center; flex-wrap: wrap; gap: 4px;
+      font-size: clamp(13px, 1.5vw, 15px); font-weight: 600; color: var(--text-light);
+    }
+    .header .greeting #greetingText { color: var(--text-dim); font-weight: 400; }
+    .header .greeting #userFirstName { color: var(--accent-bright); font-weight: 700; }
+    .header .greeting #greetingEmoji { font-size: 16px; line-height: 1; }
+    .header .header-actions { display: flex; align-items: center; gap: 6px; }
+    .header .header-actions button {
+      width: 36px; height: 36px; border-radius: 50%; border: none; background: rgba(var(--rgb-soft), 0.04);
+      color: var(--text-dim); cursor: pointer; transition: var(--transition); font-size: 15px;
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .header .header-actions button:hover { background: rgba(var(--rgb-soft), 0.07); color: var(--text-light); }
+    .header .header-actions button .notif-dot {
+      position: absolute; top: 6px; right: 6px; width: 8px; height: 8px;
+      border-radius: 50%; background: var(--danger); border: 2px solid var(--bg-dark);
+      display: none;
+    }
+    .header .header-actions button .notif-dot.show { display: block; }
+
+    /* ============================================================
+       CONTAINER
+       ============================================================ */
+    .container { max-width: 900px; margin: 0 auto; padding: 16px 16px 20px; }
+
+    /* ============================================================
+       CARD BASE
+       ============================================================ */
+    .card {
+      background: var(--bg-card); backdrop-filter: blur(10px); border: 1px solid var(--card-border);
+      border-radius: var(--radius); padding: 18px; transition: var(--transition);
+    }
+    .card:hover { border-color: rgba(184, 134, 11, 0.14); }
+    .section-title {
+      display: flex; justify-content: space-between; align-items: baseline;
+      margin: 26px 0 12px;
+    }
+    .section-title h3 { font-size: clamp(15px, 1.6vw, 17px); font-weight: 600; color: var(--text-light); }
+    .section-title:first-of-type { margin-top: 26px; }
+
+    .tool-card.tool-more {
+      border-color: rgba(224, 184, 74, 0.28);
+      background: linear-gradient(150deg, rgba(184,134,11,0.10), rgba(var(--rgb-card), 0.6));
+    }
+    .tool-card.tool-more .icon-badge {
+      background: linear-gradient(135deg, var(--accent), var(--accent-bright));
+      color: var(--bg-surface);
+    }
+    .tool-card.tool-more:hover .icon-badge {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+    }
+
+    /* ============================================================
+       MATIÈRES
+       ============================================================ */
+    .subjects-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .subject-chip {
+      background: var(--bg-card); border: 1px solid var(--card-border);
+      border-radius: 16px; padding: 16px 14px; transition: var(--transition);
+      text-decoration: none; color: var(--text-light);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .subject-chip:hover {
+      border-color: rgba(224, 184, 74, 0.22); transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .subject-chip:active { transform: scale(0.98); }
+    .subject-chip .icon-badge {
+      width: 42px; height: 42px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(184, 134, 11, 0.08); color: var(--accent-bright);
+      font-size: 17px; flex-shrink: 0;
+    }
+    .subject-chip .subject-name { font-size: clamp(13px, 1.3vw, 14.5px); font-weight: 600; }
+    .subject-chip .subject-chapters { font-size: 11.5px; color: var(--text-muted); margin-top: 2px; }
+    .subject-chip .subject-chapters.has-progress { color: var(--accent-bright); font-weight: 600; }
+
+    /* ============================================================
+       OUTILS
+       ============================================================ */
+    .tools-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .tool-card {
+      background: var(--bg-card); backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border); border-radius: 16px;
+      padding: 16px 8px; text-align: center; transition: var(--transition);
+      text-decoration: none; color: var(--text-light);
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 6px; min-height: 88px;
+    }
+    .tool-card:hover {
+      border-color: rgba(224, 184, 74, 0.22); transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    }
+    .tool-card:active { transform: scale(0.97); }
+    .tool-card .icon-badge {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(184, 134, 11, 0.08); color: var(--accent-bright);
+      font-size: 15px; transition: var(--transition);
+    }
+    .tool-card:hover .icon-badge {
+      background: rgba(184, 134, 11, 0.15);
+    }
+    .tool-card .name { font-size: clamp(11px, 1.1vw, 12px); font-weight: 600; }
+
+    
+    /* ============================================================
+       AVIS / ABONNEMENT
+       ============================================================ */
+    .next-card {
+      background: linear-gradient(135deg, rgba(184, 134, 11, 0.06), rgba(var(--rgb-card), 0.5));
+      border: 1px solid rgba(184, 134, 11, 0.12); border-radius: var(--radius);
+      padding: 18px 20px; position: relative; overflow: hidden;
+    }
+    .next-card .badge {
+      font-size: 10px; font-weight: 600; color: var(--accent-bright);
+      text-transform: uppercase; letter-spacing: 1px;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .next-card .badge i { font-size: 12px; }
+    .next-card .title {
+      font-size: clamp(16px, 1.8vw, 19px); font-weight: 700;
+      font-family: 'Playfair Display', serif; color: var(--text-light);
+      margin: 4px 0 6px;
+    }
+    .next-card .message {
+      font-size: clamp(13px, 1.3vw, 14px); color: var(--text-dim);
+      line-height: 1.7; max-width: 600px;
+    }
+    .next-card .message strong { color: var(--text-light); }
+
+    .avis-card {
+      background: linear-gradient(135deg, rgba(184, 134, 11, 0.1), rgba(184, 134, 11, 0.03)) !important;
+      border-color: rgba(184, 134, 11, 0.25) !important;
+    }
+    .avis-btn-inline {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: 8px; margin-top: 14px;
+      padding: 12px 24px; border-radius: 999px; border: none;
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--on-gold); font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.2px;
+      cursor: pointer; transition: var(--transition);
+      box-shadow: 0 4px 16px rgba(184, 134, 11, 0.25);
+    }
+    .avis-btn-inline:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(184, 134, 11, 0.4);
+    }
+    .avis-btn-inline:active { transform: translateY(0) scale(0.98); }
+
+    .subscription-reminder { margin-top: 14px; }
+    .sub-card {
+      background: linear-gradient(135deg, rgba(184, 134, 11, 0.06), rgba(var(--rgb-card), 0.5));
+      border: 1px solid rgba(184, 134, 11, 0.12); border-radius: var(--radius);
+      padding: 16px 18px; display: flex; align-items: center;
+      gap: 14px; transition: var(--transition);
+    }
+    .sub-card:hover { border-color: rgba(184, 134, 11, 0.25); }
+    .sub-card .sub-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(184, 134, 11, 0.1); display: flex;
+      align-items: center; justify-content: center;
+      font-size: 20px; color: var(--accent-bright); flex-shrink: 0;
+    }
+    .sub-card .sub-content { flex: 1; min-width: 0; }
+    .sub-card .sub-title {
+      font-size: clamp(13px, 1.3vw, 14px); font-weight: 600;
+      color: var(--text-light);
+    }
+    .sub-card .sub-text {
+      font-size: clamp(11px, 1.1vw, 12px); color: var(--text-dim);
+      margin-top: 2px;
+    }
+    .sub-card .sub-expiry {
+      font-size: 11px; color: #D97A3A; font-weight: 600;
+      margin-top: 2px;
+    }
+    .sub-card .sub-btn {
+      padding: 8px 18px; border-radius: 20px; border: none;
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--on-gold); font-size: clamp(11px, 1.1vw, 12px);
+      font-weight: 700; cursor: pointer; transition: var(--transition);
+      font-family: 'Inter', sans-serif; text-decoration: none;
+      white-space: nowrap; display: inline-flex; align-items: center; gap: 6px;
+      flex-shrink: 0;
+    }
+    .sub-card .sub-btn:hover {
+      transform: scale(1.02); box-shadow: 0 4px 16px rgba(184,134,11,0.2);
+    }
+    .sub-card .sub-btn.renew {
+      background: linear-gradient(135deg, #D97A3A, #B85C3A);
+      color: #fff;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .footer {
+      margin-top: 40px; padding: 24px 16px 16px;
+      border-top: 1px solid rgba(184, 134, 11, 0.06);
+      background: rgba(var(--rgb-veil), 0.6); backdrop-filter: blur(10px);
+    }
+    .footer-content {
+      max-width: 900px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 12px; text-align: center;
+    }
+    .footer-logo {
+      font-size: 18px; font-weight: 700; font-family: 'Playfair Display', serif;
+      color: var(--text-light); letter-spacing: 1px;
+    }
+    .footer-logo span { color: var(--accent-bright); font-style: italic; }
+    .footer-links {
+      display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+    }
+    .footer-links a {
+      color: var(--text-muted); text-decoration: none; font-size: 12px;
+      transition: var(--transition);
+    }
+    .footer-links a:hover { color: var(--text-light); }
+    .footer-copy { font-size: 11px; color: var(--text-muted); opacity: 0.6; }
+
+    /* ============================================================
+       FCM BANNER
+       ============================================================ */
+    .fcm-banner-content {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 18px; margin-bottom: 14px;
+      background: linear-gradient(135deg, rgba(184, 134, 11, 0.08), rgba(184, 134, 11, 0.03));
+      border: 1px solid rgba(184, 134, 11, 0.2);
+      border-radius: var(--radius);
+      position: relative; overflow: hidden;
+    }
+    .fcm-banner-content::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+    }
+    .fcm-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: rgba(184, 134, 11, 0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .fcm-text { flex: 1; min-width: 0; }
+    .fcm-title { font-size: 14px; font-weight: 700; color: var(--text-light); margin-bottom: 2px; }
+    .fcm-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+    .fcm-actions { display: flex; gap: 6px; flex-shrink: 0; }
+    .fcm-btn-later,
+    .fcm-btn-activate {
+      padding: 8px 14px; border-radius: 20px; border: none;
+      font-size: 12px; font-weight: 600; cursor: pointer;
+      transition: var(--transition); font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+    }
+    .fcm-btn-later { background: transparent; color: var(--text-muted); }
+    .fcm-btn-later:hover { color: var(--text-light); background: rgba(var(--rgb-soft), 0.04); }
+    .fcm-btn-activate {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--on-gold);
+      box-shadow: 0 2px 10px rgba(184, 134, 11, 0.2);
+    }
+    .fcm-btn-activate:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(184, 134, 11, 0.35);
+    }
+    .fcm-btn-activate:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ============================================================
+       MODALE AVIS
+       ============================================================ */
+    .avis-modal-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; visibility: hidden;
+      transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .avis-modal-overlay.show { opacity: 1; visibility: visible; }
+    .avis-modal {
+      background: linear-gradient(145deg, var(--bg-surface) 0%, var(--bg-dark) 100%);
+      border: 1px solid rgba(184, 134, 11, 0.2);
+      border-radius: 20px;
+      padding: 28px 24px 22px;
+      max-width: 440px; width: 100%;
+      max-height: 92vh; overflow-y: auto;
+      position: relative;
+      transform: scale(0.9) translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(184, 134, 11, 0.08);
+    }
+    .avis-modal-overlay.show .avis-modal { transform: scale(1) translateY(0); }
+    .avis-modal::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright), var(--accent));
+      border-radius: 20px 20px 0 0;
+    }
+    .avis-close {
+      position: absolute; top: 14px; right: 14px;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(var(--rgb-soft), 0.03);
+      border: 1px solid rgba(var(--rgb-soft), 0.05);
+      color: var(--text-muted); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; transition: var(--transition);
+      z-index: 2;
+    }
+    .avis-close:hover {
+      background: rgba(var(--rgb-soft), 0.08);
+      color: var(--text-light);
+    }
+    .avis-header {
+      text-align: center;
+      margin-bottom: 20px;
+      padding-right: 30px;
+    }
+    .avis-icon-wrap {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 60px; height: 60px; border-radius: 20px;
+      background: linear-gradient(135deg, rgba(184, 134, 11, 0.15), rgba(184, 134, 11, 0.05));
+      border: 1px solid rgba(184, 134, 11, 0.2);
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    .avis-title {
+      font-size: 22px;
+      font-weight: 700;
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--text-light);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .avis-title em { color: var(--accent-bright); font-style: italic; }
+    .avis-subtitle {
+      font-size: 13px; color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .avis-field { margin-bottom: 18px; }
+    .avis-label {
+      display: block;
+      font-size: 12px; font-weight: 600;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .avis-label i { color: var(--accent-bright); margin-right: 6px; }
+    .avis-stars {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+      padding: 8px 0;
+    }
+    .avis-star {
+      font-size: 34px;
+      color: rgba(var(--rgb-soft), 0.1);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+      user-select: none;
+      line-height: 1;
+    }
+    .avis-star:hover,
+    .avis-star.active {
+      color: var(--accent-bright);
+      transform: scale(1.15);
+    }
+    .avis-star-hint {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      min-height: 18px;
+      font-weight: 500;
+    }
+    .avis-star-hint.active { color: var(--accent-bright); font-weight: 600; }
+    .avis-textarea {
+      width: 100%;
+      min-height: 100px;
+      max-height: 200px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(var(--rgb-soft), 0.06);
+      background: rgba(var(--rgb-soft), 0.02);
+      color: var(--text-light);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      resize: vertical;
+      outline: none;
+      transition: var(--transition);
+    }
+    .avis-textarea:focus {
+      border-color: rgba(184, 134, 11, 0.3);
+      background: rgba(184, 134, 11, 0.02);
+    }
+    .avis-textarea::placeholder { color: var(--text-muted); }
+    .avis-char-count {
+      text-align: right;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .avis-char-count.warning { color: var(--accent-bright); }
+    .avis-char-count.danger { color: var(--danger); }
+    .avis-categories {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .avis-cat-chip {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(var(--rgb-soft), 0.06);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 12px; font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Inter', sans-serif;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .avis-cat-chip:hover { color: var(--text-dim); border-color: rgba(var(--rgb-soft), 0.1); }
+    .avis-cat-chip.active {
+      background: rgba(184, 134, 11, 0.12);
+      color: var(--accent-bright);
+      border-color: rgba(184, 134, 11, 0.25);
+    }
+    .avis-actions {
+      display: flex; gap: 10px;
+      margin-top: 20px;
+    }
+    .avis-btn {
+      flex: 1;
+      padding: 13px 18px;
+      border-radius: 999px;
+      border: none;
+      font-size: 14px; font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Inter', sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+    }
+    .avis-btn.cancel {
+      background: rgba(var(--rgb-soft), 0.05);
+      color: var(--text-dim);
+      border: 1px solid rgba(var(--rgb-soft), 0.08);
+    }
+    .avis-btn.cancel:hover {
+      background: rgba(var(--rgb-soft), 0.09);
+      color: var(--text-light);
+    }
+    .avis-btn.submit {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--on-gold);
+      box-shadow: 0 4px 16px rgba(184, 134, 11, 0.25);
+    }
+    .avis-btn.submit:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(184, 134, 11, 0.4);
+    }
+    .avis-btn.submit:active { transform: scale(0.97); }
+    .avis-btn.submit:disabled {
+      opacity: 0.5; cursor: not-allowed; box-shadow: none;
+    }
+    .avis-btn .spinner {
+      display: none;
+      width: 16px; height: 16px;
+      border: 2px solid rgba(var(--rgb-veil), 0.2);
+      border-top-color: var(--bg-dark);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    .avis-btn.loading .spinner { display: block; }
+    .avis-btn.loading .btn-text,
+    .avis-btn.loading .btn-icon { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .avis-success {
+      text-align: center;
+      padding: 20px 0;
+      display: none;
+    }
+    .avis-success.show { display: block; }
+    .avis-success-icon {
+      font-size: 56px;
+      margin-bottom: 14px;
+      display: inline-block;
+    }
+    .avis-success h3 {
+      font-size: 22px;
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--accent-bright);
+      margin-bottom: 8px;
+    }
+    .avis-success p {
+      font-size: 14px; color: var(--text-dim);
+      line-height: 1.6; max-width: 320px; margin: 0 auto;
+    }
+
+    /* ============================================================
+       MODALE DE CONFIRMATION
+       ============================================================ */
+    .arvexa-confirm-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+    .arvexa-confirm-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .arvexa-confirm-modal {
+      background: linear-gradient(145deg, var(--bg-surface) 0%, var(--bg-dark) 100%);
+      border: 1px solid rgba(184, 134, 11, 0.25);
+      border-radius: 20px;
+      padding: 32px 28px 24px;
+      max-width: 400px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      transform: scale(0.96) translateY(10px);
+      transition: transform 0.3s ease;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(184, 134, 11, 0.08);
+    }
+    .arvexa-confirm-overlay.show .arvexa-confirm-modal {
+      transform: scale(1) translateY(0);
+    }
+    .arvexa-confirm-modal::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-bright), transparent);
+      opacity: 0.9;
+    }
+    .arvexa-confirm-modal::after {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(circle at center, rgba(184, 134, 11, 0.04), transparent 60%);
+      pointer-events: none;
+    }
+    .arvexa-confirm-icon-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+    .arvexa-confirm-icon-box {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(184, 134, 11, 0.15), rgba(184, 134, 11, 0.05));
+      border: 1px solid rgba(184, 134, 11, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      position: relative;
+    }
+    .arvexa-confirm-icon-box.danger {
+      background: linear-gradient(135deg, rgba(184, 92, 58, 0.15), rgba(184, 92, 58, 0.05));
+      border-color: rgba(184, 92, 58, 0.3);
+    }
+    .arvexa-confirm-title {
+      font-size: 22px;
+      font-weight: 700;
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 8px;
+      line-height: 1.25;
+      position: relative;
+      z-index: 1;
+    }
+    .arvexa-confirm-divider {
+      width: 40px;
+      height: 2px;
+      margin: 0 auto 16px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      position: relative;
+      z-index: 1;
+    }
+    .arvexa-confirm-message {
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: var(--text-dim);
+      text-align: center;
+      margin-bottom: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    .arvexa-confirm-message strong {
+      color: var(--text-light);
+      font-weight: 600;
+    }
+    .arvexa-confirm-actions {
+      display: flex;
+      flex-wrap: wrap;   /* ✅ v8.6 — libellé long : le bouton passe sur sa propre ligne au lieu de déborder */
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .arvexa-confirm-btn {
+      flex: 1;
+      padding: 13px 16px;
+      border-radius: 999px;
+      border: none;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+      min-width: fit-content;  /* ✅ v8.6 — plancher naturel : déclenche le wrap, sinon largeurs égales (comme avant) */
+    }
+    .arvexa-confirm-btn.cancel {
+      background: rgba(var(--rgb-soft), 0.05);
+      color: var(--text-dim);
+      border: 1px solid rgba(var(--rgb-soft), 0.08);
+    }
+    .arvexa-confirm-btn.cancel:hover {
+      background: rgba(var(--rgb-soft), 0.09);
+      color: var(--text-light);
+      border-color: rgba(var(--rgb-soft), 0.12);
+    }
+    .arvexa-confirm-btn.cancel:active { transform: scale(0.97); }
+    .arvexa-confirm-btn.danger {
+      background: linear-gradient(135deg, #D97A3A, #B85C3A);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(184, 92, 58, 0.25);
+    }
+    .arvexa-confirm-btn.danger:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(184, 92, 58, 0.4);
+    }
+    .arvexa-confirm-btn.danger:active { transform: scale(0.97); }
+    .arvexa-confirm-btn.primary {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--on-gold);
+      box-shadow: 0 4px 16px rgba(184, 134, 11, 0.25);
+    }
+    .arvexa-confirm-btn.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(184, 134, 11, 0.4);
+    }
+    .arvexa-confirm-btn.primary:active { transform: scale(0.97); }
+    .arvexa-confirm-btn i { font-size: 13px; }
+    .arvexa-confirm-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(var(--rgb-soft), 0.03);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      z-index: 2;
+    }
+    .arvexa-confirm-close:hover {
+      background: rgba(var(--rgb-soft), 0.08);
+      color: var(--text-light);
+    }
+    /* ✅ v8.6 — MODE CLAIR : ombre papier chaude (alignée sur le composant
+       arvexa-confirm.js ; le dégradé/textes/boutons suivent déjà les tokens) */
+    html[data-theme="light"] .arvexa-confirm-modal {
+      box-shadow: 0 20px 60px rgba(74, 58, 24, 0.18), 0 0 40px rgba(184, 134, 11, 0.10);
+    }
+
+    /* Modale de confirmation : responsive profil.html (référence) */
+    @media (max-width: 640px) {
+      .arvexa-confirm-modal { padding: 26px 22px 20px; max-width: 360px; }
+      .arvexa-confirm-icon-box { width: 56px; height: 56px; font-size: 24px; }
+      .arvexa-confirm-title { font-size: 19px; }
+      .arvexa-confirm-message { font-size: 13.5px; }
+      .arvexa-confirm-btn { padding: 11px 14px; font-size: 13px; }
+    }
+    @media (max-width: 480px) {
+      .arvexa-confirm-modal { padding: 22px 18px 18px; }
+      .arvexa-confirm-title { font-size: 17px; }
+      .arvexa-confirm-message { font-size: 13px; margin-bottom: 20px; }
+    }
+    @media (max-width: 360px) {
+      .arvexa-confirm-modal { padding: 20px 16px 16px; }
+      .arvexa-confirm-title { font-size: 16px; }
+      .arvexa-confirm-message { font-size: 12.5px; }
+      .arvexa-confirm-btn { padding: 10px 10px; font-size: 12.5px; gap: 6px; }
+    }
+
+    /* ============================================================
+       COMPTE À REBOURS BAC — carte héros (tout en haut de l'accueil)
+       ============================================================ */
+    .countdown-card {
+      position: relative; overflow: hidden;
+      padding: 26px 20px 24px;
+      border-radius: 20px;
+      background: linear-gradient(145deg, rgba(184,134,11,0.10) 0%, rgba(var(--rgb-veil), 0.85) 55%, rgba(var(--rgb-card), 0.9) 100%);
+      border: 1px solid rgba(224, 184, 74, 0.14);
+    }
+    .countdown-card::before {
+      content: ''; position: absolute; top: -70px; right: -60px;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(224,184,74,0.16) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .countdown-card::after {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(224,184,74,0.7), transparent);
+    }
+    .hero-date {
+      display: flex; align-items: center; gap: 7px;
+      font-size: 11px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 10px;
+    }
+    .hero-date i { color: var(--accent-bright); font-size: 10px; }
+    .cd-hero-head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px; flex-wrap: wrap;
+    }
+    .cd-hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(26px, 7vw, 34px); font-weight: 700; line-height: 1.15;
+      background: linear-gradient(120deg, var(--text-light) 10%, var(--accent-bright) 55%, #B8860B 95%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+    .countdown-date {
+      font-size: 12px; color: var(--text-muted); font-weight: 500; margin-top: 4px;
+    }
+    .cd-hero-greeting {
+      margin: 14px 0 0; font-size: clamp(14px, 2vw, 15.5px);
+      color: var(--text-light); font-weight: 500;
+    }
+    .cd-hero-greeting .shimmer { color: var(--accent-bright); font-style: italic; }
+    .cd-hero-note { color: var(--text-muted); font-weight: 400; }
+    .countdown-status {
+      font-size: 11px; font-weight: 600;
+      padding: 4px 12px; border-radius: 999px;
+      background: rgba(224, 184, 74, 0.08); color: var(--accent-bright);
+      border: 1px solid rgba(224, 184, 74, 0.15);
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .countdown-status.early { background: rgba(46, 204, 113, 0.1); color: var(--success-light); border-color: rgba(46, 204, 113, 0.2); }
+    .countdown-status.mid { background: rgba(241, 196, 15, 0.1); color: var(--warning); border-color: rgba(241, 196, 15, 0.2); }
+    .countdown-status.late { background: rgba(230, 126, 34, 0.1); color: var(--danger-bright); border-color: rgba(230, 126, 34, 0.2); }
+    .countdown-status.critical { background: rgba(231, 76, 60, 0.1); color: var(--danger-light); border-color: rgba(231, 76, 60, 0.2); }
+
+    .progress-track {
+      width: 100%; height: 4px; background: rgba(var(--rgb-soft), 0.06);
+      border-radius: 8px; margin: 14px 0; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 8px; transition: width 1s ease;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+      width: 0%;
+    }
+    .progress-fill.early { background: linear-gradient(90deg, #2ECC71, #27AE60); }
+    .progress-fill.mid { background: linear-gradient(90deg, #F1C40F, #F39C12); }
+    .progress-fill.late { background: linear-gradient(90deg, #E67E22, #D35400); }
+    .progress-fill.critical { background: linear-gradient(90deg, #E74C3C, #C0392B); }
+
+    .countdown-display {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px;
+    }
+    .cd-block {
+      display: flex; flex-direction: column; align-items: center;
+      background: rgba(224,184,74,0.05); border: 1px solid rgba(224,184,74,0.12);
+      border-radius: 12px; padding: 10px 14px; min-width: 68px;
+    }
+    .cd-block.primary {
+      border-color: rgba(224,184,74,0.30); background: rgba(224,184,74,0.09);
+    }
+    .cd-block.primary .cd-number { color: var(--accent-bright); }
+    .cd-number {
+      font-size: clamp(26px, 3.4vw, 32px); font-weight: 800;
+      font-family: 'Playfair Display', Georgia, serif; color: var(--text-light);
+      line-height: 1.1;
+    }
+    .cd-label {
+      font-size: 10px; color: var(--text-muted); margin-top: 2px;
+      text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;
+    }
+    .cd-separator {
+      font-size: 22px; font-weight: 700;
+      color: var(--text-muted); padding-bottom: 10px;
+    }
+    .hero-quote {
+      position: relative; margin-top: 16px; padding: 2px 0 0 16px;
+      border-left: 2px solid rgba(224,184,74,0.35);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic; font-size: clamp(13.5px, 1.6vw, 15px);
+      color: var(--text-dim); line-height: 1.65;
+    }
+    .hero-quote .quote-author {
+      display: block; margin-top: 6px;
+      font-family: 'Inter', sans-serif; font-style: normal;
+      font-size: 10.5px; font-weight: 700; letter-spacing: 0.8px;
+      color: var(--accent-bright); text-transform: uppercase;
+    }
+
+    
+    /* ============================================================
+       MATIÈRES — mini barre de progression
+       ============================================================ */
+    .subject-chip .subject-body { flex: 1; min-width: 0; }
+    .subject-mini {
+      height: 3px; background: rgba(var(--rgb-soft), 0.06);
+      border-radius: 999px; margin-top: 7px; overflow: hidden;
+    }
+    .subject-mini span {
+      display: block; height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+      border-radius: 999px;
+      transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* ============================================================
+       BADGES — réalisations
+       ============================================================ */
+    .badges-scroll {
+      display: flex; gap: 10px; overflow-x: auto;
+      padding: 2px 2px 8px; -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .badges-scroll::-webkit-scrollbar { display: none; }
+    .badge-item {
+      flex: 0 0 auto; width: 86px; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+    }
+    .badge-coin {
+      width: 58px; height: 58px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; position: relative;
+      background: rgba(var(--rgb-soft), 0.02);
+      border: 1px solid rgba(var(--rgb-soft), 0.06);
+      filter: grayscale(1); opacity: 0.4;
+      transition: var(--transition);
+    }
+    .badge-item.unlocked .badge-coin {
+      filter: none; opacity: 1;
+      background: linear-gradient(135deg, rgba(224,184,74,0.18), rgba(184,134,11,0.06));
+      border: 1px solid rgba(224,184,74,0.4);
+      box-shadow: 0 0 18px rgba(184,134,11,0.18);
+    }
+    .badge-item .badge-name {
+      font-size: 10px; font-weight: 600; color: var(--text-muted); line-height: 1.3;
+    }
+    .badge-item.unlocked .badge-name { color: var(--text-light); }
+
+    /* ============================================================
+       INSTALLATION PWA
+       ============================================================ */
+    .install-inner {
+      display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+      margin-top: 14px;
+      background: linear-gradient(135deg, rgba(184,134,11,0.12), rgba(var(--rgb-card), 0.8));
+      border: 1px solid rgba(224,184,74,0.30); border-radius: var(--radius);
+      position: relative;
+    }
+    .install-icon { font-size: 24px; flex-shrink: 0; }
+    .install-text { flex: 1; min-width: 0; }
+    .install-title { font-size: 13.5px; font-weight: 700; color: var(--text-light); }
+    .install-desc { font-size: 11.5px; color: var(--text-dim); margin-top: 1px; }
+    .install-btn {
+      padding: 8px 14px; border-radius: 999px; border: none; cursor: pointer;
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--on-gold); font-size: 12px; font-weight: 700;
+      font-family: 'Inter', sans-serif; white-space: nowrap; flex-shrink: 0;
+      transition: var(--transition);
+    }
+    .install-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(184,134,11,0.3); }
+    .install-close {
+      position: absolute; top: -8px; right: -8px;
+      width: 24px; height: 24px; border-radius: 50%;
+      border: 1px solid rgba(var(--rgb-soft), 0.1); background: var(--bg-surface);
+      color: var(--text-muted); font-size: 10px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .install-close:hover { color: var(--text-light); }
+
+    /* ============================================================
+       CHARGEUR DE PROFIL — squelette doré discret
+       (le SEUL état de chargement : les données arrivent progressivement,
+        la page elle-même reste fixe)
+       ============================================================ */
+    .profile-skeleton {
+      display: inline-block; width: 72px; height: 0.9em;
+      border-radius: 999px; background: rgba(224,184,74,0.18);
+      animation: profilePulse 1.2s ease-in-out infinite;
+      vertical-align: middle;
+    }
+    .header .profile-skeleton { width: 54px; height: 0.8em; }
+    @keyframes profilePulse { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) {
+      .profile-skeleton { animation: none; opacity: 0.6; }
+    }
+
+    /* ============================================================
+       RESPONSIVE NOUVEAUX BLOCS
+       ============================================================ */
+    @media (max-width: 640px) {
+      .countdown-card { padding: 20px 16px 18px; }
+      .cd-hero-head { flex-direction: column; align-items: flex-start; }
+      .countdown-status { font-size: 10.5px; padding: 3px 10px; }
+      .countdown-display { gap: 6px; }
+      .cd-block { padding: 6px 10px; min-width: 54px; }
+      .cd-number { font-size: 22px; }
+      .cd-separator { font-size: 16px; padding-bottom: 8px; }
+    }
+    @media (max-width: 480px) {
+      .countdown-display { gap: 4px; }
+      .cd-block { padding: 5px 8px; min-width: 46px; }
+      .cd-number { font-size: 18px; }
+      .cd-separator { font-size: 14px; padding-bottom: 6px; }
+      .cd-label { font-size: 7.5px; letter-spacing: 0.2px; white-space: nowrap; }
+      .badge-item { width: 80px; }
+      .badge-coin { width: 54px; height: 54px; font-size: 22px; }
+      .install-inner { flex-wrap: wrap; }
+      .install-btn { width: 100%; padding: 10px 14px; }
+    }
+    @media (max-width: 360px) {
+
+      .badge-item { width: 74px; }
+      .badge-coin { width: 50px; height: 50px; font-size: 20px; }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (min-width: 768px) {
+      .sidebar { left: 0; display: flex; }
+      .sidebar-overlay { display: none !important; }
+      .main-content { margin-left: var(--sidebar-width); }
+      .header .menu-toggle { display: none; }
+    }
+
+    @media (max-width: 767px) {
+      .sidebar { left: -280px; }
+      .sidebar.open { left: 0; }
+      .container { padding: 12px 12px 20px; }
+      .header .greeting { font-size: 13px; }
+    }
+
+    @media (max-width: 640px) {
+      .sub-card { flex-direction: column; text-align: center; padding: 16px 14px; gap: 10px; }
+      .sub-card .sub-btn { width: 100%; justify-content: center; }
+      .subjects-grid { gap: 8px; }
+      .subject-chip { padding: 12px; }
+      .subject-chip .icon-badge { width: 34px; height: 34px; font-size: 14px; }
+      .tools-grid { gap: 6px; }
+      .tool-card { padding: 12px 6px; min-height: 76px; }
+      .tool-card .icon-badge { width: 30px; height: 30px; font-size: 13px; }
+      .tool-card .name { font-size: 10px; }
+      .header .header-actions button { width: 32px; height: 32px; font-size: 13px; }
+      .next-card .title { font-size: 16px; }
+      .next-card .message { font-size: 13px; }
+      .avis-modal { padding: 22px 18px 18px; }
+      .avis-star { font-size: 28px; }
+      .avis-title { font-size: 19px; }
+      .arvexa-confirm-modal { padding: 26px 22px 20px; max-width: 360px; }
+      .arvexa-confirm-title { font-size: 19px; }
+      .arvexa-confirm-message { font-size: 13.5px; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 10px 10px 16px; }
+      .subjects-grid { grid-template-columns: 1fr 1fr; }
+      .tools-grid { grid-template-columns: repeat(3, 1fr); gap: 5px; }
+      .tool-card { padding: 10px 4px; min-height: 68px; border-radius: 10px; }
+      .tool-card .icon-badge { width: 28px; height: 28px; font-size: 12px; }
+      .tool-card .name { font-size: 9px; }
+      .header .greeting { font-size: 11px; }
+      .card { padding: 14px; }
+      .section-title { margin: 18px 0 8px; }
+      .section-title h3 { font-size: 14px; }
+      .next-card { padding: 14px 16px; }
+      .next-card .title { font-size: 14px; }
+      .next-card .message { font-size: 12px; }
+      .footer-links { gap: 10px; }
+      .footer-links a { font-size: 11px; }
+      .sub-card .sub-icon { width: 36px; height: 36px; font-size: 16px; }
+      .avis-modal { padding: 20px 16px 16px; max-width: 340px; }
+      .avis-icon-wrap { width: 52px; height: 52px; font-size: 24px; }
+      .avis-title { font-size: 17px; }
+      .avis-star { font-size: 26px; }
+      .avis-actions { flex-direction: column-reverse; gap: 8px; }
+      .avis-btn { padding: 12px 16px; font-size: 13px; }
+      .avis-btn-inline { width: 100%; padding: 12px 18px; font-size: 13px; }
+    }
+
+    @media (max-width: 360px) {
+      .tools-grid { grid-template-columns: repeat(3, 1fr); gap: 4px; }
+      .tool-card { padding: 8px 2px; min-height: 60px; border-radius: 10px; }
+      .tool-card .icon-badge { width: 24px; height: 24px; font-size: 11px; border-radius: 8px; }
+      .tool-card .name { font-size: 8px; }
+      .avis-star { font-size: 24px; gap: 4px; }
+      .arvexa-confirm-modal { padding: 22px 18px 18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ============================================================
+       ACCESSIBILITÉ — focus visible rétabli
+       ============================================================ */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(184, 134, 11, 0.25); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(184, 134, 11, 0.4); }
+
+    /* ============================================================
+       SPLASH — écran de chargement lié à l'index uniquement.
+       ✅ v8.3 — affiché UNIQUEMENT au premier chargement de la session ;
+       les retours (navigation interne) ne le rejouent plus : il est
+       retiré avant la première peinture, le contenu se restaure
+       derrière lui puis il se dissipe.
+       ============================================================ */
+    #appSplash {
+      position: fixed; inset: 0; z-index: 20000;
+      display: flex; align-items: center; justify-content: center;
+      background: radial-gradient(120% 120% at 50% 0%, #16130A 0%, #0A0A0A 55%, #050505 100%);
+      opacity: 0; transition: opacity .45s ease;
+    }
+    html[data-theme="light"] #appSplash {
+      background: radial-gradient(120% 120% at 50% 0%, #FFFFFF 0%, #F5F1E6 60%, #EFE9D9 100%);
+    }
+    #appSplash.on { opacity: 1; }
+    #appSplash.hide { opacity: 0; pointer-events: none; }
+    .splash-inner { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+    .splash-ring {
+      position: relative; width: 72px; height: 72px; border-radius: 50%;
+      border: 2px solid rgba(212, 175, 55, 0.15);
+      border-top-color: var(--accent-bright);
+      animation: splashSpin 1s linear infinite;
+    }
+    .splash-word {
+      font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700;
+      color: var(--text-light); letter-spacing: 2px;
+    }
+    .splash-word em { color: var(--accent-bright); font-style: italic; }
+    @keyframes splashSpin { to { transform: rotate(360deg); } }
+
+    /* Contenu « en dur » : caché jusqu'à la restauration instantanée
+       (mode retour seulement — html.instant posé par la porte du splash) */
+    html.instant #dynamicContent { visibility: hidden; }
+    html.instant.ready #dynamicContent { visibility: visible; }
+
+    /* PILL — synchronisation Firestore en arrière-plan (retour instantané) */
+    #bgSyncPill {
+      position: fixed; left: 50%; bottom: calc(18px + env(safe-area-inset-bottom));
+      transform: translateX(-50%) translateY(8px);
+      z-index: 9000; display: flex; align-items: center; gap: 8px;
+      padding: 8px 14px; border-radius: 999px; max-width: calc(100vw - 32px);
+      background: rgba(20, 18, 12, 0.92); color: var(--text-light);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      font-size: 12px; letter-spacing: .3px; white-space: nowrap; overflow: hidden;
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s ease, transform .35s ease;
+    }
+    html[data-theme="light"] #bgSyncPill { background: rgba(255, 253, 247, 0.95); color: #3A3428; }
+    #bgSyncPill.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    #bgSyncPill i { color: var(--accent-bright); animation: splashSpin 1.6s linear infinite; }
+  </style>
+  <!-- ⚡ ARVEXA FLUX v1 — navigation instantanée -->
+  <script src="flux-router.js?v=flux1" defer></script>
+</head>
+<body>
+
+  <!-- ============================================================
+       SPLASH — écran de chargement lié à l'index uniquement.
+       ✅ v8.3 — 1er chargement de la session uniquement (marqueur
+       sessionStorage « arvexa_splash_seen ») ; retours ensuite :
+       supprimé avant la première peinture (zéro flash).
+       ============================================================ -->
+  <div id="appSplash" aria-hidden="true">
+    <div class="splash-inner">
+      <span class="splash-ring"></span>
+      <div class="splash-word">ARVEXA <em>School</em></div>
+    </div>
+  </div>
+  <script>
+  /* Porte du splash : snapshot de session valide → retour instantané :
+     le contenu est restauré DERRIÈRE le splash pendant qu'il joue son
+     animation ; sinon → 1er chargement, l'écran d'attente reste visible
+     jusqu'à ce que les données soient prêtes.
+     ✅ v5.6 — ÉCRAN DE CHARGEMENT RÉTABLI : il s'affiche à CHAQUE
+     ouverture (y compris HORS LIGNE) mais ne bloque JAMAIS l'entrée :
+     il se dissipe dès que sa durée minimale est jouée (contenu déjà
+     peint derrière) — plus jamais de suppression avant peinture. */
+  (function () {
+    var MIN_SPLASH_MS = 1200; // durée de branding — 1er chargement uniquement
+    /* ✅ v8.3 — « écran de chargement uniquement au PREMIER chargement ».
+       Un marqueur de SESSION décide : présent → retour dans la session,
+       le splash est retiré AVANT la première peinture (zéro flash). */
+    var firstLoad = true;
+    try {
+      firstLoad = sessionStorage.getItem('arvexa_splash_seen') !== '1';
+      sessionStorage.setItem('arvexa_splash_seen', '1');
+    } catch (e) {}
+    window.__ARVEXA_SPLASH_FIRST__ = firstLoad;
+    function removeSplash(sp) {
+      if (!sp) return;
+      sp.classList.add('hide');
+      setTimeout(function () { if (sp.parentNode) sp.parentNode.removeChild(sp); }, 600);
+    }
+    /* Helper GLOBAL : dissipe le splash en respectant la durée minimale
+       (1er chargement) ou immédiatement (retours, v8.3). Idempotent —
+       appelé par la restauration instantanée, par le module (hideSplash)
+       et par le filet anti-blocage. */
+    window.__arvexaSplashOut = function () {
+      var sp = document.getElementById('appSplash');
+      if (!sp || sp.__arvexaOut) return;
+      sp.__arvexaOut = true;
+      if (!firstLoad) { removeSplash(sp); return; }
+      var elapsed = Date.now() - (window.__ARVEXA_SPLASH_TS__ || Date.now());
+      var wait = Math.max(0, MIN_SPLASH_MS - elapsed);
+      setTimeout(function () { removeSplash(document.getElementById('appSplash')); }, wait);
+    };
+    var snap = null;
+    try {
+      var raw = sessionStorage.getItem('arvexa_index_snapshot');
+      var sess = JSON.parse(sessionStorage.getItem('arvexa_session') || 'null');
+      if (raw && sess && sess.uid) {
+        var parsed = JSON.parse(raw);
+        if (parsed && parsed.userData && parsed.uid === sess.uid &&
+            (Date.now() - (parsed.savedAt || 0)) < 43200000) {
+          snap = parsed;
+          /* ✅ v5.9 — origine de la snapshot : « session » = retour dans la
+             MÊME session (sessionStorage). Seul ce cas peut réafficher la
+             pastille « mise à jour en arrière-plan » — plus jamais un simple
+             rafraîchissement (F5), qui réutilise aussi sessionStorage. */
+          snap.__src = 'session';
+        }
+      }
+    } catch (e) {}
+    /* ✅ v5.4 — repli localStorage : au démarrage à froid (app fermée puis
+       rouverte, sessionStorage vidé), la dernière snapshot PERSISTÉE rend
+       l'accueil immédiatement — y compris hors ligne. L'uid est re-vérifié
+       contre la session locale pour ne jamais peindre le mauvais élève. */
+    if (!snap) {
+      try {
+        var rawLs = localStorage.getItem('arvexa_index_snapshot_persist');
+        var sessLs = JSON.parse(localStorage.getItem('arvexa_session') || 'null');
+        if (rawLs && sessLs && sessLs.uid) {
+          var parsedLs = JSON.parse(rawLs);
+          if (parsedLs && parsedLs.userData && parsedLs.uid === sessLs.uid &&
+              (Date.now() - (parsedLs.savedAt || 0)) < 43200000) {
+            snap = parsedLs;
+            /* ✅ v5.9 — « persist » = démarrage à froid (app fermée puis
+               rouverte) : affichage instantané OUI, pastille NON. */
+            snap.__src = 'persist';
+          }
+        }
+      } catch (e) {}
+    }
+    window.__ARVEXA_SPLASH_TS__ = Date.now();
+    if (!firstLoad) {
+      /* ✅ v8.3 — RETOUR dans la session : splash supprimé avant la
+         1ʳᵉ peinture ; si une snapshot est dispo, accueil instantané. */
+      var sp0 = document.getElementById('appSplash');
+      if (sp0 && sp0.parentNode) sp0.parentNode.removeChild(sp0);
+      if (snap) {
+        document.documentElement.classList.add('instant');
+        document.documentElement.classList.add('ready');
+        window.__ARVEXA_INSTANT__ = snap;
+      }
+      return;
+    }
+    if (snap) {
+      document.documentElement.classList.add('instant');
+      window.__ARVEXA_INSTANT__ = snap;
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          var sp = document.getElementById('appSplash');
+          if (sp) sp.classList.add('on');
+        });
+      });
+      /* Filet de sécurité : jamais de contenu masqué plus de 600 ms */
+      setTimeout(function () {
+        document.documentElement.classList.add('ready');
+        window.__arvexaSplashOut();
+      }, 600);
+    } else {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          var sp2 = document.getElementById('appSplash');
+          if (sp2) sp2.classList.add('on');
+        });
+      });
+    }
+  })();
+  </script>
+
+
+  <!-- ===== BACKGROUND ===== -->
+  <div class="gradient-bg"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="glow glow-3"></div>
+
+  <!-- ===== OVERLAY ===== -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <a href="index.html" class="logo">ARVEX<span>A School</span></a>
+    <nav class="nav">
+      <a href="index.html" class="active"><i class="fas fa-home"></i> Accueil</a>
+      <a href="profil.html"><i class="fas fa-user"></i> Mon profil</a>
+      <a href="abonnement.html"><i class="fas fa-crown"></i> Mon abonnement</a>
+      <a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a>
+      <a href="arv-progress.html"><i class="fas fa-graduation-cap"></i> Arv-progress</a>
+      <a href="outils.html"><i class="fas fa-toolbox"></i> Outils</a>
+      <div class="nav-divider"></div>
+      <a href="#" class="avis-link" id="avisLinkSidebar">
+        <i class="fas fa-star"></i> Donner mon avis
+      </a>
+      <div class="nav-divider"></div>
+      <div class="nav-bottom">
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <div class="main-content">
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+      <div class="header-left">
+        <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="greeting">
+          <span id="greetingText">Bonjour</span>
+          <span id="userFirstName">Élève</span>
+          <span id="greetingEmoji">👋</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="notifBtn" aria-label="Notifications">
+          <i class="fas fa-bell"></i>
+          <span class="notif-dot" id="notifDot"></span>
+        </button>
+        <button id="profileBtn" aria-label="Profil">
+          <i class="fas fa-user"></i>
+        </button>
+        <button id="refreshBtn" aria-label="Rafraîchir" title="Rafraîchir les données">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- ===== CONTAINER ===== -->
+    <div class="container" id="dashboardContent">
+
+      <div id="dynamicContent">
+
+        <!-- ============================================================
+             BLOC 0 — COMPTE À REBOURS BAC (héros)
+             ============================================================ -->
+        <section class="countdown-card" aria-labelledby="countdownTitle">
+          <div class="hero-date"><i class="fas fa-calendar-day"></i><span id="heroDateText">—</span></div>
+          <div class="cd-hero-head">
+            <h1 class="cd-hero-title" id="countdownTitle">BAC 2027</h1>
+            <span class="countdown-status early" id="countdownStatus">🌱 Tu as le temps</span>
+          </div>
+          <div class="countdown-date" id="countdownDate">Date indicative</div>
+          <p class="cd-hero-greeting">
+            <span id="heroGreeting">Bonsoir</span>, <span class="shimmer" id="heroName">Élève</span><span class="cd-hero-note"> — chaque jour compte vers ton BAC.</span>
+          </p>
+          <div class="progress-track">
+            <div class="progress-fill early" id="progressFill" style="width: 0%"></div>
+          </div>
+          <div class="countdown-display">
+            <div class="cd-block primary">
+              <span class="cd-number" id="cdDays">--</span>
+              <span class="cd-label">Jours</span>
+            </div>
+            <span class="cd-separator">:</span>
+            <div class="cd-block">
+              <span class="cd-number" id="cdHours">--</span>
+              <span class="cd-label">Heures</span>
+            </div>
+            <span class="cd-separator">:</span>
+            <div class="cd-block">
+              <span class="cd-number" id="cdMinutes">--</span>
+              <span class="cd-label">Minutes</span>
+            </div>
+            <span class="cd-separator">:</span>
+            <div class="cd-block">
+              <span class="cd-number" id="cdSeconds">--</span>
+              <span class="cd-label">Secondes</span>
+            </div>
+          </div>
+          <div class="hero-quote">
+            <span id="heroQuoteText">« Chaque jour compte vers ton BAC. »</span>
+            <span class="quote-author" id="heroQuoteAuthor">— ARVEXA School</span>
+          </div>
+        </section>
+
+        <!-- ============================================================
+             BLOC 3 — MATIÈRES
+             ============================================================ -->
+        <div class="section-title"><h3>📐 Mes matières</h3></div>
+        <div class="subjects-grid" id="subjectsGrid">
+          <a href="matiere.html?subject=mathematiques" class="subject-chip">
+            <div class="icon-badge"><i class="fas fa-square-root-variable"></i></div>
+            <div class="subject-body">
+              <div class="subject-name">Mathématiques</div>
+              <div class="subject-chapters" data-subject="mathematiques">11 chapitres</div>
+                          <div class="subject-mini"><span data-mini="mathematiques"></span></div>
+            </div>
+          </a>
+          <a href="matiere.html?subject=physique" class="subject-chip">
+            <div class="icon-badge"><i class="fas fa-bolt"></i></div>
+            <div class="subject-body">
+              <div class="subject-name">Physique</div>
+              <div class="subject-chapters" data-subject="physique">17 chapitres</div>
+                          <div class="subject-mini"><span data-mini="physique"></span></div>
+            </div>
+          </a>
+          <a href="matiere.html?subject=chimie" class="subject-chip">
+            <div class="icon-badge"><i class="fas fa-flask"></i></div>
+            <div class="subject-body">
+              <div class="subject-name">Chimie</div>
+              <div class="subject-chapters" data-subject="chimie">9 chapitres</div>
+                          <div class="subject-mini"><span data-mini="chimie"></span></div>
+            </div>
+          </a>
+          <a href="matiere.html?subject=svt" class="subject-chip">
+            <div class="icon-badge"><i class="fas fa-dna"></i></div>
+            <div class="subject-body">
+              <div class="subject-name">SVT</div>
+              <div class="subject-chapters" data-subject="svt">20 chapitres</div>
+                          <div class="subject-mini"><span data-mini="svt"></span></div>
+            </div>
+          </a>
+        </div>
+
+        <!-- ============================================================
+             BLOC 4 — OUTILS
+             ============================================================ -->
+        <div class="section-title"><h3>🛠️ Outils & Ressources</h3></div>
+        <div class="tools-grid" id="toolsGrid">
+          <a href="calculatrice.html" class="tool-card">
+            <div class="icon-badge"><i class="fas fa-calculator"></i></div>
+            <div class="name">Calculatrice</div>
+          </a>
+          <a href="formulaires.html" class="tool-card">
+            <div class="icon-badge"><i class="fas fa-square-root-variable"></i></div>
+            <div class="name">Formulaires</div>
+          </a>
+          <a href="tableau-periodique.html" class="tool-card">
+            <div class="icon-badge"><i class="fas fa-table-cells"></i></div>
+            <div class="name">Tableau périodique</div>
+          </a>
+          <a href="exam.html" class="tool-card">
+            <div class="icon-badge"><i class="fas fa-stopwatch"></i></div>
+            <div class="name">Mode Examen</div>
+          </a>
+          <a href="arv-progress.html" class="tool-card">
+            <div class="icon-badge"><i class="fas fa-graduation-cap"></i></div>
+            <div class="name">ARV Progress</div>
+          </a>
+          <a href="outils.html" class="tool-card tool-more">
+            <div class="icon-badge"><i class="fas fa-toolbox"></i></div>
+            <div class="name">Plus d'outils</div>
+          </a>
+        </div>
+
+        <!-- ============================================================
+             BLOC 5bis — RÉALISATIONS
+             ============================================================ -->
+        <div class="section-title"><h3>🏆 Tes réalisations</h3></div>
+        <div class="badges-scroll" id="badgesScroll" aria-label="Badges débloqués"></div>
+
+        <!-- ============================================================
+             BLOC 6 — AVIS
+             ============================================================ -->
+        <div class="section-title"><h3>⭐ Ton avis compte</h3></div>
+        <div class="next-card avis-card">
+          <div class="badge"><i class="fas fa-star"></i> Aide-nous à nous améliorer</div>
+          <div class="title">Partage ton expérience</div>
+          <div class="message">
+            Ton avis est <strong>précieux</strong> pour nous aider à améliorer ARVEXA School.
+            Ça ne prend que 30 secondes et ça nous aide énormément !
+          </div>
+          <button class="avis-btn-inline" id="avisBtnInline">
+            <i class="fas fa-star"></i> Donner mon avis
+          </button>
+        </div>
+
+        <!-- ============================================================
+             BLOC 7 — ABONNEMENT
+             ============================================================ -->
+        <div class="subscription-reminder" id="subscriptionReminder" style="display:none;">
+          <div class="sub-card" id="subCard">
+            <div class="sub-icon"><i class="fas fa-crown"></i></div>
+            <div class="sub-content">
+              <div class="sub-title" id="subTitle">🔓 Débloque tout ARVEXA School</div>
+              <div class="sub-text" id="subText">Accède à tous les chapitres, exercices, corrections et plus de fonctionnalités avec Premium.</div>
+              <div class="sub-expiry" id="subExpiry" style="display:none;"></div>
+            </div>
+            <a href="abonnement.html" class="sub-btn" id="subBtn">Voir les offres</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-logo">ARVEX<span>A School</span></div>
+        <div class="footer-links">
+          <a href="index.html">Accueil</a>
+          <a href="profil.html">Profil</a>
+          <a href="abonnement.html">Abonnement</a>
+          <a href="#" id="avisLinkFooter">Donner mon avis</a>
+        </div>
+        <div class="footer-copy">
+          &copy; 2026 ARVEXA School — Tous droits réservés
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+
+  <!-- ============================================================
+       MODALE AVIS
+       ============================================================ -->
+  <div class="avis-modal-overlay" id="avisModal">
+    <div class="avis-modal">
+      <button class="avis-close" id="avisClose" aria-label="Fermer">
+        <i class="fas fa-times"></i>
+      </button>
+      <div id="avisForm">
+        <div class="avis-header">
+          <div class="avis-icon-wrap">⭐</div>
+          <h2 class="avis-title">Ton <em>avis</em> compte</h2>
+          <p class="avis-subtitle">Aide-nous à améliorer ARVEXA School</p>
+        </div>
+        <div class="avis-field">
+          <label class="avis-label"><i class="fas fa-star"></i> Note globale</label>
+          <div class="avis-stars" id="avisStars">
+            <span class="avis-star" data-value="1">★</span>
+            <span class="avis-star" data-value="2">★</span>
+            <span class="avis-star" data-value="3">★</span>
+            <span class="avis-star" data-value="4">★</span>
+            <span class="avis-star" data-value="5">★</span>
+          </div>
+          <div class="avis-star-hint" id="avisStarHint">Clique sur les étoiles</div>
+        </div>
+        <div class="avis-field">
+          <label class="avis-label"><i class="fas fa-tags"></i> Catégorie</label>
+          <div class="avis-categories" id="avisCategories">
+            <button class="avis-cat-chip active" data-cat="general"><i class="fas fa-comment"></i> Général</button>
+            <button class="avis-cat-chip" data-cat="bug"><i class="fas fa-bug"></i> Bug</button>
+            <button class="avis-cat-chip" data-cat="suggestion"><i class="fas fa-lightbulb"></i> Suggestion</button>
+            <button class="avis-cat-chip" data-cat="contenu"><i class="fas fa-book"></i> Contenu</button>
+            <button class="avis-cat-chip" data-cat="autre"><i class="fas fa-ellipsis"></i> Autre</button>
+          </div>
+        </div>
+        <div class="avis-field">
+          <label class="avis-label"><i class="fas fa-pen"></i> Ton message</label>
+          <textarea
+            class="avis-textarea"
+            id="avisMessage"
+            placeholder="Dis-nous ce que tu penses d'ARVEXA School, ce qui te plaît, ce qu'on pourrait améliorer..."
+            maxlength="500"
+          ></textarea>
+          <div class="avis-char-count" id="avisCharCount">0 / 500</div>
+        </div>
+        <div class="avis-actions">
+          <button class="avis-btn cancel" id="avisCancel">
+            <i class="fas fa-times"></i>
+            <span>Annuler</span>
+          </button>
+          <button class="avis-btn submit" id="avisSubmit" disabled>
+            <span class="btn-icon"><i class="fas fa-paper-plane"></i></span>
+            <span class="btn-text">Envoyer mon avis</span>
+            <span class="spinner"></span>
+          </button>
+        </div>
+      </div>
+      <div class="avis-success" id="avisSuccess">
+        <div class="avis-success-icon">🎉</div>
+        <h3>Merci beaucoup !</h3>
+        <p>Ton avis a bien été envoyé. Nous le lisons avec attention pour améliorer ARVEXA School.</p>
+        <button class="avis-btn submit" id="avisSuccessClose" style="margin-top:20px;width:100%">
+          <i class="fas fa-check"></i>
+          <span>Fermer</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       MODALE CONFIRMATION DÉCONNEXION
+       ============================================================ -->
+  <div class="arvexa-confirm-overlay" id="arvexaConfirmModal">
+    <div class="arvexa-confirm-modal">
+      <button class="arvexa-confirm-close" id="arvexaConfirmClose" aria-label="Fermer">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="arvexa-confirm-icon-wrap">
+        <div class="arvexa-confirm-icon-box danger" id="arvexaConfirmIconBox">
+          <span id="arvexaConfirmIcon">⚠️</span>
+        </div>
+      </div>
+      <h3 class="arvexa-confirm-title" id="arvexaConfirmTitle">Confirmation</h3>
+      <div class="arvexa-confirm-divider"></div>
+      <p class="arvexa-confirm-message" id="arvexaConfirmMessage">
+        Es-tu sûr de vouloir continuer ?
+      </p>
+      <div class="arvexa-confirm-actions">
+        <button class="arvexa-confirm-btn cancel" id="arvexaConfirmCancel">
+          Annuler
+        </button>
+        <button class="arvexa-confirm-btn danger" id="arvexaConfirmOk">
+          <i class="fas fa-check"></i>
+          <span id="arvexaConfirmOkText">Confirmer</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pastille de synchronisation arrière-plan (retour instantané) -->
+  <div id="bgSyncPill" role="status" aria-live="polite">
+    <i class="fas fa-sync-alt"></i>
+    <span>Mise à jour en arrière-plan...</span>
+  </div>
+
+  <script>
+  /* RESTAURATION INSTANTE — réapplique la snapshot de session sur le DOM
+     avant même le chargement des modules Firebase (CDN). Le module
+     re-validera ensuite discrètement via Firestore (onSnapshot). */
+  window.__arvexaApplyInstant = function () {
+    var snap = window.__ARVEXA_INSTANT__;
+    if (!snap || !snap.userData) return;
+    var d = snap.userData;
+    function $(id) { return document.getElementById(id); }
+    try {
+      var h = new Date().getHours();
+      var g = (h >= 5 && h < 12) ? { t: 'Bonjour', e: '🌅' }
+            : (h >= 12 && h < 18) ? { t: 'Bon après-midi', e: '☀️' }
+            : { t: 'Bonsoir', e: '🌙' };
+      var name = d.firstName || 'Élève';
+      var gt = $('greetingText'); if (gt) gt.textContent = g.t;
+      var un = $('userFirstName'); if (un) un.textContent = name;
+      var ge = $('greetingEmoji'); if (ge) ge.textContent = g.e;
+      var hg = $('heroGreeting'); if (hg) hg.textContent = g.t;
+      var hn = $('heroName'); if (hn) hn.textContent = name;
+      var sk = document.querySelectorAll('.profile-skeleton');
+      for (var i = 0; i < sk.length; i++) sk[i].remove();
+
+      var sub = snap.sub;
+      var rem = $('subscriptionReminder');
+      if (rem && sub) {
+        rem.style.display = sub.display || 'block';
+        var st = $('subTitle'); if (st) st.textContent = sub.title || '';
+        var sx = $('subText'); if (sx) sx.textContent = sub.text || '';
+        var se = $('subExpiry');
+        if (se) {
+          se.style.display = sub.expiryDisplay || 'none';
+          if (sub.expiryText) se.textContent = sub.expiryText;
+        }
+        var sb = $('subBtn');
+        if (sb) {
+          if (sub.btnText) sb.textContent = sub.btnText;
+          sb.className = sub.btnClass || 'sub-btn';
+          if (sub.btnHref) sb.setAttribute('href', sub.btnHref);
+        }
+      }
+
+      var nd = $('notifDot');
+      if (nd) nd.classList.toggle('show', !!snap.notifUnread);
+      var dyn = $('dynamicContent');
+      if (dyn) dyn.style.display = 'block';
+    } catch (e) {}
+
+
+    /* ================================================================
+
+       RESTAURATION « EN DUR » — tout le tableau de bord est recalculé
+
+       localement (zéro réseau, caches locaux uniquement) pour être peint
+
+       correctement dès la première image. Le module revalidera ensuite à
+
+       l'identique via Firestore (aucun changement visible).
+
+       ⚠ Garder synchronisé avec updateCountdown()/renderHero()/
+
+       renderProgress()/renderBadges() du module.
+
+       ================================================================ */
+
+    var CH = { mathematiques: 11, physique: 17, chimie: 9, svt: 20 };
+
+    var parts = [];
+
+    var per = {};
+
+    try {
+
+      parts = JSON.parse(localStorage.getItem('arvexa_read_parts') || '[]') || [];
+
+      Object.keys(CH).forEach(function (k) { per[k] = {}; });
+
+      parts.forEach(function (key) {
+
+        var pp = String(key).split('_');
+
+        if (pp.length >= 2 && per[pp[0]]) per[pp[0]][pp[1]] = true;
+
+      });
+
+    } catch (eP) {}
+
+
+
+    /* — Compte à rebours BAC (identique au module) — */
+
+    try {
+
+      function dashExamDate() {
+
+        if (typeof window.ARVEXA_getExamDate === 'function') return window.ARVEXA_getExamDate();
+
+        var n = new Date(), y = n.getFullYear(), j = new Date(y, 5, 1);
+
+        return n < j ? j : new Date(y + 1, 5, 1);
+
+      }
+
+      var now = new Date(), exam = dashExamDate(), diffMs = exam - now;
+
+      var ct = $('countdownTitle');
+
+      if (ct) ct.textContent = 'BAC ' + exam.getFullYear();
+
+      var cd = $('countdownDate');
+
+      if (cd) {
+
+        try { cd.textContent = 'Échéance : ' + exam.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }); }
+
+        catch (e2) { cd.textContent = 'Date indicative'; }
+
+      }
+
+      var pf = $('progressFill'), cs = $('countdownStatus');
+
+      if (diffMs <= 0) {
+
+        var dJ = $('cdDays'), hJ = $('cdHours'), mJ = $('cdMinutes'), sJ = $('cdSeconds');
+
+        if (dJ) dJ.textContent = '0';
+
+        if (hJ) hJ.textContent = '00';
+
+        if (mJ) mJ.textContent = '00';
+        if (sJ) sJ.textContent = '00';
+
+        if (pf) { pf.style.width = '100%'; pf.className = 'progress-fill critical'; }
+
+        if (cs) { cs.textContent = "🎉 C'est le jour J !"; cs.className = 'countdown-status critical'; }
+
+      } else {
+
+        var days = Math.floor(diffMs / 86400000);
+
+        var hours = Math.floor((diffMs % 86400000) / 3600000);
+
+        var mins = Math.floor((diffMs % 3600000) / 60000);
+
+        var dE = $('cdDays'); if (dE) dE.textContent = days;
+
+        var hE = $('cdHours'); if (hE) hE.textContent = String(hours).padStart(2, '0');
+
+        var mE = $('cdMinutes'); if (mE) mE.textContent = String(mins).padStart(2, '0');
+        var secs = Math.floor((diffMs % 60000) / 1000); var sE = $('cdSeconds'); if (sE) sE.textContent = String(secs).padStart(2, '0');
+
+        var exY = exam.getFullYear(), exM = exam.getMonth();
+
+        var start = new Date(exM < 8 ? exY - 1 : exY, 8, 1);
+
+        var total = exam - start, elapsed = now - start;
+
+        var progress = total > 0 ? Math.min(100, Math.max(0, (elapsed / total) * 100)) : 0;
+
+        if (pf) {
+
+          var pc = 'early';
+
+          if (progress > 85) pc = 'critical'; else if (progress > 70) pc = 'late'; else if (progress > 50) pc = 'mid';
+
+          pf.style.width = progress + '%';
+
+          pf.className = 'progress-fill ' + pc;
+
+        }
+
+        if (cs) {
+
+          var msg = days < 7 ? { e: '🏆', m: "C'est maintenant ! Dernière ligne droite", c: 'critical' }
+
+                  : days < 15 ? { e: '🚀', m: 'Sprint final, donne tout', c: 'critical' }
+
+                  : days < 30 ? { e: '🔥', m: 'Concentre-toi, chaque jour compte', c: 'late' }
+
+                  : days < 60 ? { e: '⚡', m: "Accélère, c'est le moment clé", c: 'mid' }
+
+                  : days < 90 ? { e: '📚', m: 'Bon rythme, continue comme ça', c: 'mid' }
+
+                  : { e: '🌱', m: 'Tu as le temps, commence tranquillement', c: 'early' };
+
+          cs.textContent = msg.e + ' ' + msg.m;
+
+          cs.className = 'countdown-status ' + msg.c;
+
+        }
+
+      }
+
+    } catch (e) {}
+
+
+
+    /* — Date du jour + citation du jour (identique au module) — */
+
+    try {
+
+      var hd = $('heroDateText');
+
+      if (hd) {
+
+        var dd = new Date();
+
+        try {
+
+          var ds = dd.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+
+          hd.textContent = ds.charAt(0).toUpperCase() + ds.slice(1);
+
+        } catch (e2) { hd.textContent = dd.getDate() + '/' + (dd.getMonth() + 1) + '/' + dd.getFullYear(); }
+
+      }
+
+      var QUOTES = [
+
+        { t: "L'éducation est l'arme la plus puissante pour changer le monde.", a: "Nelson Mandela" },
+
+        { t: "La discipline est le pont entre les objectifs et les accomplissements.", a: "Jim Rohn" },
+
+        { t: "Petit à petit, l'oiseau fait son nid.", a: "Proverbe" },
+
+        { t: "Seul on va plus vite, ensemble on va plus loin.", a: "Proverbe africain" },
+
+        { t: "Le succès, c'est d'aller d'échec en échec sans perdre son enthousiasme.", a: "Winston Churchill" },
+
+        { t: "La connaissance est un trésor, mais la pratique en est la clé.", a: "Proverbe" },
+
+        { t: "Le génie est fait de 1 % d'inspiration et de 99 % de transpiration.", a: "Thomas Edison" },
+
+        { t: "Patience et longueur de temps font plus que force ni que rage.", a: "Jean de La Fontaine" },
+
+        { t: "Ce n'est pas parce que les choses sont difficiles que nous n'osons pas.", a: "Sénèque" },
+
+        { t: "Chaque chapitre maîtrisé aujourd'hui est une question gagnée demain.", a: "ARVEXA School" }
+
+      ];
+
+      var qt = $('heroQuoteText'), qa = $('heroQuoteAuthor');
+
+      if (qt && qa) {
+
+        var yStart = new Date(new Date().getFullYear(), 0, 0);
+
+        var doy = Math.floor((Date.now() - yStart) / 86400000);
+
+        var q = QUOTES[doy % QUOTES.length] || QUOTES[0];
+
+        qt.textContent = '« ' + q.t + ' »';
+
+        qa.textContent = '— ' + q.a;
+
+      }
+
+    } catch (e) {}
+
+
+
+    /* — Compteurs de lecture des matières (localStorage) — */
+
+    try {
+
+      Object.keys(CH).forEach(function (k) {
+
+        var el = document.querySelector('[data-subject="' + k + '"]');
+
+        if (!el) return;
+
+        var count = Object.keys(per[k]).length;
+
+        if (count > 0) {
+
+          el.textContent = count + '/' + CH[k] + ' chapitres lus';
+
+          el.classList.add('has-progress');
+
+        } else {
+
+          el.textContent = CH[k] + ' chapitres';
+
+          el.classList.remove('has-progress');
+
+        }
+
+      });
+
+    } catch (e) {}
+
+
+
+    /* — Badges réalisations (localStorage, identique au module) — */
+
+    try {
+
+      var bsc = $('badgesScroll');
+
+      if (bsc) {
+
+        var BADGES = [
+
+          { icon: '📖', name: 'Première section', check: function (st) { return st.totalParts >= 1; } },
+
+          { icon: '📚', name: '5 sections', check: function (st) { return st.totalParts >= 5; } },
+
+          { icon: '🎓', name: '15 sections', check: function (st) { return st.totalParts >= 15; } },
+
+          { icon: '🏅', name: '30 sections', check: function (st) { return st.totalParts >= 30; } },
+
+          { icon: '🌍', name: 'Toutes matières', check: function (st) { return st.subjectsTouched >= 4; } },
+
+          { icon: '🔥', name: 'Série de 3 jours', check: function (st) { return st.streak >= 3; } },
+
+          { icon: '🚀', name: 'Série de 7 jours', check: function (st) { return st.streak >= 7; } },
+
+          { icon: '💎', name: 'Programme complet', check: function (st) { return st.chaptersRead >= st.chaptersTotal; } }
+
+        ];
+
+        var activity = {};
+
+        try { activity = JSON.parse(localStorage.getItem('arvexa_daily_activity') || '{}') || {}; } catch (e2) { activity = {}; }
+
+        var dashDayStr = function (dt) {
+
+          return dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0') + '-' + String(dt.getDate()).padStart(2, '0');
+
+        };
+
+        var streak = 0;
+
+        var cursor = new Date();
+
+        var dashActive = function (dt) { return (Number(activity[dashDayStr(dt)]) || 0) > 0; };
+
+        if (!dashActive(cursor)) cursor.setDate(cursor.getDate() - 1);
+
+        while (dashActive(cursor) && streak < 365) { streak++; cursor.setDate(cursor.getDate() - 1); }
+
+        var chaptersRead = 0, subjectsTouched = 0, chaptersTotal = 0;
+
+        Object.keys(CH).forEach(function (k) {
+
+          chaptersTotal += CH[k];
+
+          var count = Object.keys(per[k]).length;
+
+          if (count > 0) { subjectsTouched++; chaptersRead += count; }
+
+        });
+
+        var st = { totalParts: parts.length, subjectsTouched: subjectsTouched, chaptersRead: chaptersRead, chaptersTotal: chaptersTotal, streak: streak };
+
+        bsc.textContent = '';
+
+        BADGES.forEach(function (b) {
+
+          var item = document.createElement('div');
+
+          item.className = 'badge-item' + (b.check(st) ? ' unlocked' : '');
+
+          var coin = document.createElement('div');
+
+          coin.className = 'badge-coin';
+
+          coin.textContent = b.icon;
+
+          var nm = document.createElement('div');
+
+          nm.className = 'badge-name';
+
+          nm.textContent = b.name;
+
+          item.appendChild(coin);
+
+          item.appendChild(nm);
+
+          bsc.appendChild(item);
+
+        });
+
+      }
+
+    } catch (e) {}
+
+
+
+    /* Tout est peint depuis le cache : révéler le contenu */
+
+    document.documentElement.classList.add('ready');
+    /* ✅ v5.6 — contenu prêt derrière le splash : le laisser se dissiper */
+    if (typeof window.__arvexaSplashOut === 'function') window.__arvexaSplashOut();
+  };
+  window.__arvexaApplyInstant();
+  </script>
+
+  <script>
+  /* ================================================================
+     ✅ v5.4 — FILET ANTI-SPLASH INFINI : le « chargement du tout début »
+     ne peut plus rester bloqué. Si le module principal n'a pas démarré
+     (window.__ARVEXA_BOOTED__ absent = imports Firebase inaccessibles :
+     hors ligne avant la mise en cache du SDK, ou réseau très lent),
+     après 7 s le splash laisse place au contenu en cache (peinture
+     optimiste depuis localStorage) ou à un panneau « Réessayer » honnête.
+     Si le module finit par charger, il prend la main normalement.
+     ================================================================ */
+  (function () {
+    setTimeout(function () {
+      if (window.__ARVEXA_BOOTED__) return;
+      var sp = document.getElementById('appSplash');
+      if (!sp) return; /* déjà retiré par la porte instantanée */
+      var sess = null, data = null;
+      try { sess = JSON.parse(localStorage.getItem('arvexa_session') || 'null'); } catch (e) {}
+      try { data = JSON.parse(localStorage.getItem('arvexa_user_data') || 'null'); } catch (e) {}
+      if (sess && sess.uid && data && (!data._uid || data._uid === sess.uid)) {
+        window.__ARVEXA_INSTANT__ = { uid: sess.uid, userData: data, notifUnread: false, savedAt: Date.now(), __src: 'persist' }; /* ✅ v5.9 */
+        if (typeof window.__arvexaApplyInstant === 'function') window.__arvexaApplyInstant();
+        if (sp.parentNode) sp.parentNode.removeChild(sp);
+        document.documentElement.classList.add('instant');
+        requestAnimationFrame(function () { document.documentElement.classList.add('ready'); });
+      } else {
+        var offline = !navigator.onLine;
+        sp.innerHTML = '<div class="splash-inner">' +
+          '<span style="font-size:40px">' + (offline ? '📶' : '⏳') + '</span>' +
+          '<div class="splash-word">' + (offline ? 'Mode hors ligne' : 'Connexion lente') + '</div>' +
+          '<div style="font-size:13px;color:rgba(245,240,232,.75);max-width:300px;text-align:center;line-height:1.6">' +
+          (offline
+            ? "Ta connexion est coupée. Si tu as déjà utilisé ARVEXA avec Internet, réessaie dans quelques secondes — le contenu revient dès que le réseau s'affiche."
+            : "Le chargement prend plus de temps que prévu. Tu peux attendre encore un peu ou réessayer.") +
+          '</div>' +
+          '<button id="arvexaSplashRetry" style="margin-top:6px;padding:10px 26px;border-radius:999px;border:none;background:linear-gradient(135deg,#E0B84A,#B8860B);color:#0A0A0A;font-family:Inter,sans-serif;font-size:13px;font-weight:700;cursor:pointer">Réessayer</button>' +
+          '</div>';
+        var rb = document.getElementById('arvexaSplashRetry');
+        if (rb) rb.addEventListener('click', function () { window.location.reload(); });
+      }
+    }, 7000);
+  })();
+  </script>
+
+  <!-- ============================================================ -->
+  <!-- SCRIPTS                                                       -->
+  <!-- ============================================================ -->
+  <script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js",
+      "firebase/auth": "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js",
+      "firebase/firestore": "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js",
+      "firebase/messaging": "https://www.gstatic.com/firebasejs/12.12.1/firebase-messaging.js"
+    }
+  }
+  </script>
+    <script type="module">
+  // ✅ v5.4 — drapeau posé DÈS QUE le module s'exécute (donc après la
+  // réussite de TOUS ses imports) : le filet anti-splash infini vérifie
+  // ce drapeau pour savoir si l'app a réellement démarré.
+  window.__ARVEXA_BOOTED__ = true;
+  // ================================================================
+  // INDEX — Version refondue (progression prioritaire, action intelligente)
+  // Corrections conservées de la version précédente + ajouts :
+  //  - Bloc progression lue depuis localStorage (arvexa_read_parts)
+  //  - Action principale conditionnelle (aucune donnée inventée)
+  //  - Conseils en 3 catégories (révision / personnalisé / motivation)
+  //  - Compte à rebours avec date de référence visible
+  //  - showToast sécurisé (textContent, plus d'innerHTML)
+  //  - handleMissingUserDoc sans redirection register.html
+  //  - focus-visible rétabli
+  // ================================================================
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+  import {
+    getAuth,
+    onAuthStateChanged,
+    setPersistence,
+    browserLocalPersistence,
+    signOut,
+    getIdToken
+  } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+  import {
+    getMessaging,
+    getToken,
+    onMessage
+  } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-messaging.js";
+  import {
+    initializeFirestore,
+    persistentLocalCache,
+    persistentSingleTabManager,
+    doc,
+    getDoc,
+    onSnapshot,
+    collection,
+    query,
+    where,
+    limit,
+    getDocs,
+    addDoc,
+    updateDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+  // ================================================================
+  // CONFIG
+  // ================================================================
+  const firebaseConfig = {
+    apiKey: "AIzaSyDHscOXw3rLuhV6z1Cny-bdYCumqpnG7QE",
+    authDomain: "arvexa-fbf10.firebaseapp.com",
+    projectId: "arvexa-fbf10",
+    storageBucket: "arvexa-fbf10.firebasestorage.app",
+    messagingSenderId: "920108330053",
+    appId: "1:920108330053:web:f532d71cbc2c824bc7472c"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const db = (window.__ARVEXA_DB_SHARED__ !== undefined ? window.__ARVEXA_DB_SHARED__ : (window.__ARVEXA_DB_SHARED__ = initializeFirestore(app, {
+    localCache: persistentLocalCache({
+      tabManager: persistentSingleTabManager()
+    })
+  })));
+
+  let messaging = null;
+  try {
+    messaging = getMessaging(app);
+  } catch (e) {
+    console.warn('FCM non supporté:', e);
+  }
+
+  try {
+    await setPersistence(auth, browserLocalPersistence);
+  } catch (e) {
+    console.warn('[Auth] Persistance locale indisponible :', e.code || e.message);
+  }
+
+  // ================================================================
+  // SESSION / CACHE
+  // ================================================================
+  const SESSION_KEY = 'arvexa_session';
+  const USER_DATA_KEY = 'arvexa_user_data';
+  const READ_KEY = 'arvexa_read_parts';
+  const LAST_UID_KEY = 'arvexa_last_uid';
+
+  function saveSession(user) {
+    if (!user) return;
+    try {
+      const data = { uid: user.uid, email: user.email, lastActive: Date.now() };
+      localStorage.setItem(SESSION_KEY, JSON.stringify(data));
+      localStorage.setItem(LAST_UID_KEY, user.uid);
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(data));
+    } catch (e) {}
+  }
+
+  function clearSession() {
+    try {
+      localStorage.removeItem(SESSION_KEY);
+      localStorage.removeItem(USER_DATA_KEY);
+      localStorage.removeItem(LAST_UID_KEY);
+      localStorage.removeItem('arvexa_index_snapshot_persist'); /* ✅ v5.4 */
+      sessionStorage.removeItem(SESSION_KEY);
+      sessionStorage.removeItem('redirectAfterLogin');
+      sessionStorage.removeItem(INDEX_SNAPSHOT_KEY);
+      try { window.__ARVEXA_INSTANT__ = null; } catch (e) {}
+    } catch (e) {}
+  }
+
+  function saveUserDataToCache(data, uid) {
+    try {
+      localStorage.setItem(USER_DATA_KEY, JSON.stringify({
+        ...data, _cachedAt: Date.now(), _uid: uid
+      }));
+    } catch (e) {}
+  }
+
+  function getCachedUserData(currentUid) {
+    try {
+      const cached = JSON.parse(localStorage.getItem(USER_DATA_KEY) || 'null');
+      if (!cached) return null;
+      if (cached._uid && cached._uid !== currentUid) {
+        localStorage.removeItem(USER_DATA_KEY);
+        return null;
+      }
+      return cached;
+    } catch (e) { return null; }
+  }
+
+  // ================================================================
+  // SNAPSHOT DE SESSION — retour instantané sur l'accueil
+  // 1er chargement : splash + Firestore. Retours ensuite : le dernier
+  // rendu est restauré immédiatement (sessionStorage) pendant que
+  // Firestore actualise en arrière-plan (onSnapshot + pill discrète).
+  // ================================================================
+  const INDEX_SNAPSHOT_KEY = 'arvexa_index_snapshot';
+  const INDEX_SNAPSHOT_MAX_AGE = 12 * 60 * 60 * 1000; // 12 h
+  let lastNotifUnread = false;
+  let syncPillTimer = null;
+
+  function readSubStateFromDOM() {
+    const rem = document.getElementById('subscriptionReminder');
+    if (!rem) return null;
+    const st = document.getElementById('subTitle');
+    const sx = document.getElementById('subText');
+    const se = document.getElementById('subExpiry');
+    const sb = document.getElementById('subBtn');
+    return {
+      display: rem.style.display || 'block',
+      title: st ? st.textContent : '',
+      text: sx ? sx.textContent : '',
+      expiryDisplay: se ? (se.style.display || 'none') : 'none',
+      expiryText: se ? se.textContent : '',
+      btnText: sb ? sb.textContent : '',
+      btnClass: sb ? sb.className : 'sub-btn',
+      btnHref: sb ? (sb.getAttribute('href') || 'abonnement.html') : 'abonnement.html'
+    };
+  }
+
+  function saveIndexSnapshot() {
+    try {
+      if (!currentUid || !userData) return;
+      const payload = JSON.stringify({
+        uid: currentUid,
+        userData: userData,
+        notifUnread: lastNotifUnread,
+        sub: readSubStateFromDOM(),
+        savedAt: Date.now()
+      });
+      sessionStorage.setItem(INDEX_SNAPSHOT_KEY, payload);
+      // ✅ v5.4 — miroir localStorage : survit à la fermeture de l'app
+      // (sessionStorage est vidé) → démarrage à froid hors ligne instantané
+      try { localStorage.setItem('arvexa_index_snapshot_persist', payload); } catch (e) {}
+    } catch (e) {}
+  }
+
+  function hideSplash() {
+    /* ✅ v5.6 — le splash est un écran de chargement à part entière :
+       même durée minimale (branding) sur le 1er chargement comme sur les
+       retours, via le helper global posé par la porte du splash. */
+    if (typeof window.__arvexaSplashOut === 'function') {
+      window.__arvexaSplashOut();
+      return;
+    }
+    const sp = document.getElementById('appSplash');
+    if (!sp || sp.classList.contains('hide')) return;
+    const startedAt = window.__ARVEXA_SPLASH_TS__ || 0;
+    const wait = Math.max(0, 700 - (Date.now() - startedAt)); // anti-flash
+    setTimeout(() => {
+      sp.classList.add('hide');
+      setTimeout(() => { if (sp.parentNode) sp.parentNode.removeChild(sp); }, 600);
+    }, wait);
+  }
+
+  function showSyncPill() {
+    const pill = document.getElementById('bgSyncPill');
+    if (!pill) return;
+    pill.classList.add('show');
+    if (syncPillTimer) clearTimeout(syncPillTimer);
+    syncPillTimer = setTimeout(hideSyncPill, 5000); // garde-fou
+  }
+
+  function hideSyncPill() {
+    if (syncPillTimer) { clearTimeout(syncPillTimer); syncPillTimer = null; }
+    const pill = document.getElementById('bgSyncPill');
+    if (pill) pill.classList.remove('show');
+  }
+
+  function toDate(value) {
+    if (!value) return null;
+    if (typeof value.toDate === 'function') return value.toDate();
+    if (value.seconds !== undefined) return new Date(value.seconds * 1000);
+    const date = value instanceof Date ? value : new Date(value);
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  function isUserPremium(userData) {
+    if (!userData) return false;
+    const hasStatus = userData.premium === true ||
+                      userData.isUnlocked === true ||
+                      userData.hasDeposited === true;
+    if (!hasStatus) return false;
+    const endDate = toDate(userData.subscriptionEndDate);
+    if (!endDate) return true;
+    return endDate.getTime() > Date.now();
+  }
+
+  // ================================================================
+  // DOM
+  // ================================================================
+  const userFirstName = document.getElementById('userFirstName');
+  const greetingText = document.getElementById('greetingText');
+  const greetingEmoji = document.getElementById('greetingEmoji');
+  const notifDot = document.getElementById('notifDot');
+
+  // ================================================================
+  // CONSTANTES
+  // ================================================================
+  const SUBJECTS = [
+    { key: 'mathematiques', name: 'Mathématiques', chapters: 11, icon: 'fa-square-root-variable' },
+    { key: 'physique', name: 'Physique', chapters: 17, icon: 'fa-bolt' },
+    { key: 'chimie', name: 'Chimie', chapters: 9, icon: 'fa-flask' },
+    { key: 'svt', name: 'SVT', chapters: 20, icon: 'fa-dna' }
+  ];
+
+  const VAPID_KEY = 'BKx2iXs_mlCDdDjh_JxsjOQiOlW1-95pJi8myJCr503pB8TkFjJ8bZfpZ7Fv9pYyV_O9_Ca_fbwkO5eGPrnWaHA';
+  const FCM_DISMISSED_KEY = 'arvexa_fcm_dismissed';
+  const FCM_DISMISSED_DURATION = 12 * 60 * 60 * 1000; // 12h — re-proposer plus souvent (beaucoup d'élèves n'ont pas activé les notifications)
+
+
+
+  // ================================================================
+  // GREETING
+  // ================================================================
+  function getGreeting() {
+    const hours = new Date().getHours();
+    if (hours >= 5 && hours < 12) return { text: 'Bonjour', emoji: '🌅' };
+    if (hours >= 12 && hours < 18) return { text: 'Bon après-midi', emoji: '☀️' };
+    return { text: 'Bonsoir', emoji: '🌙' };
+  }
+
+  function updateGreeting(firstName) {
+    const { text, emoji } = getGreeting();
+    greetingText.textContent = text;
+    userFirstName.classList.remove('loading');
+    userFirstName.textContent = firstName || 'Élève';
+    greetingEmoji.textContent = emoji;
+    const heroGreeting = document.getElementById('heroGreeting');
+    const heroName = document.getElementById('heroName');
+    if (heroGreeting) heroGreeting.textContent = text;
+    if (heroName) {
+      heroName.classList.remove('loading');
+      heroName.textContent = firstName || 'Élève';
+    }
+  }
+
+  // CHARGEUR DE PROFIL — squelette doré discret le temps que les données
+  // arrivent (cache localStorage puis Firestore). La page reste fixe :
+  // c'est le seul état de chargement de tout l'accueil.
+  function showProfileLoading() {
+    const { text, emoji } = getGreeting();
+    greetingText.textContent = text;
+    greetingEmoji.textContent = emoji;
+    const heroGreeting = document.getElementById('heroGreeting');
+    if (heroGreeting) heroGreeting.textContent = text;
+    [userFirstName, document.getElementById('heroName')].forEach((el) => {
+      if (!el) return;
+      el.classList.add('loading');
+      el.textContent = '';
+      const sk = document.createElement('span');
+      sk.className = 'profile-skeleton';
+      sk.setAttribute('aria-label', 'Chargement du profil');
+      el.appendChild(sk);
+    });
+  }
+
+  if (!window.__ARVEXA_INSTANT__) showProfileLoading();
+
+  // ================================================================
+  // COMPTE À REBOURS BAC
+  // ================================================================
+  const cdDays = document.getElementById('cdDays');
+  const cdHours = document.getElementById('cdHours');
+  const cdMinutes = document.getElementById('cdMinutes');
+  const cdSeconds = document.getElementById('cdSeconds');
+  const progressFill = document.getElementById('progressFill');
+  const countdownStatus = document.getElementById('countdownStatus');
+  const countdownTitle = document.getElementById('countdownTitle');
+  const countdownDate = document.getElementById('countdownDate');
+
+  function getExamDate() {
+    if (typeof window.ARVEXA_getExamDate === 'function') {
+      return window.ARVEXA_getExamDate();
+    }
+    const now = new Date();
+    const year = now.getFullYear();
+    const juneThisYear = new Date(year, 5, 1);
+    if (now < juneThisYear) return juneThisYear;
+    return new Date(year + 1, 5, 1);
+  }
+
+  function getSchoolYearStart(examDate) {
+    const examYear = examDate.getFullYear();
+    const examMonth = examDate.getMonth();
+    const startYear = examMonth < 8 ? examYear - 1 : examYear;
+    return new Date(startYear, 8, 1);
+  }
+
+  function getCountdownMessages(days) {
+    if (days <= 0) return { emoji: '🎉', message: 'C\'est le jour J ! Bonne chance !', class: 'critical' };
+    if (days < 7) return { emoji: '🏆', message: 'C\'est maintenant ! Dernière ligne droite', class: 'critical' };
+    if (days < 15) return { emoji: '🚀', message: 'Sprint final, donne tout', class: 'critical' };
+    if (days < 30) return { emoji: '🔥', message: 'Concentre-toi, chaque jour compte', class: 'late' };
+    if (days < 60) return { emoji: '⚡', message: 'Accélère, c\'est le moment clé', class: 'mid' };
+    if (days < 90) return { emoji: '📚', message: 'Bon rythme, continue comme ça', class: 'mid' };
+    return { emoji: '🌱', message: 'Tu as le temps, commence tranquillement', class: 'early' };
+  }
+
+  function updateCountdown() {
+    const now = new Date();
+    const exam = getExamDate();
+    const diffMs = exam - now;
+
+    countdownTitle.textContent = 'BAC ' + exam.getFullYear();
+    try {
+      countdownDate.textContent = 'Échéance : ' + exam.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+    } catch (e) {
+      countdownDate.textContent = 'Date indicative';
+    }
+
+    if (diffMs <= 0) {
+      cdDays.textContent = '0';
+      cdHours.textContent = '00';
+      cdMinutes.textContent = '00';
+      cdSeconds.textContent = '00';
+      progressFill.style.width = '100%';
+      progressFill.className = 'progress-fill critical';
+      countdownStatus.textContent = '🎉 C\'est le jour J !';
+      countdownStatus.className = 'countdown-status critical';
+      return;
+    }
+
+    const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diffMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
+
+    cdDays.textContent = days;
+    cdHours.textContent = String(hours).padStart(2, '0');
+    cdMinutes.textContent = String(minutes).padStart(2, '0');
+    cdSeconds.textContent = String(seconds).padStart(2, '0');
+
+    const start = getSchoolYearStart(exam);
+    const total = exam - start;
+    const elapsed = now - start;
+    const progress = total > 0 ? Math.min(100, Math.max(0, (elapsed / total) * 100)) : 0;
+    progressFill.style.width = progress + '%';
+
+    let progressClass = 'early';
+    if (progress > 85) progressClass = 'critical';
+    else if (progress > 70) progressClass = 'late';
+    else if (progress > 50) progressClass = 'mid';
+    progressFill.className = 'progress-fill ' + progressClass;
+
+    const msg = getCountdownMessages(days);
+    countdownStatus.textContent = `${msg.emoji} ${msg.message}`;
+    countdownStatus.className = 'countdown-status ' + msg.class;
+  }
+
+  updateCountdown();
+  const countdownInterval = setInterval(updateCountdown, 1000); // v6.7 tick chaque seconde
+  window.addEventListener('beforeunload', () => clearInterval(countdownInterval));
+
+  // ================================================================
+  // HERO — date + citation du jour
+  // ================================================================
+  const QUOTES = [
+    { t: "L'éducation est l'arme la plus puissante pour changer le monde.", a: "Nelson Mandela" },
+    { t: "La discipline est le pont entre les objectifs et les accomplissements.", a: "Jim Rohn" },
+    { t: "Petit à petit, l'oiseau fait son nid.", a: "Proverbe" },
+    { t: "Seul on va plus vite, ensemble on va plus loin.", a: "Proverbe africain" },
+    { t: "Le succès, c'est d'aller d'échec en échec sans perdre son enthousiasme.", a: "Winston Churchill" },
+    { t: "La connaissance est un trésor, mais la pratique en est la clé.", a: "Proverbe" },
+    { t: "Le génie est fait de 1 % d'inspiration et de 99 % de transpiration.", a: "Thomas Edison" },
+    { t: "Patience et longueur de temps font plus que force ni que rage.", a: "Jean de La Fontaine" },
+    { t: "Ce n'est pas parce que les choses sont difficiles que nous n'osons pas.", a: "Sénèque" },
+    { t: "Chaque chapitre maîtrisé aujourd'hui est une question gagnée demain.", a: "ARVEXA School" }
+  ];
+
+  const heroDateText = document.getElementById('heroDateText');
+  const heroQuoteText = document.getElementById('heroQuoteText');
+  const heroQuoteAuthor = document.getElementById('heroQuoteAuthor');
+
+  function renderHero() {
+    const d = new Date();
+    try {
+      const ds = d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
+      heroDateText.textContent = ds.charAt(0).toUpperCase() + ds.slice(1);
+    } catch (e) {
+      heroDateText.textContent = d.getDate() + '/' + (d.getMonth() + 1) + '/' + d.getFullYear();
+    }
+    const start = new Date(d.getFullYear(), 0, 0);
+    const dayOfYear = Math.floor((d - start) / (1000 * 60 * 60 * 24));
+    const q = QUOTES[dayOfYear % QUOTES.length] || QUOTES[0];
+    heroQuoteText.textContent = '« ' + q.t + ' »';
+    heroQuoteAuthor.textContent = '— ' + q.a;
+  }
+
+  renderHero();
+
+  // ================================================================
+  // PROGRESSION SCOLAIRE (prioritaire)
+  // ================================================================
+  function readProgressData() {
+    let readParts = [];
+    try {
+      readParts = JSON.parse(localStorage.getItem(READ_KEY) || '[]');
+    } catch (e) { readParts = []; }
+
+    const perSubject = {};
+    SUBJECTS.forEach(s => { perSubject[s.key] = new Set(); });
+
+    readParts.forEach(key => {
+      const parts = String(key).split('_');
+      if (parts.length >= 2 && perSubject[parts[0]]) {
+        perSubject[parts[0]].add(parts[1]);
+      }
+    });
+
+    let totalChaptersRead = 0;
+    let subjectsTouched = 0;
+    const totalChaptersAll = SUBJECTS.reduce((acc, s) => acc + s.chapters, 0);
+
+    SUBJECTS.forEach(s => {
+      const count = perSubject[s.key].size;
+      if (count > 0) {
+        subjectsTouched++;
+        totalChaptersRead += count;
+      }
+    });
+
+    return {
+      perSubject,
+      totalChaptersRead,
+      totalChaptersAll,
+      subjectsTouched,
+      subjectsTotal: SUBJECTS.length
+    };
+  }
+
+  function renderProgress() {
+    const data = readProgressData();
+
+    // Mettre à jour les cartes matières (compteurs)
+    SUBJECTS.forEach(s => {
+      const el = document.querySelector(`[data-subject="${s.key}"]`);
+      if (el) {
+        const count = data.perSubject[s.key].size;
+        if (count > 0) {
+          el.textContent = `${count}/${s.chapters} chapitres lus`;
+          el.classList.add('has-progress');
+        } else {
+          el.textContent = `${s.chapters} chapitres`;
+          el.classList.remove('has-progress');
+        }
+      }
+    });
+
+    // Badges (gamification)
+    renderBadges();
+  }
+
+  // ================================================================
+  // ACTIVITÉ QUOTIDIENNE (série / objectif / semaine)
+  // Écrit aussi par lecture.html (hook temps réel) + merge snapshot ici.
+  // ================================================================
+  const ACTIVITY_KEY = 'arvexa_daily_activity';
+  const SNAP_KEY = 'arvexa_daily_snap';
+  const DAILY_GOAL = 3;
+
+  function dayStr(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  function getTotalParts() {
+    try { return JSON.parse(localStorage.getItem(READ_KEY) || '[]').length; }
+    catch (e) { return 0; }
+  }
+
+  function computeActivity() {
+    let hook = {}, snap = {};
+    try { hook = JSON.parse(localStorage.getItem(ACTIVITY_KEY) || '{}') || {}; } catch (e) { hook = {}; }
+    try { snap = JSON.parse(localStorage.getItem(SNAP_KEY) || '{}') || {}; } catch (e) { snap = {}; }
+    const total = getTotalParts();
+    const today = dayStr(new Date());
+    const prevDays = Object.keys(snap).filter((d) => d < today).sort();
+    const prevTotal = prevDays.length ? (Number(snap[prevDays[prevDays.length - 1]]) || 0) : total;
+    const deltaToday = Math.max(0, total - prevTotal);
+
+    const activity = {};
+    Object.keys(snap).forEach((d) => { if (d !== today) activity[d] = Number(hook[d]) || 0; });
+    Object.keys(hook).forEach((d) => { if (d !== today) activity[d] = Math.max(activity[d] || 0, Number(hook[d]) || 0); });
+    activity[today] = Math.max(Number(hook[today]) || 0, deltaToday);
+
+    // Prune 35 jours + sauvegarde
+    const snapNext = {};
+    Object.keys(snap).forEach((d) => { snapNext[d] = Number(snap[d]) || 0; });
+    snapNext[today] = Math.max(Number(snap[today]) || 0, total);
+    const snapKeys = Object.keys(snapNext).sort().slice(-35);
+    const snapOut = {};
+    snapKeys.forEach((d) => { snapOut[d] = snapNext[d]; });
+    const actKeys = Object.keys(activity).sort().slice(-35);
+    const actOut = {};
+    actKeys.forEach((d) => { actOut[d] = activity[d]; });
+    try { localStorage.setItem(SNAP_KEY, JSON.stringify(snapOut)); } catch (e) {}
+    try { localStorage.setItem(ACTIVITY_KEY, JSON.stringify(actOut)); } catch (e) {}
+    return actOut;
+  }
+
+  function computeStreak(activity) {
+    let streak = 0;
+    const cursor = new Date();
+    const active = (dt) => (Number(activity[dayStr(dt)]) || 0) > 0;
+    if (!active(cursor)) cursor.setDate(cursor.getDate() - 1);
+    while (active(cursor) && streak < 365) {
+      streak++;
+      cursor.setDate(cursor.getDate() - 1);
+    }
+    return streak;
+  }
+
+  // ================================================================
+  // BADGES — réalisations
+  // ================================================================
+  const badgesScroll = document.getElementById('badgesScroll');
+  const BADGES = [
+    { icon: '📖', name: 'Première section', check: (st) => st.totalParts >= 1 },
+    { icon: '📚', name: '5 sections', check: (st) => st.totalParts >= 5 },
+    { icon: '🎓', name: '15 sections', check: (st) => st.totalParts >= 15 },
+    { icon: '🏅', name: '30 sections', check: (st) => st.totalParts >= 30 },
+    { icon: '🌍', name: 'Toutes matières', check: (st) => st.subjectsTouched >= 4 },
+    { icon: '🔥', name: 'Série de 3 jours', check: (st) => st.streak >= 3 },
+    { icon: '🚀', name: 'Série de 7 jours', check: (st) => st.streak >= 7 },
+    { icon: '💎', name: 'Programme complet', check: (st) => st.chaptersRead >= st.chaptersTotal }
+  ];
+
+  function renderBadges() {
+    if (!badgesScroll) return;
+    const activity = computeActivity();
+    const streak = computeStreak(activity);
+    const prog = readProgressData();
+    const st = {
+      totalParts: getTotalParts(),
+      subjectsTouched: prog.subjectsTouched,
+      chaptersRead: prog.totalChaptersRead,
+      chaptersTotal: prog.totalChaptersAll,
+      streak: streak
+    };
+    badgesScroll.textContent = '';
+    BADGES.forEach((b) => {
+      const item = document.createElement('div');
+      item.className = 'badge-item' + (b.check(st) ? ' unlocked' : '');
+      const coin = document.createElement('div');
+      coin.className = 'badge-coin';
+      coin.textContent = b.icon;
+      const nm = document.createElement('div');
+      nm.className = 'badge-name';
+      nm.textContent = b.name;
+      item.appendChild(coin);
+      item.appendChild(nm);
+      badgesScroll.appendChild(item);
+    });
+  }
+
+  // ✅ v8.0 — SYNC FIREBASE : re-rendu quand la progression fusionne/arrive du
+  // cloud (compteurs matières, badges, série quotidienne). Les lectures faites
+  // sur un autre appareil apparaissent ici sans recharger.
+  window.addEventListener('arvexa-progress-updated', () => {
+    try { renderProgress(); renderBadges(); } catch (e) {}
+  });
+
+  // ================================================================
+  // INSTALLATION PWA — bannière élégante (beforeinstallprompt)
+  // ================================================================
+  let deferredPrompt = null;
+  const PWA_DISMISS_KEY = 'arvexa_pwa_dismissed';
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    setTimeout(maybeShowInstallBanner, 1500);
+  });
+
+  window.addEventListener('appinstalled', () => {
+    const b = document.getElementById('installBanner');
+    if (b) b.remove();
+    deferredPrompt = null;
+  });
+
+  function maybeShowInstallBanner() {
+    if (!deferredPrompt) return;
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    if (isStandalone) return;
+    try {
+      const dismissed = window.localStorage.getItem(PWA_DISMISS_KEY);
+      if (dismissed) {
+        if (Date.now() - parseInt(dismissed, 10) < 7 * 24 * 60 * 60 * 1000) return;
+        window.localStorage.removeItem(PWA_DISMISS_KEY);
+      }
+    } catch (e) {}
+    const container = document.getElementById('dynamicContent');
+    if (!container || document.getElementById('installBanner')) return;
+
+    const banner = document.createElement('div');
+    banner.id = 'installBanner';
+    const inner = document.createElement('div');
+    inner.className = 'install-inner';
+    const icon = document.createElement('div');
+    icon.className = 'install-icon';
+    icon.textContent = '📲';
+    const txt = document.createElement('div');
+    txt.className = 'install-text';
+    const tt = document.createElement('div');
+    tt.className = 'install-title';
+    tt.textContent = 'Installe ARVEXA';
+    const td = document.createElement('div');
+    td.className = 'install-desc';
+    td.textContent = "Accès hors ligne + icône sur ton écran d'accueil, comme une vraie app.";
+    txt.appendChild(tt);
+    txt.appendChild(td);
+    const btn = document.createElement('button');
+    btn.className = 'install-btn';
+    btn.id = 'installBtn';
+    btn.type = 'button';
+    btn.textContent = 'Installer';
+    const close = document.createElement('button');
+    close.className = 'install-close';
+    close.type = 'button';
+    close.setAttribute('aria-label', 'Fermer');
+    const ci = document.createElement('i');
+    ci.className = 'fas fa-times';
+    close.appendChild(ci);
+    inner.appendChild(icon);
+    inner.appendChild(txt);
+    inner.appendChild(btn);
+    inner.appendChild(close);
+    banner.appendChild(inner);
+    container.appendChild(banner);
+
+    btn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      btn.disabled = true;
+      deferredPrompt.prompt();
+      try { await deferredPrompt.userChoice; } catch (err) {}
+      deferredPrompt = null;
+      banner.remove();
+    });
+    close.addEventListener('click', () => {
+      try { window.localStorage.setItem(PWA_DISMISS_KEY, String(Date.now())); } catch (err) {}
+      banner.remove();
+    });
+  }
+
+  renderProgress();
+
+
+  // ================================================================
+  // NOTIFICATIONS NON LUES
+  // ================================================================
+  async function checkUnreadNotifications(userId) {
+    try {
+      const q = query(
+        collection(db, 'users', userId, 'notifications'),
+        where('read', '==', false),
+        limit(1)
+      );
+      const snapshot = await getDocs(q);
+      lastNotifUnread = !snapshot.empty;
+      if (notifDot) notifDot.classList.toggle('show', lastNotifUnread);
+      saveIndexSnapshot();
+    } catch (e) {
+      console.warn('[Notif] checkUnread:', e.message);
+      lastNotifUnread = false;
+      if (notifDot) notifDot.classList.remove('show');
+    }
+  }
+
+  // ================================================================
+  // SUBSCRIPTION
+  // ================================================================
+  function updateSubscriptionDisplay(isPremium, userData) {
+    const reminder = document.getElementById('subscriptionReminder');
+    const subTitle = document.getElementById('subTitle');
+    const subText = document.getElementById('subText');
+    const subExpiry = document.getElementById('subExpiry');
+    const subBtn = document.getElementById('subBtn');
+    if (!reminder) return;
+
+    if (!isPremium) {
+      reminder.style.display = 'block';
+      subTitle.textContent = '🔓 Débloque tout ARVEXA School';
+      subText.textContent = 'Accède à tous les chapitres, exercices, corrections et plus de fonctionnalités avec Premium.';
+      subExpiry.style.display = 'none';
+      subBtn.textContent = 'Voir les offres';
+      subBtn.className = 'sub-btn';
+      subBtn.href = 'abonnement.html';
+      return;
+    }
+
+    const expiry = toDate(userData?.subscriptionEndDate);
+    if (!expiry) {
+      reminder.style.display = 'none';
+      return;
+    }
+
+    const now = new Date();
+    const daysLeft = Math.ceil((expiry - now) / (1000 * 60 * 60 * 24));
+
+    if (daysLeft <= 0) {
+      reminder.style.display = 'block';
+      subTitle.textContent = '⏳ Abonnement expiré';
+      subText.textContent = 'Renouvelle ton abonnement pour continuer à profiter de tous les avantages.';
+      subExpiry.style.display = 'none';
+      subBtn.textContent = 'Renouveler maintenant';
+      subBtn.className = 'sub-btn renew';
+      subBtn.href = 'abonnement.html';
+      return;
+    }
+
+    if (daysLeft <= 7) {
+      reminder.style.display = 'block';
+      subTitle.textContent = '⚠️ Abonnement bientôt terminé';
+      subText.textContent = 'Renouvelle pour ne pas perdre l\'accès à tous les chapitres.';
+      subExpiry.style.display = 'block';
+      subExpiry.textContent = `📅 Expire dans ${daysLeft} jour${daysLeft > 1 ? 's' : ''} (${expiry.toLocaleDateString('fr-FR')})`;
+      subBtn.textContent = 'Renouveler maintenant';
+      subBtn.className = 'sub-btn renew';
+      subBtn.href = 'abonnement.html';
+      return;
+    }
+
+    reminder.style.display = 'none';
+  }
+
+  function renderUserData(data) {
+    if (!data) return;
+    updateGreeting(data.firstName || 'Élève');
+    const premium = isUserPremium(data);
+    updateSubscriptionDisplay(premium, data);
+    saveIndexSnapshot();
+  }
+
+  function showDashboard() {
+    hideSplash();
+    const dynamic = document.getElementById('dynamicContent');
+    if (dynamic) dynamic.style.display = 'block';
+  }
+
+  // ================================================================
+  // TOAST — SÉCURISÉ (textContent, plus d'innerHTML sur le message)
+  // ================================================================
+  function showToast(message, type = 'info') {
+    let container = document.getElementById('toastContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toastContainer';
+      container.style.cssText = `
+        position: fixed;
+        top: calc(env(safe-area-inset-top, 0px) + 16px);
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+        width: calc(100% - 32px);
+        max-width: 420px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        pointer-events: none;
+      `;
+      document.body.appendChild(container);
+    }
+
+    const toast = document.createElement('div');
+    const icons = {
+      success: 'fa-check-circle', error: 'fa-exclamation-circle',
+      info: 'fa-info-circle', warning: 'fa-exclamation-triangle'
+    };
+    const colors = {
+      success: '#3AB67E', error: '#E74C3C', info: 'var(--accent-bright)', warning: '#D4A017'
+    };
+
+    toast.style.cssText = `
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 18px; border-radius: 12px;
+      background: rgba(var(--rgb-card), 0.96);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border: 1px solid ${colors[type] || colors.info}44;
+      color: var(--text-light); font-family: 'Inter', sans-serif;
+      font-size: 13px; font-weight: 500;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      pointer-events: auto;
+    `;
+
+    const icon = document.createElement('i');
+    icon.className = `fas ${icons[type] || icons.info}`;
+    icon.style.cssText = `color: ${colors[type] || colors.info}; font-size: 15px; flex-shrink: 0;`;
+    toast.appendChild(icon);
+
+    const span = document.createElement('span');
+    span.style.cssText = 'flex: 1; min-width: 0; line-height: 1.5;';
+    span.textContent = String(message);
+    toast.appendChild(span);
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(-10px)';
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+
+  // ================================================================
+  // FCM
+  // ================================================================
+  let fcmToken = null;
+
+  function shouldShowFcmBanner() {
+    if (!('Notification' in window)) return false;
+    if (!messaging) return false;
+    if (!('serviceWorker' in navigator)) return false;
+    if (Notification.permission === 'granted') return false;
+    // permission 'denied' INCLUSE : le bandeau guide vers les réglages du
+    // téléphone (popup native impossible après un refus) — « tout
+    // utilisateur voit le bandeau s'il n'a pas activé »
+    try {
+      const dismissed = localStorage.getItem(FCM_DISMISSED_KEY);
+      if (dismissed) {
+        const timestamp = parseInt(dismissed, 10);
+        if (Date.now() - timestamp < FCM_DISMISSED_DURATION) return false;
+      }
+    } catch (e) {}
+    return true;
+  }
+
+  function showFcmBanner() {
+    if (!shouldShowFcmBanner()) return;
+    const container = document.getElementById('dynamicContent');
+    if (!container) return;
+    if (document.getElementById('fcmBanner')) return;
+
+    const banner = document.createElement('div');
+    banner.id = 'fcmBanner';
+    // Deux variantes : jamais demandé (popup native possible) / refusé
+    // (popup bloquée → instructions réglages du téléphone)
+    const denied = Notification.permission === 'denied';
+    banner.innerHTML = `
+      <div class="fcm-banner-content">
+        <div class="fcm-icon">${denied ? '🔕' : '🔔'}</div>
+        <div class="fcm-text">
+          <div class="fcm-title">${denied ? 'Notifications désactivées' : 'Active les notifications'}</div>
+          <div class="fcm-desc">${denied
+            ? 'Réglages → Applications → Chrome ou ARVEXA → Notifications → Autoriser, puis rouvrez l\'app.'
+            : 'Reçois une alerte quand un nouveau chapitre est disponible.'}</div>
+        </div>
+        <div class="fcm-actions">
+          <button class="fcm-btn-later" id="fcmLater">Plus tard</button>
+          <button class="fcm-btn-activate" id="fcmActivate">${denied ? 'Réessayer' : 'Activer'}</button>
+        </div>
+      </div>
+    `;
+
+    container.insertBefore(banner, container.firstChild);
+
+    document.getElementById('fcmLater').addEventListener('click', () => {
+      try { localStorage.setItem(FCM_DISMISSED_KEY, String(Date.now())); } catch (e) {}
+      banner.remove();
+    });
+
+    document.getElementById('fcmActivate').addEventListener('click', async () => {
+      const btn = document.getElementById('fcmActivate');
+      btn.disabled = true;
+      btn.textContent = 'Activation...';
+      const success = await requestFcmPermission();
+      if (success) {
+        banner.remove();
+        showToast('Notifications activées !', 'success');
+      } else {
+        const stillDenied = ('Notification' in window) && Notification.permission === 'denied';
+        btn.disabled = false;
+        btn.textContent = stillDenied ? 'Réessayer' : 'Activer';
+        showToast(stillDenied
+          ? 'Toujours bloqué : Réglages → Applications → Chrome ou ARVEXA → Notifications'
+          : 'Impossible d\'activer les notifications', 'error');
+      }
+    });
+  }
+
+  // ================================================================
+  // FCM — RELANCE PÉRIODIQUE DU BANDEAU (toutes les 12h)
+  // Tout utilisateur qui n'a pas activé les notifications revoit le
+  // bandeau : à chaque retour sur l'app (visibilitychange) et toutes
+  // les 12h pendant une session longue. « Plus tard » = pause 12h
+  // (FCM_DISMISSED_KEY), « Autoriser » = plus jamais (permission
+  // granted → shouldShowFcmBanner retourne false).
+  // ================================================================
+  let fcmRecurringInstalled = false;
+  function installFcmRecurring() {
+    if (fcmRecurringInstalled) return;
+    fcmRecurringInstalled = true;
+    setInterval(() => showFcmBanner(), FCM_DISMISSED_DURATION);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        setTimeout(() => showFcmBanner(), 2000);
+      }
+    });
+  }
+
+  async function requestFcmPermission() {
+    try {
+      if (!('Notification' in window)) return false;
+      if (!('serviceWorker' in navigator)) return false;
+      if (!messaging) return false;
+      if (!window.isSecureContext) return false;
+
+      const permission = await Notification.requestPermission();
+      if (permission !== 'granted') return false;
+
+      const swRegistration = window.arvexaFcmRegistration
+        ? await window.arvexaFcmRegistration
+        : await navigator.serviceWorker.getRegistration('./firebase-cloud-messaging-push-scope');
+      if (!swRegistration) return false;
+      const token = await getToken(messaging, {
+        vapidKey: VAPID_KEY,
+        serviceWorkerRegistration: swRegistration
+      });
+
+      if (!token) return false;
+
+      fcmToken = token;
+      await saveFcmToken(token);
+      return true;
+    } catch (error) {
+      console.error('[FCM] Erreur:', error);
+      return false;
+    }
+  }
+
+  async function saveFcmToken(token) {
+    const user = auth.currentUser;
+    if (!user) return;
+    try {
+      const userRef = doc(db, 'users', user.uid);
+      const userSnap = await getDoc(userRef);
+      const data = userSnap.exists() ? userSnap.data() : {};
+      let tokens = Array.isArray(data.fcmTokens) ? [...data.fcmTokens] : [];
+      if (data.fcmToken && !tokens.includes(data.fcmToken)) tokens.push(data.fcmToken);
+      if (!tokens.includes(token)) tokens.push(token);
+      if (tokens.length > 5) tokens = tokens.slice(-5);
+      await updateDoc(userRef, {
+        fcmTokens: tokens,
+        fcmTokenUpdatedAt: serverTimestamp(),
+        fcmToken: token
+      });
+    } catch (e) {
+      console.error('[FCM] Erreur sauvegarde:', e.message);
+    }
+  }
+
+  function setupFcmForeground() {
+    if (!messaging) return;
+    onMessage(messaging, (payload) => {
+      const title = payload.notification?.title || payload.data?.title || 'ARVEXA School';
+      const body = payload.notification?.body || payload.data?.body || '';
+      showToast(`${title} — ${body}`, 'info');
+    });
+  }
+
+  async function checkExistingFcmToken(user) {
+    if (!messaging) return;
+    if (typeof Notification === 'undefined') return;
+    if (Notification.permission !== 'granted') return;
+    try {
+      const swRegistration = window.arvexaFcmRegistration
+        ? await window.arvexaFcmRegistration
+        : await navigator.serviceWorker.getRegistration('./firebase-cloud-messaging-push-scope');
+      if (!swRegistration) return;
+      const token = await getToken(messaging, {
+        vapidKey: VAPID_KEY,
+        serviceWorkerRegistration: swRegistration
+      });
+      if (token) {
+        fcmToken = token;
+        await saveFcmToken(token);
+      }
+    } catch (e) {
+      console.warn('[FCM] checkExisting failed:', e.message);
+    }
+  }
+
+  // ================================================================
+  // VARIABLES GLOBALES
+  // ================================================================
+  let userData = null;
+  let unsubscribeUser = null;
+  let currentUid = null;
+  let isRedirecting = false;
+  let isAuthResolved = false;
+  let lastSnapshotUid = null;
+  let authGraceTimer = null;
+  let authUnsubscribe = null;
+
+  // ================================================================
+  // MODALE AVIS
+  // ================================================================
+  const avisModal = document.getElementById('avisModal');
+  const avisForm = document.getElementById('avisForm');
+  const avisSuccess = document.getElementById('avisSuccess');
+  const avisStars = document.querySelectorAll('.avis-star');
+  const avisStarHint = document.getElementById('avisStarHint');
+  const avisMessage = document.getElementById('avisMessage');
+  const avisCharCount = document.getElementById('avisCharCount');
+  const avisSubmit = document.getElementById('avisSubmit');
+  const avisCancel = document.getElementById('avisCancel');
+  const avisClose = document.getElementById('avisClose');
+  const avisSuccessClose = document.getElementById('avisSuccessClose');
+  const avisCategories = document.getElementById('avisCategories');
+
+  let currentRating = 0;
+  let currentCategory = 'general';
+  let isSubmittingAvis = false;
+
+  const RATING_LABELS = {
+    0: 'Clique sur les étoiles',
+    1: '😞 Très déçu',
+    2: '😕 Pas terrible',
+    3: '😐 Moyen',
+    4: '😊 Bien',
+    5: '🤩 Excellent !'
+  };
+
+  function updateStarHint() {
+    if (currentRating === 0) {
+      avisStarHint.textContent = RATING_LABELS[0];
+      avisStarHint.classList.remove('active');
+    } else {
+      avisStarHint.textContent = RATING_LABELS[currentRating];
+      avisStarHint.classList.add('active');
+    }
+  }
+
+  function updateSubmitState() {
+    const hasRating = currentRating >= 1;
+    const hasMessage = avisMessage.value.trim().length >= 10;
+    avisSubmit.disabled = !hasRating || !hasMessage || isSubmittingAvis;
+  }
+
+  avisStars.forEach(star => {
+    star.addEventListener('click', () => {
+      currentRating = parseInt(star.dataset.value);
+      avisStars.forEach(s => {
+        s.classList.toggle('active', parseInt(s.dataset.value) <= currentRating);
+      });
+      updateStarHint();
+      updateSubmitState();
+    });
+    star.addEventListener('mouseenter', () => {
+      const hoverValue = parseInt(star.dataset.value);
+      avisStars.forEach(s => {
+        s.classList.toggle('active', parseInt(s.dataset.value) <= hoverValue);
+      });
+    });
+  });
+
+  document.getElementById('avisStars').addEventListener('mouseleave', () => {
+    avisStars.forEach(s => {
+      s.classList.toggle('active', parseInt(s.dataset.value) <= currentRating);
+    });
+  });
+
+  avisCategories.querySelectorAll('.avis-cat-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      avisCategories.querySelectorAll('.avis-cat-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      currentCategory = chip.dataset.cat;
+    });
+  });
+
+  avisMessage.addEventListener('input', () => {
+    const len = avisMessage.value.length;
+    avisCharCount.textContent = `${len} / 500`;
+    avisCharCount.classList.remove('warning', 'danger');
+    if (len > 450) avisCharCount.classList.add('danger');
+    else if (len > 400) avisCharCount.classList.add('warning');
+    updateSubmitState();
+  });
+
+  function openAvisModal() {
+    avisModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    currentRating = 0;
+    currentCategory = 'general';
+    avisStars.forEach(s => s.classList.remove('active'));
+    avisMessage.value = '';
+    avisCharCount.textContent = '0 / 500';
+    avisCharCount.classList.remove('warning', 'danger');
+    avisCategories.querySelectorAll('.avis-cat-chip').forEach(c => c.classList.remove('active'));
+    avisCategories.querySelector('.avis-cat-chip[data-cat="general"]').classList.add('active');
+    avisForm.style.display = 'block';
+    avisSuccess.classList.remove('show');
+    updateStarHint();
+    updateSubmitState();
+  }
+
+  function closeAvisModal() {
+    avisModal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  async function submitAvis() {
+    if (isSubmittingAvis) return;
+    if (currentRating < 1 || avisMessage.value.trim().length < 10) return;
+    if (!auth.currentUser) {
+      showToast('Session expirée. Reconnecte-toi.', 'error');
+      return;
+    }
+
+    isSubmittingAvis = true;
+    avisSubmit.disabled = true;
+    avisSubmit.classList.add('loading');
+
+    try {
+      let telegramSent = true;
+      const message = avisMessage.value.trim();
+      const userEmail = auth.currentUser.email || 'Anonyme';
+      const userName = userData?.firstName
+        ? `${userData.firstName} ${userData.lastName || ''}`.trim()
+        : 'Utilisateur';
+
+      await addDoc(collection(db, 'avis'), {
+        userId: auth.currentUser.uid,
+        userEmail, userName,
+        rating: currentRating, category: currentCategory,
+        message, createdAt: serverTimestamp(),
+        appVersion: '1.0.0', platform: navigator.userAgent
+      });
+
+      try {
+        await sendToTelegram({ userName, userEmail, rating: currentRating, category: currentCategory, message });
+      } catch (telegramError) {
+        telegramSent = false;
+        console.warn('Notification Telegram indisponible:', telegramError.message);
+      }
+
+      avisForm.style.display = 'none';
+      avisSuccess.classList.add('show');
+      showToast(
+        telegramSent ? 'Avis envoyé.' : 'Avis enregistré. Notification Telegram différée.',
+        telegramSent ? 'success' : 'info'
+      );
+    } catch (error) {
+      console.error('Erreur envoi avis:', error);
+      showToast('Impossible d\'envoyer ton avis. Réessaie.', 'error');
+    } finally {
+      isSubmittingAvis = false;
+      avisSubmit.classList.remove('loading');
+      updateSubmitState();
+    }
+  }
+
+  async function sendToTelegram({ userName, userEmail, rating, category, message }) {
+    const response = await fetch('/api/telegram', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userName, userEmail, rating, category, message })
+    });
+    const data = await response.json().catch(() => null);
+    if (!response.ok) throw new Error(data?.error || 'Notification Telegram indisponible.');
+    return data;
+  }
+
+  // ================================================================
+  // MODALE CONFIRMATION
+  // ================================================================
+  const confirmModal = document.getElementById('arvexaConfirmModal');
+  const confirmIconBox = document.getElementById('arvexaConfirmIconBox');
+  const confirmIcon = document.getElementById('arvexaConfirmIcon');
+  const confirmTitle = document.getElementById('arvexaConfirmTitle');
+  const confirmMessage = document.getElementById('arvexaConfirmMessage');
+  const confirmOk = document.getElementById('arvexaConfirmOk');
+  const confirmOkText = document.getElementById('arvexaConfirmOkText');
+  const confirmCancel = document.getElementById('arvexaConfirmCancel');
+  const confirmClose = document.getElementById('arvexaConfirmClose');
+
+  let confirmCallback = null;
+  let confirmCancelCb = null;   // ✅ v8.5 — Annuler/Échap/extérieur
+  let confirmedFlag = false;
+
+  window.arvexaConfirm = function(options) {
+    confirmTitle.textContent = options.title || 'Confirmation';
+    confirmMessage.innerHTML = options.message || 'Es-tu sûr de vouloir continuer ?';
+    confirmIcon.textContent = options.icon || '⚠️';
+    confirmOkText.textContent = options.confirmText || 'Confirmer';
+    confirmCancel.textContent = options.cancelText || 'Annuler';
+    confirmIconBox.className = 'arvexa-confirm-icon-box ' + (options.variant === 'primary' ? '' : 'danger');
+    confirmOk.className = 'arvexa-confirm-btn ' + (options.variant === 'primary' ? 'primary' : 'danger');
+    confirmCallback = options.onConfirm || null;
+    confirmCancelCb = options.onCancel || null;  // ✅ v8.5
+    confirmedFlag = false;
+    confirmModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  };
+
+  function closeArvexaConfirm() {
+    confirmModal.classList.remove('show');
+    document.body.style.overflow = '';
+    const ccb = confirmCancelCb;
+    confirmCallback = null;
+    confirmCancelCb = null;
+    if (!confirmedFlag && typeof ccb === 'function') ccb(); // ✅ v8.5 — fermée sans confirmer
+  }
+
+  confirmCancel.addEventListener('click', closeArvexaConfirm);
+  confirmClose.addEventListener('click', closeArvexaConfirm);
+  confirmOk.addEventListener('click', () => {
+    const cb = confirmCallback;
+    confirmedFlag = true;
+    closeArvexaConfirm();
+    if (typeof cb === 'function') cb();
+  });
+  confirmModal.addEventListener('click', (e) => {
+    if (e.target === confirmModal) closeArvexaConfirm();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && confirmModal.classList.contains('show')) closeArvexaConfirm();
+  });
+
+  // ================================================================
+  // LOAD USER DATA (temps réel)
+  // ================================================================
+  function loadUserData(user) {
+    if (unsubscribeUser && lastSnapshotUid === user.uid) return;
+    if (unsubscribeUser) { unsubscribeUser(); unsubscribeUser = null; }
+    lastSnapshotUid = user.uid;
+
+    const userRef = doc(db, 'users', user.uid);
+    unsubscribeUser = onSnapshot(userRef,
+      (docSnap) => {
+        const cached = getCachedUserData(user.uid);
+        if (docSnap.exists()) {
+          userData = docSnap.data();
+
+          if (userData.accountStatus === 'blocked') {
+            if (unsubscribeUser) { unsubscribeUser(); unsubscribeUser = null; }
+            lastSnapshotUid = null;
+            clearSession();
+            try { sessionStorage.setItem('arvexa_account_blocked', '1'); } catch (e) {}
+            signOut(auth)
+              .catch((err) => console.warn('[Auth] signOut bloqué :', err.code || err.message))
+              .finally(() => { window.location.replace('auth-choice.html'); });
+            return;
+          }
+
+          if (userData.accountStatus === 'paused') {
+            showToast('Ton compte est temporairement en pause. Contacte le support.', 'warning');
+            renderUserData(userData);
+            showDashboard();
+            return;
+          }
+
+          saveUserDataToCache(userData, user.uid);
+          renderUserData(userData);
+          showDashboard();
+          checkUnreadNotifications(user.uid);
+          hideSyncPill();
+        } else if (cached) {
+          userData = cached;
+          renderUserData(cached);
+          showDashboard();
+        } else {
+          handleMissingUserDoc(user.uid);
+        }
+      },
+      (error) => {
+        const cached = getCachedUserData(user.uid);
+        if (cached) {
+          userData = cached;
+          renderUserData(cached);
+          showDashboard();
+        } else {
+          showDashboard();
+        }
+        hideSyncPill();
+        console.warn('[Firestore] onSnapshot users:', error.code || error.message);
+      }
+    );
+  }
+
+  // ✅ CORRIGÉ — pas de redirection automatique vers register.html
+  // On affiche un message et on propose un contact, sans boucle.
+  let missingUserDocInFlight = false;
+  async function handleMissingUserDoc(uid) {
+    if (missingUserDocInFlight) return;
+    missingUserDocInFlight = true;
+    try {
+      await new Promise((r) => setTimeout(r, 900));
+      if (!auth.currentUser || auth.currentUser.uid !== uid) return;
+      const userRef = doc(db, 'users', uid);
+      const retry = await getDoc(userRef);
+      if (retry.exists()) {
+        userData = retry.data();
+        saveUserDataToCache(userData, uid);
+        renderUserData(userData);
+        showDashboard();
+        return;
+      }
+      // Profil toujours absent : message d'erreur, pas de redirection
+      showToast(
+        'Ton compte existe, mais son profil est incomplet. Contacte le support ARVEXA pour le restaurer.',
+        'error'
+      );
+      showDashboard();
+    } catch (e) {
+      console.warn('[Firestore] handleMissingUserDoc:', e.code || e.message);
+      showToast('Impossible de vérifier ton profil. Vérifie ta connexion.', 'error');
+      showDashboard();
+    } finally {
+      missingUserDocInFlight = false;
+    }
+  }
+
+  // ================================================================
+  // REFRESH
+  // ================================================================
+  async function refreshDashboard() {
+    const user = auth.currentUser;
+    if (!user) return;
+    const btn = document.getElementById('refreshBtn');
+    const icon = btn?.querySelector('i');
+    if (icon) {
+      icon.style.transition = 'transform 0.6s ease';
+      icon.style.transform = 'rotate(360deg)';
+      setTimeout(() => {
+        icon.style.transition = 'none';
+        icon.style.transform = 'rotate(0deg)';
+      }, 600);
+    }
+    try {
+      await getIdToken(user, true);
+      const userRef = doc(db, 'users', user.uid);
+      const snap = await getDoc(userRef, { source: 'server' });
+      if (snap.exists()) {
+        const fresh = snap.data();
+        userData = fresh;
+        saveUserDataToCache(fresh, user.uid);
+        renderUserData(fresh);
+      }
+      renderProgress();
+      showToast('Données actualisées', 'success');
+    } catch (e) {
+      console.warn('[Refresh] erreur:', e.message);
+      showToast('Impossible de rafraîchir. Vérifie ta connexion.', 'error');
+    }
+  }
+
+  // ================================================================
+  // AUTH ROBUSTE
+  // ================================================================
+  function redirectToLogin() {
+    if (isRedirecting) return;
+    if (auth.currentUser) return;
+    isRedirecting = true;
+    try {
+      sessionStorage.setItem('redirectAfterAuth', window.location.pathname + window.location.search);
+    } catch (e) {}
+    window.location.replace('auth-choice.html');
+  }
+
+  function initAuthGuard(onAuthenticated) {
+    if (authUnsubscribe) return;
+
+    authUnsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        if (authGraceTimer) { clearTimeout(authGraceTimer); authGraceTimer = null; }
+        if (!isAuthResolved) isAuthResolved = true;
+        if (user.uid === currentUid) return;
+        currentUid = user.uid;
+        saveSession(user);
+        onAuthenticated(user);
+        return;
+      }
+
+      if (!isAuthResolved) {
+        if (authGraceTimer) return;
+        authGraceTimer = setTimeout(() => {
+          authGraceTimer = null;
+          if (auth.currentUser) return;
+          // ✅ v5.4 — Hors ligne + session locale : on ne détruit RIEN et on
+          // ne jette pas l'élève dehors. Firebase peut mettre > 1,2 s à
+          // restaurer la session depuis IndexedDB (2G, appareil modeste) ;
+          // en attendant, l'accueil s'affiche depuis le cache local. Au
+          // retour du réseau, onAuthStateChanged tranche proprement
+          // (user → tableau de bord, null → déconnexion).
+          if (!navigator.onLine) {
+            let offUid = null;
+            try { offUid = (JSON.parse(localStorage.getItem('arvexa_session') || 'null') || {}).uid || null; } catch (e) {}
+            if (offUid) {
+              const cachedOffline = getCachedUserData(offUid);
+              isAuthResolved = true;
+              if (cachedOffline) { userData = cachedOffline; renderUserData(cachedOffline); }
+              showDashboard();
+              return;
+            }
+          }
+          if (authUnsubscribe) { try { authUnsubscribe(); } catch (e) {} authUnsubscribe = null; }
+          isAuthResolved = true;
+          currentUid = null;
+          lastSnapshotUid = null;
+          clearSession();
+          redirectToLogin();
+        }, 1200);
+        return;
+      }
+
+      currentUid = null;
+      lastSnapshotUid = null;
+      clearSession();
+      redirectToLogin();
+    });
+  }
+
+  // ================================================================
+  // LANCER LA PROTECTION
+  // ================================================================
+  initAuthGuard(async (user) => {
+    const instant = !!window.__ARVEXA_INSTANT__;
+
+    // Retour sur l'accueil dans la même session : le DOM est déjà peint
+    // depuis la snapshot — Firestore actualise en arrière-plan via
+    // onSnapshot, inutile de re-rendre le cache localStorage.
+    if (!instant) {
+      const cached = getCachedUserData(user.uid);
+      if (cached) {
+        const cachedSafe = { ...cached };
+        delete cachedSafe.premium;
+        delete cachedSafe.isUnlocked;
+        delete cachedSafe.hasDeposited;
+        delete cachedSafe.subscriptionEndDate;
+        userData = cachedSafe;
+        updateGreeting(cachedSafe.firstName || 'Élève');
+        showDashboard();
+      }
+    }
+
+    loadUserData(user);
+    renderProgress();
+
+    // Retour instantané : signal discret « mise à jour en arrière-plan »
+    // ✅ v5.9 — PLUS JAMAIS À CHAQUE RAFRAÎCHISSEMENT. La snapshot miroir
+    // localStorage (v5.4) rendait __ARVEXA_INSTANT__ vrai à CHAQUE
+    // chargement → la pastille s'affichait à chaque F5 et à chaque
+    // ouverture de l'app, comme si l'app se mettait à jour sans fin.
+    // Désormais elle n'apparaît QUE sur un vrai retour dans la même
+    // session (lien interne vers l'accueil) : origine « session » ET
+    // navigation de type « navigate » (pas reload, pas back_forward,
+    // pas démarrage à froid). Firestore actualise toujours en silence.
+    if (instant && window.__ARVEXA_INSTANT__ && window.__ARVEXA_INSTANT__.__src === 'session') {
+      let navType = 'navigate';
+      try {
+        const navEntries = performance.getEntriesByType && performance.getEntriesByType('navigation');
+        if (navEntries && navEntries[0] && navEntries[0].type) navType = navEntries[0].type;
+      } catch (e) {}
+      if (navType === 'navigate') showSyncPill();
+    }
+
+    setupFcmForeground();
+    installFcmRecurring();
+    if (instant) {
+      // Maintenance FCM différée : priorité à l'affichage instantané
+      setTimeout(() => { checkExistingFcmToken(user).catch(() => {}); }, 3000);
+      setTimeout(() => showFcmBanner(), 4000);
+    } else {
+      await checkExistingFcmToken(user);
+      setTimeout(() => showFcmBanner(), 1000);
+    }
+  });
+
+  // ================================================================
+  // PRÉCHAUFFAGE DU CACHE — pendant que l'utilisateur consulte
+  // l'accueil, Firestore télécharge en arrière-plan les données des
+  // autres pages (matières, chapitres, notifications) : leurs
+  // visites seront instantanées grâce au cache-first.
+  // ================================================================
+  async function prewarmPagesCache() {
+    try {
+      const u = auth.currentUser;
+      if (!u) return;
+      // 4 matières : doc + sous-collection chapters (données matiere.html)
+      for (const key of ['mathematiques', 'physique', 'chimie', 'svt']) {
+        await getDoc(doc(db, 'subjects', key)).catch(() => {});
+        await getDocs(collection(db, 'subjects', key, 'chapters')).catch(() => {});
+      }
+      // Notifications (notifications.html)
+      await getDocs(collection(db, 'users', u.uid, 'notifications')).catch(() => {});
+      console.log('[Cache] Préchauffage des pages terminé');
+    } catch (e) {}
+  }
+
+  // Une seule fois par session, après l'affichage du tableau de bord
+  setTimeout(() => {
+    try {
+      if (sessionStorage.getItem('arvexa_prewarm_done')) return;
+      sessionStorage.setItem('arvexa_prewarm_done', '1');
+      if (window.requestIdleCallback) {
+        window.requestIdleCallback(() => prewarmPagesCache());
+      } else {
+        setTimeout(prewarmPagesCache, 1500);
+      }
+    } catch (e) {}
+  }, 3000);
+
+  // ================================================================
+  // DÉCONNEXION
+  // ================================================================
+  async function performLogout() {
+    isRedirecting = true;
+    if (unsubscribeUser) { unsubscribeUser(); unsubscribeUser = null; }
+    if (authUnsubscribe) { try { authUnsubscribe(); } catch (e) {} authUnsubscribe = null; }
+    if (authGraceTimer) { clearTimeout(authGraceTimer); authGraceTimer = null; }
+    lastSnapshotUid = null;
+    clearSession();
+    try { await signOut(auth); } catch (e) {}
+    window.location.replace('auth-choice.html');
+  }
+
+  function handleLogout() {
+    window.arvexaConfirm({
+      title: 'Se déconnecter ?',
+      message: 'Tu devras te <strong>reconnecter</strong> pour accéder à ton compte.',
+      icon: '⚠️',
+      confirmText: 'Se déconnecter',
+      cancelText: 'Annuler',
+      variant: 'danger',
+      onConfirm: performLogout
+    });
+  }
+
+  // ================================================================
+  // ÉVÉNEMENTS
+  // ================================================================
+  document.getElementById('logoutBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    handleLogout();
+  });
+
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebarOverlay').classList.toggle('active');
+  });
+
+  document.getElementById('sidebarOverlay').addEventListener('click', () => {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('active');
+  });
+
+  document.getElementById('notifBtn').addEventListener('click', () => {
+    window.location.href = 'notifications.html';
+  });
+
+  document.getElementById('profileBtn').addEventListener('click', () => {
+    window.location.href = 'profil.html';
+  });
+
+  document.getElementById('refreshBtn').addEventListener('click', refreshDashboard);
+
+  document.getElementById('avisLinkSidebar').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebarOverlay').classList.remove('active');
+    openAvisModal();
+  });
+
+  document.getElementById('avisLinkFooter').addEventListener('click', (e) => {
+    e.preventDefault();
+    openAvisModal();
+  });
+
+  document.getElementById('avisBtnInline').addEventListener('click', openAvisModal);
+
+  // Ouverture auto de la modale Avis (?avis=1) — lien « Donner mon avis » des autres pages
+  try {
+    if (new URLSearchParams(window.location.search).get('avis') === '1') {
+      openAvisModal();
+      history.replaceState(null, '', window.location.pathname);
+    }
+  } catch (e) { /* no-op */ }
+
+  avisClose.addEventListener('click', closeAvisModal);
+  avisCancel.addEventListener('click', closeAvisModal);
+  avisSuccessClose.addEventListener('click', closeAvisModal);
+  avisSubmit.addEventListener('click', submitAvis);
+
+  avisModal.addEventListener('click', (e) => {
+    if (e.target === avisModal) closeAvisModal();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && avisModal.classList.contains('show')) closeAvisModal();
+  });
+
+  // Rafraîchir la progression quand l'utilisateur revient sur la page
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) renderProgress();
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') renderProgress();
+  });
+
+  window.addEventListener('beforeunload', () => {
+    if (authGraceTimer) { clearTimeout(authGraceTimer); authGraceTimer = null; }
+  });
+
+  console.log('🚀 ARVEXA School — Accueil : compte à rebours BAC en ouverture');
+  </script>
+</body>
+</html>

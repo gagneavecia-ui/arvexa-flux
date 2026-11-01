@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+    <title>ARVEXA — Calculatrice scientifique</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0A0A">
+<script>(function(){try{if(localStorage.getItem('arvexa-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}})();</script>
+<script src="theme.js"></script><script src="arvexa-i18n.js" defer></script>
+  <meta name="description" content="ARVEXA School - Calculatrice scientifique">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="stylesheet" href="perf.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="analytics.js"></script>
+  <script src="register-sw.js" defer></script>
+
+  <link rel="stylesheet" href="arvexa-ui.css">
+  <style>
+    /* ============================================================
+       ROOT
+       ============================================================ */
+    :root {
+      --accent: #B8860B;
+      --accent-bright: #E0B84A;
+      --accent-dim: rgba(184, 134, 11, 0.08);
+      --success: #2D7D5A;
+      --success-light: #3AB67E;
+      --danger: #B85C3A;
+      --warning: #D4A017;
+
+      --bg-dark: #0A0A0A;
+      --bg-surface: #141414;
+      --bg-card: rgba(20, 20, 20, 0.7);
+      --bg-elevated: rgba(255, 255, 255, 0.02);
+
+      --text-light: #F5F0E8;
+      --text-dim: #8A8A7A;
+      --text-muted: #5A5A4A;
+
+      --border-soft: rgba(255, 255, 255, 0.05);
+      --border-gold: rgba(184, 134, 11, 0.15);
+
+      --transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      --transition-fast: all 0.1s ease;
+      --radius: 16px;
+      --radius-lg: 20px;
+
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-size: 14px;
+      line-height: 1.4;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      inset: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .gradient-bg {
+      position: fixed; inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 40% 30% at 30% 15%, rgba(184, 134, 11, .16) 0%, transparent 70%),
+        radial-gradient(ellipse 35% 25% at 75% 85%, rgba(184,134,11,.05) 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-deep) 100%);
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .header {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      padding-top: calc(8px + var(--safe-top));
+      background: rgba(var(--rgb-veil), .92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(184,134,11,.06);
+      gap: 8px;
+      min-height: 48px;
+      z-index: 10;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 15px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .back-btn:hover {
+      border-color: rgba(184,134,11,.2);
+      color: var(--accent-bright);
+      background: rgba(184,134,11,.04);
+    }
+
+    .page-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-light);
+      font-family: 'Playfair Display', serif;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .page-title i {
+      color: var(--accent-bright);
+      margin-right: 5px;
+      font-size: 13px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .mode-toggle {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      background: rgba(184,134,11,.08);
+      border: 1px solid rgba(184,134,11,.15);
+      color: var(--accent-bright);
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.5px;
+    }
+    .mode-toggle:hover {
+      background: rgba(184,134,11,.15);
+      transform: translateY(-1px);
+    }
+    .mode-toggle i { font-size: 10px; }
+
+    .icon-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-btn:hover {
+      border-color: rgba(184,134,11,.2);
+      color: var(--accent-bright);
+      background: rgba(184,134,11,.04);
+    }
+    .icon-btn.active {
+      background: rgba(184,134,11,.12);
+      color: var(--accent-bright);
+      border-color: rgba(184,134,11,.25);
+    }
+
+    /* ============================================================
+       DISPLAY
+       ============================================================ */
+    .display {
+      flex-shrink: 0;
+      padding: 12px 16px 14px;
+      background: linear-gradient(180deg, rgba(var(--rgb-card), .6) 0%, rgba(var(--rgb-veil), .3) 100%);
+      border-bottom: 1px solid rgba(184,134,11,.08);
+      position: relative;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .display::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--success), var(--accent));
+    }
+
+    .display-status {
+      position: absolute;
+      top: 10px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .display-status .mem-indicator {
+      color: var(--accent-bright);
+      background: rgba(184,134,11,.12);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 9px;
+      display: none;
+    }
+    .display-status .mem-indicator.visible { display: inline-block; }
+
+    .display-status .paren-indicator {
+      color: var(--accent-bright);
+      font-size: 11px;
+      display: none;
+    }
+    .display-status .paren-indicator.visible { display: inline-block; }
+
+    .display-expr {
+      font-size: 15px;
+      color: var(--text-dim);
+      text-align: right;
+      word-break: break-all;
+      line-height: 1.4;
+      min-height: 22px;
+      max-height: 60px;
+      overflow-y: auto;
+      padding: 0 4px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+    .display-expr::-webkit-scrollbar { width: 2px; }
+    .display-expr::-webkit-scrollbar-thumb {
+      background: rgba(184,134,11,.3);
+      border-radius: 8px;
+    }
+
+    .display-result {
+      font-size: 34px;
+      font-weight: 700;
+      color: var(--text-light);
+      text-align: right;
+      font-family: 'Playfair Display', serif;
+      line-height: 1.2;
+      word-break: break-all;
+      min-height: 42px;
+      padding: 0 4px;
+      transition: font-size 0.15s ease;
+    }
+    .display-result.error {
+      color: var(--danger);
+      font-size: 18px;
+      font-family: 'Inter', sans-serif;
+    }
+    .display-result.small { font-size: 24px; }
+    .display-result.tiny { font-size: 18px; }
+
+    /* ============================================================
+       KEYPAD
+       ============================================================ */
+    .keypad {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 10px 8px 8px;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .keypad-row {
+      display: grid;
+      gap: 6px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .row-sci { grid-template-columns: repeat(5, 1fr); }
+    .row-sci-2 { grid-template-columns: repeat(5, 1fr); }
+    .row-main { grid-template-columns: repeat(4, 1fr); }
+
+    .cb {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      border: 1px solid rgba(var(--rgb-soft), .04);
+      background: rgba(var(--rgb-soft), .03);
+      color: var(--text-light);
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.1s ease, transform 0.08s ease, border-color 0.15s ease;
+      font-family: 'Inter', sans-serif;
+      min-height: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cb:active {
+      transform: scale(0.95);
+      background: rgba(var(--rgb-soft), .08);
+    }
+
+    .cb:hover {
+      border-color: rgba(184,134,11,.2);
+      background: rgba(var(--rgb-soft), .05);
+    }
+
+    .cb.fn {
+      color: var(--accent-bright);
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(184,134,11,.06);
+      border-color: rgba(184,134,11,.1);
+    }
+    .cb.fn:active { background: rgba(184,134,11,.16); }
+    .cb.fn:hover {
+      background: rgba(184,134,11,.1);
+      border-color: rgba(184,134,11,.25);
+    }
+
+    .cb.op {
+      color: var(--accent-bright);
+      font-size: 20px;
+      font-weight: 600;
+      background: rgba(184,134,11,.08);
+      border-color: rgba(184,134,11,.1);
+    }
+    .cb.op:active { background: rgba(184,134,11,.18); }
+    .cb.op:hover {
+      background: rgba(184,134,11,.14);
+      border-color: rgba(184,134,11,.25);
+    }
+
+    .cb.num {
+      font-size: 20px;
+      font-weight: 600;
+      background: rgba(var(--rgb-soft), .05);
+      border-color: rgba(var(--rgb-soft), .06);
+    }
+    .cb.num:active { background: rgba(var(--rgb-soft), .12); }
+
+    .cb.eq {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--on-gold);
+      font-size: 22px;
+      font-weight: 800;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(184,134,11,.25);
+    }
+    .cb.eq:active {
+      transform: scale(0.95);
+      box-shadow: 0 2px 8px rgba(184,134,11,.4);
+    }
+    .cb.eq:hover {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent-bright));
+      transform: translateY(-1px);
+    }
+
+    .cb.danger { color: var(--danger); font-weight: 700; }
+    .cb.danger:active { background: rgba(184,92,58,.15); }
+    .cb.danger:hover {
+      background: rgba(184,92,58,.1);
+      border-color: rgba(184,92,58,.25);
+    }
+
+    .cb.clear {
+      color: var(--danger-light);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .cb.clear:hover {
+      background: rgba(231, 76, 60, 0.1);
+      border-color: rgba(231, 76, 60, 0.25);
+    }
+
+    .cb sup { font-size: 0.7em; vertical-align: super; }
+    .cb sub { font-size: 0.7em; vertical-align: sub; }
+
+    /* ============================================================
+       TOOLBAR
+       ============================================================ */
+    .toolbar {
+      flex-shrink: 0;
+      display: flex;
+      gap: 6px;
+      padding: 8px 8px;
+      padding-bottom: calc(8px + var(--safe-bottom));
+      background: rgba(var(--rgb-veil), .92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(184,134,11,.08);
+    }
+
+    .toolbar-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 8px;
+      border-radius: 10px;
+      background: rgba(var(--rgb-soft), .03);
+      border: 1px solid rgba(var(--rgb-soft), .05);
+      color: var(--text-dim);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+    }
+
+    .toolbar-btn:hover {
+      background: rgba(184,134,11,.08);
+      color: var(--accent-bright);
+      border-color: rgba(184,134,11,.2);
+      transform: translateY(-1px);
+    }
+    .toolbar-btn:active { transform: scale(0.97); }
+    .toolbar-btn i {
+      font-size: 13px;
+      color: var(--accent-bright);
+    }
+
+    /* ============================================================
+       MODALES
+       ============================================================ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.25,1,0.5,1);
+    }
+
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-sheet {
+      width: 100%;
+      max-width: 560px;
+      max-height: 85vh;
+      background: var(--bg-surface);
+      border-radius: 20px 20px 0 0;
+      border-top: 1px solid rgba(184,134,11,.15);
+      padding: 16px;
+      padding-bottom: calc(16px + var(--safe-bottom));
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.25,1,0.5,1);
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .modal-overlay.show .modal-sheet {
+      transform: translateY(0);
+    }
+
+    .modal-sheet::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 4px;
+      border-radius: 8px;
+      background: rgba(var(--rgb-soft), 0.15);
+      cursor: grab;
+      z-index: 10;
+      transition: background 0.2s ease, width 0.2s ease;
+    }
+
+    .modal-sheet::before:hover {
+      background: rgba(224, 184, 74, 0.4);
+      width: 50px;
+    }
+
+    .modal-sheet.dragging {
+      transition: none;
+    }
+
+    .modal-sheet.dragging::before {
+      background: rgba(224, 184, 74, 0.6);
+      cursor: grabbing;
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 12px 0 16px;
+      gap: 10px;
+    }
+
+    .modal-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-light);
+      font-family: 'Playfair Display', serif;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .modal-title i { color: var(--accent-bright); }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      border: 1px solid rgba(var(--rgb-soft), .05);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      transition: var(--transition);
+    }
+    .modal-close:hover {
+      color: var(--text-light);
+      border-color: rgba(184,134,11,.25);
+      background: rgba(184,134,11,.06);
+    }
+
+    /* ============================================================
+       HISTORIQUE
+       ============================================================ */
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+
+    .history-item {
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(var(--rgb-soft), .02);
+      border: 1px solid rgba(var(--rgb-soft), .04);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .history-item:hover {
+      background: rgba(184,134,11,.06);
+      border-color: rgba(184,134,11,.15);
+      transform: translateX(3px);
+    }
+
+    .history-item .h-expr {
+      font-size: 12px;
+      color: var(--text-muted);
+      word-break: break-all;
+      margin-bottom: 4px;
+    }
+    .history-item .h-res {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent-bright);
+      font-family: 'Playfair Display', serif;
+      text-align: right;
+    }
+
+    .history-empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .history-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .history-clear {
+      flex: 1;
+      padding: 11px;
+      border-radius: 12px;
+      background: rgba(184,92,58,.08);
+      border: 1px solid rgba(184,92,58,.15);
+      color: var(--danger);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .history-clear:hover {
+      background: rgba(184,92,58,.15);
+      transform: translateY(-1px);
+    }
+
+    /* ============================================================
+       CONSTANTES
+       ============================================================ */
+    .const-search-wrap {
+      position: relative;
+      margin-bottom: 12px;
+    }
+    .const-search-wrap i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 13px;
+      pointer-events: none;
+    }
+    .const-search {
+      width: 100%;
+      padding: 11px 14px 11px 38px;
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      background: rgba(var(--rgb-soft), .03);
+      color: var(--text-light);
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: var(--transition);
+    }
+    .const-search:focus {
+      border-color: rgba(184,134,11,.3);
+      background: rgba(184,134,11,.02);
+    }
+    .const-search::placeholder { color: var(--text-muted); }
+
+    .const-category {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent-bright);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 12px 0 6px;
+      border-bottom: 1px solid rgba(184,134,11,.1);
+      margin-bottom: 4px;
+    }
+
+    .const-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      max-height: 55vh;
+      overflow-y: auto;
+    }
+
+    .const-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 4px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: var(--transition);
+      gap: 10px;
+    }
+    .const-item:hover {
+      background: rgba(184,134,11,.06);
+      transform: translateX(3px);
+    }
+    .const-item:active { transform: scale(0.98); }
+
+    .const-item .ci-left { min-width: 0; flex: 1; }
+    .const-item .ci-symbol {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--accent-bright);
+      font-family: 'Playfair Display', serif;
+      line-height: 1.2;
+    }
+    .const-item .ci-name {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .const-item .ci-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .const-item .ci-value {
+      font-size: 13px;
+      color: var(--text-light);
+      font-weight: 600;
+      font-family: 'Playfair Display', serif;
+    }
+    .const-item .ci-unit {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ============================================================
+       CONVERSIONS
+       ============================================================ */
+    .conv-cats {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .conv-cat {
+      padding: 7px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(var(--rgb-soft), .05);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Inter', sans-serif;
+    }
+    .conv-cat:hover {
+      color: var(--text-dim);
+      border-color: rgba(var(--rgb-soft), .1);
+    }
+    .conv-cat.active {
+      background: rgba(184,134,11,.12);
+      color: var(--accent-bright);
+      border-color: rgba(184,134,11,.25);
+    }
+
+    .conv-field { margin-bottom: 14px; }
+    .conv-field label {
+      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .conv-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .conv-input {
+      flex: 1;
+      min-width: 0;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      background: rgba(var(--rgb-soft), .03);
+      color: var(--text-light);
+      font-size: 16px;
+      font-weight: 600;
+      font-family: 'Playfair Display', serif;
+      outline: none;
+      transition: var(--transition);
+    }
+    .conv-input:focus {
+      border-color: rgba(184,134,11,.3);
+      background: rgba(184,134,11,.02);
+    }
+    .conv-select {
+      padding: 12px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-surface);
+      color: var(--text-light);
+      font-size: 12px;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      min-width: 90px;
+    }
+
+    .conv-swap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(184,134,11,.15);
+      background: rgba(184,134,11,.06);
+      color: var(--accent-bright);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 14px;
+      margin: 0 auto;
+      flex-shrink: 0;
+    }
+    .conv-swap:hover {
+      background: rgba(184,134,11,.15);
+      transform: rotate(180deg);
+    }
+
+    .conv-formula {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 4px;
+      min-height: 18px;
+    }
+
+    /* ============================================================
+       MENU
+       ============================================================ */
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* ============================================================
+       TOAST
+       ============================================================ */
+    .toast {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      padding: 11px 20px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-gold);
+      color: var(--text-light);
+      font-size: 13px;
+      font-weight: 500;
+      z-index: 2000;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.25,1,0.5,1);
+      pointer-events: none;
+      max-width: 90%;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,.4);
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 480px) {
+      .display { padding: 10px 14px 12px; min-height: 130px; }
+      .display-result { font-size: 30px; }
+      .display-expr { font-size: 14px; }
+      .cb { font-size: 13px; border-radius: 10px; }
+      .cb.fn { font-size: 11px; }
+      .cb.num { font-size: 18px; }
+      .cb.op { font-size: 18px; }
+      .cb.eq { font-size: 20px; }
+      .page-title { font-size: 13px; }
+    }
+
+    @media (max-width: 360px) {
+      .display { min-height: 110px; padding: 8px 12px 10px; }
+      .display-result { font-size: 24px; }
+      .display-expr { font-size: 13px; }
+      .keypad { gap: 4px; padding: 6px 6px 4px; }
+      .keypad-row { gap: 4px; }
+      .cb { font-size: 12px; border-radius: 8px; }
+      .cb.fn { font-size: 10px; }
+      .cb.num { font-size: 16px; }
+      .cb.op { font-size: 16px; }
+      .cb.eq { font-size: 18px; }
+      .toolbar { gap: 4px; padding: 6px 6px; padding-bottom: calc(6px + var(--safe-bottom)); }
+      .toolbar-btn { font-size: 10px; padding: 8px 4px; gap: 4px; }
+      .toolbar-btn i { font-size: 12px; }
+      .back-btn { width: 30px; height: 30px; font-size: 13px; }
+      .mode-toggle { padding: 5px 10px; font-size: 10px; }
+    }
+
+    @media (max-height: 600px) and (orientation: landscape) {
+      .display { min-height: 80px; padding: 6px 14px 8px; }
+      .display-result { font-size: 24px; min-height: 30px; }
+      .display-expr { font-size: 13px; max-height: 30px; }
+      .keypad { gap: 3px; padding: 6px 8px 4px; }
+      .keypad-row { gap: 3px; }
+      .cb { font-size: 12px; }
+      .cb.num { font-size: 15px; }
+      .cb.op { font-size: 15px; }
+      .toolbar { padding: 5px 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+  <!-- ⚡ ARVEXA FLUX v1 — navigation instantanée -->
+  <script src="flux-router.js?v=flux1" defer></script>
+</head>
+<body>
+
+<div class="gradient-bg"></div>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="header">
+  <div class="header-left">
+    <a href="index.html" class="back-btn" aria-label="Retour">
+      <i class="fas fa-arrow-left"></i>
+    </a>
+    <div class="page-title"><i class="fas fa-calculator"></i> Calculatrice</div>
+  </div>
+  <div class="header-right">
+    <button class="mode-toggle" id="modeToggle" title="Degrés / Radians">
+      <i class="fas fa-rotate"></i>
+      <span id="modeLabel">DEG</span>
+    </button>
+    <button class="icon-btn" id="menuBtn" aria-label="Menu">
+      <i class="fas fa-ellipsis-vertical"></i>
+    </button>
+  </div>
+</header>
+
+<!-- ============================================================
+     DISPLAY
+     ============================================================ -->
+<div class="display">
+  <div class="display-status">
+    <span class="paren-indicator" id="parenIndicator">0 parenthèse(s) ouverte(s)</span>
+    <span class="mem-indicator" id="memIndicator">M</span>
+  </div>
+
+  <div class="display-expr" id="displayExpr"></div>
+  <div class="display-result" id="displayResult">0</div>
+</div>
+
+<!-- ============================================================
+     KEYPAD
+     ============================================================ -->
+<div class="keypad">
+
+  <!-- Rangée scientifique 1 -->
+  <div class="keypad-row row-sci">
+    <button class="cb fn" data-fn="sin">sin</button>
+    <button class="cb fn" data-fn="cos">cos</button>
+    <button class="cb fn" data-fn="tan">tan</button>
+    <button class="cb fn" data-fn="ln">ln</button>
+    <button class="cb fn" data-fn="log">log</button>
+  </div>
+
+  <!-- Rangée scientifique 2 -->
+  <div class="keypad-row row-sci-2">
+    <button class="cb fn" data-fn="asin">sin⁻¹</button>
+    <button class="cb fn" data-fn="acos">cos⁻¹</button>
+    <button class="cb fn" data-fn="atan">tan⁻¹</button>
+    <button class="cb fn" data-fn="sqrt">√</button>
+    <button class="cb fn" data-fn="cbrt">∛</button>
+  </div>
+
+  <!-- Rangée scientifique 3 -->
+  <div class="keypad-row row-sci-2">
+    <button class="cb fn" data-fn="square">x²</button>
+    <button class="cb fn" data-fn="cube">x³</button>
+    <button class="cb fn" data-fn="power">xʸ</button>
+    <button class="cb fn" data-fn="exp">eˣ</button>
+    <button class="cb fn" data-fn="tenpow">10ˣ</button>
+  </div>
+
+  <!-- Rangée scientifique 4 (sans nCr/nPr) -->
+  <div class="keypad-row row-sci-2">
+    <button class="cb fn" data-fn="inv">1/x</button>
+    <button class="cb fn" data-fn="abs">|x|</button>
+    <button class="cb fn" data-fn="fact">n!</button>
+    <button class="cb fn" data-fn="percent">%</button>
+    <button class="cb fn" data-const="pi">π</button>
+  </div>
+
+  <!-- Rangée principale 1 -->
+  <div class="keypad-row row-main">
+    <button class="cb clear" id="btnAC">AC</button>
+    <button class="cb fn" id="btnDel"><i class="fas fa-delete-left"></i></button>
+    <button class="cb fn" id="btnParen" style="font-size:14px">( )</button>
+    <button class="cb op" id="btnDiv">÷</button>
+  </div>
+
+  <!-- Rangée principale 2 -->
+  <div class="keypad-row row-main">
+    <button class="cb num" data-n="7">7</button>
+    <button class="cb num" data-n="8">8</button>
+    <button class="cb num" data-n="9">9</button>
+    <button class="cb op" id="btnMul">×</button>
+  </div>
+
+  <!-- Rangée principale 3 -->
+  <div class="keypad-row row-main">
+    <button class="cb num" data-n="4">4</button>
+    <button class="cb num" data-n="5">5</button>
+    <button class="cb num" data-n="6">6</button>
+    <button class="cb op" id="btnSub">−</button>
+  </div>
+
+  <!-- Rangée principale 4 -->
+  <div class="keypad-row row-main">
+    <button class="cb num" data-n="1">1</button>
+    <button class="cb num" data-n="2">2</button>
+    <button class="cb num" data-n="3">3</button>
+    <button class="cb op" id="btnAdd">+</button>
+  </div>
+
+  <!-- Rangée principale 5 -->
+  <div class="keypad-row row-main">
+    <button class="cb fn" data-const="e">e</button>
+    <button class="cb num" data-n="0">0</button>
+    <button class="cb num" data-n=".">.</button>
+    <button class="cb eq" id="btnEq">=</button>
+  </div>
+
+</div>
+
+<!-- ============================================================
+     TOOLBAR
+     ============================================================ -->
+<div class="toolbar">
+  <button class="toolbar-btn" id="toolHistory">
+    <i class="fas fa-clock-rotate-left"></i>
+    Historique
+  </button>
+  <button class="toolbar-btn" id="toolConst">
+    <i class="fas fa-atom"></i>
+    Constantes
+  </button>
+  <button class="toolbar-btn" id="toolConvert">
+    <i class="fas fa-right-left"></i>
+    Convertir
+  </button>
+</div>
+
+<!-- ============================================================
+     MODALE : HISTORIQUE
+     ============================================================ -->
+<div class="modal-overlay" id="modalHistory">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <div class="modal-title"><i class="fas fa-clock-rotate-left"></i> Historique</div>
+      <button class="modal-close" data-close="modalHistory"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="history-list" id="historyList">
+      <div class="history-empty">Aucun calcul pour le moment</div>
+    </div>
+    <div class="history-actions" id="historyActions" style="display:none;">
+      <button class="history-clear" id="clearHistory">
+        <i class="fas fa-trash"></i> Effacer tout l'historique
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODALE : CONSTANTES
+     ============================================================ -->
+<div class="modal-overlay" id="modalConst">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <div class="modal-title"><i class="fas fa-atom"></i> Constantes</div>
+      <button class="modal-close" data-close="modalConst"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="const-search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" class="const-search" id="constSearch" placeholder="Rechercher une constante...">
+    </div>
+    <div class="const-list" id="constList"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODALE : CONVERSIONS
+     ============================================================ -->
+<div class="modal-overlay" id="modalConvert">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <div class="modal-title"><i class="fas fa-right-left"></i> Conversions</div>
+      <button class="modal-close" data-close="modalConvert"><i class="fas fa-xmark"></i></button>
+    </div>
+
+    <div class="conv-cats" id="convCats"></div>
+
+    <div class="conv-field">
+      <label>Valeur</label>
+      <div class="conv-row">
+        <input type="number" class="conv-input" id="convFrom" value="1" step="any" inputmode="decimal">
+        <select class="conv-select" id="convFromUnit"></select>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:center;margin:6px 0;">
+      <button class="conv-swap" id="convSwap" aria-label="Inverser">
+        <i class="fas fa-arrow-down-up-across-line"></i>
+      </button>
+    </div>
+
+    <div class="conv-field">
+      <label>Résultat</label>
+      <div class="conv-row">
+        <input type="text" class="conv-input" id="convTo" readonly style="color:var(--accent-bright)">
+        <select class="conv-select" id="convToUnit"></select>
+      </div>
+    </div>
+
+    <div class="conv-formula" id="convFormula"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MODALE : MENU
+     ============================================================ -->
+<div class="modal-overlay" id="modalMenu">
+  <div class="modal-sheet">
+    <div class="modal-head">
+      <div class="modal-title"><i class="fas fa-ellipsis-vertical"></i> Menu</div>
+      <button class="modal-close" data-close="modalMenu"><i class="fas fa-xmark"></i></button>
+    </div>
+
+    <div class="menu-list">
+      <button class="toolbar-btn" id="menuAns" style="justify-content:flex-start;padding:14px;">
+        <i class="fas fa-reply"></i> Insérer le dernier résultat (Ans)
+      </button>
+      <button class="toolbar-btn" id="menuMem" style="justify-content:flex-start;padding:14px;">
+        <i class="fas fa-bookmark"></i> Mémoire : <strong id="memValue" style="margin-left:auto;color:var(--accent-bright)">0</strong>
+      </button>
+      <button class="toolbar-btn" id="menuMemPlus" style="justify-content:flex-start;padding:14px;">
+        <i class="fas fa-plus"></i> Ajouter à la mémoire (M+)
+      </button>
+      <button class="toolbar-btn" id="menuMemMinus" style="justify-content:flex-start;padding:14px;">
+        <i class="fas fa-minus"></i> Soustraire de la mémoire (M−)
+      </button>
+      <button class="toolbar-btn" id="menuMemClear" style="justify-content:flex-start;padding:14px;">
+        <i class="fas fa-eraser"></i> Vider la mémoire
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ================================================================
+// CALCULATRICE — Version avec swipe-to-close
+// ================================================================
+(function() {
+  'use strict';
+
+  // ============================================================
+  // DOM
+  // ============================================================
+  const displayExpr = document.getElementById('displayExpr');
+  const displayResult = document.getElementById('displayResult');
+  const parenIndicator = document.getElementById('parenIndicator');
+  const memIndicator = document.getElementById('memIndicator');
+  const modeToggle = document.getElementById('modeToggle');
+  const modeLabel = document.getElementById('modeLabel');
+  const toast = document.getElementById('toast');
+
+  // ============================================================
+  // ÉTAT
+  // ============================================================
+  let expr = '';
+  let calc = '';
+  let openP = 0;
+  let isDeg = true;
+  let done = false;
+  let memory = 0;
+  let hasMem = false;
+  let lastAns = 0;
+  let history = [];
+
+  // ============================================================
+  // STORAGE
+  // ============================================================
+  const STORAGE_HISTORY = 'arvexa_calc_history';
+  const STORAGE_MEM = 'arvexa_calc_mem';
+  const STORAGE_ANS = 'arvexa_calc_ans';
+
+  function loadStorage() {
+    try {
+      const h = localStorage.getItem(STORAGE_HISTORY);
+      if (h) history = JSON.parse(h);
+      const m = localStorage.getItem(STORAGE_MEM);
+      if (m) {
+        const parsed = parseFloat(m);
+        if (!isNaN(parsed)) {
+          memory = parsed;
+          hasMem = memory !== 0;
+          if (hasMem) memIndicator.classList.add('visible');
+        }
+      }
+      const a = localStorage.getItem(STORAGE_ANS);
+      if (a) lastAns = parseFloat(a) || 0;
+    } catch (e) {}
+  }
+
+  function saveHistory() {
+    try { localStorage.setItem(STORAGE_HISTORY, JSON.stringify(history.slice(0, 50))); } catch (e) {}
+  }
+
+  function saveMemory() {
+    try { localStorage.setItem(STORAGE_MEM, String(memory)); } catch (e) {}
+  }
+
+  function saveAns() {
+    try { localStorage.setItem(STORAGE_ANS, String(lastAns)); } catch (e) {}
+  }
+
+  // ============================================================
+  // VIBRATION
+  // ============================================================
+  function vibrate(ms) {
+    if (navigator.vibrate) {
+      try { navigator.vibrate(ms); } catch (e) {}
+    }
+  }
+
+  // ============================================================
+  // TOAST
+  // ============================================================
+  let toastTimer = null;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+
+  // ============================================================
+  // FORMATAGE
+  // ============================================================
+  function formatNumber(n) {
+    if (!isFinite(n)) return n > 0 ? '∞' : (n < 0 ? '-∞' : 'Erreur');
+    if (isNaN(n)) return 'Erreur';
+
+    const absN = Math.abs(n);
+    if (absN !== 0 && (absN >= 1e12 || absN < 1e-6)) {
+      return n.toExponential(6).replace('e+', ' × 10^').replace('e-', ' × 10^−');
+    }
+
+    const frac = toSimpleFraction(n);
+    if (frac) return frac;
+
+    if (Number.isInteger(n)) return n.toLocaleString('fr-FR');
+
+    const rounded = parseFloat(n.toPrecision(10));
+    return rounded.toLocaleString('fr-FR', { maximumFractionDigits: 10 });
+  }
+
+  function toSimpleFraction(n) {
+    if (!isFinite(n) || Number.isInteger(n)) return null;
+    const absN = Math.abs(n);
+    if (absN >= 100 || absN < 0.001) return null;
+
+    const denominators = [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 20, 25, 50];
+    for (const d of denominators) {
+      const num = n * d;
+      if (Math.abs(num - Math.round(num)) < 1e-9) {
+        const roundedNum = Math.round(num);
+        const g = gcd(Math.abs(roundedNum), d);
+        if (g > 1) {
+          return `${roundedNum / g}/${d / g}`;
+        }
+        return `${roundedNum}/${d}`;
+      }
+    }
+    return null;
+  }
+
+  function gcd(a, b) {
+    return b === 0 ? a : gcd(b, a % b);
+  }
+
+  // ============================================================
+  // NORMALIZE
+  // ============================================================
+  function normalizeInput(str) {
+    return String(str)
+      .replace(/[−–—]/g, '-')
+      .replace(/[×✕✖]/g, '*')
+      .replace(/[÷∕]/g, '/')
+      .replace(/²/g, '^2')
+      .replace(/³/g, '^3')
+      .replace(/π/g, 'PI')
+      .replace(/√/g, 'sqrt');
+  }
+
+  // ============================================================
+  // ÉVALUATION
+  // ============================================================
+  const toRad = d => d * Math.PI / 180;
+  const toDeg = r => r * 180 / Math.PI;
+
+  function factorial(n) {
+    if (n < 0 || !Number.isInteger(n)) return NaN;
+    if (n > 170) return Infinity;
+    let r = 1;
+    for (let i = 2; i <= n; i++) r *= i;
+    return r;
+  }
+
+  function safeEval(raw) {
+    let e = normalizeInput(raw);
+
+    if (isDeg) {
+      e = e.replace(/\bsin\(/g, '__sinD(');
+      e = e.replace(/\bcos\(/g, '__cosD(');
+      e = e.replace(/\btan\(/g, '__tanD(');
+      e = e.replace(/\basin\(/g, '__asinD(');
+      e = e.replace(/\bacos\(/g, '__acosD(');
+      e = e.replace(/\batan\(/g, '__atanD(');
+    } else {
+      e = e.replace(/\bsin\(/g, 'Math.sin(');
+      e = e.replace(/\bcos\(/g, 'Math.cos(');
+      e = e.replace(/\btan\(/g, 'Math.tan(');
+      e = e.replace(/\basin\(/g, 'Math.asin(');
+      e = e.replace(/\bacos\(/g, 'Math.acos(');
+      e = e.replace(/\batan\(/g, 'Math.atan(');
+    }
+
+    e = e.replace(/\bln\(/g, 'Math.log(');
+    e = e.replace(/\blog\(/g, 'Math.log10(');
+    e = e.replace(/\bsqrt\(/g, 'Math.sqrt(');
+    e = e.replace(/\bcbrt\(/g, 'Math.cbrt(');
+    e = e.replace(/\babs\(/g, 'Math.abs(');
+    e = e.replace(/\bexp\(/g, 'Math.exp(');
+    e = e.replace(/\bfact\(/g, 'fact(');
+
+    e = e.replace(/\bPI\b/g, '(' + Math.PI + ')');
+    e = e.replace(/π/g, '(' + Math.PI + ')');
+
+    e = e.replace(/(^|[^a-zA-Z_])e(?![a-zA-Z_])/g, '$1(' + Math.E + ')');
+
+    e = e.replace(/(\d)\(/g, '$1*(');
+    e = e.replace(/\)(\d)/g, ')*$1');
+    e = e.replace(/\)\(/g, ')*(');
+    e = e.replace(/(\d)(Math\.)/g, '$1*$2');
+
+    try {
+      const fn = new Function(
+        '__sinD', '__cosD', '__tanD', '__asinD', '__acosD', '__atanD',
+        'fact',
+        `'use strict'; return (${e});`
+      );
+      return fn(
+        x => Math.sin(toRad(x)),
+        x => Math.cos(toRad(x)),
+        x => Math.tan(toRad(x)),
+        x => toDeg(Math.asin(Math.min(1, Math.max(-1, x)))),
+        x => toDeg(Math.acos(Math.min(1, Math.max(-1, x)))),
+        x => toDeg(Math.atan(x)),
+        factorial
+      );
+    } catch (err) {
+      return NaN;
+    }
+  }
+
+  // ============================================================
+  // AFFICHAGE
+  // ============================================================
+  function updateDisplay() {
+    displayExpr.textContent = expr;
+
+    if (openP > 0) {
+      parenIndicator.textContent = openP + ' parenthèse(s) ouverte(s)';
+      parenIndicator.classList.add('visible');
+    } else {
+      parenIndicator.classList.remove('visible');
+    }
+
+    const len = displayResult.textContent.length;
+    displayResult.classList.remove('small', 'tiny');
+    if (len > 14) displayResult.classList.add('small');
+    if (len > 20) displayResult.classList.add('tiny');
+  }
+
+  function updateResult(text, isError = false) {
+    displayResult.textContent = text;
+    displayResult.classList.toggle('error', isError);
+    updateDisplay();
+  }
+
+  // ============================================================
+  // ACTIONS CALCULATRICE
+  // ============================================================
+  function inputNumber(n) {
+    if (done) {
+      expr = n === '.' ? '0.' : n;
+      calc = expr;
+      done = false;
+    } else {
+      expr += n;
+      calc += n;
+    }
+    vibrate(8);
+    updateDisplay();
+  }
+
+  function inputOperator(op) {
+    done = false;
+    const sym = {'+': '+', '-': '−', '*': '×', '/': '÷'}[op];
+    expr += ' ' + sym + ' ';
+    calc += op;
+    vibrate(10);
+    updateDisplay();
+  }
+
+  function inputFunction(fn) {
+    done = false;
+
+    switch (fn) {
+      case 'square':
+        if (expr) { expr += '²'; calc += '**2'; }
+        break;
+      case 'cube':
+        if (expr) { expr += '³'; calc += '**3'; }
+        break;
+      case 'power':
+        if (expr) { expr += '^'; calc += '**'; }
+        break;
+      case 'inv':
+        if (expr) { expr = '1÷(' + expr + ')'; calc = '1/(' + calc + ')'; }
+        else { expr = '1÷('; calc = '1/('; openP++; }
+        break;
+      case 'abs':
+        expr += '|'; calc += 'abs('; openP++;
+        break;
+      case 'fact':
+        if (expr) { expr += '!'; calc = 'fact(' + calc + ')'; }
+        break;
+      case 'percent':
+        expr += '%'; calc += '/100';
+        break;
+      case 'tenpow':
+        if (expr) { expr = '10^(' + expr + ')'; calc = 'Math.pow(10,' + calc + ')'; }
+        else { expr = '10^('; calc = 'Math.pow(10,'; openP++; }
+        break;
+      default:
+        expr += fn + '(';
+        calc += fn + '(';
+        openP++;
+    }
+    vibrate(8);
+    updateDisplay();
+  }
+
+  function inputConst(c) {
+    done = false;
+    if (c === 'pi') {
+      expr += 'π';
+      calc += 'PI';
+    } else if (c === 'e') {
+      expr += 'e';
+      calc += 'e';
+    }
+    vibrate(8);
+    updateDisplay();
+  }
+
+  function inputParen() {
+    done = false;
+    const last = expr.trim().slice(-1);
+    if (!expr || /[+\-×÷^(]$/.test(last) || openP === 0) {
+      expr += '(';
+      calc += '(';
+      openP++;
+    } else if (openP > 0) {
+      expr += ')';
+      calc += ')';
+      openP--;
+    } else {
+      expr += '(';
+      calc += '(';
+      openP++;
+    }
+    vibrate(8);
+    updateDisplay();
+  }
+
+  function clearAll() {
+    expr = '';
+    calc = '';
+    openP = 0;
+    done = false;
+    displayExpr.textContent = '';
+    updateResult('0');
+    vibrate(15);
+  }
+
+  function deleteLast() {
+    if (done) {
+      clearAll();
+      return;
+    }
+    if (!expr.length) return;
+
+    const rem = expr.slice(-1);
+    expr = expr.slice(0, -1);
+    calc = calc.slice(0, -1);
+
+    if (rem === '(') openP = Math.max(0, openP - 1);
+    if (rem === ')') openP++;
+
+    if (expr.endsWith(' ')) {
+      expr = expr.slice(0, -1);
+      calc = calc.slice(0, -1);
+    }
+
+    if (!expr) updateResult('0');
+    vibrate(6);
+    updateDisplay();
+  }
+
+  function evaluate() {
+    if (done) return;
+    if (!calc.trim()) return;
+
+    let fCalc = calc;
+    let fExpr = expr;
+
+    while (openP > 0) {
+      fCalc += ')';
+      fExpr += ')';
+      openP = 0;
+    }
+
+    const result = safeEval(fCalc);
+
+    if (isNaN(result) || !isFinite(result)) {
+      updateResult(result === Infinity ? '∞' : 'Erreur', true);
+      vibrate([20, 30, 20]);
+      return;
+    }
+
+    const formatted = formatNumber(result);
+    displayExpr.textContent = fExpr + ' =';
+    updateResult(formatted);
+
+    history.unshift({ e: fExpr, r: formatted });
+    if (history.length > 50) history.length = 50;
+    saveHistory();
+
+    lastAns = result;
+    saveAns();
+
+    expr = String(result);
+    calc = String(result);
+    done = true;
+
+    vibrate([10, 20, 10]);
+    updateDisplay();
+  }
+
+  // ============================================================
+  // MÉMOIRE
+  // ============================================================
+  function memClear() {
+    memory = 0;
+    hasMem = false;
+    memIndicator.classList.remove('visible');
+    saveMemory();
+    showToast('Mémoire vidée');
+    updateMemValue();
+  }
+
+  function memRecall() {
+    if (!hasMem) return;
+    done = false;
+    expr += String(memory);
+    calc += String(memory);
+    vibrate(8);
+    updateDisplay();
+    closeModal('modalMenu');
+  }
+
+  function memAdd() {
+    if (calc.trim()) {
+      const v = safeEval(calc);
+      if (!isNaN(v)) {
+        memory += v;
+        hasMem = true;
+        memIndicator.classList.add('visible');
+        saveMemory();
+        showToast('M+ : ' + memory);
+        updateMemValue();
+      }
+    }
+  }
+
+  function memSub() {
+    if (calc.trim()) {
+      const v = safeEval(calc);
+      if (!isNaN(v)) {
+        memory -= v;
+        hasMem = true;
+        memIndicator.classList.add('visible');
+        saveMemory();
+        showToast('M− : ' + memory);
+        updateMemValue();
+      }
+    }
+  }
+
+  function updateMemValue() {
+    const el = document.getElementById('memValue');
+    if (el) el.textContent = memory;
+  }
+
+  // ============================================================
+  // MODALES
+  // ============================================================
+  function openModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.classList.add('show');
+  }
+
+  function closeModal(id) {
+    const modal = document.getElementById(id);
+    if (modal) modal.classList.remove('show');
+  }
+
+  // ============================================================
+  // SWIPE TO CLOSE
+  // ============================================================
+  function setupSwipeToClose() {
+    document.querySelectorAll('.modal-sheet').forEach(sheet => {
+      let startY = 0;
+      let currentY = 0;
+      let isDragging = false;
+      let startTime = 0;
+
+      sheet.addEventListener('touchstart', (e) => {
+        const rect = sheet.getBoundingClientRect();
+        const touchY = e.touches[0].clientY;
+
+        if (touchY - rect.top < 80) {
+          startY = touchY;
+          currentY = touchY;
+          startTime = Date.now();
+          isDragging = true;
+          sheet.classList.add('dragging');
+        }
+      }, { passive: true });
+
+      sheet.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+
+        currentY = e.touches[0].clientY;
+        const diff = currentY - startY;
+
+        if (diff > 0) {
+          sheet.style.transform = `translateY(${diff}px)`;
+          e.preventDefault();
+        }
+      }, { passive: false });
+
+      sheet.addEventListener('touchend', () => {
+        if (!isDragging) return;
+
+        isDragging = false;
+        sheet.classList.remove('dragging');
+
+        const diff = currentY - startY;
+        const duration = Date.now() - startTime;
+        const velocity = diff / duration;
+
+        if (diff > 100 || (velocity > 0.5 && diff > 30)) {
+          sheet.style.transition = 'transform 0.3s cubic-bezier(0.25,1,0.5,1)';
+          sheet.style.transform = `translateY(100%)`;
+
+          setTimeout(() => {
+            sheet.parentElement.classList.remove('show');
+            sheet.style.transform = '';
+            sheet.style.transition = '';
+          }, 300);
+        } else {
+          sheet.style.transform = '';
+        }
+
+        startY = 0;
+        currentY = 0;
+      }, { passive: true });
+
+      sheet.addEventListener('touchcancel', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        sheet.classList.remove('dragging');
+        sheet.style.transform = '';
+      }, { passive: true });
+    });
+  }
+
+  // ============================================================
+  // HISTORIQUE
+  // ============================================================
+  function renderHistory() {
+    const list = document.getElementById('historyList');
+    const actions = document.getElementById('historyActions');
+
+    if (!history.length) {
+      list.innerHTML = '<div class="history-empty">Aucun calcul pour le moment</div>';
+      actions.style.display = 'none';
+      return;
+    }
+
+    actions.style.display = 'flex';
+    list.innerHTML = history.map((h, i) => `
+      <div class="history-item" data-idx="${i}">
+        <div class="h-expr">${escapeHtml(h.e)}</div>
+        <div class="h-res">= ${escapeHtml(h.r)}</div>
+      </div>
+    `).join('');
+
+    list.querySelectorAll('.history-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const h = history[parseInt(item.dataset.idx)];
+        if (h) {
+          const val = String(h.r).replace(/[^\d.\-]/g, '');
+          expr = val;
+          calc = val;
+          done = false;
+          updateDisplay();
+          updateResult(val);
+          closeModal('modalHistory');
+          vibrate(10);
+        }
+      });
+    });
+  }
+
+  function escapeHtml(s) {
+    return String(s || '').replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+    }[c]));
+  }
+
+  // ============================================================
+  // CONSTANTES
+  // ============================================================
+  const CONSTANTS = [
+    { cat: 'Fondamentales', items: [
+      { s: 'c', n: 'Vitesse de la lumière', v: 299792458, u: 'm/s', d: '3,00 × 10⁸ m/s' },
+      { s: 'G', n: 'Constante gravitationnelle', v: 6.674e-11, u: 'm³·kg⁻¹·s⁻²', d: '6,674 × 10⁻¹¹' },
+      { s: 'h', n: 'Constante de Planck', v: 6.626e-34, u: 'J·s', d: '6,626 × 10⁻³⁴ J·s' },
+      { s: 'k_B', n: 'Constante de Boltzmann', v: 1.381e-23, u: 'J/K', d: '1,381 × 10⁻²³ J/K' },
+      { s: 'N_A', n: "Nombre d'Avogadro", v: 6.022e23, u: 'mol⁻¹', d: '6,022 × 10²³ mol⁻¹' },
+      { s: 'R', n: 'Constante des gaz parfaits', v: 8.314, u: 'J·mol⁻¹·K⁻¹', d: '8,314 J·mol⁻¹·K⁻¹' }
+    ]},
+    { cat: 'Physique', items: [
+      { s: 'g', n: 'Accélération gravitationnelle', v: 9.80665, u: 'm/s²', d: '9,807 m/s²' },
+      { s: 'atm', n: 'Pression atmosphérique', v: 101325, u: 'Pa', d: '101 325 Pa' },
+      { s: 'eV', n: 'Électronvolt', v: 1.602e-19, u: 'J', d: '1,602 × 10⁻¹⁹ J' },
+      { s: 'u', n: 'Unité de masse atomique', v: 1.661e-27, u: 'kg', d: '1,661 × 10⁻²⁷ kg' },
+      { s: 'm_e', n: "Masse de l'électron", v: 9.109e-31, u: 'kg', d: '9,109 × 10⁻³¹ kg' },
+      { s: 'q_e', n: 'Charge élémentaire', v: 1.602e-19, u: 'C', d: '1,602 × 10⁻¹⁹ C' }
+    ]},
+    { cat: 'Mathématiques', items: [
+      { s: 'π', n: 'Pi', v: Math.PI, u: '', d: '3,14159...' },
+      { s: 'e', n: "Nombre d'Euler", v: Math.E, u: '', d: '2,71828...' },
+      { s: 'φ', n: "Nombre d'or", v: 1.6180339887, u: '', d: '1,61803...' },
+      { s: '√2', n: 'Racine de 2', v: Math.SQRT2, u: '', d: '1,41421...' }
+    ]}
+  ];
+
+  function renderConstants(filter = '') {
+    const f = filter.toLowerCase().trim();
+    const list = document.getElementById('constList');
+
+    let html = '';
+    CONSTANTS.forEach(cat => {
+      const items = cat.items.filter(it =>
+        !f || it.s.toLowerCase().includes(f) || it.n.toLowerCase().includes(f)
+      );
+      if (!items.length) return;
+
+      html += `<div class="const-category">${cat.cat}</div>`;
+      items.forEach(it => {
+        html += `
+          <div class="const-item" data-val="${it.v}">
+            <div class="ci-left">
+              <div class="ci-symbol">${it.s}</div>
+              <div class="ci-name">${it.n}</div>
+            </div>
+            <div class="ci-right">
+              <div class="ci-value">${it.d}</div>
+              ${it.u ? `<div class="ci-unit">${it.u}</div>` : ''}
+            </div>
+          </div>
+        `;
+      });
+    });
+
+    if (!html) html = '<div class="history-empty">Aucune constante trouvée</div>';
+    list.innerHTML = html;
+
+    list.querySelectorAll('.const-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const val = item.dataset.val;
+        expr += val;
+        calc += val;
+        done = false;
+        updateDisplay();
+        closeModal('modalConst');
+        showToast('Constante insérée');
+        vibrate(10);
+      });
+    });
+  }
+
+  // ============================================================
+  // CONVERSIONS
+  // ============================================================
+  const CONVERSIONS = {
+    'Longueur': {
+      units: ['m', 'km', 'cm', 'mm', 'µm', 'in', 'ft', 'mi'],
+      labels: ['Mètre', 'Kilomètre', 'Centimètre', 'Millimètre', 'Micromètre', 'Pouce', 'Pied', 'Mile'],
+      toBase: [1, 1000, 0.01, 0.001, 1e-6, 0.0254, 0.3048, 1609.344]
+    },
+    'Masse': {
+      units: ['kg', 'g', 'mg', 't', 'oz', 'lb'],
+      labels: ['Kilogramme', 'Gramme', 'Milligramme', 'Tonne', 'Once', 'Livre'],
+      toBase: [1, 0.001, 1e-6, 1000, 0.0283495, 0.453592]
+    },
+    'Température': {
+      units: ['°C', '°F', 'K'],
+      labels: ['Celsius', 'Fahrenheit', 'Kelvin'],
+      special: true
+    },
+    'Pression': {
+      units: ['Pa', 'kPa', 'bar', 'atm', 'mmHg'],
+      labels: ['Pascal', 'Kilopascal', 'Bar', 'Atmosphère', 'mmHg'],
+      toBase: [1, 1000, 100000, 101325, 133.322]
+    },
+    'Énergie': {
+      units: ['J', 'kJ', 'cal', 'kcal', 'eV', 'kWh'],
+      labels: ['Joule', 'Kilojoule', 'Calorie', 'Kilocalorie', 'Électronvolt', 'kWh'],
+      toBase: [1, 1000, 4.184, 4184, 1.602e-19, 3.6e6]
+    },
+    'Vitesse': {
+      units: ['m/s', 'km/h', 'mph', 'kn'],
+      labels: ['m/s', 'km/h', 'mph', 'Nœud'],
+      toBase: [1, 0.277778, 0.44704, 0.514444]
+    },
+    'Volume': {
+      units: ['L', 'mL', 'm³', 'cm³', 'gal'],
+      labels: ['Litre', 'Millilitre', 'm³', 'cm³', 'Gallon US'],
+      toBase: [1, 0.001, 1000, 0.001, 3.78541]
+    },
+    'Temps': {
+      units: ['s', 'min', 'h', 'jour', 'semaine'],
+      labels: ['Seconde', 'Minute', 'Heure', 'Jour', 'Semaine'],
+      toBase: [1, 60, 3600, 86400, 604800]
+    }
+  };
+
+  let currentConvCat = 'Longueur';
+
+  function renderConvCats() {
+    const cats = document.getElementById('convCats');
+    cats.innerHTML = Object.keys(CONVERSIONS).map(cat =>
+      `<button class="conv-cat ${cat === currentConvCat ? 'active' : ''}" data-cat="${cat}">${cat}</button>`
+    ).join('');
+
+    cats.querySelectorAll('.conv-cat').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentConvCat = btn.dataset.cat;
+        renderConvCats();
+        populateConvUnits();
+        doConversion();
+      });
+    });
+  }
+
+  function populateConvUnits() {
+    const c = CONVERSIONS[currentConvCat];
+    const fromSel = document.getElementById('convFromUnit');
+    const toSel = document.getElementById('convToUnit');
+
+    fromSel.innerHTML = '';
+    toSel.innerHTML = '';
+
+    c.labels.forEach((lbl, i) => {
+      fromSel.innerHTML += `<option value="${i}">${lbl} (${c.units[i]})</option>`;
+      toSel.innerHTML += `<option value="${i}">${lbl} (${c.units[i]})</option>`;
+    });
+
+    if (c.labels.length > 1) toSel.value = '1';
+  }
+
+  function convertTemp(val, from, to) {
+    let c;
+    if (from === 0) c = val;
+    else if (from === 1) c = (val - 32) * 5 / 9;
+    else c = val - 273.15;
+
+    if (to === 0) return c;
+    else if (to === 1) return c * 9 / 5 + 32;
+    else return c + 273.15;
+  }
+
+  function doConversion() {
+    const c = CONVERSIONS[currentConvCat];
+    const val = parseFloat(document.getElementById('convFrom').value);
+    const fi = parseInt(document.getElementById('convFromUnit').value);
+    const ti = parseInt(document.getElementById('convToUnit').value);
+
+    const toEl = document.getElementById('convTo');
+    const formulaEl = document.getElementById('convFormula');
+
+    if (isNaN(val)) {
+      toEl.value = '';
+      formulaEl.textContent = '';
+      return;
+    }
+
+    let result;
+    if (c.special) {
+      result = convertTemp(val, fi, ti);
+    } else {
+      const base = val * c.toBase[fi];
+      result = base / c.toBase[ti];
+    }
+
+    let fmt;
+    if (Math.abs(result) >= 1e6 || (Math.abs(result) < 0.001 && result !== 0)) {
+      fmt = result.toExponential(4);
+    } else {
+      fmt = parseFloat(result.toPrecision(10)).toLocaleString('fr-FR', { maximumFractionDigits: 6 });
+    }
+
+    toEl.value = fmt;
+    formulaEl.textContent = `${val} ${c.units[fi]} = ${fmt} ${c.units[ti]}`;
+  }
+
+  // ============================================================
+  // ÉVÉNEMENTS
+  // ============================================================
+  function bindEvents() {
+    document.querySelectorAll('.cb.num[data-n]').forEach(btn => {
+      btn.addEventListener('click', () => inputNumber(btn.dataset.n));
+    });
+
+    document.getElementById('btnAdd').addEventListener('click', () => inputOperator('+'));
+    document.getElementById('btnSub').addEventListener('click', () => inputOperator('-'));
+    document.getElementById('btnMul').addEventListener('click', () => inputOperator('*'));
+    document.getElementById('btnDiv').addEventListener('click', () => inputOperator('/'));
+
+    document.querySelectorAll('.cb.fn[data-fn]').forEach(btn => {
+      btn.addEventListener('click', () => inputFunction(btn.dataset.fn));
+    });
+
+    document.querySelectorAll('.cb[data-const]').forEach(btn => {
+      btn.addEventListener('click', () => inputConst(btn.dataset.const));
+    });
+
+    document.getElementById('btnAC').addEventListener('click', clearAll);
+    document.getElementById('btnDel').addEventListener('click', deleteLast);
+    document.getElementById('btnParen').addEventListener('click', inputParen);
+    document.getElementById('btnEq').addEventListener('click', evaluate);
+
+    modeToggle.addEventListener('click', () => {
+      isDeg = !isDeg;
+      modeLabel.textContent = isDeg ? 'DEG' : 'RAD';
+      showToast(isDeg ? 'Mode Degré' : 'Mode Radian');
+      vibrate(10);
+    });
+
+    document.getElementById('toolHistory').addEventListener('click', () => {
+      renderHistory();
+      openModal('modalHistory');
+      vibrate(10);
+    });
+
+    document.getElementById('toolConst').addEventListener('click', () => {
+      renderConstants();
+      openModal('modalConst');
+      vibrate(10);
+    });
+
+    document.getElementById('toolConvert').addEventListener('click', () => {
+      renderConvCats();
+      populateConvUnits();
+      doConversion();
+      openModal('modalConvert');
+      vibrate(10);
+    });
+
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      updateMemValue();
+      openModal('modalMenu');
+    });
+
+    document.getElementById('menuAns').addEventListener('click', () => {
+      done = false;
+      expr += String(lastAns);
+      calc += String(lastAns);
+      updateDisplay();
+      closeModal('modalMenu');
+      vibrate(10);
+    });
+
+    document.getElementById('menuMem').addEventListener('click', () => {
+      memRecall();
+      closeModal('modalMenu');
+    });
+
+    document.getElementById('menuMemPlus').addEventListener('click', () => {
+      memAdd();
+      closeModal('modalMenu');
+    });
+
+    document.getElementById('menuMemMinus').addEventListener('click', () => {
+      memSub();
+      closeModal('modalMenu');
+    });
+
+    document.getElementById('menuMemClear').addEventListener('click', () => {
+      memClear();
+      closeModal('modalMenu');
+    });
+
+    document.querySelectorAll('[data-close]').forEach(btn => {
+      btn.addEventListener('click', () => closeModal(btn.dataset.close));
+    });
+
+    document.querySelectorAll('.modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.classList.remove('show');
+      });
+    });
+
+    document.getElementById('clearHistory').addEventListener('click', () => {
+      history = [];
+      saveHistory();
+      renderHistory();
+      showToast('Historique effacé');
+      vibrate(15);
+    });
+
+    document.getElementById('constSearch').addEventListener('input', (e) => {
+      renderConstants(e.target.value);
+    });
+
+    document.getElementById('convFrom').addEventListener('input', doConversion);
+    document.getElementById('convFromUnit').addEventListener('change', doConversion);
+    document.getElementById('convToUnit').addEventListener('change', doConversion);
+
+    document.getElementById('convSwap').addEventListener('click', () => {
+      const fromSel = document.getElementById('convFromUnit');
+      const toSel = document.getElementById('convToUnit');
+      const tmp = fromSel.value;
+      fromSel.value = toSel.value;
+      toSel.value = tmp;
+
+      const toVal = document.getElementById('convTo').value.replace(/\s/g, '').replace(/,/g, '.');
+      document.getElementById('convFrom').value = toVal;
+      doConversion();
+      vibrate(10);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (document.querySelector('.modal-overlay.show')) {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.modal-overlay.show').forEach(m => m.classList.remove('show'));
+        }
+        return;
+      }
+
+      const k = e.key;
+      if (k >= '0' && k <= '9') {
+        const btn = document.querySelector(`.cb.num[data-n="${k}"]`);
+        if (btn) btn.click();
+      } else if (k === '.') {
+        const btn = document.querySelector('.cb.num[data-n="."]');
+        if (btn) btn.click();
+      } else if (k === '+') { e.preventDefault(); inputOperator('+'); }
+      else if (k === '-') { e.preventDefault(); inputOperator('-'); }
+      else if (k === '*') { e.preventDefault(); inputOperator('*'); }
+      else if (k === '/') { e.preventDefault(); inputOperator('/'); }
+      else if (k === 'Enter' || k === '=') { e.preventDefault(); evaluate(); }
+      else if (k === 'Backspace') { e.preventDefault(); deleteLast(); }
+      else if (k === 'Escape') { clearAll(); }
+      else if (k === '(' || k === ')') { e.preventDefault(); inputParen(); }
+    });
+  }
+
+  // ============================================================
+  // INIT
+  // ============================================================
+  function init() {
+    loadStorage();
+    bindEvents();
+    setupSwipeToClose();
+    updateDisplay();
+    updateMemValue();
+  }
+
+  init();
+
+})();
+</script>
+</body>
+</html>

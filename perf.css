@@ -1,0 +1,379 @@
+/* ═══════════════════════════════════════════════════════════════
+   ARVEXA — PERF.CSS
+   Ciblage par ID unique de chaque page → aucune casse possible.
+   Pages activées : index.html, reviseur.html, profil.html
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 1 : index.html  (ciblée par #greetingText)
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#greetingText) .card,
+body:has(#greetingText) .panel,
+body:has(#greetingText) .tool-card,
+body:has(#greetingText) .notif-card,
+body:has(#greetingText) .subject-chip,
+body:has(#greetingText) .next-card,
+body:has(#greetingText) .tip-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body:has(#greetingText) .glow,
+body:has(#greetingText) .glow-1,
+body:has(#greetingText) .glow-2,
+body:has(#greetingText) .glow-3 {
+  filter: blur(40px) !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 2 : reviseur.html  (ciblée par #configForm + #generateBtn)
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#generateBtn) .panel,
+body:has(#generateBtn) .notion-card,
+body:has(#generateBtn) .global-block {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body:has(#generateBtn) .glow,
+body:has(#generateBtn) .glow-1,
+body:has(#generateBtn) .glow-2,
+body:has(#generateBtn) .glow-3 {
+  filter: blur(40px) !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 3 : profil.html  (ciblée par #userFullName)
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#userFullName) .profile-card,
+body:has(#userFullName) .stat-item,
+body:has(#userFullName) .badge-item,
+body:has(#userFullName) .info-row {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body:has(#userFullName) .glow,
+body:has(#userFullName) .glow-1,
+body:has(#userFullName) .glow-2,
+body:has(#userFullName) .glow-3 {
+  filter: blur(40px) !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 4 : matiere.html  (ciblée par #subjectHero)
+   ⚠️ Attention : c'est la page qui cassait avant.
+   On cible uniquement les éléments internes, pas la page entière.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Backdrop-filter retiré UNIQUEMENT sur les cards de matiere.html */
+body:has(#subjectHero) .chapter-card,
+body:has(#subjectHero) .chapter-info,
+body:has(#subjectHero) .progress-wrap {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ⚠️ On NE TOUCHE PAS à .subject-hero (contient un ::after décoratif) */
+/* ⚠️ On NE TOUCHE PAS à .subject-chip (contient des div dynamiques) */
+
+/* Glows réduits */
+body:has(#subjectHero) .glow,
+body:has(#subjectHero) .glow-1,
+body:has(#subjectHero) .glow-2,
+body:has(#subjectHero) .glow-3 {
+  filter: blur(40px) !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 5 : chapitre.html  (ciblée par #cardsView)
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#cardsView) .chapter-info,
+body:has(#cardsView) .chapter-progress,
+body:has(#cardsView) .part-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body:has(#cardsView) .glow,
+body:has(#cardsView) .glow-1,
+body:has(#cardsView) .glow-2,
+body:has(#cardsView) .glow-3 {
+  filter: blur(40px) !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 6 : exam.html  (ciblée par #generateButton)
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#generateButton) .panel,
+body:has(#generateButton) .subject-card,
+body:has(#generateButton) .quiz-question,
+body:has(#generateButton) .quiz-option,
+body:has(#generateButton) .metric,
+body:has(#generateButton) .exercise-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body:has(#generateButton) .glow,
+body:has(#generateButton) .glow-1,
+body:has(#generateButton) .glow-2,
+body:has(#generateButton) .glow-3 {
+  filter: blur(40px) !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 7 : abonnement.html  (ciblée par #subscribeBtn)
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#subscribeBtn) .sub-card,
+body:has(#subscribeBtn) .status-section,
+body:has(#subscribeBtn) .benefits-grid .item,
+body:has(#subscribeBtn) .premium-info-card,
+body:has(#subscribeBtn) .premium-benefits,
+body:has(#subscribeBtn) .pending-info-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body:has(#subscribeBtn) .glow,
+body:has(#subscribeBtn) .glow-1,
+body:has(#subscribeBtn) .glow-2,
+body:has(#subscribeBtn) .glow-3 {
+  filter: blur(40px) !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 8 : notifications.html  (ciblée par #notifList)
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#notifList) .notif-card,
+body:has(#notifList) .skeleton-card,
+body:has(#notifList) .empty-state {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body:has(#notifList) .glow,
+body:has(#notifList) .glow-1,
+body:has(#notifList) .glow-2,
+body:has(#notifList) .glow-3 {
+  filter: blur(40px) !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 9 : formulaires.html  (ciblée par #searchInput)
+   ⚠️ Attention : #searchInput existe aussi dans groupe.html
+   On utilise #activeTab ou un ID unique. Ici : #tabs
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#tabs) .f-card,
+body:has(#tabs) .modal,
+body:has(#tabs) .modal-formula-box,
+body:has(#tabs) .search-input {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body:has(#tabs) .glow,
+body:has(#tabs) .glow-1,
+body:has(#tabs) .glow-2 {
+  filter: blur(40px) !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 10 : exam-history.html  (ciblée par #examsContainer)
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#examsContainer) .exam-item,
+body:has(#examsContainer) .panel,
+body:has(#examsContainer) .summary-card,
+body:has(#examsContainer) .custom-select-trigger {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body:has(#examsContainer) .glow,
+body:has(#examsContainer) .glow-1,
+body:has(#examsContainer) .glow-2,
+body:has(#examsContainer) .glow-3 {
+  filter: blur(40px) !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 11 : arv-progress.html  (ciblée par #view-notebooks)
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#view-notebooks) .subject-card,
+body:has(#view-notebooks) .list-item,
+body:has(#view-notebooks) .list-item-icon,
+body:has(#view-notebooks) .streak-card {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 12 : arv-pilot.html  (ciblée par #pilotGrid)
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#pilotGrid) .stat-card,
+body:has(#pilotGrid) .conseil-block,
+body:has(#pilotGrid) .action-item {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body:has(#pilotGrid) .glow,
+body:has(#pilotGrid) .glow-1,
+body:has(#pilotGrid) .glow-2,
+body:has(#pilotGrid) .glow-3 {
+  filter: blur(40px) !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 13 : planificateur.html  (ciblée par #loadPlanButton)
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#loadPlanButton) .launch-panel,
+body:has(#loadPlanButton) .readiness-card,
+body:has(#loadPlanButton) .week-goal-card,
+body:has(#loadPlanButton) .priority-card,
+body:has(#loadPlanButton) .day-card,
+body:has(#loadPlanButton) .swot-card,
+body:has(#loadPlanButton) .metric-card,
+body:has(#loadPlanButton) .encouragement-card,
+body:has(#loadPlanButton) .action-link,
+body:has(#loadPlanButton) .alert-item {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 14 : tableau-periodique.html  (ciblée par #ptable)
+   ⚠️ ATTENTION : grille CSS complexe, on touche UNIQUEMENT le détail
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#ptable) .detail-panel {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body:has(#ptable) .detail-overlay {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 15 : lecture.html  (ciblée par #contentWrapper)
+   ⚠️ PRUDENCE : #contentWrapper gère son propre scroll
+   → on ne touche QU'aux cards internes au contenu, jamais au wrapper
+   ═══════════════════════════════════════════════════════════════ */
+body:has(#contentWrapper) .lecture-quiz-item,
+body:has(#contentWrapper) .lecture-exercise,
+body:has(#contentWrapper) .lecture-figure svg,
+body:has(#contentWrapper) .part,
+body:has(#contentWrapper) .block,
+body:has(#contentWrapper) .formula-block,
+body:has(#contentWrapper) .qa-item,
+body:has(#contentWrapper) .qcm-item {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Glows réduits (ils sont fixés derrière, pas dans le scroll) */
+body:has(#contentWrapper) .glow,
+body:has(#contentWrapper) .glow-1,
+body:has(#contentWrapper) .glow-2 {
+  filter: blur(40px) !important;
+  animation: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGE 16 : outils.html
+   Ciblage : .tool-card.featured.premium
+   (cette combinaison n'existe QUE dans outils.html)
+   ═══════════════════════════════════════════════════════════════ */
+body:has(.tool-card.featured.premium) .tool-card,
+body:has(.tool-card.featured.premium) .section-head {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+body:has(.tool-card.featured.premium) .glow,
+body:has(.tool-card.featured.premium) .glow-1,
+body:has(.tool-card.featured.premium) .glow-2,
+body:has(.tool-card.featured.premium) .glow-3 {
+  filter: blur(40px) !important;
+  animation: none !important;
+}
+
+/* ⚠️ On NE TOUCHE PAS à .el (grille critique) ni .ptable */
+
+
+/* ═══════════════════════════════════════════════════════════════
+   ⚡ NOUVEAU — VIEW TRANSITIONS
+   Navigation fluide sans flash entre toutes les pages
+   Compatible avec tous les navigateurs modernes (2026)
+   Fallback silencieux sur anciens navigateurs : aucune régression
+   ═══════════════════════════════════════════════════════════════ */
+
+@view-transition {
+  navigation: auto;
+}
+
+/* L'ancienne page s'efface en glissant légèrement vers la gauche */
+::view-transition-old(root) {
+  animation: arvexaFadeOut 0.22s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* La nouvelle page apparaît en glissant légèrement depuis la droite */
+::view-transition-new(root) {
+  animation: arvexaFadeIn 0.28s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes arvexaFadeOut {
+  to {
+    opacity: 0;
+    transform: translateX(-20px) scale(0.97);
+  }
+}
+
+@keyframes arvexaFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px) scale(0.97);
+  }
+}
+
+/* ⚡ Le header reste fixe pendant la transition (pas de clignotement) */
+.header {
+  view-transition-name: arvexa-header;
+}
+
+::view-transition-old(arvexa-header),
+::view-transition-new(arvexa-header) {
+  animation: none;
+}
+
+/* ⚡ Le fond sombre reste appliqué pendant toute la transition
+   → évite tout flash blanc entre deux pages */
+html {
+  background: var(--bg-dark);
+}
+
+html[data-theme="light"] {
+  background: #F5F1E8;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Accessibilité — Respect de prefers-reduced-motion
+   ═══════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}

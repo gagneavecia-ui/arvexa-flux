@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+    <title>ARVEXA — Chapitre</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0A0A">
+<script>(function(){try{if(localStorage.getItem('arvexa-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}})();</script>
+<script src="theme.js"></script><script src="arvexa-i18n.js" defer></script>
+<script src="arvexa-sync.js" defer></script><!-- ✅ v8.0 sync Firebase des progressions (par compte) -->
+  <meta name="description" content="ARVEXA School - Chapitre">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="stylesheet" href="perf.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="analytics.js"></script>
+  <script src="register-sw.js" defer></script>
+
+  <link rel="stylesheet" href="arvexa-ui.css">
+  <style>
+    /* ============================================================
+       ROOT — Design system ARVEXA (harmonisé avec matiere.html)
+       ============================================================ */
+    :root {
+      --primary: #1A3A2A;
+      --primary-dark: #0A1A12;
+      --primary-light: #2A5A3A;
+      --accent: #B8860B;
+      --accent-bright: #E0B84A;
+      --accent-dim: rgba(184, 134, 11, 0.08);
+      --success: #2D7D5A;
+      --success-light: #3AB67E;
+      --danger: #B85C3A;
+      --warning: #D4A017;
+      --bg-dark: #0A0A0A;
+      --bg-surface: #141414;
+      --bg-card: rgba(20, 20, 20, 0.7);
+      --text-light: #F5F0E8;
+      --text-dim: #8A8A7A;
+      --text-muted: #7A7A6A;
+      --card-border: rgba(184, 134, 11, 0.06);
+      --transition: all 0.28s cubic-bezier(0.25, 1, 0.5, 1);
+      --transition-fast: all 0.18s ease;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --radius: 16px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; width: 100%; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      width: 100%;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gradient-bg {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+      background: radial-gradient(ellipse 40% 30% at 30% 15%, rgba(184, 134, 11,  0.18) 0%, transparent 70%),
+                  radial-gradient(ellipse 35% 25% at 75% 85%, rgba(184, 134, 11, 0.06) 0%, transparent 60%),
+                  linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-deep) 100%);
+    }
+
+    .glow {
+      position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: -1;
+      opacity: 0.12;
+    }
+    .glow-1 { width: 300px; height: 300px; background: rgba(184, 134, 11, 0.20); top: -80px; right: -80px; }
+    .glow-2 { width: 180px; height: 180px; background: rgba(184,134,11,0.06); bottom: 0; left: 0; }
+
+    /* ============================================================
+       HEADER PREMIUM (harmonisé avec matiere.html)
+       ============================================================ */
+    .header {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: calc(10px + var(--safe-top)) 16px 10px;
+      background: rgba(var(--rgb-veil), 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(224, 184, 74, 0.10);
+      gap: 12px;
+      min-height: 60px;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: -1px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(224, 184, 74, 0.35), transparent);
+      pointer-events: none;
+    }
+    .header-left { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+    .brand-mark {
+      display: inline-flex;
+      align-items: baseline;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: var(--text-light);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .brand-mark span {
+      color: var(--accent-bright);
+      font-style: italic;
+      margin-left: 1px;
+    }
+    .header-divider {
+      width: 1px; height: 20px;
+      background: rgba(var(--rgb-soft), 0.08);
+      flex-shrink: 0;
+    }
+    .back-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 10px;
+      border: 1px solid rgba(var(--rgb-soft), 0.06); background: transparent;
+      color: var(--text-dim); cursor: pointer; transition: var(--transition-fast);
+      font-size: 15px; text-decoration: none; flex-shrink: 0;
+    }
+    .back-btn:hover {
+      border-color: rgba(224, 184, 74, 0.30);
+      color: var(--accent-bright);
+      background: rgba(224, 184, 74, 0.05);
+    }
+    .back-btn:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 2px;
+    }
+    .page-title {
+      font-size: clamp(13px, 1.6vw, 15px); font-weight: 600; color: var(--text-light);
+      font-family: 'Playfair Display', serif;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: clamp(180px, 50vw, 350px);
+      min-width: 0;
+      letter-spacing: -0.01em;
+    }
+    .page-title i { color: var(--accent-bright); margin-right: 6px; font-size: 13px; }
+
+    /* ============================================================
+       CONTAINER
+       ============================================================ */
+    .container { max-width: 680px; margin: 0 auto; padding: 18px 16px 48px; width: 100%; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+
+    /* ============================================================
+       CHAPTER INFO
+       ============================================================ */
+    .chapter-info {
+      display: flex; align-items: center; gap: clamp(12px, 1.4vw, 16px);
+      padding: clamp(14px, 1.5vw, 18px) clamp(16px, 1.8vw, 20px);
+      border-radius: 16px;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184, 134, 11,  0.35) 0%, transparent 70%),
+        linear-gradient(160deg, rgba(var(--rgb-card), 0.75), rgba(var(--rgb-veil), 0.75));
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(224, 184, 74, 0.14);
+      position: relative; overflow: hidden;
+    }
+    .chapter-info::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(224, 184, 74, 0.55), transparent);
+    }
+    .ci-num {
+      width: clamp(40px, 5vw, 46px); height: clamp(40px, 5vw, 46px);
+      border-radius: 12px; display: flex; align-items: center;
+      justify-content: center; font-size: clamp(15px, 1.8vw, 18px);
+      font-weight: 700; flex-shrink: 0;
+      font-family: 'Playfair Display', serif;
+      background: rgba(224, 184, 74, 0.10);
+      color: var(--accent-bright);
+      border: 1px solid rgba(224, 184, 74, 0.18);
+    }
+    .ci-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+    .ci-title {
+      font-size: clamp(14px, 1.6vw, 17px);
+      font-weight: 600; color: var(--text-light); line-height: 1.3;
+    }
+    .ci-sub {
+      font-size: clamp(11px, 1.1vw, 12px);
+      color: var(--text-muted); display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .ci-status {
+      font-size: clamp(10px, 0.9vw, 11px);
+      font-weight: 600; padding: 2px 10px; border-radius: 999px;
+      white-space: nowrap;
+    }
+    .ci-status.premium { background: rgba(224,184,74,0.12); color: var(--accent-bright); border: 1px solid rgba(224,184,74,0.22); }
+    .ci-status.free { background: rgba(45,125,90,0.12); color: var(--success-light); border: 1px solid rgba(45,125,90,0.22); }
+    .ci-status.locked { background: rgba(184,92,58,0.12); color: var(--danger-light); border: 1px solid rgba(184,92,58,0.22); }
+
+    /* ============================================================
+       CHAPTER PROGRESS
+       ============================================================ */
+    .chapter-progress {
+      background: rgba(var(--rgb-card), 0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(224, 184, 74, 0.10);
+      border-radius: 16px;
+      padding: clamp(12px, 1.2vw, 16px) clamp(16px, 1.8vw, 20px);
+      transition: var(--transition-fast);
+    }
+    .chapter-progress:hover { border-color: rgba(224, 184, 74, 0.20); }
+    .chapter-progress .cp-header {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: clamp(11px, 1.1vw, 13px);
+      color: var(--text-dim); flex-wrap: wrap; gap: 4px;
+    }
+    .chapter-progress .cp-header strong { color: var(--text-light); font-weight: 700; }
+    .chapter-progress .cp-header .cp-percent {
+      font-weight: 700; color: var(--accent-bright);
+      font-size: clamp(12px, 1.2vw, 13.5px);
+    }
+    .chapter-progress .cp-track {
+      width: 100%; height: 6px; border-radius: 999px;
+      background: rgba(var(--rgb-soft), 0.06); overflow: hidden; margin-top: 8px;
+      position: relative;
+    }
+    .chapter-progress .cp-track .cp-fill {
+      height: 100%; border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+      transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 0%;
+    }
+
+    /* ============================================================
+       TABS
+       ============================================================ */
+    .tabs {
+      display: flex; gap: 4px; background: rgba(var(--rgb-soft), 0.02); border-radius: 16px;
+      padding: 4px; border: 1px solid rgba(var(--rgb-soft), 0.05);
+    }
+    .tab-btn {
+      flex: 1; padding: clamp(10px, 1vw, 12px) clamp(6px, 0.8vw, 10px);
+      border: none; border-radius: 12px; background: transparent;
+      color: var(--text-muted); font-size: clamp(11px, 1.1vw, 13px);
+      font-weight: 600; cursor: pointer;
+      transition: var(--transition-fast); font-family: 'Inter', sans-serif;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      position: relative;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+    .tab-btn i { font-size: clamp(11px, 1.1vw, 14px); }
+    .tab-btn.active {
+      background: rgba(224, 184, 74, 0.10); color: var(--accent-bright);
+      border: 1px solid rgba(224, 184, 74, 0.22);
+    }
+    .tab-btn:not(.active) { border: 1px solid transparent; }
+    .tab-btn:hover:not(.active) { color: var(--text-light); background: rgba(var(--rgb-soft), 0.03); }
+    .tab-btn:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 2px;
+    }
+
+    /* ============================================================
+       CARDS VIEW
+       ============================================================ */
+    .cards-view { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+
+    /* ============================================================
+       PART CARD (harmonisé avec matiere.html)
+       ============================================================ */
+    .part-card {
+      background: rgba(var(--rgb-card), 0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: clamp(14px, 1.5vw, 18px) clamp(14px, 1.8vw, 20px);
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      display: flex; align-items: center; gap: clamp(10px, 1.4vw, 16px);
+      position: relative; overflow: hidden;
+      text-decoration: none; color: inherit;
+    }
+    .part-card:hover {
+      border-color: rgba(224, 184, 74, 0.22);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.30);
+    }
+    .part-card:active { transform: scale(0.995); }
+    .part-card.locked { opacity: 0.72; }
+    .part-card.locked:hover { opacity: 0.88; }
+
+    .part-card.read {
+      border-color: rgba(58, 182, 126, 0.30);
+      background: rgba(58, 182, 126, 0.035);
+    }
+    .part-card.read::before {
+      content: '';
+      position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
+      background: linear-gradient(180deg, var(--success), var(--success-light));
+    }
+    .part-card.read .pc-icon {
+      background: rgba(58, 182, 126, 0.12);
+      color: var(--success-light);
+      border-color: rgba(58, 182, 126, 0.25);
+    }
+
+    .pc-icon {
+      width: clamp(40px, 4.5vw, 48px);
+      height: clamp(40px, 4.5vw, 48px);
+      border-radius: 12px; display: flex; align-items: center;
+      justify-content: center; font-size: clamp(16px, 1.8vw, 20px);
+      flex-shrink: 0;
+      background: rgba(224, 184, 74, 0.08);
+      color: var(--accent-bright);
+      border: 1px solid rgba(224, 184, 74, 0.15);
+      transition: var(--transition-fast);
+    }
+    .pc-icon.exo { background: rgba(45,125,90,0.08); color: var(--success-light); border-color: rgba(45,125,90,0.18); }
+    .pc-icon.corr { background: rgba(74,175,224,0.08); color: var(--info); border-color: rgba(74,175,224,0.18); }
+
+    .pc-info { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+    .pc-title {
+      font-size: clamp(14px, 1.5vw, 15px);
+      font-weight: 600; color: var(--text-light); line-height: 1.35;
+      display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px;
+    }
+    .pc-title .pc-badge {
+      font-size: 10px;
+      font-weight: 600; padding: 2px 9px; border-radius: 999px;
+      white-space: nowrap;
+      display: inline-flex; align-items: center; gap: 3px;
+    }
+    .pc-title .pc-badge.read {
+      color: var(--success-light); background: rgba(45,125,90,0.12);
+      border: 1px solid rgba(45,125,90,0.22);
+    }
+    .pc-title .pc-badge.premium {
+      color: var(--accent-bright); background: rgba(224,184,74,0.12);
+      border: 1px solid rgba(224,184,74,0.22);
+    }
+    .pc-title .pc-badge.free {
+      color: var(--success-light); background: rgba(45,125,90,0.12);
+      border: 1px solid rgba(45,125,90,0.22);
+    }
+    .pc-sub {
+      font-size: clamp(11px, 1vw, 12.5px);
+      color: var(--text-muted);
+    }
+    .pc-arrow {
+      display: flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 10px;
+      background: rgba(var(--rgb-soft), 0.03); color: var(--text-muted);
+      flex-shrink: 0; transition: var(--transition-fast); font-size: clamp(11px, 1vw, 12px);
+    }
+    .part-card:hover .pc-arrow {
+      color: var(--accent-bright); background: rgba(224,184,74,0.10);
+      transform: translateX(2px);
+    }
+
+    /* ============================================================
+       LOADING & EMPTY (harmonisé)
+       ============================================================ */
+    .loading-state {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 60px 20px; gap: 14px; min-height: 200px;
+    }
+    .spinner {
+      width: 32px; height: 32px; border: 3px solid rgba(224,184,74,0.15);
+      border-top-color: var(--accent-bright); border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-state p { font-size: 13px; color: var(--text-muted); }
+
+    .empty-state {
+      text-align: center; padding: 56px 24px; display: flex; flex-direction: column;
+      align-items: center; gap: 14px;
+    }
+    .empty-state .es-icon {
+      width: 72px; height: 72px; border-radius: 20px; display: flex; align-items: center;
+      justify-content: center; background: rgba(224,184,74,0.08);
+      border: 1px solid rgba(224,184,74,0.14);
+      font-size: 28px; color: var(--accent-bright);
+    }
+    .empty-state h4 { font-size: 16px; color: var(--text-dim); font-weight: 600; }
+    .empty-state p { font-size: 13px; color: var(--text-muted); max-width: 320px; line-height: 1.65; }
+
+    /* ✅ v8.4 — le pop-up Premium utilise le composant UNIFORME du site
+       (arvexa-confirm.js), partagé par toutes les pages. */
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 640px) {
+      .container { padding: 14px 14px 36px; gap: 12px; }
+      .chapter-info { padding: 14px 16px; }
+      .ci-num { width: 42px; height: 42px; font-size: 15px; }
+      .ci-title { font-size: 14.5px; }
+      .chapter-progress { padding: 12px 16px; }
+      .part-card { padding: 14px 16px; }
+      .pc-icon { width: 40px; height: 40px; font-size: 16px; }
+      .pc-title { font-size: 14px; }
+    }
+
+    @media (max-width: 480px) {
+      .header { padding: 8px 12px; padding-top: calc(8px + var(--safe-top)); min-height: 54px; }
+      .brand-mark { font-size: 11.5px; }
+      .back-btn { width: 34px; height: 34px; font-size: 13px; }
+      .page-title { font-size: 12.5px; max-width: 180px; }
+
+      .container { padding: 12px 12px 32px; gap: 10px; }
+      .chapter-info { padding: 12px 14px; gap: 12px; border-radius: 16px; }
+      .ci-num { width: 38px; height: 38px; font-size: 14px; border-radius: 10px; }
+      .ci-title { font-size: 13.5px; }
+
+      .chapter-progress { padding: 10px 14px; border-radius: 16px; }
+      .chapter-progress .cp-header { font-size: 11px; }
+
+      .tabs { border-radius: 16px; padding: 3px; gap: 3px; }
+      .tab-btn { font-size: 11px; padding: 9px 4px; border-radius: 10px; }
+      .tab-btn i { font-size: 11px; }
+
+      .part-card { padding: 12px 14px; border-radius: 16px; gap: 12px; }
+      .pc-icon { width: 38px; height: 38px; font-size: 15px; border-radius: 10px; }
+      .pc-title { font-size: 13.5px; }
+      .pc-title .pc-badge { font-size: 9.5px; padding: 1px 7px; }
+      .pc-sub { font-size: 11px; }
+      .pc-arrow { width: 26px; height: 26px; font-size: 11px; }
+    }
+
+    @media (max-width: 380px) {
+      .header { padding: 6px 10px; padding-top: calc(6px + var(--safe-top)); min-height: 50px; gap: 8px; }
+      .brand-mark { display: none; }
+      .header-divider { display: none; }
+      .back-btn { width: 32px; height: 32px; font-size: 12px; }
+      .page-title { font-size: 12px; max-width: 160px; }
+      .page-title i { font-size: 11px; }
+
+      .container { padding: 10px 10px 24px; gap: 8px; }
+      .chapter-info { padding: 10px 12px; gap: 10px; border-radius: 12px; }
+      .ci-num { width: 34px; height: 34px; font-size: 13px; border-radius: 10px; }
+      .ci-title { font-size: 12.5px; }
+      .ci-sub { font-size: 10px; gap: 5px; }
+      .ci-status { font-size: 9.5px; padding: 2px 8px; }
+
+      .chapter-progress { padding: 10px 12px; border-radius: 12px; }
+      .chapter-progress .cp-header { font-size: 10.5px; }
+      .chapter-progress .cp-track { height: 5px; }
+
+      .tabs { border-radius: 12px; padding: 3px; gap: 2px; }
+      .tab-btn { font-size: 10px; padding: 8px 3px; border-radius: 10px; }
+      .tab-btn i { font-size: 10px; }
+
+      .part-card { padding: 10px 12px; border-radius: 12px; gap: 10px; }
+      .pc-icon { width: 34px; height: 34px; font-size: 13px; border-radius: 10px; }
+      .pc-title { font-size: 12.5px; }
+      .pc-title .pc-badge { font-size: 9px; padding: 1px 6px; }
+      .pc-sub { font-size: 10.5px; }
+      .pc-arrow { width: 24px; height: 24px; font-size: 10px; }
+    }
+
+    @media (min-width: 768px) {
+      .container { max-width: 720px; padding: 24px 24px 56px; }
+    }
+
+    @media (min-width: 1024px) {
+      .container { max-width: 760px; }
+    }
+
+    /* ============================================================
+       ACCESSIBILITÉ
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .glow,
+      .chapter-progress .cp-track .cp-fill::after {
+        animation: none !important;
+      }
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(224,184,74,0.25); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(224,184,74,0.45); }
+  </style>
+  <!-- ⚡ ARVEXA FLUX v1 — navigation instantanée -->
+  <script src="flux-router.js?v=flux1" defer></script>
+</head>
+<body>
+
+  <div class="gradient-bg"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-left">
+      <a href="#" class="back-btn" id="backBtn" aria-label="Retour"><i class="fas fa-arrow-left"></i></a>
+      <span class="header-divider" aria-hidden="true"></span>
+      <h1 class="page-title" id="pageTitle">Chapitre</h1>
+    </div>
+  </header>
+
+  <!-- ===== CONTAINER ===== -->
+  <main class="container">
+
+    <!-- ===== CHAPTER INFO ===== -->
+    <div class="chapter-info">
+      <div class="ci-num" id="chapNum">1</div>
+      <div class="ci-text">
+        <div class="ci-title" id="chapTitle">Chargement...</div>
+        <div class="ci-sub">
+          <span id="chapSub"></span>
+          <span class="ci-status" id="chapStatus">Gratuit</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CHAPTER PROGRESS ===== -->
+    <div class="chapter-progress" id="chapterProgress">
+      <div class="cp-header">
+        <span>📖 Progression du chapitre</span>
+        <span>
+          <strong id="cpRead">0</strong> / <span id="cpTotal">0</span>
+          <span class="cp-percent" id="cpPercent">(0%)</span>
+        </span>
+      </div>
+      <div class="cp-track">
+        <div class="cp-fill" id="cpFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- ===== TABS ===== -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="cours" id="tabCours">
+        <i class="fas fa-book-open"></i> Chapitre
+      </button>
+      <button class="tab-btn" data-tab="exercices" id="tabExercices">
+        <i class="fas fa-pen-to-square"></i> Exercices
+      </button>
+      <button class="tab-btn" data-tab="corrections" id="tabCorrections">
+        <i class="fas fa-check-double"></i> Corrections
+      </button>
+    </div>
+
+    <!-- ===== CARDS VIEW ===== -->
+    <div class="cards-view" id="cardsView">
+      <div class="loading-state"><div class="spinner"></div><p>Chargement...</p></div>
+    </div>
+
+  </main>
+
+  <!-- ✅ v8.4 — pop-up Premium retiré : window.arvexaConfirm() (composant
+       uniforme du site) est ouverte par showPremiumPopup(). -->
+  <!-- ============================================================ -->
+  <!-- SCRIPTS                                                       -->
+  <!-- ============================================================ -->
+  <script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js",
+      "firebase/auth": "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js",
+      "firebase/firestore": "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js"
+    }
+  }
+  </script>
+
+  <script type="module">
+  // ================================================================
+  // CHAPITRE — Version robuste anti-flash
+  // ================================================================
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+  import {
+    getAuth,
+    onAuthStateChanged,
+    setPersistence,
+    browserLocalPersistence
+  } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+  import {
+    initializeFirestore,
+    persistentLocalCache,
+    persistentSingleTabManager,
+    doc,
+    getDoc,
+    onSnapshot
+  } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+  // ================================================================
+  // CONFIG FIREBASE
+  // ================================================================
+  const firebaseConfig = {
+    apiKey: "AIzaSyDHscOXw3rLuhV6z1Cny-bdYCumqpnG7QE",
+    authDomain: "arvexa-fbf10.firebaseapp.com",
+    projectId: "arvexa-fbf10",
+    storageBucket: "arvexa-fbf10.firebasestorage.app",
+    messagingSenderId: "920108330053",
+    appId: "1:920108330053:web:f532d71cbc2c824bc7472c"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const db = (window.__ARVEXA_DB_SHARED__ !== undefined ? window.__ARVEXA_DB_SHARED__ : (window.__ARVEXA_DB_SHARED__ = initializeFirestore(app, {
+    localCache: persistentLocalCache({
+      tabManager: persistentSingleTabManager()
+    })
+  })));
+
+  try {
+    await setPersistence(auth, browserLocalPersistence);
+  } catch (e) {}
+
+  // ================================================================
+  // SESSION / CACHE
+  // ================================================================
+  const SESSION_KEY = 'arvexa_session';
+  const USER_DATA_KEY = 'arvexa_user_data';
+  const LAST_UID_KEY = 'arvexa_last_uid';
+  const READ_KEY = 'arvexa_read_parts';
+
+  function saveSession(user) {
+    if (!user) return;
+    try {
+      const data = {
+        uid: user.uid,
+        email: user.email,
+        lastActive: Date.now()
+      };
+      localStorage.setItem(SESSION_KEY, JSON.stringify(data));
+      localStorage.setItem(LAST_UID_KEY, user.uid);
+    } catch (e) {}
+  }
+
+  function clearSession() {
+    try {
+      localStorage.removeItem(SESSION_KEY);
+      localStorage.removeItem(USER_DATA_KEY);
+      localStorage.removeItem(LAST_UID_KEY);
+      sessionStorage.removeItem(SESSION_KEY);
+    } catch (e) {}
+  }
+
+  function getCachedUserData(uid) {
+    try {
+      const raw = localStorage.getItem(USER_DATA_KEY);
+      if (!raw) return null;
+      const cached = JSON.parse(raw);
+      if (cached._uid && cached._uid !== uid) {
+        localStorage.removeItem(USER_DATA_KEY);
+        return null;
+      }
+      return cached;
+    } catch (e) { return null; }
+  }
+
+  // ================================================================
+  // URL PARAMS
+  // ================================================================
+  const params = new URLSearchParams(window.location.search);
+  const subjectKey = params.get('subject') || 'mathematiques';
+  const chapIdx = parseInt(params.get('chapter')) || 0;
+  const tabParam = params.get('tab') || 'cours';
+
+  // ================================================================
+  // CONFIG MATIÈRES (fallback)
+  // ================================================================
+  const SUBJECTS_CONFIG = {
+    mathematiques: { name: 'Mathématiques', icon: 'fa-square-root-variable', color: 'var(--accent-bright)' },
+    physique: { name: 'Physique', icon: 'fa-bolt', color: '#4AAFE0' },
+    chimie: { name: 'Chimie', icon: 'fa-flask', color: '#E07A4A' },
+    svt: { name: 'SVT', icon: 'fa-dna', color: '#7AE04A' }
+  };
+
+ const DEFAULT_CHAPTERS = {
+  mathematiques: [
+    'Nombres complexes',
+    'Similitudes planes directes',
+    'Calcul de probabilités',
+    'Variable aléatoire',
+    'Fonction numérique',
+    'Fonction logarithme',
+    'Fonction exponentielle',
+    'Calcul intégral',
+    'Équations différentielles',
+    'Suites numériques',
+    'Statistiques'
+  ],
+  physique: [
+    'Cinématique',
+    'Mouvement rectiligne',
+    'Mouvement dans le champ de pesanteur',
+    'Mouvement des particules chargées',
+    'Oscillateurs mécaniques',
+    'Généralités sur les ondes',
+    'Mouvement vibratoire',
+    'Superposition des ondes',
+    'Interférence lumineuse',
+    'Champ magnétique',
+    'Force de Laplace',
+    'Force de Lorentz',
+    'Induction magnétique',
+    'Auto-induction',
+    'Circuit LC',
+    'Circuit RLC',
+    'Radioactivité'
+  ],
+  chimie: [
+    'Solutions aqueuses et leur pH',
+    'Acide fort, base forte',
+    'Acide faible, base faible',
+    'Couples acide/base et classification',
+    'Réaction acido-basique et solution tampon',
+    'Alcools',
+    'Acides carboxyliques et ses dérivés',
+    'Amines et amides',
+    'Acides α-aminés et protéines'
+  ],
+  svt: [
+    'Notion de l\'IG',
+    'Nature chimique et structure de l\'IG : la molécule d\'ADN',
+    'La reproduction conforme',
+    'Notion de cycle cellulaire et évolution de la quantité d\'ADN au cours du cycle',
+    'Protéines',
+    'Mécanismes d\'expression des gènes : la synthèse des protéines',
+    'Reproduction sexuée',
+    'Brassage des gènes',
+    'Transmission des caractères héréditaires chez l\'Homme',
+    'Anomalies chromosomiques',
+    'Tissus nerveux et notions de réflexes',
+    'Messages nerveux',
+    'La glycémie',
+    'Les appareils génitaux et leur fonctionnement',
+    'Régulation du fonctionnement des organes génitaux',
+    'De la fécondation à la nidation',
+    'La régulation des naissances',
+    'Le soi et le non soi',
+    'Les réponses immunitaires',
+    'Dysfonctionnement du système immunitaire : cas du VIH/SIDA'
+  ]
+};
+
+  // ================================================================
+  // DOM
+  // ================================================================
+  const cardsView = document.getElementById('cardsView');
+  const cpRead = document.getElementById('cpRead');
+  const cpTotal = document.getElementById('cpTotal');
+  const cpPercent = document.getElementById('cpPercent');
+  const cpFill = document.getElementById('cpFill');
+
+  // ================================================================
+  // UTILITAIRE — TIMESTAMP
+  // ================================================================
+  function toDate(value) {
+    if (!value) return null;
+    if (typeof value.toDate === 'function') return value.toDate();
+    if (value.seconds !== undefined) return new Date(value.seconds * 1000);
+    const date = value instanceof Date ? value : new Date(value);
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  // ================================================================
+  // VÉRIFICATION PREMIUM
+  // ================================================================
+  function isUserPremium(userData) {
+    if (!userData) return false;
+    const hasStatus = userData.premium === true ||
+                      userData.isUnlocked === true ||
+                      userData.hasDeposited === true;
+    if (!hasStatus) return false;
+    const endDate = toDate(userData.subscriptionEndDate);
+    if (!endDate) return true;
+    return endDate.getTime() > Date.now();
+  }
+
+  // ================================================================
+  // GESTION DES PARTIES LUES
+  // ================================================================
+  function getReadParts() {
+    try {
+      return JSON.parse(localStorage.getItem(READ_KEY) || '[]');
+    } catch (e) { return []; }
+  }
+
+  function isPartRead(subject, chapter, tab, partIndex) {
+    const key = `${subject}_${chapter}_${tab}_${partIndex}`;
+    const readParts = getReadParts();
+    return readParts.includes(key);
+  }
+
+  function getPartsReadForChapter(subject, chapter, tab, totalParts) {
+    let count = 0;
+    for (let i = 0; i < totalParts; i++) {
+      if (isPartRead(subject, chapter, tab, i)) count++;
+    }
+    return count;
+  }
+
+  // ================================================================
+  // NAVIGATION
+  // ================================================================
+  function openPart(index) {
+    window.location.href = `lecture.html?subject=${subjectKey}&chapter=${chapIdx}&tab=${currentTab}&part=${index}`;
+  }
+
+  // ✅ v8.0 — SYNC FIREBASE : re-rendu quand la progression fusionne/arrive du cloud
+  window.addEventListener('arvexa-progress-updated', () => {
+    if (!currentParts || currentParts.length === 0) return; // pas encore chargé
+    try { renderCards(); } catch (e) {}
+  });
+
+  // ✅ v8.4 — modale UNIFORME du site (arvexa-confirm.js) : mêmes
+  // couleurs et mêmes boutons que index/profil/abonnement.
+  function showPremiumPopup() {
+    if (typeof window.arvexaConfirm !== 'function') { window.location.assign('abonnement.html'); return; }
+    window.arvexaConfirm({
+      title: 'Cette partie est réservée',
+      message: 'Passe à Premium pour débloquer tout ce chapitre : toutes les parties, tous les exercices, toutes les corrections.',
+      icon: '👑',
+      confirmText: 'Découvrir Premium',
+      cancelText: 'Plus tard',
+      variant: 'primary',
+      onConfirm: () => window.location.assign('abonnement.html')
+    });
+  }
+
+  window.openPart = openPart;
+  window.showPremiumPopup = showPremiumPopup;
+  // ✅ v8.4 — fermeture gérée par arvexa-confirm.js (Échap/clic extérieur)
+
+  // ================================================================
+  // ÉTAT
+  // ================================================================
+  let subjectConfig = null;
+  let chapters = [];
+  let isPremium = false;
+  let currentTab = (tabParam === 'cours' || tabParam === 'exercices' || tabParam === 'corrections')
+    ? tabParam
+    : 'cours';
+  let currentParts = [];
+  let unsubscribeUser = null;
+  let currentUid = null;
+
+  // ================================================================
+  // RENDU
+  // ================================================================
+  function loadSubjectData() {
+    // Cache d'abord (instantané)
+    try {
+      const cached = localStorage.getItem('arvexa_subject_' + subjectKey);
+      if (cached) {
+        const data = JSON.parse(cached);
+        subjectConfig = data.subjectConfig;
+        chapters = data.chapters;
+        renderPage();
+        return;
+      }
+    } catch (e) {}
+
+    // Fallback
+    const defaultData = SUBJECTS_CONFIG[subjectKey];
+    if (defaultData) {
+      subjectConfig = {
+        name: defaultData.name,
+        icon: defaultData.icon,
+        color: defaultData.color
+      };
+      chapters = DEFAULT_CHAPTERS[subjectKey] || [];
+      renderPage();
+    } else {
+      window.location.replace('index.html');
+    }
+  }
+
+  function renderPage() {
+    if (!subjectConfig || !chapters.length) return;
+
+    const title = chapters[chapIdx] || 'Chapitre ' + (chapIdx + 1);
+    document.title = 'ARVEXA - ' + title;
+    document.getElementById('pageTitle').innerHTML = '<i class="fas ' + subjectConfig.icon + '"></i> ' + title;
+    document.getElementById('backBtn').href = 'matiere.html?subject=' + subjectKey;
+
+    const isFree = chapIdx === 0;
+    const statusEl = document.getElementById('chapStatus');
+
+    document.getElementById('chapNum').textContent = chapIdx + 1;
+    document.getElementById('chapTitle').textContent = title;
+    document.getElementById('chapSub').textContent = subjectConfig.name + ' — Chapitre ' + (chapIdx + 1) + ' / ' + chapters.length;
+
+    if (isFree) {
+      statusEl.textContent = '🎁 Gratuit';
+      statusEl.className = 'ci-status free';
+    } else if (isPremium) {
+      statusEl.textContent = '👑 Premium';
+      statusEl.className = 'ci-status premium';
+    } else {
+      statusEl.textContent = '🔒 Verrouillé';
+      statusEl.className = 'ci-status locked';
+    }
+
+    // Tabs
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.tab === currentTab);
+    });
+
+    // Charger le manifest
+    loadManifest();
+  }
+
+function loadManifest() {
+  const container = document.getElementById('cardsView');
+  container.innerHTML = '<div class="loading-state"><div class="spinner"></div><p>Chargement...</p></div>';
+
+  // ⚡ Charger le fichier unique de la matière
+  const manifestPath = 'cours/' + subjectKey + '.json';
+
+  fetch(manifestPath)
+    .then((r) => { if (!r.ok) throw new Error('not found'); return r.json(); })
+    .then((data) => {
+      // ⚡ Trouver le chapitre par son numéro
+      const chapter = (data.chapters || []).find((c) => c.number === chapIdx);
+      if (!chapter) {
+        currentParts = [];
+        renderEmpty();
+        return;
+      }
+
+      // ⚡ Choisir les parties selon l'onglet actif
+      let partsKey;
+      if (currentTab === 'cours') partsKey = 'cours';
+      else if (currentTab === 'exercices') partsKey = 'exercices';
+      else partsKey = 'corrections';
+
+      const rawParts = chapter[partsKey] || [];
+
+      // ⚡ Adapter le format pour renderCards
+      currentParts = rawParts.map((p) => ({
+        title: p.title || `Partie ${p.part}`,
+        file: p.file || '',
+        part: p.part,
+        duration: p.duration || 0
+      }));
+
+      renderCards();
+    })
+    .catch((err) => {
+      console.warn('Impossible de charger le chapitre :', err.message);
+      currentParts = [];
+      renderEmpty();
+    });
+}
+    
+  function renderCards() {
+    const container = document.getElementById('cardsView');
+    if (currentParts.length === 0) {
+      renderEmpty();
+      return;
+    }
+
+    const tabLabels = { cours: 'Partie', exercices: 'Exercice', corrections: 'Correction' };
+    const tabIcons = { cours: 'fa-book-open', exercices: 'fa-pen-to-square', corrections: 'fa-check-double' };
+    const iconClass = { cours: '', exercices: 'exo', corrections: 'corr' };
+    const label = tabLabels[currentTab] || 'Partie';
+    const icon = tabIcons[currentTab] || 'fa-file';
+    const ic = iconClass[currentTab] || '';
+
+    const isFree = chapIdx === 0;
+    const isLockedCorrection = currentTab === 'corrections' && !isPremium && !isFree;
+
+    const totalParts = currentParts.length;
+    const readCount = getPartsReadForChapter(subjectKey, chapIdx, currentTab, totalParts);
+    cpTotal.textContent = totalParts;
+    cpRead.textContent = readCount;
+    const percent = totalParts > 0 ? Math.round((readCount / totalParts) * 100) : 0;
+    cpFill.style.width = percent + '%';
+    cpPercent.textContent = `(${percent}%)`;
+
+    container.innerHTML = currentParts.map((part, i) => {
+      const isRead = isPartRead(subjectKey, chapIdx, currentTab, i);
+      const isLocked = isLockedCorrection;
+
+      let badge = '';
+      let badgeClass = '';
+      let cardClass = '';
+
+      if (isRead && !isLocked) {
+        badge = '✅ Lu';
+        badgeClass = 'read';
+        cardClass = 'read';
+      } else if (isLocked) {
+        badge = '🔒 Premium';
+        badgeClass = 'premium';
+        cardClass = 'locked';
+      } else if (isFree && currentTab === 'cours') {
+        badge = '🎁 Gratuit';
+        badgeClass = 'free';
+      }
+
+      const onclick = isLocked ? 'showPremiumPopup()' : `openPart(${i})`;
+
+      return `
+        <div class="part-card ${cardClass}" onclick="${onclick}">
+          <div class="pc-icon ${ic}">
+            <i class="fas ${icon}"></i>
+          </div>
+          <div class="pc-info">
+            <div class="pc-title">
+              ${escapeHtml(part.title)}
+              ${badge ? `<span class="pc-badge ${badgeClass}">${badge}</span>` : ''}
+            </div>
+            <div class="pc-sub">${label} ${i + 1} — ${subjectConfig.name}</div>
+          </div>
+          <div class="pc-arrow"><i class="fas fa-chevron-right"></i></div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function renderEmpty() {
+    const container = document.getElementById('cardsView');
+    const tabNames = { cours: 'cours', exercices: 'exercices', corrections: 'corrections' };
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="es-icon"><i class="fas fa-folder-open"></i></div>
+        <h4>Aucun ${tabNames[currentTab] || 'contenu'} disponible</h4>
+        <p>Le contenu sera ajouté prochainement.</p>
+      </div>
+    `;
+    cpTotal.textContent = '0';
+    cpRead.textContent = '0';
+    cpPercent.textContent = '(0%)';
+    cpFill.style.width = '0%';
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // ================================================================
+  // TABS
+  // ================================================================
+  function setupTabs() {
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+        if (tab === currentTab) return;
+        currentTab = tab;
+        const url = new URL(window.location);
+        url.searchParams.set('tab', tab);
+        window.history.pushState({}, '', url);
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+        loadManifest();
+      });
+    });
+  }
+
+  // ================================================================
+  // CHARGEMENT UTILISATEUR (temps réel)
+  // ================================================================
+  function loadUserData(user) {
+    if (unsubscribeUser) {
+      unsubscribeUser();
+      unsubscribeUser = null;
+    }
+
+    const userRef = doc(db, 'users', user.uid);
+
+    unsubscribeUser = onSnapshot(userRef,
+      (docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const newPremium = isUserPremium(data);
+
+          if (newPremium !== isPremium) {
+            isPremium = newPremium;
+            if (subjectConfig && chapters.length) {
+              renderPage();
+            }
+          }
+
+          try {
+            localStorage.setItem(USER_DATA_KEY, JSON.stringify({
+              ...data,
+              _uid: user.uid,
+              _cachedAt: Date.now()
+            }));
+          } catch (e) {}
+        } else {
+          const cached = getCachedUserData(user.uid);
+          if (cached) {
+            const newPremium = isUserPremium(cached);
+            if (newPremium !== isPremium) {
+              isPremium = newPremium;
+              if (subjectConfig && chapters.length) {
+                renderPage();
+              }
+            }
+          }
+        }
+      },
+      (error) => {
+        const cached = getCachedUserData(user.uid);
+        if (cached) {
+          const newPremium = isUserPremium(cached);
+          if (newPremium !== isPremium) {
+            isPremium = newPremium;
+            if (subjectConfig && chapters.length) {
+              renderPage();
+            }
+          }
+        }
+      }
+    );
+  }
+
+  // ================================================================
+  // AUTH ROBUSTE — Anti-flash
+  // ================================================================
+  let isRedirecting = false;
+  let isAuthResolved = false;
+  let graceTimer = null;
+  let maxTimer = null;
+
+  function redirectToLogin() {
+    if (isRedirecting) return;
+    isRedirecting = true;
+    try {
+      sessionStorage.setItem('redirectAfterLogin',
+        window.location.pathname + window.location.search);
+    } catch (e) {}
+    window.location.replace('login.html');
+  }
+
+  function initAuthGuard(onAuthenticated) {
+    auth.onAuthStateChanged((user) => {
+      if (isAuthResolved) {
+        if (user && user.uid !== currentUid) {
+          currentUid = user.uid;
+          saveSession(user);
+          onAuthenticated(user);
+        } else if (!user && currentUid) {
+          currentUid = null;
+          clearSession();
+          redirectToLogin();
+        }
+        return;
+      }
+
+      if (!user) {
+        if (graceTimer) clearTimeout(graceTimer);
+        graceTimer = setTimeout(() => {
+          if (isAuthResolved) return;
+          if (auth.currentUser) return;
+
+          const hasSession = localStorage.getItem(SESSION_KEY);
+          const hasUserData = localStorage.getItem(USER_DATA_KEY);
+
+          if ((hasSession || hasUserData) && !navigator.onLine) {
+            setTimeout(() => {
+              if (auth.currentUser) return;
+              if (!isAuthResolved) redirectToLogin();
+            }, 1500);
+            return;
+          }
+
+          if (hasSession && hasUserData) {
+            setTimeout(() => {
+              if (auth.currentUser) return;
+              if (!isAuthResolved) redirectToLogin();
+            }, 1500);
+            return;
+          }
+
+          redirectToLogin();
+        }, 600);
+        return;
+      }
+
+      if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+      if (maxTimer) { clearTimeout(maxTimer); maxTimer = null; }
+
+      isAuthResolved = true;
+      currentUid = user.uid;
+      saveSession(user);
+      onAuthenticated(user);
+    });
+
+    maxTimer = setTimeout(() => {
+      if (isAuthResolved) return;
+      if (auth.currentUser) {
+        isAuthResolved = true;
+        currentUid = auth.currentUser.uid;
+        saveSession(auth.currentUser);
+        onAuthenticated(auth.currentUser);
+      } else {
+        redirectToLogin();
+      }
+    }, 5000);
+  }
+
+  // ================================================================
+  // LANCER LA PROTECTION
+  // ================================================================
+  initAuthGuard(async (user) => {
+    // Cache-first : Premium depuis le cache
+    const cached = getCachedUserData(user.uid);
+    isPremium = cached ? isUserPremium(cached) : false;
+
+    // Charger les données
+    loadSubjectData();
+    setupTabs();
+
+    // Écouter Firestore en temps réel
+    loadUserData(user);
+  });
+
+  console.log('🚀 ARVEXA — Chapitre (avec session robuste)');
+  </script>
+<script type="module" src="./arvexa-confirm.js"></script>
+</body>
+</html>

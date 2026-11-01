@@ -1,0 +1,4371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+    <title>ARVEXA — Lecture de cours</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0A0A">
+<script>(function(){try{if(localStorage.getItem('arvexa-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}})();</script>
+<script src="theme.js"></script><script src="arvexa-i18n.js" defer></script>
+<script src="arvexa-sync.js" defer></script><!-- ✅ v8.0 sync Firebase des progressions (par compte) -->
+  <meta name="description" content="ARVEXA School - Lecture">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="stylesheet" href="perf.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="analytics.js"></script>
+  <script src="register-sw.js" defer></script>
+
+  <link rel="stylesheet" href="arvexa-ui.css">
+  <style>
+    /* ============================================================
+       TOKENS — Identité ARVEXA School
+       ============================================================ */
+    :root {
+      --primary: #1A3A2A;
+      --accent: #B8860B;
+      --accent-bright: #E0B84A;
+      --success: #2D7D5A;
+      --success-light: #3AB67E;
+      --danger: #B85C3A;
+      --danger-light: #f87171;
+      --warning: #D4A017;
+      --warning-bright: #fbbf24;
+
+      --bg-dark: #0A0A0A;
+      --bg-surface: #131311;
+      --bg-card: rgba(255, 255, 255, 0.025);
+      --bg-elev: rgba(19, 19, 17, 0.9);
+
+      --text-light: #F5F0E8;
+      --text-body: #C9CBC0;
+      --text-dim: #8A8A7A;
+      --text-muted: #5C5C4E;
+
+      --border-soft: rgba(255, 255, 255, 0.065);
+      --border-gold: rgba(224, 184, 74, 0.14);
+      --card-border: rgba(184, 134, 11, 0.11);
+
+      --tint-gold: rgba(224, 184, 74, 0.05);
+      --tint-red: rgba(248, 113, 113, 0.05);
+      --tint-warn: rgba(251, 191, 36, 0.055);
+
+      --shadow-soft: 0 10px 34px rgba(0, 0, 0, 0.35);
+
+      --transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+      --radius: 16px;
+      --radius-lg: 18px;
+      --content-max: 780px;
+      --header-h: 56px;
+
+      --font-body: 'Inter', 'Segoe UI', Arial, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-mono: 'SF Mono', 'Monaco', 'Consolas', 'Courier New', monospace;
+
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    html[data-theme="light"] {
+      --bg-dark: #FAF7F0;
+      --bg-surface: #FFFFFF;
+      --bg-card: rgba(255, 255, 255, 0.8);
+      --bg-elev: rgba(255, 255, 255, 0.96);
+
+      --text-light: #1C1B17;
+      --text-body: #33322C;
+      --text-dim: #5A594F;
+      --text-muted: #8B897C;
+
+      --border-soft: rgba(var(--rgb-card), 0.09);
+      --border-gold: rgba(184, 134, 11, 0.2);
+      --card-border: rgba(184, 134, 11, 0.18);
+
+      --accent: #96650A;
+      --accent-bright: #B8860B;
+      --success: #1E6B47;
+      --danger-light: #dc2626;
+      --warning: #B37D00;
+      --warning-bright: #B37D00;
+
+      --tint-gold: rgba(184, 134, 11, 0.08);
+      --tint-red: rgba(220, 38, 38, 0.06);
+      --tint-warn: rgba(217, 119, 6, 0.08);
+
+      --shadow-soft: 0 10px 30px rgba(80, 60, 10, 0.1);
+    }
+
+    /* ============================================================
+       BASE
+       ============================================================ */
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; width: 100%; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-size: 16px;
+      line-height: 1.8;
+      min-height: 100vh;
+      width: 100%;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    ::selection { background: rgba(224, 184, 74, 0.28); }
+
+    /* ============================================================
+       FOND DÉCORATIF
+       ============================================================ */
+    .gradient-bg {
+      position: fixed; inset: 0; z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 42% 30% at 24% 10%, rgba(184, 134, 11,  0.22) 0%, transparent 62%),
+        radial-gradient(ellipse 36% 26% at 82% 88%, rgba(184, 134, 11, 0.06) 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-deep) 100%);
+      transition: opacity 0.3s ease;
+    }
+    html[data-theme="light"] .gradient-bg {
+      background:
+        radial-gradient(ellipse 42% 30% at 24% 10%, rgba(184, 134, 11, 0.07) 0%, transparent 62%),
+        radial-gradient(ellipse 36% 26% at 82% 88%, rgba(184, 134, 11,  0.05) 0%, transparent 60%),
+        linear-gradient(180deg, #FAF7F0 0%, #F1EBDD 100%);
+    }
+
+    /* ============================================================
+       PROGRESSION DE LECTURE (barre supérieure)
+       ============================================================ */
+    .read-progress {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 3px; z-index: 300; pointer-events: none;
+      background: transparent;
+    }
+    .read-progress-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+      box-shadow: 0 0 10px rgba(224, 184, 74, 0.55);
+      transition: width 0.12s ease-out;
+    }
+
+    /* ============================================================
+       EN-TÊTE — compact, clair, organisé
+       ============================================================ */
+    .header {
+      position: sticky; top: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 10px;
+      padding: calc(6px + var(--safe-top)) 14px 6px;
+      min-height: calc(var(--header-h) + var(--safe-top));
+      background: rgba(var(--rgb-veil), 0.78);
+      backdrop-filter: blur(18px) saturate(1.15);
+      -webkit-backdrop-filter: blur(18px) saturate(1.15);
+      border-bottom: 1px solid rgba(184, 134, 11, 0.08);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    html[data-theme="light"] .header {
+      background: rgba(250, 247, 240, 0.85);
+      border-bottom-color: rgba(184, 134, 11, 0.14);
+    }
+    .header.scrolled {
+      background: rgba(var(--rgb-veil), 0.93);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+    html[data-theme="light"] .header.scrolled {
+      background: rgba(250, 247, 240, 0.97);
+      box-shadow: 0 8px 24px rgba(80, 60, 10, 0.09);
+    }
+
+    .header-left {
+      display: flex; align-items: center; gap: 10px;
+      min-width: 0; flex: 1;
+    }
+
+    .icon-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 10px;
+      border: 1px solid var(--border-soft); background: transparent;
+      color: var(--text-dim); cursor: pointer;
+      transition: var(--transition); font-size: 14px;
+      flex-shrink: 0;
+    }
+    .icon-btn:hover {
+      border-color: rgba(224, 184, 74, 0.28);
+      color: var(--accent-bright);
+      background: rgba(224, 184, 74, 0.05);
+    }
+    .icon-btn:active { transform: scale(0.94); }
+
+    .header-title {
+      min-width: 0;
+      display: flex; flex-direction: column; gap: 1px;
+    }
+    .ht-overline {
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 2.2px; text-transform: uppercase;
+      color: var(--accent); line-height: 1.3;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .ht-main {
+      font-size: 13.5px; font-weight: 600;
+      color: var(--text-light); line-height: 1.35;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    .header-right {
+      display: flex; align-items: center; gap: 7px;
+      flex-shrink: 0;
+    }
+
+    .tts-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      height: 34px; padding: 0 13px; border-radius: 999px;
+      border: 1px solid rgba(224, 184, 74, 0.2);
+      background: rgba(224, 184, 74, 0.07);
+      color: var(--accent-bright); font-size: 11.5px; font-weight: 600;
+      cursor: pointer; transition: var(--transition);
+      font-family: var(--font-body);
+      flex-shrink: 0; white-space: nowrap;
+    }
+    .tts-btn i { font-size: 12px; }
+    .tts-btn:hover { background: rgba(224, 184, 74, 0.14); }
+    .tts-btn:active { transform: scale(0.95); }
+    .tts-btn.speaking {
+      border-color: rgba(224, 184, 74, 0.45);
+      background: rgba(224, 184, 74, 0.16);
+    }
+    .tts-btn.speaking i { animation: ttsPulse 1.2s ease-in-out infinite; }
+    .tts-btn.paused {
+      border-color: rgba(224, 184, 74, 0.35);
+      background: rgba(224, 184, 74, 0.1);
+      color: var(--accent-bright);
+    }
+    @keyframes ttsPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.35; }
+    }
+
+    .notes-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      height: 34px; padding: 0 13px; border-radius: 999px;
+      border: 1px solid rgba(224, 184, 74, 0.2);
+      background: rgba(224, 184, 74, 0.07);
+      color: var(--accent-bright); font-size: 11.5px; font-weight: 600;
+      cursor: pointer; transition: var(--transition);
+      font-family: var(--font-body);
+      flex-shrink: 0; white-space: nowrap;
+      position: relative;
+    }
+    .notes-btn i { font-size: 12px; }
+    .notes-btn:hover { background: rgba(224, 184, 74, 0.14); }
+    .notes-btn:active { transform: scale(0.95); }
+    .notes-btn .dot {
+      position: absolute; top: 5px; right: 5px;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--success-light);
+      box-shadow: 0 0 6px rgba(58, 182, 126, 0.8);
+      display: none;
+    }
+    .notes-btn .dot.show { display: block; }
+
+    /* ============================================================
+       CONTENEUR DE LECTURE — largeur adaptée
+       ============================================================ */
+    .content-wrapper {
+      width: 100%; max-width: var(--content-max);
+      margin: 0 auto; min-width: 0;
+      padding: 28px 20px 36px;
+    }
+
+    #contentBody {
+      min-width: 0; max-width: 100%;
+      font-size: 16.5px;
+      line-height: 1.85;
+      color: var(--text-body);
+      letter-spacing: 0.005em;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    #contentBody [id] { scroll-margin-top: calc(var(--header-h) + 20px); }
+    #contentBody > div:empty,
+    #contentBody > p:empty,
+    #contentBody > br:last-child { display: none; }
+
+    /* ============================================================
+       ÉTATS — chargement
+       ============================================================ */
+    .loading-state {
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 90px 20px; gap: 16px;
+    }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid rgba(224, 184, 74, 0.15);
+      border-top-color: var(--accent-bright);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-state p {
+      font-size: 13px; color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    /* ============================================================
+       SABLIER ANIMÉ — Contenu en préparation
+       ============================================================ */
+    .hourglass-wrap {
+      position: relative;
+      width: 100px; height: 100px;
+      margin: 0 auto 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hourglass-wrap::before {
+      content: '';
+      position: absolute; inset: -20%;
+      border-radius: 50%;
+      background: radial-gradient(
+        circle,
+        rgba(224, 184, 74, 0.25) 0%,
+        rgba(224, 184, 74, 0.08) 40%,
+        transparent 70%
+      );
+      animation: hourglassHalo 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes hourglassHalo {
+      0%, 100% { transform: scale(1); opacity: 0.6; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+    .hourglass-svg {
+      width: 72px; height: 72px;
+      position: relative; z-index: 1;
+      animation: hourglassTilt 6s ease-in-out infinite;
+      filter: drop-shadow(0 0 12px rgba(224, 184, 74, 0.4));
+    }
+    @keyframes hourglassTilt {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
+    }
+    .hourglass-svg .frame {
+      stroke: var(--accent-bright); stroke-width: 2;
+      fill: none; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .hourglass-svg .glass {
+      fill: rgba(224, 184, 74, 0.08);
+      stroke: rgba(224, 184, 74, 0.4); stroke-width: 1.5;
+    }
+    .hourglass-svg .sand-top {
+      fill: var(--accent-bright);
+      animation: sandTopDrain 4s ease-in-out infinite;
+      transform-origin: center top;
+    }
+    @keyframes sandTopDrain {
+      0%, 10% { transform: scaleY(1); opacity: 1; }
+      80%, 90% { transform: scaleY(0.05); opacity: 0.9; }
+      100% { transform: scaleY(1); opacity: 1; }
+    }
+    .hourglass-svg .sand-stream {
+      fill: var(--accent-bright);
+      animation: sandStream 4s ease-in-out infinite;
+    }
+    @keyframes sandStream {
+      0%, 15% { opacity: 0.9; }
+      75%, 85% { opacity: 0.9; }
+      95%, 100% { opacity: 0; }
+    }
+    .hourglass-svg .sand-bottom {
+      fill: var(--accent-bright);
+      animation: sandBottomFill 4s ease-in-out infinite;
+      transform-origin: center bottom;
+    }
+    @keyframes sandBottomFill {
+      0%, 10% { transform: scaleY(0.1); opacity: 0.8; }
+      80%, 90% { transform: scaleY(1); opacity: 1; }
+      100% { transform: scaleY(0.1); opacity: 0.8; }
+    }
+    .hourglass-particle {
+      position: absolute;
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--accent-bright);
+      box-shadow: 0 0 6px var(--accent-bright);
+      opacity: 0; pointer-events: none;
+    }
+    .hourglass-particle:nth-child(1) { left: 50%; top: 35%; animation: particleDrop 2.5s ease-in 0s infinite; }
+    .hourglass-particle:nth-child(2) { left: 48%; top: 35%; animation: particleDrop 2.5s ease-in 0.6s infinite; }
+    .hourglass-particle:nth-child(3) { left: 52%; top: 35%; animation: particleDrop 2.5s ease-in 1.2s infinite; }
+    .hourglass-particle:nth-child(4) { left: 50%; top: 35%; animation: particleDrop 2.5s ease-in 1.8s infinite; }
+    @keyframes particleDrop {
+      0% { opacity: 0; transform: translateY(0) scale(0.5); }
+      10% { opacity: 1; transform: translateY(0) scale(1); }
+      80% { opacity: 1; transform: translateY(28px) scale(1); }
+      100% { opacity: 0; transform: translateY(35px) scale(0.4); }
+    }
+    html[data-theme="light"] .hourglass-wrap::before {
+      background: radial-gradient(
+        circle,
+        rgba(184, 134, 11, 0.3) 0%,
+        rgba(184, 134, 11, 0.1) 40%,
+        transparent 70%
+      );
+    }
+    html[data-theme="light"] .hourglass-svg {
+      filter: drop-shadow(0 0 12px rgba(184, 134, 11, 0.5));
+    }
+
+    /* ============================================================
+       CONTENU INDISPONIBLE
+       ============================================================ */
+    .content-unavailable {
+      text-align: center; padding: 56px 24px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 14px;
+      min-height: 300px; justify-content: center;
+    }
+    .content-unavailable h2 {
+      font-family: var(--font-serif);
+      font-size: 22px; font-weight: 700;
+      color: var(--text-light); margin: 0;
+    }
+    .content-unavailable p {
+      font-size: 14px; color: var(--text-dim);
+      max-width: 380px; line-height: 1.7; margin: 0;
+    }
+    .content-unavailable .cu-actions {
+      display: flex; gap: 10px; margin-top: 10px;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .content-unavailable .cu-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; border-radius: 100px;
+      border: 1px solid var(--border-soft); background: transparent;
+      color: var(--text-light); text-decoration: none;
+      font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: var(--transition);
+      font-family: var(--font-body);
+    }
+    .content-unavailable .cu-btn:hover {
+      border-color: rgba(224, 184, 74, 0.3);
+      background: rgba(224, 184, 74, 0.08);
+      color: var(--accent-bright);
+    }
+    .content-unavailable .cu-btn.primary {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--bg-dark); border-color: transparent;
+    }
+    .content-unavailable .cu-btn.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(184, 134, 11, 0.3);
+      color: var(--bg-dark);
+    }
+
+    /* ============================================================
+       NAVIGATION BAS DE PAGE
+       ============================================================ */
+    .nav-bar {
+      margin-top: 64px; padding-top: 20px;
+      border-top: 1px solid var(--border-gold);
+      position: relative;
+    }
+    .nav-bar::before {
+      content: ''; position: absolute;
+      top: -1px; left: 0; width: 46px; height: 2px;
+      background: linear-gradient(90deg, var(--accent-bright), transparent);
+    }
+    .nav-progress {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      justify-content: center; margin-bottom: 18px;
+    }
+    .nav-progress[hidden] { display: none; }
+    .pdot {
+      width: 6px; height: 6px; border-radius: 999px;
+      background: rgba(var(--rgb-soft), 0.12);
+      transition: var(--transition);
+    }
+    html[data-theme="light"] .pdot { background: rgba(0, 0, 0, 0.14); }
+    .pdot.done { background: rgba(224, 184, 74, 0.4); }
+    .pdot.active {
+      width: 22px; background: var(--accent-bright);
+      box-shadow: 0 0 8px rgba(224, 184, 74, 0.5);
+    }
+    .nav-row {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 12px;
+    }
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 11px 20px; border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      color: var(--text-dim); font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: var(--transition);
+      font-family: var(--font-body); text-decoration: none;
+    }
+    .nav-btn:hover:not(:disabled) {
+      border-color: rgba(224, 184, 74, 0.3);
+      color: var(--text-light);
+      transform: translateY(-1px);
+    }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .nav-btn i { font-size: 11px; }
+    .nav-btn.primary {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--bg-dark); border-color: transparent; font-weight: 700;
+    }
+    .nav-btn.primary:hover:not(:disabled) {
+      box-shadow: 0 6px 20px rgba(184, 134, 11, 0.35);
+      color: var(--bg-dark);
+    }
+    .nav-counter {
+      font-size: 12px; color: var(--text-muted);
+      font-weight: 600; letter-spacing: 0.06em;
+      padding: 0 4px; flex-shrink: 0;
+    }
+
+    /* ============================================================
+       MODAL NOTES
+       ============================================================ */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9999; display: none;
+      align-items: center; justify-content: center;
+      padding: 20px; animation: fadeIn 0.25s ease;
+    }
+    .modal-overlay.show { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .modal {
+      background: var(--bg-surface);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 24px 20px; max-width: 480px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      animation: slideUp 0.3s ease; position: relative;
+      box-shadow: var(--shadow-soft);
+    }
+    @keyframes slideUp {
+      from { transform: translateY(28px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .modal .modal-close {
+      position: absolute; top: 12px; right: 12px;
+      width: 32px; height: 32px; border-radius: 10px;
+      background: transparent; border: 1px solid transparent;
+      color: var(--text-muted); font-size: 15px;
+      cursor: pointer; transition: var(--transition);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal .modal-close:hover {
+      color: var(--text-light);
+      background: rgba(var(--rgb-soft), 0.05);
+      border-color: var(--border-soft);
+    }
+    .modal .modal-title {
+      font-size: 19px; font-weight: 700;
+      font-family: var(--font-serif);
+      color: var(--text-light);
+      margin-bottom: 4px; padding-right: 30px;
+    }
+    .modal .modal-title span { color: var(--accent-bright); }
+    .modal .modal-sub {
+      font-size: 12px; color: var(--text-dim);
+      margin-bottom: 16px;
+    }
+    .modal textarea {
+      width: 100%; min-height: 180px; max-height: 400px;
+      padding: 14px 16px; border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      background: rgba(var(--rgb-soft), 0.02);
+      color: var(--text-light); font-size: 14px;
+      font-family: var(--font-body);
+      resize: vertical; outline: none;
+      transition: var(--transition); line-height: 1.7;
+    }
+    html[data-theme="light"] .modal textarea { background: rgba(0, 0, 0, 0.02); }
+    .modal textarea:focus { border-color: rgba(224, 184, 74, 0.35); }
+    .modal textarea::placeholder { color: var(--text-muted); }
+    .modal .modal-actions {
+      display: flex; gap: 10px; margin-top: 14px;
+    }
+    .modal .modal-actions button {
+      flex: 1; padding: 11px; border-radius: 100px;
+      border: none; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: var(--transition);
+      font-family: var(--font-body);
+    }
+    .modal .modal-actions .btn-save {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--bg-dark);
+    }
+    .modal .modal-actions .btn-save:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(184, 134, 11, 0.25);
+    }
+    .modal .modal-actions .btn-cancel {
+      background: rgba(var(--rgb-soft), 0.04);
+      color: var(--text-dim);
+      border: 1px solid var(--border-soft);
+    }
+    html[data-theme="light"] .modal .modal-actions .btn-cancel {
+      background: rgba(0, 0, 0, 0.04);
+    }
+    .modal .modal-actions .btn-cancel:hover {
+      background: rgba(var(--rgb-soft), 0.08);
+      color: var(--text-light);
+    }
+    .modal .note-saved {
+      font-size: 12px; color: var(--success-light);
+      margin-top: 10px; display: none;
+      align-items: center; gap: 6px;
+    }
+    .modal .note-saved.show { display: flex; }
+
+    .tts-progress {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      height: 3px; background: rgba(224, 184, 74, 0.1);
+      z-index: 300; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .tts-progress.active { opacity: 1; }
+    .tts-progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+      width: 0%; transition: width 0.4s ease;
+      box-shadow: 0 0 12px rgba(224, 184, 74, 0.5);
+    }
+    /* ============================================================
+       TYPOGRAPHIE GÉNÉRALE DU CONTENU
+       ============================================================ */
+    #contentBody h1,
+    #contentBody h2,
+    #contentBody h3,
+    #contentBody h4,
+    #contentBody h5,
+    #contentBody h6 {
+      font-family: var(--font-serif);
+      color: var(--text-light);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.015em;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+
+    #contentBody h1 {
+      font-size: clamp(26px, 3.5vw, 34px);
+      margin: 0 0 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-gold);
+      position: relative;
+    }
+    #contentBody h1::after {
+      content: ''; position: absolute; bottom: -1px; left: 0;
+      width: 50px; height: 2px;
+      background: linear-gradient(90deg, var(--accent-bright), transparent);
+    }
+
+    #contentBody h2 {
+      font-size: clamp(22px, 3vw, 28px);
+      margin: 44px 0 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-soft);
+      position: relative;
+    }
+    #contentBody h2::after {
+      content: ''; position: absolute; bottom: -1px; left: 0;
+      width: 36px; height: 2px;
+      background: var(--accent-bright);
+    }
+
+    #contentBody h3 {
+      font-size: clamp(19px, 2.5vw, 22px);
+      margin: 32px 0 14px;
+    }
+    #contentBody h4 {
+      font-family: var(--font-body);
+      font-size: clamp(16px, 2vw, 18px);
+      font-weight: 600;
+      margin: 26px 0 12px;
+    }
+    #contentBody h5 {
+      font-family: var(--font-body);
+      font-size: 15px; font-weight: 700;
+      margin: 22px 0 10px;
+      color: var(--accent-bright);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    #contentBody h6 {
+      font-family: var(--font-body);
+      font-size: 13px; font-weight: 700;
+      margin: 18px 0 8px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+
+    #contentBody p {
+      margin: 0 0 18px;
+      color: var(--text-body);
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    #contentBody p:last-child { margin-bottom: 0; }
+
+    #contentBody strong { color: var(--text-light); font-weight: 600; }
+    #contentBody em { color: var(--accent-bright); font-style: italic; font-weight: 500; }
+    #contentBody del { color: var(--text-muted); text-decoration: line-through; }
+    #contentBody mark {
+      background: rgba(224, 184, 74, 0.2);
+      color: var(--text-light);
+      padding: 1px 4px; border-radius: 8px;
+    }
+
+    #contentBody a {
+      color: var(--accent-bright);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(224, 184, 74, 0.3);
+      transition: var(--transition);
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    #contentBody a:hover {
+      border-bottom-color: var(--accent-bright);
+      background: rgba(224, 184, 74, 0.06);
+      padding: 0 2px;
+    }
+
+    #contentBody ul,
+    #contentBody ol {
+      margin: 16px 0 20px;
+      padding-left: 26px;
+    }
+    #contentBody li {
+      margin: 6px 0; line-height: 1.8;
+      overflow-wrap: break-word;
+    }
+
+    sup {
+      font-size: 0.68em;
+      vertical-align: super;
+      line-height: 0;
+      font-family: var(--font-serif);
+      font-weight: 600;
+      margin-left: 1px;
+    }
+    sub {
+      font-size: 0.68em;
+      vertical-align: sub;
+      line-height: 0;
+      font-family: var(--font-serif);
+      font-weight: 600;
+      margin-left: 1px;
+    }
+
+    #contentBody pre {
+      margin: 20px 0; padding: 16px 18px;
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--border-soft);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      font-family: var(--font-mono);
+      font-size: 13px; line-height: 1.6;
+      color: var(--text-body);
+    }
+    html[data-theme="light"] #contentBody pre { background: rgba(0, 0, 0, 0.04); }
+    #contentBody code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      background: rgba(224, 184, 74, 0.1);
+      color: var(--accent-bright);
+      padding: 2px 7px; border-radius: 8px;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    #contentBody pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    #contentBody blockquote {
+      margin: 22px 0;
+      padding: 4px 0 4px 20px;
+      border-left: 3px solid var(--accent-bright);
+      color: var(--text-dim);
+      font-style: italic;
+      font-size: 15.5px; line-height: 1.8;
+    }
+    #contentBody blockquote strong { color: var(--text-light); font-style: normal; }
+
+    #contentBody hr {
+      margin: 36px 0; border: none; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+    }
+
+    #contentBody img {
+      max-width: 100%; height: auto;
+      border-radius: 10px; margin: 16px 0;
+      display: block;
+    }
+    #contentBody svg {
+      max-width: 100%; height: auto;
+      display: block; margin: 16px auto;
+    }
+
+    #contentBody table {
+      width: 100%; border-collapse: collapse;
+      margin: 22px 0; font-size: 14px;
+      border: 1px solid var(--border-soft);
+      border-radius: 10px; overflow: hidden;
+      word-break: break-word;
+    }
+    #contentBody th,
+    #contentBody td {
+      padding: 11px 14px; text-align: left;
+      border-bottom: 1px solid var(--border-soft);
+      overflow-wrap: break-word;
+      word-break: break-word;
+      min-width: 0; vertical-align: top;
+    }
+    #contentBody thead th {
+      background: rgba(224, 184, 74, 0.06);
+      color: var(--accent-bright);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    #contentBody tbody tr:last-child td { border-bottom: none; }
+    #contentBody tbody tr:hover { background: rgba(224, 184, 74, 0.03); }
+
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 22px 0; border-radius: 10px;
+      border: 1px solid var(--border-soft);
+    }
+    .table-wrap table { margin: 0; border: none; border-radius: 0; min-width: 100%; }
+
+    /* ============================================================
+       FORMULES MATHÉMATIQUES — lisibles, sans débordement
+       ============================================================ */
+    #contentBody .math { color: var(--text-light); }
+
+    /* v4.30 — formule « posée » : le client met en page sans toucher au
+       contenu. Chaque formule/comparaison extraite d'une phrase tient sur
+       SA propre ligne (nowrap + scroll horizontal si vraiment longue),
+       comme un calcul au tableau. Thème clair/sombre via variables. */
+    #contentBody .math-line {
+      display: block;
+      margin: 10px 0;
+      padding: 7px 12px;
+      text-align: left;
+      font-size: 1.05em;
+      line-height: 1.65;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+    html[data-theme="light"] #contentBody .math-line { color: var(--text-light); }
+
+    .katex { font-size: 1.06em; color: var(--text-light); }
+    .katex-display {
+      margin: 22px 0; padding: 2px 6px;
+      overflow-x: auto; overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      text-align: center;
+    }
+    .katex-display > .katex {
+      font-size: 1.15em; white-space: normal;
+    }
+    .katex .mathnormal,
+    .katex .mathit {
+      font-style: italic;
+      color: var(--text-light);
+    }
+    .katex .mop,
+    .katex .mord.text {
+      font-family: 'KaTeX_Main', 'Times New Roman', serif;
+      font-style: normal;
+      color: var(--text-light);
+    }
+    .katex .mbin,
+    .katex .mrel { color: var(--text-body); }
+    .katex .frac-line { border-bottom-color: var(--text-light); }
+    .katex .sqrt > .root { color: var(--accent-bright); }
+
+    /* ============================================================
+       COMPOSANTS PÉDAGOGIQUES DU COURS
+       ============================================================ */
+    .lecture-container {
+      min-width: 0; max-width: 100%;
+    }
+
+    /* ---- HERO ---- */
+    .lecture-hero {
+      margin: 0 0 40px; padding: 0 0 28px;
+      border-bottom: 1px solid var(--border-gold);
+      position: relative; min-width: 0;
+    }
+    .lecture-hero::after {
+      content: ''; position: absolute;
+      bottom: -1px; left: 0;
+      width: 56px; height: 2px;
+      background: linear-gradient(90deg, var(--accent-bright), transparent);
+    }
+    .lecture-hero-badge {
+      display: inline-flex; align-items: center;
+      gap: 8px; margin-bottom: 18px;
+      padding: 6px 14px; border-radius: 999px;
+      background: var(--tint-gold);
+      border: 1px solid var(--border-gold);
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+    }
+    .lecture-hero-icon { font-size: 13px; }
+    .lecture-hero-label { color: var(--accent-bright); }
+    .lecture-hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(27px, 4.2vw, 40px);
+      font-weight: 700; line-height: 1.15;
+      color: var(--text-light);
+      margin: 0 0 16px;
+      letter-spacing: -0.025em;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    .lecture-hero-title em {
+      color: var(--accent-bright);
+      font-style: italic; font-weight: 500;
+    }
+    .lecture-hero-intro {
+      font-size: clamp(15px, 1.7vw, 17px);
+      line-height: 1.75; color: var(--text-dim);
+      margin: 0 0 22px; max-width: 640px;
+      font-weight: 300;
+      overflow-wrap: break-word;
+    }
+    .lecture-hero-meta {
+      display: flex; flex-wrap: wrap;
+      gap: 8px; font-size: 12px;
+      color: var(--text-dim);
+    }
+    .lecture-hero-meta-item {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 5px 12px; border-radius: 999px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      letter-spacing: 0.03em;
+    }
+    .lecture-hero-meta-item i {
+      color: var(--accent); font-size: 11px;
+    }
+
+    /* ---- SOMMAIRE ---- */
+    .lecture-toc {
+      margin: 0 0 48px; padding: 0; min-width: 0;
+    }
+    .lecture-toc-header {
+      display: flex; justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 10px; margin-bottom: 4px;
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--accent); gap: 12px; flex-wrap: wrap;
+    }
+    .lecture-toc-count {
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 1.5px;
+    }
+    .lecture-toc-list {
+      list-style: none; padding: 0; margin: 0;
+    }
+    .lecture-toc-list li {
+      border-bottom: 1px solid var(--border-soft);
+      margin: 0;
+    }
+    .lecture-toc-list li:last-child { border-bottom: none; }
+    .lecture-toc-list a {
+      display: flex; align-items: baseline;
+      gap: 20px; padding: 12px 4px;
+      color: var(--text-dim); text-decoration: none;
+      font-size: 14.5px; line-height: 1.6;
+      transition: color 0.2s, padding-left 0.25s, background 0.2s;
+      border-bottom: none;
+      border-radius: 8px;
+    }
+    .lecture-toc-list a:hover {
+      color: var(--accent-bright);
+      padding-left: 8px; background: transparent;
+    }
+    .lecture-toc-list a.toc-active {
+      color: var(--accent-bright);
+    }
+    .lecture-toc-list a.toc-active .toc-num { color: var(--accent-bright); }
+    .toc-num {
+      font-family: var(--font-serif);
+      font-size: 11px; font-weight: 700;
+      color: var(--accent); letter-spacing: 1px;
+      flex-shrink: 0; min-width: 22px;
+    }
+
+    /* ---- SECTIONS ---- */
+    .lecture-section {
+      margin: 0 0 72px;
+      min-width: 0;
+    }
+    #contentBody .lecture-section:last-child { margin-bottom: 0; }
+    .lecture-section-header {
+      display: flex; align-items: baseline;
+      gap: 22px; margin-bottom: 26px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-soft);
+      position: relative; flex-wrap: wrap;
+    }
+    .lecture-section-header::after {
+      content: ''; position: absolute;
+      bottom: -1px; left: 0;
+      width: 36px; height: 2px;
+      background: var(--accent-bright);
+    }
+    .lecture-section-num {
+      font-family: var(--font-serif);
+      font-size: clamp(30px, 4vw, 40px);
+      font-weight: 700; color: var(--accent);
+      opacity: 0.45; line-height: 1;
+      flex-shrink: 0;
+      letter-spacing: -0.03em;
+    }
+    .lecture-section-heading { flex: 1; min-width: 0; }
+    .lecture-section-eyebrow {
+      display: block; font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 2.8px;
+      text-transform: uppercase;
+      color: var(--accent); margin-bottom: 6px;
+    }
+    .lecture-section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 2.8vw, 26px);
+      font-weight: 700; color: var(--text-light);
+      margin: 0; line-height: 1.2;
+      letter-spacing: -0.02em;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    .lecture-section-body { min-width: 0; }
+    .lecture-section-sub { margin: 34px 0 20px; min-width: 0; }
+    .lecture-subtitle {
+      font-family: var(--font-serif);
+      font-size: clamp(17px, 2vw, 19px);
+      font-weight: 700; color: var(--text-light);
+      margin: 0 0 14px;
+      letter-spacing: -0.01em;
+      padding-left: 14px;
+      border-left: 3px solid var(--accent-bright);
+      line-height: 1.4;
+      overflow-wrap: break-word;
+    }
+
+    /* ---- TEXTE & LISTES ---- */
+    .lecture-text {
+      font-size: 16px; line-height: 1.85;
+      color: var(--text-body);
+      margin: 0 0 18px;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    .lecture-text strong { color: var(--text-light); font-weight: 600; }
+
+    .lecture-list {
+      list-style: none; padding: 0; margin: 18px 0 22px;
+    }
+    .lecture-list li {
+      position: relative;
+      padding: 7px 0 7px 24px;
+      color: var(--text-body);
+      font-size: 15.5px; line-height: 1.8;
+      overflow-wrap: break-word;
+      word-break: break-word; margin: 0;
+    }
+    .lecture-list li::before {
+      content: '—'; position: absolute;
+      left: 0; top: 7px;
+      color: var(--accent); font-weight: 700;
+      font-size: 14px;
+    }
+    .lecture-list li strong { color: var(--text-light); font-weight: 600; }
+
+    .lecture-list-elegant li {
+      display: flex; gap: 18px;
+      padding: 12px 0 12px 24px;
+      border-bottom: 1px solid var(--border-soft);
+      flex-wrap: wrap;
+    }
+    .lecture-list-elegant li:last-child { border-bottom: none; }
+    .lecture-list-elegant li strong {
+      min-width: 80px;
+      font-family: var(--font-serif);
+      color: var(--accent-bright);
+      font-size: 14.5px; flex-shrink: 0;
+    }
+    .lecture-list-elegant li span {
+      color: var(--text-dim);
+      font-size: 15px; line-height: 1.75;
+      flex: 1; min-width: 0;
+    }
+
+    /* ---- CALLOUTS (définitions, astuces, erreurs) ---- */
+    .lecture-callout {
+      margin: 26px 0;
+      padding: 16px 18px 16px 20px;
+      border-left: 3px solid var(--accent-bright);
+      background: var(--tint-gold);
+      border-radius: 0 12px 12px 0;
+      min-width: 0;
+    }
+    .lecture-callout-body,
+    .lecture-callout-content { flex: 1; min-width: 0; }
+    .lecture-callout-title,
+    .lecture-callout-label {
+      display: block;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      margin-bottom: 10px;
+    }
+    .lecture-callout-body p,
+    .lecture-callout-content p,
+    .lecture-callout p {
+      margin: 0 0 10px;
+      font-size: 15.5px;
+      line-height: 1.85;
+      color: var(--text-body);
+      overflow-wrap: break-word;
+    }
+    .lecture-callout-body p:last-child,
+    .lecture-callout-content p:last-child,
+    .lecture-callout p:last-child { margin-bottom: 0; }
+    .lecture-callout-body strong,
+    .lecture-callout-content strong { color: var(--text-light); }
+
+    .lecture-callout-gold {
+      border-left-color: var(--accent-bright);
+      background: var(--tint-gold);
+    }
+    .lecture-callout-gold .lecture-callout-title { color: var(--accent-bright); }
+
+    .lecture-callout-key {
+      border-left-color: var(--accent-bright);
+      background: var(--tint-gold);
+    }
+    .lecture-callout-key .lecture-callout-title { color: var(--accent-bright); }
+
+    .lecture-callout-warning {
+      border-left-color: var(--warning-bright);
+      background: var(--tint-warn);
+    }
+    .lecture-callout-warning .lecture-callout-title { color: var(--warning-bright); }
+
+    .lecture-callout-danger {
+      border-left-color: var(--danger-light);
+      background: var(--tint-red);
+    }
+    .lecture-callout-danger .lecture-callout-title { color: var(--danger-light); }
+
+    /* ---- ENCADRÉS HISTOIRE / CULTURE ---- */
+    .lecture-aside {
+      margin: 28px 0;
+      padding: 14px 18px 14px 20px;
+      border-left: 3px solid var(--border-soft);
+      background: rgba(139, 115, 85, 0.05);
+      border-radius: 0 12px 12px 0;
+      min-width: 0;
+    }
+    .lecture-aside-content { flex: 1; min-width: 0; }
+    .lecture-aside-label {
+      display: block; font-size: 10.5px;
+      font-weight: 700; letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: var(--accent); margin-bottom: 10px;
+    }
+    .lecture-aside-content p {
+      margin: 0; font-size: 15px;
+      line-height: 1.85; color: var(--text-dim);
+      font-style: italic;
+    }
+
+    /* ---- FORMULES MISES EN VALEUR ---- */
+    .lecture-formula-hero {
+      margin: 40px 0; padding: 32px 22px 30px;
+      text-align: center; position: relative;
+      min-width: 0;
+      background: linear-gradient(180deg, rgba(224, 184, 74, 0.05), rgba(224, 184, 74, 0.012));
+      border-radius: 8px;
+    }
+    .lecture-formula-hero::before,
+    .lecture-formula-hero::after {
+      content: ''; position: absolute;
+      left: 50%; transform: translateX(-50%);
+      width: 60px; height: 1px;
+      background: rgba(224, 184, 74, 0.35);
+    }
+    .lecture-formula-hero::before { top: 0; }
+    .lecture-formula-hero::after { bottom: 0; }
+    .lecture-formula-hero-label {
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent); margin-bottom: 18px;
+    }
+    .lecture-formula-hero-main {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 700; color: var(--text-light);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    .lecture-formula-hero-desc {
+      font-size: 13.5px; color: var(--text-dim);
+      margin-top: 14px; font-style: italic;
+      letter-spacing: 0.02em;
+      line-height: 1.7;
+    }
+
+    .lecture-formula-box {
+      margin: 24px 0; padding: 18px 22px;
+      border: 1px solid rgba(224, 184, 74, 0.13);
+      border-left: 3px solid var(--accent-bright);
+      background: linear-gradient(135deg, rgba(224, 184, 74, 0.055), rgba(224, 184, 74, 0.015));
+      border-radius: 0 12px 12px 0;
+      text-align: center; min-width: 0;
+      overflow-x: auto; overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+    .lecture-formula-main {
+      font-family: var(--font-serif);
+      font-size: 19px; font-weight: 600;
+      color: var(--text-light);
+      line-height: 1.55;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+    .lecture-formula-desc {
+      font-size: 13px; color: var(--text-dim);
+      margin-top: 8px; line-height: 1.65;
+      font-style: italic;
+    }
+
+    /* ---- RÈGLES FONDAMENTALES ---- */
+    .lecture-rule {
+      margin: 32px 0; padding: 26px 20px;
+      text-align: center;
+      border-top: 1px solid var(--border-gold);
+      border-bottom: 1px solid var(--border-gold);
+      background: linear-gradient(180deg, rgba(224, 184, 74, 0.03), transparent);
+      min-width: 0;
+    }
+    .lecture-rule-label {
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      margin-bottom: 16px;
+    }
+    .lecture-rule-body {
+      font-family: var(--font-serif);
+      font-size: 18px; color: var(--text-light);
+      line-height: 2; display: flex;
+      align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 12px;
+      overflow-wrap: anywhere;
+    }
+    .lecture-rule-iff {
+      color: var(--accent-bright); font-size: 20px;
+    }
+    .lecture-rule-and {
+      font-family: var(--font-body);
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 2.5px;
+      color: var(--accent);
+      padding: 4px 12px;
+      border: 1px solid rgba(224, 184, 74, 0.25);
+      border-radius: 100px;
+    }
+
+    /* ---- EXEMPLES ---- */
+    .lecture-example {
+      margin: 26px 0; padding: 2px 0 2px 18px;
+      border-left: 2px solid rgba(224, 184, 74, 0.35);
+      min-width: 0;
+    }
+    .lecture-example-label {
+      display: block; font-size: 10.5px;
+      font-weight: 700; letter-spacing: 2.6px;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      margin-bottom: 12px;
+    }
+    .lecture-example-content {
+      color: var(--text-body);
+      font-size: 15.5px; line-height: 1.85;
+    }
+    .lecture-example-content p {
+      margin: 0 0 10px;
+      color: var(--text-body);
+      overflow-wrap: break-word;
+    }
+    .lecture-example-content p:last-child { margin-bottom: 0; }
+    .lecture-example-featured {
+      border-left: none;
+      padding: 20px 22px;
+      background: var(--tint-gold);
+      border: 1px solid rgba(224, 184, 74, 0.14);
+      border-left: 3px solid var(--accent-bright);
+      border-radius: 12px;
+    }
+    .lecture-example-featured .lecture-example-label {
+      color: var(--accent-bright);
+    }
+
+    /* ---- ÉTAPES NUMÉROTÉES ---- */
+    .lecture-steps { margin: 24px 0; }
+    .lecture-step {
+      display: flex; gap: 16px;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-soft);
+      min-width: 0;
+    }
+    .lecture-step:last-child { border-bottom: none; }
+    .lecture-step-number {
+      flex-shrink: 0;
+      width: 34px; height: 34px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 15px; font-weight: 700;
+      color: var(--accent-bright);
+      border: 1px solid rgba(224, 184, 74, 0.3);
+      background: rgba(224, 184, 74, 0.06);
+      line-height: 1;
+    }
+    .lecture-step-content {
+      flex: 1; min-width: 0;
+      overflow-wrap: break-word;
+      padding-top: 4px;
+    }
+    /* v4.30 — strong redevient inline : « Titre : texte » reste UNE phrase,
+       le deux-points ne se retrouve plus orphelin en début de ligne.
+       Les titres seuls (<p><strong>Titre</strong></p>) gardent leur ligne. */
+    .lecture-step-content strong {
+      display: inline; color: var(--text-light);
+      font-size: inherit; font-weight: 700;
+      line-height: 1.75;
+    }
+    .lecture-step-content p {
+      margin: 0; font-size: 14.5px;
+      line-height: 1.75; color: var(--text-dim);
+      overflow-wrap: break-word;
+    }
+
+    /* ---- CHAÎNES / CYCLES / VOCABULAIRE ---- */
+    .lecture-chain {
+      display: flex; align-items: center;
+      justify-content: center; flex-wrap: wrap;
+      gap: 10px; padding: 28px 12px;
+      margin: 28px 0;
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .chain-item {
+      font-family: var(--font-serif);
+      font-size: 22px; font-weight: 700;
+      color: var(--text-muted);
+      padding: 4px 10px;
+      transition: color 0.25s;
+    }
+    .chain-item.active { color: var(--accent-bright); }
+    .chain-arrow {
+      color: var(--text-muted); font-size: 11px;
+    }
+
+    .lecture-powers-cycle {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0; margin: 28px 0;
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .power-box {
+      padding: 22px 10px; text-align: center;
+      border-right: 1px solid var(--border-soft);
+      min-width: 0;
+    }
+    .power-box:last-child { border-right: none; }
+    .power-expo {
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 2px; color: var(--accent);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+    .power-value {
+      font-family: var(--font-serif);
+      font-size: 26px; font-weight: 700;
+      color: var(--text-light); line-height: 1;
+    }
+
+    .lecture-vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0; margin: 24px 0;
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .vocab-card {
+      padding: 20px 18px;
+      border-right: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+      min-width: 0;
+    }
+    .vocab-card:nth-child(2n) { border-right: none; }
+    .vocab-card:nth-last-child(-n+2) { border-bottom: none; }
+    .vocab-symbol {
+      font-family: var(--font-serif);
+      font-size: 26px; font-weight: 700;
+      color: var(--accent-bright);
+      line-height: 1; margin-bottom: 10px;
+    }
+    .vocab-name {
+      font-size: 12.5px; font-weight: 600;
+      color: var(--text-light); margin-bottom: 5px;
+    }
+    .vocab-notation {
+      font-size: 12px; color: var(--text-dim);
+      font-family: var(--font-serif);
+    }
+    .vocab-card-success .vocab-symbol { color: var(--success-light); }
+    .vocab-card-info .vocab-symbol { color: var(--info); }
+
+    .lecture-plane-visual {
+      position: relative; height: 260px;
+      margin: 28px 0;
+      border: 1px solid var(--border-soft);
+      border-radius: 8px; overflow: hidden;
+    }
+
+    /* ---- RÉCAPITULATIF ---- */
+    .lecture-recap {
+      margin: 56px 0 24px;
+      padding: 28px 0 0;
+      border-top: 1px solid var(--border-gold);
+      position: relative; min-width: 0;
+    }
+    .lecture-recap::before {
+      content: ''; position: absolute;
+      top: -1px; left: 0;
+      width: 60px; height: 2px;
+      background: var(--accent-bright);
+    }
+    .lecture-recap-title {
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+      margin-bottom: 18px;
+    }
+    .lecture-recap-list {
+      list-style: none; padding: 0; margin: 0;
+    }
+    .lecture-recap-list li {
+      position: relative;
+      padding: 10px 0 10px 28px;
+      color: var(--text-body);
+      font-size: 15.5px; line-height: 1.8;
+      border-bottom: 1px solid var(--border-soft);
+      overflow-wrap: break-word;
+      word-break: break-word; margin: 0;
+    }
+    .lecture-recap-list li:last-child { border-bottom: none; }
+    .lecture-recap-list li::before {
+      content: '✓'; position: absolute;
+      left: 0; top: 10px;
+      color: var(--accent-bright); font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* ---- FIN DE PARTIE ---- */
+    .lecture-end {
+      text-align: center;
+      margin: 56px 0 0;
+      padding: 32px 16px 16px;
+      border-top: 1px solid var(--border-gold);
+    }
+    .lecture-end-icon {
+      display: block; font-size: 28px;
+      margin-bottom: 14px; opacity: 0.75;
+    }
+    .lecture-end-text {
+      font-family: var(--font-serif);
+      font-size: 21px; font-weight: 700;
+      font-style: italic;
+      color: var(--accent-bright);
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .lecture-end-sub {
+      font-size: 13.5px; color: var(--text-dim);
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+    .lecture-end-divider {
+      width: 44px; height: 1px;
+      margin: 0 auto;
+      background: rgba(224, 184, 74, 0.4);
+    }
+
+    /* ---- QCM / QUIZ ---- */
+    .lecture-quiz {
+      display: flex; flex-direction: column;
+      gap: 12px; margin: 20px 0;
+    }
+    .lecture-quiz-item {
+      background: var(--bg-card);
+      border: 1px solid rgba(224, 184, 74, 0.14);
+      border-radius: 12px;
+      padding: 16px 18px;
+      transition: var(--transition);
+    }
+    html[data-theme="light"] .lecture-quiz-item {
+      background: rgba(255, 255, 255, 0.7);
+    }
+    .lecture-quiz-item:hover {
+      border-color: rgba(224, 184, 74, 0.25);
+    }
+    .lecture-quiz-q {
+      font-weight: 600; color: var(--text-light);
+      margin-bottom: 10px;
+      font-size: 15px; line-height: 1.6;
+    }
+    .lecture-quiz-options {
+      display: grid; gap: 6px; margin: 10px 0;
+    }
+    .lecture-quiz-options span {
+      color: var(--text-dim);
+      font-size: 14.5px; padding: 2px 0;
+      line-height: 1.6;
+    }
+    .lecture-quiz-answer {
+      margin-top: 12px;
+      background: rgba(58, 182, 126, 0.08);
+      border-left: 3px solid var(--success-light);
+      padding: 12px 16px;
+      border-radius: 0 10px 10px 0;
+      color: var(--text-body);
+      font-size: 14.5px; line-height: 1.75;
+    }
+    .lecture-quiz-answer p {
+      margin: 0 0 8px;
+      color: var(--text-body);
+      overflow-wrap: break-word;
+    }
+    .lecture-quiz-answer p:last-child { margin-bottom: 0; }
+    .lecture-quiz-answer strong { color: var(--success-light); }
+
+    /* ---- EXERCICES ---- */
+    .lecture-exercise {
+      background: var(--tint-gold);
+      border: 1px solid rgba(224, 184, 74, 0.16);
+      border-left: 3px solid rgba(224, 184, 74, 0.55);
+      border-radius: 12px;
+      padding: 18px 20px; margin: 24px 0;
+      transition: var(--transition);
+    }
+    html[data-theme="light"] .lecture-exercise {
+      background: rgba(184, 134, 11, 0.06);
+    }
+    .lecture-exercise:hover {
+      border-color: rgba(224, 184, 74, 0.28);
+      border-left-color: var(--accent-bright);
+    }
+    .lecture-exercise-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--accent-bright); margin-bottom: 12px;
+      line-height: 1.6;
+    }
+    .lecture-exercise .lecture-text {
+      margin-bottom: 12px; font-size: 15px;
+    }
+    .lecture-exercise .lecture-text:last-of-type { margin-bottom: 0; }
+
+    /* ---- SOLUTIONS DÉPLIABLES ---- */
+    #contentBody details {
+      margin-top: 14px;
+      padding-top: 2px;
+    }
+    #contentBody details > summary {
+      cursor: pointer;
+      color: var(--accent-bright);
+      font-weight: 600; font-size: 13px;
+      user-select: none;
+      list-style: none;
+      display: inline-flex; align-items: center;
+      gap: 8px; padding: 8px 16px;
+      border-radius: 100px;
+      background: rgba(224, 184, 74, 0.08);
+      border: 1px solid rgba(224, 184, 74, 0.2);
+      transition: var(--transition);
+      -webkit-tap-highlight-color: transparent;
+      line-height: 1.4;
+    }
+    #contentBody details > summary::-webkit-details-marker { display: none; }
+    #contentBody details > summary::before {
+      content: '▶'; font-size: 9px;
+      transition: transform 0.25s ease;
+      display: inline-block;
+    }
+    #contentBody details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    #contentBody details > summary:hover {
+      background: rgba(224, 184, 74, 0.15);
+      border-color: rgba(224, 184, 74, 0.3);
+    }
+    #contentBody details[open] > summary {
+      margin-bottom: 10px;
+    }
+
+    /* ---- FIGURES / SCHÉMAS ---- */
+    .lecture-figure {
+      margin: 30px auto; padding: 0;
+      max-width: 560px; width: 100%;
+      text-align: center;
+      display: flex; flex-direction: column;
+      align-items: center; min-width: 0;
+    }
+    .lecture-figure svg {
+      display: block; width: 100%;
+      max-width: 100%; height: auto;
+      background: rgba(var(--rgb-soft), 0.02);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px; padding: 10px;
+      box-sizing: border-box;
+    }
+    html[data-theme="light"] .lecture-figure svg {
+      background: rgba(255, 255, 255, 0.6);
+    }
+    .lecture-figure-caption {
+      margin-top: 12px; font-size: 13px;
+      color: var(--text-dim);
+      font-style: italic;
+      line-height: 1.6; text-align: center;
+      max-width: 100%;
+      overflow-wrap: break-word;
+    }
+    #contentBody figure {
+      margin: 24px 0; padding: 0;
+      display: flex; flex-direction: column;
+      align-items: center; min-width: 0;
+    }
+    #contentBody figure img,
+    #contentBody figure svg {
+      max-width: 100%; height: auto;
+      background: rgba(var(--rgb-soft), 0.02);
+      border: 1px solid var(--border-soft);
+      border-radius: 12px; padding: 8px;
+      box-sizing: border-box;
+    }
+    #contentBody figcaption {
+      margin-top: 12px; font-size: 13px;
+      color: var(--text-dim);
+      font-style: italic;
+      text-align: center;
+      line-height: 1.6; max-width: 100%;
+      overflow-wrap: break-word;
+    }
+
+    #contentBody * { box-sizing: border-box; min-width: 0; }
+    #contentBody > * {
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+    /* ============================================================
+       LECTEUR PDF ARVEXA PERSONNALISÉ (v5.1)
+       Visionneuse canvas maison (pdf.js embarqué) — zéro dépendance
+       au lecteur PDF du système/navigateur. Feuilles A4 empilées dans
+       le flux, rendu paresseux (IntersectionObserver), zoom, 100 %
+       hors-ligne (SW). Fonctionne identiquement desktop et mobile.
+       ============================================================ */
+    .arv-pdf { width: 100%; max-width: var(--content-max); margin: 0 auto; }
+    .arv-pdf-toolbar {
+      position: sticky;
+      top: calc(var(--header-h) + var(--safe-top) + 10px);
+      z-index: 40;
+      display: flex; align-items: center; justify-content: center;
+      gap: 2px;
+      padding: 7px 10px;
+      border-radius: 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.16);
+      margin-bottom: 16px;
+    }
+    .arv-pdf-tbtn {
+      width: 36px; height: 36px; flex-shrink: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      border: none; border-radius: 10px;
+      background: transparent; color: var(--text-body);
+      font-size: 14px; cursor: pointer; text-decoration: none;
+      transition: var(--transition);
+    }
+    .arv-pdf-tbtn:active { transform: scale(0.94); }
+    .arv-pdf-tbtn[disabled] { opacity: 0.32; pointer-events: none; }
+    .arv-pdf-tbtn.gold { color: var(--accent-bright); }
+    .arv-pdf-count {
+      min-width: 62px; text-align: center; flex-shrink: 0;
+      font-size: 12.5px; font-weight: 700; color: var(--text-body);
+      font-variant-numeric: tabular-nums;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .arv-pdf-sep { width: 1px; height: 20px; background: var(--card-border); flex-shrink: 0; margin: 0 4px; }
+    .arv-pdf-viewport { overflow-x: auto; overflow-y: hidden; padding-bottom: 4px; }
+    .arv-pdf-pages { display: flex; flex-direction: column; align-items: center; gap: 16px; min-width: 0; }
+    .arv-pdf-page {
+      position: relative; flex-shrink: 0;
+      background: #FFFFFF;
+      border-radius: 4px;
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
+      overflow: hidden;
+    }
+    .arv-pdf-page canvas { display: block; }
+    .arv-pdf-page .arv-pdf-ph {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px;
+      color: var(--text-muted); font-size: 12px; font-weight: 600;
+      background: var(--bg-surface);
+    }
+    .arv-pdf-page.rendered .arv-pdf-ph { display: none; }
+    .arv-pdf-status {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 14px; text-align: center;
+      min-height: 300px; padding: 40px 20px;
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      color: var(--text-body); font-size: 14px;
+    }
+    .arv-pdf-status .spinner { width: 34px; height: 34px; }
+    .arv-pdf-status h3 { font-size: 16px; font-weight: 700; color: var(--text-light); }
+    .arv-pdf-status p { font-size: 13px; color: var(--text-dim); max-width: 360px; line-height: 1.6; }
+    .arv-pdf-status-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+    .arv-pdf-status-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--border-gold);
+      background: var(--tint-gold);
+      color: var(--accent-bright);
+      border-radius: 999px; padding: 9px 20px;
+      font-size: 13px; font-weight: 700;
+      cursor: pointer; text-decoration: none;
+      transition: var(--transition);
+    }
+    .arv-pdf-status-btn:active { transform: scale(0.97); }
+    /* ✅ v5.3 — SKELETON de chargement du cours : 3 feuilles A4 scintillantes
+       à la place du simple spinner (l'utilisateur voit la forme de ce qui
+       arrive, plus aucun « panneau vide »). */
+    .arv-pdf-skel {
+      display: flex; gap: 12px;
+      align-items: center; justify-content: center;
+    }
+    .arv-pdf-skel-page {
+      position: relative; width: 88px; height: 118px;
+      border-radius: 6px; overflow: hidden;
+      background: var(--bg-surface);
+      border: 1px solid var(--card-border);
+    }
+    .arv-pdf-skel-page:nth-child(2) { transform: scale(1.14); }
+    .arv-pdf-skel-page::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(100deg, transparent 32%, rgba(224, 184, 74, 0.14) 50%, transparent 68%);
+      transform: translateX(-100%);
+      animation: arvSkelShimmer 1.5s ease-in-out infinite;
+    }
+    .arv-pdf-skel-page:nth-child(2)::after { animation-delay: 0.18s; }
+    .arv-pdf-skel-page:nth-child(3)::after { animation-delay: 0.36s; }
+    @keyframes arvSkelShimmer { to { transform: translateX(100%); } }
+    .arv-pdf-skel-line {
+      position: absolute; left: 11px; right: 11px; height: 6px;
+      border-radius: 3px; background: var(--card-border);
+    }
+    .arv-pdf-skel-line.t { top: 13px; left: 11px; right: auto; width: 52%; height: 8px; background: var(--border-gold); opacity: 0.75; }
+    .arv-pdf-skel-line.l1 { top: 33px; }
+    .arv-pdf-skel-line.l2 { top: 47px; right: 24px; }
+    .arv-pdf-skel-line.l3 { top: 61px; }
+    .arv-pdf-skel-line.l4 { top: 75px; right: 19px; }
+    .arv-pdf-skel-line.l5 { top: 89px; }
+    @media (prefers-reduced-motion: reduce) {
+      .arv-pdf-skel-page::after { animation: none; }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 768px) {
+      :root { --content-max: 100%; }
+      .content-wrapper { padding: 20px 16px 30px; }
+    }
+
+    @media (max-width: 600px) {
+      .content-wrapper { padding: 16px 14px 28px; }
+      #contentBody { font-size: 15.5px; line-height: 1.8; }
+
+      .header { padding-left: 10px; padding-right: 10px; gap: 8px; }
+      .ht-main { font-size: 12.5px; }
+      .tts-btn, .notes-btn { width: 34px; padding: 0; justify-content: center; }
+      .tts-btn span, .notes-btn span { display: none; }
+      .icon-btn { width: 34px; height: 34px; }
+
+      #contentBody h1 { font-size: 24px; }
+      #contentBody h2 { font-size: 20px; }
+      #contentBody h3 { font-size: 17px; }
+      #contentBody p { font-size: 15px; }
+
+      .lecture-hero { margin-bottom: 32px; padding-bottom: 22px; }
+      .lecture-hero-title { font-size: 26px; }
+      .lecture-hero-intro { font-size: 15px; }
+      .lecture-hero-meta { gap: 6px; }
+      .lecture-section { margin-bottom: 52px; }
+      .lecture-section-header { gap: 14px; margin-bottom: 20px; padding-bottom: 12px; }
+      .lecture-section-num { font-size: 30px; }
+      .lecture-section-title { font-size: 20px; }
+      .lecture-subtitle { font-size: 16px; padding-left: 12px; }
+      .lecture-text { font-size: 15px; }
+      .lecture-toc { margin-bottom: 38px; }
+
+      .lecture-formula-hero { padding: 26px 14px; margin: 32px 0; }
+      .lecture-formula-hero-main { font-size: 28px; }
+      .lecture-formula-box { padding: 14px 16px; }
+      .lecture-formula-main { font-size: 17px; }
+
+      .lecture-powers-cycle { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .power-box { padding: 18px 8px; border-right: none; border-bottom: 1px solid var(--border-soft); }
+      .power-box:nth-child(odd) { border-right: 1px solid var(--border-soft); }
+      .power-box:nth-last-child(-n+2) { border-bottom: none; }
+
+      .chain-item { font-size: 19px; }
+      .lecture-quiz-item { padding: 14px 15px; }
+      .lecture-exercise { padding: 15px 16px; }
+      .lecture-example-featured { padding: 16px 16px; }
+      .lecture-callout { padding: 13px 14px 13px 16px; }
+      .lecture-figure { max-width: 100%; }
+
+      .katex { font-size: 1em; }
+      .katex-display { margin: 18px 0; }
+
+      .nav-btn { font-size: 12px; padding: 10px 16px; }
+      .nav-bar { margin-top: 48px; }
+    }
+
+    @media (max-width: 380px) {
+      .content-wrapper { padding: 14px 12px 26px; }
+      #contentBody { font-size: 15px; }
+      .ht-overline { letter-spacing: 1.6px; }
+
+      #contentBody h1 { font-size: 22px; }
+      #contentBody h2 { font-size: 18px; }
+      #contentBody p { font-size: 14.5px; }
+
+      .lecture-hero-title { font-size: 22px; }
+      .lecture-section-num { font-size: 24px; }
+      .lecture-section-title { font-size: 17px; }
+
+      .lecture-vocab-grid { grid-template-columns: minmax(0, 1fr); }
+      .vocab-card { border-right: none; }
+      .vocab-card:last-child { border-bottom: none; }
+
+      .nav-row { flex-wrap: wrap; justify-content: center; }
+      .nav-btn { flex: 1; justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    textarea:focus-visible,
+    summary:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(184, 134, 11, 0.22);
+      border-radius: 10px;
+    }
+  </style>
+  <!-- ⚡ ARVEXA FLUX v1 — navigation instantanée -->
+  <script src="flux-router.js?v=flux1" defer></script>
+</head>
+<body>
+
+  <div class="gradient-bg"></div>
+
+  <div class="read-progress">
+    <div class="read-progress-fill" id="readProgressFill"></div>
+  </div>
+
+  <header class="header" id="appHeader">
+    <div class="header-left">
+      <button class="icon-btn" id="backBtn" aria-label="Retour au chapitre">
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <div class="header-title" id="pageTitle">
+        <span class="ht-overline" id="headerOverline">Lecture</span>
+        <span class="ht-main" id="pageTitleText">Chargement...</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="icon-btn" id="themeBtn" aria-label="Changer de thème">
+        <i class="fas fa-moon" id="themeIcon"></i>
+      </button>
+      <button class="tts-btn" id="ttsBtn" aria-label="Écouter la partie">
+        <i class="fas fa-volume-up"></i>
+        <span>Écouter</span>
+      </button>
+      <button class="notes-btn" id="notesBtn" aria-label="Mes notes">
+        <i class="fas fa-pen"></i>
+        <span>Notes</span>
+        <span class="dot" id="notesDot"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="content-wrapper" id="contentWrapper">
+    <div id="contentBody">
+      <div class="loading-state">
+        <div class="spinner"></div>
+        <p>Chargement du contenu...</p>
+      </div>
+    </div>
+
+    <div class="nav-bar" id="navBar">
+      <div class="nav-progress" id="partDots" hidden></div>
+      <div class="nav-row">
+        <button class="nav-btn" id="prevBtn" disabled>
+          <i class="fas fa-chevron-left"></i> Précédent
+        </button>
+        <span class="nav-counter" id="partCounter">1 / 1</span>
+        <button class="nav-btn primary" id="nextBtn">
+          Suivant <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="tts-progress" id="ttsProgress">
+    <div class="tts-progress-fill" id="ttsProgressFill"></div>
+  </div>
+
+  <div class="modal-overlay" id="notesModal">
+    <div class="modal">
+      <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+      <div class="modal-title">📝 Mes <span>notes</span></div>
+      <div class="modal-sub" id="modalSub">Partie 1</div>
+      <textarea id="notesTextarea" maxlength="5000" placeholder="Écris ici ce que tu as compris, des points importants, des questions..."></textarea>
+      <div class="note-saved" id="noteSaved"><i class="fas fa-check-circle"></i> Notes enregistrées !</div>
+      <div class="modal-actions">
+        <button class="btn-cancel" id="modalCancel">Annuler</button>
+        <button class="btn-save" id="modalSave">💾 Enregistrer</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js",
+      "firebase/auth": "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js",
+      "firebase/firestore": "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js"
+    }
+  }
+  </script>
+
+ <script type="module">
+// ================================================================
+// LECTURE — Interface refondue ARVEXA School
+// Corrections appliquées :
+//  - C1 : redirectToLogin préserve redirectAfterLogin/redirectAfterAuth
+//  - C2 : gestion blocked/paused alignée sur les autres pages protégées
+//  - C3 : retry doux + warn si doc users/{uid} absent
+//  - C4 : saveSession écrit aussi sessionStorage
+//  - C5 : clearSession supprime redirectAfterLogin/redirectAfterAuth
+//  - C6 : log explicite si setPersistence échoue
+//  - C7 : unsubscribe propre du listener auth
+//  - C8 : warn dans le catch de loadUserData
+//  - C9 : grâce initiale alignée à 600 ms (au lieu de 2000 ms)
+//  - C11 : saveStudyTime utilise increment() (plus de race condition)
+// ================================================================
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import {
+  initializeFirestore,
+  persistentLocalCache,
+  persistentSingleTabManager,
+  doc,
+  getDoc,
+  onSnapshot,
+  updateDoc,
+  increment,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHscOXw3rLuhV6z1Cny-bdYCumqpnG7QE",
+  authDomain: "arvexa-fbf10.firebaseapp.com",
+  projectId: "arvexa-fbf10",
+  storageBucket: "arvexa-fbf10.firebasestorage.app",
+  messagingSenderId: "920108330053",
+  appId: "1:920108330053:web:f532d71cbc2c824bc7472c"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const db = (window.__ARVEXA_DB_SHARED__ !== undefined ? window.__ARVEXA_DB_SHARED__ : (window.__ARVEXA_DB_SHARED__ = initializeFirestore(app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentSingleTabManager()
+  })
+})));
+
+// ✅ C6 — Log explicite si persistance refusée
+try {
+  await setPersistence(auth, browserLocalPersistence);
+} catch (e) {
+  console.warn('[Auth] Persistance locale indisponible sur lecture.html :', e.code || e.message);
+}
+
+// ================================================================
+// THÈME
+// ================================================================
+const THEME_KEY = 'arvexa-theme'; // ✅ même clé que theme.js / profil / onboarding (avant : 'arvexa_theme' → le choix clair du profil n'était jamais appliqué ici, écrasé en sombre après chargement)
+
+function applyTheme(theme) {
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    const icon = document.getElementById('themeIcon');
+    if (icon) icon.className = 'fas fa-sun';
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', '#FAF7F0');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    const icon = document.getElementById('themeIcon');
+    if (icon) icon.className = 'fas fa-moon';
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', '#0A0A0A');
+  }
+}
+
+function initTheme() {
+  try {
+    const saved = localStorage.getItem(THEME_KEY);
+    applyTheme(saved === 'light' ? 'light' : 'dark');
+  } catch (e) {
+    applyTheme('dark');
+  }
+}
+
+initTheme();
+
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const newTheme = isLight ? 'dark' : 'light';
+  applyTheme(newTheme);
+  try { localStorage.setItem(THEME_KEY, newTheme); } catch (e) {}
+});
+
+// ================================================================
+// URL PARAMS
+// ================================================================
+const params = new URLSearchParams(window.location.search);
+
+// ✅ SEC — params URL sanitisés (avant : injectés bruts dans les attributs href
+// des templates innerHTML → XSS par injection d'attribut).
+//  - subject : whitelist stricte [a-z0-9_] (protège aussi cours/${subject}.json)
+//  - tab     : whitelist stricte des 3 onglets
+const rawSubject = (params.get('subject') || '').toLowerCase();
+const subject = /^[a-z][a-z0-9_]{0,39}$/.test(rawSubject) ? rawSubject : 'mathematiques';
+const chapter = parseInt(params.get('chapter')) || 0;
+const rawTab = params.get('tab') || 'cours';
+const tab = ['cours', 'exercices', 'corrections'].includes(rawTab) ? rawTab : 'cours';
+const partIndex = parseInt(params.get('part')) || 0;
+
+const TAB_LABELS = {
+  cours: 'Cours',
+  exercices: 'Exercices',
+  corrections: 'Corrections'
+};
+const headerOverline = document.getElementById('headerOverline');
+if (headerOverline) {
+  headerOverline.textContent = TAB_LABELS[tab] || 'Lecture';
+}
+
+// ================================================================
+// DOM
+// ================================================================
+const contentBody = document.getElementById('contentBody');
+const pageTitle = document.getElementById('pageTitleText');
+const headerEl = document.getElementById('appHeader');
+const backBtn = document.getElementById('backBtn');
+const notesBtn = document.getElementById('notesBtn');
+const notesDot = document.getElementById('notesDot');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const partCounter = document.getElementById('partCounter');
+const partDots = document.getElementById('partDots');
+const readProgressFill = document.getElementById('readProgressFill');
+const contentWrapper = document.getElementById('contentWrapper');
+
+const notesModal = document.getElementById('notesModal');
+const modalClose = document.getElementById('modalClose');
+const modalCancel = document.getElementById('modalCancel');
+const modalSave = document.getElementById('modalSave');
+const notesTextarea = document.getElementById('notesTextarea');
+const modalSub = document.getElementById('modalSub');
+const noteSaved = document.getElementById('noteSaved');
+
+const ttsBtn = document.getElementById('ttsBtn');
+const ttsProgress = document.getElementById('ttsProgress');
+const ttsProgressFill = document.getElementById('ttsProgressFill');
+
+// ================================================================
+// SESSION / CACHE — ✅ C4/C5 alignements
+// ================================================================
+const SESSION_KEY = 'arvexa_session';
+const USER_DATA_KEY = 'arvexa_user_data';
+const LAST_UID_KEY = 'arvexa_last_uid';
+const READ_KEY = 'arvexa_read_parts';
+const NOTES_KEY = 'arvexa_notes';
+
+function saveSession(user) {
+  if (!user) return;
+  try {
+    const data = {
+      uid: user.uid,
+      email: user.email,
+      lastActive: Date.now()
+    };
+    localStorage.setItem(SESSION_KEY, JSON.stringify(data));
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(data)); // ✅ C4
+    localStorage.setItem(LAST_UID_KEY, user.uid);
+  } catch (e) {}
+}
+
+function clearSession() {
+  try {
+    localStorage.removeItem(SESSION_KEY);
+    localStorage.removeItem(USER_DATA_KEY);
+    localStorage.removeItem(LAST_UID_KEY);
+    sessionStorage.removeItem(SESSION_KEY);
+    // ✅ C5 — alignement
+    sessionStorage.removeItem('redirectAfterLogin');
+    sessionStorage.removeItem('redirectAfterAuth');
+  } catch (e) {}
+}
+
+function getCachedUserData(uid) {
+  try {
+    const raw = localStorage.getItem(USER_DATA_KEY);
+    if (!raw) return null;
+    const cached = JSON.parse(raw);
+    if (cached._uid && cached._uid !== uid) {
+      localStorage.removeItem(USER_DATA_KEY);
+      return null;
+    }
+    return cached;
+  } catch (e) { return null; }
+}
+
+// ================================================================
+// UTILITAIRE
+// ================================================================
+function toDate(value) {
+  if (!value) return null;
+  if (typeof value.toDate === 'function') return value.toDate();
+  if (value.seconds !== undefined) return new Date(value.seconds * 1000);
+  const date = value instanceof Date ? value : new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function isUserPremium(userData) {
+  if (!userData) return false;
+  const hasStatus = userData.premium === true ||
+                    userData.isUnlocked === true ||
+                    userData.hasDeposited === true;
+  if (!hasStatus) return false;
+  const endDate = toDate(userData.subscriptionEndDate);
+  if (!endDate) return true;
+  return endDate.getTime() > Date.now();
+}
+
+function scrollToTopInstant() {
+  try {
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    contentWrapper.scrollTop = 0;
+    requestAnimationFrame(() => {
+      document.documentElement.style.scrollBehavior = '';
+    });
+  } catch (e) {}
+}
+
+// ================================================================
+// STORAGE
+// ================================================================
+function getReadParts() {
+  try { return JSON.parse(localStorage.getItem(READ_KEY) || '[]'); }
+  catch (e) { return []; }
+}
+
+function markPartAsRead() {
+  const key = `${subject}_${chapter}_${tab}_${partIndex}`;
+  const readParts = getReadParts();
+  if (!readParts.includes(key)) {
+    readParts.push(key);
+    try { localStorage.setItem(READ_KEY, JSON.stringify(readParts)); } catch (e) {}
+    bumpDailyActivity();
+    // ✅ v8.0 — SYNC FIREBASE : la section lue part dans le compte (arrayUnion)
+    if (window.ArvexaProgress) window.ArvexaProgress.notifyChange('read', key);
+  }
+}
+
+// Gamification accueil : compte les sections lues aujourd'hui
+// (l'accueil fusionne ce compteur temps réel avec ses snapshots)
+function bumpDailyActivity() {
+  try {
+    const K = 'arvexa_daily_activity';
+    const a = JSON.parse(localStorage.getItem(K) || '{}');
+    const d = new Date();
+    const day = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    a[day] = (a[day] || 0) + 1;
+    const keys = Object.keys(a).sort();
+    while (keys.length > 35) { delete a[keys.shift()]; }
+    localStorage.setItem(K, JSON.stringify(a));
+  } catch (e) {}
+}
+
+function getNotesKey() {
+  return `${subject}_${chapter}_${tab}_${partIndex}`;
+}
+
+function loadNotes() {
+  try {
+    const notes = JSON.parse(localStorage.getItem(NOTES_KEY) || '{}');
+    const key = getNotesKey();
+    if (notes[key]) {
+      notesTextarea.value = notes[key];
+      notesDot.classList.add('show');
+    } else {
+      notesTextarea.value = '';
+      notesDot.classList.remove('show');
+    }
+  } catch (e) {}
+}
+
+function saveNotes() {
+  try {
+    const notes = JSON.parse(localStorage.getItem(NOTES_KEY) || '{}');
+    const key = getNotesKey();
+    const text = notesTextarea.value.trim();
+    if (text) {
+      notes[key] = text;
+      notesDot.classList.add('show');
+    } else {
+      delete notes[key];
+      notesDot.classList.remove('show');
+    }
+    localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
+    // ✅ v8.0 — horodatage de l'édition (fusion cloud « dernier gagnant ») + sync Firebase
+    try {
+      const meta = JSON.parse(localStorage.getItem('arvexa_notes_meta') || '{}');
+      if (text) meta[key] = Date.now(); else delete meta[key];
+      localStorage.setItem('arvexa_notes_meta', JSON.stringify(meta));
+    } catch (e2) {}
+    if (window.ArvexaProgress) window.ArvexaProgress.notifyChange('note', key);
+    noteSaved.classList.add('show');
+    setTimeout(() => noteSaved.classList.remove('show'), 2000);
+  } catch (e) {}
+}
+
+// ================================================================
+// ÉTAT
+// ================================================================
+let parts = [];
+let currentIndex = partIndex;
+let isPremium = false;
+let currentUid = null;
+let unsubscribeUser = null;
+let authUnsubscribe = null;         // ✅ C7
+let missingDocInFlight = false;     // ✅ C3
+
+// ================================================================
+// PRÉ-PROCESSING
+// ================================================================
+function preprocessContent(html) {
+  if (!html) return '';
+  let processed = html;
+  processed = processed.replace(/<style[\s\S]*?<\/style>/gi, '');
+  processed = processed.replace(/<script[\s\S]*?<\/script>/gi, '');
+  return processed;
+}
+
+// ================================================================
+// KATEX
+// ================================================================
+let katexRetries = 0;
+function renderKaTeX() {
+  if (typeof renderMathInElement !== 'function') {
+    // ✅ v4.30 — plafond de tentatives : CDN KaTeX bloqué/hors ligne → on
+    // abandonne silencieusement (les cours sont en maths Unicode et restent
+    // lisibles sans KaTeX). Plus de boucle infinie.
+    if (++katexRetries > 30) return;
+    setTimeout(renderKaTeX, 200);
+    return;
+  }
+  try {
+    renderMathInElement(contentBody, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '\\[', right: '\\]', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      throwOnError: false,
+      errorColor: '#f87171',
+      strict: false,
+      trust: false,
+      macros: {
+        "\\R": "\\mathbb{R}",
+        "\\C": "\\mathbb{C}",
+        "\\N": "\\mathbb{N}",
+        "\\Z": "\\mathbb{Z}",
+        "\\Q": "\\mathbb{Q}",
+        "\\Re": "\\operatorname{Re}",
+        "\\Im": "\\operatorname{Im}",
+        "\\arg": "\\operatorname{arg}"
+      }
+    });
+  } catch (e) {}
+}
+
+// ================================================================
+// CONTENU INDISPONIBLE
+// ================================================================
+function showContentUnavailable() {
+  const partNumber = currentIndex + 1;
+
+  const tabConfig = {
+    cours: {
+      backLabel: 'Retour au cours',
+      backIcon: 'fa-arrow-left',
+      listLabel: 'Voir les autres parties',
+      listIcon: 'fa-book',
+      description: `La partie ${partNumber} du cours de ce chapitre sera bientôt disponible.`
+    },
+    exercices: {
+      backLabel: 'Retour aux exercices',
+      backIcon: 'fa-arrow-left',
+      listLabel: 'Voir les autres exercices',
+      listIcon: 'fa-pen-to-square',
+      description: `L'exercice ${partNumber} de ce chapitre sera bientôt disponible.`
+    },
+    corrections: {
+      backLabel: 'Retour aux corrections',
+      backIcon: 'fa-arrow-left',
+      listLabel: 'Voir les autres corrections',
+      listIcon: 'fa-check-double',
+      description: `La correction ${partNumber} de ce chapitre sera bientôt disponible.`
+    }
+  };
+
+  const cfg = tabConfig[tab] || tabConfig.cours;
+
+  let title;
+  if (tab === 'cours') title = `Partie ${partNumber} — Cours`;
+  else if (tab === 'exercices') title = `Exercice ${partNumber}`;
+  else if (tab === 'corrections') title = `Correction ${partNumber}`;
+  else title = `Partie ${partNumber}`;
+
+  const hourglassSVG = `
+    <div class="hourglass-wrap">
+      <span class="hourglass-particle"></span>
+      <span class="hourglass-particle"></span>
+      <span class="hourglass-particle"></span>
+      <span class="hourglass-particle"></span>
+      <svg class="hourglass-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <path class="frame" d="M 20 15 L 80 15" />
+        <path class="frame" d="M 20 85 L 80 85" />
+        <path class="glass" d="M 22 17 L 78 17 L 50 50 Z" />
+        <path class="glass" d="M 50 50 L 78 83 L 22 83 Z" />
+        <path class="sand-top" d="M 26 20 L 74 20 L 50 47 Z" />
+        <rect class="sand-stream" x="48.5" y="47" width="3" height="8" />
+        <path class="sand-bottom" d="M 50 53 L 74 80 L 26 80 Z" />
+      </svg>
+    </div>
+  `;
+
+  contentBody.innerHTML = `
+    <div class="content-unavailable">
+      ${hourglassSVG}
+      <h2>${title} en préparation</h2>
+      <p>${cfg.description}</p>
+      <div class="cu-actions">
+        <a href="chapitre.html?subject=${subject}&chapter=${chapter}&tab=${tab}" class="cu-btn primary">
+          <i class="fas ${cfg.backIcon}"></i> ${cfg.backLabel}
+        </a>
+        <a href="matiere.html?subject=${subject}" class="cu-btn">
+          <i class="fas ${cfg.listIcon}"></i> ${cfg.listLabel}
+        </a>
+      </div>
+    </div>
+  `;
+  pageTitle.textContent = `${title} en préparation`;
+  document.title = `ARVEXA - ${title} en préparation`;
+  prevBtn.style.display = 'none';
+  nextBtn.style.display = 'none';
+  partCounter.style.display = 'none';
+  notesBtn.style.display = 'none';
+  if (partDots) partDots.style.display = 'none';
+  if (ttsBtn) ttsBtn.style.display = 'none';
+}
+
+// ================================================================
+// ✅ SEC — PAYWALL CORRECTIONS
+// Le drapeau isPremium existait mais n'était JAMAIS utilisé : les
+// corrections étaient librement accessibles à tous. Verrou désormais
+// appliqué côté client (la vraie garantie reste le serveur).
+// ================================================================
+let premiumGateShown = false;
+
+function getPremiumNow() {
+  if (isPremium) return true;
+  if (!currentUid) return false;
+  const cached = getCachedUserData(currentUid);
+  return cached ? isUserPremium(cached) : false;
+}
+
+function showPremiumPaywall() {
+  stopTTS();
+  contentBody.innerHTML = `
+    <div class="content-unavailable">
+      <div class="hourglass-wrap" style="font-size: 42px; color: var(--accent-bright, #B8860B);">
+        <i class="fas fa-lock"></i>
+      </div>
+      <h2>Corrections réservées aux membres Premium</h2>
+      <p>Débloque toutes les corrections d'exercices, les explications détaillées et bien plus avec ARVEXA Premium.</p>
+      <div class="cu-actions">
+        <a href="abonnement.html" class="cu-btn primary">
+          <i class="fas fa-crown"></i> Débloquer Premium
+        </a>
+        <a href="chapitre.html?subject=${subject}&chapter=${chapter}&tab=cours" class="cu-btn">
+          <i class="fas fa-book-open"></i> Retour au cours
+        </a>
+      </div>
+    </div>
+  `;
+  pageTitle.textContent = 'Contenu Premium';
+  document.title = 'ARVEXA - Contenu Premium';
+  prevBtn.style.display = 'none';
+  nextBtn.style.display = 'none';
+  partCounter.style.display = 'none';
+  notesBtn.style.display = 'none';
+  if (partDots) partDots.style.display = 'none';
+  if (ttsBtn) ttsBtn.style.display = 'none';
+}
+
+// Appelé quand le statut Premium change en direct (snapshot Firestore)
+function syncPremiumGate() {
+  if (tab !== 'corrections') return;
+  const premiumNow = getPremiumNow();
+  if (!premiumNow && !premiumGateShown) {
+    premiumGateShown = true;
+    showPremiumPaywall();
+  } else if (premiumNow && premiumGateShown) {
+    premiumGateShown = false;
+    loadContent();
+  }
+}
+
+function setPremium(v) {
+  const changed = v !== isPremium;
+  isPremium = v;
+  if (changed) syncPremiumGate();
+}
+let tocObserver = null;
+
+function initTocSpy() {
+  if (tocObserver) {
+    try { tocObserver.disconnect(); } catch (e) {}
+    tocObserver = null;
+  }
+  const tocLinks = contentBody.querySelectorAll('.lecture-toc-list a[href^="#"]');
+  if (!tocLinks.length || !('IntersectionObserver' in window)) return;
+
+  const map = new Map();
+  tocLinks.forEach(a => {
+    const href = a.getAttribute('href') || '';
+    if (href.length < 2) return;
+    const id = decodeURIComponent(href.slice(1));
+    const target = document.getElementById(id);
+    if (target) map.set(target, a);
+  });
+  if (!map.size) return;
+
+  tocObserver = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      const link = map.get(en.target);
+      if (!link) return;
+      if (en.isIntersecting) {
+        tocLinks.forEach(l => l.classList.remove('toc-active'));
+        link.classList.add('toc-active');
+      }
+    });
+  }, { rootMargin: '-12% 0px -70% 0px', threshold: 0 });
+
+  map.forEach((_, target) => {
+    try { tocObserver.observe(target); } catch (e) {}
+  });
+}
+
+// ================================================================
+// v4.30 — MISE EN PAGE DES FORMULES (présentation seulement, le
+// contenu des cours n'est PAS modifié) : une formule de calcul
+// (=, ≈, →, ≥…) noyée dans une phrase passe sur SA propre ligne,
+// comme un calcul posé au tableau. Fini les formules coupées en
+// deux par le retour à la ligne du téléphone.
+// ================================================================
+function promoteMathLines(root) {
+  try {
+    if (!root) return;
+    const spans = root.querySelectorAll('p > .math, li > .math');
+    spans.forEach((sp) => {
+      if (sp.classList.contains('math-line')) return;
+      if (sp.closest('.lecture-formula-hero, .lecture-formula-box, .katex, .lecture-table')) return;
+      const txt = (sp.textContent || '').trim();
+      if (!txt) return;
+      const hasRel = /[=≈≠→⇔≥≤±]/.test(txt);
+      if (!(hasRel ? txt.length >= 8 : txt.length >= 14)) return;
+      const parent = sp.parentElement;
+      if (!parent) return;
+
+      // contexte texte AVANT / APRÈS la formule
+      let before = '', after = '';
+      let n = sp.previousSibling;
+      while (n && n.nodeType === 3) { before = n.textContent + before; n = n.previousSibling; }
+      n = sp.nextSibling;
+      while (n && n.nodeType === 3) { after += n.textContent; n = n.nextSibling; }
+      // formule serrée dans une parenthèse de la phrase → on ne touche pas
+      if (/\(\s*$/.test(before) || /^\s*\)/.test(after)) return;
+
+      // déjà seule dans son paragraphe → rien à faire
+      const others = Array.from(parent.childNodes).filter((c) =>
+        c !== sp && !(c.nodeType === 3 && !c.textContent.trim()));
+      if (!others.length) return;
+
+      // ponctuation de fin de phrase collée au span → suit la formule
+      // v5.2 : tolère l'espace avant la ponctuation (« 2i = 0 + 2i » + « : »)
+      // → le « : » est collé à la formule (fini le « : » orphelin) ;
+      // espace insécable avant : et ; (typographie FR)
+      const nx = sp.nextSibling;
+      if (nx && nx.nodeType === 3) {
+        const m = nx.textContent.match(/^[ \t\u00a0]*([:;,….]+)/);
+        if (m) {
+          const glue = (m[1] === ':' || m[1] === ';') ? '\u00a0' : '';
+          sp.appendChild(document.createTextNode(glue + m[1]));
+          nx.textContent = nx.textContent.slice(m[0].length);
+        }
+      }
+      sp.classList.add('math-line');
+    });
+  } catch (e) {}
+}
+
+function enhanceContent() {
+  try { promoteMathLines(contentBody); } catch (e) {}
+  try {
+    contentBody.querySelectorAll('table').forEach(tbl => {
+      const parent = tbl.parentElement;
+      if (parent && parent.classList.contains('table-wrap')) return;
+      const wrap = document.createElement('div');
+      wrap.className = 'table-wrap';
+      tbl.parentNode.insertBefore(wrap, tbl);
+      wrap.appendChild(tbl);
+    });
+  } catch (e) {}
+
+  try {
+    contentBody.querySelectorAll('img').forEach(img => {
+      if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+    });
+  } catch (e) {}
+
+  try { initTocSpy(); } catch (e) {}
+}
+
+function updatePartDots() {
+  if (!partDots) return;
+  if (!parts.length || parts.length > 20) {
+    partDots.hidden = true;
+    return;
+  }
+  if (partDots.hidden) partDots.hidden = false;
+  if (partDots.childElementCount !== parts.length) {
+    partDots.innerHTML = parts.map(() => '<span class="pdot"></span>').join('');
+  }
+  Array.from(partDots.children).forEach((d, i) => {
+    d.classList.toggle('active', i === currentIndex);
+    d.classList.toggle('done', i < currentIndex);
+  });
+}
+
+// ================================================================
+// CHARGEMENT
+// ================================================================
+function loadContent() {
+  // ✅ SEC — verrou Premium sur l'onglet Corrections
+  if (tab === 'corrections' && !getPremiumNow()) {
+    premiumGateShown = true;
+    showPremiumPaywall();
+    return;
+  }
+
+  const manifestPath = `cours/${subject}.json`;
+
+  contentBody.innerHTML = `
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Chargement du contenu...</p>
+    </div>
+  `;
+
+  fetch(manifestPath)
+    .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
+    .then(data => {
+      const ch = (data.chapters || []).find(c => c.number === chapter);
+      if (!ch) { showContentUnavailable(); return; }
+
+      const tabKey = tab === 'cours' ? 'cours'
+                   : tab === 'exercices' ? 'exercices'
+                   : 'corrections';
+
+      parts = (ch[tabKey] || []).map(p => ({
+        title: p.title || `Partie ${p.part}`,
+        file: p.file || '',
+        part: p.part,
+        duration: p.duration || 0
+      }));
+
+      parts = parts.filter(p => p.file);
+
+      if (parts.length === 0) {
+        showContentUnavailable();
+        return;
+      }
+
+      if (currentIndex >= parts.length) currentIndex = 0;
+      // ✅ v5.8 — préchauffage des AUTRES parties du chapitre SANS AFFAMER
+      // le PDF en cours (cause racine des « 4 minutes » : 3 PDF de plus
+      // (~4 Mo) téléchargés en parallèle de celui qu'on essaie d'ouvrir).
+      // DÉSORMAIS :
+      //   1. démarrage APRÈS le téléchargement complet du PDF affiché
+      //      (événement 'arvexa-pdf-ready' envoyé par openArvPdf) — ou 20 s
+      //      de garde-fou pour les parties HTML ;
+      //   2. connexion lente (2G / slow-2g / économiseur de données) → pas
+      //      de préchauffage du tout : la 1ʳᵉ lecture prime ;
+      //   3. fichiers déjà en cache sautés (CHECK_CACHED, zéro réseau) ;
+      //   4. UN SEUL fichier à la fois, et mis en pause si l'élève ouvre
+      //      entre-temps un autre PDF (__arvPdfLoading).
+      // ⚠ on attend toujours que le SW CONTRÔLE la page (v4.31) : avant
+      // clients.claim() (premier chargement), les fetch contournent le SW
+      // et ne cachent rien (constaté en test réel hors-ligne v4.30).
+      const prefetchParts = () => {
+        const key = subject + '/' + chapter + '/' + tab;
+        if (window.__arvPrefetchKey === key) return;
+        window.__arvPrefetchKey = key;
+        const current = parts[currentIndex] ? parts[currentIndex].file : '';
+        const others = parts.map((p) => p.file).filter((f) => f && f !== current);
+        if (!others.length) return;
+        const conn = navigator.connection || {};
+        if (conn.saveData || conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g') return;
+        if (!navigator.onLine) return;
+        let cachedSet = new Set();
+        const run = async () => {
+          for (const f of others) {
+            if (cachedSet.has(f)) continue;           // déjà sur l'appareil
+            if (window.__arvPrefetchKey !== key) return; // chapitre changé
+            while (window.__arvPdfLoading && window.__arvPrefetchKey === key) {
+              await new Promise((r) => setTimeout(r, 900)); // une lecture prime
+            }
+            if (window.__arvPrefetchKey !== key) return;
+            try { await fetch(f, { cache: 'reload' }); } catch (e) {}
+            await new Promise((r) => setTimeout(r, 400)); // respiration réseau
+          }
+        };
+        const curIsPdf = /\.pdf$/i.test(current);
+        if (curIsPdf) {
+          let kicked = false;
+          const kick = () => { if (kicked) return; kicked = true; run(); };
+          window.addEventListener('arvexa-pdf-ready', kick, { once: true });
+          setTimeout(kick, 20000); // garde-fou (partie HTML, erreur réseau…)
+          // ✅ v5.8 — PDF déjà chargé (ouverture < 1,2 s) : l'événement a pu
+          // être émis AVANT l'inscription de ce listener → on démarre tout de suite.
+          if (!window.__arvPdfLoading && document.querySelector('.arv-pdf-page.rendered')) kick();
+        } else {
+          setTimeout(run, 5000);
+        }
+        // Liste des fichiers déjà en cache (réponse du SW, zéro réseau)
+        try {
+          if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+            const ch = new MessageChannel();
+            ch.port1.onmessage = (e) => {
+              if (e.data && e.data.type === 'CHECK_CACHED_RESULT' && Array.isArray(e.data.cached)) {
+                cachedSet = new Set(e.data.cached);
+              }
+            };
+            navigator.serviceWorker.controller.postMessage({ type: 'CHECK_CACHED', files: others }, [ch.port2]);
+          }
+        } catch (e) {}
+      };
+      if (!navigator.serviceWorker) {
+        setTimeout(prefetchParts, 1200);
+      } else if (navigator.serviceWorker.controller) {
+        setTimeout(prefetchParts, 1200);
+      } else {
+        let prefetchStarted = false;
+        const startPrefetchOnce = () => {
+          if (prefetchStarted) return;
+          prefetchStarted = true;
+          setTimeout(prefetchParts, 600);
+        };
+        try {
+          navigator.serviceWorker.addEventListener('controllerchange', startPrefetchOnce, { once: true });
+          navigator.serviceWorker.ready.then(() => setTimeout(startPrefetchOnce, 800)).catch(() => startPrefetchOnce());
+        } catch (e) { startPrefetchOnce(); }
+      }
+      renderPart();
+    })
+    .catch(() => {
+      showContentUnavailable();
+    });
+}
+
+function renderPart() {
+  if (!parts || parts.length === 0) {
+    showContentUnavailable();
+    return;
+  }
+  if (currentIndex >= parts.length || currentIndex < 0) currentIndex = 0;
+
+  const part = parts[currentIndex];
+  if (!part) {
+    showContentUnavailable();
+    return;
+  }
+
+  // ✅ v4.30 — les écrans d'erreur masquent la navigation : on la remontre
+  [prevBtn, nextBtn, partCounter, notesBtn].forEach((el) => { el.style.display = ''; });
+  if (partDots) partDots.style.display = '';
+  if (ttsBtn) ttsBtn.style.display = '';
+
+  stopTTS();
+
+  pageTitle.textContent = part.title || 'Partie ' + (currentIndex + 1);
+  document.title = 'ARVEXA - ' + (part.title || 'Lecture');
+
+  partCounter.textContent = `${currentIndex + 1} / ${parts.length}`;
+  prevBtn.disabled = currentIndex === 0;
+  nextBtn.disabled = currentIndex >= parts.length - 1;
+  modalSub.textContent = part.title || 'Partie ' + (currentIndex + 1);
+
+  const prevPart = parts[currentIndex - 1];
+  const nextPart = parts[currentIndex + 1];
+  prevBtn.title = prevPart ? prevPart.title : '';
+  nextBtn.title = nextPart ? nextPart.title : '';
+  updatePartDots();
+
+  const filePath = part.file;
+
+  contentBody.innerHTML = `
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Chargement...</p>
+    </div>
+  `;
+
+  // ✅ v5-PDF — ouverture locale du PDF de la partie quand il existe
+  // (formules, schémas et tableaux mis en page A4), repli automatique sur le
+  // rendu HTML sinon (zéro régression). Verrou premium conservé sur les
+  // corrections : pas de PDF sans abonnement.
+  const pdfPath = toLocalPdfPath(filePath);
+  if (pdfPath && (tab !== 'corrections' || getPremiumNow())) {
+    // ✅ v5.3 — pdf.js se PRÉCHARGE pendant la sonde HEAD (avant : chargé
+    // après, en série → 0,3 à 1 s perdus à chaque ouverture froide)
+    loadArvPdfJs().catch(() => {});
+    probeLocalPdf(pdfPath)
+      .then((available) => {
+        if (available) renderPdfReader(pdfPath);
+        else loadPartHtml(filePath);
+      })
+      .catch(() => loadPartHtml(filePath));
+  } else {
+    loadPartHtml(filePath);
+  }
+}
+
+// ================================================================
+// ✅ v5-PDF — LECTEUR PDF LOCAL
+// ================================================================
+function escapeAttr(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+  ));
+}
+
+function toLocalPdfPath(htmlPath) {
+  try {
+    if (typeof htmlPath !== 'string' || !/\.html$/i.test(htmlPath)) return null;
+    const pdf = htmlPath.replace(/\.html$/i, '.pdf');
+    // garde-fou : même arborescence cours/<matiere>/<chapitre>/ que le HTML
+    // d'origine (aucun caractère dangereux possible dans les attributs)
+    if (!/^cours\/[a-z0-9_]+\/[a-z0-9_]+\/[A-Za-z0-9_-]+\.pdf$/.test(pdf)) return null;
+    return pdf;
+  } catch (e) { return null; }
+}
+
+function probeLocalPdf(url) {
+  // ✅ v5.8 — le CACHE D'ABORD : un PDF déjà consulté/téléchargé est
+  // détecté immédiatement (0 aller-retour réseau), même hors ligne —
+  // l'ouverture d'un cours déjà vu ne dépend plus de la latence réseau.
+  // La sonde HEAD réseau ne sert que si le PDF n'est pas en cache.
+  // (Le SW n'intercepte pas les HEAD — garde method !== 'GET' — d'où la
+  // lecture directe du Cache Storage depuis la page.)
+  const fromCache = (window.caches && typeof caches.match === 'function')
+    ? caches.match(url, { ignoreSearch: true }).then((hit) => !!hit).catch(() => false)
+    : Promise.resolve(false);
+  return fromCache.then((hit) => {
+    if (hit) return true;
+    return fetch(url, { method: 'HEAD' })
+      .then((r) => !!r && r.ok)
+      .catch(() => false);
+  });
+}
+
+function renderPdfReader(pdfPath) {
+  const part = parts[currentIndex];
+  const rawTitle = (part && part.title) || pageTitle.textContent || 'Partie';
+  const safeTitle = escapeAttr(rawTitle);
+
+  // TTS impossible sur un PDF → bouton masqué (renderPart le remonte en HTML)
+  if (ttsBtn) ttsBtn.style.display = 'none';
+
+  contentBody.innerHTML = `
+    <div class="arv-pdf">
+      <div class="arv-pdf-toolbar" id="arvPdfToolbar">
+        <button class="arv-pdf-tbtn" id="arvPdfPrev" aria-label="Page précédente" title="Page précédente">
+          <i class="fas fa-chevron-up"></i>
+        </button>
+        <span class="arv-pdf-count" id="arvPdfCount">… / …</span>
+        <button class="arv-pdf-tbtn" id="arvPdfNext" aria-label="Page suivante" title="Page suivante">
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <span class="arv-pdf-sep"></span>
+        <button class="arv-pdf-tbtn" id="arvPdfZoomOut" aria-label="Réduire" title="Réduire">
+          <i class="fas fa-minus"></i>
+        </button>
+        <span class="arv-pdf-count" id="arvPdfZoom">100 %</span>
+        <button class="arv-pdf-tbtn" id="arvPdfZoomIn" aria-label="Agrandir" title="Agrandir">
+          <i class="fas fa-plus"></i>
+        </button>
+        <span class="arv-pdf-sep"></span>
+        <a class="arv-pdf-tbtn gold" href="${pdfPath}" download title="Télécharger le PDF">
+          <i class="fas fa-download"></i>
+        </a>
+      </div>
+      <div class="arv-pdf-viewport" id="arvPdfViewport">
+        <div class="arv-pdf-pages" id="arvPdfPages">
+          <div class="arv-pdf-status" id="arvPdfStatus">
+            <div class="arv-pdf-skel" aria-hidden="true">
+              <div class="arv-pdf-skel-page"><span class="arv-pdf-skel-line t"></span><span class="arv-pdf-skel-line l1"></span><span class="arv-pdf-skel-line l3"></span><span class="arv-pdf-skel-line l5"></span></div>
+              <div class="arv-pdf-skel-page"><span class="arv-pdf-skel-line t"></span><span class="arv-pdf-skel-line l1"></span><span class="arv-pdf-skel-line l2"></span><span class="arv-pdf-skel-line l4"></span><span class="arv-pdf-skel-line l5"></span></div>
+              <div class="arv-pdf-skel-page"><span class="arv-pdf-skel-line t"></span><span class="arv-pdf-skel-line l2"></span><span class="arv-pdf-skel-line l3"></span><span class="arv-pdf-skel-line l5"></span></div>
+            </div>
+            <p>Chargement du cours…</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  markPartAsRead();
+
+  // préchauffage hors-ligne : le PDF consulté est mis en cache par le SW.
+  // ✅ v5.3 — DIFFÉRÉ côté SW (6 s) : le téléchargement complet du PDF ne
+  // concurrence plus les Range requests de la 1ʳᵉ page sur réseau lent.
+  // La bibliothèque pdf.js, elle, reste précachée immédiatement.
+  try {
+    if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: 'CACHE_URL', url: pdfPath, delay: 6000 });
+      navigator.serviceWorker.controller.postMessage({ type: 'CACHE_URL', url: 'assets/pdfjs/pdf.min.js' });
+      navigator.serviceWorker.controller.postMessage({ type: 'CACHE_URL', url: 'assets/pdfjs/pdf.worker.min.js' });
+    }
+  } catch (e) {}
+
+  openArvPdf(pdfPath, pdfPath);
+}
+
+// ================================================================
+// ✅ v5.5 — ZOOM 100 % STABLE (fini les « coupures » au zoom) :
+// Avant, chaque zoom/pinch/rotation VIDAIT les canvases affichés avant de
+// re-rendre → la page lue disparaissait 1 à 3 s (rendu haute résolution)
+// puis réapparaissait. MAINTENANT (double-buffer) : l'ancien bitmap RESTE
+// AFFICHÉ (étiré en CSS), le nouveau se dessine dans un tampon hors écran,
+// bascule instantanée par drawImage. + anti-rebond zoom (taps rapides
+// fusionnés), file 2 rendus max, plafond 10 Mpx, pages hors écran libérées.
+// ✅ v5.3 — VISIONNEUSE PDF ARVEXA (canvas pdf.js, maison)
+// v5.3 : OUVERTURE < 5 s + FINI LES PAGES BLANCHES (« crash d'images ») :
+// (1) pdf.js préchargé en parallèle de la sonde HEAD ; (2) métrage des pages
+// non plus séquentiel (44 aller-retours !) : page 1 mesurée seule, placeholders
+// posés, page 1 RENDUE IMMÉDIATEMENT, les autres formats mesurés en fond
+// (8 en parallèle) ; (3) file de rendu (3 canvas max en vol) + annulation des
+// rendus obsolètes + re-rendu de TOUTES les pages visibles après un
+// recadrage — les canvases vidés pendant le scroll/zoom/rotation sont
+// repeints au lieu de rester blancs.
+// Zéro lecteur système : les pages A4 sont rendues en canvas,
+// empilées dans le flux (la barre de progression de l'app suit le
+// scroll normalement). Rendu paresseux ±1 écran, nettoyage mémoire
+// des pages lointaines, zoom 60–300 %, navigation clavier/boutons.
+// v5.2 : NETTETÉ — rendu au minimum 2× la densité d'écran (plancher
+// dpr, fini le flou sur les écrans dpr 1), garde-fou mémoire canvas
+// (≤ ~12 Mpx, ≤ 4096 px par côté — au-delà les navigateurs mobiles
+// brident le canvas en silence et tout devient flou), et RE-RENDU
+// automatique au pinch-zoom (visualViewport.scale) : zoomer avec
+// les doigts reste net. Affichage 100 % PDF : plus aucun bouton de
+// retour vers la version HTML (consigne propriétaire).
+// ================================================================
+const ARV_PDF_ZOOMS = [0.6, 0.8, 1, 1.25, 1.5, 2, 2.5, 3];
+const ARV_PDF_JS = 'assets/pdfjs/pdf.min.js';
+const ARV_PDF_WORKER = 'assets/pdfjs/pdf.worker.min.js';
+const ARV_PDF_MAX_CANVAS_PX = 10 * 1024 * 1024;   // ~10 Mpx (v5.5 : marge mémoire — un zoom garde 2 bitmaps par page active)
+const ARV_PDF_MAX_CANVAS_DIM = 4096;              // largeur max par canvas
+let arvPdfState = null;   // état de la visionneuse courante
+let arvPdfSeq = 0;        // anti-course (changement rapide de partie)
+
+function destroyArvPdf() {
+  if (!arvPdfState) { window.__arvPdfLoading = false; return; }
+  window.__arvPdfLoading = false;
+  try { if (arvPdfState.observer) arvPdfState.observer.disconnect(); } catch (e) {}
+  // ✅ v5.3 — annule tout rendu en vol : un task pdf.js qui survit au
+  // démontage repeignait un canvas déjà libéré
+  try {
+    (arvPdfState.renderTasks || []).forEach((t) => {
+      try { if (t) t.cancel(); } catch (e) {}
+    });
+  } catch (e) {}
+  try { if (arvPdfState.doc) arvPdfState.doc.destroy(); } catch (e) {}
+  try { if (arvPdfState.zoomTimer) clearTimeout(arvPdfState.zoomTimer); } catch (e) {}
+  try {
+    if (arvPdfState.vvHook && window.visualViewport) {
+      window.visualViewport.removeEventListener('resize', arvPdfState.vvHook);
+      window.visualViewport.removeEventListener('scroll', arvPdfState.vvHook);
+    }
+  } catch (e) {}
+  // ✅ v6.5 — retire aussi les hooks window (scroll/resize) posés par
+  // wireArvPdf : sans ça, chaque changement de partie en RAJOUTAIT un
+  // (10 parties lues = 10 listeners → updateArvPdfCurrent 10× par tick
+  // de scroll → lectures offsetTop répétées → jank sur mobiles modestes).
+  try {
+    if (arvPdfState.scrollHook) window.removeEventListener('scroll', arvPdfState.scrollHook);
+    if (arvPdfState.resizeHook) window.removeEventListener('resize', arvPdfState.resizeHook);
+  } catch (e) {}
+  arvPdfState = null;
+}
+
+let arvPdfJsPromise = null; // ✅ v5.3 — promesse mémoïsée : jamais 2 <script>
+function loadArvPdfJs() {   // pdf.min.js injectés en parallèle
+  if (window.pdfjsLib) return Promise.resolve();
+  if (!arvPdfJsPromise) {
+    arvPdfJsPromise = new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = ARV_PDF_JS;
+      s.onload = () => resolve();
+      s.onerror = () => { arvPdfJsPromise = null; reject(new Error('pdf.js indisponible')); };
+      document.head.appendChild(s);
+    });
+  }
+  return arvPdfJsPromise;
+}
+
+// ── Netteté (v5.2, plafond ajusté v5.5) ──────────────────────
+// Échelle interne visée = cssScale × max(dpr, 2) × pinch-zoom,
+// PLAFONNÉE à 3,5× au total (v5.5) : au-delà, le gain visuel est
+// imperceptible sur les écrans ≤ dpr 3 mais le temps de rendu et la
+// mémoire explosent (c'est ça qui rendait le zoom lent et figeait
+// l'écran). Garde-fous mémoire : canvas ≤ ~10 Mpx et ≤ 4096 px par
+// côté (au-delà, les navigateurs mobiles brident le canvas EN
+// SILENCE → flou).
+const ARV_PDF_MAX_TOTAL_SCALE = 3.5;
+
+function arvVvScale() {
+  try {
+    const s = (window.visualViewport && window.visualViewport.scale) || 1;
+    return Math.min(Math.max(s, 1), 4);
+  } catch (e) { return 1; }
+}
+
+function arvPdfDpr(cssScale, pageW, pageH) {
+  if (!(cssScale > 0) || !(pageW > 0) || !(pageH > 0)) return 2;
+  const base = Math.max(window.devicePixelRatio || 1, 2);
+  // ✅ v5.5 — plafond de résolution TOTALE (css × dpr) : rendus de zoom
+  // ~40 % plus rapides et ~40 % plus légers, netteté inchangée à l'écran
+  const want = Math.min(cssScale * base * arvVvScale(), ARV_PDF_MAX_TOTAL_SCALE);
+  const maxTotal = Math.sqrt(ARV_PDF_MAX_CANVAS_PX / (pageW * pageH));
+  const maxDim = ARV_PDF_MAX_CANVAS_DIM / pageW;
+  const s = Math.max(1, Math.min(want, maxTotal, maxDim));
+  return s / cssScale;
+}
+
+// Pinch-zoom : re-rend les pages visibles à la nouvelle résolution.
+function wireArvVvZoom(state) {
+  if (!window.visualViewport || state.vvHook) return;
+  let timer = null;
+  let lastScale = 1;
+  state.vvHook = () => {
+    const s = arvVvScale();
+    if (Math.abs(s - lastScale) < 0.05) return;
+    lastScale = s;
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      const st = arvPdfState;
+      if (!st || !st.pageCount) return;
+      const cur = Math.max(0, (st.currentPage || 1) - 1);
+      for (let k = Math.max(0, cur - 1); k <= Math.min(st.pageCount - 1, cur + 1); k++) {
+        // ✅ v5.5 — pinch SANS coupure : l'ancien bitmap reste affiché
+        // (double-buffer) pendant le re-rendu à la nouvelle résolution
+        if (st.rendered[k] || st.rendering[k]) invalidateArvPdf(st, k, true);
+        queueArvPdfRender(k);
+      }
+    }, 240);
+  };
+  window.visualViewport.addEventListener('resize', state.vvHook);
+  window.visualViewport.addEventListener('scroll', state.vvHook, { passive: true });
+}
+
+function openArvPdf(pdfPath, downloadRef) {
+  destroyArvPdf();
+  // ✅ v5.8 — signal « une lecture est en cours » : le préchauffage des
+  // autres parties se met en pause pour laisser toute la bande passante
+  // au PDF que l'élève ouvre.
+  window.__arvPdfLoading = true;
+  const token = ++arvPdfSeq;
+  arvPdfState = { token, doc: null, pagesMeta: [], wraps: [], canvases: [],
+                  rendered: [], rendering: [], renderTasks: [], dirty: [],
+                  queue: [], queued: [], active: 0, visible: new Set(),
+                  zoomIdx: 2, observer: null, zoomTimer: null,
+                  pageCount: 0, path: pdfPath, vvHook: null,
+                  tStart: (window.performance && performance.now()) || 0 };
+  // défini AVANT toute utilisation (buildArvPdfPages s'en sert)
+  arvPdfState.zoomFactor = () => ARV_PDF_ZOOMS[arvPdfState.zoomIdx] || 1;
+
+  loadArvPdfJs()
+    .then(() => {
+      if (token !== arvPdfSeq) return;
+      window.pdfjsLib.GlobalWorkerOptions.workerSrc = ARV_PDF_WORKER;
+      // ✅ v5.3 — disableAutoFetch : sur réseau lent, pdf.js ne récupère que
+      // les morceaux (Range) utiles aux pages affichées → 1ʳᵉ page en ~2 s au
+      // lieu d'attendre le PDF entier (~7 s à 200 Ko/s). Le téléchargement
+      // complet pour le hors-ligne est assuré côté SW (CACHE_URL différé).
+      const task = window.pdfjsLib.getDocument({ url: pdfPath, disableAutoFetch: true });
+      task.onProgress = (d) => {
+        if (token !== arvPdfSeq || !d || !d.total) return;
+        const pct = Math.round((d.loaded / d.total) * 100);
+        const st = document.getElementById('arvPdfStatus');
+        if (st && pct > 4) {
+          const p = st.querySelector('p');
+          if (p) p.textContent = `Chargement du cours… ${Math.min(99, pct)} %`;
+        }
+      };
+      return task.promise;
+    })
+    .then((doc) => {
+      if (token !== arvPdfSeq) return;
+      arvPdfState.doc = doc;
+      arvPdfState.pageCount = doc.numPages;
+      // ✅ v5.8 — à ce stade le PDF est ENTIÈREMENT téléchargé et déjà en
+      // cache (la passerelle SW ne résout qu'après cache.put) : on lève le
+      // signal pour que le préchauffage des autres parties puisse démarrer
+      // SANS concurrence sur la bande passante.
+      window.__arvPdfLoading = false;
+      try { window.dispatchEvent(new Event('arvexa-pdf-ready')); } catch (e) {}
+      return buildArvPdfPages(doc, token);
+    })
+    .then(() => { if (token === arvPdfSeq) wireArvPdf(pdfPath); })
+    .catch((err) => {
+      if (token !== arvPdfSeq) return;
+      window.__arvPdfLoading = false;
+      try { window.dispatchEvent(new Event('arvexa-pdf-ready')); } catch (e) {}
+      console.warn('[ARV-PDF] échec :', err);
+      showArvPdfError(pdfPath);
+    });
+}
+
+async function buildArvPdfPages(doc, token) {
+  const state = arvPdfState;
+  const pagesWrap = document.getElementById('arvPdfPages');
+  if (!state || !pagesWrap) return;
+  pagesWrap.innerHTML = '';
+
+  // ✅ v5.3 — AVANT : await doc.getPage(i+1) SÉQUENTIELLEMENT pour les ~44
+  // pages avant d'afficher quoi que ce soit (1 à 2 s perdues).
+  // MAINTENANT : la page 1 est mesurée seule (toutes les feuilles du cours
+  // partagent le format A4), les placeholders sont posés à la bonne hauteur
+  // (zéro saut de scroll), la page 1 se PEINT IMMÉDIATEMENT, et les rares
+  // formats différents sont mesurés en arrière-plan (8 en parallèle).
+  const first = await doc.getPage(1);
+  if (token !== arvPdfSeq) return;
+  const vp0 = first.getViewport({ scale: 1 });
+
+  const viewport = document.getElementById('arvPdfViewport');
+  state.containerW = Math.max(240, (viewport ? viewport.clientWidth : 320));
+
+  const n = doc.numPages;
+  state.pagesMeta = new Array(n);
+  for (let i = 0; i < n; i++) state.pagesMeta[i] = { w: vp0.width, h: vp0.height };
+
+  for (let i = 0; i < n; i++) {
+    const meta = state.pagesMeta[i];
+    const cssW = state.containerW * state.zoomFactor();
+    const cssH = cssW * (meta.h / meta.w);
+    const wrap = document.createElement('div');
+    wrap.className = 'arv-pdf-page';
+    wrap.style.width = Math.round(cssW) + 'px';
+    wrap.style.height = Math.round(cssH) + 'px';
+    wrap.innerHTML = `<div class="arv-pdf-ph"><i class="fas fa-file-lines"></i> Page ${i + 1}</div>`;
+    const canvas = document.createElement('canvas');
+    wrap.appendChild(canvas);
+    pagesWrap.appendChild(wrap);
+    state.wraps.push(wrap);
+    state.canvases.push(canvas);
+    state.rendered.push(false);
+    state.rendering.push(false);
+  }
+
+  // Rendu paresseux : ±1,5 écran autour du viewport.
+  // ✅ v5.3 — les index visibles sont tracés : après un recadrage (rotation,
+  // scrollbar, zoom, pinch), TOUTES les pages visibles sont repeintes et non
+  // plus seulement la courante → fini les pages blanches qui restaient vides
+  // jusqu'à sortir de l'écran (« crash d'images »).
+  state.observer = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      const idx = state.wraps.indexOf(en.target);
+      if (idx < 0) return;
+      if (en.isIntersecting) {
+        state.visible.add(idx);
+        queueArvPdfRender(idx);
+      } else {
+        state.visible.delete(idx);
+        scheduleArvPdfCleanup(idx);
+      }
+    });
+  }, { rootMargin: '160% 0px 160% 0px' });
+  state.wraps.forEach((w) => state.observer.observe(w));
+  updateArvPdfCurrent();
+
+  // Resynchronisation après pose des pages : la barre de défilement
+  // verticale qui vient d'apparaître réduit la largeur utile (desktop,
+  // rotation…). Sans recadrage, les feuilles A4 débordent de l'écran.
+  syncArvPdfWidth();
+  requestAnimationFrame(() => requestAnimationFrame(syncArvPdfWidth));
+
+  // ✅ v5.3 — la 1ʳᵉ page (et la suivante) se peignent TOUT DE SUITE,
+  // sans attendre le premier tick de l'observer : c'est ça qui fait
+  // passer l'ouverture sous les 5 secondes.
+  queueArvPdfRender(0);
+  if (n > 1) queueArvPdfRender(1);
+
+  // ✅ v5.3 — mesure des pages restantes en arrière-plan (8 en parallèle) :
+  // seules celles dont le format diffère de la page 1 sont recadrées.
+  for (let start = 1; start < n; start += 8) {
+    const batch = [];
+    for (let i = start; i < Math.min(n, start + 8); i++) batch.push(i);
+    const metas = await Promise.all(batch.map(async (i) => {
+      try {
+        const pg = await doc.getPage(i + 1);
+        const vp = pg.getViewport({ scale: 1 });
+        return { i, w: vp.width, h: vp.height };
+      } catch (e) { return null; }
+    }));
+    if (token !== arvPdfSeq) return;
+    const changed = [];
+    metas.forEach((m) => {
+      if (!m) return;
+      const prev = state.pagesMeta[m.i];
+      if (prev && Math.abs(prev.w - m.w) < 0.5 && Math.abs(prev.h - m.h) < 0.5) return;
+      state.pagesMeta[m.i] = { w: m.w, h: m.h };
+      changed.push(m.i);
+    });
+    if (!changed.length) continue;
+    const z = state.zoomFactor();
+    changed.forEach((i) => {
+      const meta = state.pagesMeta[i];
+      const cssW = Math.round(state.containerW * z);
+      const cssH = Math.round(cssW * (meta.h / meta.w));
+      state.wraps[i].style.width = cssW + 'px';
+      state.wraps[i].style.height = cssH + 'px';
+      if (state.rendered[i] || state.rendering[i]) clearArvPdfCanvas(state, i);
+    });
+    changed.forEach((i) => { if (state.visible.has(i)) queueArvPdfRender(i); });
+  }
+}
+
+// ── ✅ v5.5 — FILE DE RENDU + DOUBLE-BUFFER (zoom SANS coupure) ──
+// Avant v5.5, chaque zoom/pinch/rotation VIDAIT les canvases affichés
+// (clearArvPdfCanvas) AVANT de re-rendre → la page lue devenait blanche
+// 1 à 3 s (le temps du rendu haute résolution) puis réapparaissait :
+// les « coupures » signalées par l'utilisateur.
+// DÉSORMAIS : invalidateArvPdf(i, true) garde l'ancien bitmap AFFICHÉ
+// (étiré en CSS pendant un instant) ; le nouveau rendu se prépare dans un
+// tampon hors écran et la bascule ancien→nouveau est instantanée.
+// Seules les pages HORS ÉCRAN sont vidées (libération mémoire).
+// File avec priorité (la page lue d'abord), 2 rendus max en vol.
+const ARV_PDF_MAX_ACTIVE = 2;
+
+// Invalide une page pour re-rendu.
+// keepOld=true  → l'ancien bitmap reste affiché (double-buffer, page à l'écran)
+// keepOld=false → canvas libéré immédiatement (page hors écran)
+function invalidateArvPdf(state, i, keepOld) {
+  const t = state.renderTasks[i];
+  if (t) {
+    state.renderTasks[i] = null;
+    try { t.cancel(); } catch (e) {}
+  }
+  if (keepOld) {
+    state.dirty[i] = true;   // le canvas garde son bitmap visible
+  } else {
+    const c = state.canvases[i];
+    c.width = 0; c.height = 0;
+    state.rendered[i] = false;
+    state.wraps[i].classList.remove('rendered');
+  }
+  // le catch du rendu annulé est idempotent ; on remet déjà le drapeau ici
+  // pour que la file puisse relancer un rendu immédiatement
+  state.rendering[i] = false;
+}
+
+function clearArvPdfCanvas(state, i) { invalidateArvPdf(state, i, false); }
+
+function queueArvPdfRender(i) {
+  const state = arvPdfState;
+  if (!state || !state.doc) return;
+  if (state.queued[i] || state.rendering[i]) return;
+  if (state.rendered[i] && !state.dirty[i]) return;
+  state.queued[i] = true;
+  state.queue.push(i);
+  pumpArvPdfQueue();
+}
+
+function pumpArvPdfQueue() {
+  const state = arvPdfState;
+  if (!state) return;
+  while (state.active < ARV_PDF_MAX_ACTIVE && state.queue.length) {
+    // priorité : page la plus proche de celle en cours de lecture
+    let best = 0, bd = Infinity;
+    for (let k = 0; k < state.queue.length; k++) {
+      const d = Math.abs(state.queue[k] - ((state.currentPage || 1) - 1));
+      if (d < bd) { bd = d; best = k; }
+    }
+    const i = state.queue.splice(best, 1)[0];
+    state.queued[i] = false;
+    if (state.rendering[i] || (state.rendered[i] && !state.dirty[i])) continue;
+    state.active++;
+    Promise.resolve(renderArvPdfPage(i))
+      .catch(() => {})
+      .finally(() => {
+        state.active--;
+        pumpArvPdfQueue();
+      });
+  }
+}
+
+// ✅ v5.5 — recadrage COMMUN (zoom, rotation, scrollbar) SANS vider les
+// pages affichées : pages à l'écran (±40 % de marge) → double-buffer,
+// pages hors écran → libérées (mémoire). Priorité de file : page lue.
+function resizeArvPdfPages(state) {
+  const vh = window.innerHeight || 800;
+  const z = state.zoomFactor();
+  const onscreen = new Array(state.pageCount);
+  for (let i = 0; i < state.pageCount; i++) {
+    const r = state.wraps[i].getBoundingClientRect();
+    onscreen[i] = r.bottom > -vh * 0.4 && r.top < vh * 1.4;
+  }
+  for (let i = 0; i < state.pageCount; i++) {
+    const meta = state.pagesMeta[i];
+    const cssW = Math.round(state.containerW * z);
+    const cssH = Math.round(cssW * (meta.h / meta.w));
+    state.wraps[i].style.width = cssW + 'px';
+    state.wraps[i].style.height = cssH + 'px';
+    if (state.rendered[i] || state.rendering[i]) {
+      // ✅ v5.5 — à l'écran : l'ancien bitmap RESTE affiché (aucune coupure)
+      invalidateArvPdf(state, i, onscreen[i]);
+    }
+  }
+  // re-rendu : toutes les pages visibles (observer ±160 %) + courante +
+  // suivante ; la priorité de file peint d'abord la page en cours de lecture
+  state.visible.forEach((i) => queueArvPdfRender(i));
+  const cur = Math.max(0, (state.currentPage || 1) - 1);
+  queueArvPdfRender(cur);
+  queueArvPdfRender(Math.min(state.pageCount - 1, cur + 1));
+}
+
+// Recadre toutes les pages sur la largeur réelle du conteneur.
+// Retourne true si une resynchronisation a eu lieu.
+function syncArvPdfWidth() {
+  const state = arvPdfState;
+  if (!state || !state.pageCount || !state.wraps.length) return false;
+  const vp = document.getElementById('arvPdfViewport');
+  if (!vp) return false;
+  const w = Math.max(240, vp.clientWidth);
+  if (Math.abs(w - state.containerW) <= 2) return false;
+  state.containerW = w;
+  resizeArvPdfPages(state);
+  return true;
+}
+
+function renderArvPdfPage(i) {
+  const state = arvPdfState;
+  if (!state || !state.doc || state.rendering[i]) return Promise.resolve();
+  if (state.rendered[i] && !state.dirty[i]) return Promise.resolve();
+  state.rendering[i] = true;
+  state.dirty[i] = false;
+  const token = state.token;
+  const canvas = state.canvases[i];
+  const meta = state.pagesMeta[i];
+  const cssW = Math.round(state.containerW * state.zoomFactor());
+  const cssH = Math.round(cssW * (meta.h / meta.w));
+  // ✅ v5.5 — DOUBLE-BUFFER : si la page affiche déjà un bitmap, il reste
+  // VISIBLE (étiré à la nouvelle taille CSS) pendant tout le re-rendu ;
+  // le nouveau se dessine dans un tampon hors écran. Aucune coupure blanche,
+  // la bascule ancien→nouveau est un simple drawImage (< 30 ms).
+  const hasOld = !!(state.rendered[i] || canvas.width > 0);
+  canvas.style.width = cssW + 'px';
+  canvas.style.height = cssH + 'px';
+  const target = hasOld ? document.createElement('canvas') : canvas;
+  let myTask = null;
+  return state.doc.getPage(i + 1).then((page) => {
+    if (token !== arvPdfSeq) return;
+    const cssScale = cssW / meta.w;
+    const dpr = arvPdfDpr(cssScale, meta.w, meta.h);
+    const viewport = page.getViewport({ scale: cssScale * dpr });
+    // ✅ v5.5 — le plafond 3,5× est déjà atteint et le bitmap affiché a la
+    // MÊME résolution que la cible (ex. zoom 150→200 % sur écran dpr 3) :
+    // seul la taille CSS a changé (déjà appliquée) → AUCUN re-rendu, zéro
+    // CPU/GPU, le zoom est instantané. Avant, on re-rendait quand même
+    // 6-10 Mpx pour produire EXACTEMENT le même bitmap.
+    if (hasOld && canvas.width === Math.floor(viewport.width) &&
+        canvas.height === Math.floor(viewport.height)) {
+      state.rendered[i] = true;
+      state.rendering[i] = false;
+      state.wraps[i].classList.add('rendered');
+      return;
+    }
+    target.width = Math.floor(viewport.width);
+    target.height = Math.floor(viewport.height);
+    const ctx = target.getContext('2d', { alpha: false });
+    const task = page.render({ canvasContext: ctx, viewport });
+    myTask = task;
+    state.renderTasks[i] = task;
+    return task.promise.then(() => {
+      // un rendu plus récent a pris le relais (zoom rapide) : on s'efface
+      if (state.renderTasks[i] !== myTask) return;
+      state.renderTasks[i] = null;
+      if (token !== arvPdfSeq) {
+        if (hasOld) { target.width = 0; target.height = 0; }
+        return;
+      }
+      // ✅ v5.3 — le canvas visible a été vidé entre-temps (nettoyage hors
+      // écran) : on abandonne le tampon, la file repeindra la page.
+      if (!canvas.width) {
+        if (hasOld) { target.width = 0; target.height = 0; }
+        state.rendering[i] = false;
+        return;
+      }
+      // ✅ v5.5 — bascule instantanée ancien → nouveau bitmap
+      if (hasOld) {
+        canvas.width = target.width;
+        canvas.height = target.height;
+        canvas.getContext('2d', { alpha: false }).drawImage(target, 0, 0);
+        target.width = 0; target.height = 0;   // tampon libéré immédiatement
+      }
+      state.rendered[i] = true;
+      state.rendering[i] = false;
+      state.wraps[i].classList.add('rendered');
+      if (i === 0 && !state.firstPageDone) {
+        state.firstPageDone = true;
+        try {
+          console.info(`[ARV-PDF] 1re page affichée en ${Math.round(performance.now() - state.tStart)} ms`);
+        } catch (e) {}
+      }
+    });
+  }).catch((err) => {
+    if (myTask && state.renderTasks[i] === myTask) state.renderTasks[i] = null;
+    if (!state.renderTasks[i] && state.rendering[i]) state.rendering[i] = false;
+    // ✅ v5.3 — annulation volontaire (clear/canvas 0) : silencieux
+    if (err && (err.name === 'RenderingCancelledException' || /cancel/i.test(String(err.message || '')))) return;
+    console.warn('[ARV-PDF] rendu page', i + 1, err);
+  });
+}
+
+// Libère la mémoire des pages trop loin du viewport (mobiles modestes)
+function scheduleArvPdfCleanup(idx) {
+  const state = arvPdfState;
+  if (!state || state.cleanupTimer) return;
+  state.cleanupTimer = setTimeout(() => {
+    state.cleanupTimer = null;
+    if (!arvPdfState) return;
+    const cur = arvPdfState.currentPage || 0;
+    if (Math.abs(idx - cur) > 4 && (arvPdfState.rendered[idx] || arvPdfState.rendering[idx])) {
+      // ✅ v5.3 — clearArvPdfCanvas annule aussi le rendu en vol
+      clearArvPdfCanvas(arvPdfState, idx);
+    }
+  }, 400);
+}
+
+// ✅ v5.5 — ZOOM SANS COUPURE : plus aucun clear des pages affichées.
+// L'ancien bitmap reste visible (étiré en CSS) pendant le re-rendu en
+// double-buffer ; bascule instantanée dès que la nouvelle résolution est
+// prête. Anti-rebond : des taps rapides sur zoom +/− fusionnent en UN
+// re-rendu (avant : 1 re-rendu complet par tap → écran figé).
+function rerenderArvPdf() {
+  const state = arvPdfState;
+  if (!state) return;
+  const viewport = document.getElementById('arvPdfViewport');
+  if (viewport) state.containerW = Math.max(240, viewport.clientWidth);
+  resizeArvPdfPages(state);
+  updateArvPdfZoomLabel();
+}
+
+function scheduleArvZoomRerender() {
+  const state = arvPdfState;
+  if (!state) return;
+  clearTimeout(state.zoomTimer);
+  state.zoomTimer = setTimeout(() => {
+    if (arvPdfState) { arvPdfState.zoomTimer = null; rerenderArvPdf(); }
+  }, 160);
+}
+
+// suivi continu du conteneur (rotation, barres latérales, split-screen)
+if (typeof ResizeObserver !== 'undefined') {
+  const arvPdfRO = new ResizeObserver(() => {
+    if (arvPdfState && arvPdfState.pageCount) syncArvPdfWidth();
+  });
+  const roWatch = setInterval(() => {
+    const vp = document.getElementById('arvPdfViewport');
+    if (vp) { arvPdfRO.observe(vp); clearInterval(roWatch); }
+  }, 1000);
+  setTimeout(() => clearInterval(roWatch), 30000);
+}
+
+function updateArvPdfZoomLabel() {
+  const el = document.getElementById('arvPdfZoom');
+  if (el && arvPdfState) el.textContent = Math.round(arvPdfState.zoomFactor() * 100) + ' %';
+}
+
+function updateArvPdfCurrent() {
+  const state = arvPdfState;
+  if (!state || !state.pageCount) return;
+  const wraps = state.wraps;
+  const ref = window.scrollY + window.innerHeight * 0.35;
+  let cur = 0;
+  for (let i = 0; i < wraps.length; i++) {
+    if (wraps[i].offsetTop <= ref) cur = i; else break;
+  }
+  state.currentPage = cur + 1;
+  const count = document.getElementById('arvPdfCount');
+  if (count) count.textContent = `${cur + 1} / ${state.pageCount}`;
+  const prev = document.getElementById('arvPdfPrev');
+  const next = document.getElementById('arvPdfNext');
+  if (prev) prev.disabled = cur <= 0;
+  if (next) next.disabled = cur >= state.pageCount - 1;
+}
+
+function scrollToArvPdfPage(i) {
+  const state = arvPdfState;
+  if (!state || !state.wraps[i]) return;
+  const y = state.wraps[i].offsetTop - 8;
+  window.scrollTo({ top: y, behavior: 'smooth' });
+}
+
+function wireArvPdf(pdfPath) {
+  const state = arvPdfState;
+  if (!state) return;
+  updateArvPdfZoomLabel();
+  updateArvPdfCurrent();
+  wireArvVvZoom(state);
+
+  const on = (id, fn) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('click', fn);
+  };
+  on('arvPdfPrev', () => scrollToArvPdfPage(Math.max(0, (state.currentPage || 1) - 2)));
+  on('arvPdfNext', () => scrollToArvPdfPage(Math.min(state.pageCount - 1, (state.currentPage || 1))));
+  on('arvPdfZoomIn', () => {
+    if (state.zoomIdx < ARV_PDF_ZOOMS.length - 1) {
+      state.zoomIdx++;
+      updateArvPdfZoomLabel();     // retour visuel immédiat
+      scheduleArvZoomRerender();   // ✅ v5.5 — fusion des taps rapides
+    }
+  });
+  on('arvPdfZoomOut', () => {
+    if (state.zoomIdx > 0) {
+      state.zoomIdx--;
+      updateArvPdfZoomLabel();
+      scheduleArvZoomRerender();
+    }
+  });
+
+  if (!state.scrollHook) {
+    state.scrollHook = () => updateArvPdfCurrent();
+    window.addEventListener('scroll', state.scrollHook, { passive: true });
+  }
+
+  // redimensionnement : largeur recalculée (zoom « ajusté » conservé)
+  if (!state.resizeHook) {
+    let rt = null;
+    state.resizeHook = () => {
+      clearTimeout(rt);
+      rt = setTimeout(() => {
+        if (!arvPdfState) return;
+        const vp = document.getElementById('arvPdfViewport');
+        if (vp && Math.abs(vp.clientWidth - arvPdfState.containerW) > 24) rerenderArvPdf();
+      }, 220);
+    };
+    window.addEventListener('resize', state.resizeHook);
+  }
+
+  // cache SW du worker si chargé à la volée
+  try {
+    if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({ type: 'CACHE_URL', url: ARV_PDF_WORKER });
+      navigator.serviceWorker.controller.postMessage({ type: 'CACHE_URL', url: ARV_PDF_JS });
+    }
+  } catch (e) {}
+}
+
+function showArvPdfError(pdfPath) {
+  const status = document.getElementById('arvPdfStatus');
+  if (!status) return;
+  status.innerHTML = `
+    <i class="fas fa-triangle-exclamation" style="font-size:30px;color:var(--warning-bright,#E0B84A);"></i>
+    <h3>PDF indisponible</h3>
+    <p>Le PDF n'a pas pu être chargé (connexion ou mémoire). Vérifie ta connexion puis réessaie.</p>
+    <div class="arv-pdf-status-actions">
+      <button class="arv-pdf-status-btn" id="arvPdfRetry"><i class="fas fa-rotate-right"></i> Réessayer</button>
+    </div>
+  `;
+  const retry = document.getElementById('arvPdfRetry');
+  if (retry) retry.addEventListener('click', () => {
+    // ✅ v5.3 — skeleton + libellé « cours » (plus de spinner « PDF »)
+    status.innerHTML = `
+      <div class="arv-pdf-skel" aria-hidden="true">
+        <div class="arv-pdf-skel-page"><span class="arv-pdf-skel-line t"></span><span class="arv-pdf-skel-line l1"></span><span class="arv-pdf-skel-line l3"></span><span class="arv-pdf-skel-line l5"></span></div>
+        <div class="arv-pdf-skel-page"><span class="arv-pdf-skel-line t"></span><span class="arv-pdf-skel-line l1"></span><span class="arv-pdf-skel-line l2"></span><span class="arv-pdf-skel-line l4"></span><span class="arv-pdf-skel-line l5"></span></div>
+        <div class="arv-pdf-skel-page"><span class="arv-pdf-skel-line t"></span><span class="arv-pdf-skel-line l2"></span><span class="arv-pdf-skel-line l3"></span><span class="arv-pdf-skel-line l5"></span></div>
+      </div>
+      <p>Chargement du cours…</p>
+    `;
+    openArvPdf(pdfPath, pdfPath);
+  });
+}
+
+function loadPartHtml(filePath) {
+  // retour depuis le lecteur PDF : visionneuse démontée + bouton écouter rendu
+  destroyArvPdf();
+  if (ttsBtn) ttsBtn.style.display = '';
+  fetch(filePath)
+    .then(r => {
+      if (!r.ok) {
+        const err = new Error(r.status === 504 ? 'offline' : 'not found');
+        err.isOffline = (r.status === 504) || navigator.onLine === false;
+        err.isMissing = !err.isOffline;
+        throw err;
+      }
+      return r.text();
+    })
+    .then(html => {
+      const cleaned = preprocessContent(html);
+      contentBody.innerHTML = cleaned;
+      markPartAsRead();
+      loadNotes();
+      renderKaTeX();
+      enhanceContent();
+      updateReadProgress();
+      resetStudyTimer();
+    })
+    .catch((err) => {
+      // ✅ v4.30 — plus de faux « bientôt disponible » : si c'est le réseau
+      // (hors ligne, 504 du SW, requête avortée) on affiche le panneau
+      // hors-ligne avec Réessayer ; « bientôt disponible » = vrai 404.
+      const offline = !err || err.isOffline || err instanceof TypeError || navigator.onLine === false;
+      if (offline) showOfflinePanel();
+      else showContentUnavailable();
+    });
+}
+
+// ================================================================
+// ✅ v4.30 — PANNEAU HORS LIGNE honnête + Réessayer
+// (les boutons de navigation restent visibles : la partie précédente,
+// déjà en cache, reste accessible)
+// ================================================================
+function showOfflinePanel() {
+  stopTTS();
+  contentBody.innerHTML = `
+    <div class="content-unavailable">
+      <div class="hourglass-wrap" style="font-size: 42px; color: var(--info, #6FC8F0);">
+        <i class="fas fa-wifi"></i>
+      </div>
+      <h2>Pas de connexion</h2>
+      <p>Cette partie n'est pas encore enregistrée sur ton téléphone. Reconnecte-toi puis réessaie : elle restera ensuite disponible même sans Internet.</p>
+      <div class="cu-actions">
+        <button id="retryPartBtn" class="cu-btn primary">
+          <i class="fas fa-rotate-right"></i> Réessayer
+        </button>
+        <a href="chapitre.html?subject=${subject}&chapter=${chapter}&tab=${tab}" class="cu-btn">
+          <i class="fas fa-arrow-left"></i> Retour
+        </a>
+      </div>
+    </div>
+  `;
+  pageTitle.textContent = 'Hors ligne';
+  document.title = 'ARVEXA - Hors ligne';
+  const rb = document.getElementById('retryPartBtn');
+  if (rb) rb.addEventListener('click', () => { renderPart(); });
+}
+
+// ================================================================
+// PROGRESSION DE LECTURE
+// ================================================================
+function updateReadProgress() {
+  const docEl = document.documentElement;
+  const max = docEl.scrollHeight - window.innerHeight;
+  const progress = max > 0 ? Math.min(100, Math.max(0, (window.scrollY / max) * 100)) : 0;
+  readProgressFill.style.width = progress + '%';
+  if (headerEl) headerEl.classList.toggle('scrolled', window.scrollY > 6);
+}
+
+window.addEventListener('scroll', updateReadProgress, { passive: true });
+window.addEventListener('resize', updateReadProgress);
+
+// ================================================================
+// NAVIGATION
+// ================================================================
+function goToPrev() {
+  if (currentIndex > 0) {
+    saveStudyTimeBeforeChange();
+    currentIndex--;
+    if (notesTextarea.value.trim()) saveNotes();
+    scrollToTopInstant();
+    renderPart();
+  }
+}
+
+function goToNext() {
+  if (currentIndex < parts.length - 1) {
+    saveStudyTimeBeforeChange();
+    currentIndex++;
+    if (notesTextarea.value.trim()) saveNotes();
+    scrollToTopInstant();
+    renderPart();
+  }
+}
+
+// ================================================================
+// MODAL NOTES
+// ================================================================
+function openModal() {
+  notesModal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  notesTextarea.focus();
+}
+
+function closeModal() {
+  notesModal.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// ================================================================
+// ÉVÉNEMENTS
+// ================================================================
+backBtn.addEventListener('click', () => {
+  saveStudyTimeBeforeChange();
+  window.location.href = `chapitre.html?subject=${subject}&chapter=${chapter}&tab=${tab}`;
+});
+
+prevBtn.addEventListener('click', goToPrev);
+nextBtn.addEventListener('click', goToNext);
+
+document.addEventListener('keydown', (e) => {
+  if (notesModal.classList.contains('show')) {
+    if (e.key === 'Escape') closeModal();
+    return;
+  }
+  if (e.key === 'ArrowLeft' && !prevBtn.disabled) goToPrev();
+  if (e.key === 'ArrowRight' && !nextBtn.disabled) goToNext();
+});
+
+notesBtn.addEventListener('click', openModal);
+modalClose.addEventListener('click', closeModal);
+modalCancel.addEventListener('click', closeModal);
+notesModal.addEventListener('click', (e) => {
+  if (e.target === notesModal) closeModal();
+});
+
+modalSave.addEventListener('click', () => {
+  saveNotes();
+  closeModal();
+});
+
+// ================================================================
+// TTS
+// ================================================================
+const TTS_SUPPORTED = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+
+const tts = {
+  synth: TTS_SUPPORTED ? window.speechSynthesis : null,
+  chunks: [],
+  currentChunk: 0,
+  utterance: null,
+  voice: null,
+  isSpeaking: false,
+  isPaused: false,
+  isActive: false,
+  rate: 0.92,
+  pitch: 1,
+  volume: 1,
+  stopRequested: false
+};
+
+function loadTTSVoices() {
+  if (!TTS_SUPPORTED) return;
+  const voices = tts.synth.getVoices();
+  if (!voices || voices.length === 0) return;
+  tts.voice =
+    voices.find(v => v.lang && v.lang.toLowerCase() === 'fr-fr' && v.localService) ||
+    voices.find(v => v.lang && v.lang.toLowerCase() === 'fr-fr') ||
+    voices.find(v => v.lang && v.lang.toLowerCase().startsWith('fr')) ||
+    null;
+}
+
+loadTTSVoices();
+if (TTS_SUPPORTED && 'onvoiceschanged' in window.speechSynthesis) {
+  window.speechSynthesis.onvoiceschanged = loadTTSVoices;
+}
+
+function cleanTTS(text) {
+  if (!text) return '';
+  let result = String(text);
+  result = result.replace(/\$\$([^$]+)\$\$/g, (m, f) => convertMathToSpeech(f));
+  result = result.replace(/\$([^$]+)\$/g, (m, f) => convertMathToSpeech(f));
+  result = result.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, ' ');
+  result = result.replace(/⟺/g, ' si et seulement si ');
+  result = result.replace(/⟹/g, ' implique ');
+  result = result.replace(/→/g, ' vers ');
+  result = result.replace(/←/g, ' de ');
+  result = result.replace(/∈/g, ' appartient à ');
+  result = result.replace(/≤/g, ' inférieur ou égal à ');
+  result = result.replace(/≥/g, ' supérieur ou égal à ');
+  result = result.replace(/≠/g, ' différent de ');
+  result = result.replace(/√/g, ' racine carrée de ');
+  result = result.replace(/([A-Za-z0-9])²/g, '$1 au carré');
+  result = result.replace(/([A-Za-z0-9])³/g, '$1 au cube');
+  result = result.replace(/×/g, ' fois ');
+  result = result.replace(/÷/g, ' divisé par ');
+  result = result.replace(/∞/g, ' infini ');
+  result = result.replace(/π/g, ' pi ');
+  result = result.replace(/−/g, ' moins ');
+  return result.replace(/\s+/g, ' ').trim();
+}
+
+function convertMathToSpeech(latex) {
+  let s = String(latex);
+  s = s.replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, ' $1 sur $2 ');
+  s = s.replace(/\\sqrt\{([^}]+)\}/g, ' racine de $1 ');
+  s = s.replace(/([a-zA-Z0-9])\^\{([^}]+)\}/g, ' $1 puissance $2 ');
+  s = s.replace(/([a-zA-Z0-9])\^([a-zA-Z0-9])/g, ' $1 puissance $2 ');
+  s = s.replace(/([a-zA-Z0-9])_\{([^}]+)\}/g, ' $1 indice $2 ');
+  s = s.replace(/([a-zA-Z0-9])_([a-zA-Z0-9])/g, ' $1 indice $2 ');
+  s = s.replace(/\\cos/g, ' cosinus ');
+  s = s.replace(/\\sin/g, ' sinus ');
+  s = s.replace(/\\tan/g, ' tangente ');
+  s = s.replace(/\\ln/g, ' logarithme népérien ');
+  s = s.replace(/\\pi/g, ' pi ');
+  s = s.replace(/\\times/g, ' fois ');
+  s = s.replace(/\\div/g, ' divisé par ');
+  s = s.replace(/\\infty/g, ' infini ');
+  s = s.replace(/\\/g, ' ');
+  s = s.replace(/[{}]/g, ' ');
+  return s.replace(/\s+/g, ' ').trim();
+}
+
+function extractReadableContent() {
+  const container = document.querySelector('#contentBody .lecture-container') ||
+                    document.querySelector('.lecture-container') ||
+                    document.querySelector('#contentBody');
+  if (!container) return [];
+
+  const parts = [];
+  const selectors = [
+    '.lecture-hero h1', '.lecture-hero p',
+    '.lecture-section h2', '.lecture-section h3', '.lecture-section p',
+    '.lecture-callout', '.lecture-aside',
+    '.lecture-example p', '.lecture-formula-main',
+    '.lecture-step p', '.lecture-container > p'
+  ];
+
+  const elements = container.querySelectorAll(selectors.join(','));
+  const seen = new Set();
+
+  elements.forEach(el => {
+    if (seen.has(el)) return;
+    if (el.closest('button') || el.matches('button')) return;
+    let text = el.innerText || el.textContent || '';
+    text = cleanTTS(text);
+    if (!text) return;
+    if (parts.some(p => p.toLowerCase() === text.toLowerCase())) return;
+    seen.add(el);
+    parts.push(text);
+  });
+
+  if (parts.length === 0) {
+    let fallback = container.innerText || container.textContent || '';
+    fallback = cleanTTS(fallback);
+    if (fallback) parts.push(fallback);
+  }
+
+  const chunks = [];
+  parts.forEach(text => {
+    const sentences = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [text];
+    let current = '';
+    sentences.forEach(s => {
+      s = s.trim();
+      if (!s) return;
+      if ((current + ' ' + s).length <= 200) {
+        current += (current ? ' ' : '') + s;
+      } else {
+        if (current) chunks.push(current.trim());
+        current = s;
+      }
+    });
+    if (current) chunks.push(current.trim());
+  });
+
+  return chunks.filter(c => c.length > 1);
+}
+
+function updateTTSButton(state) {
+  if (!ttsBtn) return;
+  const icon = ttsBtn.querySelector('i');
+  const text = ttsBtn.querySelector('span');
+  if (state === 'speaking') {
+    ttsBtn.classList.add('speaking');
+    ttsBtn.classList.remove('paused');
+    if (icon) icon.className = 'fas fa-pause';
+    if (text) text.textContent = 'Pause';
+  } else if (state === 'paused') {
+    ttsBtn.classList.remove('speaking');
+    ttsBtn.classList.add('paused');
+    if (icon) icon.className = 'fas fa-play';
+    if (text) text.textContent = 'Reprendre';
+  } else {
+    ttsBtn.classList.remove('speaking', 'paused');
+    if (icon) icon.className = 'fas fa-volume-up';
+    if (text) text.textContent = 'Écouter';
+  }
+}
+
+function updateTTSProgress() {
+  if (!ttsProgressFill || !tts.chunks.length) return;
+  const p = ((tts.currentChunk + 1) / tts.chunks.length) * 100;
+  ttsProgressFill.style.width = Math.min(100, p) + '%';
+}
+
+function resetTTSProgress() {
+  if (ttsProgressFill) ttsProgressFill.style.width = '0%';
+}
+
+function speakChunk(index) {
+  if (!TTS_SUPPORTED) return;
+  if (index >= tts.chunks.length) { finishTTS(); return; }
+  if (tts.stopRequested) return;
+
+  tts.currentChunk = index;
+  const text = tts.chunks[index];
+  if (!text) { speakChunk(index + 1); return; }
+
+  try { tts.synth.cancel(); } catch (e) {}
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  tts.utterance = utterance;
+  utterance.lang = 'fr-FR';
+  utterance.rate = tts.rate;
+  utterance.pitch = tts.pitch;
+  utterance.volume = tts.volume;
+  if (tts.voice) utterance.voice = tts.voice;
+
+  utterance.onstart = () => {
+    tts.isSpeaking = true;
+    tts.isPaused = false;
+    updateTTSButton('speaking');
+    updateTTSProgress();
+  };
+
+  utterance.onend = () => {
+    if (tts.stopRequested) return;
+    const next = index + 1;
+    if (next < tts.chunks.length) {
+      setTimeout(() => {
+        if (tts.isSpeaking && !tts.isPaused && !tts.stopRequested) speakChunk(next);
+      }, 80);
+    } else finishTTS();
+  };
+
+  utterance.onerror = (e) => {
+    if (e.error === 'interrupted' || e.error === 'canceled') return;
+    finishTTS();
+  };
+
+  tts.synth.speak(utterance);
+  setTimeout(() => {
+    if (tts.isSpeaking && !tts.isPaused && !tts.stopRequested) {
+      try { tts.synth.resume(); } catch (e) {}
+    }
+  }, 100);
+}
+
+function startTTS() {
+  if (!TTS_SUPPORTED) return;
+  try { tts.synth.cancel(); } catch (e) {}
+  tts.stopRequested = false;
+  tts.chunks = extractReadableContent();
+  if (!tts.chunks.length) return;
+  loadTTSVoices();
+  tts.currentChunk = 0;
+  tts.isSpeaking = true;
+  tts.isPaused = false;
+  tts.isActive = true;
+  ttsProgress.classList.add('active');
+  resetTTSProgress();
+  updateTTSButton('speaking');
+  speakChunk(0);
+}
+
+function pauseTTS() {
+  if (!TTS_SUPPORTED || !tts.synth || !tts.isSpeaking) return;
+  try { tts.synth.cancel(); } catch (e) {}
+  tts.isPaused = true;
+  tts.isSpeaking = false;
+  updateTTSButton('paused');
+}
+
+function resumeTTS() {
+  if (!TTS_SUPPORTED || !tts.synth || !tts.isPaused) return;
+  tts.isPaused = false;
+  tts.isSpeaking = true;
+  tts.stopRequested = false;
+  updateTTSButton('speaking');
+  setTimeout(() => {
+    if (tts.isSpeaking && !tts.isPaused && !tts.stopRequested) speakChunk(tts.currentChunk);
+  }, 150);
+}
+
+function stopTTS() {
+  if (!TTS_SUPPORTED || !tts.synth) return;
+  tts.stopRequested = true;
+  try { tts.synth.cancel(); } catch (e) {}
+  tts.isSpeaking = false;
+  tts.isPaused = false;
+  tts.isActive = false;
+  tts.utterance = null;
+  tts.currentChunk = 0;
+  updateTTSButton('stopped');
+  resetTTSProgress();
+  ttsProgress.classList.remove('active');
+}
+
+function finishTTS() {
+  tts.isSpeaking = false;
+  tts.isPaused = false;
+  tts.isActive = false;
+  tts.stopRequested = false;
+  tts.utterance = null;
+  updateTTSButton('stopped');
+  if (ttsProgressFill) {
+    ttsProgressFill.style.width = '100%';
+    setTimeout(() => {
+      if (!tts.isSpeaking) {
+        ttsProgressFill.style.width = '0%';
+        ttsProgress.classList.remove('active');
+      }
+    }, 1000);
+  }
+}
+
+if (ttsBtn) {
+  ttsBtn.addEventListener('click', () => {
+    if (!TTS_SUPPORTED) return;
+    if (tts.isSpeaking) pauseTTS();
+    else if (tts.isPaused) resumeTTS();
+    else startTTS();
+  });
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden' && tts.isSpeaking) {
+    try { tts.synth.pause(); } catch (e) {}
+  }
+});
+
+window.addEventListener('beforeunload', () => {
+  try { if (tts.synth) tts.synth.cancel(); } catch (e) {}
+});
+
+// ================================================================
+// SUIVI DU TEMPS D'ÉTUDE — ✅ C11 : increment() atomique
+// ================================================================
+let studyStartTime = Date.now();
+let studyTimeActive = true;
+let studySaveInFlight = false;
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    pauseStudyTime();
+  } else {
+    resumeStudyTime();
+  }
+});
+
+function pauseStudyTime() {
+  if (!studyTimeActive) return;
+  const duration = Math.floor((Date.now() - studyStartTime) / 1000);
+  if (duration >= 5) {
+    saveStudyTime(duration);
+  }
+  studyTimeActive = false;
+}
+
+function resumeStudyTime() {
+  studyStartTime = Date.now();
+  studyTimeActive = true;
+}
+
+window.addEventListener('beforeunload', () => {
+  pauseStudyTime();
+});
+
+function saveStudyTimeBeforeChange() {
+  const duration = Math.floor((Date.now() - studyStartTime) / 1000);
+  if (duration >= 5) {
+    saveStudyTime(duration);
+  }
+  studyStartTime = Date.now();
+}
+
+// ✅ C11 — updateDoc avec increment(seconds) : atomique, pas de read-then-write
+async function saveStudyTime(seconds) {
+  const user = auth.currentUser;
+  if (!user) return;
+
+  try {
+    await updateDoc(doc(db, 'users', user.uid), {
+      totalStudyTime: increment(seconds),
+      lastStudyUpdate: serverTimestamp()
+    });
+  } catch (e) {
+    // Silencieux : le temps d'étude n'est pas critique
+    console.warn('[Lecture] saveStudyTime:', e.code || e.message);
+  }
+}
+
+function resetStudyTimer() {
+  studyStartTime = Date.now();
+  studyTimeActive = true;
+}
+
+// ================================================================
+// ✅ C3 — Retry doux si doc users/{uid} absent
+// ================================================================
+async function handleMissingUserDoc(uid) {
+  if (missingDocInFlight) return;
+  missingDocInFlight = true;
+  try {
+    await new Promise((r) => setTimeout(r, 900));
+    if (!auth.currentUser || auth.currentUser.uid !== uid) return;
+    const retry = await getDoc(doc(db, 'users', uid));
+    if (retry.exists()) {
+      const data = retry.data();
+      try {
+        localStorage.setItem(USER_DATA_KEY, JSON.stringify({
+          ...data,
+          _uid: uid,
+          _cachedAt: Date.now()
+        }));
+      } catch (e) {}
+      const newPremium = isUserPremium(data);
+      setPremium(newPremium);
+      return;
+    }
+    console.warn('[Lecture] Profil utilisateur introuvable pour', uid);
+  } catch (e) {
+    console.warn('[Lecture] handleMissingUserDoc:', e.code || e.message);
+  } finally {
+    missingDocInFlight = false;
+  }
+}
+
+// ================================================================
+// CHARGEMENT UTILISATEUR — ✅ C2 + C3 + C8
+// ================================================================
+function loadUserData(user) {
+  if (unsubscribeUser) {
+    unsubscribeUser();
+    unsubscribeUser = null;
+  }
+  const userRef = doc(db, 'users', user.uid);
+  unsubscribeUser = onSnapshot(userRef,
+    (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+
+        // ✅ C2 — blocked : signOut tolérant + auth-choice.html
+        if (data.accountStatus === 'blocked') {
+          if (unsubscribeUser) { unsubscribeUser(); unsubscribeUser = null; }
+          stopTTS();
+          clearSession();
+          try { sessionStorage.setItem('arvexa_account_blocked', '1'); } catch (e) {}
+          signOut(auth)
+            .catch((err) => console.warn('[Lecture] signOut bloqué :', err.code || err.message))
+            .finally(() => { window.location.replace('auth-choice.html'); });
+          return;
+        }
+
+        // ✅ C2 — paused : ne pas déconnecter
+        if (data.accountStatus === 'paused') {
+          try {
+            localStorage.setItem(USER_DATA_KEY, JSON.stringify({
+              ...data,
+              _uid: user.uid,
+              _cachedAt: Date.now()
+            }));
+          } catch (e) {}
+          return;
+        }
+
+        // Cas normal
+        const newPremium = isUserPremium(data);
+        setPremium(newPremium);
+
+        try {
+          localStorage.setItem(USER_DATA_KEY, JSON.stringify({
+            ...data,
+            _uid: user.uid,
+            _cachedAt: Date.now()
+          }));
+        } catch (e) {}
+      } else {
+        const cached = getCachedUserData(user.uid);
+        if (cached) {
+          const newPremium = isUserPremium(cached);
+          setPremium(newPremium);
+        } else {
+          // ✅ C3 — retry doux
+          handleMissingUserDoc(user.uid);
+        }
+      }
+    },
+    (error) => {
+      // ✅ C8 — warn au lieu du silence
+      console.warn('[Lecture] onSnapshot users:', error.code || error.message);
+      const cached = getCachedUserData(user.uid);
+      if (cached) {
+        const newPremium = isUserPremium(cached);
+        setPremium(newPremium);
+      }
+    }
+  );
+}
+
+// ================================================================
+// AUTH ROBUSTE — ✅ C1/C7/C9
+// ================================================================
+let isRedirecting = false;
+let isAuthResolved = false;
+let graceTimer = null;
+let maxTimer = null;
+
+// ✅ C1 — préserver les clés existantes
+function redirectToLogin() {
+  if (isRedirecting) return;
+  isRedirecting = true;
+
+  if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+  if (maxTimer) { clearTimeout(maxTimer); maxTimer = null; }
+  if (authUnsubscribe) {
+    try { authUnsubscribe(); } catch (e) {}
+    authUnsubscribe = null;
+  }
+
+  try {
+    const existing = sessionStorage.getItem('redirectAfterLogin')
+                  || sessionStorage.getItem('redirectAfterAuth');
+    if (!existing) {
+      sessionStorage.setItem('redirectAfterLogin',
+        window.location.pathname + window.location.search);
+    }
+  } catch (e) {}
+
+  window.location.replace('login.html');
+}
+
+function initAuthGuard(onAuthenticated) {
+  if (authUnsubscribe) return; // garde anti-double
+
+  authUnsubscribe = onAuthStateChanged(auth, (user) => {
+    if (isAuthResolved) {
+      if (user && user.uid !== currentUid) {
+        currentUid = user.uid;
+        saveSession(user);
+        onAuthenticated(user);
+      } else if (!user && currentUid) {
+        currentUid = null;
+        clearSession();
+        stopTTS();
+        redirectToLogin();
+      }
+      return;
+    }
+
+    if (!user) {
+      if (graceTimer) return;
+      // ✅ C9 — aligné à 600 ms
+      graceTimer = setTimeout(() => {
+        graceTimer = null;
+        if (isAuthResolved) return;
+        if (auth.currentUser) return;
+
+        const hasSession = localStorage.getItem(SESSION_KEY);
+        const hasUserData = localStorage.getItem(USER_DATA_KEY);
+
+        if ((hasSession || hasUserData) && !navigator.onLine) {
+          setTimeout(() => {
+            if (auth.currentUser) return;
+            if (!isAuthResolved) redirectToLogin();
+          }, 1500);
+          return;
+        }
+
+        if (hasSession && hasUserData) {
+          setTimeout(() => {
+            if (auth.currentUser) return;
+            if (!isAuthResolved) redirectToLogin();
+          }, 1500);
+          return;
+        }
+
+        redirectToLogin();
+      }, 600);
+      return;
+    }
+
+    if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+    if (maxTimer) { clearTimeout(maxTimer); maxTimer = null; }
+
+    isAuthResolved = true;
+    currentUid = user.uid;
+    saveSession(user);
+    onAuthenticated(user);
+  });
+
+  maxTimer = setTimeout(() => {
+    if (isAuthResolved) return;
+    if (auth.currentUser) {
+      isAuthResolved = true;
+      currentUid = auth.currentUser.uid;
+      saveSession(auth.currentUser);
+      onAuthenticated(auth.currentUser);
+    } else {
+      redirectToLogin();
+    }
+  }, 5000);
+}
+
+// ================================================================
+// LANCER LA PROTECTION
+// ================================================================
+initAuthGuard(async (user) => {
+  const cached = getCachedUserData(user.uid);
+  isPremium = cached ? isUserPremium(cached) : false;
+
+  loadContent();
+  loadUserData(user);
+});
+
+// ✅ C7 — cleanup global
+window.addEventListener('beforeunload', () => {
+  if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+  if (maxTimer) { clearTimeout(maxTimer); maxTimer = null; }
+  if (authUnsubscribe) { try { authUnsubscribe(); } catch (e) {} authUnsubscribe = null; }
+  if (unsubscribeUser) { try { unsubscribeUser(); } catch (e) {} unsubscribeUser = null; }
+});
+
+console.log('🚀 ARVEXA — Lecture (version corrigée C1-C11)');
+</script>
+</body>
+</html>

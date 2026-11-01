@@ -1,0 +1,548 @@
+<!-- ============================================================ -->
+<!-- PARTIE 2 : ANOMALIES DE STRUCTURE (25 min)                    -->
+<!-- (TRANSLOCATION, DÉLÉTION)                                     -->
+<!-- Notion 1 : anomalie_structure — Cassures et remaniements      -->
+<!-- Notion 2 : deletion — La délétion : un fragment perdu         -->
+<!-- Notion 3 : duplication — Un fragment répété                   -->
+<!-- Notion 4 : inversion — Un fragment retourné                   -->
+<!-- Notion 5 : translocation — Un fragment transféré (14/21)      -->
+<!-- Notion 6 : consequences_structure — Équilibré vs déséquilibré -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 02 · Anomalies chromosomiques</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Anomalies de <em>structure</em> : translocation et délétion
+    </h1>
+    <p class="lecture-hero-intro">
+      Et si le nombre de chromosomes restait correct, mais que les chromosomes eux-mêmes étaient « mal recollés » ? Cette partie construit <strong>6 notions</strong> : la notion générale d'<strong>anomalie de structure</strong> (cassures puis remaniements), puis les quatre remaniements classiques — <strong>délétion</strong> (fragment perdu), <strong>duplication</strong> (fragment répété), <strong>inversion</strong> (fragment retourné) et <strong>translocation</strong> (fragment transféré vers un autre chromosome, comme la translocation 14/21) — et enfin leurs <strong>conséquences</strong>.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧬 6 notions</span>
+      <span class="lecture-hero-meta-item">📚 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">6 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Des chromosomes « mal recollés »</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion · anomalie_structure — Cassures puis remaniements</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion · deletion — La délétion : un fragment perdu</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion · duplication — La duplication : un fragment répété</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion · inversion — L'inversion : un fragment retourné</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion · translocation — La translocation et le cas 14/21</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion · consequences_structure — Équilibré ou déséquilibré ?</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — Tableau des remaniements et pièges</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION                                       -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Des chromosomes « mal recollés »</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Dans la partie 1, nous avons compté les chromosomes : 46, 47 ou 45. Mais le nombre ne dit pas tout ! Imaginons un caryotype de <strong>46 chromosomes apparemment normaux</strong>… et pourtant, une personne présente des anomalies du développement. Comment est-ce possible ?
+      </p>
+      <p class="lecture-text">
+        La réponse tient dans une image simple : un chromosome, c'est un peu comme un <strong>collier de perles</strong> (les perles = les gènes, alignés le long de la molécule d'ADN). Ce collier peut <strong>casser</strong>, et les morceaux peuvent être <strong>recollés autrement</strong> : une perle manquante, une suite de perles en double, un tronçon remonté à l'envers, ou un morceau de collier soudé à un autre collier. Le nombre total de chromosomes peut rester 46 — mais <strong>l'ordre et la quantité de gènes</strong> ont changé. Ce sont les <strong>anomalies de structure</strong>.
+      </p>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Le fil conducteur de la partie</div>
+          <p>Une anomalie de structure commence presque toujours par une ou plusieurs <strong>cassures</strong> de chromosomes, suivies d'un <strong>remaniement</strong> anormal des fragments. Le nombre de chromosomes <strong>ne change pas forcément</strong> — c'est la grande différence avec la partie 1.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION · ANOMALIE_STRUCTURE                      -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · anomalie_structure</span>
+        <h2 class="lecture-section-title">Cassures puis remaniements : la définition</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📖 Définition officielle</div>
+          <p>Une <strong>anomalie de structure</strong> (ou anomalie de structure chromosomique) est une anomalie qui modifie <strong>l'organisation d'un chromosome</strong> — perte, répétition, retournement ou déplacement d'un <strong>fragment</strong> de chromosome — à la suite d'une ou plusieurs <strong>cassures</strong>, sans que le <strong>nombre de chromosomes ne change forcément</strong>.</p>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Trois idées sont dans cette définition, et il faut les retenir ensemble :
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <span class="lecture-step-number">1</span>
+          <div class="lecture-step-content">
+            <strong>Une cassure se produit</strong>
+            <p>le chromosome (ou deux chromosomes à la fois) se rompt en un ou plusieurs points — cela peut arriver de façon accidentelle, sous l'effet de certains agents (radiations, produits toxiques) ou lors d'événements cellulaires anormaux.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">2</span>
+          <div class="lecture-step-content">
+            <strong>Les fragments se recollent mal</strong>
+            <p>le système de réparation recolle les morceaux… mais pas toujours au bon endroit ni dans le bon sens : c'est le <strong>remaniement</strong>.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">3</span>
+          <div class="lecture-step-content">
+            <strong>Le nombre de chromosomes ne bouge pas forcément</strong>
+            <p>s'il n'y a ni perte ni gain de chromosome entier, le caryotype peut rester à 46 — seuls les fragments ont bougé.</p>
+          </div>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Selon ce que devient le fragment cassé, on distingue <strong>quatre remaniements classiques</strong> à connaître : la <strong>délétion</strong>, la <strong>duplication</strong>, l'<strong>inversion</strong> et la <strong>translocation</strong>. Les trois premières se produisent sur un seul chromosome ; la translocation, elle, implique <strong>deux chromosomes différents</strong>.
+      </p>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Le mot qui change tout : « fragment »</div>
+          <p>Toutes les anomalies de cette partie concernent des <strong>fragments de chromosome</strong>, pas des chromosomes entiers. C'est exactement l'inverse de la partie 1, où c'était le chromosome <strong>entier</strong> (de trop ou en moins) qui était en cause. Cette nuance « fragment vs chromosome entier » est LA clé de lecture des sujets de Bac.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION · DELETION                                -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · deletion</span>
+        <h2 class="lecture-section-title">La délétion : un fragment perdu</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📖 Définition officielle</div>
+          <p>Une <strong>délétion</strong> est une anomalie de structure correspondant à la <strong>perte d'un fragment de chromosome</strong> : le chromosome se casse en un ou deux points, le fragment détaché est <strong>perdu</strong>, et le chromosome est <strong>raccourci</strong>.</p>
+        </div>
+      </div>
+      <!-- SVG : délétion -->
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 620 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Délétion : un chromosome perd un fragment lors d'une cassure">
+          <text x="310" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">LA DÉLÉTION : UN FRAGMENT PERDU</text>
+          <!-- chromosome normal avec fragments A B C D E -->
+          <text x="110" y="52" style="fill:var(--text-light)" font-size="12" font-weight="700" font-family="Inter" text-anchor="middle">Chromosome normal</text>
+          <g>
+          <rect x="55" y="65" width="20" height="100" rx="9" fill="rgba(224,184,74,0.08)" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+            <text x="65" y="190" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">A · B · C · D</text>
+          </g>
+          <!-- cassure -->
+          <line x1="110" y1="75" x2="150" y2="115" style="stroke:var(--text-dim)" stroke-width="1.5"/> <polygon points="150,115 141,112 146,106" style="fill:var(--text-dim)"/> <line x1="118" y1="118" x2="158" y2="150" style="stroke:var(--danger-light)" stroke-width="2" stroke-dasharray="4 3"/>
+          <text x="140" y="62" style="fill:var(--danger-light)" font-size="11" font-weight="700" font-family="Inter">cassure ✂</text>
+          <!-- chromosome raccourci -->
+          <text x="290" y="52" style="fill:var(--text-light)" font-size="12" font-weight="700" font-family="Inter" text-anchor="middle">Chromosome délété</text>
+          <g>
+          <rect x="235" y="65" width="20" height="62" rx="9" fill="rgba(224,184,74,0.08)" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+            <text x="245" y="148" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">A · B</text>
+          <rect x="275" y="65" width="20" height="100" rx="9" fill="rgba(224,184,74,0.08)" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+            <text x="285" y="190" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">D</text>
+          </g>
+          <text x="265" y="52" style="fill:var(--text-dim)" font-size="16" font-family="Inter" text-anchor="middle">gap…</text>
+          <!-- fragment perdu -->
+          <g>
+          <rect x="380" y="65" width="20" height="30" rx="7" fill="none" style="stroke:var(--danger-light)" stroke-width="1.5" stroke-dasharray="4 3"/> <line x1="385" y1="72" x2="395" y2="88" style="stroke:var(--danger-light)" stroke-width="1.5"/> <line x1="395" y1="72" x2="385" y2="88" style="stroke:var(--danger-light)" stroke-width="1.5"/>
+            <text x="435" y="84" style="fill:var(--danger-light)" font-size="11.5" font-weight="700" font-family="Inter">fragment C perdu</text>
+          </g>
+          <text x="310" y="196" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">les gènes du fragment perdu manquent désormais : le chromosome est raccourci</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Schéma simplifié : une cassure détache le fragment C, qui disparaît. Le chromosome gardé est raccourci — les gènes qu'il portait sont définitivement absents (schéma littéral, un vrai chromosome est filiforme).</figcaption>
+      </figure>
+
+      <p class="lecture-text">
+        Ce qui manque ne revient pas : les gènes du fragment perdu sont <strong>définitivement absents</strong> de ce chromosome. Les conséquences dépendent de la <strong>taille du fragment perdu</strong> et des <strong>gènes qu'il contenait</strong> — un petit fragment peut passer presque inaperçu, un grand fragment manque gravement au développement.
+      </p>
+
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">L'exemple à connaître : le syndrome du « cri du chat »</div>
+        <div class="lecture-example-content">
+          <p>Il est dû à une <strong>délétion sur le bras court du chromosome 5</strong> (notation <strong>5p−</strong>, « p » désigne le bras court). La personne présente un cri aigu et monotone qui évoque le miaulement d'un chat (d'où le nom), un retard mental et un retard de croissance. C'est un exemple rare (≈ 1 naissance sur 50 000) mais classique.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">🚨 Délétion ≠ monosomie</div>
+          <p>Une délétion = un <strong>morceau</strong> de chromosome perdu → le caryotype garde <strong>46 chromosomes</strong>. Une monosomie = un <strong>chromosome entier</strong> perdu → 45 chromosomes. Ne mélange jamais les deux familles d'anomalies dans une copie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION · DUPLICATION                             -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · duplication</span>
+        <h2 class="lecture-section-title">La duplication : un fragment répété</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📖 Définition officielle</div>
+          <p>Une <strong>duplication</strong> est une anomalie de structure correspondant à la <strong>répétition d'un fragment de chromosome</strong> : un fragment est présent en <strong>deux exemplaires</strong> sur le même chromosome (l'un à sa place normale, l'autre en supplément).</p>
+        </div>
+      </div>
+      <p class="lecture-text">
+        La duplication est en quelque sorte <strong>le symétrique de la délétion</strong> : au lieu de perdre un fragment, le chromosome en <strong>gagne une copie</strong>. Conséquence logique : les gènes de ce fragment se retrouvent en <strong>trois exemplaires</strong> dans la cellule (deux sur le chromosome dupliqué + un sur l'homologue normal) — c'est un <strong>excès de matériel génétique</strong>, mais limité à un fragment.
+      </p>
+
+      <ul class="lecture-list-elegant">
+        <li><strong>Mécanisme simplifié</strong> : deux cassures mal réparées, ou un « copier-coller » erroné lors de la réparation, insèrent une copie du fragment juste à côté de l'original.</li>
+        <li><strong>Conséquences</strong> : comme toujours, elles dépendent de la <strong>taille du fragment</strong> dupliqué et des gènes concernés ; elles sont en général <strong>moins graves</strong> que la perte du même fragment, mais un excès de certains gènes perturbe quand même le développement.</li>
+        <li><strong>Nombre de chromosomes</strong> : inchangé (46) — c'est un remaniement <em>à l'intérieur</em> du chromosome.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Duplication ≠ trisomie</div>
+          <p>Une trisomie (partie 1) = un <strong>chromosome entier</strong> en 3 exemplaires → 47 chromosomes. Une duplication = un <strong>fragment</strong> en 2 exemplaires sur un chromosome → toujours 46 chromosomes. Le déséquilibre porte sur des gènes, pas sur le compte de chromosomes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION · INVERSION                               -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · inversion</span>
+        <h2 class="lecture-section-title">L'inversion : un fragment retourné</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📖 Définition officielle</div>
+          <p>Une <strong>inversion</strong> est une anomalie de structure correspondant au <strong>retournement d'un fragment de chromosome</strong> : le chromosome casse en <strong>deux points</strong>, le fragment situé entre les deux cassures se <strong>détache, se retourne</strong> (pivote sur l'ADN de 180°), puis <strong>se recolle à l'envers</strong> sur le même chromosome.</p>
+        </div>
+      </div>
+      <p class="lecture-text">
+        L'inversion est le remaniement le plus « discret » des quatre : <strong>aucun gène n'est perdu ni ajouté</strong> — tout le matériel est encore là, mais dans un <strong>ordre inversé</strong>. Imagine un paragraphe dont une phrase serait insérée à l'envers au milieu du texte : le texte a la même longueur, mais il n'a plus le même sens.
+      </p>
+
+      <ul class="lecture-list-elegant">
+        <li><strong>Aucune perte</strong> de matériel : le porteur d'une inversion est souvent <strong>équilibré</strong>, donc sans manifestation visible (on parle d'individu équilibré, développe en section 06).</li>
+        <li><strong>Mais des risques à la génération suivante</strong> : lors de la méiose, l'appariement des homologues devient difficile dans la zone inversée, et les gamètes peuvent recevoir des chromosomes <strong>déséquilibrés</strong> — d'où des grossesses compliquées ou des enfants porteurs d'anomalies.</li>
+      </ul>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Comment repérer une inversion sur un schéma</div>
+          <p>Sur un caryogramme, l'inversion ne se <strong>voit quasiment pas</strong> à l'œil nu (même taille, même centromère) : il faut des techniques de coloration fine qui révèlent des <strong>bandes</strong> — l'ordre des bandes est alors inversé. Si un exercice te dit « l'ordre des bandes est modifié », la réponse est inversion (ou translocation si les bandes sont passées sur un autre chromosome).</p>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">Pour fixer les idées</div>
+        <div class="lecture-example-content">
+          <p>Chromosome : <strong>A · B · C · D · E</strong>. Cassures autour de C et D, retournement du fragment : le chromosome devient <strong>A · B · D · C · E</strong>. Rien n'est perdu, tout est retourné. ✔</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION · TRANSLOCATION                           -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · translocation</span>
+        <h2 class="lecture-section-title">La translocation : un fragment transféré (cas 14/21)</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📖 Définition officielle</div>
+          <p>Une <strong>translocation</strong> est une anomalie de structure dans laquelle un <strong>fragment de chromosome est transféré vers un autre chromosome</strong> (non homologue). Elle résulte de cassures sur <strong>deux chromosomes différents</strong>, dont les fragments s'échangent ou se recollent l'un sur l'autre.</p>
+        </div>
+      </div>
+      <!-- SVG : translocation -->
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 620 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Translocation : un fragment du chromosome 21 se fixe sur le chromosome 14">
+          <text x="310" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">TRANSLOCATION 14/21 : UN FRAGMENT CHANGE DE CHROMOSOME</text>
+          <!-- chromosome 14 -->
+          <text x="140" y="52" style="fill:var(--text-light)" font-size="12" font-weight="700" font-family="Inter" text-anchor="middle">Chromosome 14</text>
+          <g>
+          <rect x="60" y="65" width="20" height="120" rx="9" fill="rgba(224,184,74,0.08)" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+            <text x="70" y="205" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">14</text>
+          </g>
+          <g>
+          <rect x="100" y="65" width="20" height="120" rx="9" fill="rgba(224,184,74,0.08)" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+          </g>
+          <!-- fragment 21 -->
+          <text x="310" y="52" style="fill:var(--text-light)" font-size="12" font-weight="700" font-family="Inter" text-anchor="middle">Fragment du chromosome 21</text>
+          <g>
+          <rect x="280" y="80" width="20" height="46" rx="7" fill="rgba(58,182,126,0.10)" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+            <text x="290" y="150" style="fill:var(--green-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">21</text>
+          </g>
+          <!-- flèches de transfert -->
+          <line x1="150" y1="100" x2="255" y2="100" style="stroke:var(--text-dim)" stroke-width="1.5"/> <polygon points="255,100 245,95 245,105" style="fill:var(--text-dim)"/> <line x1="350" y1="100" x2="430" y2="100" style="stroke:var(--text-dim)" stroke-width="1.5"/> <polygon points="430,100 420,95 420,105" style="fill:var(--text-dim)"/>
+          <!-- chromosome 14 porteur -->
+          <text x="520" y="52" style="fill:var(--text-light)" font-size="12" font-weight="700" font-family="Inter" text-anchor="middle">Résultat</text>
+          <g>
+          <rect x="450" y="65" width="20" height="120" rx="9" fill="rgba(224,184,74,0.08)" style="stroke:var(--accent-bright)" stroke-width="1.5"/> <rect x="450" y="42" width="20" height="30" rx="7" fill="rgba(58,182,126,0.10)" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+          </g>
+          <text x="517" y="60" style="fill:var(--green-bright)" font-size="11" font-weight="700" font-family="Inter">fragment 21</text>
+          <text x="517" y="90" style="fill:var(--text-dim)" font-size="11" font-family="Inter">fixé sur le 14</text>
+          <text x="310" y="220" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">le chromosome 14 « embarque » un fragment du 21 : le nombre de chromosomes reste 46</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Schéma simplifié de la translocation 14/21 : un fragment du chromosome 21 se soude au chromosome 14. Le matériel 21 n'est pas perdu — il a juste changé de « véhicule ».</figcaption>
+      </figure>
+
+      <p class="lecture-text">
+        La translocation la plus célèbre au programme est la <strong>translocation 14/21</strong> : une partie du <strong>chromosome 21</strong> se fixe sur le <strong>chromosome 14</strong>. Elle explique certaines <strong>trisomies 21 dites « familiales »</strong>, c'est-à-dire qui se répètent dans une même famille. Voici le mécanisme complet, en 3 étapes :
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <span class="lecture-step-number">1</span>
+          <div class="lecture-step-content">
+            <strong>Un parent est porteur équilibré</strong>
+            <p>son caryotype compte <strong>46 chromosomes</strong> : il possède un chromosome 14 qui « embarque » un fragment de 21, mais <strong>aucun gène n'est en excès ni en défaut</strong> → il est en parfaite santé, sans aucun signe.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">2</span>
+          <div class="lecture-step-content">
+            <strong>À la méiose, les gamètes se constituent</strong>
+            <p>certains gamètes reçoivent le chromosome 14 porteur du fragment 21 <strong>et</strong> les deux chromosomes 21 normaux → ce gamète contient un excès de matériel du chromosome 21.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">3</span>
+          <div class="lecture-step-content">
+            <strong>Fécondation : l'enfant est trisomique 21</strong>
+            <p>l'enfant possède du matériel du chromosome 21 <strong>en trois exemplaires</strong> (deux 21 libres + le fragment collé au 14) → <strong>trisomie 21 par translocation</strong>, syndrome de Down — avec un caryotype qui peut compter 46 chromosomes seulement !</p>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">🚨 Le piège n°1 de la partie</div>
+          <p>Une trisomie 21 par translocation peut exister avec <strong>46 chromosomes</strong> (et non 47) : le « troisième exemplaire » de matériel 21 est <strong>collé</strong> sur le chromosome 14. On dit que l'anomalie est <strong>déséquilibrée</strong>. La conséquence (syndrome de Down) est la même, mais le compte de chromosomes, lui, n'est pas le même que dans la trisomie 21 « libre » de la partie 1. Vérifie toujours ce que l'énoncé compte : des chromosomes entiers, ou du matériel génétique.</p>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">Application</div>
+        <div class="lecture-example-content">
+          <p>Une mère porteuse équilibrée d'une translocation 14/21 consulte avant une grossesse : le <strong>conseil génétique</strong> (partie 3) établira son caryotype et estimera le risque que chaque enfant reçoive la combinaison déséquilibrée. Ce suivi explique pourquoi les trisomies 21 « familiales » apparaissent chez <strong>plusieurs enfants d'une même fratrie</strong>, contrairement à la trisomie 21 libre, accidentelle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION · CONSEQUENCES_STRUCTURE                  -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · consequences_structure</span>
+        <h2 class="lecture-section-title">Équilibré ou déséquilibré : quelles conséquences ?</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Toutes les anomalies de structure ne se valent pas. La question centrale est simple : <strong>y a-t-il encore la « juste quantité » de matériel génétique ?</strong>
+      </p>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>État du remaniement</th><th>Matériel génétique</th><th>Conséquence pour la personne</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Équilibré</strong></td><td>Rien n'est perdu ni ajouté (inversion, translocation « de place »)</td><td>Aucune manifestation en général : la personne est dite <strong>équilibrée</strong> et se sent parfaitement saine</td></tr>
+            <tr><td><strong>Déséquilibré</strong></td><td>Il manque du matériel (délétion) ou il y en a en excès (duplication, fragments en trop)</td><td>Signes cliniques : le développement est perturbé par les gènes manquants ou en excès</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📖 Règle à retenir : la gravité dépend de la taille du fragment</div>
+          <p>Les conséquences d'une anomalie de structure dépendent <strong>de la taille du fragment</strong> concerné et <strong>des gènes qu'il porte</strong> : un petit fragment peut avoir des effets limités ; un grand fragment (beaucoup de gènes manquants ou en excès) perturbe gravement le développement. Plus le fragment est grand, plus les conséquences sont lourdes.</p>
+        </div>
+      </div>
+      <p class="lecture-text">
+        D'où deux conséquences pratiques importantes :
+      </p>
+
+      <ul class="lecture-list-elegant">
+        <li><strong>Pour l'individu</strong> : un remaniement équilibré ne se voit pas, mais un remaniement déséquilibré peut avoir des effets variés selon les gènes touchés (retard de développement, malformations…) — chaque situation est unique, d'où l'importance du suivi médical.</li>
+        <li><strong>Pour la descendance</strong> : une personne <strong>équilibrée</strong> transmettra normalement ses chromosomes… mais lors de la méiose, la répartition des fragments peut donner des gamètes <strong>déséquilibrés</strong> : c'est le cas de la translocation 14/21 vue plus haut.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ La nuance à ne pas perdre</div>
+          <p>« Équilibré » ne veut pas dire « sans importance pour la famille » : la personne équilibrée est saine, mais son remaniement peut <strong>réapparaître sous forme déséquilibrée chez ses enfants</strong>. C'est précisément pour cela qu'on propose un <strong>conseil génétique</strong> aux familles concernées (partie 3).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN                                            -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">Tableau des remaniements et pièges</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le tableau de synthèse des quatre remaniements — sache le reconstruire ligne par ligne :
+      </p>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Anomalie</th><th>Que devient le fragment ?</th><th>Matériel génétique</th><th>Nombre de chromosomes</th><th>Exemple</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Délétion</strong></td><td>Perte d'un fragment</td><td>En défaut</td><td>46 (inchangé)</td><td>Cri du chat (5p−)</td></tr>
+            <tr><td><strong>Duplication</strong></td><td>Répétition d'un fragment</td><td>En excès</td><td>46 (inchangé)</td><td>Fragments répétés</td></tr>
+            <tr><td><strong>Inversion</strong></td><td>Fragment retourné sur place</td><td>Intact (équilibré)</td><td>46 (inchangé)</td><td>Ordre des bandes inversé</td></tr>
+            <tr><td><strong>Translocation</strong></td><td>Fragment transféré sur un autre chromosome</td><td>Intact (équilibré) ou en excès (déséquilibré)</td><td>46 (souvent inchangé !)</td><td>Translocation 14/21</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="lecture-subtitle">🔍 Comparer nombre et structure en un coup d'œil</h3>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Question</th><th>Anomalie de nombre (partie 1)</th><th>Anomalie de structure (partie 2)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Qu'est-ce qui change ?</td><td>Le <strong>chromosome entier</strong> (de trop ou en moins)</td><td>Un <strong>fragment</strong> (perdu, dupliqué, retourné, déplacé)</td></tr>
+            <tr><td>Le nombre de chromosomes ?</td><td>Obligatoirement changé (45 ou 47)</td><td>Pas forcément (souvent 46)</td></tr>
+            <tr><td>Exemples phares</td><td>Trisomie 21 libre (47) · monosomie X (45)</td><td>Cri du chat · translocation 14/21</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">🚨 Les 3 confusions qui coûtent des points</div>
+          <ul class="lecture-list-elegant">
+            <li><strong>Délétion et monosomie</strong> : fragment perdu (46 chromosomes) ≠ chromosome entier perdu (45 chromosomes).</li>
+            <li><strong>Duplication et trisomie</strong> : fragment répété (46 chromosomes) ≠ chromosome entier en 3 exemplaires (47 chromosomes).</li>
+            <li><strong>Translocation équilibrée et personne saine « sans anomalies »</strong> : le porteur est sain, mais son caryotype <strong>contient</strong> un remaniement — à ne pas écrire « caryotype normal » ! On écrit « caryotype équilibré ».</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Une délétion correspond à :</p>
+      <div class="lecture-quiz-options">
+        <span>A) La perte d'un chromosome entier</span>
+        <span>B) La perte d'un fragment de chromosome</span>
+        <span>C) La répétition d'un fragment de chromosome</span>
+        <span>D) Le transfert d'un fragment vers un autre chromosome</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B.</strong> Délétion = perte d'un <strong>fragment</strong> (pas d'un chromosome entier — ce serait une monosomie !). C correspond à la duplication et D à la translocation.</div>
+      </details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Un individu porteur équilibré d'une translocation 14/21 a un caryotype de :</p>
+      <div class="lecture-quiz-options">
+        <span>A) 47 chromosomes, avec syndrome de Down</span>
+        <span>B) 45 chromosomes</span>
+        <span>C) 46 chromosomes, sans manifestation clinique</span>
+        <span>D) 46 chromosomes, avec syndrome de Down</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>C.</strong> Porteur <strong>équilibré</strong> = aucun gène en excès ni en défaut → 46 chromosomes et aucune manifestation. C'est à la génération suivante que la répartition des fragments lors de la méiose peut produire des gamètes déséquilibrés, à l'origine d'une trisomie 21 chez l'enfant.</div>
+      </details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Quelle anomalie de structure n'entraîne NI perte NI excès de matériel génétique ?</p>
+      <div class="lecture-quiz-options">
+        <span>A) La délétion</span>
+        <span>B) La duplication</span>
+        <span>C) L'inversion</span>
+        <span>D) La trisomie</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>C) L'inversion.</strong> Le fragment est détaché, retourné, puis recollé : tout le matériel est conservé, seul l'ordre change (remaniement équilibré). A perd du matériel, B en ajoute, et D n'est même pas une anomalie de structure (c'est une anomalie de nombre, partie 1).</div>
+      </details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[anomalie_structure]</strong> Anomalie de structure = cassures de chromosomes suivies d'un remaniement anormal des fragments ; le <strong>nombre de chromosomes ne change pas forcément</strong>.</li>
+      <li><strong>[deletion]</strong> Délétion = <strong>perte d'un fragment</strong> de chromosome → chromosome raccourci, gènes manquants (ex. cri du chat, délétion du bras court du chromosome 5 : 5p−).</li>
+      <li><strong>[duplication]</strong> Duplication = <strong>répétition d'un fragment</strong> → gènes en excès (le symétrique de la délétion).</li>
+      <li><strong>[inversion]</strong> Inversion = fragment détaché, <strong>retourné</strong>, recollé à l'envers sur le même chromosome → matériel intact, ordre modifié.</li>
+      <li><strong>[translocation]</strong> Translocation = fragment <strong>transféré vers un autre chromosome</strong> (non homologue) ; ex. translocation 14/21 → trisomies 21 « familiales » par gamètes déséquilibrés.</li>
+      <li><strong>[translocation]</strong> Porteur équilibré 14/21 : 46 chromosomes, sain — mais risque de trisomie 21 chez ses enfants.</li>
+      <li><strong>[consequences_structure]</strong> Remaniement <strong>équilibré</strong> (matériel intact) → personne saine ; remaniement <strong>déséquilibré</strong> (matériel en défaut ou en excès) → signes cliniques.</li>
+      <li><strong>[consequences_structure]</strong> La gravité dépend de la <strong>taille du fragment</strong> et des gènes concernés : petit fragment → effets limités ; grand fragment → conséquences graves.</li>
+      <li><strong>[consequences_structure]</strong> Confusions interdites : délétion ≠ monosomie · duplication ≠ trisomie — fragment (46 chr) ≠ chromosome entier (45 ou 47 chr).</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 2 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie 3 : d'où viennent ces anomalies ? — mécanismes, diagnostic et accompagnement</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

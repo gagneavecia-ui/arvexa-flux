@@ -1,0 +1,3163 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0A0A">
+<script>(function(){try{if(localStorage.getItem('arvexa-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}})();</script>
+<script src="theme.js"></script><script src="wake-lock.js"></script><script src="arvexa-i18n.js" defer></script>
+  <title>ARVEXA — Réviseur</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="stylesheet" href="perf.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="katex/katex.min.css">
+  <script defer src="katex/katex.min.js"></script>
+  <script defer src="katex/contrib/auto-render.min.js"></script>
+  <script src="katex-utils.js" defer></script>
+  <script src="analytics.js"></script>
+  <script src="register-sw.js" defer></script>
+
+  <link rel="stylesheet" href="arvexa-ui.css">
+  <style>
+       :root {
+      /* Palette complète — alignée sur index.html */
+      --primary: #1A3A2A;
+      --primary-dark: #0A1A12;
+      --primary-light: #2A5A3A;
+      --accent: #B8860B;
+      --accent-bright: #E0B84A;
+      --accent-dim: rgba(184, 134, 11, 0.08);
+      --success: #2D7D5A;
+      --success-light: #3AB67E;
+      --danger: #B85C3A;
+      --danger-light: #E07A5F;
+      --warning: #D4A017;
+      --info: #4AAFE0;
+
+      /* Fonds */
+      --bg-dark: #0A0A0A;
+      --bg-surface: #141414;
+      --bg-card: rgba(20, 20, 20, 0.7);
+      --text-light: #F5F0E8;
+      --text-dim: #8A8A7A;
+      --text-muted: #5A5A4A;
+      --text-body: #cfd0cc;
+
+      /* Bordures dorées — identité ARVEXA */
+      --card-border: rgba(184, 134, 11, 0.06);
+      --card-border-hover: rgba(184, 134, 11, 0.2);
+      --border-soft: rgba(184, 134, 11, 0.06);
+      --border-strong: rgba(184, 134, 11, 0.15);
+      --border-gold: rgba(184, 134, 11, 0.15);
+
+      /* Transitions, rayons, ombres */
+      --transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      --transition-fast: all 0.15s ease;
+      --radius-sm: 10px;
+      --radius: 16px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+      /* Polices */
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+
+      /* Layout */
+      --header-height: 64px;
+      --sidebar-width: 280px;
+
+      /* Safe areas */
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html {
+      background: var(--bg-dark);
+      color-scheme: dark;
+      min-width: 320px;
+      width: 100%;
+      min-height: 100%;
+      background:
+        radial-gradient(ellipse 40% 30% at 30% 15%, rgba(184, 134, 11,  0.16) 0%, transparent 70%),
+        radial-gradient(ellipse 35% 25% at 75% 85%, rgba(184, 134, 11, 0.05) 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-deep) 100%);
+      background-attachment: fixed;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      background: transparent;
+      color: var(--text-light);
+      font: 15px/1.6 var(--font-body);
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button { cursor: pointer; font-family: inherit; }
+    button:disabled { cursor: not-allowed; opacity: 0.55; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      padding-top: calc(12px + var(--safe-top));
+      background: rgba(var(--rgb-veil), 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-soft);
+      gap: 12px;
+      min-height: var(--header-height);
+    }
+    .brand {
+      color: var(--text-light);
+      text-decoration: none;
+      font: 700 20px 'Playfair Display', serif;
+      letter-spacing: 0.04em;
+    }
+    .brand span { color: var(--accent-bright); font-style: italic; }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .top-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-soft);
+      background: rgba(var(--rgb-soft), 0.03);
+      color: var(--text-dim);
+      font-weight: 600;
+      font-size: 12.5px;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    .top-btn:hover {
+      border-color: rgba(184, 134, 11, 0.3);
+      background: rgba(184, 134, 11, 0.06);
+      color: var(--accent-bright);
+    }
+    .top-btn i { font-size: 11px; }
+
+    .connection {
+      color: var(--text-muted);
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .connection::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .connection.online::before { background: var(--success-light); }
+
+    .shell {
+      width: min(100% - 28px, 900px);
+      margin: 0 auto;
+      padding: 20px 0 40px;
+    }
+
+    .view { display: none; }
+    .view.active {
+      display: block;
+      animation: appear 0.3s ease;
+    }
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.2;
+      font-family: var(--font-serif);
+      color: var(--text-light);
+    }
+    h1 { font-size: clamp(24px, 5vw, 34px); }
+    h2 { font-size: clamp(20px, 4vw, 26px); }
+
+    .eyebrow {
+      color: var(--accent-bright);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .lead {
+      color: var(--text-dim);
+      max-width: 620px;
+      margin: 12px 0 0;
+      line-height: 1.7;
+      font-size: 14.5px;
+    }
+
+    .panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .selectors-bar {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    @media (min-width: 620px) {
+      .selectors-bar {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .selector {
+      position: relative;
+      width: 100%;
+      user-select: none;
+    }
+    .selector-trigger {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      color: var(--text-light);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .selector-trigger:hover {
+      border-color: rgba(224, 184, 74, 0.3);
+      background: rgba(var(--rgb-soft), 0.04);
+    }
+    .selector.open .selector-trigger {
+      border-color: var(--accent-bright);
+      box-shadow: 0 0 0 3px rgba(224, 184, 74, 0.1);
+      background: rgba(184, 134, 11, 0.02);
+    }
+
+    .selector-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      background: rgba(224, 184, 74, 0.1);
+      color: var(--accent-bright);
+      border: 1px solid rgba(224, 184, 74, 0.2);
+      flex-shrink: 0;
+    }
+
+    .selector-value {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .selector-arrow {
+      color: var(--text-muted);
+      font-size: 12px;
+      flex-shrink: 0;
+      transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .selector.open .selector-arrow {
+      transform: rotate(180deg);
+      color: var(--accent-bright);
+    }
+
+    .selector-options {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      z-index: 50;
+      max-height: 320px;
+      overflow-y: auto;
+      background: linear-gradient(145deg, var(--bg-surface), var(--bg-surface));
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      padding: 6px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px) scale(0.98);
+      transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+      transform-origin: top center;
+    }
+    .selector.open .selector-options {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+    .selector-options::-webkit-scrollbar { width: 4px; }
+    .selector-options::-webkit-scrollbar-thumb {
+      background: rgba(224, 184, 74, 0.2);
+      border-radius: 10px;
+    }
+
+    .selector-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      border-radius: 10px;
+      color: var(--text-body);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      position: relative;
+    }
+    .selector-option:hover {
+      background: rgba(224, 184, 74, 0.08);
+      color: var(--text-light);
+    }
+    .selector-option.selected {
+      background: rgba(224, 184, 74, 0.12);
+      color: var(--accent-bright);
+      font-weight: 700;
+    }
+    .selector-option.selected::after {
+      content: '✓';
+      margin-left: auto;
+      color: var(--accent-bright);
+      font-size: 12px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+    .selector-option .option-emoji {
+      font-size: 15px;
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .hero-chapter {
+      background: linear-gradient(135deg, rgba(184, 134, 11, 0.08), rgba(184, 134, 11,  0.06));
+      border: 1px solid rgba(184, 134, 11, 0.2);
+      border-radius: var(--radius);
+      padding: 24px 22px;
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-chapter::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright), var(--accent));
+    }
+    .hero-subject {
+      color: var(--accent-bright);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(20px, 4vw, 26px);
+      font-weight: 700;
+      color: var(--text-light);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .hero-progress {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 12px;
+    }
+    .hero-progress-bar {
+      flex: 1;
+      height: 6px;
+      border-radius: 8px;
+      background: rgba(var(--rgb-soft), 0.06);
+      overflow: hidden;
+    }
+    .hero-progress-fill {
+      height: 100%;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+      transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .hero-progress-text {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .hero-progress-text strong { color: var(--accent-bright); }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .action-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 22px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: left;
+      width: 100%;
+      font-family: inherit;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+    .action-card:hover:not(:disabled) {
+      transform: translateY(-2px);
+      border-color: rgba(184, 134, 11, 0.35);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    .action-card:active:not(:disabled) { transform: translateY(0); }
+    .action-card:disabled { opacity: 0.5; }
+
+    .action-card-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      background: rgba(184, 134, 11, 0.1);
+      color: var(--accent-bright);
+      border: 1px solid rgba(184, 134, 11, 0.2);
+    }
+    .action-card-body { flex: 1; min-width: 0; }
+    .action-card-title {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .action-card-title .free-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: rgba(58, 182, 126, 0.15);
+      color: var(--success-light);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .action-card-desc {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .action-card-arrow {
+      color: var(--text-muted);
+      font-size: 16px;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+    .action-card:hover:not(:disabled) .action-card-arrow {
+      color: var(--accent-bright);
+      transform: translateX(4px);
+    }
+
+    .action-card.primary {
+      background: linear-gradient(135deg, rgba(224, 184, 74, 0.1), rgba(184, 134, 11, 0.05));
+      border-color: rgba(224, 184, 74, 0.3);
+    }
+    .action-card.primary .action-card-icon {
+      background: linear-gradient(135deg, rgba(224, 184, 74, 0.25), rgba(184, 134, 11, 0.15));
+      border-color: rgba(224, 184, 74, 0.4);
+      color: var(--accent-bright);
+    }
+
+    .notions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .notion-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-card);
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: left;
+      width: 100%;
+      font-family: inherit;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+    .notion-row::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent-bright), var(--accent));
+      opacity: 0.7;
+    }
+    .notion-row:hover {
+      border-color: rgba(224, 184, 74, 0.3);
+      transform: translateX(2px);
+    }
+    .notion-row-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 15px;
+      font-weight: 700;
+      background: rgba(224, 184, 74, 0.1);
+      color: var(--accent-bright);
+      border: 1px solid rgba(224, 184, 74, 0.2);
+      flex-shrink: 0;
+    }
+    .notion-row-body { flex: 1; min-width: 0; }
+    .notion-row-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 4px;
+      overflow-wrap: break-word;
+    }
+    .notion-row-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .notion-row-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      background: rgba(var(--rgb-soft), 0.03);
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .notion-row-tag i { font-size: 10px; color: var(--accent-bright); }
+    .notion-row-arrow {
+      color: var(--text-muted);
+      font-size: 14px;
+      flex-shrink: 0;
+      transition: var(--transition);
+    }
+    .notion-row:hover .notion-row-arrow {
+      color: var(--accent-bright);
+      transform: translateX(3px);
+    }
+
+    .notion-detail-header {
+      margin-bottom: 20px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-soft);
+      background: transparent;
+      color: var(--text-dim);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: inherit;
+      margin-bottom: 16px;
+    }
+    .back-btn:hover {
+      color: var(--text-light);
+      border-color: var(--accent-bright);
+      background: rgba(184, 134, 11, 0.06);
+    }
+
+    .notion-detail-title {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 4.5vw, 28px);
+      font-weight: 700;
+      color: var(--text-light);
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .notion-detail-meta {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    .block {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 12px;
+    }
+    .block-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-bright);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .block-label i { font-size: 12px; }
+    .block-text {
+      font-size: 14.5px;
+      color: var(--text-body);
+      line-height: 1.75;
+    }
+
+    .formulas-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .formula-item {
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: var(--block-bg);
+      text-align: center;
+    }
+    .formula-latex {
+      font-size: 15px;
+      color: var(--text-light);
+      padding: 4px 0;
+      overflow-x: auto;
+    }
+    .formula-condition {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    .simple-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 0;
+    }
+    .simple-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.7;
+    }
+    .simple-list li::before {
+      content: '•';
+      color: var(--accent-bright);
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+    .simple-list li strong {
+      color: var(--text-light);
+      font-weight: 700;
+    }
+
+    .method-steps {
+      list-style: none;
+      padding: 0;
+      counter-reset: step;
+    }
+    .method-steps li {
+      position: relative;
+      padding-left: 32px;
+      counter-increment: step;
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+    .method-steps li:last-child { margin-bottom: 0; }
+    .method-steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0; top: 1px;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(224, 184, 74, 0.15);
+      color: var(--accent-bright);
+      font-size: 11px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .example-enonce {
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: var(--block-bg);
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+    .example-steps {
+      list-style: none;
+      padding: 0;
+      counter-reset: e;
+      margin-bottom: 12px;
+    }
+    .example-steps li {
+      position: relative;
+      padding-left: 28px;
+      counter-increment: e;
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .example-steps li::before {
+      content: counter(e) '.';
+      position: absolute;
+      left: 0; top: 0;
+      color: var(--accent-bright);
+      font-weight: 700;
+    }
+    .example-conclusion {
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(69, 180, 125, 0.08);
+      font-size: 14px;
+      color: var(--success-light);
+      font-weight: 600;
+    }
+
+    .piege-trap {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 10px;
+    }
+    .piege-solution {
+      position: relative;
+      padding-left: 22px;
+      font-size: 13.5px;
+      color: var(--success-light);
+      line-height: 1.7;
+    }
+    .piege-solution::before {
+      content: '→';
+      position: absolute;
+      left: 0; top: 0;
+      font-weight: 700;
+    }
+
+    .block.astuce {
+      background: linear-gradient(135deg, rgba(74, 175, 224, 0.06), rgba(74, 175, 224, 0.02));
+      border-color: rgba(74, 175, 224, 0.2);
+    }
+    .block.astuce .block-label { color: var(--info); }
+
+    .mechanism {
+      padding: 14px 16px;
+      border-radius: 10px;
+      background: var(--block-bg);
+      margin-bottom: 12px;
+    }
+    .mechanism:last-child { margin-bottom: 0; }
+    .mechanism-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mechanism-name i {
+      color: var(--accent-bright);
+      font-size: 12px;
+    }
+    .mechanism-steps {
+      list-style: none;
+      padding: 0;
+      counter-reset: mstep;
+      margin-bottom: 10px;
+    }
+    .mechanism-steps li {
+      position: relative;
+      padding-left: 28px;
+      counter-increment: mstep;
+      font-size: 13.5px;
+      color: var(--text-body);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .mechanism-steps li::before {
+      content: counter(mstep);
+      position: absolute;
+      left: 0; top: 1px;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(74, 175, 224, 0.15);
+      color: var(--info);
+      font-size: 10px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mechanism-consequences {
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(69, 180, 125, 0.06);
+      border-left: 3px solid var(--success-light);
+    }
+    .mechanism-consequences-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--success-light);
+      margin-bottom: 6px;
+    }
+    .mechanism-consequences ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mechanism-consequences li {
+      font-size: 13px;
+      color: var(--success-light);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .mechanism-consequences li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      font-weight: 700;
+    }
+
+    .loading-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .loader-spinner {
+      width: 48px;
+      height: 48px;
+      border: 3px solid rgba(224, 184, 74, 0.15);
+      border-top-color: var(--accent-bright);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-state h3 {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      color: var(--text-light);
+    }
+    .loading-state p {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 50px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .empty-state-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: rgba(184, 134, 11, 0.06);
+      border: 1px solid rgba(184, 134, 11, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: var(--text-muted);
+    }
+    .empty-state h3 {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      color: var(--text-light);
+    }
+    .empty-state p {
+      color: var(--text-dim);
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 360px;
+    }
+
+    .quiz-question {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 12px;
+    }
+    .quiz-q-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .quiz-q-num {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-bright);
+    }
+    .quiz-q-text {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-light);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .quiz-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border-soft);
+      background: var(--block-bg);
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.5;
+      transition: var(--transition-fast);
+      text-align: left;
+      width: 100%;
+      font-family: inherit;
+    }
+    .quiz-option:hover:not(.disabled) {
+      border-color: rgba(224, 184, 74, 0.3);
+      background: rgba(224, 184, 74, 0.04);
+    }
+    .quiz-option.correct {
+      border-color: var(--success-light);
+      background: rgba(58, 182, 126, 0.12);
+      color: var(--success-light);
+    }
+    .quiz-option.wrong {
+      border-color: var(--danger-light);
+      background: rgba(215, 101, 74, 0.12);
+      color: var(--danger-light);
+    }
+    .quiz-option.disabled { cursor: not-allowed; }
+    .quiz-letter {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: rgba(var(--rgb-soft), 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .quiz-option.correct .quiz-letter {
+      background: var(--success-light);
+      color: #fff;
+    }
+    .quiz-option.wrong .quiz-letter {
+      background: var(--danger-light);
+      color: #fff;
+    }
+    .quiz-explanation {
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: rgba(74, 175, 224, 0.06);
+      border-radius: 10px;
+      font-size: 13.5px;
+      line-height: 1.65;
+      color: var(--text-body);
+      display: none;
+    }
+    .quiz-explanation.show { display: block; }
+    .quiz-explanation strong { color: var(--info); }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .btn {
+      min-height: 48px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 13px 24px;
+      color: var(--text-light);
+      background: rgba(var(--rgb-soft), 0.04);
+      font-weight: 700;
+      font-size: 14px;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: inherit;
+      text-decoration: none;
+    }
+    .btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      border-color: rgba(224, 184, 74, 0.3);
+      background: rgba(var(--rgb-soft), 0.06);
+    }
+    .btn:active:not(:disabled) {
+      transform: scale(0.97);
+    }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--on-gold);
+      box-shadow: 0 4px 16px rgba(184, 134, 11, 0.25);
+    }
+    .btn.primary:hover:not(:disabled) {
+      box-shadow: 0 6px 22px rgba(184, 134, 11, 0.4);
+    }
+    .btn.primary:active:not(:disabled) {
+      transform: scale(0.97);
+    }
+    .btn.secondary {
+      background: transparent;
+      border-color: var(--border-strong);
+      color: var(--text-dim);
+    }
+    .btn.full { width: 100%; }
+
+    .result-hero {
+      text-align: center;
+      padding: 32px 22px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius);
+      margin-bottom: 18px;
+    }
+    .result-hero .emoji {
+      font-size: 56px;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .result-hero h2 {
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .result-hero p {
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+    .result-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .metric {
+      padding: 16px 12px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      text-align: center;
+    }
+    .metric strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent-bright);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    .metric small {
+      display: block;
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .toast-container {
+      position: fixed;
+      top: calc(var(--safe-top) + 16px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      width: calc(100% - 32px);
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: rgba(var(--rgb-card), 0.96);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-soft);
+      color: var(--text-light);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      pointer-events: auto;
+      animation: toastSlideIn 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .toast.success { border-color: rgba(58, 182, 126, 0.5); }
+    .toast.success i { color: var(--success-light); }
+    .toast.error { border-color: rgba(215, 101, 74, 0.5); }
+    .toast.error i { color: var(--danger-light); }
+    .toast.info { border-color: rgba(74, 175, 224, 0.5); }
+    .toast.info i { color: var(--info); }
+    @keyframes toastSlideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .katex { font-size: 1.05em; color: inherit; }
+    .katex-display {
+      margin: 8px 0;
+      overflow-x: auto;
+      padding: 4px 0;
+    }
+
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 20px, 900px); padding: 14px 0 30px; }
+      .panel { padding: 18px; }
+      .hero-chapter { padding: 20px 18px; }
+      .action-card { padding: 16px 18px; gap: 12px; }
+      .action-card-icon { width: 46px; height: 46px; font-size: 20px; }
+      .action-card-title { font-size: 14.5px; }
+      .action-card-desc { font-size: 12.5px; }
+      .notion-row { padding: 14px 15px; gap: 12px; }
+      .notion-row-num { width: 32px; height: 32px; font-size: 14px; }
+      .notion-row-title { font-size: 14px; }
+      .block { padding: 16px; }
+      .top-btn { padding: 8px 12px; font-size: 11.5px; }
+      .result-metrics { gap: 8px; }
+      .metric strong { font-size: 18px; }
+      .selector-trigger { padding: 12px 14px; font-size: 13.5px; }
+      .selector-icon { width: 28px; height: 28px; font-size: 13px; }
+    }
+
+    @media (max-width: 480px) {
+      .shell { width: min(100% - 16px, 900px); padding: 12px 0 26px; }
+      .panel { padding: 16px; }
+      .hero-chapter { padding: 18px 16px; }
+      .hero-title { font-size: 21px; }
+      .action-card { padding: 14px 16px; gap: 10px; }
+      .action-card-icon { width: 42px; height: 42px; font-size: 18px; border-radius: 12px; }
+      .action-card-title { font-size: 14px; }
+      .action-card-desc { font-size: 12px; }
+      .notion-row { padding: 12px 14px; gap: 10px; }
+      .notion-row-num { width: 30px; height: 30px; font-size: 13px; border-radius: 10px; }
+      .notion-row-title { font-size: 13.5px; }
+      .block { padding: 14px 16px; }
+      .block-text { font-size: 14px; }
+      .quiz-question { padding: 16px; }
+      .quiz-q-text { font-size: 14px; }
+      .quiz-option { padding: 10px 12px; font-size: 13.5px; }
+      .result-metrics { gap: 6px; }
+      .metric { padding: 12px 8px; }
+      .metric strong { font-size: 16px; }
+      .metric small { font-size: 9px; }
+      .btn { padding: 12px 20px; font-size: 13.5px; }
+      .top-btn { padding: 7px 11px; font-size: 11px; }
+      .brand { font-size: 18px; }
+      .connection { font-size: 11px; }
+      .selector-trigger { padding: 11px 13px; font-size: 13px; }
+      .selector-icon { width: 26px; height: 26px; font-size: 12px; }
+      .notion-detail-title { font-size: 20px; }
+      /* modale premium → composant uniforme arvexa-confirm (v8.4) */
+    }
+
+    @media (max-width: 360px) {
+      .hero-title { font-size: 20px; }
+      .notion-row-tags { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar { width: 4px; height: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(184, 134, 11, 0.25); border-radius: 10px; }
+
+    /* ✅ v8.4 — le pop-up « Limite atteinte » utilise le composant
+       UNIFORME du site (arvexa-confirm.js) : mêmes couleurs et mêmes
+       boutons que index/profil/abonnement. */
+      /* ⚡ Anti-flash restauration en dur (pré-CDN, pattern accueil v4.2) */
+    html.instant .shell { visibility: hidden; }
+    html.instant.ready .shell { visibility: visible; }
+      /* ⚡ Émoji matière dans le hero (v4.2) */
+    .hero-emoji { font-size: 17px; line-height: 1; }
+  </style>
+  <!-- ⚡ ARVEXA FLUX v1 — navigation instantanée -->
+  <script src="flux-router.js?v=flux1" defer></script>
+</head>
+
+<body>
+
+  <header>
+    <a class="brand" href="index.html">ARVEX<span>A School</span></a>
+    <div class="header-actions">
+      <a href="reviseur-history.html" class="top-btn" id="historyLink">
+        <i class="fas fa-history"></i>
+        Historique
+      </a>
+      <div class="connection" id="connectionState">Vérification...</div>
+    </div>
+  </header>
+
+  <main class="shell">
+
+    <!-- VUE 1 — ACCUEIL -->
+    <section class="view active" id="viewHome">
+
+      <div class="selectors-bar">
+        <div class="selector" id="subjectSelector">
+          <button type="button" class="selector-trigger">
+            <div class="selector-icon"><i class="fas fa-graduation-cap"></i></div>
+            <span class="selector-value" id="subjectSelectorValue">Mathématiques</span>
+            <i class="fas fa-chevron-down selector-arrow"></i>
+          </button>
+          <div class="selector-options" id="subjectSelectorOptions"></div>
+        </div>
+
+        <div class="selector" id="chapterSelector">
+          <button type="button" class="selector-trigger">
+            <div class="selector-icon"><i class="fas fa-book"></i></div>
+            <span class="selector-value" id="chapterSelectorValue">Nombres complexes</span>
+            <i class="fas fa-chevron-down selector-arrow"></i>
+          </button>
+          <div class="selector-options" id="chapterSelectorOptions"></div>
+        </div>
+      </div>
+
+      <div class="hero-chapter">
+        <div class="hero-subject">
+          <span class="hero-emoji" id="subjectEmoji">📖</span>
+          <span id="subjectLabel">Chargement...</span>
+        </div>
+        <div class="hero-title" id="chapterTitle">—</div>
+        <div class="hero-progress">
+          <div class="hero-progress-bar">
+            <div class="hero-progress-fill" id="progressFill" style="width: 0%"></div>
+          </div>
+          <div class="hero-progress-text">
+            <strong id="progressCurrent">0</strong>
+            <span id="progressTotal">/ 0 notions</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="action-grid">
+        <button class="action-card" id="btnViewNotions">
+          <div class="action-card-icon"><i class="fas fa-book-open"></i></div>
+          <div class="action-card-body">
+            <div class="action-card-title">
+              Voir mes notions
+              <span class="free-badge"><i class="fas fa-gift"></i> Gratuit</span>
+            </div>
+            <div class="action-card-desc" id="viewNotionsDesc">
+              Consulte tes notions déjà générées. Aucun coût.
+            </div>
+          </div>
+          <i class="fas fa-chevron-right action-card-arrow"></i>
+        </button>
+
+        <button class="action-card primary" id="btnGenerate">
+          <div class="action-card-icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+          <div class="action-card-body">
+            <div class="action-card-title" id="btnGenerateTitle">
+              Générer mes premières notions
+            </div>
+            <div class="action-card-desc" id="btnGenerateDesc">
+              4 notions · ~15 secondes
+            </div>
+          </div>
+          <i class="fas fa-chevron-right action-card-arrow"></i>
+        </button>
+
+        <button class="action-card" id="btnQuiz" disabled>
+          <div class="action-card-icon"><i class="fas fa-circle-question"></i></div>
+          <div class="action-card-body">
+            <div class="action-card-title">Faire un quiz</div>
+            <div class="action-card-desc" id="btnQuizDesc">
+              Génère d'abord des notions
+            </div>
+          </div>
+          <i class="fas fa-chevron-right action-card-arrow"></i>
+        </button>
+      </div>
+    </section>
+
+    <!-- VUE 2 — CHARGEMENT -->
+    <section class="view" id="viewLoading">
+      <div class="panel">
+        <div class="loading-state">
+          <div class="loader-spinner"></div>
+          <h3 id="loadingTitle">Préparation...</h3>
+          <p id="loadingMessage">Cela peut prendre 10 à 20 secondes.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VUE 3 — LISTE DES NOTIONS -->
+    <section class="view" id="viewNotions">
+      <div class="notion-detail-header">
+        <button class="back-btn" id="backFromNotions">
+          <i class="fas fa-arrow-left"></i> Retour
+        </button>
+        <div class="eyebrow">Mes notions</div>
+        <div class="notion-detail-title" id="notionsListTitle">Notions générées</div>
+        <div class="notion-detail-meta" id="notionsListMeta">—</div>
+      </div>
+
+      <div class="notions-list" id="notionsList"></div>
+
+      <div class="empty-state" id="notionsEmpty" style="display:none;">
+        <div class="empty-state-icon"><i class="fas fa-book"></i></div>
+        <h3>Aucune notion générée</h3>
+        <p>Retourne à l'accueil pour générer tes premières notions.</p>
+      </div>
+    </section>
+
+    <!-- VUE 4 — DÉTAIL D'UNE NOTION -->
+    <section class="view" id="viewNotionDetail">
+      <div class="notion-detail-header">
+        <button class="back-btn" id="backFromNotionDetail">
+          <i class="fas fa-arrow-left"></i> Retour
+        </button>
+        <div class="eyebrow" id="notionDetailEyebrow">Notion</div>
+        <div class="notion-detail-title" id="notionDetailTitle">—</div>
+        <div class="notion-detail-meta" id="notionDetailMeta"></div>
+      </div>
+
+      <div id="notionDetailContent"></div>
+
+      <div class="actions">
+        <button class="btn secondary full" id="btnDeleteNotion">
+          <i class="fas fa-trash"></i>
+          <span>Supprimer cette notion</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- VUE 5 — QUIZ -->
+    <section class="view" id="viewQuiz">
+      <div class="notion-detail-header">
+        <button class="back-btn" id="backFromQuiz">
+          <i class="fas fa-arrow-left"></i> Retour
+        </button>
+        <div class="eyebrow">Quiz</div>
+        <div class="notion-detail-title">Teste tes connaissances</div>
+        <div class="notion-detail-meta" id="quizMeta"></div>
+      </div>
+
+      <div id="quizContent"></div>
+
+      <div class="actions">
+        <button class="btn primary full" id="btnValidateQuiz" disabled>
+          <i class="fas fa-check-circle"></i>
+          <span>Valider mes réponses</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- VUE 6 — RÉSULTATS DU QUIZ -->
+    <section class="view" id="viewQuizResults">
+      <div class="result-hero">
+        <span class="emoji" id="quizResultEmoji">🎉</span>
+        <h2 id="quizResultTitle">Bravo !</h2>
+        <p id="quizResultSub">Continue comme ça !</p>
+      </div>
+
+      <div class="result-metrics">
+        <div class="metric">
+          <strong id="metricCorrect">0/10</strong>
+          <small>Correctes</small>
+        </div>
+        <div class="metric">
+          <strong id="metricScore">0/20</strong>
+          <small>Score</small>
+        </div>
+        <div class="metric">
+          <strong id="metricPercent">0%</strong>
+          <small>Réussite</small>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary full" id="btnNewQuiz">
+          <i class="fas fa-redo"></i>
+          <span>Nouveau quiz</span>
+        </button>
+        <button class="btn secondary full" id="btnBackHomeFromResults">
+          <i class="fas fa-home"></i>
+          <span>Retour à l'accueil</span>
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ✅ v8.4 — pop-up Premium retiré : window.arvexaConfirm() (composant
+       uniforme du site) est ouverte par showPremiumPopup(). -->
+
+  <div class="toast-container" id="toastContainer"></div>
+  
+  <script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js",
+      "firebase/auth": "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js",
+      "firebase/firestore": "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js"
+    }
+  }
+  </script>
+
+ <script>
+/* ⚡ Restauration « en dur » du cahier — pré-CDN (pattern accueil, v4.2).
+   Peint l'accueil du réviseur depuis le snapshot local AVANT que Firebase/CDN
+   chargent : plus jamais « Chargement... » ni « — » ni 0/0 à l'ouverture. */
+(function () {
+  try {
+    function g(id) { return document.getElementById(id); }
+    var subject = localStorage.getItem('arvexa_reviseur_last_subject');
+    var chapter = localStorage.getItem('arvexa_reviseur_last_chapter');
+    if (!subject || !chapter) return;
+    var raw = null;
+    try { raw = localStorage.getItem('arvexa_reviseur_cahier__' + subject + '::' + chapter); } catch (e) {}
+    if (!raw) return;
+    var snap = null;
+    try { snap = JSON.parse(raw); } catch (e) { return; }
+    if (!snap || !snap.savedAt || (Date.now() - snap.savedAt) > 43200000) return;
+    var uid = null;
+    try {
+      var sess = JSON.parse(localStorage.getItem('arvexa_session') || sessionStorage.getItem('arvexa_session') || 'null');
+      uid = sess && sess.uid;
+    } catch (e) {}
+    if (snap.uid && uid && snap.uid !== uid) return;
+    var label = snap.subjectLabel || subject;
+    var EMO = { mathematiques: '📐', physique: '⚡', chimie: '🧪', svt: '🧬', philosophie: '🧠', histoire: '🌍', geographie: '🗺️' };
+    var el;
+    el = g('subjectEmoji'); if (el) el.textContent = EMO[subject] || '📖';
+    el = g('subjectLabel'); if (el) el.textContent = label;
+    el = g('chapterTitle'); if (el) el.textContent = snap.chapter || chapter;
+    el = g('chapterSelectorValue'); if (el) el.textContent = snap.chapter || chapter;
+    el = g('subjectSelectorValue'); if (el) el.textContent = label;
+    var total = snap.totalAvailable | 0, gen = snap.generatedCount | 0;
+    var pct = total > 0 ? Math.round((gen / total) * 100) : 0;
+    el = g('progressFill'); if (el) el.style.width = pct + '%';
+    el = g('progressCurrent'); if (el) el.textContent = String(gen);
+    el = g('progressTotal'); if (el) el.textContent = '/ ' + total + ' notions';
+    el = g('viewNotionsDesc');
+    if (el) el.textContent = gen > 0
+      ? gen + ' notion' + (gen > 1 ? 's' : '') + ' disponible' + (gen > 1 ? 's' : '') + '. Lecture gratuite.'
+      : 'Aucune notion générée pour le moment.';
+    var remaining = total - gen;
+    var bGen = g('btnGenerate'), tGen = g('btnGenerateTitle'), dGen = g('btnGenerateDesc');
+    if (gen === 0) {
+      if (tGen) tGen.textContent = 'Générer mes premières notions';
+      if (dGen) dGen.textContent = '4 notions · ~15 secondes';
+      if (bGen) bGen.disabled = false;
+    } else if (remaining === 0) {
+      if (tGen) tGen.textContent = 'Toutes les notions sont générées \u2705';
+      if (dGen) dGen.textContent = 'Tu as terminé ce chapitre !';
+      if (bGen) bGen.disabled = true;
+    } else {
+      var count = Math.min(3, remaining);
+      if (tGen) tGen.textContent = 'Générer de nouvelles notions';
+      if (dGen) dGen.textContent = count + ' notion' + (count > 1 ? 's' : '') + ' · ' + remaining + ' restante' + (remaining > 1 ? 's' : '');
+      if (bGen) bGen.disabled = false;
+    }
+    var bQuiz = g('btnQuiz'), dQuiz = g('btnQuizDesc');
+    if (gen >= 3) {
+      if (bQuiz) bQuiz.disabled = false;
+      if (dQuiz) dQuiz.textContent = 'Teste tes connaissances sur ' + gen + ' notions';
+    } else {
+      if (dQuiz) dQuiz.textContent = 'Génère au moins 3 notions d\'abord';
+    }
+    document.documentElement.classList.add('instant');
+    setTimeout(function () { document.documentElement.classList.add('ready'); }, 150);
+  } catch (e) {}
+})();
+</script>
+<script type="module">
+// ═══════════════════════════════════════════════════════════════
+// RÉVISEUR v7.3 — Multi-format + Historique mobile
+// Corrections appliquées :
+//  - C1 : initializeFirestore avec cache persistant (aligné sur les autres pages)
+//  - C2 : garde d'auth robuste (grâce 600ms + maxTimer 5s + offline + unsub)
+//  - C3 : redirectAfterLogin posé avant redirection
+//  - C4 : gestion blocked/paused via getDoc users/{uid}
+//  - C5 : saveSession / clearSession alignés
+//  - C6 : setPersistence avec log
+//  - C7 : imports setPersistence + signOut
+//  - C8 : console.warn sur catch silencieux
+//  - C9 : cleanup global (beforeunload)
+// ═══════════════════════════════════════════════════════════════
+
+import { initializeApp } from 'firebase/app';
+import {
+  getAuth,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence,
+  getIdToken,
+  signOut
+} from 'firebase/auth';
+import {
+  initializeFirestore,
+  persistentLocalCache,
+  persistentSingleTabManager,
+  doc,
+  getDoc,
+  serverTimestamp
+} from 'firebase/firestore';
+import { docSWR } from './arvexa-cache.js';
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyDHscOXw3rLuhV6z1Cny-bdYCumqpnG7QE',
+  authDomain: 'arvexa-fbf10.firebaseapp.com',
+  projectId: 'arvexa-fbf10',
+  storageBucket: 'arvexa-fbf10.firebasestorage.app',
+  messagingSenderId: '920108330053',
+  appId: '1:920108330053:web:f532d71cbc2c824bc7472c'
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// ✅ C1 — initializeFirestore avec cache persistant
+const db = (window.__ARVEXA_DB_SHARED__ !== undefined ? window.__ARVEXA_DB_SHARED__ : (window.__ARVEXA_DB_SHARED__ = initializeFirestore(app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentSingleTabManager()
+  })
+})));
+
+// ✅ C6 — Log explicite si persistance refusée
+try {
+  await setPersistence(auth, browserLocalPersistence);
+} catch (e) {
+  console.warn('[Reviseur] Persistance locale indisponible :', e.code || e.message);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ✅ C5 — SESSION / CACHE alignés sur les autres pages
+// ═══════════════════════════════════════════════════════════════
+const SESSION_KEY = 'arvexa_session';
+const USER_DATA_KEY = 'arvexa_user_data';
+const LAST_UID_KEY = 'arvexa_last_uid';
+
+function saveSession(user) {
+  if (!user) return;
+  try {
+    const data = {
+      uid: user.uid,
+      email: user.email,
+      lastActive: Date.now()
+    };
+    localStorage.setItem(SESSION_KEY, JSON.stringify(data));
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(data));
+    localStorage.setItem(LAST_UID_KEY, user.uid);
+  } catch (e) {}
+}
+
+function clearSession() {
+  try {
+    localStorage.removeItem(SESSION_KEY);
+    localStorage.removeItem(USER_DATA_KEY);
+    localStorage.removeItem(LAST_UID_KEY);
+    sessionStorage.removeItem(SESSION_KEY);
+    sessionStorage.removeItem('redirectAfterLogin');
+    sessionStorage.removeItem('redirectAfterAuth');
+  } catch (e) {}
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════════════════════════
+const SUBJECTS = {
+  mathematiques: 'Mathématiques',
+  physique: 'Physique',
+  chimie: 'Chimie',
+  svt: 'SVT',
+  philosophie: 'Philosophie',
+  histoire: 'Histoire',
+  geographie: 'Géographie'
+};
+
+const SUBJECT_EMOJIS = {
+  mathematiques: '📐',
+  physique: '⚡',
+  chimie: '🧪',
+  svt: '🧬',
+  philosophie: '🧠',
+  histoire: '🌍',
+  geographie: '🗺️'
+};
+
+const SCIENTIFIC_SUBJECTS = new Set(['mathematiques', 'physique', 'chimie']);
+
+const CHAPTERS = {
+  mathematiques: [
+    'Nombres complexes', 'Similitudes planes directes', 'Calcul de probabilités',
+    'Variable aléatoire', 'Fonction numérique', 'Fonction logarithme',
+    'Fonction exponentielle', 'Calcul intégral', 'Équations différentielles',
+    'Suites numériques', 'Statistiques'
+  ],
+  physique: [
+    'Cinématique', 'Mouvement rectiligne', 'Mouvement dans le champ de pesanteur',
+    'Mouvement des particules chargées', 'Oscillateurs mécaniques',
+    'Généralités sur les ondes', 'Mouvement vibratoire', 'Superposition des ondes',
+    'Interférence lumineuse', 'Champ magnétique', 'Force de Laplace',
+    'Force de Lorentz', 'Induction magnétique', 'Auto-induction', 'Circuit LC',
+    'Circuit RLC', 'Radioactivité'
+  ],
+  chimie: [
+    'Solutions aqueuses et leur pH', 'Acide fort, base forte',
+    'Acide faible, base faible', 'Couples acide/base et classification',
+    'Réaction acido-basique et solution tampon', 'Alcools',
+    'Acides carboxyliques et ses dérivés', 'Amines et amides',
+    'Acides α-aminés et protéines'
+  ],
+  svt: [
+    'Notion de l\'IG', 'Nature chimique et structure de l\'IG : la molécule d\'ADN',
+    'La reproduction conforme', 'Cycle cellulaire et évolution de la quantité d\'ADN',
+    'Protéines', 'Synthèse des protéines', 'Reproduction sexuée',
+    'Brassage des gènes', 'Transmission des caractères héréditaires',
+    'Anomalies chromosomiques', 'Tissus nerveux et réflexes', 'Messages nerveux',
+    'La glycémie', 'Appareils génitaux', 'Régulation des organes génitaux',
+    'De la fécondation à la nidation', 'Régulation des naissances',
+    'Le soi et le non soi', 'Réponses immunitaires', 'VIH/SIDA'
+  ],
+  philosophie: [
+    'Conscience - Inconscient', 'Les passions', 'Autrui', 'Travail', 'Histoire',
+    'Religion', 'Science et technique', 'Le langage', 'La vérité',
+    'Espace - temps', 'État', 'La justice', 'La liberté'
+  ],
+  histoire: [
+    'Les causes de la Seconde Guerre mondiale', 'Le déroulement de la Seconde Guerre mondiale',
+    'L\'Afrique dans la guerre', 'Le bilan de la Seconde Guerre mondiale',
+    'Les conditions de la lutte de libération', 'La libération de l\'Algérie',
+    'La décolonisation en AOF', 'Les problèmes des pays décolonisés'
+  ],
+  geographie: [
+    'Les aspects physiques', 'Étude humaine', 'L\'agriculture', 'L\'élevage',
+    'La pêche', 'L\'industrie et l\'artisanat', 'La communication et le transport',
+    'Le commerce', 'Le tourisme'
+  ]
+};
+
+const STORAGE_KEY_SUBJECT = 'arvexa_reviseur_last_subject';
+const STORAGE_KEY_CHAPTER = 'arvexa_reviseur_last_chapter';
+
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+const state = {
+  user: null,
+  subject: null,
+  chapter: null,
+  subjectType: 'scientific',
+  totalAvailable: 0,
+  generatedCount: 0,
+  notions: [],
+  generatedIds: [],
+  currentNotion: null,
+  currentNotionIndex: 0,
+  quiz: [],
+  quizAnswers: {},
+  isGenerating: false,
+  isGeneratingQuiz: false
+};
+
+const $ = (id) => document.getElementById(id);
+
+// ✅ C2 — Variables de garde d'auth
+let currentUid = null;
+let isRedirecting = false;
+let isAuthResolved = false;
+let graceTimer = null;
+let maxTimer = null;
+let authUnsubscribe = null;
+
+// ═══════════════════════════════════════════════════════════════
+// UTILITAIRES
+// ═══════════════════════════════════════════════════════════════
+function escapeHtml(text) {
+  return String(text === null || text === undefined ? '' : text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function safeText(value) {
+  const txt = String(value === null || value === undefined ? '' : value);
+  const parts = txt.split(/(\$\$[\s\S]*?\$\$|\$[^$\n]+\$)/g);
+  return parts.map((part, i) => {
+    if (i % 2 === 1) return part;
+    return escapeHtml(part);
+  }).join('');
+}
+
+function cleanLatex(value) {
+  let txt = String(value || '').trim();
+  txt = txt.replace(/^\$\$([\s\S]*)\$\$$/, '$1');
+  txt = txt.replace(/^\$([\s\S]*)\$$/, '$1');
+  return txt.trim();
+}
+
+function showToast(message, type = 'info') {
+  const icons = {
+    success: 'fa-check-circle',
+    error: 'fa-exclamation-circle',
+    info: 'fa-info-circle'
+  };
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `<i class="fas ${icons[type] || icons.info}"></i><span>${escapeHtml(message)}</span>`;
+  $('toastContainer').appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 250);
+  }, 3200);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// NAVIGATION AVEC HISTORIQUE
+// ═══════════════════════════════════════════════════════════════
+function showView(id) {
+  document.querySelectorAll('.view').forEach((v) => v.classList.remove('active'));
+  const target = $(id);
+  if (target) target.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+const NON_HISTORY_VIEWS = new Set(['viewLoading', 'viewQuizResults']);
+const ROOT_VIEWS = new Set(['viewNotions', 'viewQuiz']);
+
+function navigateTo(viewId, stateData = {}) {
+  const currentView = document.querySelector('.view.active')?.id;
+
+  if (currentView === viewId) {
+    showView(viewId);
+    return;
+  }
+
+  try {
+    const isReturningHome = (viewId === 'viewHome');
+    const isFromHome = (currentView === 'viewHome');
+    const isNonHistory = NON_HISTORY_VIEWS.has(viewId);
+
+    if (isNonHistory || (!isFromHome && !isReturningHome)) {
+      window.history.replaceState(
+        { view: viewId, ...stateData },
+        '',
+        window.location.pathname + window.location.search
+      );
+    } else if (isFromHome && !isReturningHome) {
+      window.history.pushState(
+        { view: viewId, ...stateData },
+        '',
+        window.location.pathname + window.location.search
+      );
+    } else {
+      window.history.replaceState(
+        { view: 'viewHome', ...stateData },
+        '',
+        window.location.pathname + window.location.search
+      );
+    }
+  } catch (e) {
+    console.warn('[Réviseur] history error:', e.message);
+  }
+
+  showView(viewId);
+}
+
+function goBack() {
+  const currentView = document.querySelector('.view.active')?.id;
+
+  if (currentView === 'viewHome') {
+    window.history.back();
+    return;
+  }
+
+  try {
+    window.history.replaceState(
+      { view: 'viewHome' },
+      '',
+      window.location.pathname + window.location.search
+    );
+  } catch (e) {}
+
+  updateHomeUI();
+  showView('viewHome');
+}
+
+window.addEventListener('popstate', (event) => {
+  const targetView = event.state?.view;
+
+  if (!targetView) return;
+
+  if (targetView === 'viewHome') {
+    updateHomeUI();
+    showView('viewHome');
+    return;
+  }
+
+  if (targetView === 'viewNotions') {
+    renderNotionsList();
+    showView('viewNotions');
+    return;
+  }
+
+  if (targetView === 'viewNotionDetail') {
+    if (state.currentNotion) {
+      const idx = state.currentNotionIndex;
+      const notion = state.notions[idx];
+      if (notion) {
+        state.currentNotion = notion;
+        $('notionDetailEyebrow').textContent = 'Notion ' + (idx + 1);
+        $('notionDetailTitle').textContent = notion.notionTitle || 'Notion';
+        $('notionDetailMeta').textContent = (SUBJECT_EMOJIS[state.subject] || '📖') + ' ' + state.chapter + ' · ' + (SUBJECTS[state.subject] || state.subject);
+        $('notionDetailContent').innerHTML = renderNotionContent(notion);
+        showView('viewNotionDetail');
+        return;
+      }
+    }
+    renderNotionsList();
+    showView('viewNotions');
+    return;
+  }
+
+  try {
+    window.history.replaceState(
+      { view: 'viewHome' },
+      '',
+      window.location.pathname + window.location.search
+    );
+  } catch (e) {}
+
+  updateHomeUI();
+  showView('viewHome');
+});
+
+// ═══════════════════════════════════════════════════════════════
+// SÉLECTEURS
+// ═══════════════════════════════════════════════════════════════
+function closeAllSelectors() {
+  document.querySelectorAll('.selector.open').forEach((el) => el.classList.remove('open'));
+}
+
+function saveSelection() {
+  try {
+    localStorage.setItem(STORAGE_KEY_SUBJECT, state.subject);
+    localStorage.setItem(STORAGE_KEY_CHAPTER, state.chapter);
+  } catch (e) {}
+}
+
+function initSubjectSelector() {
+  const el = document.getElementById('subjectSelector');
+  const trigger = el.querySelector('.selector-trigger');
+  const valueEl = document.getElementById('subjectSelectorValue');
+  const optionsEl = document.getElementById('subjectSelectorOptions');
+
+  function render() {
+    valueEl.textContent = SUBJECTS[state.subject] || state.subject;
+
+    optionsEl.innerHTML = Object.entries(SUBJECTS).map(([key, label]) => `
+      <div class="selector-option ${key === state.subject ? 'selected' : ''}" data-value="${key}">
+        <span class="option-emoji">${SUBJECT_EMOJIS[key] || '📖'}</span>
+        <span>${escapeHtml(label)}</span>
+      </div>
+    `).join('');
+
+    optionsEl.querySelectorAll('.selector-option').forEach((opt) => {
+      opt.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const newSubject = opt.dataset.value;
+        if (newSubject === state.subject) {
+          closeAllSelectors();
+          return;
+        }
+
+        state.subject = newSubject;
+        state.chapter = CHAPTERS[newSubject]?.[0] || '';
+        state.subjectType = SCIENTIFIC_SUBJECTS.has(newSubject) ? 'scientific' : 'lesson';
+        saveSelection();
+
+        closeAllSelectors();
+        render();
+        resetChapterSelector();
+        loadCahier();
+      });
+    });
+  }
+
+  trigger.onclick = (e) => {
+    e.stopPropagation();
+    const wasOpen = el.classList.contains('open');
+    closeAllSelectors();
+    if (!wasOpen) el.classList.add('open');
+  };
+
+  render();
+}
+
+function initChapterSelector() {
+  const el = document.getElementById('chapterSelector');
+  const trigger = el.querySelector('.selector-trigger');
+
+  trigger.onclick = (e) => {
+    e.stopPropagation();
+    const wasOpen = el.classList.contains('open');
+    closeAllSelectors();
+    if (!wasOpen) el.classList.add('open');
+  };
+
+  renderChapterOptions();
+}
+
+function renderChapterOptions() {
+  const valueEl = document.getElementById('chapterSelectorValue');
+  const optionsEl = document.getElementById('chapterSelectorOptions');
+  const chapters = CHAPTERS[state.subject] || [];
+
+  valueEl.textContent = state.chapter || 'Choisir un chapitre';
+
+  optionsEl.innerHTML = chapters.map((ch) => `
+    <div class="selector-option ${ch === state.chapter ? 'selected' : ''}" data-value="${escapeHtml(ch)}">
+      <span class="option-emoji">📖</span>
+      <span>${escapeHtml(ch)}</span>
+    </div>
+  `).join('');
+
+  optionsEl.querySelectorAll('.selector-option').forEach((opt) => {
+    opt.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const newChapter = opt.dataset.value;
+      if (newChapter === state.chapter) {
+        closeAllSelectors();
+        return;
+      }
+      state.chapter = newChapter;
+      saveSelection();
+      closeAllSelectors();
+      renderChapterOptions();
+      loadCahier();
+    });
+  });
+}
+
+function resetChapterSelector() {
+  renderChapterOptions();
+}
+
+document.addEventListener('click', () => closeAllSelectors());
+
+// ═══════════════════════════════════════════════════════════════
+// API CALL
+// ═══════════════════════════════════════════════════════════════
+async function callApi(payload, _attempt = 1) {
+  if (!state.user) throw new Error('Non authentifié.');
+  // _attempt > 1 -> forceRefresh : le token est régénéré côté Firebase
+  const token = await getIdToken(state.user, _attempt > 1);
+  if (window.ARVEXAWakeLock) ARVEXAWakeLock.acquire('reviseur');
+  let res, data;
+  try {
+    res = await fetch('/api/reviseur', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(payload)
+    });
+    data = await res.json().catch(() => null);
+  } finally {
+    if (window.ARVEXAWakeLock) ARVEXAWakeLock.release('reviseur');
+  }
+
+  if (res.status === 401 && data?.code === 'AUTH_REQUIRED') {
+    // Anti-boucle : rafraîchissement forcé du token + UNE retente avant
+    // de renvoyer vers la connexion (401 passagers tolérés).
+    if (_attempt === 1) return callApi(payload, 2);
+    try {
+      sessionStorage.setItem('redirectAfterLogin',
+        window.location.pathname + window.location.search);
+    } catch (e) {}
+    window.location.replace('auth-choice.html');
+    throw new Error('Session expirée');
+  }
+
+  if (!res.ok || !data?.success) {
+    const err = new Error(data?.error || `Erreur ${res.status}`);
+    err.code = data?.code;
+    err.status = res.status;
+    throw err;
+  }
+  return data;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CHARGEMENT DU CAHIER
+// ═══════════════════════════════════════════════════════════════
+async function loadCahier() {
+  // ⚡ Cache local d'abord : un snapshot récent de ce chapitre hydrate l'état
+  // et peint l'UI immédiatement — l'appel réseau ne sert qu'à revalider.
+  const hydrated = hydrateFromSnapshot();
+  if (hydrated) updateHomeUI();
+
+  try {
+    const data = await callApi({
+      action: 'loadCahier',
+      subject: state.subject,
+      chapter: state.chapter
+    });
+
+    state.totalAvailable = data.totalAvailable || 0;
+    state.generatedCount = data.generatedCount || 0;
+    state.notions = data.notions || [];
+    state.generatedIds = data.generatedIds || [];
+    state.subjectType = data.subjectType || (SCIENTIFIC_SUBJECTS.has(state.subject) ? 'scientific' : 'lesson');
+
+    saveCahierSnapshot();
+    updateHomeUI();
+  } catch (err) {
+    console.error('[Réviseur] loadCahier error:', err);
+    // ⚡ Contenu déjà servi depuis le cache local → conservé silencieusement
+    if (hydrated && state.notions.length > 0) {
+      updateHomeUI();
+      return;
+    }
+    showToast(err.message || 'Impossible de charger le cahier', 'error');
+    state.totalAvailable = 0;
+    state.generatedCount = 0;
+    state.notions = [];
+    state.generatedIds = [];
+    updateHomeUI();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ⚡ SNAPSHOTS LOCAUX — cahier « en dur » (pattern accueil, v4.2)
+const CAHIER_KEY_PREFIX = 'arvexa_reviseur_cahier__';
+const CAHIER_MAX_AGE = 12 * 60 * 60 * 1000; // 12 h
+const CAHIER_MAX_SLOTS = 12; // LRU : max 12 chapitres en local
+
+function cahierKey() {
+  return CAHIER_KEY_PREFIX + state.subject + '::' + state.chapter;
+}
+
+function capNotion(n) {
+  if (!n || typeof n !== 'object') return n;
+  const out = {};
+  for (const k in n) {
+    if (!Object.prototype.hasOwnProperty.call(n, k)) continue;
+    const v = n[k];
+    if (typeof v === 'string') out[k] = v.length > 4000 ? v.slice(0, 4000) : v;
+    else if (Array.isArray(v)) out[k] = v.slice(0, 30).map((x) => (typeof x === 'string' && x.length > 2000 ? x.slice(0, 2000) : x));
+    else if (v && typeof v === 'object') { try { out[k] = JSON.parse(JSON.stringify(v)); } catch (e) { /* ignoré */ } }
+    else out[k] = v;
+  }
+  return out;
+}
+
+function saveCahierSnapshot() {
+  try {
+    const payload = {
+      uid: state.user ? state.user.uid : null,
+      subject: state.subject,
+      chapter: state.chapter,
+      subjectLabel: SUBJECTS[state.subject] || state.subject,
+      subjectType: state.subjectType,
+      totalAvailable: state.totalAvailable || 0,
+      generatedCount: state.generatedCount || 0,
+      generatedIds: state.generatedIds || [],
+      notions: (state.notions || []).slice(0, 40).map(capNotion),
+      savedAt: Date.now()
+    };
+    localStorage.setItem(cahierKey(), JSON.stringify(payload));
+
+    // LRU : purge des chapitres les plus anciens au-delà de CAHIER_MAX_SLOTS
+    const keys = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.indexOf(CAHIER_KEY_PREFIX) === 0) keys.push(k);
+    }
+    if (keys.length > CAHIER_MAX_SLOTS) {
+      keys
+        .map((k) => {
+          try { return { k, t: (JSON.parse(localStorage.getItem(k)) || {}).savedAt || 0 }; }
+          catch (e) { return { k, t: 0 }; }
+        })
+        .sort((a, b) => a.t - b.t)
+        .slice(0, keys.length - CAHIER_MAX_SLOTS)
+        .forEach((o) => { try { localStorage.removeItem(o.k); } catch (e) {} });
+    }
+  } catch (e) { /* quota dépassé : on continue sans snapshot */ }
+}
+
+function hydrateFromSnapshot() {
+  try {
+    const raw = localStorage.getItem(cahierKey());
+    if (!raw) return false;
+    const snap = JSON.parse(raw);
+    if (!snap || !snap.savedAt || (Date.now() - snap.savedAt) > CAHIER_MAX_AGE) return false;
+    if (snap.uid && state.user && snap.uid !== state.user.uid) return false;
+    if (snap.subject !== state.subject || snap.chapter !== state.chapter) return false;
+    state.totalAvailable = snap.totalAvailable || 0;
+    state.generatedCount = snap.generatedCount || 0;
+    state.notions = Array.isArray(snap.notions) ? snap.notions : [];
+    state.generatedIds = Array.isArray(snap.generatedIds) ? snap.generatedIds : [];
+    state.subjectType = snap.subjectType || (SCIENTIFIC_SUBJECTS.has(state.subject) ? 'scientific' : 'lesson');
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+// ────────────────────────────────────────────────────────────────
+// MISE À JOUR UI ACCUEIL
+// ═══════════════════════════════════════════════════════════════
+function updateHomeUI() {
+  $('subjectLabel').textContent = SUBJECTS[state.subject] || state.subject;
+  const heroEmoji = document.getElementById('subjectEmoji');
+  if (heroEmoji) heroEmoji.textContent = SUBJECT_EMOJIS[state.subject] || '📖';
+  $('chapterTitle').textContent = state.chapter;
+
+  const chapterValueEl = document.getElementById('chapterSelectorValue');
+  if (chapterValueEl) chapterValueEl.textContent = state.chapter;
+
+  const subjectValueEl = document.getElementById('subjectSelectorValue');
+  if (subjectValueEl) subjectValueEl.textContent = SUBJECTS[state.subject] || state.subject;
+
+  const percent = state.totalAvailable > 0
+    ? Math.round((state.generatedCount / state.totalAvailable) * 100)
+    : 0;
+  $('progressFill').style.width = percent + '%';
+  $('progressCurrent').textContent = state.generatedCount;
+  $('progressTotal').textContent = '/ ' + state.totalAvailable + ' notions';
+
+  if (state.generatedCount > 0) {
+    $('btnViewNotions').disabled = false;
+    $('viewNotionsDesc').textContent = state.generatedCount + ' notion' + (state.generatedCount > 1 ? 's' : '') + ' disponible' + (state.generatedCount > 1 ? 's' : '') + '. Lecture gratuite.';
+  } else {
+    $('btnViewNotions').disabled = true;
+    $('viewNotionsDesc').textContent = 'Aucune notion générée pour le moment.';
+  }
+
+  const remaining = state.totalAvailable - state.generatedCount;
+
+  if (state.generatedCount === 0) {
+    $('btnGenerate').disabled = false;
+    $('btnGenerateTitle').textContent = 'Générer mes premières notions';
+    $('btnGenerateDesc').textContent = '4 notions · ~15 secondes';
+  } else if (remaining === 0) {
+    $('btnGenerate').disabled = true;
+    $('btnGenerateTitle').textContent = 'Toutes les notions sont générées ✅';
+    $('btnGenerateDesc').textContent = 'Tu as terminé ce chapitre !';
+  } else {
+    $('btnGenerate').disabled = false;
+    const count = Math.min(3, remaining);
+    $('btnGenerateTitle').textContent = 'Générer de nouvelles notions';
+    $('btnGenerateDesc').textContent = count + ' notion' + (count > 1 ? 's' : '') + ' · ' + remaining + ' restante' + (remaining > 1 ? 's' : '');
+  }
+
+  if (state.generatedCount >= 3) {
+    $('btnQuiz').disabled = false;
+    $('btnQuizDesc').textContent = 'Teste tes connaissances sur ' + state.generatedCount + ' notions';
+  } else {
+    $('btnQuiz').disabled = true;
+    $('btnQuizDesc').textContent = 'Génère au moins 3 notions d\'abord';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// GÉNÉRATION
+// ═══════════════════════════════════════════════════════════════
+async function generateInitial() {
+  if (state.isGenerating) return;
+  state.isGenerating = true;
+
+  $('loadingTitle').textContent = 'Génération de tes premières notions';
+  $('loadingMessage').textContent = 'L\'IA prépare 4 notions complètes. Cela peut prendre 15 à 20 secondes.';
+
+  navigateTo('viewLoading');
+
+  try {
+    const data = await callApi({
+      action: 'generateInitial',
+      subject: state.subject,
+      chapter: state.chapter
+    });
+
+    state.notions = data.notions || [];
+    state.generatedCount = data.generatedCount || state.notions.length;
+    state.totalAvailable = data.totalAvailable || 0;
+    saveCahierSnapshot();
+
+    if (data.message) {
+      showToast(data.message, 'success');
+    } else {
+      showToast(state.notions.length + ' notions générées !', 'success');
+    }
+
+    updateHomeUI();
+
+    try {
+      window.history.replaceState(
+        { view: 'viewHome' },
+        '',
+        window.location.pathname + window.location.search
+      );
+    } catch (e) {}
+    showView('viewHome');
+
+  } catch (err) {
+    console.error('[Réviseur] generateInitial error:', err);
+    if (err.status === 429 && err.code === 'FREE_REVISEUR_LIMIT') {
+      showPremiumPopup();
+      navigateTo('viewHome');
+    } else {
+      showToast(err.message || 'Erreur de génération', 'error', 5000);
+      navigateTo('viewHome');
+    }
+  } finally {
+    state.isGenerating = false;
+  }
+}
+
+async function generateMore() {
+  if (state.isGenerating) return;
+  state.isGenerating = true;
+
+  $('loadingTitle').textContent = 'Génération de nouvelles notions';
+  $('loadingMessage').textContent = 'L\'IA prépare 3 nouvelles notions. Cela peut prendre 10 à 15 secondes.';
+
+  navigateTo('viewLoading');
+
+  try {
+    const data = await callApi({
+      action: 'generateMore',
+      subject: state.subject,
+      chapter: state.chapter
+    });
+
+    await loadCahier();
+
+    if (data.message) {
+      showToast(data.message, 'success');
+    } else {
+      showToast('Nouvelles notions générées !', 'success');
+    }
+
+    updateHomeUI();
+
+    try {
+      window.history.replaceState(
+        { view: 'viewHome' },
+        '',
+        window.location.pathname + window.location.search
+      );
+    } catch (e) {}
+    showView('viewHome');
+
+  } catch (err) {
+    console.error('[Réviseur] generateMore error:', err);
+    if (err.status === 429 && err.code === 'FREE_REVISEUR_LIMIT') {
+      showPremiumPopup();
+      navigateTo('viewHome');
+    } else {
+      showToast(err.message || 'Erreur de génération', 'error', 5000);
+      navigateTo('viewHome');
+    }
+  } finally {
+    state.isGenerating = false;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// LISTE DES NOTIONS
+// ═══════════════════════════════════════════════════════════════
+function renderNotionsList() {
+  const list = $('notionsList');
+  const empty = $('notionsEmpty');
+
+  $('notionsListTitle').textContent = state.chapter;
+  $('notionsListMeta').textContent = state.generatedCount + ' notion' + (state.generatedCount > 1 ? 's' : '') + ' générée' + (state.generatedCount > 1 ? 's' : '');
+
+  if (state.notions.length === 0) {
+    list.innerHTML = '';
+    empty.style.display = 'flex';
+    return;
+  }
+
+  empty.style.display = 'none';
+
+  list.innerHTML = state.notions.map((n, i) => {
+    const tags = [];
+
+    if (Array.isArray(n.formules) && n.formules.length > 0) {
+      tags.push('<span class="notion-row-tag"><i class="fas fa-square-root-variable"></i> Formules</span>');
+    }
+    if (Array.isArray(n.points_cles) && n.points_cles.length > 0) {
+      tags.push('<span class="notion-row-tag"><i class="fas fa-list-check"></i> Points clés</span>');
+    }
+    if (Array.isArray(n.termes) && n.termes.length > 0) {
+      tags.push('<span class="notion-row-tag"><i class="fas fa-book"></i> Termes</span>');
+    }
+    if (Array.isArray(n.mecanismes) && n.mecanismes.length > 0) {
+      tags.push('<span class="notion-row-tag"><i class="fas fa-cogs"></i> Mécanismes</span>');
+    }
+    if (Array.isArray(n.dates_cles) && n.dates_cles.length > 0) {
+      tags.push('<span class="notion-row-tag"><i class="fas fa-calendar"></i> Dates</span>');
+    }
+    if (n.methode && Array.isArray(n.methode.steps) && n.methode.steps.length > 0) {
+      tags.push('<span class="notion-row-tag"><i class="fas fa-list-ol"></i> Méthode</span>');
+    }
+    if (n.exempleResolu && n.exempleResolu.enonce) {
+      tags.push('<span class="notion-row-tag"><i class="fas fa-check-circle"></i> Exemple</span>');
+    }
+    if (n.piegeBAC && n.piegeBAC.trap) {
+      tags.push('<span class="notion-row-tag"><i class="fas fa-triangle-exclamation"></i> Piège</span>');
+    }
+
+    return `
+      <button class="notion-row" data-notion-index="${i}">
+        <div class="notion-row-num">${i + 1}</div>
+        <div class="notion-row-body">
+          <div class="notion-row-title">${escapeHtml(n.notionTitle || 'Sans titre')}</div>
+          <div class="notion-row-tags">${tags.join('')}</div>
+        </div>
+        <i class="fas fa-chevron-right notion-row-arrow"></i>
+      </button>
+    `;
+  }).join('');
+
+  list.querySelectorAll('.notion-row').forEach((row) => {
+    row.addEventListener('click', () => {
+      const idx = Number(row.dataset.notionIndex);
+      openNotionDetail(idx);
+    });
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DÉTAIL D'UNE NOTION
+// ═══════════════════════════════════════════════════════════════
+function openNotionDetail(index) {
+  const notion = state.notions[index];
+  if (!notion) return;
+
+  state.currentNotion = notion;
+  state.currentNotionIndex = index;
+
+  $('notionDetailEyebrow').textContent = 'Notion ' + (index + 1);
+  $('notionDetailTitle').textContent = notion.notionTitle || 'Notion';
+  $('notionDetailMeta').textContent = (SUBJECT_EMOJIS[state.subject] || '📖') + ' ' + state.chapter + ' · ' + (SUBJECTS[state.subject] || state.subject);
+
+  const content = $('notionDetailContent');
+  content.innerHTML = renderNotionContent(notion);
+
+  navigateTo('viewNotionDetail');
+}
+
+function renderNotionContent(n) {
+  let html = '';
+
+  if (n.comprendre && n.comprendre.trim()) {
+    html += `
+      <div class="block">
+        <div class="block-label"><i class="fas fa-lightbulb"></i> Comprendre</div>
+        <div class="block-text">${safeText(n.comprendre)}</div>
+      </div>
+    `;
+  }
+
+  if (Array.isArray(n.points_cles) && n.points_cles.length > 0) {
+    html += `
+      <div class="block">
+        <div class="block-label"><i class="fas fa-list-check"></i> Points clés</div>
+        <ul class="simple-list">
+          ${n.points_cles.map((p) => `<li>${safeText(p)}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  if (Array.isArray(n.termes) && n.termes.length > 0) {
+    const termesHtml = n.termes.map((t) => {
+      const term = t.terme || t.mot || '';
+      const def = t.definition || t.meaning || '';
+      if (!term) return '';
+      return `<li><strong>${safeText(term)}</strong> — ${safeText(def)}</li>`;
+    }).filter(Boolean).join('');
+
+    if (termesHtml) {
+      html += `
+        <div class="block">
+          <div class="block-label"><i class="fas fa-book"></i> Termes clés</div>
+          <ul class="simple-list">${termesHtml}</ul>
+        </div>
+      `;
+    }
+  }
+
+  if (Array.isArray(n.mecanismes) && n.mecanismes.length > 0) {
+    const mecaHtml = n.mecanismes.map((m) => {
+      const nom = m.nom || m.name || 'Mécanisme';
+      const etapes = Array.isArray(m.etapes) ? m.etapes : [];
+      const consequences = Array.isArray(m.consequences) ? m.consequences : [];
+
+      let inner = `<div class="mechanism-name"><i class="fas fa-cogs"></i> ${safeText(nom)}</div>`;
+
+      if (etapes.length > 0) {
+        inner += `<ol class="mechanism-steps">${etapes.map((e) => `<li>${safeText(e)}</li>`).join('')}</ol>`;
+      }
+
+      if (consequences.length > 0) {
+        inner += `
+          <div class="mechanism-consequences">
+            <div class="mechanism-consequences-title">Conséquences</div>
+            <ul>${consequences.map((c) => `<li>${safeText(c)}</li>`).join('')}</ul>
+          </div>
+        `;
+      }
+
+      return `<div class="mechanism">${inner}</div>`;
+    }).join('');
+
+    html += `
+      <div class="block">
+        <div class="block-label"><i class="fas fa-cogs"></i> Mécanismes</div>
+        ${mecaHtml}
+      </div>
+    `;
+  }
+
+  if (Array.isArray(n.dates_cles) && n.dates_cles.length > 0) {
+    const datesHtml = n.dates_cles.map((d) => {
+      const date = d.date || '';
+      const evt = d.evenement || d.event || '';
+      if (!date) return '';
+      return `<li><strong>${safeText(date)}</strong> — ${safeText(evt)}</li>`;
+    }).filter(Boolean).join('');
+
+    if (datesHtml) {
+      html += `
+        <div class="block">
+          <div class="block-label"><i class="fas fa-calendar"></i> Dates clés</div>
+          <ul class="simple-list">${datesHtml}</ul>
+        </div>
+      `;
+    }
+  }
+
+  if (Array.isArray(n.personnages) && n.personnages.length > 0) {
+    const persoHtml = n.personnages.map((p) => {
+      const nom = p.nom || p.name || '';
+      const role = p.role || '';
+      if (!nom) return '';
+      return `<li><strong>${safeText(nom)}</strong> — ${safeText(role)}</li>`;
+    }).filter(Boolean).join('');
+
+    if (persoHtml) {
+      html += `
+        <div class="block">
+          <div class="block-label"><i class="fas fa-user-tie"></i> Personnages clés</div>
+          <ul class="simple-list">${persoHtml}</ul>
+        </div>
+      `;
+    }
+  }
+
+  if (Array.isArray(n.lieux) && n.lieux.length > 0) {
+    const lieuxHtml = n.lieux.map((l) => {
+      const nom = l.nom || l.name || l.lieu || '';
+      const info = l.info || l.description || '';
+      if (!nom) return '';
+      return `<li><strong>${safeText(nom)}</strong> — ${safeText(info)}</li>`;
+    }).filter(Boolean).join('');
+
+    if (lieuxHtml) {
+      html += `
+        <div class="block">
+          <div class="block-label"><i class="fas fa-map-location-dot"></i> Lieux importants</div>
+          <ul class="simple-list">${lieuxHtml}</ul>
+        </div>
+      `;
+    }
+  }
+
+  if (Array.isArray(n.auteurs) && n.auteurs.length > 0) {
+    const auteursHtml = n.auteurs.map((a) => {
+      const nom = a.nom || a.name || '';
+      const idee = a.idee || a.these || '';
+      if (!nom) return '';
+      return `<li><strong>${safeText(nom)}</strong> — ${safeText(idee)}</li>`;
+    }).filter(Boolean).join('');
+
+    if (auteursHtml) {
+      html += `
+        <div class="block">
+          <div class="block-label"><i class="fas fa-user-graduate"></i> Auteurs clés</div>
+          <ul class="simple-list">${auteursHtml}</ul>
+        </div>
+      `;
+    }
+  }
+
+  if (Array.isArray(n.formules) && n.formules.length > 0) {
+    const formulesHtml = n.formules.map((f) => {
+      const latex = cleanLatex(f.latex || '');
+      if (!latex) return '';
+      return `
+        <div class="formula-item">
+          <div class="formula-latex">$$${safeText(latex)}$$</div>
+          ${f.condition ? `<div class="formula-condition">${safeText(f.condition)}</div>` : ''}
+        </div>
+      `;
+    }).filter(Boolean).join('');
+
+    if (formulesHtml) {
+      html += `
+        <div class="block">
+          <div class="block-label"><i class="fas fa-square-root-variable"></i> Formules clés</div>
+          <div class="formulas-list">${formulesHtml}</div>
+        </div>
+      `;
+    }
+  }
+
+  if (Array.isArray(n.proprietes) && n.proprietes.length > 0) {
+    html += `
+      <div class="block">
+        <div class="block-label"><i class="fas fa-list-ul"></i> Propriétés</div>
+        <ul class="simple-list">
+          ${n.proprietes.map((p) => `<li>${safeText(p)}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+  }
+
+  let methodeSteps = [];
+  let methodeTitle = 'Méthode pas-à-pas';
+
+  if (n.methode && typeof n.methode === 'object' && !Array.isArray(n.methode)) {
+    methodeTitle = n.methode.title || methodeTitle;
+    methodeSteps = Array.isArray(n.methode.steps) ? n.methode.steps : [];
+  } else if (Array.isArray(n.methodes) && n.methodes.length > 0) {
+    methodeSteps = n.methodes;
+  }
+
+  if (methodeSteps.length > 0) {
+    html += `
+      <div class="block">
+        <div class="block-label"><i class="fas fa-list-ol"></i> ${escapeHtml(methodeTitle)}</div>
+        <ol class="method-steps">
+          ${methodeSteps.map((s) => `<li>${safeText(s)}</li>`).join('')}
+        </ol>
+      </div>
+    `;
+  }
+
+  if (n.exempleResolu && typeof n.exempleResolu === 'object') {
+    const ex = n.exempleResolu;
+    if (ex.enonce || (Array.isArray(ex.etapes) && ex.etapes.length > 0)) {
+      let exHtml = '<div class="block"><div class="block-label"><i class="fas fa-check-circle"></i> Exemple résolu</div>';
+      if (ex.enonce) exHtml += `<div class="example-enonce">${safeText(ex.enonce)}</div>`;
+      if (Array.isArray(ex.etapes) && ex.etapes.length > 0) {
+        exHtml += `<ol class="example-steps">${ex.etapes.map((e) => `<li>${safeText(e)}</li>`).join('')}</ol>`;
+      }
+      if (ex.conclusion) exHtml += `<div class="example-conclusion">${safeText(ex.conclusion)}</div>`;
+      exHtml += '</div>';
+      html += exHtml;
+    }
+  }
+
+  if (n.piegeBAC && (n.piegeBAC.trap || n.piegeBAC.solution)) {
+    html += `
+      <div class="block">
+        <div class="block-label"><i class="fas fa-triangle-exclamation"></i> Piège du BAC</div>
+        ${n.piegeBAC.trap ? `<div class="piege-trap">${safeText(n.piegeBAC.trap)}</div>` : ''}
+        ${n.piegeBAC.solution ? `<div class="piege-solution">${safeText(n.piegeBAC.solution)}</div>` : ''}
+      </div>
+    `;
+  }
+
+  if (n.astuce && n.astuce.trim()) {
+    html += `
+      <div class="block astuce">
+        <div class="block-label"><i class="fas fa-star"></i> Astuce</div>
+        <div class="block-text">${safeText(n.astuce)}</div>
+      </div>
+    `;
+  }
+
+  if (!html) {
+    html = `
+      <div class="block">
+        <div class="block-label"><i class="fas fa-info-circle"></i> Information</div>
+        <div class="block-text">Le contenu de cette notion n'est pas disponible.</div>
+      </div>
+    `;
+  }
+
+  return html;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// SUPPRESSION D'UNE NOTION
+// ═══════════════════════════════════════════════════════════════
+async function deleteCurrentNotion() {
+  if (!state.currentNotion) return;
+
+  // ✅ Modale uniforme (même modèle que index.html)
+  window.arvexaConfirm({
+    title: 'Supprimer cette notion ?',
+    message: 'Elle pourra être <strong>régénérée</strong> plus tard.',
+    icon: '🗑️',
+    confirmText: 'Supprimer',
+    cancelText: 'Annuler',
+    variant: 'danger',
+    onConfirm: async () => {
+      try {
+        await callApi({
+          action: 'deleteNotion',
+          subject: state.subject,
+          chapter: state.chapter,
+          notionId: state.currentNotion.notionId
+        });
+
+        showToast('Notion supprimée', 'success');
+        state.currentNotion = null;
+        await loadCahier();
+
+        window.history.replaceState({ view: 'viewHome' }, '', window.location.pathname + window.location.search);
+        showView('viewHome');
+
+      } catch (err) {
+        console.error('[Réviseur] deleteNotion error:', err);
+        showToast(err.message || 'Erreur de suppression', 'error');
+      }
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════════════════════════════
+async function generateQuiz() {
+  if (state.isGeneratingQuiz) return;
+  state.isGeneratingQuiz = true;
+
+  $('loadingTitle').textContent = 'Génération du quiz';
+  $('loadingMessage').textContent = 'L\'IA prépare 10 questions sur tes notions. ~10 secondes.';
+
+  navigateTo('viewLoading');
+
+  try {
+    const data = await callApi({
+      action: 'quiz',
+      subject: state.subject,
+      chapter: state.chapter,
+      count: 10
+    });
+
+    state.quiz = data.quiz || [];
+    state.quizAnswers = {};
+
+    if (state.quiz.length === 0) {
+      showToast('Aucune question générée. Réessaie.', 'error');
+      navigateTo('viewHome');
+      return;
+    }
+
+    renderQuiz();
+
+    try {
+      window.history.replaceState(
+        { view: 'viewQuiz' },
+        '',
+        window.location.pathname + window.location.search
+      );
+    } catch (e) {}
+    showView('viewQuiz');
+
+  } catch (err) {
+    console.error('[Réviseur] quiz error:', err);
+
+    if (err.status === 429 && err.code === 'FREE_REVISEUR_LIMIT') {
+      showPremiumPopup();
+      navigateTo('viewHome');
+    } else {
+      showToast(err.message || 'Erreur de génération du quiz', 'error');
+      navigateTo('viewHome');
+    }
+  } finally {
+    state.isGeneratingQuiz = false;
+  }
+}
+
+function renderQuiz() {
+  const container = $('quizContent');
+  container.innerHTML = '';
+
+  $('quizMeta').textContent = state.quiz.length + ' questions · ' + state.chapter;
+
+  state.quiz.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-question';
+    div.dataset.index = i;
+
+    const opts = (q.options || []).map((opt) => `
+      <button class="quiz-option" data-option="${escapeHtml(opt.id)}" data-qindex="${i}" type="button">
+        <span class="quiz-letter">${escapeHtml(opt.id)}</span>
+        <span>${safeText(opt.text)}</span>
+      </button>
+    `).join('');
+
+    div.innerHTML = `
+      <div class="quiz-q-header">
+        <div class="quiz-q-num">Question ${i + 1}</div>
+      </div>
+      <div class="quiz-q-text">${safeText(q.question)}</div>
+      <div class="quiz-options">${opts}</div>
+      <div class="quiz-explanation" id="expl-${i}"></div>
+    `;
+    container.appendChild(div);
+  });
+
+  container.querySelectorAll('.quiz-option').forEach((opt) => {
+    opt.addEventListener('click', () => handleQuizAnswer(opt));
+  });
+
+  $('btnValidateQuiz').disabled = true;
+}
+
+function handleQuizAnswer(opt) {
+  const i = parseInt(opt.dataset.qindex);
+  if (state.quizAnswers[i]) return;
+
+  const q = state.quiz[i];
+  state.quizAnswers[i] = opt.dataset.option;
+
+  const question = document.querySelector(`.quiz-question[data-index="${i}"]`);
+  question.querySelectorAll('.quiz-option').forEach((o) => {
+    o.classList.add('disabled');
+    if (o.dataset.option === q.correctAnswer) {
+      o.classList.add('correct');
+    } else if (o.dataset.option === opt.dataset.option) {
+      o.classList.add('wrong');
+    }
+  });
+
+  const expl = document.getElementById('expl-' + i);
+  if (q.explanation) {
+    expl.innerHTML = `<strong>💡</strong> ${safeText(q.explanation)}`;
+    expl.classList.add('show');
+  }
+
+  const answered = Object.keys(state.quizAnswers).length;
+  $('btnValidateQuiz').disabled = answered < state.quiz.length;
+}
+
+function validateQuiz() {
+  let correct = 0;
+  state.quiz.forEach((q, i) => {
+    if (state.quizAnswers[i] === q.correctAnswer) correct++;
+  });
+
+  const total = state.quiz.length;
+  if (total === 0) return;
+
+  const score = Math.round((correct / total) * 20);
+  const percent = Math.round((correct / total) * 100);
+
+  $('metricCorrect').textContent = correct + '/' + total;
+  $('metricScore').textContent = score + '/20';
+  $('metricPercent').textContent = percent + '%';
+
+  let emoji, title, sub;
+  if (percent >= 90) { emoji = '🏆'; title = 'Excellent !'; sub = 'Chapitre maîtrisé !'; }
+  else if (percent >= 70) { emoji = '🎉'; title = 'Bravo !'; sub = 'Bonne progression.'; }
+  else if (percent >= 50) { emoji = '📚'; title = 'Pas mal'; sub = 'Continue à réviser.'; }
+  else { emoji = '💪'; title = 'Courage'; sub = 'Retravaille ce chapitre.'; }
+
+  $('quizResultEmoji').textContent = emoji;
+  $('quizResultTitle').textContent = title;
+  $('quizResultSub').textContent = sub;
+
+  navigateTo('viewQuizResults');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// PREMIUM POPUP — ✅ v8.4 modale UNIFORME (arvexa-confirm.js)
+// ═══════════════════════════════════════════════════════════════
+function showPremiumPopup() {
+  if (typeof window.arvexaConfirm !== 'function') { window.location.assign('abonnement.html'); return; }
+  window.arvexaConfirm({
+    title: 'Limite atteinte',
+    message: "Tu as utilisé tes <strong>3 générations gratuites</strong> aujourd'hui. Passe à Premium pour réviser sans limite.",
+    icon: '👑',
+    confirmText: 'Découvrir Premium',
+    cancelText: 'Plus tard',
+    variant: 'primary',
+    onConfirm: () => window.location.assign('abonnement.html')
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EVENT LISTENERS
+// ═══════════════════════════════════════════════════════════════
+$('btnViewNotions').addEventListener('click', () => {
+  renderNotionsList();
+  navigateTo('viewNotions');
+});
+
+$('btnGenerate').addEventListener('click', () => {
+  if (state.generatedCount === 0) {
+    generateInitial();
+  } else {
+    generateMore();
+  }
+});
+
+$('btnQuiz').addEventListener('click', generateQuiz);
+
+$('backFromNotions').addEventListener('click', () => goBack());
+$('backFromNotionDetail').addEventListener('click', () => goBack());
+$('btnDeleteNotion').addEventListener('click', deleteCurrentNotion);
+$('backFromQuiz').addEventListener('click', () => goBack());
+$('btnValidateQuiz').addEventListener('click', validateQuiz);
+$('btnNewQuiz').addEventListener('click', () => generateQuiz());
+$('btnBackHomeFromResults').addEventListener('click', () => goBack());
+
+// ✅ v8.4 — fermeture gérée par arvexa-confirm.js (Échap/clic extérieur)
+
+// ═══════════════════════════════════════════════════════════════
+// PRÉREMPLISSAGE
+// ═══════════════════════════════════════════════════════════════
+function prefillFromUrl() {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const urlSubject = params.get('subject');
+    const urlChapter = params.get('chapter');
+
+    if (urlSubject && SUBJECTS[urlSubject]) {
+      state.subject = urlSubject;
+      if (urlChapter && CHAPTERS[state.subject]?.includes(urlChapter)) {
+        state.chapter = urlChapter;
+      } else {
+        state.chapter = CHAPTERS[state.subject]?.[0] || 'Nombres complexes';
+      }
+      state.subjectType = SCIENTIFIC_SUBJECTS.has(urlSubject) ? 'scientific' : 'lesson';
+      return;
+    }
+
+    try {
+      const savedSubject = localStorage.getItem(STORAGE_KEY_SUBJECT);
+      const savedChapter = localStorage.getItem(STORAGE_KEY_CHAPTER);
+
+      if (savedSubject && SUBJECTS[savedSubject]) {
+        state.subject = savedSubject;
+        if (savedChapter && CHAPTERS[state.subject]?.includes(savedChapter)) {
+          state.chapter = savedChapter;
+          state.subjectType = SCIENTIFIC_SUBJECTS.has(savedSubject) ? 'scientific' : 'lesson';
+          return;
+        }
+      }
+    } catch (e) {}
+
+    state.subject = 'mathematiques';
+    state.chapter = 'Nombres complexes';
+    state.subjectType = 'scientific';
+  } catch (e) {
+    console.warn('[Réviseur] prefillFromUrl error:', e.message);
+    state.subject = 'mathematiques';
+    state.chapter = 'Nombres complexes';
+    state.subjectType = 'scientific';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// ✅ C2/C3/C4 — AUTH ROBUSTE
+// ═══════════════════════════════════════════════════════════════
+function redirectToLogin() {
+  if (isRedirecting) return;
+  isRedirecting = true;
+
+  if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+  if (maxTimer) { clearTimeout(maxTimer); maxTimer = null; }
+  if (authUnsubscribe) {
+    try { authUnsubscribe(); } catch (e) {}
+    authUnsubscribe = null;
+  }
+
+  try {
+    const existing = sessionStorage.getItem('redirectAfterLogin')
+                  || sessionStorage.getItem('redirectAfterAuth');
+    if (!existing) {
+      sessionStorage.setItem('redirectAfterLogin',
+        window.location.pathname + window.location.search + window.location.hash);
+    }
+  } catch (e) {}
+
+  window.location.replace('login.html');
+}
+
+function initAuthGuard(onAuthenticated) {
+  if (authUnsubscribe) return;
+
+  authUnsubscribe = onAuthStateChanged(auth, (user) => {
+    if (isAuthResolved) {
+      if (user && user.uid !== currentUid) {
+        currentUid = user.uid;
+        saveSession(user);
+        onAuthenticated(user);
+      } else if (!user && currentUid) {
+        currentUid = null;
+        clearSession();
+        redirectToLogin();
+      }
+      return;
+    }
+
+    if (!user) {
+      if (graceTimer) return;
+      graceTimer = setTimeout(() => {
+        graceTimer = null;
+        if (isAuthResolved) return;
+        if (auth.currentUser) return;
+
+        const hasSession = localStorage.getItem(SESSION_KEY);
+        const hasUserData = localStorage.getItem(USER_DATA_KEY);
+
+        if ((hasSession || hasUserData) && !navigator.onLine) {
+          setTimeout(() => {
+            if (auth.currentUser) return;
+            if (!isAuthResolved) redirectToLogin();
+          }, 1500);
+          return;
+        }
+
+        if (hasSession && hasUserData) {
+          setTimeout(() => {
+            if (auth.currentUser) return;
+            if (!isAuthResolved) redirectToLogin();
+          }, 1500);
+          return;
+        }
+
+        redirectToLogin();
+      }, 600);
+      return;
+    }
+
+    if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+    if (maxTimer) { clearTimeout(maxTimer); maxTimer = null; }
+
+    isAuthResolved = true;
+    currentUid = user.uid;
+    saveSession(user);
+    onAuthenticated(user);
+  });
+
+  maxTimer = setTimeout(() => {
+    if (isAuthResolved) return;
+    if (auth.currentUser) {
+      isAuthResolved = true;
+      currentUid = auth.currentUser.uid;
+      saveSession(auth.currentUser);
+      onAuthenticated(auth.currentUser);
+    } else {
+      redirectToLogin();
+    }
+  }, 5000);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// LANCER LA PROTECTION — ✅ C4 (blocked/paused)
+// ═══════════════════════════════════════════════════════════════
+initAuthGuard(async (user) => {
+  // ⚡ Cache-first : statut blocked/paused lu du cache IndexedDB (~10-50 ms),
+  // puis revalidé silencieusement côté serveur (réapplication si accountStatus change).
+  await docSWR(doc(db, 'users', user.uid), (userSnap) => {
+    if (!userSnap.exists()) return;
+    const userData = userSnap.data();
+
+    if (userData.accountStatus === 'blocked') {
+      try { sessionStorage.setItem('arvexa_account_blocked', '1'); } catch (e) {}
+      try { signOut(auth); } catch (e) {}
+      window.location.replace('auth-choice.html');
+      return;
+    }
+
+    if (userData.accountStatus === 'paused') {
+      showToast('Ton compte est temporairement en pause. Contacte le support.', 'error');
+      // On laisse la page consultable mais la génération IA sera refusée côté backend
+    }
+
+    try {
+      localStorage.setItem(USER_DATA_KEY, JSON.stringify({
+        ...userData,
+        _uid: user.uid,
+        _cachedAt: Date.now()
+      }));
+    } catch (e) {}
+  }, (a, b) => (a && a.accountStatus) !== (b && b.accountStatus));
+
+  state.user = user;
+  const conn = $('connectionState');
+  if (conn) {
+    conn.textContent = 'Connecté';
+    conn.classList.add('online');
+  }
+
+  prefillFromUrl();
+  hydrateFromSnapshot();
+  initSubjectSelector();
+  initChapterSelector();
+
+  try {
+    window.history.replaceState(
+      { view: 'viewHome' },
+      '',
+      window.location.pathname + window.location.search
+    );
+  } catch (e) {
+    console.warn('[Réviseur] replaceState error:', e.message);
+  }
+
+  updateHomeUI();
+  await loadCahier();
+  showView('viewHome');
+});
+
+// ✅ C9 — cleanup global
+window.addEventListener('beforeunload', () => {
+  if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+  if (maxTimer) { clearTimeout(maxTimer); maxTimer = null; }
+  if (authUnsubscribe) { try { authUnsubscribe(); } catch (e) {} authUnsubscribe = null; }
+});
+
+console.log('🚀 ARVEXA — Réviseur v7.3 — Corrections C1-C9 appliquées');
+</script>
+<script type="module" src="./arvexa-confirm.js"></script>
+</body>
+</html>

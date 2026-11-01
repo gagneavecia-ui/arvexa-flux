@@ -1,0 +1,23 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return signedIn() && request.auth.token.admin == true;
+    }
+
+    // No application upload path is currently used. Keep Storage closed until
+    // a server-validated upload flow is introduced.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

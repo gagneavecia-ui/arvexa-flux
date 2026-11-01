@@ -1,0 +1,550 @@
+<!-- ============================================================ -->
+<!-- PARTIE 2 : STRUCTURE EN DOUBLE HÉLICE & APARIEMENT DES BASES  -->
+<!-- Notion 1 : chargaff · diffraction_rx · double_helice          -->
+<!-- Notion 2 : appariement_bases · complementarite_chaines        -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 02 · Structure de l'ADN</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      La <em>double hélice</em> et l'appariement des bases
+    </h1>
+    <p class="lecture-hero-intro">
+      En 1953, James Watson et Francis Crick proposent le modèle qui explique enfin la molécule d'ADN : une <strong>double hélice</strong>. Ce modèle ne sort pas de nulle part — il s'appuie sur les <strong>données de Chargaff</strong> et les <strong>clichés de diffraction aux rayons X</strong> de Rosalind Franklin. Cette partie déroule <strong>2 notions</strong> : les <strong>données expérimentales</strong>, puis le <strong>modèle lui-même</strong> — appariement spécifique des bases et complémentarité des chaînes.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧬 2 notions</span>
+      <span class="lecture-hero-meta-item">📑 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">2 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — La course à la structure, 1953</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · chargaff — Les données de Chargaff</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · diffraction_rx — Les clichés de Rosalind Franklin</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 1 · double_helice — Le modèle : une double hélice</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 1 · antiparallelisme — Deux chaînes antiparallèles</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 2 · appariement_bases — A—T et C≡G</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 2 · complementarite_chaines — Complémentarité et continuité</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Fiche méthode — Écrire la chaîne complémentaire</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">La course à la structure, 1953</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La partie 1 t'a donné les briques : deux chaînes polynucléotidiques, des nucléotides à quatre bases. Reste l'énigme du <strong>plan de l'édifice</strong>. Au début des années 1950, plusieurs équipes du monde entier cherchent la forme exacte de l'ADN — celui qui trouve le plan comprendra du même coup <strong>comment l'information génétique peut être copiée</strong>.
+      </p>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">La démarche scientifique en jeu</div>
+          <p>Watson et Crick n'ont pas fait d'expériences sur l'ADN eux-mêmes : ils ont <strong>construit un modèle</strong> en rassemblant les données des autres. Un bon modèle doit <strong>expliquer toutes les données connues</strong> — les quantités de bases de Chargaff ET les images de diffraction de Franklin. C'est cette confrontation données ↔ modèle que tu dois savoir raconter au Bac.</p>
+        </div>
+      </div>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Acteur</th><th>Apport</th><th>Type de données</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Erwin Chargaff</td><td>Quantités de bases : <span class="math">A = T</span> et <span class="math">G = C</span></td><td>Biochimie (dosage)</td></tr>
+            <tr><td>Rosalind Franklin</td><td>Forme hélicoïdale et dimensions précises</td><td>Diffraction aux rayons X</td></tr>
+            <tr><td>Watson et Crick (1953)</td><td>Le modèle : la double hélice</td><td>Modélisation</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">📌 Le savais-tu ?</div>
+        <div class="lecture-aside-content">Le prix Nobel de médecine 1962 a récompensé Watson, Crick et Wilkins. Rosalind Franklin, morte en 1958 à 37 ans, ne put y figurer — son cliché n° 51, « Photo 51 », reste pourtant la clé qui a ouvert la porte.</div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 — LES DONNÉES DE CHARGAFF -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · chargaff</span>
+        <h2 class="lecture-section-title">Les données de Chargaff : A = T et G = C</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Erwin Chargaff dose les quatre bases dans l'ADN d'organismes très variés (bactéries, plantes, animaux). Les proportions d'ensemble changent d'une espèce à l'autre… mais un rapport étonnant apparaît <strong>toujours</strong>, quel que soit l'être vivant.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition officielle — règles de Chargaff</div>
+          <p>Dans toute molécule d'ADN, la quantité d'adénine est <strong>égale</strong> à la quantité de thymine (<span class="math">A = T</span>), et la quantité de guanine est <strong>égale</strong> à la quantité de cytosine (<span class="math">G = C</span>). Conséquence : <span class="math">A + G = T + C</span> — les bases puriques représentent toujours 50 % des bases, et les pyrimidiques 50 %.</p>
+        </div>
+      </div>
+
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">Exemple d'application — exploiter les règles de Chargaff</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text">Une molécule d'ADN contient 30 % d'adénine. Déterminons les proportions des trois autres bases :</p>
+          <div class="lecture-steps">
+            <div class="lecture-step">
+              <div class="lecture-step-number">1</div>
+              <div class="lecture-step-content"><span class="math">A = T</span> → <span class="math">%T = 30 %</span> (règle de Chargaff n° 1).</div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">2</div>
+              <div class="lecture-step-content"><span class="math">A + T = 30 % + 30 % = 60 %</span> du total. Il reste <span class="math">100 % − 60 % = 40 %</span> pour <span class="math">G + C</span>.</div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">3</div>
+              <div class="lecture-step-content"><span class="math">G = C</span> → <span class="math">%G = %C = 40 % ÷ 2 = 20 %</span>.</div>
+            </div>
+          </div>
+          <p class="lecture-text">✅ Bilan : <span class="math">A = 30 % · T = 30 % · G = 20 % · C = 20 %</span>. Vérification : <span class="math">A + G = 50 % = T + C</span>.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Piège : égalité de quantités, pas appariement</div>
+          <p>L'égalité <span class="math">A = T</span> de Chargaff parle de <strong>quantités mesurées</strong> dans la molécule. Ne la confonds pas avec l'<strong>appariement</strong> A—T (qui, lui, décrit deux bases face à face). Chargaff constate l'égalité sans pouvoir l'expliquer : c'est le modèle de Watson et Crick qui en donne la raison — chaque A d'une chaîne fait face à un T de l'autre chaîne !</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 — DIFFRACTION AUX RAYONS X -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · diffraction_rx</span>
+        <h2 class="lecture-section-title">Les clichés de diffraction aux rayons X</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Savoir <em>de quoi</em> est fait l'ADN ne suffit pas : il faut connaître sa <em>forme</em>, invisible au microscope. Pour cela, Rosalind Franklin, au King's College de Londres, fait passer un faisceau de <strong>rayons X</strong> à travers des fibres d'ADN et photographie la figure obtenue : c'est la <strong>diffraction aux rayons X</strong>.
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><strong>Préparation.</strong> On étire l'ADN en une fibre très fine, contenant des milliers de molécules parallèles et orientées.</div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><strong>Irradiation.</strong> Le faisceau de rayons X (longueur d'onde comparable à la taille des atomes) traverse la fibre.</div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content"><strong>Enregistrement.</strong> Les rayons déviés par les atomes dessinent sur une pellicule un motif de taches — le célèbre cliché « Photo 51 » (1952).</div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content"><strong>Interprétation.</strong> La forme en X du motif révèle une <strong>hélice</strong> ; les distances entre taches fournissent les <strong>dimensions</strong> de la molécule.</div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Ce que révèlent les clichés — à citer exactement</div>
+          <p>Les clichés de diffraction de Rosalind Franklin montrent que l'ADN est une <strong>molécule hélicoïdale régulière</strong>, de <strong>diamètre constant ≈ 2 nm</strong>, avec un <strong>pas de l'hélice de 3,4 nm</strong> correspondant à <strong>10 paires de nucléotides par tour</strong> — soit 0,34 nm entre deux paires de bases successives.</p>
+        </div>
+      </div>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Grandeur</th><th>Valeur</th><th>Signification</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Diamètre de l'hélice</td><td><span class="math">≈ 2 nm</span></td><td>Largeur constante de la molécule</td></tr>
+            <tr><td>Pas de l'hélice</td><td><span class="math">3,4 nm</span></td><td>Distance parcourue en <strong>un tour complet</strong></td></tr>
+            <tr><td>Paires de nucléotides par tour</td><td><span class="math">10</span></td><td>Densité de l'enroulement</td></tr>
+            <tr><td>Distance entre 2 paires</td><td><span class="math">0,34 nm</span></td><td><span class="math">3,4 nm ÷ 10</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Ne confonds pas les trois chiffres : <strong>2 nm</strong> (diamètre), <strong>3,4 nm</strong> (pas = un tour), <strong>0,34 nm</strong> (distance entre deux paires). Une erreur classique consiste à donner 3,4 nm comme diamètre ou 2 nm comme pas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 1 — LE MODÈLE : DOUBLE HÉLICE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · double_helice</span>
+        <h2 class="lecture-section-title">Le modèle de Watson et Crick : une double hélice</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition officielle — modèle de Watson et Crick (1953)</div>
+          <p>D'après le modèle de Watson et Crick, la molécule d'ADN est formée de <strong>deux chaînes polynucléotidiques enroulées l'une autour de l'autre</strong> selon un axe commun, formant une <strong>double hélice régulière</strong>. Les squelettes phosphate–désoxyribose sont <strong>externes</strong> ; les bases azotées sont <strong>à l'intérieur</strong>, appariées deux à deux.</p>
+        </div>
+      </div>
+      <!-- SVG : la double hélice -->
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 560 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma de la double hélice d'ADN : deux chaînes enroulées, paires de bases internes, diamètre 2 nanomètres, pas 3,4 nanomètres">
+          <text x="280" y="24" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">LE MODÈLE DE WATSON ET CRICK — DOUBLE HÉLICE</text>
+          <line x1="280" y1="44" x2="280" y2="284" style="stroke:var(--border-soft)" stroke-width="1.5" stroke-dasharray="4 5"/>
+          <path d="M 280,44 Q 180,84 280,124 Q 380,164 280,204 Q 180,244 280,284" fill="none" style="stroke:var(--accent-bright)" stroke-width="2.5"/>
+          <path d="M 280,44 Q 380,84 280,124 Q 180,164 280,204 Q 380,244 280,284" fill="none" style="stroke:var(--success-light)" stroke-width="2.5"/>
+          <line x1="230" y1="84" x2="330" y2="84" style="stroke:var(--text-light)" stroke-width="3"/>
+          <text x="280" y="76" style="fill:var(--text-dim)" font-size="11" font-weight="600" font-family="Inter" text-anchor="middle">A—T</text>
+          <line x1="330" y1="164" x2="230" y2="164" style="stroke:var(--text-light)" stroke-width="3"/>
+          <text x="280" y="156" style="fill:var(--text-dim)" font-size="11" font-weight="600" font-family="Inter" text-anchor="middle">C≡G</text>
+          <line x1="230" y1="244" x2="330" y2="244" style="stroke:var(--text-light)" stroke-width="3"/>
+          <text x="280" y="236" style="fill:var(--text-dim)" font-size="11" font-weight="600" font-family="Inter" text-anchor="middle">T—A</text>
+          <text x="196" y="88" style="fill:var(--accent-bright)" font-size="11" font-weight="600" font-family="Inter" text-anchor="end">chaîne 1</text>
+          <text x="364" y="88" style="fill:var(--success-light)" font-size="11" font-weight="600" font-family="Inter" text-anchor="start">chaîne 2</text>
+          <line x1="230" y1="176" x2="330" y2="176" style="stroke:var(--warning-bright)" stroke-width="1.5"/>
+          <polygon points="230,176 240,172 240,180" style="fill:var(--warning-bright)"/>
+          <polygon points="330,176 320,172 320,180" style="fill:var(--warning-bright)"/>
+          <text x="280" y="194" style="fill:var(--warning-bright)" font-size="10.5" font-family="Inter" text-anchor="middle">diamètre ≈ 2 nm</text>
+          <line x1="455" y1="44" x2="455" y2="204" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <line x1="447" y1="44" x2="463" y2="44" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <line x1="447" y1="204" x2="463" y2="204" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <text x="467" y="118" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="start">1 tour = 10 pnb</text>
+          <text x="467" y="134" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="start">pas = 3,4 nm</text>
+          <text x="280" y="316" style="fill:var(--text-dim)" font-size="11.5" font-family="Inter" text-anchor="middle">Squelettes externes · bases appariées à l'intérieur · régularité de l'enroulement</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">La double hélice : deux chaînes enroulées autour du même axe. Une paire de nucléotides (pnb) = une base de la chaîne 1 face à une base de la chaîne 2. Un tour complet = 10 pnb = 3,4 nm.</figcaption>
+      </figure>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Diamètre ≈ 2 nm · pas de l'hélice = 3,4 nm · 10 paires de nucléotides par tour</div>
+        <div class="lecture-formula-desc">Les trois chiffres clés du modèle — à connaître par cœur, ils tombent régulièrement au Bac.</div>
+      </div>
+
+      <p class="lecture-text">
+        Ce modèle explique du même coup la <strong>régularité</strong> de la molécule : si une grande base (purique) faisait face à une autre grande base, la molécule gonflerait ; si une petite faisait face à une petite, elle se rétrécirait. Mais une <strong>purique face à une pyrimidique</strong> : la largeur reste constante — exactement les ≈ 2 nm mesurés par Franklin. Toutes les données s'assemblent.
+      </p>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 1 — ANTIPARALLÉLISME -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · antiparallelisme</span>
+        <h2 class="lecture-section-title">Deux chaînes antiparallèles</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition officielle — antiparallélisme</div>
+          <p>Les deux chaînes de l'ADN sont dites <strong>antiparallèles</strong> parce qu'elles courent en <strong>sens opposés</strong> : si l'une est orientée <span class="math">5' → 3'</span> de haut en bas, l'autre est orientée <span class="math">5' → 3'</span> de bas en haut.</p>
+        </div>
+      </div>
+      <!-- SVG : antiparallélisme -->
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 480 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Les deux chaînes de l'ADN sont antiparallèles : orientations 5 prime vers 3 prime opposées">
+          <text x="240" y="24" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">DEUX CHAÎNES ANTIPARALLÈLES</text>
+          <line x1="150" y1="60" x2="150" y2="180" style="stroke:var(--accent-bright)" stroke-width="3"/>
+          <polygon points="150,192 143,178 157,178" style="fill:var(--accent-bright)"/>
+          <text x="150" y="46" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">5'</text>
+          <text x="150" y="216" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">3'</text>
+          <text x="150" y="238" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">chaîne 1 : lit 5' → 3' vers le bas</text>
+          <line x1="320" y1="180" x2="320" y2="60" style="stroke:var(--success-light)" stroke-width="3"/>
+          <polygon points="320,48 313,62 327,62" style="fill:var(--success-light)"/>
+          <text x="320" y="46" style="fill:var(--success-light)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">3'</text>
+          <text x="320" y="216" style="fill:var(--success-light)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">5'</text>
+          <text x="320" y="238" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">chaîne 2 : lit 5' → 3' vers le haut</text>
+          <line x1="160" y1="80" x2="310" y2="80" style="stroke:var(--text-dim)" stroke-width="1.2" stroke-dasharray="4 4"/>
+          <line x1="160" y1="120" x2="310" y2="120" style="stroke:var(--text-dim)" stroke-width="1.2" stroke-dasharray="4 4"/>
+          <line x1="160" y1="160" x2="310" y2="160" style="stroke:var(--text-dim)" stroke-width="1.2" stroke-dasharray="4 4"/>
+        </svg>
+        <figcaption class="lecture-figure-caption">Chaque chaîne conserve son propre sens 5' → 3', mais les deux sens sont opposés dans la double hélice.</figcaption>
+      </figure>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Piège d'examen</div>
+          <p>Sur un schéma ou dans une séquence, place toujours les indications <span class="math">5'</span> et <span class="math">3'</span> <strong>en face l'une de l'autre en sens opposés</strong> : si le haut de la chaîne 1 porte 5', le haut de la chaîne 2 porte 3'. Des extrémités mal placées signifient que tu as dessiné deux chaînes parallèles — c'est faux.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 2 — APARIEMENT DES BASES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · appariement_bases</span>
+        <h2 class="lecture-section-title">L'appariement spécifique : A—T et C≡G</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Comment les deux chaînes sont-elles solidaires ? Par leurs bases, qui se font face à l'intérieur de l'hélice et se lient deux à deux par des <strong>liaisons hydrogène</strong> — des liaisons faibles, mais très nombreuses. Et cet appariement obéit à une règle stricte.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition officielle — appariement spécifique</div>
+          <p>L'appariement des bases est <strong>spécifique</strong> : l'adénine s'apparie toujours avec la thymine par <strong>2 liaisons hydrogène</strong> — on écrit <span class="math">A—T</span> ; la cytosine s'apparie toujours avec la guanine par <strong>3 liaisons hydrogène</strong> — on écrit <span class="math">C≡G</span>.</p>
+        </div>
+      </div>
+      <!-- SVG : appariement A—T / C≡G -->
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Appariement spécifique : A avec T par deux liaisons hydrogène, C avec G par trois liaisons hydrogène">
+          <text x="260" y="24" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">APARIEMENT SPÉCIFIQUE DES BASES</text>
+          <rect x="150" y="44" width="14" height="224" rx="7" fill="rgba(224,184,74,0.08)" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+          <rect x="356" y="44" width="14" height="224" rx="7" fill="rgba(58,182,126,0.08)" style="stroke:var(--success-light)" stroke-width="1.5"/>
+          <text x="118" y="88" style="fill:var(--accent-bright)" font-size="17" font-weight="700" font-family="Inter" text-anchor="middle">A</text>
+          <text x="402" y="88" style="fill:var(--success-light)" font-size="17" font-weight="700" font-family="Inter" text-anchor="middle">T</text>
+          <line x1="168" y1="74" x2="352" y2="74" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <line x1="168" y1="84" x2="352" y2="84" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <text x="260" y="62" style="fill:var(--warning-bright)" font-size="10.5" font-weight="600" font-family="Inter" text-anchor="middle">2 liaisons hydrogène</text>
+          <text x="118" y="168" style="fill:var(--accent-bright)" font-size="17" font-weight="700" font-family="Inter" text-anchor="middle">C</text>
+          <text x="402" y="168" style="fill:var(--success-light)" font-size="17" font-weight="700" font-family="Inter" text-anchor="middle">G</text>
+          <line x1="168" y1="150" x2="352" y2="150" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <line x1="168" y1="160" x2="352" y2="160" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <line x1="168" y1="170" x2="352" y2="170" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <text x="260" y="142" style="fill:var(--warning-bright)" font-size="10.5" font-weight="600" font-family="Inter" text-anchor="middle">3 liaisons hydrogène</text>
+          <text x="118" y="248" style="fill:var(--accent-bright)" font-size="17" font-weight="700" font-family="Inter" text-anchor="middle">T</text>
+          <text x="402" y="248" style="fill:var(--success-light)" font-size="17" font-weight="700" font-family="Inter" text-anchor="middle">A</text>
+          <line x1="168" y1="234" x2="352" y2="234" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <line x1="168" y1="244" x2="352" y2="244" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <text x="260" y="222" style="fill:var(--warning-bright)" font-size="10.5" font-weight="600" font-family="Inter" text-anchor="middle">2 liaisons hydrogène</text>
+          <text x="260" y="288" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">Toujours une purique (grande) face à une pyrimidique (petite) : largeur constante ≈ 2 nm</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Les liaisons hydrogène (pointillés) sont faibles individuellement, mais leur grand nombre assure la cohésion des deux chaînes.</figcaption>
+      </figure>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac — ne pas inverser !</div>
+          <p><strong>A—T = 2 liaisons hydrogène ; C≡G = 3 liaisons hydrogène.</strong> L'inverser est une erreur sanctionnée. Astuce : regarde les symboles — le trait <span class="math">—</span> de A—T évoque « 2 », le triple signe <span class="math">≡</span> de C≡G évoque « 3 ». Et rappelle-toi : jamais d'uracile dans l'ADN, donc jamais de « A—U » ici (l'appariement A—U existe seulement dans l'ARN).</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Deux liaisons chimiques à ne pas confondre</div>
+          <p><strong>Liaisons phosphodiesters</strong> (partie 1) : covalentes et solides, elles enchaînent les nucléotides <em>le long</em> de chaque chaîne. <strong>Liaisons hydrogène</strong> : faibles, elles relient les bases <em>d'une chaîne à l'autre</em>. Dans l'hydrolyse ménagère, ce sont les phosphodiesters qui cèdent ; dans la dénaturation (partie 3), ce sont les liaisons hydrogène.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 2 — COMPLÉMENTARITÉ ET CONTINUITÉ -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · complementarite_chaines</span>
+        <h2 class="lecture-section-title">Complémentarité et continuité des chaînes</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition officielle — complémentarité</div>
+          <p>Les deux chaînes de l'ADN sont <strong>complémentaires</strong> : la séquence des bases de l'une détermine obligatoirement la séquence des bases de l'autre, par la règle d'appariement <span class="math">A—T</span> et <span class="math">C≡G</span>. Chaque chaîne est par ailleurs <strong>continue</strong>, grâce à la succession de liaisons phosphodiesters.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        La complémentarité est la propriété la plus féconde de la molécule : connaissant une chaîne, tu déduis l'autre — et c'est exactement ainsi que l'ADN pourra être copié (réplication, chapitre suivant). Écrivons un exemple complet :
+      </p>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">Exemple — lecture d'une double hélice</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text">
+            Chaîne 1 : <span class="math">5'—A T G C A T—3'</span><br/>
+            Chaîne 2 (complémentaire, antiparallèle) : <span class="math">3'—T A C G T A—5'</span>
+          </p>
+          <p class="lecture-text">Face à chaque A de la chaîne 1, un T sur la chaîne 2 ; face à chaque T, un A ; face à chaque C, un G ; face à chaque G, un C. Les deux chaînes ont <strong>le même nombre de nucléotides</strong> et des séquences « miroirs » selon la règle d'appariement.</p>
+        </div>
+      </div>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Si une chaîne porte A, l'autre porte T en face · si elle porte C, l'autre porte G en face</div>
+        <div class="lecture-formula-desc">La règle d'or de la complémentarité — elle explique A = T et G = C chez Chargaff, et rendra possible la réplication.</div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Piège d'examen</div>
+          <p>Un A ne fait JAMAIS face à un G, un C ne fait jamais face à un T. Si l'on te donne une « double hélice » contenant un appariement A—G ou C—T, il s'agit d'un document piège : signale l'incohérence. Seules les paires <span class="math">A—T</span> et <span class="math">C≡G</span> existent.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : FICHE MÉTHODE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Fiche méthode</span>
+        <h2 class="lecture-section-title">Écrire la chaîne complémentaire sans se tromper</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">Méthode</div>
+        <div class="lecture-rule-body">
+          <div class="lecture-steps">
+            <div class="lecture-step">
+              <div class="lecture-step-number">1</div>
+              <div class="lecture-step-content"><strong>Recopie le sens.</strong> Écris la chaîne donnée avec ses extrémités : <span class="math">5'—…—3'</span>.</div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">2</div>
+              <div class="lecture-step-content"><strong>Remplace chaque base par sa compagne</strong>, face à face : A ↔ T et C ↔ G.</div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">3</div>
+              <div class="lecture-step-content"><strong>Inverse les extrémités.</strong> La chaîne complémentaire est antiparallèle : son 5' est en face du 3' de la première. Elle s'écrit <span class="math">3'—…—5'</span> si tu l'écris en dessous.</div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">4</div>
+              <div class="lecture-step-content"><strong>Vérifie.</strong> Même nombre de nucléotides ; chaque colonne de la paire contient A—T ou C≡G, rien d'autre.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">Exercice type résolu</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text"><strong>Énoncé.</strong> Un fragment de chaîne d'ADN a pour séquence <span class="math">5'—C G A T T A C—3'</span>. Donner la séquence de la chaîne complémentaire.</p>
+          <details>
+            <summary>Voir la solution détaillée</summary>
+            <div class="lecture-quiz-answer">
+              <p><strong>Étape 1 :</strong> je place la chaîne donnée : <span class="math">5'—C G A T T A C—3'</span></p>
+              <p><strong>Étape 2 :</strong> j'apparie face à face : C↔G, G↔C, A↔T, T↔A, T↔A, A↔T, C↔G.</p>
+              <p><strong>Étape 3 :</strong> j'écris la complémentaire en antiparallèle : <span class="math">3'—G C T A A T G—5'</span></p>
+              <p><strong>Étape 4 :</strong> vérification — 7 nucléotides des deux côtés ✔, paires uniquement A—T et C≡G ✔.</p>
+              <p><strong>✅ Réponse :</strong> <span class="math">3'—G C T A A T G—5'</span> (soit, lue dans son propre sens : <span class="math">5'—G T A A T C G—3'</span>).</p>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">📌 Ce qu'il faut savoir raconter</div>
+        <div class="lecture-aside-content">En introduction d'une question sur la structure, la phrase « gagnante » : « Le modèle de Watson et Crick (1953), établi à partir des données de Chargaff (A = T ; G = C) et des clichés de diffraction aux rayons X de Rosalind Franklin, décrit l'ADN comme deux chaînes polynucléotidiques antiparallèles et complémentaires, enroulées en une double hélice de diamètre ≈ 2 nm, avec 10 paires de nucléotides par tour (pas de 3,4 nm). »</div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Selon les règles de Chargaff, dans toute molécule d'ADN :</p>
+      <div class="lecture-quiz-options">
+        <span>A) A = G et T = C</span>
+        <span>B) A = T et G = C</span>
+        <span>C) A = C et T = G</span>
+        <span>D) la quantité de bases est la même chez toutes les espèces</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B. A = T et G = C.</strong> Ce sont des égalités de quantités. D est faux : les proportions varient d'une espèce à l'autre — seule l'égalité A = T (et G = C) est universelle.</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Le pas de l'hélice de l'ADN mesure :</p>
+      <div class="lecture-quiz-options">
+        <span>A) 2 nm</span>
+        <span>B) 0,34 nm</span>
+        <span>C) 3,4 nm</span>
+        <span>D) 34 nm</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>C. 3,4 nm.</strong> Un tour complet d'hélice = 3,4 nm = 10 paires de nucléotides (0,34 nm entre deux paires). Le diamètre, lui, vaut ≈ 2 nm.</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — La chaîne <span class="math">5'—A T G C—3'</span> a pour chaîne complémentaire :</p>
+      <div class="lecture-quiz-options">
+        <span>A) 5'—T A C G—3'</span>
+        <span>B) 3'—T A C G—5'</span>
+        <span>C) 5'—A T G C—3'</span>
+        <span>D) 3'—G C A T—5'</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B. 3'—T A C G—5'.</strong> On apparie face à face (A↔T, C↔G) ET on inverse les extrémités (antiparallélisme). A correspond à l'écriture en sens parallèle — faux ; D est la complémentaire de la complémentaire, c'est-à-dire la chaîne de départ écrite en sens inverse.</div>
+      </details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[chargaff]</strong> Règles de Chargaff : dans tout ADN, <span class="math">A = T</span> et <span class="math">G = C</span> (égalités de quantités) — donc <span class="math">A + G = T + C</span></li>
+      <li><strong>[diffraction_rx]</strong> Les clichés de diffraction aux rayons X de Rosalind Franklin révèlent une hélice régulière : diamètre ≈ 2 nm, pas de 3,4 nm, 10 paires de nucléotides par tour</li>
+      <li><strong>[double_helice]</strong> Modèle de Watson et Crick (1953) : deux chaînes polynucléotidiques enroulées en une double hélice — squelettes externes, bases à l'intérieur</li>
+      <li><strong>[antiparallelisme]</strong> Les deux chaînes sont antiparallèles : chacune a son sens propre <span class="math">5' → 3'</span>, mais les deux sens sont opposés</li>
+      <li><strong>[appariement_bases]</strong> Appariement spécifique par liaisons hydrogène : <span class="math">A—T</span> = 2 liaisons hydrogène ; <span class="math">C≡G</span> = 3 liaisons hydrogène (ne pas inverser !)</li>
+      <li><strong>[appariement_bases]</strong> Toujours une purique (A ou G) face à une pyrimidique (T ou C) : largeur constante ≈ 2 nm</li>
+      <li><strong>[complementarite_chaines]</strong> Les deux chaînes sont complémentaires : la séquence de l'une détermine celle de l'autre — et chaque chaîne est continue (liaisons phosphodiesters)</li>
+      <li><strong>[complementarite_chaines]</strong> La complémentarité explique les règles de Chargaff et rendra possible la réplication de l'ADN</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 2 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie 3 : les propriétés physico-chimiques de l'ADN</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

@@ -1,0 +1,516 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · LOGARITHME NÉPÉRIEN      -->
+<!-- PARTIE 3 : LIMITES & ÉTUDE DE LA FONCTION ln                 -->
+<!-- Notion 1 : limites de référence — −∞ en 0⁺, +∞ en +∞         -->
+<!-- Notion 2 : variations et signe — tableau complet             -->
+<!-- Notion 3 : croissances comparées — (ln x)/x, x·ln x          -->
+<!-- Notion 4 : étude complète — f(x) = ln(x + 2) − 2             -->
+<!-- Plus : tangente en 1 et inégalité ln x ≤ x − 1               -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 03 · Logarithme népérien</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Limites &amp; <em>étude complète</em> du ln
+    </h1>
+    <p class="lecture-hero-intro">
+      Tu connais déjà <span class="math">ln</span> au voisinage de quelques points ; un exercice de Bac D demande en plus ce que fait la fonction <strong>aux bornes de son domaine</strong> — près de <span class="math">0</span> (exclu) et à l'<strong>infini</strong>. Cette partie couvre <strong>4 notions</strong> : les <strong>limites de référence</strong> et l'asymptote verticale, le <strong>tableau de variations</strong> et le signe, les <strong>croissances comparées</strong> (le duel entre <span class="math">x</span> et <span class="math">ln x</span>), puis une <strong>étude complète</strong> du type <span class="math">f(x) = ln(x + 2) − 2</span>, avec en bonus l'inégalité <span class="math">ln x ≤ x − 1</span>.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 4 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Aux deux bouts du domaine</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · limites — de référence et asymptote x = 0</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 2 · variations — tableau et signe de ln</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 3 · croissances comparées — la lenteur de ln</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Entraînement — cinq limites calculées</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 4 · étude complète — f(x) = ln(x + 2) − 2</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Prolongement — la tangente en 1 : ln x ≤ x − 1</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — la méthode d'étude en 5 étapes</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Aux deux bouts du domaine</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Un exercice de Bac D ne s'arrête jamais aux valeurs usuelles : il demande ce que fait la fonction <strong>aux bornes de son domaine</strong> — près de <span class="math">0</span> (exclu) et à l'<strong>infini</strong>. C'est l'objet des limites, et elles dictent la forme de la courbe.
+      </p>
+      <p class="lecture-text">
+        La stratégie du chapitre est toujours la même : <strong>limites → dérivée → variations → tableau</strong>. Une fois ce quadrillage en place, aucune fonction contenant <span class="math">ln</span> ne peut te résister.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Connaître les limites</strong> de <span class="math">ln x</span> en <span class="math">0⁺</span> et en <span class="math">+∞</span>, et l'asymptote qui en résulte.</li>
+            <li><strong>Dresser</strong> le tableau de variations et le <strong>signe</strong> de <span class="math">ln</span>.</li>
+            <li><strong>Comparer les croissances</strong> : qui gagne, de <span class="math">x</span> ou de <span class="math">ln x</span> ?</li>
+            <li><strong>Étudier complètement</strong> une fonction du type <span class="math">ln(x + 2) − 2</span>, étape par étape.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Pour aller plus loin</div>
+        <div class="lecture-aside-content">
+          C'est <strong>Leonhard Euler</strong> qui, dans son <em>Introductio in analysin infinitorum</em> (1748), définit le logarithme comme réciproque de l'exponentielle — exactement le point de vue de ton programme. Euler aimait souligner un paradoxe amusant : <span class="math">ln</span> tend vers <span class="math">+∞</span>, mais si lentement qu'il faut <span class="math">x ≈ 10 000</span> pour que <span class="math">ln x</span> atteigne à peine <span class="math">9,2</span>…
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · LIMITES DE RÉFÉRENCE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · limites</span>
+        <h2 class="lecture-section-title">Limites de référence et asymptote x = 0</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Les deux limites de référence se justifient avec la réciprocité de la partie 1. Vers <span class="math">+∞</span> : prends des valeurs de la forme <span class="math">eⁿ</span> de plus en plus grandes ; leur logarithme vaut <span class="math">n</span> et devient aussi grand que voulu. Vers <span class="math">0⁺</span> : prends des valeurs de la forme <span class="math">1/eⁿ</span>, de plus en plus proches de <span class="math">0</span> ; leur logarithme vaut <span class="math">−n</span> et devient aussi négatif que voulu.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Les deux limites à connaître par cœur</div>
+        <div class="lecture-formula-hero-main">lim(x→0⁺) ln x = −∞<br>lim(x→+∞) ln x = +∞</div>
+        <div class="lecture-formula-hero-desc">La première limite n'existe qu'à droite : 0⁺, car ln x n'existe pas pour x ≤ 0.</div>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Asymptote verticale</div>
+          <p>Quand <span class="math">x</span> tend vers <span class="math">0</span> par valeurs positives, <span class="math">ln x</span> tend vers <span class="math">−∞</span> : la courbe de <span class="math">ln</span> <strong>descend indéfiniment</strong> en se collant à l'axe des ordonnées. On dit que la droite d'équation <span class="math">x = 0</span> est une <strong>asymptote verticale</strong> de la courbe.</p>
+        </div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbe du logarithme népérien, croissante, passant par les points un zéro et e un, collée à son asymptote verticale x égale zéro, sous la tangente y égale x moins un">
+          <text x="260" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">LA COURBE DE ln : CROISSANTE, COLLÉE À L'AXE DES ORDONNÉES</text>
+          <!-- asymptote verticale x = 0 (axe des ordonnées) -->
+          <line x1="150" y1="300" x2="150" y2="45" style="stroke:var(--info)" stroke-width="1.5" stroke-dasharray="6 4"/>
+          <polygon points="150,38 146,48 154,48" style="fill:var(--info)"/>
+          <text x="136" y="52" style="fill:var(--info)" font-size="11" font-family="Inter">y</text>
+          <text x="158" y="60" style="fill:var(--info)" font-size="10" font-family="Inter">asymptote : x = 0</text>
+          <!-- axe des abscisses -->
+          <line x1="60" y1="165" x2="494" y2="165" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="500,165 490,161 490,169" style="fill:var(--text-dim)"/>
+          <text x="506" y="169" style="fill:var(--text-dim)" font-size="11" font-family="Inter">x</text>
+          <text x="141" y="181" style="fill:var(--text-dim)" font-size="11" font-family="Inter">O</text>
+          <text x="66" y="122" style="fill:var(--text-dim)" font-size="10" font-family="Inter">ln x n'existe pas ici (x &lt; 0)</text>
+          <!-- tangente en 1 : y = x − 1 -->
+          <line x1="162" y1="193" x2="294" y2="61" style="stroke:var(--text-dim)" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <text x="298" y="60" style="fill:var(--text-dim)" font-size="10" font-family="Inter">T : y = x − 1</text>
+          <!-- courbe de ln -->
+          <path d="M 152 268 C 154 246, 157 224, 163 206 C 169 189, 178 173, 190 165 C 202 157, 216 143, 231 137 C 246 131, 252 127, 259 125 C 285 116, 320 104, 360 96 C 395 89, 425 86, 470 81" style="fill:none;stroke:var(--accent-bright)" stroke-width="2.5"/>
+          <text x="478" y="76" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">ln</text>
+          <!-- points remarquables -->
+          <circle cx="190" cy="165" r="4.5" style="fill:var(--info)"/>
+          <text x="184" y="182" style="fill:var(--info)" font-size="11" font-weight="700" font-family="Inter">1</text>
+          <circle cx="259" cy="125" r="4.5" style="fill:var(--info)"/>
+          <text x="266" y="122" style="fill:var(--info)" font-size="11" font-weight="700" font-family="Inter">e</text>
+          <circle cx="446" cy="85" r="4.5" style="fill:var(--info)"/>
+          <text x="440" y="102" style="fill:var(--info)" font-size="11" font-weight="700" font-family="Inter">e²</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Schéma : la courbe de <span class="math">ln</span> passe par <span class="math">(1 ; 0)</span>, <span class="math">(e ; 1)</span> et <span class="math">(e² ; 2)</span>, reste <strong>sous sa tangente</strong> <span class="math">y = x − 1</span> (voir section 06) et longe l'axe des ordonnées, asymptote verticale d'équation <span class="math">x = 0</span>.</figcaption>
+      </figure>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ 0⁺ et non 0</div>
+          <p>On écrit la limite vers <span class="math">0</span> avec l'exposant <span class="math">⁺</span> : elle n'existe que <strong>par valeurs positives</strong>. Omettre le <span class="math">⁺</span> est une maladresse signalée par les correcteurs, car <span class="math">ln</span> n'existe pas à gauche de <span class="math">0</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 2 · VARIATIONS & SIGNE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · variations &amp; signe</span>
+        <h2 class="lecture-section-title">Variations et signe de ln</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La partie 2 a démontré que la dérivée de <span class="math">ln</span> est <span class="math">1/x</span>. Comme <span class="math">1/x &gt; 0</span> pour tout <span class="math">x &gt; 0</span>, la fonction <span class="math">ln</span> est <strong>strictement croissante</strong> sur tout son domaine. On obtient le tableau de variations complet :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>x</th><th>0</th><th></th><th>1</th><th></th><th>+∞</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>f'(x) = 1/x</strong></td><td>‖</td><td>+</td><td></td><td>+</td><td></td></tr>
+            <tr><td><strong>f(x) = ln x</strong></td><td>−∞</td><td>↗</td><td>0</td><td>↗</td><td>+∞</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lecture-text">
+        Lecture du tableau : <span class="math">ln</span> part de <span class="math">−∞</span> (asymptote <span class="math">x = 0</span>), passe par <span class="math">0</span> à l'abscisse <span class="math">1</span>, et monte vers <span class="math">+∞</span> — sans jamais s'arrêter, mais en ralentissant (la pente <span class="math">1/x</span> diminue).
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 Signe de ln x (à connaître par cœur)</div>
+          <ul class="lecture-list">
+            <li>Pour <span class="math">0 &lt; x &lt; 1</span> : <span class="math">ln x &lt; 0</span> (négatif).</li>
+            <li>Pour <span class="math">x = 1</span> : <span class="math">ln x = 0</span> (nul).</li>
+            <li>Pour <span class="math">x &gt; 1</span> : <span class="math">ln x &gt; 0</span> (positif).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">a &lt; b ⇔ ln a &lt; ln b&nbsp;&nbsp;&nbsp;(a &gt; 0 et b &gt; 0)</div>
+        <div class="lecture-formula-desc">ln est strictement croissante : elle conserve l'ordre. Cette équivalence est l'arme des inéquations logarithmiques (fiche, partie 4) : passer au log ne change pas le sens d'une inégalité.</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🔍 Contrôle immédiat de la conservation de l'ordre</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On compare <span class="math">3</span> et <span class="math">5</span> : on a bien <span class="math">3 &lt; 5</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Le log respecte l'ordre : <span class="math">ln 3 ≈ 1,099</span> et <span class="math">ln 5 ≈ 1,609</span>, donc <span class="math">ln 3 &lt; ln 5</span> ✓.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Croissante ne veut pas dire rapide</div>
+          <p><span class="math">ln</span> est croissante, mais sa pente <span class="math">1/x</span> diminue : la courbe monte de moins en moins vite. Entre <span class="math">1</span> et <span class="math">e</span>, le log gagne <span class="math">1</span> unité ; entre <span class="math">e</span> et <span class="math">e² ≈ 7,39</span>, il gagne encore <span class="math">1</span> unité… mais sur un intervalle bien plus long. C'est la lenteur que quantifie la section suivante.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 3 · CROISSANCES COMPARÉES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · croissances comparées</span>
+        <h2 class="lecture-section-title">Croissances comparées : la lenteur de ln</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        « <span class="math">ln</span> tend vers <span class="math">+∞</span> » et « <span class="math">ln</span> croît lentement » ne se contredisent pas : les croissances comparées comparent deux infinis. Le verdict est sans appel : <strong>à l'infini, toute puissance de x l'emporte sur ln</strong>.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 Théorème — croissances comparées (admis)</div>
+          <ul class="lecture-list">
+            <li>En <span class="math">+∞</span> : le quotient de <span class="math">ln x</span> par <span class="math">x</span> tend vers <span class="math">0</span> — face à <span class="math">x</span>, le logarithme est négligeable.</li>
+            <li>En <span class="math">0⁺</span> : le produit de <span class="math">x</span> par <span class="math">ln x</span> tend vers <span class="math">0</span> — le « moins l'infini » est écrasé.</li>
+            <li>Plus généralement, pour tout entier <span class="math">n ≥ 1</span> : mêmes limites avec <span class="math">xⁿ</span> à la place de <span class="math">x</span>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Le duel ln contre x — à retenir</div>
+        <div class="lecture-formula-hero-main">(ln x)/x → 0&nbsp;&nbsp;(en +∞)<br>x · ln x → 0&nbsp;&nbsp;(en 0⁺)</div>
+        <div class="lecture-formula-hero-desc">Dans les deux duels, la puissance gagne : en +∞ le facteur x écrase ln x ; en 0⁺ le facteur x écrase le −∞ du logarithme.</div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>x</th><th>10</th><th>100</th><th>1 000</th><th>10 000</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>ln x</strong></td><td>≈ 2,30</td><td>≈ 4,61</td><td>≈ 6,91</td><td>≈ 9,21</td></tr>
+            <tr><td><strong>(ln x)/x</strong></td><td>≈ 0,23</td><td>≈ 0,046</td><td>≈ 0,007</td><td>≈ 0,0009</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lecture-text">
+        Le tableau le montre : pendant que <span class="math">x</span> est multiplié par <span class="math">1 000</span>, <span class="math">ln x</span> ne fait que s'ajouter quelques unités, et le quotient file vers <span class="math">0</span>. C'est exactement le sens du théorème.
+      </p>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Croissances comparées ≠ formes indéterminées quelconques</div>
+          <p>Ces limites traitent des formes indéterminées précises (<span class="math">∞/∞</span> et <span class="math">0 × ∞</span>). Elles ne disent rien d'une forme comme <span class="math">ln x − x</span> ou <span class="math">ln x + x</span> : là, il faut <strong>factoriser</strong> (voir les exemples de la section 04). Ne sors jamais une croissance comparée de son cadre.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : LIMITES USUELLES CALCULÉES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Entraînement · limites</span>
+        <h2 class="lecture-section-title">Limites usuelles — cinq exemples calculés</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Les limites de référence et les croissances comparées se combinent pour résoudre la plupart des questions de limite du chapitre. Voici cinq calculs types, rédigés comme en copie — une transformation par ligne.
+      </p>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 1 — une limite en +∞</div>
+        <div class="lecture-example-content">
+          <p>Calculer <span class="math">lim(x→+∞) ln(2x + 5)</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Analyser l'intérieur.</strong> Quand <span class="math">x → +∞</span> : <span class="math">2x + 5 → +∞</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Appliquer la référence.</strong> Le log d'un nombre qui tend vers <span class="math">+∞</span> tend vers <span class="math">+∞</span> : la limite vaut <span class="math">+∞</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 2 — forme indéterminée ∞/∞</div>
+        <div class="lecture-example-content">
+          <p>Calculer <span class="math">lim(x→+∞) (ln x)/(x + 1)</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Reconnaître la forme.</strong> Numérateur et dénominateur tendent tous deux vers <span class="math">+∞</span> : forme <span class="math">∞/∞</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Se ramener à la croissance comparée.</strong></p><p><span class="math">(ln x)/(x + 1) = (ln x)/x × x/(x + 1)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Conclure.</strong> Le premier facteur tend vers <span class="math">0</span>, le second vers <span class="math">1</span> : la limite vaut <span class="math">0 × 1 = 0</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 3 — forme indéterminée 0 × ∞</div>
+        <div class="lecture-example-content">
+          <p>Calculer <span class="math">lim(x→0⁺) x² · ln x</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Reconnaître la forme.</strong> <span class="math">x² → 0</span> et <span class="math">ln x → −∞</span> : forme <span class="math">0 × ∞</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Décomposer le produit.</strong></p><p><span class="math">x² · ln x = x × (x · ln x)</span></p><p>et <span class="math">x · ln x → 0</span> en <span class="math">0⁺</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Conclure.</strong> <span class="math">0 × 0 = 0</span> : la puissance <span class="math">x²</span> a eu le dernier mot.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 4 — forme 0/0 : penser au nombre dérivé</div>
+        <div class="lecture-example-content">
+          <p>Calculer <span class="math">lim(x→1) (ln x)/(x − 1)</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Reconnaître la forme.</strong> En <span class="math">x = 1</span> : <span class="math">ln 1 = 0</span> et <span class="math">1 − 1 = 0</span> — forme <span class="math">0/0</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Reconnaître un taux d'accroissement.</strong> C'est <span class="math">(f(x) − f(1))/(x − 1)</span> avec <span class="math">f(x) = ln x</span> : la limite vaut <span class="math">f'(1)</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Conclure.</strong> <span class="math">f'(1) = 1/1 = 1</span> : c'est la pente de la tangente <span class="math">y = x − 1</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 5 — forme ∞ − ∞ : factoriser</div>
+        <div class="lecture-example-content">
+          <p>Calculer <span class="math">lim(x→+∞) (ln x − x)</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Factoriser par x.</strong></p><p><span class="math">ln x − x = x × ((ln x)/x − 1)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Évaluer les facteurs.</strong> <span class="math">x → +∞</span> et <span class="math">(ln x)/x − 1 → 0 − 1 = −1</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Conclure.</strong> La limite vaut <span class="math">+∞ × (−1) = −∞</span> : à grande échelle, la puissance écrase totalement le logarithme.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 4 · ÉTUDE COMPLÈTE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · étude complète</span>
+        <h2 class="lecture-section-title">Étude complète : f(x) = ln(x + 2) − 2</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Assemblons tous les outils dans l'exercice type du Bac D. Le plan est immuable : <strong>domaine → dérivée → limites → tableau → valeurs et signe remarquables</strong>.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple travaillé complet — étude de f(x) = ln(x + 2) − 2</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Domaine.</strong> <span class="math">f</span> existe si <span class="math">x + 2 &gt; 0</span>, soit <span class="math">x &gt; −2</span> : domaine <span class="math">]−2 ; +∞[</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Écrire u et le dériver.</strong> Ici <span class="math">u(x) = x + 2</span>, dérivable, et :</p><p><span class="math">u'(x) = 1</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Appliquer la formule.</strong></p><p><span class="math">f'(x) = u'(x)/u(x) = 1/(x + 2)</span></p><p>valable sur le domaine <span class="math">]−2 ; +∞[</span> déjà établi (là, <span class="math">u &gt; 0</span>).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Variations.</strong> Sur le domaine, <span class="math">x + 2 &gt; 0</span> donc <span class="math">f'(x) &gt; 0</span> : <span class="math">f</span> est <strong>strictement croissante</strong>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Limites.</strong> En <span class="math">−2⁺</span> : <span class="math">x + 2 → 0⁺</span> donc <span class="math">f(x) → −∞</span> (asymptote verticale <span class="math">x = −2</span>). En <span class="math">+∞</span> : <span class="math">f(x) → +∞</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Zéro de f, une équivalence par ligne.</strong></p><p><span class="math">f(x) = 0 ⇔ ln(x + 2) = 2</span></p><p><span class="math">ln(x + 2) = 2 ⇔ x + 2 = e²</span></p><p><span class="math">x + 2 = e² ⇔ x = e² − 2 ≈ 5,39</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p><strong>Valeurs et signe.</strong> <span class="math">f(−1) = ln 1 − 2 = −2</span> ; <span class="math">f(0) = ln 2 − 2 ≈ −1,31</span>. Comme <span class="math">f</span> est croissante : <span class="math">f &lt; 0</span> sur <span class="math">]−2 ; e² − 2[</span>, puis <span class="math">f &gt; 0</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>x</th><th>−2</th><th></th><th>e² − 2</th><th></th><th>+∞</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>f'(x) = 1/(x + 2)</strong></td><td>‖</td><td>+</td><td></td><td>+</td><td></td></tr>
+            <tr><td><strong>f(x)</strong></td><td>−∞</td><td>↗</td><td>0</td><td>↗</td><td>+∞</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lecture-text">
+        Remarque de structure : <span class="math">f</span> est simplement la fonction <span class="math">ln</span> <strong>translatée</strong> de <span class="math">2</span> vers la gauche (l'asymptote passe de <span class="math">x = 0</span> à <span class="math">x = −2</span>) et de <span class="math">2</span> vers le bas (le zéro passe de <span class="math">1</span> à <span class="math">e² − 2</span>). Reconnaître ces translations donne un contrôle immédiat du résultat.
+      </p>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ L'asymptote suit l'intérieur du logarithme</div>
+          <p>L'asymptote verticale de <span class="math">ln(u(x))</span> se trouve aux bornes où <span class="math">u(x) → 0⁺</span>, pas forcément en <span class="math">x = 0</span> : ici elle est en <span class="math">x = −2</span>. Toujours résoudre <span class="math">u(x) &gt; 0</span> avant d'annoncer l'asymptote.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : TANGENTE EN 1 -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Prolongement</span>
+        <h2 class="lecture-section-title">La tangente en 1 : ln x ≤ x − 1</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La section 2 a trouvé la tangente <span class="math">y = x − 1</span> au point <span class="math">(1 ; 0)</span>. Question de position relative : la courbe de <span class="math">ln</span> est-elle au-dessus ou en dessous de sa tangente ? La réponse est un résultat majeur, démontrable en quelques lignes avec un tableau de variations.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">L'inégalité de référence — pour tout x &gt; 0</div>
+        <div class="lecture-formula-hero-main">ln x ≤ x − 1</div>
+        <div class="lecture-formula-hero-desc">Avec égalité seulement pour x = 1. La courbe de ln est tout entière sous sa tangente en 1 : c'est la marque de la concavité.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Démonstration — étude de g(x) = x − 1 − ln x</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Poser l'écart.</strong> Soit <span class="math">g(x) = x − 1 − ln x</span> sur <span class="math">]0 ; +∞[</span> : étudier <span class="math">g</span>, c'est comparer la tangente et la courbe.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Dériver, une étape par ligne.</strong></p><p><span class="math">g'(x) = 1 − 1/x</span></p><p><span class="math">g'(x) = (x − 1)/x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Signer.</strong> Sur le domaine, <span class="math">x &gt; 0</span> : <span class="math">g'</span> a le signe de <span class="math">x − 1</span>, négatif avant <span class="math">1</span>, positif après.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Tableau.</strong> <span class="math">g</span> décroît puis croît : minimum en <span class="math">1</span>, et <span class="math">g(1) = 1 − 1 − ln 1 = 0</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Conclure.</strong> Le minimum de <span class="math">g</span> vaut <span class="math">0</span>, donc <span class="math">g(x) ≥ 0</span> pour tout <span class="math">x &gt; 0</span>, c'est-à-dire <span class="math">ln x ≤ x − 1</span> ∎.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Ce que dit graphiquement cette inégalité</div>
+          <p>La courbe de <span class="math">ln</span> est <strong>tout entière au-dessous de sa tangente</strong> <span class="math">y = x − 1</span>, qu'elle ne touche qu'au point <span class="math">(1 ; 0)</span> : on dit que <span class="math">ln</span> est <strong>concave</strong> (ses pentes <span class="math">1/x</span> diminuent). L'inégalité sert aussi de croissance comparée qualitative : comme <span class="math">x − 1 &lt; x</span>, on en déduit <span class="math">ln x &lt; x</span> pour tout <span class="math">x &gt; 0</span> — le logarithme ne dépasse jamais la fonction identité.</p>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🔍 Contrôles numériques de l'inégalité</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>x = 0,5 :</strong> <span class="math">ln 0,5 ≈ −0,693</span> et <span class="math">x − 1 = −0,5</span>. On a bien <span class="math">−0,693 ≤ −0,5</span> ✓.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>x = 4 :</strong> <span class="math">ln 4 ≈ 1,386</span> et <span class="math">x − 1 = 3</span>. On a bien <span class="math">1,386 ≤ 3</span> ✓.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>x = 1 :</strong> <span class="math">0 = 0</span> — le seul point de contact ✓.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">La méthode d'étude en 5 étapes</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Toute étude de fonction contenant <span class="math">ln</span> suit le même chemin. Apprends l'ordre — c'est lui qui organise la rédaction et la notation.
+      </p>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode — Étudier une fonction avec ln</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>(1) Domaine</strong> : résoudre <span class="math">u(x) &gt; 0</span>.</li>
+            <li><strong>(2) Dérivée</strong> : <span class="math">f'(x) = u'(x)/u(x)</span>, en citant les conditions.</li>
+            <li><strong>(3) Limites aux bornes</strong> du domaine (référence et croissances comparées).</li>
+            <li><strong>(4) Tableau de variations</strong> (signe de <span class="math">f'</span>, flèches, valeurs remarquables).</li>
+            <li><strong>(5) Valeurs particulières</strong> : zéro de <span class="math">f</span> (en passant à l'exponentielle), points sur les axes, signe de <span class="math">f</span>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Le kit de limites du chapitre</div>
+        <div class="lecture-formula-hero-main">lim(x→0⁺) ln x = −∞<br>lim(x→+∞) ln x = +∞</div>
+        <div class="lecture-formula-hero-desc">Deux limites de référence, une asymptote verticale x = 0, et une fonction strictement croissante de −∞ à +∞ en passant par (1 ; 0).</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">(ln x)/x → 0&nbsp;&nbsp;en +∞<br>x · ln x → 0&nbsp;&nbsp;en 0⁺</div>
+        <div class="lecture-formula-desc">Les deux croissances comparées, valables aussi avec des puissances xⁿ (n ≥ 1) : la puissance gagne toujours le duel.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">ln x ≤ x − 1&nbsp;&nbsp;(tout x &gt; 0, égalité en x = 1)</div>
+        <div class="lecture-formula-desc">L'inégalité de référence : courbe sous sa tangente en 1, concavité, et conséquence ln x &lt; x pour tout x &gt; 0.</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><span class="math">ln</span> est <strong>strictement croissante</strong> : elle conserve l'ordre (<span class="math">a &lt; b ⇔ ln a &lt; ln b</span>).</li>
+        <li>Asymptote verticale <span class="math">x = 0</span> : la courbe longe l'axe des ordonnées vers <span class="math">−∞</span>.</li>
+        <li>Signe : <span class="math">ln x &lt; 0</span> sur <span class="math">]0 ; 1[</span>, <span class="math">ln 1 = 0</span>, <span class="math">ln x &gt; 0</span> sur <span class="math">]1 ; +∞[</span>.</li>
+        <li>L'asymptote de <span class="math">ln(u(x))</span> se trouve où <span class="math">u(x) → 0⁺</span> — exemple : <span class="math">x = −2</span> pour <span class="math">ln(x + 2)</span>.</li>
+        <li>Le zéro d'une fonction avec <span class="math">ln</span> se trouve en <strong>passant à l'exponentielle</strong>.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Rédaction type pour l'examen</div>
+          <p>Chaque borne du tableau doit être <strong>justifiée</strong> : la limite en <span class="math">−2⁺</span> par celle de <span class="math">ln</span> en <span class="math">0⁺</span>, le signe de <span class="math">f'</span> par celui de <span class="math">u</span> et de <span class="math">u'</span>, le zéro par un passage à l'exponentielle. Un tableau « sans explications » perd la moitié des points, même s'il est exact.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — La limite de (ln x)/x quand x tend vers +∞ est :</p>
+      <div class="lecture-quiz-options"><span>A) 0</span><span>B) 1</span><span>C) +∞</span><span>D) −∞</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) 0.</strong> Croissance comparée : à l'infini, la puissance <span class="math">x</span> l'emporte sur le logarithme, donc le quotient tend vers <span class="math">0</span>. Répondre <span class="math">+∞</span>, c'est oublier que le dénominateur croît infiniment plus vite.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — La limite de x·ln x quand x tend vers 0⁺ est :</p>
+      <div class="lecture-quiz-options"><span>A) −∞</span><span>B) 0</span><span>C) +∞</span><span>D) la limite n'existe pas</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) 0.</strong> Forme indéterminée <span class="math">0 × (−∞)</span> tranchée par la croissance comparée : le facteur <span class="math">x</span>, en s'écrasant vers <span class="math">0</span>, gagne le duel contre le <span class="math">−∞</span> du logarithme.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — La fonction ln x est :</p>
+      <div class="lecture-quiz-options"><span>A) strictement croissante sur ]0 ; +∞[</span><span>B) strictement décroissante sur ]0 ; +∞[</span><span>C) croissante sur ℝ tout entier</span><span>D) négative sur tout ]0 ; +∞[</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) strictement croissante sur ]0 ; +∞[.</strong> Sa dérivée <span class="math">1/x</span> est strictement positive sur ce domaine. L'option D est fausse : <span class="math">ln x</span> est négatif seulement sur <span class="math">]0 ; 1[</span>, puis positif après <span class="math">1</span>.</div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[limites]</strong> <span class="math">lim(x→0⁺) ln x = −∞</span> et <span class="math">lim(x→+∞) ln x = +∞</span> — justifiées par <span class="math">ln(eⁿ) = n</span></li>
+      <li><strong>[asymptote]</strong> La droite <span class="math">x = 0</span> (axe des ordonnées) est <strong>asymptote verticale</strong> à la courbe de <span class="math">ln</span></li>
+      <li><strong>[variations]</strong> <span class="math">(ln x)' = 1/x &gt; 0</span> : <span class="math">ln</span> est <strong>strictement croissante</strong>, de <span class="math">−∞</span> à <span class="math">+∞</span>, en passant par <span class="math">(1 ; 0)</span></li>
+      <li><strong>[signe]</strong> <span class="math">ln x &lt; 0</span> si <span class="math">0 &lt; x &lt; 1</span> ; <span class="math">ln 1 = 0</span> ; <span class="math">ln x &gt; 0</span> si <span class="math">x &gt; 1</span></li>
+      <li><strong>[ordre]</strong> <span class="math">ln</span> conserve l'ordre : <span class="math">a &lt; b ⇔ ln a &lt; ln b</span> (pour <span class="math">a ; b &gt; 0</span>) — base des inéquations</li>
+      <li><strong>[croissances]</strong> <span class="math">(ln x)/x → 0</span> en <span class="math">+∞</span> ; <span class="math">x · ln x → 0</span> en <span class="math">0⁺</span> ; généralisation avec <span class="math">xⁿ</span> (<span class="math">n ≥ 1</span>)</li>
+      <li><strong>[etude]</strong> Plan d'étude : domaine (<span class="math">u &gt; 0</span>) → dérivée (<span class="math">u'/u</span>) → limites → tableau → valeurs remarquables (zéro par exponentielle)</li>
+      <li><strong>[etude]</strong> L'asymptote verticale de <span class="math">ln(u(x))</span> se trouve où <span class="math">u(x) → 0⁺</span> — exemple <span class="math">x = −2</span> pour <span class="math">ln(x + 2)</span></li>
+      <li><strong>[tangente]</strong> Tangente en <span class="math">1</span> : <span class="math">y = x − 1</span> ; et <span class="math">ln x ≤ x − 1</span> pour tout <span class="math">x &gt; 0</span> (courbe sous sa tangente)</li>
+      <li><strong>[methode]</strong> Toute borne de tableau doit être justifiée : limite de référence, signe de la dérivée, passage à l'exponentielle pour le zéro</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 3 terminée !</div>
+    <div class="lecture-end-sub">Passe à la fiche complète : équations, inéquations, changement de variable et applications du ln</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

@@ -1,0 +1,385 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · SIMILITUDES PLANES       -->
+<!-- PARTIE 3 : CAS PARTICULIERS & COMPOSITION                    -->
+<!-- Notion 1 : cas_particuliers — tableau de reconnaissance et   -->
+<!--             3 vérifications (translation, rotation, homothétie) -->
+<!-- Notion 2 : composition — S₂ ∘ S₁ : z'' = (a₂a₁)z + (a₂b₁ + b₂), -->
+<!--             k = k₁k₂, θ = θ₁ + θ₂, non-commutativité         -->
+<!-- Notion 3 : decomposition — rotation + homothétie de même     -->
+<!--             centre                                            -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 03 · Similitudes planes directes</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Cas particuliers &amp; <em>composition</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Une similitude directe est parfois plus simple qu'elle n'en a l'air : le tableau de reconnaissance dit <em>quand</em> c'est une translation, une rotation ou une homothétie. Et quand on <strong>enchaîne deux similitudes</strong> — d'abord l'une, ensuite l'autre — le résultat est encore une similitude directe, avec ses propres éléments caractéristiques. Cette partie couvre <strong>3 notions</strong> : le <strong>tableau de reconnaissance</strong> et ses vérifications, la <strong>composition</strong> <span class="math">S₂ ∘ S₁</span> avec ses règles <span class="math">k = k₁k₂</span> et <span class="math">θ = θ₁ + θ₂</span>, puis la <strong>décomposition</strong> de toute similitude en homothétie et rotation de même centre.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 3 notions</span>
+      <span class="lecture-hero-meta-item">📊 7 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">3 notions · 7 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Enchaîner deux gestes</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · cas_particuliers — Le tableau de reconnaissance</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · cas_particuliers — Trois vérifications en pratique</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · composition — La formule de la composée</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · composition — Exemple complet et contrôles</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 3 · decomposition — Rotation et homothétie de même centre</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Bilan — L'essentiel de la partie</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Enchaîner deux gestes</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le tailleur qui reproduit un patron procède en deux gestes : il <strong>tourne</strong> le tissu pour orienter le motif, puis il <strong>agrandit</strong> le patron à la taille voulue. Deux transformations, l'une après l'autre — et pourtant, le résultat final se décrit d'un seul trait : le patron est <em>plus grand et tourné</em>. Un seul « moteur » a suffi.
+      </p>
+      <p class="lecture-text">
+        Les mathématiques disent la même chose : enchaîner une <strong>rotation</strong> puis une <strong>homothétie</strong> (de même centre) donne une <strong>similitude directe</strong>. Cette partie organise tout cela : d'abord savoir <strong>reconnaître</strong> la nature d'une similitude sur son écriture, puis <strong>composer</strong> deux similitudes et lire le rapport et l'angle du résultat, enfin <strong>décomposer</strong> une similitude quelconque en gestes simples.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Reconnaître</strong> la nature d'une similitude directe grâce au tableau de vérifications (<span class="math">a = 1</span> ? <span class="math">|a| = 1</span> ? <span class="math">a</span> réel ?).</li>
+            <li><strong>Composer</strong> deux similitudes directes et retrouver rapport, angle et nature de la composée.</li>
+            <li><strong>Décomposer</strong> toute similitude directe en une rotation suivie d'une homothétie de même centre.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Pour aller plus loin</div>
+        <div class="lecture-aside-content">
+          Les brodeuses automatiques des ateliers de Niamey enchaînent des milliers de motifs « tournés et mis à l'échelle » par seconde. Chaque motif est l'image du précédent par une <strong>composée</strong> de similitudes — et comme le montre la suite, cette composée reste une similitude : c'est ce qui donne aux bordures leur régularité.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · cas_particuliers — TABLEAU DE RECONNAISSANCE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · cas_particuliers</span>
+        <h2 class="lecture-section-title">Le tableau de reconnaissance</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Devant <span class="math">z' = az + b</span>, la nature de la transformation se lit sur <span class="math">a</span> — avec trois tests à faire <strong>dans l'ordre</strong> (le premier qui réussit tranche la question). Le voici, complet, avec les éléments caractéristiques à annoncer :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Tests sur a</th><th>Nature de S</th><th>Éléments caractéristiques</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">a = 1</span></td><td><strong>Translation</strong></td><td>vecteur →u d'affixe b ; aucun point invariant (si b ≠ 0)</td></tr>
+            <tr><td><span class="math">a ≠ 1</span> et <span class="math">|a| = 1</span></td><td><strong>Rotation</strong></td><td>centre Ω d'affixe <span class="math">ω = b/(1 − a)</span> ; angle <span class="math">θ = arg(a)</span></td></tr>
+            <tr><td><span class="math">a</span> réel avec <span class="math">a &gt; 0</span> et <span class="math">a ≠ 1</span></td><td><strong>Homothétie</strong></td><td>centre Ω d'affixe <span class="math">ω = b/(1 − a)</span> ; rapport <span class="math">k = a</span></td></tr>
+            <tr><td>aucun des trois</td><td><strong>Similitude directe générale</strong></td><td>centre Ω d'affixe <span class="math">ω = b/(1 − a)</span> ; rapport <span class="math">|a|</span> ; angle <span class="math">arg(a)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lecture-text">
+        La dernière ligne est le cas général de la Partie 1 ; la section 05 montrera qu'elle se décompose en <strong>homothétie + rotation de même centre</strong>. Dans tous les cas (hors translation), le centre s'obtient par la formule de la Partie 2 — à n'utiliser qu'après avoir vérifié <span class="math">a ≠ 1</span>.
+      </p>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ L'ordre des tests compte</div>
+          <p>Commence TOUJOURS par tester <span class="math">a = 1</span> : si tu passes d'abord au test <span class="math">|a| = 1</span>, tu risques d'annoncer une « rotation » pour <span class="math">a = 1</span> (puisque <span class="math">|1| = 1</span>), ce qui est faux — <span class="math">a = 1</span> donne une translation. L'ordre <span class="math">a = 1</span>, puis <span class="math">|a| = 1</span>, puis <span class="math">a</span> réel protège de ce piège.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · cas_particuliers — TROIS VÉRIFICATIONS -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · cas_particuliers</span>
+        <h2 class="lecture-section-title">Trois vérifications en pratique</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Appliquons la méthode du tableau à deux écritures concrètes, en montrant chaque test.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet 1 — Reconnaître z' = −iz + 1 + i</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Vérification 1 : <span class="math">a = −i ≠ 1</span> → ce n'est pas une translation.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Vérification 2 : <span class="math">|a| = |−i| = 1</span> → c'est une <strong>rotation</strong>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Centre : <span class="math">ω = (1 + i)/(1 − (−i)) = (1 + i)/(1 + i) = 1</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Angle : <span class="math">θ = arg(−i) = −π/2</span>. Conclusion : rotation de centre le point d'affixe <span class="math">1</span> et d'angle <span class="math">−π/2</span> (quart de tour horaire).</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet 2 — Reconnaître z' = 3z − 6 + 6i</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Vérification 1 : <span class="math">a = 3 ≠ 1</span> → pas une translation ; vérification 2 : <span class="math">|a| = 3 ≠ 1</span> → pas une rotation.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Vérification 3 : <span class="math">a = 3</span> est <strong>réel et positif</strong> → c'est une <strong>homothétie</strong>, de rapport <span class="math">k = 3</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Centre : <span class="math">ω = (−6 + 6i)/(1 − 3) = (−6 + 6i)/(−2) = 3 − 3i</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Une homothétie exige <span class="math">a</span> <strong>réel</strong>, pas seulement <span class="math">|a| &gt; 0</span> : pour <span class="math">z' = (1 + i)z</span>, on a <span class="math">|a| = √2</span> mais <span class="math">a</span> n'est pas réel — ce n'est <strong>pas</strong> une homothétie, c'est une similitude directe générale (elle tourne de <span class="math">45°</span> en plus d'agrandir). Inversement, <span class="math">a = −3</span> (réel négatif) n'est pas non plus le cas du tableau : la direction est retournée de <span class="math">180°</span>, on la traitera comme similitude générale (homothétie + rotation d'angle <span class="math">π</span>).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · composition — LA FORMULE DE LA COMPOSÉE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · composition</span>
+        <h2 class="lecture-section-title">La formule de la composée <span class="math">S₂ ∘ S₁</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Composer deux transformations, c'est les <strong>enchaîner</strong> : <span class="math">S₂ ∘ S₁</span> signifie « d'abord <span class="math">S₁</span>, ensuite <span class="math">S₂</span> » (on lit de droite à gauche). Calculons l'écriture complexe du résultat, pour <span class="math">S₁ : z' = a₁z + b₁</span> et <span class="math">S₂ : z'' = a₂z' + b₂</span> :
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Calcul — L'écriture de la composée</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>La première transformation donne : <span class="math">z' = a₁z + b₁</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>La seconde s'applique à <span class="math">z'</span> : <span class="math">z'' = a₂z' + b₂ = a₂(a₁z + b₁) + b₂</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On développe : <span class="math">z'' = a₂a₁ × z + a₂b₁ + b₂</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La composée de deux similitudes directes</div>
+        <div class="lecture-formula-hero-main">z'' = (a₂a₁)z + (a₂b₁ + b₂)</div>
+        <div class="lecture-formula-hero-desc">Encore une écriture az + b avec a = a₂a₁ ≠ 0 : la composée est ENCORE une similitude directe. Cas particulier : si a₂a₁ = 1, c'est une translation.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">k = k₁ × k₂&nbsp;&nbsp;·&nbsp;&nbsp;θ ≡ θ₁ + θ₂ [2π]</div>
+        <div class="lecture-formula-desc">Dans la composée, les rapports se MULTIPLIENT et les angles s'ADDITIONNENT — fidèle au sens des gestes : agrandir deux fois multiplie les facteurs, tourner deux fois additionne les angles.</div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Composition : un point M devient M1 par S1, puis M2 par S2, résultat de la composée S2 rond S1">
+          <line x1="95" y1="210" x2="238" y2="158" style="stroke:var(--accent)" stroke-width="2.5"/>
+          <polygon points="250,155 240,163 237,155" style="fill:var(--accent)"/>
+          <line x1="253" y1="150" x2="331" y2="74" style="stroke:var(--green-bright)" stroke-width="2.5"/>
+          <polygon points="340,65 334,76 329,71" style="fill:var(--green-bright)"/>
+          <line x1="100" y1="205" x2="330" y2="72" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="6 5"/>
+          <polygon points="340,65 333,74 328,67" style="fill:var(--text-dim)"/>
+          <circle cx="90" cy="215" r="4.5" style="fill:var(--text-dim)"/>
+          <circle cx="250" cy="155" r="4.5" style="fill:var(--accent)"/>
+          <circle cx="340" cy="65" r="4.5" style="fill:var(--green-bright)"/>
+          <text x="72" y="228" style="fill:var(--text-dim)" font-size="14" font-weight="700" font-family="Inter">M</text>
+          <text x="244" y="148" style="fill:var(--accent)" font-size="14" font-weight="700" font-family="Inter">M₁ = S₁(M)</text>
+          <text x="350" y="62" style="fill:var(--green-bright)" font-size="14" font-weight="700" font-family="Inter">M₂ = S₂(M₁)</text>
+          <text x="128" y="168" style="fill:var(--accent)" font-size="12" font-weight="700" font-family="Inter">S₁ : k₁, θ₁</text>
+          <text x="290" y="118" style="fill:var(--green-bright)" font-size="12" font-weight="700" font-family="Inter">S₂ : k₂, θ₂</text>
+          <text x="150" y="105" style="fill:var(--text-dim)" font-size="12" font-family="Inter">S₂ ∘ S₁ : k₁k₂, θ₁ + θ₂</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">La composée <span class="math">S₂ ∘ S₁</span> applique d'abord <span class="math">S₁</span> (flèche pleine bleue), puis <span class="math">S₂</span> (flèche pleine verte). Le trajet direct (pointillés) est la composée : rapport multiplié <span class="math">k₁ × k₂</span>, angle additionné <span class="math">θ₁ + θ₂</span>.</figcaption>
+      </figure>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Lire de droite à gauche</div>
+          <p>Dans <span class="math">S₂ ∘ S₁</span>, la transformation la plus à <strong>droite</strong> s'applique en premier. Écrire les formules dans le mauvais ordre conduit à <span class="math">a₁b₂ + b₁</span> au lieu de <span class="math">a₂b₁ + b₂</span> — deux résultats différents. Pose toujours « d'abord …, ensuite … » avant de calculer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 2 · composition — EXEMPLE COMPLET -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · composition</span>
+        <h2 class="lecture-section-title">Exemple complet et contrôles</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Composons <span class="math">S₂ ∘ S₁</span> pour <span class="math">S₁ : z' = iz + 1 − i</span> et <span class="math">S₂ : z'' = (1 + i)z'</span> — puis contrôlons le résultat avec les règles <span class="math">k = k₁ × k₂</span> et <span class="math">θ = θ₁ + θ₂</span>.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Calculer S₂ ∘ S₁</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>D'abord <span class="math">S₁</span> : <span class="math">z' = iz + 1 − i</span> (avec <span class="math">a₁ = i</span>, <span class="math">b₁ = 1 − i</span>).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Ensuite <span class="math">S₂</span> : <span class="math">z'' = (1 + i)z' = (1 + i)(iz + 1 − i)</span> (avec <span class="math">a₂ = 1 + i</span>, <span class="math">b₂ = 0</span>).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Coefficient de <span class="math">z</span> : <span class="math">a₂a₁ = (1 + i) × i = i + i² = −1 + i</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Constante : <span class="math">a₂b₁ + b₂ = (1 + i)(1 − i) + 0 = 1 − i² = 2</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Conclusion : <span class="math">z'' = (−1 + i)z + 2</span> — encore une similitude directe (car <span class="math">−1 + i ≠ 0</span>), de rapport <span class="math">√2</span> et d'angle <span class="math">3π/4</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Contrôles — Vérifier avec k₁k₂ et θ₁ + θ₂</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><span class="math">S₁</span> : <span class="math">k₁ = |i| = 1</span> et <span class="math">θ₁ = arg(i) = π/2</span> ; <span class="math">S₂</span> : <span class="math">k₂ = |1 + i| = √2</span> et <span class="math">θ₂ = arg(1 + i) = π/4</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Rapport attendu : <span class="math">k₁ × k₂ = 1 × √2 = √2</span> — et on trouve <span class="math">|−1 + i| = √(1 + 1) = √2</span> ✓.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Angle attendu : <span class="math">θ₁ + θ₂ = π/2 + π/4 = 3π/4</span> — et <span class="math">arg(−1 + i) = 3π/4</span> (second quadrant) ✓.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>En bonus, le centre : <span class="math">ω = 2/(1 − (−1 + i)) = 2/(2 − i) = 2(2 + i)/((2 − i)(2 + i)) = (4 + 2i)/5 = 0,8 + 0,4i</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ La composition n'est PAS commutative</div>
+          <p>En général <span class="math">S₁ ∘ S₂ ≠ S₂ ∘ S₁</span>. Sur nos deux transformations : <span class="math">S₁ ∘ S₂</span> donne <span class="math">z'' = i((1 + i)z) + 1 − i = (−1 + i)z + 1 − i</span>, alors que <span class="math">S₂ ∘ S₁</span> donne <span class="math">z'' = (−1 + i)z + 2</span>. Même moteur <span class="math">a</span> (les nombres se multiplient dans n'importe quel ordre), mais <strong>pas le même décalage</strong> : ce sont deux transformations différentes, de centres différents. L'ordre des gestes change le résultat — comme en cuisine.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 3 · decomposition — HOMOTHÉTIE + ROTATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · decomposition</span>
+        <h2 class="lecture-section-title">Toute similitude = rotation + homothétie de même centre</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Réciproquement, tout nombre complexe non nul s'écrit <span class="math">a = k × e^(iθ)</span> avec <span class="math">k = |a| &gt; 0</span> (son module) et <span class="math">θ = arg(a)</span> (son argument). La forme réduite se lit alors en deux gestes :
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La décomposition centrale — a = k × e^(iθ)</div>
+        <div class="lecture-formula-hero-main">z' − ω = (k × e^(iθ)) × (z − ω)</div>
+        <div class="lecture-formula-hero-desc">Multiplier par e^(iθ) : rotation R(Ω ; θ). Multiplier par k : homothétie h(Ω ; k). Même centre Ω, donc les deux gestes peuvent se faire dans n'importe quel ordre.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">R(Ω ; θ) ∘ h(Ω ; k) = h(Ω ; k) ∘ R(Ω ; θ) = S</div>
+        <div class="lecture-formula-desc">La composée d'une rotation et d'une homothétie de MÊME centre est la similitude directe de centre Ω, d'angle θ et de rapport k. « De même centre » est essentiel : avec deux centres différents, le résultat ne se décompose pas ainsi.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Décomposer z'' = (−1 + i)z + 2</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On lit <span class="math">a = −1 + i</span> et <span class="math">b = 2</span> ; on a calculé <span class="math">ω = 0,8 + 0,4i</span> (section 04).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Rapport : <span class="math">k = |−1 + i| = √2</span> ; angle : <span class="math">θ = arg(−1 + i) = 3π/4</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Donc <span class="math">S</span> est la composée de la rotation <span class="math">R(Ω ; 3π/4)</span> et de l'homothétie <span class="math">h(Ω ; √2)</span>, de même centre <span class="math">Ω</span> d'affixe <span class="math">0,8 + 0,4i</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Lecture sur la figure : chaque point pivote de <span class="math">135°</span> autour de <span class="math">Ω</span> et s'éloigne d'un facteur <span class="math">√2 ≈ 1,41</span> — les deux gestes du compas, dans un ordre indifférent.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Les cas du tableau rentrent dans le moule</div>
+          <p>La décomposition marche pour <strong>toutes</strong> les similitudes de rapport <span class="math">k ≠ 1</span> : si <span class="math">θ = 0</span> (a réel &gt; 0), la rotation est l'identité et il reste l'homothétie ; si <span class="math">a = −3</span> (réel négatif), on obtient une homothétie de rapport 3 suivie d'une rotation d'angle <span class="math">π</span> — voilà pourquoi <span class="math">a</span> réel négatif n'était pas une « simple » homothétie au tableau.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : BILAN -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">L'essentiel de la partie</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le catalogue est complet : tu sais reconnaître la nature d'une similitude, la composer avec une autre, et la décomposer en gestes élémentaires. Il ne reste qu'à assembler le tout — c'est la fiche complète de la Partie 4.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La carte d'identité de la partie</div>
+        <div class="lecture-formula-hero-main">z'' = (a₂a₁)z + (a₂b₁ + b₂)&nbsp;&nbsp;·&nbsp;&nbsp;k = k₁k₂&nbsp;&nbsp;·&nbsp;&nbsp;θ ≡ θ₁ + θ₂ [2π]</div>
+        <div class="lecture-formula-hero-desc">Composer deux similitudes directes en donne encore une (translation si a₂a₁ = 1) ; les rapports se multiplient, les angles s'additionnent — et l'ordre des gestes compte.</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><strong>Reconnaissance</strong> : trois tests dans l'ordre — <span class="math">a = 1</span> (translation), <span class="math">|a| = 1</span> avec <span class="math">a ≠ 1</span> (rotation), <span class="math">a</span> réel <span class="math">&gt; 0</span> avec <span class="math">a ≠ 1</span> (homothétie), sinon similitude générale.</li>
+        <li><strong>Composée</strong> : <span class="math">z'' = (a₂a₁)z + (a₂b₁ + b₂)</span> — encore une similitude directe, ou une translation si <span class="math">a₂a₁ = 1</span>.</li>
+        <li><strong>Contrôles</strong> : <span class="math">k = k₁ × k₂</span> et <span class="math">θ ≡ θ₁ + θ₂ [2π]</span> — deux vérifications rapides qui sécurisent tout calcul de composée.</li>
+        <li><strong>Non-commutativité</strong> : <span class="math">S₁ ∘ S₂ ≠ S₂ ∘ S₁</span> en général (même <span class="math">a</span> possible, mais <span class="math">b</span> différent).</li>
+        <li><strong>Décomposition</strong> : <span class="math">z' − ω = (k × e^(iθ))(z − ω)</span> — rotation <span class="math">R(Ω ; θ)</span> et homothétie <span class="math">h(Ω ; k)</span> de même centre, dans un ordre indifférent.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Réflexe rédaction pour l'examen</div>
+          <p>Après un calcul de composée, <strong>conclus toujours</strong> : « donc <span class="math">S₂ ∘ S₁</span> est la similitude directe de rapport … et d'angle … (de centre …) ». Une composée laissée sous forme d'écriture sans éléments caractéristiques est une réponse inachevée.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — <span class="math">S₁ : z' = 2z</span> et <span class="math">S₂ : z'' = z' + 3</span>. Que vaut <span class="math">S₂ ∘ S₁</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) z'' = 2z + 3</span><span>B) z'' = 2z + 6</span><span>C) z'' = z + 3</span><span>D) z'' = 4z + 3</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) z'' = 2z + 3.</strong> a = a₂a₁ = 1 × 2 = 2 et b = a₂b₁ + b₂ = 1 × 0 + 3 = 3. (D'abord l'homothétie de rapport 2, ensuite la translation — les deux gestes ne se mélangent pas.)</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — On compose deux rotations de centre O, d'angles <span class="math">π/3</span> puis <span class="math">π/6</span>. Le résultat est :</p>
+      <div class="lecture-quiz-options"><span>A) une translation</span><span>B) une rotation d'angle π/2</span><span>C) une homothétie de rapport 2</span><span>D) une rotation d'angle π/18</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) une rotation d'angle π/2.</strong> k = k₁ × k₂ = 1 × 1 = 1 et θ = π/3 + π/6 = 2π/6 + π/6 = 3π/6 = π/2. Rapport 1 et angle non nul : c'est une rotation, d'angle la somme des deux.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — <span class="math">S₁</span> a pour rapport <span class="math">2</span> et angle <span class="math">0</span> ; <span class="math">S₂</span> a pour rapport <span class="math">1</span> et angle <span class="math">π/2</span>. Rapport et angle de <span class="math">S₂ ∘ S₁</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) k = 2, θ = π/2</span><span>B) k = 3, θ = π/2</span><span>C) k = 2, θ = π/4</span><span>D) k = 1, θ = π/2</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) k = 2, θ = π/2.</strong> k = k₁ × k₂ = 2 × 1 = 2 et θ = θ₁ + θ₂ = 0 + π/2 = π/2. (C'est la similitude z' = 2iz : elle double les distances et tourne d'un quart de tour.)</div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[cas_particuliers]</strong> Trois tests dans l'ordre : <span class="math">a = 1</span> → translation ; <span class="math">|a| = 1</span> et <span class="math">a ≠ 1</span> → rotation ; <span class="math">a</span> réel <span class="math">&gt; 0</span> et <span class="math">a ≠ 1</span> → homothétie</li>
+      <li><strong>[cas_particuliers]</strong> Sinon : similitude directe générale de centre <span class="math">ω = b/(1 − a)</span>, de rapport <span class="math">|a|</span> et d'angle <span class="math">arg(a)</span></li>
+      <li><strong>[cas_particuliers]</strong> Une homothétie exige a RÉEL : <span class="math">a = 1 + i</span> agrandit ET tourne, ce n'est pas une homothétie</li>
+      <li><strong>[composition]</strong> <span class="math">S₂ ∘ S₁</span> = d'abord <span class="math">S₁</span>, ensuite <span class="math">S₂</span> (lire de droite à gauche)</li>
+      <li><strong>[composition]</strong> <span class="math">z'' = (a₂a₁)z + (a₂b₁ + b₂)</span> : encore une similitude directe ; translation si <span class="math">a₂a₁ = 1</span></li>
+      <li><strong>[composition]</strong> Les rapports se multiplient (<span class="math">k = k₁k₂</span>), les angles s'additionnent (<span class="math">θ ≡ θ₁ + θ₂ [2π]</span>)</li>
+      <li><strong>[composition]</strong> Non-commutativité : <span class="math">S₁ ∘ S₂ ≠ S₂ ∘ S₁</span> en général — l'ordre des gestes change le résultat</li>
+      <li><strong>[decomposition]</strong> <span class="math">a = k × e^(iθ)</span> : toute similitude = rotation <span class="math">R(Ω ; θ)</span> + homothétie <span class="math">h(Ω ; k)</span> de même centre, ordre indifférent</li>
+      <li><strong>[decomposition]</strong> « De même centre » est indispensable : deux centres différents ne donnent pas cette décomposition</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 3 terminée !</div>
+    <div class="lecture-end-sub">Passe à la fiche complète : applications géométriques et grande table de synthèse</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

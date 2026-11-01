@@ -1,0 +1,587 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · STATISTIQUES             -->
+<!-- PARTIE 2 : ÉCART-TYPE & AJUSTEMENT LINÉAIRE                  -->
+<!-- Notion 1 : variance — La variance V                          -->
+<!-- Notion 2 : ecart_type — L'écart-type σ                       -->
+<!-- Notion 3 : nuage_moyen — Série double, nuage, point moyen G  -->
+<!-- Notion 4 : mayer — La droite de Mayer (points moyens)        -->
+<!-- Notion 5 : moindres_carres — Covariance et moindres carrés   -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 02 · Statistiques</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Écart-type &amp; <em>ajustement linéaire</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Deux parcelles peuvent afficher la même moyenne et produire l'une régulièrement, l'autre en dents de scie : la <strong>variance</strong> <span class="math">V</span> et l'<strong>écart-type</strong> <span class="math">σ</span> mesurent cette différence. Puis on passe aux <strong>séries doubles</strong> : la pluie fait-elle le rendement ? On trace le <strong>nuage de points</strong>, son <strong>point moyen</strong> <span class="math">G</span>, et on cherche la droite qui le résume — d'abord par la <strong>méthode de Mayer</strong>, puis par les <strong>moindres carrés</strong>, la méthode exacte. Cette partie couvre <strong>5 notions</strong>.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 5 notions</span>
+      <span class="lecture-hero-meta-item">📊 7 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">5 notions · 7 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Même moyenne, récoltes différentes</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · variance — La variance <span class="math">V</span></span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 2 · ecart_type — L'écart-type <span class="math">σ</span></span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 3 · nuage_moyen — Nuage de points et point moyen <span class="math">G</span></span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 4 · mayer — La droite de Mayer</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 5 · moindres_carres — Covariance et moindres carrés</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Bilan — L'essentiel de la partie</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION                                       -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Même moyenne, récoltes différentes</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Deux villages de la région de Tahoua récoltent en moyenne <span class="math">1,38 t/ha</span> de mil. Dans le premier, les parcelles donnent toutes entre <span class="math">1,3</span> et <span class="math">1,5</span> : une récolte prévisible. Dans le second, elles oscillent de <span class="math">0,8</span> à <span class="math">2,0</span> selon les pluies : même moyenne, mais un risque bien plus grand pour les familles. La Partie 1 ne voyait rien de cette différence — la <strong>variance</strong> et l'<strong>écart-type</strong> la mesurent.
+      </p>
+      <p class="lecture-text">
+        Second fil de la partie : relier deux caractères entre eux. Chaque saison, l'agronome relève la <strong>pluviométrie</strong> et le <strong>rendement</strong> : deux nombres par individu, donc une <strong>série double</strong>. En plaçant les points <span class="math">Mᵢ(xᵢ ; yᵢ)</span> dans le plan, le nuage dessine souvent une tendance — et toute tendance rectiligne peut se résumer par une <strong>droite d'ajustement</strong>, capable de <strong>prédire</strong>.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Calculer</strong> la variance <span class="math">V</span> et l'écart-type <span class="math">σ</span> du fil rouge (les 10 parcelles de mil), de deux façons.</li>
+            <li><strong>Construire</strong> un nuage de points et son point moyen <span class="math">G(x̄ ; ȳ)</span>.</li>
+            <li><strong>Déterminer</strong> une droite d'ajustement <span class="math">y = ax + b</span> par Mayer puis par les <strong>moindres carrés</strong>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · variance                              -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · variance</span>
+        <h2 class="lecture-section-title">La variance <span class="math">V</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        L'idée : mesurer « de combien les valeurs s'écartent, en moyenne, de la moyenne <span class="math">x̄</span> ». On calcule chaque écart <span class="math">xᵢ − x̄</span>, on l'élève au carré (pour que les écarts au-dessus et en dessous ne se compensent pas), on pondère par les effectifs, et on divise par <span class="math">N</span>.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définition officielle — Variance</div>
+          <p>La <strong>variance</strong> d'une série statistique de moyenne <span class="math">x̄</span> est la moyenne des carrés des écarts à la moyenne : <span class="math">V = (1 / N) × Σ nᵢ·(xᵢ − x̄)²</span>. C'est un nombre positif, exprimé dans l'unité du caractère <strong>au carré</strong>.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La variance — définition par les écarts</div>
+        <div class="lecture-formula-hero-main">V = (Σ nᵢ·(xᵢ − x̄)²) / N</div>
+        <div class="lecture-formula-hero-desc">V grande : les valeurs sont très dispersées autour de x̄. V petite (proche de 0) : les valeurs sont toutes proches de x̄.</div>
+      </div>
+      <p class="lecture-text">
+        Reprenons le fil rouge : rendements des 10 parcelles, dont <span class="math">x̄ = 1,38 t/ha</span> (Partie 1). On prépare le tableau des écarts, une colonne par étape du calcul :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>xᵢ</th><th>nᵢ</th><th>xᵢ − x̄</th><th>(xᵢ − x̄)²</th><th>nᵢ·(xᵢ − x̄)</th><th>nᵢ·(xᵢ − x̄)²</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">0,8</span></td><td>1</td><td>−0,58</td><td>0,3364</td><td>−0,58</td><td>0,3364</td></tr>
+            <tr><td><span class="math">0,9</span></td><td>1</td><td>−0,48</td><td>0,2304</td><td>−0,48</td><td>0,2304</td></tr>
+            <tr><td><span class="math">1,2</span></td><td>3</td><td>−0,18</td><td>0,0324</td><td>−0,54</td><td>0,0972</td></tr>
+            <tr><td><span class="math">1,5</span></td><td>2</td><td>0,12</td><td>0,0144</td><td>0,24</td><td>0,0288</td></tr>
+            <tr><td><span class="math">1,7</span></td><td>1</td><td>0,32</td><td>0,1024</td><td>0,32</td><td>0,1024</td></tr>
+            <tr><td><span class="math">1,8</span></td><td>1</td><td>0,42</td><td>0,1764</td><td>0,42</td><td>0,1764</td></tr>
+            <tr><td><span class="math">2,0</span></td><td>1</td><td>0,62</td><td>0,3844</td><td>0,62</td><td>0,3844</td></tr>
+            <tr><td><strong>Σ</strong></td><td>10</td><td>—</td><td>—</td><td><strong>0</strong></td><td><strong>1,3560</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — La variance du fil rouge</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Point de départ : <span class="math">x̄ = 1,38</span> et <span class="math">N = 10</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Pour chaque valeur, on calcule l'écart <span class="math">xᵢ − x̄</span> puis son carré (colonnes 3 et 4 du tableau).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On pondère par les effectifs et on additionne la dernière colonne :</p>
+              <p><span class="math">Σ nᵢ·(xᵢ − x̄)² = 0,3364 + 0,2304 + 0,0972 + 0,0288 + 0,1024 + 0,1764 + 0,3844</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>La somme vaut <span class="math">1,3560</span>. On écrit la formule, puis le développement sur sa ligne :</p>
+              <p><span class="math">V = (Σ nᵢ·(xᵢ − x̄)²) / N</span><br>
+              <span class="math">V = 1,3560 / 10</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Le résultat final, sur sa propre ligne :</p>
+              <p><span class="math">V = 0,1356 (t/ha)²</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p>Vérification de la colonne 5 : <span class="math">Σ nᵢ·(xᵢ − x̄) = 0</span> — les écarts pondérés se compensent exactement. Si ce n'est pas 0, la moyenne ou un écart est faux !</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p><strong>Variante rapide (König-Huygens)</strong> : on reprend les carrés des valeurs, pondérés par les effectifs :</p>
+              <div class="lecture-table">
+                <table>
+                  <thead>
+                    <tr><th>Valeur xᵢ</th><th>Effectif nᵢ</th><th>Carré xᵢ²</th><th>Produit nᵢ × xᵢ²</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><span class="math">0,8</span></td><td>1</td><td>0,64</td><td><span class="math">1 × 0,64 = 0,64</span></td></tr>
+                    <tr><td><span class="math">0,9</span></td><td>1</td><td>0,81</td><td><span class="math">1 × 0,81 = 0,81</span></td></tr>
+                    <tr><td><span class="math">1,2</span></td><td>3</td><td>1,44</td><td><span class="math">3 × 1,44 = 4,32</span></td></tr>
+                    <tr><td><span class="math">1,5</span></td><td>2</td><td>2,25</td><td><span class="math">2 × 2,25 = 4,50</span></td></tr>
+                    <tr><td><span class="math">1,7</span></td><td>1</td><td>2,89</td><td><span class="math">1 × 2,89 = 2,89</span></td></tr>
+                    <tr><td><span class="math">1,8</span></td><td>1</td><td>3,24</td><td><span class="math">1 × 3,24 = 3,24</span></td></tr>
+                    <tr><td><span class="math">2,0</span></td><td>1</td><td>4,00</td><td><span class="math">1 × 4,00 = 4,00</span></td></tr>
+                    <tr><td><strong>Σ</strong></td><td><span class="math">N = 10</span></td><td>—</td><td><span class="math">Σ nᵢ·xᵢ² = 20,40</span></td></tr>
+                  </tbody>
+                </table>
+              </div></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">8</div><div class="lecture-step-content"><p>On applique la formule de König-Huygens, une transformation par ligne :</p>
+              <p><span class="math">V = (Σ nᵢ·xᵢ²) / N − x̄²</span><br>
+              <span class="math">V = 20,40 / 10 − 1,38²</span><br>
+              <span class="math">V = 2,04 − 1,9044</span></p>
+              <p><span class="math">V = 0,1356</span> : même résultat ✓.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">V = (Σ nᵢ·xᵢ²) / N − x̄²</div>
+        <div class="lecture-formula-desc">Formule de König-Huygens (forme développée de la variance) : « moyenne des carrés moins carré de la moyenne ». Souvent plus rapide à la calculatrice : aucune écart à calculer, juste des carrés.</div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Trois pièges classiques : (1) oublier d'élever au carré et diviser <span class="math">Σ nᵢ·(xᵢ − x̄)</span> par N — cela donne 0, pas la variance ; (2) partir d'une moyenne mal arrondie — ici <span class="math">x̄ = 1,38</span> est exact, garde tous les chiffres ; (3) annoncer <span class="math">V</span> en t/ha — son unité est le <strong>(t/ha)²</strong>, peu parlant : c'est justement pour cela qu'on introduit <span class="math">σ</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 2 · ecart_type                            -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · ecart_type</span>
+        <h2 class="lecture-section-title">L'écart-type <span class="math">σ</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La variance <span class="math">0,1356</span> est en (t/ha)² : on ne sait pas la lire. En prenant la racine carrée, on revient à l'unité du caractère — le nombre obtenu, l'<strong>écart-type</strong>, est l'indicateur de dispersion le plus utilisé au monde.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">L'écart-type — la racine de la variance</div>
+        <div class="lecture-formula-hero-main">σ = √V</div>
+        <div class="lecture-formula-hero-desc">σ mesure l'écart moyen des valeurs à x̄, dans la MÊME unité que les données. σ ≈ 0 : série homogène ; σ grand : série dispersée.</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Écart-type du fil rouge</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On part de la variance : <span class="math">σ = √V = √0,1356</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>À la calculatrice : <span class="math">σ ≈ 0,368</span>, arrondi au centième <span class="math">σ ≈ 0,37</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Lecture : les rendements s'écartent en moyenne d'environ <span class="math">0,37 t/ha</span> autour de la moyenne <span class="math">1,38 t/ha</span> — une dispersion modérée, typique d'une saison de pluies irrégulière.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Un village plus régulier</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Un second village donne les rendements <span class="math">1,30 ; 1,34 ; 1,38 ; 1,42 ; 1,46</span> : même moyenne <span class="math">x̄ = 1,38</span>, mais les écarts sont <span class="math">±0,08</span> au plus.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>La variance, une transformation par ligne :</p>
+              <p><span class="math">V = ((−0,08)² + (−0,04)² + 0² + 0,04² + 0,08²) / 5</span><br>
+              <span class="math">V = 0,016 / 5</span><br>
+              <span class="math">V = 0,0032</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>D'où <span class="math">σ ≈ 0,06 t/ha</span> : six fois moins que le premier village. C'est <span class="math">σ</span>, et non <span class="math">x̄</span>, qui révèle cette différence.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Valeur de σ</th><th>Lecture de la série</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">σ ≈ 0</span></td><td>toutes les valeurs sont proches de <span class="math">x̄</span> — série homogène</td></tr>
+            <tr><td><span class="math">σ</span> modéré</td><td>dispersion moyenne autour de <span class="math">x̄</span> (ici <span class="math">0,37</span> pour <span class="math">1,38</span>)</td></tr>
+            <tr><td><span class="math">σ</span> grand</td><td>valeurs très étalées : forte hétérogénéité (risque agricole, inégalité…)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 3 · nuage_moyen                           -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · nuage_moyen</span>
+        <h2 class="lecture-section-title">Nuage de points et point moyen <span class="math">G</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        On étudie maintenant 5 parcelles de <strong>sorgho</strong> : pour chacune, la pluviométrie de saison <span class="math">xᵢ</span> (en dm, donc 1 dm = 100 mm) et le rendement <span class="math">yᵢ</span> (en t/ha). À chaque parcelle correspond un point du plan — c'est une <strong>série statistique double</strong>.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définitions officielles — Série double, point moyen</div>
+          <p>Une <strong>série statistique double</strong> associe à chaque individu un couple de valeurs <span class="math">(xᵢ ; yᵢ)</span>. Le <strong>nuage de points</strong> est l'ensemble des points <span class="math">Mᵢ(xᵢ ; yᵢ)</span> dans le plan. Le <strong>point moyen</strong> <span class="math">G</span> a pour coordonnées la moyenne des <span class="math">xᵢ</span> et la moyenne des <span class="math">yᵢ</span> : <span class="math">G(x̄ ; ȳ)</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Parcelle</th><th>Pluie xᵢ (dm)</th><th>Rendement yᵢ (t/ha)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>A</td><td>2</td><td>5</td></tr>
+            <tr><td>B</td><td>4</td><td>8</td></tr>
+            <tr><td>C</td><td>6</td><td>9</td></tr>
+            <tr><td>D</td><td>8</td><td>12</td></tr>
+            <tr><td>E</td><td>10</td><td>16</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">
+          G(x̄ ; ȳ)<br>
+          x̄ = (Σ xᵢ) / n<br>
+          ȳ = (Σ yᵢ) / n
+        </div>
+        <div class="lecture-formula-desc">Le point moyen se calcule colonne par colonne : on moyenne les x entre eux, les y entre eux. n = nombre de points (ici 5).</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple complet — Calculer le point moyen G</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Moyenne des abscisses, sur sa ligne :</p>
+              <p><span class="math">x̄ = (2 + 4 + 6 + 8 + 10) / 5</span><br>
+              <span class="math">x̄ = 30 / 5 = 6</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Moyenne des ordonnées, sur sa ligne :</p>
+              <p><span class="math">ȳ = (5 + 8 + 9 + 12 + 16) / 5</span><br>
+              <span class="math">ȳ = 50 / 5 = 10</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Le point moyen, sur sa propre ligne :</p>
+              <p><span class="math">G(6 ; 10)</span></p>
+              <p>Soit 6 dm de pluie (600 mm), 10 t/ha de sorgho.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><span class="math">G</span> n'est pas l'un des points <span class="math">Mᵢ</span> du nuage : c'est normal, c'est le « centre de gravité » du nuage, pas une observation.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 560 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Nuage des cinq points de sorgho, point moyen G de coordonnées 6 et 10, droite de régression y égale 1,3x plus 2,2 passant par G">
+          <line x1="50" y1="300" x2="520" y2="300" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="530,300 518,294 518,306" style="fill:var(--text-dim)"/>
+          <line x1="50" y1="310" x2="50" y2="45" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="50,35 44,47 56,47" style="fill:var(--text-dim)"/>
+          <text x="290" y="344" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">Pluviométrie x (dm)</text>
+          <text x="58" y="28" style="fill:var(--text-dim)" font-size="11" font-family="Inter">Rendement y (t/ha)</text>
+          <line x1="130" y1="294" x2="130" y2="306" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="130" y="324" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">2</text>
+          <line x1="200" y1="294" x2="200" y2="306" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="200" y="324" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">4</text>
+          <line x1="270" y1="294" x2="270" y2="306" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="270" y="324" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">6</text>
+          <line x1="340" y1="294" x2="340" y2="306" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="340" y="324" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">8</text>
+          <line x1="410" y1="294" x2="410" y2="306" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="410" y="324" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">10</text>
+          <line x1="44" y1="230" x2="56" y2="230" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="36" y="234" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">5</text>
+          <line x1="44" y1="160" x2="56" y2="160" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="36" y="164" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">10</text>
+          <line x1="44" y1="90" x2="56" y2="90" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="36" y="94" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">15</text>
+          <line x1="270" y1="160" x2="270" y2="300" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <line x1="50" y1="160" x2="270" y2="160" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <line x1="60" y1="269" x2="445" y2="69" style="stroke:currentColor" stroke-width="2.5"/>
+          <text x="318" y="112" style="fill:currentColor" font-size="12" font-family="Inter">D : y = 1,3x + 2,2</text>
+          <circle cx="130" cy="230" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="200" cy="188" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="270" cy="174" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="340" cy="132" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="410" cy="76" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="270" cy="160" r="7" style="fill:currentColor"/>
+          <text x="282" y="166" style="fill:currentColor" font-size="13" font-weight="700" font-family="Inter">G(6 ; 10)</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Le nuage des 5 points <span class="math">Mᵢ(xᵢ ; yᵢ)</span>, le point moyen <span class="math">G(6 ; 10)</span> et la droite <span class="math">D : y = 1,3x + 2,2</span> obtenue par les moindres carrés (section 05) : les points sont presque alignés et <span class="math">G</span> est sur la droite.</figcaption>
+      </figure>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ G se calcule colonne par colonne</div>
+          <p>On moyenne les <span class="math">xᵢ</span> entre eux et les <span class="math">yᵢ</span> entre eux — jamais ligne par ligne ! Écrire <span class="math">x̄ = (2 + 5)/2 + …</span> en mélangeant pluie et rendement est une erreur grave : les unités ne sont même pas les mêmes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 4 · mayer                                 -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · mayer</span>
+        <h2 class="lecture-section-title">La droite de Mayer (méthode des points moyens)</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le nuage de sorgho « monte » : une droite peut le résumer. La méthode de <strong>Mayer</strong> est la plus simple à poser : on coupe le nuage en deux, et chaque moitié fournit son point moyen. La droite passe par les deux points moyens obtenus.
+      </p>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode à retenir — Droite de Mayer</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>Découper</strong> le nuage en deux groupes de points (par exemple : petites et grandes valeurs de <span class="math">x</span>).</li>
+            <li><strong>Calculer</strong> le point moyen <span class="math">G₁</span> du premier groupe et le point moyen <span class="math">G₂</span> du second.</li>
+            <li><strong>Tracer</strong> la droite <span class="math">(G₁G₂)</span> : son coefficient directeur est <span class="math">a = (ȳ₂ − ȳ₁) / (x̄₂ − x̄₁)</span>, et son ordonnée à l'origine s'obtient avec le point moyen global <span class="math">G</span> : <span class="math">b = ȳ − a·x̄</span>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Mayer sur les 5 parcelles de sorgho</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Groupe 1</strong> (pluie faible) : <span class="math">(2 ; 5)</span>, <span class="math">(4 ; 8)</span>, <span class="math">(6 ; 9)</span>. Point moyen, un calcul par ligne :</p>
+              <p><span class="math">x̄₁ = (2 + 4 + 6) / 3 = 4</span><br>
+              <span class="math">ȳ₁ = (5 + 8 + 9) / 3 = 22 / 3 ≈ 7,33</span></p>
+              <p>D'où <span class="math">G₁(4 ; 7,33)</span>, sur sa propre ligne.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Groupe 2</strong> (pluie forte) : <span class="math">(8 ; 12)</span>, <span class="math">(10 ; 16)</span>. Point moyen :</p>
+              <p><span class="math">x̄₂ = 18 / 2 = 9</span><br>
+              <span class="math">ȳ₂ = 28 / 2 = 14</span></p>
+              <p>D'où <span class="math">G₂(9 ; 14)</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Pente de <span class="math">(G₁G₂)</span>, une transformation par ligne :</p>
+              <p><span class="math">a = (ȳ₂ − ȳ₁) / (x̄₂ − x̄₁)</span><br>
+              <span class="math">a = (14 − 7,33) / (9 − 4)</span><br>
+              <span class="math">a = 6,67 / 5 ≈ 1,33</span></p>
+              <p>En valeur exacte : <span class="math">a = 4/3</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>La droite passe par <span class="math">G(6 ; 10)</span> — l'ordonnée à l'origine, une transformation par ligne :</p>
+              <p><span class="math">b = ȳ − a·x̄</span><br>
+              <span class="math">b = 10 − (4/3) × 6</span><br>
+              <span class="math">b = 10 − 8 = 2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>L'équation finale, dans son bloc :</p>
+              <div class="lecture-formula-box">
+                <div class="lecture-formula-main">Droite de Mayer : y = (4/3)x + 2 ≈ 1,33x + 2</div>
+                <div class="lecture-formula-desc">Une tendance croissante : plus il pleut, plus le sorgho rend.</div>
+              </div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Mayer est une méthode approximative</div>
+          <p>Le résultat dépend du <strong>découpage</strong> choisi : un autre partage des points donnerait une autre droite. C'est une droite « à la main », utile pour démarrer — mais l'examen demande presque toujours la méthode <strong>exacte</strong>, celle des moindres carrés, qui ne dépend d'aucun choix.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 5 · moindres_carres                       -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 5 · moindres_carres</span>
+        <h2 class="lecture-section-title">Covariance et droite des moindres carrés</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La méthode des <strong>moindres carrés</strong> cherche LA droite qui passe « le plus près possible » de tous les points : celle qui rend minimale la somme des carrés des écarts verticaux entre les points et la droite. Son résultat se calcule avec deux nouvelles quantités : la <strong>covariance</strong> et la <strong>variance de x</strong>.
+      </p>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 460 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma de l'écart vertical d entre un point Mi et la droite D">
+          <line x1="40" y1="190" x2="420" y2="190" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="430,190 418,184 418,196" style="fill:var(--text-dim)"/>
+          <line x1="40" y1="200" x2="40" y2="35" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="40,25 34,37 46,37" style="fill:var(--text-dim)"/>
+          <line x1="55" y1="170" x2="420" y2="58" style="stroke:var(--green-bright)" stroke-width="2.5"/>
+          <text x="396" y="46" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter">D</text>
+          <circle cx="260" cy="72" r="6" style="fill:var(--accent-bright)"/>
+          <text x="248" y="62" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter" text-anchor="end">Mᵢ</text>
+          <line x1="260" y1="72" x2="260" y2="107" style="stroke:var(--green-bright)" stroke-width="2" stroke-dasharray="4 3"/>
+          <text x="270" y="95" style="fill:var(--green-bright)" font-size="12" font-family="Inter">dᵢ</text>
+          <line x1="255" y1="107" x2="265" y2="107" style="stroke:var(--green-bright)" stroke-width="2"/>
+          <line x1="260" y1="190" x2="260" y2="196" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="260" y="212" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">xᵢ</text>
+          <text x="26" y="76" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">yᵢ</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">L'écart vertical <span class="math">dᵢ</span> entre le point <span class="math">Mᵢ</span> et la droite <span class="math">D</span>. La droite des moindres carrés est celle qui rend minimale la somme <span class="math">Σ dᵢ²</span> de tous ces écarts au carré — certains points sont au-dessus de <span class="math">D</span>, d'autres en dessous.</figcaption>
+      </figure>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">cov(x, y) = (Σ nᵢ·xᵢ·yᵢ) / N − x̄·ȳ</div>
+        <div class="lecture-formula-desc">La covariance « croise » les deux séries : moyenne des produits xᵢ·yᵢ moins produit des moyennes. Son signe donne le sens de la liaison : positive = croissante, négative = décroissante.</div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La droite des moindres carrés (droite de régression)</div>
+        <div class="lecture-formula-hero-main">
+          a = cov(x, y) / V(x)<br>
+          b = ȳ − a·x̄
+        </div>
+        <div class="lecture-formula-hero-desc">La pente a rapporte la covariance à la variance de x ; l'ordonnée à l'origine b est choisie pour que la droite passe par le point moyen G(x̄ ; ȳ). D : y = ax + b.</div>
+      </div>
+      <p class="lecture-text">
+        On rassemble les sommes utiles pour les 5 parcelles de sorgho, puis on applique les formules pas à pas :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>i</th><th>xᵢ</th><th>yᵢ</th><th>xᵢ²</th><th>yᵢ²</th><th>xᵢ·yᵢ</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>2</td><td>5</td><td>4</td><td>25</td><td>10</td></tr>
+            <tr><td>2</td><td>4</td><td>8</td><td>16</td><td>64</td><td>32</td></tr>
+            <tr><td>3</td><td>6</td><td>9</td><td>36</td><td>81</td><td>54</td></tr>
+            <tr><td>4</td><td>8</td><td>12</td><td>64</td><td>144</td><td>96</td></tr>
+            <tr><td>5</td><td>10</td><td>16</td><td>100</td><td>256</td><td>160</td></tr>
+            <tr><td><strong>Σ</strong></td><td><strong>30</strong></td><td><strong>50</strong></td><td><strong>220</strong></td><td><strong>570</strong></td><td><strong>352</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — La droite des moindres carrés</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Rappels : <span class="math">x̄ = 6</span>, <span class="math">ȳ = 10</span> et <span class="math">n = 5</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Covariance</strong>, sur sa ligne :</p>
+              <p><span class="math">cov(x, y) = (Σ xᵢ·yᵢ) / 5 − x̄·ȳ</span><br>
+              <span class="math">cov(x, y) = 352 / 5 − 6 × 10</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Le résultat de la covariance, sur sa propre ligne :</p>
+              <p><span class="math">cov(x, y) = 70,4 − 60 = 10,4</span></p>
+              <p>Positive, comme le nuage croissant.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Variance de x</strong>, sur sa ligne :</p>
+              <p><span class="math">V(x) = (Σ xᵢ²) / 5 − x̄²</span><br>
+              <span class="math">V(x) = 220 / 5 − 6²</span><br>
+              <span class="math">V(x) = 44 − 36 = 8</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Pente a</strong>, sur sa ligne :</p>
+              <p><span class="math">a = cov(x, y) / V(x)</span><br>
+              <span class="math">a = 10,4 / 8</span></p>
+              <p>Résultat sur sa propre ligne : <span class="math">a = 1,3</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Ordonnée à l'origine b</strong>, sur sa ligne :</p>
+              <p><span class="math">b = ȳ − a·x̄</span><br>
+              <span class="math">b = 10 − 1,3 × 6</span><br>
+              <span class="math">b = 10 − 7,8</span></p>
+              <p>Résultat sur sa propre ligne : <span class="math">b = 2,2</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p>L'équation finale, dans son bloc :</p>
+              <div class="lecture-formula-box">
+                <div class="lecture-formula-main">D : y = 1,3x + 2,2</div>
+                <div class="lecture-formula-desc">Droite de régression : chaque dm de pluie supplémentaire apporte environ 1,3 t/ha de sorgho.</div>
+              </div></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">8</div><div class="lecture-step-content"><p>Contrôle obligatoire :</p>
+              <p><span class="math">1,3 × 6 + 2,2 = 7,8 + 2,2 = 10</span><br>
+              <span class="math">10 = ȳ</span> ✓</p>
+              <p>La droite passe bien par <span class="math">G(6 ; 10)</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Le dénominateur de <span class="math">a</span> est <span class="math">V(x)</span>, <strong>jamais</strong> <span class="math">V(y)</span> : la pente mesure l'effet de x sur y. Et ne confonds pas les sommes : <span class="math">Σ xᵢ·yᵢ</span> (produits croisés) n'est ni <span class="math">Σ xᵢ²</span> ni <span class="math">(Σ xᵢ) × (Σ yᵢ)</span>. Enfin, garde toutes les décimales pendant les calculs et n'arrondis qu'à la fin.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : BILAN                                            -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">L'essentiel de la partie</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tu sais maintenant mesurer la dispersion d'une série et résumer un nuage par sa droite. Il reste une question — la Partie 3 : <strong>à quel point la droite est-elle fiable ?</strong> Le coefficient de corrélation répondra.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Les deux formules à emporter</div>
+        <div class="lecture-formula-hero-main">
+          σ = √V<br>
+          D : y = ax + b<br>
+          a = cov(x, y) / V(x)<br>
+          b = ȳ − a·x̄
+        </div>
+        <div class="lecture-formula-hero-desc">Fil rouge : V = 0,1356, σ ≈ 0,37 (t/ha) pour le mil ; D : y = 1,3x + 2,2 pour le sorgho, qui passe par G(6 ; 10).</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><strong>Variance</strong> : <span class="math">V = (Σ nᵢ·(xᵢ − x̄)²) / N</span>, ou <span class="math">V = (Σ nᵢ·xᵢ²) / N − x̄²</span> (König-Huygens) — unité du caractère au carré.</li>
+        <li><strong>Vérification clé</strong> : <span class="math">Σ nᵢ·(xᵢ − x̄) = 0</span> — les écarts pondérés se compensent toujours.</li>
+        <li><strong>Écart-type</strong> <span class="math">σ = √V</span> : même unité que les données, mesure l'écart moyen à la moyenne.</li>
+        <li><strong>Série double</strong> : points <span class="math">Mᵢ(xᵢ ; yᵢ)</span> ; point moyen <span class="math">G(x̄ ; ȳ)</span>, moyennes prises colonne par colonne.</li>
+        <li><strong>Mayer</strong> : découper le nuage en deux, points moyens <span class="math">G₁</span> et <span class="math">G₂</span>, droite <span class="math">(G₁G₂)</span> — méthode simple mais approximative.</li>
+        <li><strong>Moindres carrés</strong> : <span class="math">cov(x, y) = (Σ nᵢ·xᵢ·yᵢ) / N − x̄·ȳ</span>, puis <span class="math">a = cov(x, y) / V(x)</span> et <span class="math">b = ȳ − a·x̄</span> — méthode exacte, toujours contrôler que <span class="math">G ∈ D</span>.</li>
+      </ul>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Pour la série 1 ; 3, quelle est la variance et l'écart-type ?</p>
+      <div class="lecture-quiz-options"><span>A) V = 1 ; σ = 1</span><span>B) V = 2 ; σ = 1</span><span>C) V = 1 ; σ = 2</span><span>D) V = 4 ; σ = 2</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) V = 1 ; σ = 1.</strong> D'abord <span class="math">x̄ = 2</span>, puis la variance est la moyenne des carrés des écarts :
+        <p><span class="math">V = ((1 − 2)² + (3 − 2)²) / 2</span></p>
+        <p><span class="math">V = (1 + 1) / 2 = 1</span></p>
+        <p>Et l'écart-type : <span class="math">σ = √1 = 1</span>.</p>
+      </div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Le point moyen des points (1 ; 2), (3 ; 4), (5 ; 6) est :</p>
+      <div class="lecture-quiz-options"><span>A) G(3 ; 4)</span><span>B) G(9 ; 12)</span><span>C) G(2 ; 3)</span><span>D) G(4,5 ; 6)</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) G(3 ; 4).</strong> On moyenne colonne par colonne, puis on divise par le nombre de points :
+        <p><span class="math">x̄ = (1 + 3 + 5) / 3</span><br>
+        <span class="math">x̄ = 9 / 3 = 3</span></p>
+        <p><span class="math">ȳ = (2 + 4 + 6) / 3</span><br>
+        <span class="math">ȳ = 12 / 3 = 4</span></p>
+      </div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — On donne cov(x,y) = 4 ; V(x) = 8 ; x̄ = 5 ; ȳ = 9. La droite de régression est :</p>
+      <div class="lecture-quiz-options"><span>A) y = 0,5x + 6,5</span><span>B) y = 2x − 1</span><span>C) y = 0,5x + 9</span><span>D) y = 8x − 31</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) y = 0,5x + 6,5.</strong> La pente d'abord, sur sa ligne :
+        <p><span class="math">a = cov(x, y) / V(x)</span><br>
+        <span class="math">a = 4 / 8 = 0,5</span></p>
+        <p>Puis l'ordonnée à l'origine, sur sa ligne :</p>
+        <p><span class="math">b = ȳ − a·x̄</span><br>
+        <span class="math">b = 9 − 0,5 × 5</span><br>
+        <span class="math">b = 9 − 2,5 = 6,5</span></p>
+        <p>Contrôle : <span class="math">0,5 × 5 + 6,5 = 9</span> — <span class="math">G(5 ; 9)</span> vérifie bien l'équation.</p>
+      </div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[variance]</strong> V = (Σ nᵢ(xᵢ − x̄)²)/N : moyenne des carrés des écarts à la moyenne, toujours positive, en unité au carré</li>
+      <li><strong>[variance]</strong> Forme développée (König-Huygens) : V = (Σ nᵢxᵢ²)/N − x̄² — plus rapide à la calculatrice</li>
+      <li><strong>[variance]</strong> Vérification : Σ nᵢ(xᵢ − x̄) = 0 — sinon, une erreur s'est glissée plus haut</li>
+      <li><strong>[ecart_type]</strong> σ = √V : même unité que les données ; σ petit = série homogène, σ grand = série dispersée</li>
+      <li><strong>[ecart_type]</strong> Fil rouge mil : V = 0,1356 (t/ha)² puis σ ≈ 0,37 t/ha autour de x̄ = 1,38 t/ha</li>
+      <li><strong>[nuage_moyen]</strong> Série double : points Mᵢ(xᵢ ; yᵢ) ; point moyen G(x̄ ; ȳ) — moyennes des x et des y prises séparément</li>
+      <li><strong>[mayer]</strong> Découper le nuage en deux groupes → G₁ et G₂ → droite (G₁G₂) de pente a = (ȳ₂ − ȳ₁)/(x̄₂ − x̄₁) — méthode approximative</li>
+      <li><strong>[moindres_carres]</strong> cov(x,y) = (Σ nᵢxᵢyᵢ)/N − x̄·ȳ ; a = cov(x,y)/V(x) (dénominateur : V(x), jamais V(y)) ; b = ȳ − a·x̄</li>
+      <li><strong>[moindres_carres]</strong> La droite des moindres carrés passe toujours par G — contrôle final : G vérifie y = ax + b</li>
+      <li><strong>[moindres_carres]</strong> Fil rouge sorgho : cov = 10,4 ; V(x) = 8 ; a = 1,3 ; b = 2,2 ; D : y = 1,3x + 2,2</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 2 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : le coefficient de corrélation, juge de la droite</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

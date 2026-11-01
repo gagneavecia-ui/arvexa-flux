@@ -1,0 +1,513 @@
+<!-- ============================================================ -->
+<!-- PARTIE 2 : POTENTIEL D'ACTION ET PROPAGATION (25 min)         -->
+<!-- Notion 1 : phases_pa — Repos, dépolarisation, repolarisation, -->
+<!--            hyperpolarisation brève, retour au repos           -->
+<!-- Notion 2 : echanges_ioniques — Entrée Na⁺ puis sortie K⁺      -->
+<!--            (canaux voltage-dépendants, pompe Na⁺/K⁺)          -->
+<!-- Notion 3 : propagation_axone — Propagation point à point      -->
+<!-- Notion 4 : conduction_saltatoire — Myéline et nœuds de        -->
+<!--            Ranvier                                             -->
+<!-- Notion 5 : loi_intensite — Fréquence, pas amplitude           -->
+<!-- Notion 6 : lecture_oscillogramme — Savoir lire un             -->
+<!--            oscillogramme                                       -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 02 · Messages nerveux</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Potentiel d'action et <em>propagation</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Tu connais maintenant la forme du potentiel d'action (PA) : un pic de −70 à +30 mV en quelques millisecondes. Mais <strong>comment la membrane fabrique-t-elle ce pic</strong>, quels ions entrent et sortent, et <strong>comment le PA voyage-t-il</strong> sur parfois un mètre d'axone ? Cette partie répond en <strong>6 notions</strong> : les phases du PA, les échanges ioniques correspondants, la propagation point à point, l'accélération par la myéline, la loi de l'intensité et la lecture d'un oscillogramme.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧬 6 notions</span>
+      <span class="lecture-hero-meta-item">📚 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">6 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Derrière le pic, des ions en mouvement</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion · phases_pa — Les 5 phases du potentiel d'action</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion · echanges_ioniques — Entrée de Na⁺, sortie de K⁺</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion · propagation_axone — Le PA se propage point à point</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion · conduction_saltatoire — Myéline et nœuds de Ranvier</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion · loi_intensite — L'intensité se code en fréquence</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Méthode · lecture_oscillogramme — Lire un oscillogramme</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Entraînement — 3 QCM d'auto-évaluation</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ===== SECTION 0 : MOTIVATION ===== -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Derrière le pic, des ions en mouvement</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La partie 1 t'a appris à <strong>décrire</strong> le potentiel d'action : un pic stéréotypé, de <span class="math">−70 mV</span> à <span class="math">+30 mV</span> puis retour, déclenché au-delà d'un seuil. Mais la physique t'a appris aussi qu'un courant électrique, c'est un <strong>mouvement de charges</strong> : derrière la courbe de l'oscillogramme, il y a donc des ions qui traversent la membrane. Notre programme de questions est le suivant :
+      </p>
+      <ul class="lecture-list">
+        <li><strong>Comment la courbe se décompose-t-elle ?</strong> → les phases du PA (s1) ;</li>
+        <li><strong>Quels ions bougent, quand et dans quel sens ?</strong> → les échanges ioniques (s2) ;</li>
+        <li><strong>Comment le pic se transmet-il de proche en proche le long de l'axone ?</strong> → la propagation (s3) ;</li>
+        <li><strong>Pourquoi certains axones sont-ils très rapides ?</strong> → la myéline et la conduction saltatoire (s4) ;</li>
+        <li><strong>Comment l'intensité d'un stimulus se traduit-elle sur l'oscillogramme ?</strong> → la loi de l'intensité (s5) ;</li>
+        <li><strong>Comment exploiter tout cela sur un document du Bac ?</strong> → la lecture d'oscillogramme (s6).</li>
+      </ul>
+      <p class="lecture-text">
+        Un mot d'ordre pour toute la partie : <strong>relier chaque portion de la courbe à un mouvement d'ions</strong>. Si tu sais faire ce lien dans les deux sens (courbe → ions, ions → courbe), le chapitre est acquis.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 1 : LES 5 PHASES DU PA ===== -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · phases_pa</span>
+        <h2 class="lecture-section-title">Les 5 phases du potentiel d'action</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Zoomons sur un PA complet enregistré par microélectrode. La courbe se découpe en <strong>5 phases</strong> qu'il faut savoir nommer et ordonner — c'est un grand classique des sujets d'examen :
+      </p>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Oscillogramme annoté d'un potentiel d'action en cinq phases avec les mouvements de sodium et de potassium">
+          <text x="330" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">LE PA EN 5 PHASES</text>
+          <line x1="70" y1="34" x2="70" y2="310" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <line x1="70" y1="190" x2="620" y2="190" style="stroke:var(--text-dim)" stroke-width="1.2" stroke-dasharray="4 4"/>
+          <polygon points="620,190 610,185 610,195" style="fill:var(--text-dim)"/>
+          <text x="612" y="212" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">temps (ms)</text>
+          <text x="64" y="158" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">+30</text>
+          <text x="64" y="194" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">0</text>
+          <text x="64" y="278" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">−70</text>
+          <text x="64" y="302" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">−90</text>
+          <line x1="70" y1="274" x2="610" y2="274" style="stroke:var(--border-soft)" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <polyline points="90,274 194,274 236,154 350,274 410,298 480,274 610,274" fill="none" style="stroke:var(--green-bright)" stroke-width="2.5"/>
+          <circle cx="128" cy="250" r="9" fill="none" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+          <text x="128" y="254" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">1</text>
+          <text x="141" y="254" style="fill:var(--text-dim)" font-size="11" font-family="Inter">repos</text>
+          <circle cx="203" cy="112" r="9" fill="none" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+          <text x="203" y="116" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">2</text>
+          <text x="216" y="116" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter">dépolarisation</text>
+          <line x1="255" y1="96" x2="225" y2="150" style="stroke:var(--danger-light)" stroke-width="1.5"/>
+          <polygon points="225,150 224,138 233,145" style="fill:var(--danger-light)"/>
+          <text x="262" y="92" style="fill:var(--danger-light)" font-size="11" font-family="Inter">entrée massive de Na⁺</text>
+          <circle cx="316" cy="236" r="9" fill="none" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+          <text x="316" y="240" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">3</text>
+          <text x="329" y="240" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter">repolarisation</text>
+          <line x1="420" y1="196" x2="382" y2="240" style="stroke:var(--danger-light)" stroke-width="1.5"/>
+          <polygon points="382,240 384,228 392,236" style="fill:var(--danger-light)"/>
+          <text x="428" y="192" style="fill:var(--danger-light)" font-size="11" font-family="Inter">sortie de K⁺</text>
+          <circle cx="452" cy="316" r="9" fill="none" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+          <text x="452" y="320" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">4</text>
+          <text x="465" y="320" style="fill:var(--text-dim)" font-size="11" font-family="Inter">hyperpolarisation brève</text>
+          <circle cx="540" cy="248" r="9" fill="none" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+          <text x="540" y="252" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">5</text>
+          <text x="553" y="252" style="fill:var(--text-dim)" font-size="11" font-family="Inter">retour au repos</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">L'oscillogramme complet : 1) repos (−70 mV), 2) dépolarisation (montée à +30 mV, entrée de Na⁺), 3) repolarisation (descente, sortie de K⁺), 4) hyperpolarisation brève (la courbe passe un peu sous −70 mV), 5) retour au repos (−70 mV stable).</figcaption>
+      </figure>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><span class="lecture-step-number">1</span>
+          <div class="lecture-step-content"><strong>Repos</strong><p>potentiel stable à <span class="math">−70 mV</span> ; la membrane est polarisée et prête.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">2</span>
+          <div class="lecture-step-content"><strong>Dépolarisation</strong><p>montée très rapide de <span class="math">−70</span> à <span class="math">+30 mV</span> : la polarité s'inverse.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">3</span>
+          <div class="lecture-step-content"><strong>Repolarisation</strong><p>descente de <span class="math">+30 mV</span> vers la valeur de repos : la polarisation se rétablit.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">4</span>
+          <div class="lecture-step-content"><strong>Hyperpolarisation brève</strong><p>la courbe passe <em>sous</em> la valeur de repos (jusqu'à ≈ <span class="math">−80 à −90 mV</span>) avant de remonter.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">5</span>
+          <div class="lecture-step-content"><strong>Retour au repos</strong><p>le potentiel se stabilise à nouveau à <span class="math">−70 mV</span> : la fibre est prête pour un nouveau PA.</p></div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">⚠️ Hyperpolarisation ≠ repolarisation</div>
+        <p>La <strong>repolarisation</strong> fait <em>revenir</em> le potentiel vers −70 mV. L'<strong>hyperpolarisation</strong> est le petit <em>dépassement</em> : le potentiel descend un peu <strong>sous</strong> −70 mV avant de se stabiliser. Sur un document, c'est le petit creux qui suit le pic : si le sujet le montre, il faut le nommer.</p>
+      </div></div>
+
+      <div class="lecture-callout lecture-callout-gold"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">À retenir — l'ordre des phases</div>
+        <p><span class="math">repos → dépolarisation → repolarisation → hyperpolarisation brève → retour au repos</span>. Cinq mots, un ordre immuable : récite-les dans cet ordre, avec les valeurs <span class="math">−70 mV</span> et <span class="math">+30 mV</span>.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2 : LES ÉCHANGES IONIQUES ===== -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · echanges_ioniques</span>
+        <h2 class="lecture-section-title">Entrée de Na⁺, sortie de K⁺ : les échanges ioniques</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La membrane contient des <strong>canaux ioniques</strong> : de petits passages qui s'ouvrent et se ferment. Certains, appelés <strong>canaux voltage-dépendants</strong> (« sensibles à la tension électrique »), réagissent à la dépolarisation de la membrane : c'est ce crochet membrane-tension qui orchestre tout le PA. Le déroulé :
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><span class="lecture-step-number">1</span>
+          <div class="lecture-step-content"><strong>Au repos</strong><p>la membrane est surtout perméable au <span class="math">K⁺</span> (qui fuit légèrement vers l'extérieur) : polarisation maintenue à <span class="math">−70 mV</span>.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">2</span>
+          <div class="lecture-step-content"><strong>Dépolarisation → entrée massive de Na⁺</strong><p>le stimulus atteint le seuil : les canaux <span class="math">Na⁺</span> voltage-dépendants s'ouvrent, le sodium (très concentré dehors) <strong>entre massivement</strong> : l'intérieur devient positif, le potentiel monte à <span class="math">+30 mV</span>.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">3</span>
+          <div class="lecture-step-content"><strong>Repolarisation → sortie de K⁺</strong><p>les canaux <span class="math">Na⁺</span> se ferment, les canaux <span class="math">K⁺</span> voltage-dépendants s'ouvrent : le potassium (très concentré dedans) <strong>sort</strong>, les charges + quittent l'intérieur, le potentiel redescend.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">4</span>
+          <div class="lecture-step-content"><strong>Hyperpolarisation brève</strong><p>la sortie de <span class="math">K⁺</span> dure un peu trop : le potentiel passe brièvement sous <span class="math">−70 mV</span>.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">5</span>
+          <div class="lecture-step-content"><strong>Retour au repos</strong><p>la <strong>pompe <span class="math">Na⁺</span>/<span class="math">K⁺</span></strong> (qui consomme de l'énergie) repousse le <span class="math">Na⁺</span> dehors et rapatrie le <span class="math">K⁺</span> : les concentrations initiales sont restaurées, le potentiel se stabilise à <span class="math">−70 mV</span>.</p></div>
+        </div>
+      </div>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Phase</th><th>Mouvement ionique dominant</th><th>Potentiel de membrane</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Repos</strong></td><td>membrane surtout perméable au <span class="math">K⁺</span> (légère fuite sortante)</td><td><span class="math">−70 mV</span> stable</td></tr>
+            <tr><td><strong>Dépolarisation</strong></td><td><strong>entrée massive de <span class="math">Na⁺</span></strong></td><td><span class="math">−70 → +30 mV</span></td></tr>
+            <tr><td><strong>Repolarisation</strong></td><td><strong>sortie de <span class="math">K⁺</span></strong></td><td><span class="math">+30 → −70 mV</span></td></tr>
+            <tr><td><strong>Hyperpolarisation</strong></td><td>sortie de <span class="math">K⁺</span> un peu prolongée</td><td>légèrement sous <span class="math">−70 mV</span></td></tr>
+            <tr><td><strong>Retour au repos</strong></td><td>pompe <span class="math">Na⁺</span>/<span class="math">K⁺</span> (restaure les concentrations)</td><td>retour à <span class="math">−70 mV</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">🚨 Erreur fréquente au Bac</div>
+        <p><strong>Inverser les ions.</strong> Dépolarisation = le <span class="math">Na⁺</span> <strong>entre</strong> ; repolarisation = le <span class="math">K⁺</span> <strong>sort</strong>. Moyen mnémotechnique : « <strong>N</strong>a⁺ comme « <strong>n</strong>aissance » du pic, « <strong>K</strong>⁺ comme « <strong>k</strong>alme » du retour. Écrire « sortie de Na⁺ pendant la dépolarisation » est une erreur éliminatoire sur une question de cours.</p>
+      </div></div>
+
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">⚠️ Restons au niveau du programme</div>
+        <p>Le programme se contente de <strong>nommer</strong> les canaux voltage-dépendants : tu dois dire que l'entrée de <span class="math">Na⁺</span> et la sortie de <span class="math">K⁺</span> passent par des canaux ioniques sensibles à la tension. Inutile (et risqué) de détailler leurs sous-unités ou leurs états au-delà — ce qui est demandé, c'est le <strong>sens</strong> des mouvements et leur <strong>phase</strong>.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3 : PROPAGATION POINT À POINT ===== -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · propagation_axone</span>
+        <h2 class="lecture-section-title">Le PA se propage point à point</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Un PA déclenché en un point de l'axone ne reste pas là : il se transmet <strong>de proche en proche</strong> sur toute la longueur de la fibre. Voici le mécanisme, point à point :
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><span class="lecture-step-number">1</span>
+          <div class="lecture-step-content"><strong>Un PA naît en un point</strong><p>ce point est dépolarisé : son intérieur est devenu positif (entrée de <span class="math">Na⁺</span>).</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">2</span>
+          <div class="lecture-step-content"><strong>Des courants locaux s'établissent</strong><p>entre la zone dépolarisée (intérieur +) et la zone voisine encore au repos (intérieur −), des charges circulent localement de part et d'autre de la membrane.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">3</span>
+          <div class="lecture-step-content"><strong>La zone voisine est dépolarisée à son tour</strong><p>cette dépolarisation atteint le seuil : de nouveaux canaux <span class="math">Na⁺</span> s'ouvrent → un <strong>nouveau PA identique</strong> naît au point voisin.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">4</span>
+          <div class="lecture-step-content"><strong>Et ainsi de suite, jusqu'au bouton de l'axone</strong><p>le PA se renouvelle point à point, comme une traînée de poudre ; derrière lui, la zone qui vient de décharger est brièvement inexcitable (période réfractaire), ce qui impose le <strong>sens unique</strong> de la propagation.</p></div>
+        </div>
+      </div>
+
+      <div class="lecture-formula-box"><div class="lecture-formula-main">PA renouvelé point à point = même forme et même amplitude du début à la fin de l'axone</div>
+        <div class="lecture-formula-desc">Le message ne « s'use » pas en voyageant : chaque point régénère un PA complet et stéréotypé (tout ou rien).</div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">⚠️ Le PA ne s'affaiblit pas</div>
+        <p>Contrairement à un simple courant électrique dans un fil, qui s'atténue avec la distance, le message nerveux est <strong>régénéré</strong> à chaque point : son amplitude est la même à l'arrivée qu'au départ. Si un sujet d'examen montre une courbe dont l'amplitude diminue le long de l'axone, c'est un piège : ça n'arrive pas pour un PA.</p>
+      </div></div>
+
+      <div class="lecture-callout lecture-callout-gold"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">À retenir</div>
+        <p>La propagation le long de l'axone est <strong>point à point</strong> : chaque zone dépolarisée déclenche le PA de la zone voisine grâce aux courants locaux. Le message garde une <strong>amplitude constante</strong> et se propage dans un <strong>seul sens</strong> (de la zone dépolarisée vers la zone au repos).</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4 : MYÉLINE ET CONDUCTION SALTATOIRE ===== -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · conduction_saltatoire</span>
+        <h2 class="lecture-section-title">Myéline et conduction saltatoire</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Certains axones sont entourés d'une <strong>gaine de myéline</strong> : une enveloppe isolante formée par des cellules gliales (les <strong>cellules de Schwann</strong> dans les nerfs) enroulées en plusieurs couches autour de la fibre. Cette gaine n'est pas continue : elle est interrompue à intervalles réguliers par des zones nues de l'axone, les <strong>nœuds de Ranvier</strong>.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">Définitions</div>
+        <p><strong>Gaine de myéline</strong> : enveloppe isolante, d'origine cellulaire (cellules de Schwann), qui entoure certains axones et interdit les échanges ioniques sur la partie recouverte. <strong>Nœud de Ranvier</strong> : interruption de la gaine de myéline, seule zone où les échanges ioniques (donc le PA) restent possibles.</p>
+      </div></div>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 660 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Axone myélinisé : cinq segments de gaine de myéline séparés par des nœuds de Ranvier où le potentiel d'action saute de nœud en nœud">
+          <text x="330" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">CONDUCTION SALTATOIRE</text>
+          <line x1="90" y1="52" x2="560" y2="52" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+          <polygon points="560,52 550,47 550,57" style="fill:var(--accent-bright)"/>
+          <text x="325" y="44" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">sens de propagation</text>
+          <rect x="40" y="130" width="580" height="56" rx="14" fill="rgba(255,255,255,0.02)" style="stroke:var(--border-soft)" stroke-width="1.5"/>
+          <g fill="rgba(224,184,74,0.08)" style="stroke:var(--accent-bright)" stroke-width="1.5">
+            <rect x="58" y="112" width="92" height="92" rx="28"/>
+            <rect x="184" y="112" width="92" height="92" rx="28"/>
+            <rect x="310" y="112" width="92" height="92" rx="28"/>
+            <rect x="436" y="112" width="92" height="92" rx="28"/>
+            <rect x="562" y="112" width="92" height="92" rx="28"/>
+          </g>
+          <text x="356" y="96" style="fill:var(--accent-bright)" font-size="11.5" font-weight="700" font-family="Inter" text-anchor="middle">gaine de myéline (cellule de Schwann) : isolante</text>
+          <g style="stroke:var(--green-bright)" stroke-width="4">
+            <line x1="167" y1="118" x2="167" y2="198"/><line x1="293" y1="118" x2="293" y2="198"/>
+            <line x1="419" y1="118" x2="419" y2="198"/><line x1="545" y1="118" x2="545" y2="198"/>
+          </g>
+          <g fill="none" style="stroke:var(--danger-light)" stroke-width="1.8" stroke-dasharray="5 4">
+            <path d="M 167 108 Q 230 66 293 108"/>
+            <path d="M 293 108 Q 356 66 419 108"/>
+            <path d="M 419 108 Q 482 66 545 108"/>
+          </g>
+          <polygon points="293,108 282,102 287,114" style="fill:var(--danger-light)"/>
+          <polygon points="419,108 408,102 413,114" style="fill:var(--danger-light)"/>
+          <polygon points="545,108 534,102 539,114" style="fill:var(--danger-light)"/>
+          <line x1="545" y1="206" x2="545" y2="234" style="stroke:var(--text-dim)" stroke-width="1"/>
+          <text x="545" y="248" style="fill:var(--green-bright)" font-size="11.5" font-weight="700" font-family="Inter" text-anchor="middle">nœuds de Ranvier</text>
+          <text x="167" y="248" style="fill:var(--danger-light)" font-size="11" font-family="Inter" text-anchor="middle">le PA « saute »</text>
+          <text x="330" y="282" style="fill:var(--text-light)" font-size="11.5" font-weight="700" font-family="Inter" text-anchor="middle">avec myéline ≈ 100 m/s · sans myéline ≈ 1 m/s : le PA saute de nœud en nœud</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Sur un axone myélinisé, l'influx ne peut se régénérer qu'aux nœuds de Ranvier : le PA « saute » de nœud en nœud (conduction saltatoire), ce qui accélère énormément la propagation.</figcaption>
+      </figure>
+
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">Définition — conduction saltatoire</div>
+        <p>Sur un axone myélinisé, le potentiel d'action ne se régénère pas à chaque point, mais <strong>« saute » d'un nœud de Ranvier au suivant</strong> : c'est la <strong>conduction saltatoire</strong> (du latin <em>saltare</em>, sauter). Elle rend la propagation <strong>beaucoup plus rapide</strong> (jusqu'à ≈ <span class="math">100 m/s</span>, contre ≈ <span class="math">1 m/s</span> sur un axone sans myéline) tout en économisant l'énergie de la pompe.</p>
+      </div></div>
+
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">⚠️ La myéline agit sur la vitesse, pas sur l'amplitude</div>
+        <p>La gaine de myéline change la <strong>vitesse</strong> de propagation, pas la forme du PA : l'amplitude reste ≈ <span class="math">100 mV</span> et le message reste codé en fréquence. Ne confonds pas non plus : la myéline est un <strong>isolant</strong> — c'est précisément parce qu'elle isole que le PA ne peut naître qu'aux nœuds, d'où les sauts.</p>
+      </div></div>
+
+      <aside class="lecture-aside"><div class="lecture-aside-content">
+        <div class="lecture-aside-label">🩸 Au Niger et dans le monde</div>
+        <p class="lecture-text">La <strong>poliomyélite</strong>, longtemps endémique dans la région, est une infection virale qui détruit les <strong>neurones moteurs</strong> de la moelle épinière : le message ne parvient plus aux muscles, d'où des paralysies définitives. Grâce à la vaccination massive, le Niger a été déclaré exempt de poliomyélite — un bel exemple de santé publique fondée sur la physiologie du message nerveux.</p>
+      </div></aside>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5 : LOI DE L'INTENSITÉ ===== -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · loi_intensite</span>
+        <h2 class="lecture-section-title">Loi de l'intensité : plus fort = plus fréquent, pas plus grand</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Revenons sur la conséquence expérimentale du tout ou rien. On stimule le même axone avec deux intensités différentes et on enregistre. Résultat, sur l'oscillogramme :
+      </p>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 660 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Deux enregistrements : un stimulus faible produit trois potentiels d'action de même amplitude, un stimulus fort en produit six, avec la même amplitude">
+          <text x="330" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">L'INTENSITÉ SE CODE EN FRÉQUENCE, PAS EN AMPLITUDE</text>
+          <line x1="132" y1="56" x2="568" y2="56" style="stroke:var(--border-soft)" stroke-width="1.2" stroke-dasharray="4 4"/>
+          <text x="330" y="46" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">sommet identique pour tous les PA : amplitude constante</text>
+          <line x1="90" y1="120" x2="600" y2="120" style="stroke:var(--border-soft)" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <g fill="none" style="stroke:var(--green-bright)" stroke-width="2.5">
+            <polyline points="132,120 140,56 148,120"/>
+            <polyline points="312,120 320,56 328,120"/>
+            <polyline points="492,120 500,56 508,120"/>
+          </g>
+          <text x="90" y="152" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">stimulus faible : 3 PA en 100 ms → f = 30 Hz</text>
+          <line x1="90" y1="280" x2="600" y2="280" style="stroke:var(--border-soft)" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <g fill="none" style="stroke:var(--danger-light)" stroke-width="2.5">
+            <polyline points="132,280 140,216 148,280"/>
+            <polyline points="216,280 224,216 232,280"/>
+            <polyline points="300,280 308,216 316,280"/>
+            <polyline points="384,280 392,216 400,280"/>
+            <polyline points="468,280 476,216 484,280"/>
+            <polyline points="552,280 560,216 568,280"/>
+          </g>
+          <text x="90" y="312" style="fill:var(--danger-light)" font-size="12" font-weight="700" font-family="Inter">stimulus fort : 6 PA en 100 ms → f = 60 Hz</text>
+          <text x="600" y="332" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="end">temps (ms)</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Les PA gardent exactement la même hauteur (tout ou rien) : le stimulus fort se traduit seulement par davantage de PA par seconde, c'est-à-dire une fréquence plus élevée.</figcaption>
+      </figure>
+
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">Définition — loi de l'intensité</div>
+        <p>Toutes choses égales par ailleurs, un <strong>stimulus plus intense</strong> provoque, sur le même axone, une <strong>fréquence de PA plus élevée</strong> (davantage de PA par seconde). L'<strong>amplitude</strong> des PA, elle, ne change jamais : c'est la conséquence directe de la loi du tout ou rien.</p>
+      </div></div>
+
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La loi de l'intensité en une ligne</div>
+        <div class="lecture-formula-hero-main">stimulus fort → fréquence ↑ (amplitude constante)</div>
+        <div class="lecture-formula-hero-desc">L'intensité du message nerveux est codée par le nombre de PA par seconde — jamais par leur taille ni leur durée</div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">🚨 Piège BAC — les deux formulations à bannir</div>
+        <p>« Un stimulus fort produit des potentiels d'action <strong>de plus grande amplitude</strong> » — FAUX. « Un stimulus fort produit des potentiels d'action <strong>plus longs</strong> » — FAUX aussi. La seule formulation correcte : <strong>plus de PA par unité de temps</strong>. C'est LE piège le plus posé du chapitre, sous toutes ses formes.</p>
+      </div></div>
+
+      <div class="lecture-example"><div class="lecture-example-label">Exemple — calcul de fréquence</div>
+        <div class="lecture-example-content"><p class="lecture-text">Sur un enregistrement de <span class="math">0,2 s</span>, tu comptes <span class="math">8 PA</span>. Fréquence : <span class="math">f = 8 ÷ 0,2 = 40 Hz</span>. Si le stimulus double d'intensité et que l'enregistrement montre <span class="math">16 PA</span> en <span class="math">0,2 s</span> : <span class="math">f = 16 ÷ 0,2 = 80 Hz</span> — les pics sont identiques, seul l'espacement a diminué.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 6 : LIRE UN OSCILLOGRAMME ===== -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Méthode · lecture_oscillogramme</span>
+        <h2 class="lecture-section-title">Lire un oscillogramme en 4 étapes</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Au Bac (et aux compositions), l'oscillogramme du message nerveux est LE document incontournable. Voici la méthode systématique, à appliquer dans cet ordre :
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><span class="lecture-step-number">1</span>
+          <div class="lecture-step-content"><strong>Lire les axes et les échelles</strong><p>vertical : potentiel de membrane (mV), repérer <span class="math">0 mV</span> et la ligne de repos (<span class="math">−70 mV</span>) ; horizontal : le temps (ms ou s). Recopier les échelles, ne jamais les inventer.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">2</span>
+          <div class="lecture-step-content"><strong>Nommer les phases d'un PA</strong><p>repos → dépolarisation → repolarisation → hyperpolarisation brève → retour au repos, avec les valeurs <span class="math">−70 mV</span> et <span class="math">+30 mV</span>.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">3</span>
+          <div class="lecture-step-content"><strong>Compter les PA et calculer la fréquence</strong><p>nombre de pics ÷ durée de l'enregistrement = fréquence (Hz). C'est elle qui traduit l'intensité du stimulus.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">4</span>
+          <div class="lecture-step-content"><strong>Conclure avec le codage</strong><p>formuler : « l'amplitude est constante (tout ou rien) ; l'intensité du stimulus est codée par la fréquence des PA ».</p></div>
+        </div>
+      </div>
+
+      <div class="lecture-example lecture-example-featured"><div class="lecture-example-label">🎓 Exemple complet résolu — l'oscillogramme décrit</div>
+        <div class="lecture-example-content">
+          <p class="lecture-text"><strong>Document décrit :</strong> un enregistrement de <span class="math">0,12 s</span> montre une ligne de repos à <span class="math">−70 mV</span>, interrompue par <span class="math">6 pics</span> identiques montant chacun à <span class="math">+30 mV</span>, espacés d'environ <span class="math">20 ms</span>. Questions : a) nommer le phénomène enregistré ; b) calculer sa fréquence ; c) que dire de l'amplitude ?</p>
+          <p class="lecture-text"><strong>a)</strong> La ligne de repos à <span class="math">−70 mV</span> parcourue de pics stéréotypés montre une <strong>série de potentiels d'action</strong> (message nerveux codé en fréquence).</p>
+          <p class="lecture-text"><strong>b)</strong> <span class="math">f = 6 ÷ 0,12 = 50 Hz</span> (soit 50 PA par seconde — on retrouve bien les 20 ms d'espacement).</p>
+          <p class="lecture-text"><strong>c)</strong> Tous les pics montent de <span class="math">−70</span> à <span class="math">+30 mV</span> : amplitude constante ≈ <span class="math">100 mV</span>, conformément au tout ou rien. L'intensité du stimulus se lit donc dans la fréquence, pas dans la hauteur des pics.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">⚠️ Les 3 réflexes de lecture</div>
+        <p>1) Toujours <strong>citer les valeurs numériques</strong> du document (−70 mV, +30 mV, la durée) : une description sans chiffres ne rapporte presque rien. 2) Toujours <strong>préciser l'unité</strong> de la fréquence (Hz). 3) Ne jamais dire « le PA augmente » : dire « la <strong>fréquence</strong> des PA augmente ».</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 7 : QCM D'ENTRAÎNEMENT ===== -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Entraînement</span>
+        <h2 class="lecture-section-title">3 QCM d'auto-évaluation</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Cache les réponses, réponds, vérifie. La section à revoir est indiquée dans chaque justification.
+      </p>
+
+      <div class="lecture-quiz">
+        <div class="lecture-quiz-item">
+          <p class="lecture-quiz-q">Q1 — Quel est l'ordre correct des phases du potentiel d'action (s1) ?</p>
+          <div class="lecture-quiz-options"><span>A) dépolarisation → repos → repolarisation → hyperpolarisation</span><span>B) repos → dépolarisation → repolarisation → hyperpolarisation brève → retour au repos</span><span>C) repos → repolarisation → dépolarisation → hyperpolarisation</span><span>D) repos → hyperpolarisation → dépolarisation → repolarisation</span></div>
+          <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B).</strong> Ordre immuable : repos (−70 mV) → dépolarisation (+30 mV) → repolarisation → hyperpolarisation brève (sous −70 mV) → retour au repos. C'est l'enchaînement à réciter tel quel au Bac.</div></details>
+        </div>
+        <div class="lecture-quiz-item">
+          <p class="lecture-quiz-q">Q2 — Pendant la dépolarisation, il se produit (s2) :</p>
+          <div class="lecture-quiz-options"><span>A) une sortie massive de K⁺</span><span>B) une entrée massive de Na⁺</span><span>C) une entrée massive de Ca²⁺</span><span>D) une sortie massive de Na⁺</span></div>
+          <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) une entrée massive de Na⁺.</strong> Le sodium, très concentré à l'extérieur, entre par ses canaux voltage-dépendants et rend l'intérieur positif. La sortie de K⁺ correspond à la repolarisation ; l'entrée de Ca²⁺, elle, a lieu à la synapse (partie 3) — piège classique !</div></details>
+        </div>
+        <div class="lecture-quiz-item">
+          <p class="lecture-quiz-q">Q3 — Sur un axone pourvu de gaine de myéline, la propagation (s3-s4) :</p>
+          <div class="lecture-quiz-options"><span>A) est plus lente, car la myéline gêne les ions</span><span>B) est plus rapide, grâce à la conduction saltatoire de nœud en nœud</span><span>C) se fait avec des PA de plus grande amplitude</span><span>D) se fait dans les deux sens le long de l'axone</span></div>
+          <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) plus rapide, par conduction saltatoire.</strong> Le PA « saute » de nœud de Ranvier en nœud de Ranvier (≈ 100 m/s contre ≈ 1 m/s sans myéline). L'amplitude ne change pas (C faux, tout ou rien) et la propagation reste unidirectionnelle (D faux, période réfractaire).</div></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[phases_pa]</strong> Le PA comporte 5 phases : <span class="math">repos (−70 mV) → dépolarisation (+30 mV) → repolarisation → hyperpolarisation brève → retour au repos</span></li>
+      <li><strong>[phases_pa]</strong> L'hyperpolarisation est le léger dépassement <em>sous</em> −70 mV qui suit la repolarisation — ne pas la confondre avec elle</li>
+      <li><strong>[echanges_ioniques]</strong> Dépolarisation = <strong>entrée massive de Na⁺</strong> (canaux Na⁺ voltage-dépendants) ; repolarisation = <strong>sortie de K⁺</strong> (canaux K⁺ voltage-dépendants)</li>
+      <li><strong>[echanges_ioniques]</strong> La pompe <span class="math">Na⁺</span>/<span class="math">K⁺</span> restaure ensuite les concentrations initiales : retour au repos à −70 mV</li>
+      <li><strong>[propagation_axone]</strong> Le PA se propage <strong>point à point</strong> : courants locaux → la zone voisine atteint le seuil → nouveau PA identique ; amplitude constante du départ à l'arrivée (régénération) et sens unique (période réfractaire)</li>
+      <li><strong>[conduction_saltatoire]</strong> Gaine de myéline (cellules de Schwann) = isolant interrompu aux <strong>nœuds de Ranvier</strong> ; le PA saute de nœud en nœud = <strong>conduction saltatoire</strong> → ≈ 100 m/s contre ≈ 1 m/s sans myéline</li>
+      <li><strong>[loi_intensite]</strong> Loi de l'intensité : stimulus plus fort → <strong>fréquence de PA plus élevée</strong> (plus de PA par seconde), amplitude inchangée</li>
+      <li><strong>[lecture_oscillogramme]</strong> Méthode : lire les axes/échelles → nommer les phases → compter les PA et calculer <span class="math">f = nombre de PA ÷ durée (s)</span> en Hz → conclure sur le codage en fréquence</li>
+      <li><strong>[lecture_oscillogramme]</strong> Toujours citer les valeurs du document (−70 mV, +30 mV, durée) et l'unité (Hz) — une description sans chiffres ne rapporte rien</li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 2 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : la synapse et la transmission chimique</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

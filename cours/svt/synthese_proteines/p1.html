@@ -1,0 +1,536 @@
+<!-- ============================================================ -->
+<!-- PARTIE 1 : TRANSCRIPTION — DE L'ADN À L'ARNM (3 NOTIONS)      -->
+<!-- Notion 1 : adn_arn — Rappel : ADN et ARN, deux cousins        -->
+<!-- Notion 2 : transcription — Copier un gène en ARN messager     -->
+<!-- Notion 3 : arn_messager — L'ARNm quitte le noyau              -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 01 · Expression des gènes</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Transcription : de l'ADN à <em>l'ARN messager</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Dans ton noyau dort un trésor : l'ADN, le plan de toutes tes protéines. Mais ces protéines se fabriquent <strong>hors du noyau</strong>, dans le cytoplasme. Comment l'information franchit-elle la double enveloppe nucléaire sans jamais exposer l'original ? Cette partie répond avec <strong>3 notions</strong> : le <strong>rappel ADN/ARN</strong>, la <strong>transcription</strong> (définition et mécanisme pas à pas), et la <strong>sortie de l'ARN messager</strong> vers le cytoplasme.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item"><i class="fas fa-clock"></i> 25 min</span>
+      <span class="lecture-hero-meta-item"><i class="fas fa-cubes"></i> 3 notions</span>
+      <span class="lecture-hero-meta-item"><i class="fas fa-layer-group"></i> 7 sections</span>
+      <span class="lecture-hero-meta-item"><i class="fas fa-graduation-cap"></i> Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">3 notions · 7 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — L'énigme du noyau fermé</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · adn_arn — ADN et ARN : deux cousins à ne pas confondre</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 2 · transcription — Définition : copier un gène en ARNm</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · transcription — Le mécanisme pas à pas</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · transcription — Les règles d'appariement et un exemple complet</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 3 · arn_messager — Le schéma d'ensemble et la sortie de l'ARNm</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Fiche méthode — Les réflexes qui évitent les pièges</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">L'énigme du noyau fermé</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Imaginons une grande bibliothèque nationale, fermée à clé, qui conserve <strong>l'unique exemplaire</strong> de tous les livres du pays. Un atelier, situé à l'extérieur, doit fabriquer des meubles d'après les plans. Question : comment donner les plans à l'atelier <strong>sans jamais sortir l'original</strong> de la bibliothèque ? La réponse tient en un mot : la <strong>photocopie</strong>.
+      </p>
+
+      <p class="lecture-text">
+        Ta cellule résout exactement le même problème. La bibliothèque, c'est le <strong>noyau</strong> : il renferme l'ADN, support de l'information génétique, jalousement protégé par l'<strong>enveloppe nucléaire</strong>. L'atelier, c'est le <strong>cytoplasme</strong>, où les <strong>ribosomes</strong> fabriquent les protéines — l'hémoglobine qui transporte l'oxygène de ton sang, l'insuline qui règle ta glycémie, les anticorps qui te défendent contre le paludisme. Or l'ADN ne quitte <strong>jamais</strong> le noyau.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">La grande idée de la partie</div>
+          <p>Pour exprimer un gène sans sortir l'ADN du noyau, la cellule en fait une <strong>copie mobile</strong> : l'<strong>ARN messager (ARNm)</strong>. Copier un gène en ARNm s'appelle la <strong>transcription</strong>. C'est le premier maillon de la chaîne : <span class="math">ADN → ARNm → protéine</span>.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Dans cette partie, nous verrons donc <strong>trois choses</strong> : ce qui distingue l'ARN de son cousin l'ADN (notion 1), comment la cellule réalise la copie d'un gène, enzyme en main (notion 2), et comment le produit fini quitte le noyau (notion 3). En route !
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · ADN ET ARN -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · adn_arn</span>
+        <h2 class="lecture-section-title">ADN et ARN : deux cousins à ne pas confondre</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        L'ADN et l'ARN sont les deux <strong>acides nucléiques</strong> de la cellule. Tous deux sont des polymères de <strong>nucléotides</strong>, et chaque nucléotide comporte trois ingrédients : un <strong>groupement phosphate</strong>, un <strong>sucre à 5 carbones</strong> (un pentose) et une <strong>base azotée</strong>. Les différences se logent dans le sucre et dans l'une des bases — et elles changent tout.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définitions — ADN et ARN</div>
+          <p>L'<strong>ADN</strong> (acide désoxyribonucléique) est une macromolécule <strong>double brin</strong> enroulée en double hélice, formée de nucléotides à <strong>désoxyribose</strong> portant les bases <strong>A, T, C, G</strong>. L'<strong>ARN</strong> (acide ribonucléique) est une macromolécule le plus souvent <strong>simple brin</strong>, formée de nucléotides à <strong>ribose</strong> portant les bases <strong>A, U, C, G</strong>.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Pose les deux molécules côte à côte et compare, critère par critère :
+      </p>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Critère</th><th>ADN</th><th>ARN</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Sucre (pentose)</td><td>désoxyribose</td><td>ribose</td></tr>
+            <tr><td>Bases azotées</td><td>A, T, C, G (thymine)</td><td>A, <strong>U</strong>, C, G (uracile)</td></tr>
+            <tr><td>Nombre de brins</td><td>double brin (double hélice)</td><td>simple brin en général</td></tr>
+            <tr><td>Localisation</td><td>noyau (jamais dehors)</td><td>noyau, puis cytoplasme</td></tr>
+            <tr><td>Rôle</td><td>support de l'information génétique</td><td>copie de travail, messagère</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-title">⚠️ Piège — l'uracile remplace la thymine</div>
+        <p>Dans un ARN, la base <strong>thymine (T)</strong> est remplacée par l'<strong>uracile (U)</strong>. Il n'y a donc <strong>jamais de T dans un ARNm</strong>. Si tu écris « T » dans une séquence d'ARN, c'est faux d'office — c'est le piège n°1 des copies.</p>
+      </div>
+
+      <aside class="lecture-aside">
+        <div class="lecture-aside-content">
+          <div class="lecture-aside-label">Pourquoi une copie ?</div>
+          <p>L'ADN est le document <strong>irremplaçable</strong> : une seule coupure non réparée et l'information est perdue à jamais. L'ARNm, lui, est une « photocopie jetable » : la cellule peut en fabriquer autant de copies qu'il faut, puis les détruire une fois le message lu. L'original reste en sécurité dans les archives nucléaires.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 2 · DÉFINITION DE LA TRANSCRIPTION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · transcription</span>
+        <h2 class="lecture-section-title">Définition : copier un gène en ARNm</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        L'ADN ne se copie pas en entier à chaque fois : seuls les gènes dont la cellule a besoin sont transcrits, au fur et à mesure des besoins. Voici la définition exacte à connaître — et à écrire telle quelle le jour du Bac :
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Définition officielle — transcription</div>
+          <p>La <strong>transcription</strong> est la <strong>copie, dans le noyau, de l'information contenue dans un gène</strong>, sous forme d'une molécule d'<strong>ARN messager (ARNm)</strong>. Cette copie est réalisée par une enzyme, l'<strong>ARN polymérase</strong>, selon les règles de complémentarité des bases entre l'ADN matrice et l'ARNm naissant.</p>
+        </div>
+      </div>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Gène (ADN, noyau) <span class="math">— ARN polymérase →</span> ARN messager (ARNm)</div>
+        <div class="lecture-formula-desc">La transcription « retranscrit » le message ADN dans l'alphabet de l'ARN : les nucléotides de l'ARNm sont choisis pour être complémentaires de ceux de la chaîne matrice.</div>
+      </div>
+
+      <p class="lecture-text">Retiens les quatre repères essentiels de la transcription :</p>
+
+      <ul class="lecture-list-elegant">
+        <li><strong>Lieu</strong> : le noyau (l'ADN n'en sort jamais).</li>
+        <li><strong>Acteur principal</strong> : l'ARN polymérase, enzyme qui assemble les ribonucléotides.</li>
+        <li><strong>Matière première</strong> : les ribonucléotides libres du noyau (A, U, C, G).</li>
+        <li><strong>Produit</strong> : une molécule d'ARNm <strong>par gène transcrit</strong> — un gène donne un ARNm.</li>
+      </ul>
+
+      <div class="lecture-vocab-grid">
+        <div>
+          <strong>Gène</strong> : segment d'ADN portant l'information nécessaire à la synthèse d'un polypeptide (d'une protéine).
+        </div>
+        <div>
+          <strong>ARN polymérase</strong> : enzyme qui lit l'ADN matrice et assemble les ribonucléotides pour fabriquer l'ARNm.
+        </div>
+        <div>
+          <strong>ARN messager (ARNm)</strong> : copie d'un gène, qui transporte l'information du noyau vers les ribosomes du cytoplasme.
+        </div>
+      </div>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">Exemple concret</div>
+        <div class="lecture-example-content">
+          <p>Le gène de la <strong>globine</strong> (protéine de l'hémoglobine) est transcrit en un ARNm de la globine dans le noyau des cellules qui fabriquent le sang. Cet ARNm, une fois dans le cytoplasme, servira de modèle pour enchaîner les acides aminés de la globine. Un gène → un ARNm → un polypeptide : la logique tient tout entière dans cette flèche.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · MÉCANISME DE LA TRANSCRIPTION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · transcription</span>
+        <h2 class="lecture-section-title">Le mécanisme pas à pas</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Comment, concrètement, l'ARN polymérase « recopie » un gène ? Le mécanisme se déroule en cinq étapes que tu dois savoir remettre dans l'ordre :
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <span class="lecture-step-number">1</span>
+          <div class="lecture-step-content">
+            <strong>Ouverture de la double hélice</strong>
+            <p>l'ARN polymérase se fixe au début du gène et sépare localement les deux chaînes d'ADN, en rompant les liaisons hydrogène entre bases complémentaires.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">2</span>
+          <div class="lecture-step-content">
+            <strong>Choix de la chaîne matrice</strong>
+            <p>une seule des deux chaînes est lue : c'est la <strong>chaîne transcrit</strong> (ou chaîne matrice). L'autre, la <strong>chaîne non transcrit</strong>, reste inactive pour ce gène.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">3</span>
+          <div class="lecture-step-content">
+            <strong>Appariement des ribonucléotides</strong>
+            <p>l'ARN polymérase parcourt la chaîne matrice et place face à chaque nucléotide d'ADN le ribonucléotide <strong>complémentaire</strong> pris dans le noyau : <span class="math">A → U</span>, <span class="math">T → A</span>, <span class="math">C → G</span>, <span class="math">G → C</span>.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">4</span>
+          <div class="lecture-step-content">
+            <strong>Progression et fermeture</strong>
+            <p>l'enzyme avance le long du gène ; l'ARNm en cours de fabrication se détache de la matrice et, derrière l'enzyme, la double hélice d'ADN se referme.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">5</span>
+          <div class="lecture-step-content">
+            <strong>Sortie de l'ARNm achevé</strong>
+            <p>la transcription s'arrête en fin de gène : l'ARNm se libère, quitte le noyau par les <strong>pores nucléaires</strong> et gagne le cytoplasme.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-title">⚠️ Piège — une seule chaîne est transcrite</div>
+        <p>Pour un gène donné, <strong>une seule</strong> des deux chaînes d'ADN sert de matrice : la chaîne transcrit. L'ARNm n'est <strong>pas</strong> une double hélice, et l'on ne fabrique <strong>pas</strong> deux ARNm complémentaires. (Remarque : ce n'est pas toujours la même chaîne physique qui sert de matrice d'un gène à l'autre.)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 2 · APPARIEMENTS ET EXEMPLE COMPLET -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · transcription</span>
+        <h2 class="lecture-section-title">Les règles d'appariement et un exemple complet</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tout le sérieux de la transcription tient dans une table de correspondance de quatre lignes. Apprends-la sur le bout des doigts :
+      </p>
+
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">Règle de complémentarité ADN → ARN</div>
+        <div class="lecture-rule-body">
+          <p>Face à la chaîne matrice d'ADN, l'ARNm reçoit la base <strong>complémentaire</strong> : <span class="math">A(ADN) → U(ARNm)</span> · <span class="math">T(ADN) → A(ARNm)</span> · <span class="math">C(ADN) → G(ARNm)</span> · <span class="math">G(ADN) → C(ARNm)</span>. L'ARNm est donc <strong>complémentaire</strong> de la chaîne transcrit, et <strong>antiparallèle</strong> : si la matrice est lue de 3′ vers 5′, l'ARNm se construit de 5′ vers 3′.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Appliquons la règle sur un vrai gène, codon par codon (les codons seront décortiqués en partie 2 — contente-toi pour l'instant des groupes de trois lettres) :
+      </p>
+
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧬 Exemple résolu — transcrire un gène</div>
+        <div class="lecture-example-content">
+          <p>On donne la séquence de la <strong>chaîne transcrit (matrice)</strong> d'un gène, lue de 3′ vers 5′. Complémentons base à base :</p>
+          <div class="lecture-table">
+            <table>
+              <thead>
+                <tr><th>Chaîne</th><th>Triplet 1</th><th>Triplet 2</th><th>Triplet 3</th><th>Triplet 4</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>ADN matrice (3′ → 5′)</td><td><span class="math">TAC</span></td><td><span class="math">CGA</span></td><td><span class="math">ACC</span></td><td><span class="math">ACT</span></td></tr>
+                <tr><td>ARNm (5′ → 3′)</td><td><span class="math">AUG</span></td><td><span class="math">GCU</span></td><td><span class="math">UGG</span></td><td><span class="math">UGA</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Détail du premier triplet</strong> : <span class="math">T → A</span>, <span class="math">A → U</span>, <span class="math">C → G</span>, d'où <span class="math">TAC → AUG</span>. Remarque au passage : l'ARNm commence par <span class="math">AUG</span> — retiens ce triplet, c'est le « signal de départ » de la traduction (partie 2).</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-title">Erreur fréquente — recopier au lieu de complémenter</div>
+        <p>La faute classique consiste à recopier la séquence matrice en remplaçant seulement T par U : c'est <strong>faux</strong>. L'ARNm n'est pas la copie conforme de la matrice, il en est le <strong>complémentaire</strong>. Deuxième faute : oublier que les deux chaînes sont antiparallèles — l'ARNm s'écrit de 5′ vers 3′. Prends l'habitude d'écrire les sens <span class="math">3′ → 5′</span> et <span class="math">5′ → 3′</span> sous chaque séquence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 3 · SCHÉMA D'ENSEMBLE ET SORTIE DE L'ARNM -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · arn_messager</span>
+        <h2 class="lecture-section-title">Le schéma d'ensemble et la sortie de l'ARNm</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Rassemblons le tout dans une figure que tu dois être capable de refaire au brouillon, légende comprise :
+      </p>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Transcription dans le noyau et sortie de l'ARNm par un pore nucléaire">
+          <text x="260" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">LA TRANSCRIPTION, DU GÈNE AU CYTOPLASME</text>
+          <!-- Noyau -->
+          <rect x="18" y="36" width="330" height="240" rx="18" fill="rgba(224,184,74,0.05)" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <text x="34" y="60" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter">Noyau</text>
+          <!-- Pore nucléaire -->
+          <rect x="330" y="140" width="24" height="34" rx="5" fill="rgba(255,255,255,0.06)" style="stroke:var(--green-bright)" stroke-width="2"/>
+          <text x="342" y="196" style="fill:var(--green-bright)" font-size="10.5" font-family="Inter" text-anchor="middle">pore</text>
+          <text x="342" y="210" style="fill:var(--green-bright)" font-size="10.5" font-family="Inter" text-anchor="middle">nucléaire</text>
+          <!-- ADN : double hélice fermée (gauche) -->
+          <g style="stroke:var(--accent-bright)" stroke-width="2">
+            <line x1="40" y1="100" x2="40" y2="230"/>
+            <line x1="70" y1="100" x2="70" y2="230"/>
+          </g>
+          <g style="stroke:var(--text-dim)" stroke-width="1.5">
+            <line x1="40" y1="112" x2="70" y2="112"/>
+            <line x1="40" y1="132" x2="70" y2="132"/>
+            <line x1="40" y1="218" x2="70" y2="218"/>
+          </g>
+          <text x="40" y="252" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">ADN (gène)</text>
+          <!-- Ouverture de l'hélice -->
+          <g style="stroke:var(--accent-bright)" stroke-width="2" fill="none">
+            <path d="M 70 120 C 100 128, 110 140, 128 144"/>
+            <path d="M 70 212 C 100 204, 110 192, 128 188"/>
+          </g>
+          <!-- ARN polymérase -->
+          <ellipse cx="160" cy="166" rx="36" ry="26" fill="rgba(224,184,74,0.14)" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <text x="160" y="170" style="fill:var(--accent-bright)" font-size="9.5" font-weight="700" font-family="Inter" text-anchor="middle">ARN</text>
+          <text x="160" y="180" style="fill:var(--accent-bright)" font-size="9.5" font-weight="700" font-family="Inter" text-anchor="middle">polymérase</text>
+          <!-- ARNm naissant -->
+          <g style="stroke:var(--green-bright)" stroke-width="2.5">
+            <line x1="180" y1="146" x2="330" y2="146"/>
+          </g>
+          <g style="stroke:var(--green-bright)" stroke-width="1.4">
+            <line x1="210" y1="141" x2="210" y2="151"/>
+            <line x1="240" y1="141" x2="240" y2="151"/>
+            <line x1="270" y1="141" x2="270" y2="151"/>
+            <line x1="300" y1="141" x2="300" y2="151"/>
+          </g>
+          <text x="255" y="132" style="fill:var(--green-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">ARNm en construction</text>
+          <!-- ARNm dans le cytoplasme -->
+          <line x1="354" y1="157" x2="452" y2="157" style="stroke:var(--green-bright)" stroke-width="2.5"/>
+          <text x="404" y="146" style="fill:var(--green-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">ARNm</text>
+
+          <!-- Cytoplasme + ribosome -->
+          <rect x="368" y="36" width="134" height="240" rx="18" fill="rgba(255,255,255,0.02)" style="stroke:var(--border-soft)" stroke-width="1.5"/>
+          <text x="435" y="60" style="fill:var(--text-dim)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">Cytoplasme</text>
+          <ellipse cx="404" cy="210" rx="26" ry="14" fill="none" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="404" y="214" style="fill:var(--text-dim)" font-size="9" font-family="Inter" text-anchor="middle">ribosome</text>
+          <line x1="404" y1="169" x2="404" y2="196" style="stroke:var(--green-bright)" stroke-width="2"/>
+          <polygon points="404,196 400,188 408,188" style="fill:var(--green-bright)"/>
+          <text x="404" y="248" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">protéine en fabrication</text>
+
+          <text x="260" y="292" style="fill:var(--text-dim)" font-size="11.5" font-weight="700" font-family="Inter" text-anchor="middle">L'ADN ne sort jamais : seul l'ARNm franchit l'enveloppe nucléaire</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Dans le noyau, l'ARN polymérase ouvre la double hélice et construit l'ARNm complémentaire de la chaîne matrice. L'ARNm achevé franchit un pore nucléaire et rejoint le ribosome, dans le cytoplasme.</figcaption>
+      </figure>
+
+      <p class="lecture-text">
+        Observe bien la figure : elle résume la <strong>répartition des rôles</strong>. L'ADN reste au noyau comme un document d'archives ; l'ARNm est le messager autorisé à voyager ; le ribosome, dans le cytoplasme, attend le message pour travailler. Et retiens le bilan quantitatif de la transcription :
+      </p>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">1 gène transcrit <span class="math">→</span> 1 molécule d'ARNm</div>
+        <div class="lecture-formula-desc">L'ordre des nucléotides du gène est recopié dans le même ordre sur l'ARNm (complémentarité à chaque position, T remplacé par U) : l'information est intacte, seule l'écriture change.</div>
+      </div>
+
+      <aside class="lecture-aside">
+        <div class="lecture-aside-content">
+          <div class="lecture-aside-label">Culture — une gare animée</div>
+          <p>Les pores nucléaires ne sont pas de simples trous : ce sont de véritables douanes moléculaires. Un ARNm n'est autorisé à sortir qu'après des contrôles précis, et une cellule peut faire sortir des milliers de copies du même ARNm quand le besoin est urgent — par exemple quand la cellule doit produire beaucoup d'une protéine de défense.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : FICHE MÉTHODE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Fiche méthode</span>
+        <h2 class="lecture-section-title">Les réflexes qui évitent les pièges</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Les sujets de Bac demandent presque toujours d'écrire une séquence d'ARNm à partir d'un ADN donné. Voici la marche à suivre, dans l'ordre :
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <span class="lecture-step-number">1</span>
+          <div class="lecture-step-content">
+            <strong>Identifier la chaîne matrice</strong>
+            <p>l'énoncé précise toujours quelle chaîne est lue (chaîne transcrit) et son sens : <span class="math">3′ → 5′</span>. Écris ces repères sous la séquence dès la première ligne.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">2</span>
+          <div class="lecture-step-content">
+            <strong>Découper en triplets</strong>
+            <p>regarde la séquence par groupes de trois nucléotides et écris les colonnes alignées : cela prépare déjà la lecture en codons de la partie 2.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">3</span>
+          <div class="lecture-step-content">
+            <strong>Complémenter base à base</strong>
+            <p><span class="math">A → U</span>, <span class="math">T → A</span>, <span class="math">C → G</span>, <span class="math">G → C</span> — et vérifie qu'aucun « T » n'apparaît dans ton ARNm.</p>
+          </div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">4</span>
+          <div class="lecture-step-content">
+            <strong>Écrire l'ARNm de 5′ vers 3′</strong>
+            <p>en rappelant les sens des deux chaînes : c'est cette précision qui rapporte les points de rigueur.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">Règle d'or à réciter</div>
+        <div class="lecture-rule-body">
+          <p>La transcription se déroule <strong>dans le noyau</strong>, sur <strong>une seule chaîne</strong> d'ADN (la chaîne transcrit), grâce à l'<strong>ARN polymérase</strong>, et produit un <strong>ARNm complémentaire et antiparallèle</strong> de cette matrice, avec <strong>U à la place de T</strong>. Un gène transcrit donne <strong>un seul ARNm</strong>, qui sort du noyau par les <strong>pores nucléaires</strong>.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-title">⚠️ Checklist avant de rendre ta copie</div>
+        <p><strong>1.</strong> Ma séquence d'ARN contient-elle des U et <strong>aucun</strong> T ? <strong>2.</strong> Ai-je écrit les sens <span class="math">3′ → 5′</span> et <span class="math">5′ → 3′</span> ? <strong>3.</strong> Ai-je bien complémenté (et non recopié) la matrice ? <strong>4.</strong> Ai-je précisé le lieu (noyau), l'enzyme (ARN polymérase) et la sortie par les pores ? Quatre « oui » = transcription parfaite.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Chez l'homme, la transcription se déroule :</p>
+      <div class="lecture-quiz-options">
+        <span>A) dans le cytoplasme, sur les ribosomes</span>
+        <span>B) dans le noyau</span>
+        <span>C) dans la mitochondrie uniquement</span>
+        <span>D) à la fois dans le noyau et le cytoplasme pour le même ARNm</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) dans le noyau.</strong> La transcription a lieu là où se trouve l'ADN, c'est-à-dire dans le noyau. C'est ensuite l'ARNm achevé qui sort par les pores nucléaires — la traduction, elle, aura lieu dans le cytoplasme (partie 2).</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Face à un nucléotide A de la chaîne matrice d'ADN, l'ARNm reçoit :</p>
+      <div class="lecture-quiz-options">
+        <span>A) un nucléotide A</span>
+        <span>B) un nucléotide T</span>
+        <span>C) un nucléotide U</span>
+        <span>D) un nucléotide G</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>C) un nucléotide U.</strong> L'ARNm est complémentaire de la matrice : A(ADN) → U(ARNm). Attention au piège : T n'existe pas dans l'ARN, et B serait la réponse si l'on complémentait avec de l'ADN (A–T) au lieu de l'ARN.</div>
+      </details>
+    </div>
+
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — L'enzyme qui réalise la transcription est :</p>
+      <div class="lecture-quiz-options">
+        <span>A) l'ADN polymérase</span>
+        <span>B) l'ARN polymérase</span>
+        <span>C) l'hélicase</span>
+        <span>D) la ligase</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) l'ARN polymérase.</strong> Elle fabrique de l'ARN (d'où son nom) en lisant l'ADN matrice. L'ADN polymérase, elle, sert à la réplication de l'ADN — ne confonds pas les deux enzymes, le nom fait toute la différence.</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[adn_arn]</strong> ADN : double brin, désoxyribose, bases A-T-C-G, reste au noyau. ARN : simple brin en général, ribose, bases A-<strong>U</strong>-C-G — l'uracile remplace la thymine</li>
+      <li><strong>[transcription]</strong> La transcription est la copie d'un gène en ARNm, dans le noyau, par l'ARN polymérase</li>
+      <li><strong>[transcription]</strong> Mécanisme : ouverture de la double hélice → lecture de la chaîne transcrit (matrice) seule → appariement <span class="math">A→U, T→A, C→G, G→C</span> → fermeture de l'hélice → ARNm libéré</li>
+      <li><strong>[transcription]</strong> L'ARNm est complémentaire et antiparallèle de la chaîne matrice : matrice lue 3′→5′, ARNm construit 5′→3′</li>
+      <li><strong>[transcription]</strong> Un gène transcrit donne une seule molécule d'ARNm, qui recopie l'ordre exact des nucléotides du gène</li>
+      <li><strong>[arn_messager]</strong> L'ARNm achevé quitte le noyau par les pores nucléaires et rejoint les ribosomes du cytoplasme — l'ADN ne sort jamais du noyau</li>
+      <li><strong>[arn_messager]</strong> L'ARNm est une « photocopie de travail » : l'original ADN reste protégé dans les archives nucléaires</li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 1 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie 2 : le code génétique et la traduction — comment lire l'ARNm et fabriquer la protéine</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

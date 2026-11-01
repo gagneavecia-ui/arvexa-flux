@@ -1,0 +1,467 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · SUITES NUMÉRIQUES        -->
+<!-- PARTIE 3 : CONVERGENCE & RAISONNEMENT PAR RÉCURRENCE         -->
+<!-- Notion 1 : convergence — Limite finie, résultats clés        -->
+<!-- Notion 2 : encadrement — Théorème des gendarmes              -->
+<!-- Notion 3 : recurrence — Initialisation, hérédité, conclusion -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 03 · Suites numériques</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Convergence &amp; <em>Raisonnement par récurrence</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Que deviennent les termes quand <span class="math">n</span> devient immense ? Certains s'accumulent contre une valeur limite : on dit qu'ils <strong>convergent</strong>. D'autres explosent ou oscillent : ils <strong>divergent</strong>. Cette partie couvre <strong>3 notions</strong> : la <strong>convergence</strong> et ses résultats clés (<span class="math">qⁿ</span>, <span class="math">1/n</span>), le <strong>théorème des gendarmes</strong> pour piéger une suite dans un encadrement, puis le <strong>raisonnement par récurrence</strong> — la machine à démonstrations du Bac — avec un exemple complet rédigé pas à pas.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 3 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">3 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Le stock qui fond</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · convergence — La notion de limite</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · convergence — Les résultats clés</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · encadrement — Le théorème des gendarmes</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 3 · recurrence — Les trois temps du raisonnement</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 3 · recurrence — Exemple complet rédigé</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 1 · convergence — Les limites type Bac</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — L'essentiel de la partie</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Le stock qui fond</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Un détaillant de Niamey reçoit <strong>100 kg</strong> de poudre de lait. Chaque jour, il distribue à ses clients réguliers <strong>la moitié de ce qui reste</strong>. Jour après jour, le stock vaut : 100 ; 50 ; 25 ; 12,5 ; 6,25 ; 3,125… Le stock <strong>ne devient jamais nul</strong> — la moitié d'un reste n'est jamais rien — mais il se rapproche de plus en plus de 0, et personne ne pourra en mesurer une pincette au bout d'un an. Le stock <strong>tend vers 0</strong>.
+      </p>
+      <p class="lecture-text">
+        Cette situation est l'âme de la notion de <strong>limite</strong> : décrire le comportement d'une suite quand le rang devient très grand, sans exiger qu'elle atteigne jamais sa cible. Et pour <strong>démontrer</strong> qu'un tel comportement a lieu pour tout rang — pas seulement pour les dix premiers jours —, les mathématiques ont forgé l'outil le plus élégant du programme : le <strong>raisonnement par récurrence</strong>.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Définir</strong> la convergence d'une suite et reconnaître les comportements typiques à l'infini.</li>
+            <li><strong>Appliquer</strong> les résultats clés : limites des suites géométriques, limite de <span class="math">1/n</span>, théorème des gendarmes.</li>
+            <li><strong>Rédiger</strong> une démonstration par récurrence complète : initialisation, hérédité, conclusion.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · convergence — LA NOTION DE LIMITE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · convergence</span>
+        <h2 class="lecture-section-title">La notion de limite</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Voici la définition officielle, sous la forme attendue au lycée.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définition officielle — Suite convergente</div>
+          <p>La suite <span class="math">(uₙ)</span> <strong>converge</strong> vers un réel <span class="math">ℓ</span> lorsque tous ses termes s'accumulent aussi près que l'on veut de <span class="math">ℓ</span> quand <span class="math">n</span> devient très grand : à partir d'un certain rang, tous les termes sont dans un couloir aussi étroit que l'on veut autour de <span class="math">ℓ</span>. On dit que <span class="math">(uₙ)</span> a pour <strong>limite</strong> <span class="math">ℓ</span>, et on note <span class="math">lim(n→+∞) uₙ = ℓ</span>. Une suite qui ne converge pas vers un réel est dite <strong>divergente</strong>.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">lim(n→+∞) uₙ = ℓ ⇔ suite convergente</div>
+        <div class="lecture-formula-desc">Se lit : « la limite de uₙ quand n tend vers plus l'infini vaut ℓ ». ℓ est un réel FINI. Une suite peut diverger vers +∞, vers −∞, ou sans tendance du tout.</div>
+      </div>
+      <p class="lecture-text">
+        Attention à une idée fausse très répandue : <strong>converger ne veut pas dire atteindre</strong>. Les termes du stock qui fond ne valent jamais exactement 0 ; les termes de <span class="math">(0,5)ⁿ</span> jamais exactement 0 non plus. La limite décrit un <strong>rapprochement indéfini</strong>, pas une arrivée.
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Suite</th><th>Premiers termes</th><th>Comportement à l'infini</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">uₙ = 1/n</span></td><td>1 ; 0,5 ; 0,33 ; 0,25</td><td>converge vers 0</td></tr>
+            <tr><td><span class="math">uₙ = (0,5)ⁿ</span></td><td>1 ; 0,5 ; 0,25 ; 0,125</td><td>converge vers 0</td></tr>
+            <tr><td><span class="math">uₙ = n</span></td><td>1 ; 2 ; 3 ; 4</td><td>diverge vers +∞</td></tr>
+            <tr><td><span class="math">uₙ = (−1)ⁿ</span></td><td>−1 ; 1 ; −1 ; 1</td><td>oscille : divergente, sans limite</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Diverger ne veut pas dire exploser</div>
+          <p>Une suite peut diverger <strong>en oscillant</strong> : <span class="math">(−1)ⁿ</span> ne tend ni vers <span class="math">+∞</span>, ni vers <span class="math">−∞</span>, ni vers aucun réel — elle n'a simplement <strong>pas de limite</strong>. Ne conclus jamais « limite = ±∞ » pour une suite qui change de signe sans grandir en valeur absolue.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · convergence — RÉSULTATS CLÉS -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · convergence</span>
+        <h2 class="lecture-section-title">Les résultats clés sur les limites</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Bonne nouvelle : une poignée de résultats couvre l'essentiel des limites demandées au Bac. Le premier concerne les suites géométriques, et prolonge le tableau des variations de la Partie 2.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Le résultat n°1 — Limite d'une suite géométrique</div>
+        <div class="lecture-formula-hero-main">|q| &lt; 1 ⇒ qⁿ → 0</div>
+        <div class="lecture-formula-hero-desc">Et les autres cas : q &gt; 1 ⇒ qⁿ → +∞ ; q = 1 ⇒ qⁿ = 1 (constante) ; q ≤ −1 ⇒ (uₙ) diverge, sans limite. La position de q par rapport à −1, 0 et 1 décide tout.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">lim(n→+∞) 1/n = 0<br>lim(n→+∞) n = +∞</div>
+        <div class="lecture-formula-desc">Plus généralement, tout quotient a/n tend vers 0 quand n devient immense : diviser un nombre fixe par un nombre toujours plus grand donne un nombre toujours plus petit.</div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Expression</th><th>Limite quand <span class="math">n → +∞</span></th><th>Condition</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">qⁿ</span></td><td>0</td><td><span class="math">|q| &lt; 1</span></td></tr>
+            <tr><td><span class="math">qⁿ</span></td><td>+∞</td><td><span class="math">q &gt; 1</span></td></tr>
+            <tr><td><span class="math">qⁿ</span></td><td>aucune (divergence)</td><td><span class="math">q ≤ −1</span></td></tr>
+            <tr><td><span class="math">1/n</span></td><td>0</td><td>toujours</td></tr>
+            <tr><td><span class="math">n</span></td><td>+∞</td><td>toujours</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Trois limites immédiates</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>lim (0,5)ⁿ = 0</strong> car <span class="math">|0,5| &lt; 1</span> : la suite géométrique décroît vers 0 (c'est le stock qui fond, ramené à 100 kg).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>lim 3ⁿ = +∞</strong> car <span class="math">3 &gt; 1</span> : croissance exponentielle, la suite explose.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>(−1)ⁿ n'a pas de limite</strong> car <span class="math">−1 ≤ −1</span> : les termes valent alternativement <span class="math">1</span> et <span class="math">−1</span>, ils ne s'accumulent vers rien.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Pour <span class="math">q ≤ −1</span>, n'écris JAMAIS <span class="math">lim (−2)ⁿ = −∞</span> : c'est faux, car les termes alternent les signes (<span class="math">−2 ; 4 ; −8 ; 16…</span>) et leur valeur absolue grandit. La rédaction correcte : « la suite <span class="math">((−2)ⁿ)</span> diverge, elle n'a pas de limite ».</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · encadrement — THÉORÈME DES GENDARMES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · encadrement</span>
+        <h2 class="lecture-section-title">Le théorème des gendarmes</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Certaines suites sont trop compliquées à calculer directement… mais on arrive à les <strong>coincer</strong> entre deux suites simples qui convergent vers la même valeur. Alors elles n'ont plus le choix.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 Théorème des gendarmes (admis)</div>
+          <p>Si, pour tout entier <span class="math">n</span> assez grand, on a l'encadrement <span class="math">vₙ ≤ uₙ ≤ wₙ</span>, et si les deux suites « gendarmes » convergent vers la même limite : <span class="math">lim vₙ = lim wₙ = ℓ</span>, alors la suite encadrée converge aussi : <span class="math">lim uₙ = ℓ</span>.</p>
+        </div>
+      </div>
+      <p class="lecture-text">
+        L'image : <span class="math">uₙ</span> marche escorté par deux gendarmes <span class="math">vₙ</span> et <span class="math">wₙ</span> qui se rendent tous les deux au commissariat <span class="math">ℓ</span>. L'escorté finit nécessairement au même endroit. Ce théorème est redoutable avec les suites qui oscillent :
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Montrer que <span class="math">(−1)ⁿ/n</span> converge vers 0</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Observons les premiers termes : <span class="math">−1 ; 0,5 ; −0,33 ; 0,25 ; −0,2…</span> — le signe alterne mais les valeurs s'aplatissent vers 0.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On encadre : puisque <span class="math">(−1)ⁿ</span> vaut <span class="math">1</span> ou <span class="math">−1</span>, pour tout <span class="math">n ≥ 1</span> :</p><p><span class="math">−1/n ≤ (−1)ⁿ/n ≤ 1/n</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Or les deux gendarmes convergent :</p><p><span class="math">lim(−1/n) = 0</span> et <span class="math">lim(1/n) = 0</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Par le théorème des gendarmes : <span class="math">lim (−1)ⁿ/n = 0</span>. La division par <span class="math">n</span> a « éteint » l'oscillation — un encadrement bien choisi vaut un calcul.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Deux conditions, aucune excuse</div>
+          <p>L'encadrement doit valoir pour <strong>tout</strong> <span class="math">n</span> (au moins à partir d'un certain rang, ce qu'on précise), et les deux bornes doivent converger vers <strong>la même</strong> limite <span class="math">ℓ</span>. Si <span class="math">vₙ → 0</span> mais <span class="math">wₙ → 1</span>, le théorème ne dit RIEN : les gendarmes ne vont pas au même commissariat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 3 · recurrence — LES TROIS TEMPS -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · recurrence</span>
+        <h2 class="lecture-section-title">Le raisonnement par récurrence : les trois temps</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Comment prouver qu'une propriété est vraie pour <strong>tous</strong> les entiers <span class="math">n</span> — donc pour une infinité de cas ? On ne peut pas les tester un par un. Le raisonnement par récurrence est la machine conçue pour cela : elle s'appuie sur la structure même des entiers, chacun suivant le précédent.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 Principe du raisonnement par récurrence</div>
+          <p>Pour démontrer qu'une propriété <span class="math">P(n)</span> est vraie pour tout entier <span class="math">n ≥ 0</span>, il suffit de vérifier <strong>trois temps</strong> :</p>
+          <ul class="lecture-list">
+            <li><strong>Initialisation</strong> : vérifier que <span class="math">P(0)</span> est vraie (la propriété marche au premier rang).</li>
+            <li><strong>Hérédité</strong> : supposer que <span class="math">P(n)</span> est vraie pour un entier <span class="math">n</span> quelconque, et démontrer qu'alors <span class="math">P(n + 1)</span> est vraie (si elle marche à un rang, elle marche au suivant).</li>
+            <li><strong>Conclusion</strong> : en déduire que <span class="math">P(n)</span> est vraie pour tout <span class="math">n</span>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Temps</th><th>Ce que l'on fait</th><th>Phrase de rédaction type</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Initialisation</td><td>vérifier <span class="math">P(0)</span> à la main</td><td>« Pour n = 0 : … , donc P(0) est vraie. »</td></tr>
+            <tr><td>Hérédité</td><td>supposer <span class="math">P(n)</span>, montrer <span class="math">P(n + 1)</span></td><td>« Supposons que pour un entier n : … . Alors … , donc P(n + 1) est vraie. »</td></tr>
+            <tr><td>Conclusion</td><td>citer le principe de récurrence</td><td>« Par récurrence, pour tout n ∈ ℕ : … »</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 L'image des dominos</div>
+        <div class="lecture-aside-content">
+          Range une file de dominos. L'<strong>initialisation</strong>, c'est pousser le premier : sans lui, rien ne bouge. L'<strong>hérédité</strong>, c'est s'assurer que chaque domino est assez proche du suivant pour le renverser : tantôt vrai ne suffit pas, il faut la certitude pour UN domino quelconque. La <strong>conclusion</strong> tombe alors toute seule : tous les dominos tombent. Oublier l'initialisation ou bâcler l'hérédité, c'est une file de dominos qui reste debout.
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur grave : l'hérédité non démontrée</div>
+          <p>Écrire « c'est vrai pour n = 0, 1 et 2, donc c'est vrai pour tout n » est une <strong>erreur</strong> : des exemples, même nombreux, ne démontrent rien. Preuve : la propriété « <span class="math">n² + n + 41</span> est un nombre premier » est vraie pour <span class="math">n = 0 ; 1 ; 2 ; … ; 39</span>… et fausse pour <span class="math">n = 40</span>, où la valeur vaut <span class="math">41²</span> ! Sans hérédité démontrée, pas de conclusion — et une grande partie des points s'envole.</p>
+        </div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode à retenir — Bien rédiger l'hérédité</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li>Fixe l'hypothèse avec la formule « <strong>soit <span class="math">n</span> un entier tel que <span class="math">P(n)</span> est vraie</strong> » — jamais avec une valeur numérique de <span class="math">n</span>.</li>
+            <li>Transforme l'encadrement ou l'égalité de <span class="math">P(n)</span> en appliquant <strong>les mêmes opérations des deux côtés</strong> (ajouter un réel, multiplier par un réel positif…), une transformation par ligne.</li>
+            <li>Termine par une phrase explicite : « donc <span class="math">P(n + 1)</span> est vraie ».</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 3 · recurrence — EXEMPLE COMPLET RÉDIGÉ -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · recurrence</span>
+        <h2 class="lecture-section-title">Exemple complet rédigé : montrer <span class="math">0 ≤ uₙ ≤ 3</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        C'est LE type de question du Bac. Consigne : la suite <span class="math">(uₙ)</span> est définie par <span class="math">u₀ = 1</span> et <span class="math">uₙ₊₁ = (uₙ + 3)/2</span>. Démontrer par récurrence que, pour tout entier <span class="math">n</span> : <span class="math">0 ≤ uₙ ≤ 3</span>. Voici la rédaction intégrale, temps par temps — et dans l'hérédité, chaque transformation d'inégalité sur sa propre ligne.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Récurrence sur l'encadrement <span class="math">0 ≤ uₙ ≤ 3</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Initialisation.</strong> Pour <span class="math">n = 0</span> :</p><p><span class="math">u₀ = 1</span></p><p><span class="math">0 ≤ 1 ≤ 3</span></p><p>La propriété est vraie au rang 0.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Hérédité — l'hypothèse.</strong> Soit <span class="math">n</span> un entier tel que <span class="math">0 ≤ uₙ ≤ 3</span> (hypothèse de récurrence). Montrons que <span class="math">0 ≤ uₙ₊₁ ≤ 3</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Hérédité — transformation 1.</strong> On ajoute 3 à chaque membre de l'encadrement :</p><p><span class="math">0 + 3 ≤ uₙ + 3 ≤ 3 + 3</span></p><p><span class="math">3 ≤ uₙ + 3 ≤ 6</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Hérédité — transformation 2.</strong> On divise chaque membre par 2 (positif : le sens des inégalités est conservé) :</p><p><span class="math">3/2 ≤ (uₙ + 3)/2 ≤ 6/2</span></p><p><span class="math">1,5 ≤ uₙ₊₁ ≤ 3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Or <span class="math">1,5 ≥ 0</span>, donc en particulier <span class="math">0 ≤ uₙ₊₁ ≤ 3</span> : la propriété est héréditaire.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Conclusion.</strong> La propriété est vraie au rang 0 et héréditaire : par récurrence, pour tout entier <span class="math">n</span>, <span class="math">0 ≤ uₙ ≤ 3</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p><strong>Vérification des premiers termes</strong> (toujours rassurante) :</p><p><span class="math">u₁ = (1 + 3)/2 = 2</span></p><p><span class="math">u₂ = (2 + 3)/2 = 2,5</span></p><p><span class="math">u₃ = (2,5 + 3)/2 = 2,75</span></p><p>Tous dans <span class="math">[0 ; 3]</span> — et on voit déjà la suite monter doucement vers 3.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">a ≤ b ⇒ a + c ≤ b + c<br>a ≤ b et c &gt; 0 ⇒ a·c ≤ b·c</div>
+        <div class="lecture-formula-desc">Les deux transformations autorisées dans l'hérédité : ajouter un réel quelconque, multiplier par un réel STRICTEMENT positif. Multiplier par un réel négatif renverse les inégalités — piège classique.</div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Rédaction attendue au Bac</div>
+          <p>Dans l'hérédité, on ne remplace <strong>jamais</strong> <span class="math">uₙ</span> par une valeur numérique : on manipule l'encadrement <strong>littéral</strong>. Et la conclusion finale doit être écrite noir sur blanc (« par récurrence, pour tout <span class="math">n</span>… ») : elle seule débloque les questions suivantes, qui s'en servent — tu verras en Partie 4 que cet encadrement prouve la convergence vers <span class="math">ℓ = 3</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 1 · convergence — LIMITES TYPE BAC -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · convergence</span>
+        <h2 class="lecture-section-title">Les limites type Bac, pas à pas</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Trois petits calculs types, à savoir reproduire tels quels. La règle d'or : chaque limite s'appuie sur <strong>un théorème nommé</strong>.
+      </p>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple A — Limite d'une suite géométrique multipliée</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On étudie <span class="math">uₙ = 5 × (0,2)ⁿ</span> : la raison vaut <span class="math">0,2</span> et <span class="math">|0,2| &lt; 1</span>, donc <span class="math">(0,2)ⁿ → 0</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On multiplie la limite par 5 :</p><p><span class="math">lim (5 × (0,2)ⁿ) = 5 × 0 = 0</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Conclusion : la suite <span class="math">(uₙ)</span> <strong>converge vers 0</strong>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple B — Une suite qui explose</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On étudie <span class="math">uₙ = 3ⁿ</span> : la raison vaut <span class="math">3 &gt; 1</span>, donc <span class="math">3ⁿ → +∞</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Conclusion : la suite <span class="math">(uₙ)</span> <strong>diverge vers <span class="math">+∞</span></strong> — aucun réel ne peut la contenir.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Contraste utile : <span class="math">3ⁿ → +∞</span> mais <span class="math">(1/3)ⁿ → 0</span>, car <span class="math">|1/3| &lt; 1</span>. Tout se joue sur la position de la raison devant 1.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple C — Une combinaison : lim (2 + 3/n)</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On décompose : <span class="math">3/n → 0</span> car <span class="math">lim 1/n = 0</span> (le 3 est un simple facteur fixe).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On ajoute la constante :</p><p><span class="math">lim (2 + 3/n) = 2 + 0 = 2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Conclusion : la suite <strong>converge vers 2</strong>. Les constantes « survivent », les quotients en <span class="math">1/n</span> s'éteignent.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Escalier des termes de la suite u n plus un égale u n plus 3 sur 2 montant vers la droite asymptote y égale 3">
+          <line x1="60" y1="280" x2="500" y2="280" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="508,280 496,274 496,286" style="fill:var(--text-dim)"/>
+          <line x1="80" y1="295" x2="80" y2="40" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="80,32 74,44 86,44" style="fill:var(--text-dim)"/>
+          <text x="490" y="298" style="fill:var(--text-dim)" font-size="12" font-family="Inter">n</text>
+          <text x="52" y="50" style="fill:var(--text-dim)" font-size="12" font-family="Inter">uₙ</text>
+          <text x="72" y="209" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">1</text>
+          <line x1="74" y1="205" x2="80" y2="205" style="stroke:var(--text-dim)" stroke-width="1"/>
+          <text x="72" y="134" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">2</text>
+          <line x1="74" y1="130" x2="80" y2="130" style="stroke:var(--text-dim)" stroke-width="1"/>
+          <text x="72" y="59" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">3</text>
+          <line x1="74" y1="55" x2="80" y2="55" style="stroke:var(--text-dim)" stroke-width="1"/>
+          <line x1="80" y1="55" x2="495" y2="55" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="6 5"/>
+          <text x="492" y="48" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">y = ℓ = 3</text>
+          <polyline points="100,205 170,205 170,130 240,130 240,93 310,93 310,74 380,74 380,64 450,64 450,60" style="stroke:currentColor" stroke-width="1.5" fill="none" opacity="0.55"/>
+          <polyline points="100,205 170,130 240,93 310,74 380,64 450,60" style="stroke:var(--green-bright)" stroke-width="2" fill="none"/>
+          <circle cx="100" cy="205" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="170" cy="130" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="240" cy="93" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="310" cy="74" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="380" cy="64" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="450" cy="60" r="5" style="fill:var(--accent-bright)"/>
+          <text x="100" y="298" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">0</text>
+          <text x="170" y="298" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">1</text>
+          <text x="240" y="298" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">2</text>
+          <text x="310" y="298" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">3</text>
+          <text x="380" y="298" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">4</text>
+          <text x="450" y="298" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">5</text>
+          <text x="108" y="216" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">u₀ = 1</text>
+          <text x="380" y="86" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">u₄ ≈ 2,88</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">L'escalier des termes de la suite <span class="math">uₙ₊₁ = (uₙ + 3)/2</span> (avec <span class="math">u₀ = 1</span>) : chaque marche est plus petite que la précédente, et les points s'accumulent contre la droite <span class="math">y = 3</span> sans jamais la franchir. La suite <strong>converge vers <span class="math">ℓ = 3</span></strong> — tu le démontreras proprement en Partie 4.</figcaption>
+      </figure>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">L'essentiel de la partie</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tu disposes maintenant des deux super-pouvoirs du chapitre : lire le destin d'une suite à l'infini, et démontrer une propriété pour tous les rangs. La Partie 4 les combinera dans la fiche de révision finale.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La machine à démonstrations universelle</div>
+        <div class="lecture-formula-hero-main">Initialisation → Hérédité → Conclusion</div>
+        <div class="lecture-formula-hero-desc">Trois temps, trois phrases de rédaction, aucune omission tolérée : c'est la seule façon de prouver « pour tout n », et l'un des démonstrations les plus rentables de l'épreuve.</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li>Converger vers <span class="math">ℓ</span> = s'accumuler contre <span class="math">ℓ</span> quand <span class="math">n</span> grandit ; converger ≠ atteindre.</li>
+        <li>Géométriques : <span class="math">|q| &lt; 1 ⇒ qⁿ → 0</span> ; <span class="math">q &gt; 1 ⇒ qⁿ → +∞</span> ; <span class="math">q ≤ −1</span> : divergence sans limite.</li>
+        <li><span class="math">lim 1/n = 0</span> ; <span class="math">lim n = +∞</span> ; tout quotient <span class="math">a/n</span> s'éteint à l'infini.</li>
+        <li>Gendarmes : si <span class="math">vₙ ≤ uₙ ≤ wₙ</span> et <span class="math">vₙ</span>, <span class="math">wₙ</span> convergent vers le même <span class="math">ℓ</span>, alors <span class="math">uₙ → ℓ</span>.</li>
+        <li>Récurrence : initialisation (vérifier <span class="math">P(0)</span>), hérédité (supposer <span class="math">P(n)</span>, montrer <span class="math">P(n + 1)</span>), conclusion explicite.</li>
+        <li>L'hérédité transforme l'encadrement littéralement, une opération par ligne : on ajoute, on multiplie par un positif — jamais de valeur numérique de <span class="math">uₙ</span>.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Réflexe rédaction pour l'examen</div>
+          <p>Une limite affirmée sans théorème cité ne rapporte rien : nomme toujours ton outil (« d'après le résultat sur les suites géométriques », « d'après le théorème des gendarmes »). Et pour une récurrence, les trois temps doivent être <strong>visibles</strong> : annonce-les avec des sous-titres sur ta copie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Que vaut <span class="math">lim (0,3)ⁿ</span> quand <span class="math">n</span> tend vers <span class="math">+∞</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) 0</span><span>B) +∞</span><span>C) 1</span><span>D) pas de limite</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><p><strong>A) 0.</strong> La raison vaut <span class="math">0,3</span> et <span class="math">|0,3| &lt; 1</span> : d'après le résultat sur les suites géométriques, <span class="math">(0,3)ⁿ → 0</span>.</p><p>Les premiers termes le confirment : 0,3 ; 0,09 ; 0,027 ; 0,0081…</p></div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Pour tout <span class="math">n ≥ 1</span>, on sait que <span class="math">1/n ≤ uₙ ≤ 5/n</span>. Que peut-on conclure ?</p>
+      <div class="lecture-quiz-options"><span>A) uₙ → 1</span><span>B) uₙ → 5</span><span>C) uₙ → 0</span><span>D) on ne peut rien conclure</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><p><strong>C) uₙ → 0.</strong> Théorème des gendarmes : les deux bornes convergent vers la même limite, car <span class="math">1/n → 0</span> et <span class="math">5/n → 0</span>.</p><p>Donc <span class="math">uₙ → 0</span>, même sans connaître la formule de <span class="math">uₙ</span>.</p></div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Dans une démonstration par récurrence, quel est l'ordre correct des trois temps ?</p>
+      <div class="lecture-quiz-options"><span>A) hérédité, initialisation, conclusion</span><span>B) initialisation, hérédité, conclusion</span><span>C) conclusion, hérédité, initialisation</span><span>D) initialisation, conclusion, hérédité</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><p><strong>B) initialisation, hérédité, conclusion.</strong></p><p>On vérifie d'abord <span class="math">P(0)</span>, puis on suppose <span class="math">P(n)</span> pour un entier <span class="math">n</span> quelconque afin de démontrer <span class="math">P(n + 1)</span>, et enfin on conclut par le principe de récurrence.</p><p>Sauter l'initialisation ou confondre <span class="math">P(n + 1)</span> avec l'hypothèse invalide toute la démonstration.</p></div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[convergence]</strong> <span class="math">(uₙ)</span> converge vers <span class="math">ℓ</span> si ses termes s'accumulent contre <span class="math">ℓ</span> quand <span class="math">n</span> grandit : <span class="math">lim(n→+∞) uₙ = ℓ</span>, avec <span class="math">ℓ</span> réel fini</li>
+      <li><strong>[convergence]</strong> Converger ≠ atteindre : les termes peuvent ne jamais valoir exactement <span class="math">ℓ</span> (exemple <span class="math">(0,5)ⁿ</span>)</li>
+      <li><strong>[convergence]</strong> Géométriques : <span class="math">|q| &lt; 1 ⇒ qⁿ → 0</span> ; <span class="math">q &gt; 1 ⇒ qⁿ → +∞</span> ; <span class="math">q = 1</span> constante ; <span class="math">q ≤ −1</span> divergente sans limite</li>
+      <li><strong>[convergence]</strong> <span class="math">lim 1/n = 0</span> et <span class="math">lim n = +∞</span> ; tout quotient <span class="math">a/n</span> tend vers 0</li>
+      <li><strong>[convergence]</strong> Diverger peut signifier exploser vers ±∞ ou osciller sans limite (exemple <span class="math">(−1)ⁿ</span>)</li>
+      <li><strong>[encadrement]</strong> Gendarmes : si <span class="math">vₙ ≤ uₙ ≤ wₙ</span> (pour tout <span class="math">n</span> assez grand) et <span class="math">lim vₙ = lim wₙ = ℓ</span>, alors <span class="math">lim uₙ = ℓ</span></li>
+      <li><strong>[encadrement]</strong> Les deux gendarmes doivent converger vers la MÊME limite — sinon le théorème ne s'applique pas</li>
+      <li><strong>[recurrence]</strong> Trois temps : initialisation (vérifier <span class="math">P(0)</span>), hérédité (supposer <span class="math">P(n)</span> pour un <span class="math">n</span> quelconque, montrer <span class="math">P(n + 1)</span>), conclusion explicite</li>
+      <li><strong>[recurrence]</strong> L'hérédité manipule l'encadrement littéral, une transformation par ligne : on ajoute un réel, on multiplie par un réel strictement positif</li>
+      <li><strong>[recurrence]</strong> Des exemples ne prouvent jamais « pour tout n » : sans hérédité démontrée, la conclusion est fausse</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 3 terminée !</div>
+    <div class="lecture-end-sub">Passe à la fiche complète : suites bornées, point fixe et applications nigériennes</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

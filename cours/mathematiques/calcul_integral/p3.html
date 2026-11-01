@@ -1,0 +1,452 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · CALCUL INTÉGRAL          -->
+<!-- PARTIE 3 : PROPRIÉTÉS, LINÉARITÉ & RELATION DE CHASLES       -->
+<!-- Notion 1 : linearite_chasles — linéarité, relation de Chasles -->
+<!-- Notion 2 : ordre_encadrement — positivité, croissance,       -->
+<!--            bornes inversées, encadrement m(b−a) ≤ ∫ ≤ M(b−a) -->
+<!-- Refonte présentation v2 : 1 étape = 1 calcul, ligne dédiée   -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 03 · Calcul intégral</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Propriétés, Linéarité &amp; <em>Relation de Chasles</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      L'intégrale est un outil de calcul : il lui faut des <strong>règles de calcul</strong>. Cette partie couvre <strong>2 notions</strong> : d'abord les propriétés <strong>algébriques</strong> (linéarité, relation de <strong>Chasles</strong>, bornes inversées), puis les propriétés d'<strong>ordre</strong> (positivité, croissance, encadrement). Avec elles, tu découperas les calculs en morceaux simples et tu contrôleras la cohérence de tes résultats — deux réflexes qui font la différence au Bac.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span>
+      <span class="lecture-hero-meta-item">🧮 2 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">2 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — des règles pour calculer vite et juste</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · linearite_chasles — La linéarité de l'intégrale</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · linearite_chasles — La relation de Chasles</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · ordre_encadrement — Positivité et croissance</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · ordre_encadrement — Bornes inversées</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 2 · ordre_encadrement — L'encadrement de l'intégrale</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 2 · ordre_encadrement — Tableau récapitulatif</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — L'essentiel de la partie</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION                                       -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Des règles pour calculer vite et juste</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Imagine un commerçant de Niamey qui livre trois quartiers dans la même tournée. Il ne recalcule pas tout à chaque fois : il <strong>ajoute les trajets quartier par quartier</strong>, et il <strong>multiplie par le prix du carburant</strong> quand ce prix change. L'intégrale se comporte de la même façon : on peut <strong>couper</strong> un intervalle en tranches (Chasles), <strong>sortir les coefficients</strong> (linéarité), et <strong>comparer</strong> deux intégrales quand on compare deux fonctions (ordre).
+      </p>
+      <p class="lecture-text">
+        Ces propriétés ne sont pas décoratives : elles transforment un calcul impossible en trois calculs faciles, et elles permettent de <strong>vérifier un résultat sans le recalculer</strong>. Le jour de l'examen, c'est elles qui te font gagner — ou perdre — les points de rédaction et de contrôle.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Énoncer</strong> et utiliser la <strong>linéarité</strong> et la <strong>relation de Chasles</strong>.</li>
+            <li><strong>Comparer</strong> des intégrales avec la <strong>positivité</strong> et la <strong>croissance</strong>, et manipuler les <strong>bornes inversées</strong>.</li>
+            <li><strong>Encadrer</strong> une intégrale avec <span class="math">m·(b − a)</span> et <span class="math">M·(b − a)</span>, et contrôler un résultat.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Dans la vie réelle</div>
+        <div class="lecture-aside-content">
+          La relation de Chasles est le quotidien des services hydrologiques : pour connaître le volume d'eau du fleuve sur toute la saison des pluies, on additionne les volumes <strong>mois par mois</strong>. Chaque mois est une « tranche » <span class="math">∫ₐᵇ</span>, et la somme des tranches donne <span class="math">∫ₐᶜ</span>. Personne ne calcule jamais tout d'un seul bloc.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · linearite_chasles — LINÉARITÉ         -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · linearite_chasles</span>
+        <h2 class="lecture-section-title">La linéarité de l'intégrale</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Elle hérite de la linéarité de la dérivation : une primitive de <span class="math">α·f + β·g</span> est <span class="math">α·F + β·G</span>. En appliquant la définition <span class="math">∫ₐᵇ f(x) dx = F(b) − F(a)</span>, on obtient la propriété centrale :
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Linéarité — pour tous réels α et β</div>
+        <div class="lecture-formula-hero-main">∫ₐᵇ (α·f(x) + β·g(x)) dx = α·∫ₐᵇ f(x) dx + β·∫ₐᵇ g(x) dx</div>
+        <div class="lecture-formula-hero-desc">
+          L'intégrale « traverse » les sommes et sort les coefficients. En particulier :<br>
+          <span class="math">∫ₐᵇ k·f(x) dx = k·∫ₐᵇ f(x) dx</span><br>
+          <span class="math">∫ₐᵇ (f + g) = ∫ₐᵇ f + ∫ₐᵇ g</span>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">∫ₐᵇ 1 dx = b − a</div>
+        <div class="lecture-formula-desc">Cas particulier très utile : la fonction constante 1 a pour primitive x, donc l'intégrale vaut x(b) − x(a) = b − a. C'est aussi l'aire du rectangle de hauteur 1 et de largeur (b − a).</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Calculer <span class="math">∫₁³ (2x + 3) dx</span> par linéarité</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>On découpe</strong> (linéarité, une ligne par intégrale) :</p><p><span class="math">∫₁³ (2x + 3) dx = 2·∫₁³ x dx + 3·∫₁³ 1 dx</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Première intégrale</strong> — primitive, puis évaluation :</p><p><span class="math">∫₁³ x dx = [x²/2]₁³</span></p><p><span class="math">[x²/2]₁³ = 9/2 − 1/2</span></p><p><span class="math">= 8/2 = 4</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Deuxième intégrale :</strong></p><p><span class="math">∫₁³ 1 dx = [x]₁³</span></p><p><span class="math">[x]₁³ = 3 − 1 = 2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>On recombine :</strong></p><p><span class="math">2 × 4 + 3 × 2 = 8 + 6 = 14</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Vérification directe :</strong> une primitive de <span class="math">2x + 3</span> est <span class="math">x² + 3x</span> :</p><p><span class="math">∫₁³ (2x + 3) dx = [x² + 3x]₁³</span></p><p><span class="math">= (9 + 9) − (1 + 3)</span></p><p><span class="math">= 18 − 4 = 14</span>&nbsp;&nbsp;✓</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>La linéarité concerne les <strong>sommes</strong>, jamais les produits : <span class="math">∫ₐᵇ (f(x) × g(x)) dx ≠ ∫ₐᵇ f(x) dx × ∫ₐᵇ g(x) dx</span>. Il n'existe aucune règle pour « l'intégrale d'un produit » en Terminale — c'est justement pour cela que l'<strong>intégration par parties</strong> (Partie 4) existe. Ne jamais « distribuer » une intégrale sur un produit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · linearite_chasles — CHASLES           -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · linearite_chasles</span>
+        <h2 class="lecture-section-title">La relation de Chasles</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Intégrer de <span class="math">a</span> à <span class="math">c</span>, c'est la même chose qu'intégrer de <span class="math">a</span> à <span class="math">b</span>, puis de <span class="math">b</span> à <span class="math">c</span> — les aires s'empilent. C'est la <strong>relation de Chasles</strong> (du nom du mathématicien français Michel Chasles) :
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Propriété — Relation de Chasles</div>
+          <p>Pour tous réels <span class="math">a ≤ b ≤ c</span> et toute fonction <span class="math">f</span> continue sur <span class="math">[a ; c]</span> :</p>
+          <p><span class="math">∫ₐᵇ f(x) dx + ∫ᵇᶜ f(x) dx = ∫ₐᶜ f(x) dx</span></p>
+          <p>La borne <strong>intérieure</strong> <span class="math">b</span> apparaît une fois en haut et une fois en bas : elle « s'élimine » entre les deux intégrales.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Chasles — on coupe l'intervalle en tranches</div>
+        <div class="lecture-formula-hero-main">∫ₐᵇ f(x) dx + ∫ᵇᶜ f(x) dx = ∫ₐᶜ f(x) dx</div>
+        <div class="lecture-formula-hero-desc">Géométriquement : l'aire de [a ; c] est la somme des aires des tranches [a ; b] et [b ; c]. Inversement, on peut DÉCOUPER un gros calcul en petits morceaux.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Calculer <span class="math">∫₀³ x² dx</span> par tranches</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>On découpe en 0 ≤ 2 ≤ 3 :</strong></p><p><span class="math">∫₀³ x² dx = ∫₀² x² dx + ∫₂³ x² dx</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Première tranche</strong> — primitive, puis évaluation :</p><p><span class="math">∫₀² x² dx = [x³/3]₀²</span></p><p><span class="math">[x³/3]₀² = 8/3 − 0 = 8/3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Seconde tranche :</strong></p><p><span class="math">∫₂³ x² dx = [x³/3]₂³</span></p><p><span class="math">[x³/3]₂³ = 27/3 − 8/3 = 19/3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>On somme</strong> (même dénominateur) :</p><p><span class="math">8/3 + 19/3 = 27/3 = 9</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Vérification directe</strong> (sans découpage) :</p><p><span class="math">∫₀³ x² dx = [x³/3]₀³</span></p><p><span class="math">[x³/3]₀³ = 27/3 = 9</span>&nbsp;&nbsp;✓</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Choisir ses tranches intelligemment</div>
+          <p>Chasles sert surtout dans l'autre sens : quand une fonction change d'expression selon l'intervalle (une valeur absolue, une courbe définie par morceaux, une aire « avant/après » le point d'intersection de deux courbes), on <strong>découpe</strong> à la borne stratégique. Repère ce point avant de te lancer dans le calcul.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · ordre_encadrement — POSITIVITÉ        -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · ordre_encadrement</span>
+        <h2 class="lecture-section-title">Positivité et croissance</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Deux propriétés d'ordre, à condition de respecter <span class="math">a ≤ b</span>. La première dit qu'une fonction positive s'intègre en un nombre positif :
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Positivité de l'intégrale</div>
+          <p>Si <span class="math">f ≥ 0</span> sur <span class="math">[a ; b]</span> et <span class="math">a ≤ b</span>, alors :</p>
+          <p><span class="math">∫ₐᵇ f(x) dx ≥ 0</span></p>
+          <p>Logique géométrique : l'intégrale est alors une <strong>aire</strong>, et une aire ne peut pas être négative.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">f ≥ 0 sur [a ; b] et a ≤ b&nbsp;&nbsp;⇒&nbsp;&nbsp;∫ₐᵇ f(x) dx ≥ 0</div>
+        <div class="lecture-formula-desc">La réciproque est FAUSSE : une intégrale positive n'implique pas que f soit positive partout (voir l'encadré ci-dessous).</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">f ≤ g sur [a ; b] et a ≤ b&nbsp;&nbsp;⇒&nbsp;&nbsp;∫ₐᵇ f(x) dx ≤ ∫ₐᵇ g(x) dx</div>
+        <div class="lecture-formula-desc">Croissance de l'intégrale : si f est « en dessous » de g, son aire est en dessous aussi. On l'obtient en appliquant la positivité à g − f ≥ 0, car ∫ₐᵇ (g − f) = ∫ₐᵇ g − ∫ₐᵇ f (linéarité !).</div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple complet — Comparer <span class="math">x²</span> et <span class="math">x</span> sur <span class="math">[0 ; 1]</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Comparaison des fonctions :</strong> pour <span class="math">0 ≤ x ≤ 1</span>, on a :</p><p><span class="math">x² − x = x·(x − 1) ≤ 0</span></p><p>donc <span class="math">x² ≤ x</span> sur <span class="math">[0 ; 1]</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Par croissance :</strong></p><p><span class="math">∫₀¹ x² dx ≤ ∫₀¹ x dx</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Calculs</strong> (une intégrale par ligne) :</p><p><span class="math">∫₀¹ x² dx = [x³/3]₀¹ = 1/3</span></p><p><span class="math">∫₀¹ x dx = [x²/2]₀¹ = 1/2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Contrôle :</strong></p><p><span class="math">1/3 ≤ 1/2</span>&nbsp;&nbsp;✓</p><p>L'ordre des intégrales reflète bien l'ordre des fonctions.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>La réciproque de la positivité est fausse : <span class="math">∫ₐᵇ f ≥ 0</span> ne prouve <strong>pas</strong> que <span class="math">f ≥ 0</span>. Contre-exemple : <span class="math">f(x) = x³</span> sur <span class="math">[−1 ; 1]</span> prend des valeurs négatives, pourtant :</p>
+          <p><span class="math">∫₋₁¹ x³ dx = [x⁴/4]₋₁¹ = 1/4 − 1/4</span></p>
+          <p><span class="math">= 0&nbsp;&nbsp;≥&nbsp;&nbsp;0</span></p>
+          <p>Les aires négatives et positives se compensent. Pour conclure sur le signe de <span class="math">f</span>, il faut étudier <span class="math">f</span> elle-même, pas son intégrale.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 2 · ordre_encadrement — BORNES INVERSÉES  -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · ordre_encadrement</span>
+        <h2 class="lecture-section-title">Bornes inversées</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Que vaut <span class="math">∫ᵇₐ</span> quand la borne du bas est plus grande que celle du haut ? La définition <span class="math">F(b) − F(a)</span> reste valable et donne la convention :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">∫ᵇₐ f(x) dx = −∫ₐᵇ f(x) dx</div>
+        <div class="lecture-formula-desc">Échanger les bornes change le signe. En effet F(a) − F(b) = −(F(b) − F(a)) : c'est la même différence, lue à l'envers. Conséquence : ∫ₐₐ f(x) dx = 0 (tranche de largeur nulle).</div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple complet — Calculer <span class="math">∫₃¹ x² dx</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>On inverse les bornes :</strong></p><p><span class="math">∫₃¹ x² dx = −∫₁³ x² dx</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>On calcule dans le bon sens</strong> — primitive, puis évaluation :</p><p><span class="math">∫₁³ x² dx = [x³/3]₁³</span></p><p><span class="math">[x³/3]₁³ = 27/3 − 1/3 = 26/3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Conclusion :</strong></p><p><span class="math">∫₃¹ x² dx = −26/3</span></p><p>Le résultat est négatif — normal : on a « intégré à reculons ».</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ L'ordre des bornes compte</div>
+          <p>Toutes les autres propriétés (positivité, croissance, encadrement) exigent <span class="math">a ≤ b</span>. Devant une intégrale écrite « à l'envers », le premier réflexe est de la retourner avec le signe « − », puis d'appliquer les propriétés sur l'intervalle bien ordonné.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 2 · ordre_encadrement — ENCADREMENT       -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · ordre_encadrement</span>
+        <h2 class="lecture-section-title">L'encadrement de l'intégrale</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Si on encadre la fonction entre deux constantes <span class="math">m</span> et <span class="math">M</span>, on encadre son intégrale entre deux aires de <strong>rectangles</strong>. C'est l'outil de contrôle le plus rapide du chapitre :
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Encadrement de l'intégrale</div>
+          <p>Si <span class="math">m ≤ f(x) ≤ M</span> pour tout <span class="math">x</span> de <span class="math">[a ; b]</span>, avec <span class="math">a ≤ b</span>, alors :</p>
+          <p><span class="math">m·(b − a) ≤ ∫ₐᵇ f(x) dx ≤ M·(b − a)</span></p>
+          <p>L'intégrale est comprise entre l'aire du rectangle de hauteur <span class="math">m</span> (le « petit rectangle ») et celle du rectangle de hauteur <span class="math">M</span> (le « grand rectangle »), tous deux de largeur <span class="math">b − a</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">L'encadrement par les rectangles</div>
+        <div class="lecture-formula-hero-main">m·(b − a) ≤ ∫ₐᵇ f(x) dx ≤ M·(b − a)</div>
+        <div class="lecture-formula-hero-desc">Avec m = minimum de f et M = maximum de f sur [a ; b] (par exemple les valeurs aux bornes si f est monotone). Un résultat qui sort de cet encadrement est forcément faux : contrôle immédiat.</div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Encadrement de l'intégrale par les rectangles de hauteurs m et M sous et au-dessus de la courbe">
+          <line x1="30" y1="250" x2="490" y2="250" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="500,250 488,244 488,256" style="fill:var(--text-dim)"/>
+          <line x1="50" y1="280" x2="50" y2="35" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="50,25 44,37 56,37" style="fill:var(--text-dim)"/>
+          <text x="36" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter">O</text>
+          <text x="494" y="270" style="fill:var(--text-dim)" font-size="12" font-family="Inter">x</text>
+          <text x="62" y="42" style="fill:var(--text-dim)" font-size="12" font-family="Inter">y</text>
+          <rect x="140" y="99" width="260" height="151" style="fill:var(--accent);fill-opacity:0.12;stroke:none"/>
+          <rect x="140" y="190" width="260" height="60" style="fill:var(--green-bright);fill-opacity:0.2;stroke:none"/>
+          <path d="M 90 200 Q 260 170 440 80" style="fill:none;stroke:var(--green-bright)" stroke-width="3"/>
+          <line x1="140" y1="250" x2="140" y2="190" style="stroke:var(--text-dim)" stroke-width="2" stroke-dasharray="5 5"/>
+          <line x1="400" y1="250" x2="400" y2="99" style="stroke:var(--text-dim)" stroke-width="2" stroke-dasharray="5 5"/>
+          <line x1="140" y1="190" x2="470" y2="190" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="3 4"/>
+          <line x1="140" y1="99" x2="470" y2="99" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="3 4"/>
+          <circle cx="140" cy="190" r="4" style="fill:var(--green-bright)"/>
+          <circle cx="400" cy="99" r="4" style="fill:var(--accent-bright)"/>
+          <text x="180" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">a</text>
+          <text x="400" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">b</text>
+          <text x="452" y="72" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter">y = f(x)</text>
+          <text x="476" y="103" style="fill:var(--accent-bright)" font-size="12" font-family="Inter" text-anchor="end">M = f(b)</text>
+          <text x="476" y="185" style="fill:var(--green-bright)" font-size="12" font-family="Inter" text-anchor="end">m = f(a)</text>
+          <text x="270" y="145" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">M·(b − a)</text>
+          <text x="270" y="222" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">m·(b − a)</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Sur <span class="math">[a ; b]</span>, la courbe reste au-dessus du petit rectangle d'aire <span class="math">m·(b − a)</span> et en dessous du grand rectangle d'aire <span class="math">M·(b − a)</span> : l'intégrale est coincée entre les deux. Ici <span class="math">f</span> est croissante, donc <span class="math">m = f(a)</span> et <span class="math">M = f(b)</span>.</figcaption>
+      </figure>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Encadrer <span class="math">∫₀² (x² + 1) dx</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Min et max :</strong> <span class="math">f(x) = x² + 1</span> est croissante sur <span class="math">[0 ; 2]</span>, donc :</p><p><span class="math">m = f(0) = 1</span></p><p><span class="math">M = f(2) = 5</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>On applique l'encadrement :</strong></p><p><span class="math">1 × (2 − 0) ≤ ∫₀² (x² + 1) dx ≤ 5 × (2 − 0)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>On simplifie :</strong></p><p><span class="math">2 ≤ ∫₀² (x² + 1) dx ≤ 10</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Valeur exacte (contrôle)</strong> — primitive, puis évaluation :</p><p><span class="math">∫₀² (x² + 1) dx = [x³/3 + x]₀²</span></p><p><span class="math">= (8/3 + 2) − 0 = 14/3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Conclusion :</strong></p><p><span class="math">14/3 ≈ 4,67</span></p><p><span class="math">2 ≤ 4,67 ≤ 10</span>&nbsp;&nbsp;✓</p><p>L'encadrement valide le calcul.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ L'encadrement ne remplace pas le calcul</div>
+          <p>L'encadrement donne un <strong>ordre de grandeur</strong>, pas la valeur exacte. Au Bac, il sert à deux choses : encadrer une intégrale qu'on ne sait pas calculer (question du type « montrer que… »), et <strong>vérifier</strong> une valeur trouvée. Si ton calcul sort de l'encadrement, cherche l'erreur avant d'avancer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 2 · ordre_encadrement — TABLEAU RÉCAP     -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · ordre_encadrement</span>
+        <h2 class="lecture-section-title">Tableau récapitulatif des propriétés</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Toutes les propriétés de la partie, en une page. Colonne de droite : le réflexe d'utilisation au Bac.
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Propriété</th><th>Énoncé</th><th>Conditions</th><th>Réflexe d'utilisation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Linéarité</td><td><span class="math">∫ₐᵇ (α·f + β·g)(x) dx = α·∫ₐᵇ f(x) dx + β·∫ₐᵇ g(x) dx</span></td><td><span class="math">f ; g</span> continues, <span class="math">α ; β</span> réels</td><td>découper les calculs, sortir les constantes</td></tr>
+            <tr><td>Intégrale de 1</td><td><span class="math">∫ₐᵇ 1 dx = b − a</span></td><td><span class="math">a ≤ b</span></td><td>rectangle de hauteur 1 ; base de tous les calculs</td></tr>
+            <tr><td>Chasles</td><td><span class="math">∫ₐᵇ f(x) dx + ∫ᵇᶜ f(x) dx = ∫ₐᶜ f(x) dx</span></td><td><span class="math">a ≤ b ≤ c</span>, f continue</td><td>couper en tranches (fonctions par morceaux)</td></tr>
+            <tr><td>Positivité</td><td><span class="math">f ≥ 0 ⇒ ∫ₐᵇ f(x) dx ≥ 0</span></td><td><span class="math">f ≥ 0</span> sur <span class="math">[a ; b]</span>, <span class="math">a ≤ b</span></td><td>signe du résultat ; réciproque FAUSSE</td></tr>
+            <tr><td>Croissance</td><td><span class="math">f ≤ g ⇒ ∫ₐᵇ f ≤ ∫ₐᵇ g</span></td><td>sur <span class="math">[a ; b]</span>, <span class="math">a ≤ b</span></td><td>comparer deux aires sans les calculer</td></tr>
+            <tr><td>Bornes inversées</td><td><span class="math">∫ᵇₐ f(x) dx = −∫ₐᵇ f(x) dx</span></td><td>toujours vraie</td><td>remettre les bornes dans l'ordre avant tout</td></tr>
+            <tr><td>Encadrement</td><td><span class="math">m·(b − a) ≤ ∫ₐᵇ f(x) dx ≤ M·(b − a)</span></td><td><span class="math">m ≤ f ≤ M</span> sur <span class="math">[a ; b]</span></td><td>ordre de grandeur et contrôle de résultat</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Comment démontrer ces propriétés ?</div>
+          <p>Toutes se prouvent avec le même levier : la définition <span class="math">∫ₐᵇ f(x) dx = F(b) − F(a)</span> plus les règles de calcul sur <span class="math">F</span>. Exemple type : pour la croissance, on pose <span class="math">h = g − f ≥ 0</span> ; une primitive de <span class="math">h</span> est <span class="math">H = G − F</span>, et comme <span class="math">h ≥ 0</span>, la fonction <span class="math">H</span> est croissante, donc <span class="math">H(b) − H(a) ≥ 0</span>, c'est-à-dire <span class="math">∫ₐᵇ g − ∫ₐᵇ f ≥ 0</span>. Un enchaînement définition → linéarité → signe, à savoir reproduire.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN                                            -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">L'essentiel de la partie</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        L'intégrale a maintenant ses règles du jeu : elle additionne et se multiplie par les constantes (linéarité), elle se découpe en tranches (Chasles), elle respecte l'ordre des fonctions (positivité, croissance) et se laisse encadrer par deux rectangles. La Partie 4, fiche de synthèse, ajoutera la dernière technique : l'<strong>intégration par parties</strong>.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Les trois formules à réciter</div>
+        <div class="lecture-formula-hero-main">
+          ∫ₐᵇ (α·f + β·g) = α·∫ₐᵇ f + β·∫ₐᵇ g<br>
+          ∫ₐᵇ + ∫ᵇᶜ = ∫ₐᶜ<br>
+          m·(b − a) ≤ ∫ₐᵇ f ≤ M·(b − a)
+        </div>
+        <div class="lecture-formula-hero-desc">Linéarité (calculs), Chasles (découpages), encadrement (contrôles) : les trois réflexes de la partie, à condition toujours de travailler avec a ≤ b.</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><strong>Linéarité</strong> : l'intégrale traverse les sommes et sort les coefficients ; cas particulier <span class="math">∫ₐᵇ 1 dx = b − a</span>.</li>
+        <li><strong>Chasles</strong> : <span class="math">∫ₐᵇ + ∫ᵇᶜ = ∫ₐᶜ</span> — on coupe l'intervalle à la borne stratégique.</li>
+        <li><strong>Positivité</strong> : <span class="math">f ≥ 0</span> et <span class="math">a ≤ b</span> donnent <span class="math">∫ₐᵇ f ≥ 0</span> — réciproque fausse.</li>
+        <li><strong>Croissance</strong> : <span class="math">f ≤ g</span> donne <span class="math">∫ₐᵇ f ≤ ∫ₐᵇ g</span> — comparer sans calculer.</li>
+        <li><strong>Bornes inversées</strong> : <span class="math">∫ᵇₐ = −∫ₐᵇ</span> — et <span class="math">∫ₐₐ = 0</span>.</li>
+        <li><strong>Encadrement</strong> : <span class="math">m·(b − a) ≤ ∫ₐᵇ f ≤ M·(b − a)</span> — l'outil de contrôle n°1 avant de rendre ta copie.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Réflexe rédaction pour l'examen</div>
+          <p>Chaque propriété citée doit être nommée : « d'après la relation de Chasles… », « par linéarité de l'intégrale… », « d'après la positivité… ». Une propriété utilisée sans être nommée fait perdre la moitié des points de la question — le correcteur doit voir que tu sais DE QUELLE propriété il s'agit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Que vaut <span class="math">∫₀² (3x² + 1) dx</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) 8</span><span>B) 9</span><span>C) 10</span><span>D) 12</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>C) 10.</strong> Par linéarité : 3·∫₀² x² dx + ∫₀² 1 dx = 3 × [x³/3]₀² + [x]₀² = 3 × 8/3 + 2 = 8 + 2 = 10. (Ou directement : primitive x³ + x, donc [x³ + x]₀² = (8 + 2) − 0 = 10.)</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Si <span class="math">f ≤ g</span> sur <span class="math">[a ; b]</span> avec <span class="math">a ≤ b</span>, alors :</p>
+      <div class="lecture-quiz-options"><span>A) ∫ₐᵇ f ≥ ∫ₐᵇ g</span><span>B) ∫ₐᵇ f ≤ ∫ₐᵇ g</span><span>C) ∫ₐᵇ f = ∫ₐᵇ g</span><span>D) on ne peut rien dire</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) ∫ₐᵇ f ≤ ∫ₐᵇ g.</strong> C'est la croissance de l'intégrale : en dessous partout, intégrée en dessous. Elle se démontre en appliquant la positivité à g − f ≥ 0, puis la linéarité.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — D'après la relation de Chasles, <span class="math">∫₂⁵ f(x) dx = ∫₂⁴ f(x) dx + …</span></p>
+      <div class="lecture-quiz-options"><span>A) ∫₄⁵ f(x) dx</span><span>B) ∫₅⁴ f(x) dx</span><span>C) ∫₂⁵ f(x) dx</span><span>D) ∫₄⁴ f(x) dx</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) ∫₄⁵ f(x) dx.</strong> On découpe [2 ; 5] en [2 ; 4] et [4 ; 5] : la borne commune 4 disparaît entre les deux intégrales. (B) est fausse : les bornes y sont inversées, ce qui changerait le signe.</div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[linearite_chasles]</strong> Linéarité : <span class="math">∫ₐᵇ (α·f(x) + β·g(x)) dx = α·∫ₐᵇ f(x) dx + β·∫ₐᵇ g(x) dx</span></li>
+      <li><strong>[linearite_chasles]</strong> Cas particulier : <span class="math">∫ₐᵇ 1 dx = b − a</span> ; et pas de règle pour l'intégrale d'un produit</li>
+      <li><strong>[linearite_chasles]</strong> Chasles : <span class="math">∫ₐᵇ f(x) dx + ∫ᵇᶜ f(x) dx = ∫ₐᶜ f(x) dx</span> (a ≤ b ≤ c) — on découpe en tranches</li>
+      <li><strong>[ordre_encadrement]</strong> Positivité : <span class="math">f ≥ 0</span> et <span class="math">a ≤ b</span> ⇒ <span class="math">∫ₐᵇ f(x) dx ≥ 0</span> — réciproque fausse</li>
+      <li><strong>[ordre_encadrement]</strong> Croissance : <span class="math">f ≤ g</span> sur <span class="math">[a ; b]</span> ⇒ <span class="math">∫ₐᵇ f ≤ ∫ₐᵇ g</span></li>
+      <li><strong>[ordre_encadrement]</strong> Bornes inversées : <span class="math">∫ᵇₐ f(x) dx = −∫ₐᵇ f(x) dx</span> ; <span class="math">∫ₐₐ = 0</span></li>
+      <li><strong>[ordre_encadrement]</strong> Encadrement : <span class="math">m·(b − a) ≤ ∫ₐᵇ f(x) dx ≤ M·(b − a)</span> dès que <span class="math">m ≤ f ≤ M</span></li>
+      <li><strong>[ordre_encadrement]</strong> Exemple type : sur [0 ; 2], x² + 1 encadrée par 1 et 5 donne <span class="math">2 ≤ ∫₀² (x² + 1) dx ≤ 10</span>, valeur exacte 14/3 ≈ 4,67</li>
+      <li><strong>[ordre_encadrement]</strong> Au Bac : nommer la propriété utilisée et encadrer son résultat pour le valider</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 3 terminée !</div>
+    <div class="lecture-end-sub">Termine le chapitre avec la fiche complète : intégration par parties, aires et valeur moyenne</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

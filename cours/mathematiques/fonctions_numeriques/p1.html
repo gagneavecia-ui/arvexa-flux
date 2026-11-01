@@ -1,0 +1,657 @@
+<!-- ============================================================ -->
+<!-- PARTIE 1 : LIMITES ET CROISSANCES COMPARÉES                  -->
+<!-- Chapitre : Fonctions numériques — Terminale D                -->
+<!-- Notion 1 : limite_point — Limite en un point, à l'infini,    -->
+<!--            limites à droite et à gauche                      -->
+<!-- Notion 2 : operations_limites — Opérations, formes           -->
+<!--            indéterminées, factorisation, quantité conjuguée  -->
+<!-- Notion 3 : croissances_comparees — Croissances comparées     -->
+<!--            (e^x, xⁿ, ln x)                                   -->
+<!-- Notion 4 : gendarmes_asymptotes — Théorème des gendarmes,    -->
+<!--            asymptotes horizontale et verticale               -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 01 · Fonctions numériques</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Limites &amp; <em>Croissances comparées</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Vers quelle valeur se dirige une fonction quand sa variable devient immense, ou quand elle s'approche d'un point précis ? La <strong>limite</strong> répond à cette question — c'est le socle de tout le chapitre : continuité, dérivées et études de fonctions s'appuieront dessus. Cette partie installe <strong>4 notions</strong> : la <strong>limite en un point et à l'infini</strong> (avec les limites à droite et à gauche), les <strong>opérations sur les limites</strong> et leurs formes indéterminées, les <strong>croissances comparées</strong>, puis le <strong>théorème des gendarmes</strong> et les <strong>asymptotes</strong>.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 4 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — La pirogue qui s'approche de la rive</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · limite_point — Limite en un point et à l'infini</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · limite_point — Limites à droite et à gauche</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · operations_limites — Opérations sur les limites</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · operations_limites — Formes indéterminées : deux techniques</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 3 · croissances_comparees — Croissances comparées</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 4 · gendarmes_asymptotes — Théorème des gendarmes</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Notion 4 · gendarmes_asymptotes — Asymptotes horizontale et verticale</span></a></li>
+    </ol>
+  </nav>
+  <!-- ===== SECTION 0 : MOTIVATION ===== -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">La pirogue qui s'approche de la rive</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Imagine une pirogue sur le fleuve, à <strong>64 mètres</strong> de la rive. À chaque minute, elle parcourt exactement la <strong>moitié</strong> de la distance qui la sépare de la rive : 32 m, puis 16 m, puis 8 m, puis 4 m… La distance restante devient aussi <em>petite qu'on veut</em>, sans jamais s'annuler. On dit qu'elle <strong>tend vers 0</strong>.
+      </p>
+      <p class="lecture-text">
+        Cette idée — « vers quoi tend une quantité quand une autre varie ? » — est exactement celle de la <strong>limite d'une fonction</strong>. Et ici, pas d'histoire compliquée : ce chapitre est une affaire de <strong>calculs</strong>. Tu vas apprendre à écrire proprement <span class="math">lim(x→a) f(x) = L</span>, à lever les <strong>formes indéterminées</strong> grâce à deux techniques de calcul, et à traduire une limite en <strong>asymptote</strong> sur la courbe.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Les trois questions de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Que vaut</strong> <span class="math">f(x)</span> quand <span class="math">x</span> s'approche d'un point <span class="math">a</span>, ou quand <span class="math">x</span> devient très grand ? (Notion 1)</li>
+            <li><strong>Comment combiner</strong> les limites — et que faire quand le calcul « bloque » ? (Notion 2)</li>
+            <li><strong>Qui l'emporte</strong> entre <span class="math">xⁿ</span>, <span class="math">e^x</span> et <span class="math">ln x</span> à l'infini — et que voit-on alors sur la courbe ? (Notions 3 et 4)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Pour aller plus loin</div>
+        <div class="lecture-aside-content">
+          Le mot « limite » vient du latin <em>limes</em> : la borne, la frontière. Les mathématiciens ont mis plus de deux mille ans — de Zénon d'Élée à Cauchy au XIXᵉ siècle — pour le rendre précis. Aujourd'hui, une ligne de calcul bien rédigée suffit à le manipuler.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== SECTION 1 : LIMITE EN UN POINT, À L'INFINI ===== -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · limite_point</span>
+        <h2 class="lecture-section-title">Limite en un point et à l'infini</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Premier geste du chapitre : donner un sens précis à « <span class="math">f(x)</span> se rapproche de <span class="math">L</span> ». La définition officielle ne parle jamais de la valeur <span class="math">f(a)</span> elle-même — seulement du <em>voisinage</em> du point <span class="math">a</span>.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition — Limite en un point</div>
+          <p>On dit que la fonction <span class="math">f</span> admet pour <strong>limite</strong> le réel <span class="math">L</span> en <span class="math">a</span> lorsque <span class="math">f(x)</span> est aussi proche qu'on veut de <span class="math">L</span> dès que <span class="math">x</span> est assez proche de <span class="math">a</span> (avec <span class="math">x ≠ a</span>). On écrit : <span class="math">lim(x→a) f(x) = L</span>.</p>
+        </div>
+      </div>
+      <p class="lecture-text">Deux remarques essentielles :</p>
+      <ul class="lecture-list-elegant">
+        <li><strong>Le point <span class="math">a</span> lui-même ne compte pas</strong> : la condition est <span class="math">x ≠ a</span>. La fonction peut même être <em>non définie</em> en <span class="math">a</span> et avoir pourtant une limite en <span class="math">a</span> (exemple en section 02).</li>
+        <li><strong>« Aussi proche qu'on veut »</strong> : pour tout écart ε aussi petit soit-il, on peut trouver des <span class="math">x</span> assez proches de <span class="math">a</span> tels que <span class="math">f(x)</span> soit à moins de ε de <span class="math">L</span>. C'est la pirogue : on s'approche « autant qu'on veut ».</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Limite à l'infini</div>
+          <p>On écrit <span class="math">lim(x→+∞) f(x) = L</span> lorsque <span class="math">f(x)</span> est aussi proche qu'on veut de <span class="math">L</span> dès que <span class="math">x</span> est assez <strong>grand</strong> (positivement ou négativement pour <span class="math">x → −∞</span>). De même, <span class="math">lim(x→a) f(x) = +∞</span> signifie que <span class="math">f(x)</span> devient <strong>plus grand que tout nombre fixé d'avance</strong> pour <span class="math">x</span> assez proche de <span class="math">a</span> ; <span class="math">−∞</span> se lit de façon analogue.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ +∞ et −∞ ne sont pas des nombres</div>
+          <p>Écrire <span class="math">lim(x→+∞) f(x) = +∞</span> ne veut pas dire que <span class="math">f</span> « atteint » l'infini : cela décrit une <strong>tendance</strong> — les valeurs de <span class="math">f</span> dépassent n'importe quel nombre fixé pour <span class="math">x</span> assez grand. On ne note jamais <span class="math">f(x) = ∞</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple résolu — deux limites de référence</div>
+        <div class="lecture-example-content"><p>Calculer <span class="math">lim(x→3) f(x)</span> pour <span class="math">f(x) = x² + 2x</span>, puis <span class="math">lim(x→+∞) g(x)</span> pour <span class="math">g(x) = 1/x</span>.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p><strong>Testons des valeurs proches de 3</strong> pour <span class="math">f(x) = x² + 2x</span> : <span class="math">f(2,9) = 8,41 + 5,8 = 14,21</span> ; <span class="math">f(2,99) = 8,9401 + 5,98 = 14,9201</span> ; <span class="math">f(3,01) = 9,0601 + 6,02 = 15,0801</span>. Les valeurs s'approchent de <span class="math">15</span>.</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p><strong>Conclusion pour f</strong> :</p><p><span class="math">lim(x→3) (x² + 2x) = 15</span></p><p>Pour une fonction polynôme, la limite en un point <span class="math">a</span> s'obtient en remplaçant <span class="math">x</span> par <span class="math">a</span> (on justifiera ce réflexe par la continuité, partie 2).</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content"><p><strong>Pour g(x) = 1/x à l'infini</strong> : <span class="math">g(100) = 0,01</span> ; <span class="math">g(10 000) = 0,0001</span> ; <span class="math">g(−10 000) = −0,0001</span>. Les valeurs s'approchent de <span class="math">0</span> des deux côtés :</p><p><span class="math">lim(x→+∞) 1/x = 0</span></p><p><span class="math">lim(x→−∞) 1/x = 0</span></p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content"><p><strong>Comparaison avec x²</strong> : <span class="math">lim(x→+∞) x² = +∞</span> (les valeurs dépassent tout : <span class="math">100² = 10 000</span>, <span class="math">1 000² = 1 000 000</span>…) et <span class="math">lim(x→−∞) x² = +∞</span> car un carré est positif. En revanche <span class="math">lim(x→−∞) x³ = −∞</span> : la puissance impaire garde le signe de <span class="math">x</span>.</p></div>
+        </div>
+      </div>
+      <p class="lecture-text">Les limites de référence à connaître par cœur — chaque limite sur sa ligne :</p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Fonction</th><th>Limite</th><th>Quand</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">xⁿ</span> avec <span class="math">n ≥ 1</span></td><td><span class="math">+∞</span></td><td><span class="math">x → +∞</span></td></tr>
+            <tr><td><span class="math">x²</span> (puissance paire)</td><td><span class="math">+∞</span></td><td><span class="math">x → −∞</span></td></tr>
+            <tr><td><span class="math">x³</span> (puissance impaire)</td><td><span class="math">−∞</span></td><td><span class="math">x → −∞</span></td></tr>
+            <tr><td><span class="math">1/x</span></td><td><span class="math">0</span></td><td><span class="math">x → ±∞</span></td></tr>
+            <tr><td><span class="math">√x</span></td><td><span class="math">+∞</span></td><td><span class="math">x → +∞</span></td></tr>
+            <tr><td><span class="math">ln x</span></td><td><span class="math">+∞</span></td><td><span class="math">x → +∞</span></td></tr>
+            <tr><td><span class="math">e^x</span></td><td><span class="math">0</span></td><td><span class="math">x → −∞</span></td></tr>
+            <tr><td><span class="math">e^x</span></td><td><span class="math">+∞</span></td><td><span class="math">x → +∞</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <!-- ===== SECTION 2 : LIMITES À DROITE ET À GAUCHE ===== -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · limite_point</span>
+        <h2 class="lecture-section-title">Limites à droite et à gauche</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        On peut s'approcher d'un point <span class="math">a</span> par les valeurs <strong>plus grandes</strong> que <span class="math">a</span> (par la droite) ou par les valeurs <strong>plus petites</strong> (par la gauche). Rien ne garantit que la fonction fasse la même chose des deux côtés — surtout près d'une borne du domaine, comme <span class="math">0</span> pour <span class="math">1/x</span>.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition — Limites unilatérales</div>
+          <p><strong>Limite à droite</strong> : <span class="math">lim(x→a⁺) f(x) = L₁</span> signifie que <span class="math">f(x)</span> tend vers <span class="math">L₁</span> quand <span class="math">x</span> s'approche de <span class="math">a</span> par les valeurs <span class="math">x &gt; a</span>. <strong>Limite à gauche</strong> : <span class="math">lim(x→a⁻) f(x) = L₂</span>, avec cette fois <span class="math">x &lt; a</span>.</p>
+          <p><strong>Théorème :</strong> <span class="math">f</span> admet une limite <span class="math">L</span> en <span class="math">a</span> si et seulement si les limites à droite et à gauche existent et sont égales : <span class="math">L₁ = L₂ = L</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple résolu — 1/x en 0 : deux comportements opposés</div>
+        <div class="lecture-example-content"><p>Étudier les limites de <span class="math">f(x) = 1/x</span> en <span class="math">0</span>. La fonction n'est pas définie en <span class="math">0</span> (division par zéro), mais on peut l'approcher des deux côtés.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p><strong>À droite de 0</strong> : <span class="math">f(0,1) = 10</span> ; <span class="math">f(0,01) = 100</span> ; <span class="math">f(0,001) = 1 000</span>. Les valeurs deviennent aussi grandes qu'on veut :</p><p><span class="math">lim(x→0⁺) 1/x = +∞</span></p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p><strong>À gauche de 0</strong> : <span class="math">f(−0,1) = −10</span> ; <span class="math">f(−0,01) = −100</span> ; <span class="math">f(−0,001) = −1 000</span>. Les valeurs deviennent aussi petites (négatives) qu'on veut :</p><p><span class="math">lim(x→0⁻) 1/x = −∞</span></p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content"><p><strong>Conclusion</strong> : les deux limites unilatérales existent mais sont <strong>différentes</strong> (<span class="math">+∞</span> et <span class="math">−∞</span>). Donc <span class="math">f</span> n'admet <strong>pas de limite en 0</strong>. La courbe « explose » de part et d'autre de l'axe des ordonnées.</p></div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple résolu — une limite existe sans que f(a) existe</div>
+        <div class="lecture-example-content"><p>Soit <span class="math">f(x) = (x² − 4)/(x − 2)</span>, définie pour <span class="math">x ≠ 2</span>. Calculer <span class="math">lim(x→2) f(x)</span>.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p><strong>Diagnostic</strong> : en <span class="math">x = 2</span>, le numérateur vaut <span class="math">4 − 4 = 0</span> et le dénominateur vaut <span class="math">0</span> : forme <span class="math">0/0</span>, indéterminée. On factorise le numérateur : <span class="math">x² − 4 = (x − 2)(x + 2)</span>.</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p><strong>Simplification</strong> (valable car <span class="math">x ≠ 2</span>) :</p><p><span class="math">f(x) = ((x − 2)(x + 2))/(x − 2) = x + 2</span></p><p><strong>Conclusion</strong> : la limite existe et vaut <span class="math">4</span>, alors même que <span class="math">f(2)</span> n'existe pas — la définition de la limite ne demande que <span class="math">x ≠ 2</span> :</p><p><span class="math">lim(x→2⁺) f(x) = lim(x→2⁻) f(x) = 4</span></p></div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Réflexe devant une borne du domaine</div>
+          <p>Chaque fois que <span class="math">a</span> est une valeur interdite (dénominateur nul, racine ou logarithme en butée), étudie <strong>toujours les deux limites unilatérales</strong> <span class="math">lim(x→a⁺)</span> et <span class="math">lim(x→a⁻)</span> avant de conclure : c'est elles qui décident de l'existence de la limite et du sens de l'asymptote verticale (section 07).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== SECTION 3 : OPÉRATIONS SUR LES LIMITES ===== -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · operations_limites</span>
+        <h2 class="lecture-section-title">Opérations sur les limites</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Bonne nouvelle : dans la plupart des cas, une limite se calcule <strong>brique par brique</strong>. Si <span class="math">f</span> et <span class="math">g</span> admettent des limites, alors <span class="math">f + g</span>, <span class="math">f × g</span> et <span class="math">f/g</span> (avec <span class="math">g</span> de limite non nulle) en admettent aussi, obtenues par les règles du tableau ci-dessous. Dans ce tableau, « <span class="math">L</span> finie » désigne un réel, « <span class="math">0</span> » une <strong>limite nulle</strong>, et « F.I. » une <strong>forme indéterminée</strong> (traitée en section 04).
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>lim f</th><th>lim g</th><th>lim (f + g)</th><th>lim (f × g)</th><th>lim f/g</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">L finie</span></td><td><span class="math">M finie</span></td><td><span class="math">L + M</span></td><td><span class="math">L × M</span></td><td><span class="math">L/M</span> (si <span class="math">M ≠ 0</span>)</td></tr>
+            <tr><td><span class="math">L finie ≠ 0</span></td><td><span class="math">+∞</span></td><td><span class="math">+∞</span></td><td><span class="math">±∞</span> (signe de <span class="math">L</span>)</td><td><span class="math">0</span></td></tr>
+            <tr><td><span class="math">0</span></td><td><span class="math">+∞</span></td><td><span class="math">+∞</span></td><td><strong>F.I.</strong></td><td><span class="math">0</span></td></tr>
+            <tr><td><span class="math">L finie ≠ 0</span></td><td><span class="math">−∞</span></td><td><span class="math">−∞</span></td><td><span class="math">±∞</span> (signe de <span class="math">L</span>)</td><td><span class="math">0</span></td></tr>
+            <tr><td><span class="math">0</span></td><td><span class="math">−∞</span></td><td><span class="math">−∞</span></td><td><strong>F.I.</strong></td><td><span class="math">0</span></td></tr>
+            <tr><td><span class="math">+∞</span></td><td><span class="math">+∞</span></td><td><span class="math">+∞</span></td><td><span class="math">+∞</span></td><td><strong>F.I.</strong></td></tr>
+            <tr><td><span class="math">−∞</span></td><td><span class="math">−∞</span></td><td><span class="math">−∞</span></td><td><span class="math">+∞</span></td><td><strong>F.I.</strong></td></tr>
+            <tr><td><span class="math">+∞</span></td><td><span class="math">−∞</span></td><td><strong>F.I.</strong></td><td><span class="math">−∞</span></td><td><strong>F.I.</strong></td></tr>
+            <tr><td><span class="math">b finie ≠ 0</span></td><td><span class="math">0</span></td><td><span class="math">b</span></td><td><span class="math">0</span></td><td><span class="math">±∞</span> (signe de <span class="math">b</span> et du côté)</td></tr>
+            <tr><td><span class="math">0</span></td><td><span class="math">0</span></td><td><span class="math">0</span></td><td><span class="math">0</span></td><td><strong>F.I.</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lecture-text">
+        Pour le quotient, retiens aussi la règle des signes : le signe de <span class="math">f/g</span> est le signe du quotient des signes de <span class="math">f</span> et <span class="math">g</span> au voisinage du point étudié. Trois applications directes, en pas à pas :
+      </p>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p><strong>Exemple A (quotient de limites finies)</strong> : <span class="math">lim(x→2) (x² + 1)/(x − 1)</span>.</p><p>Numérateur : <span class="math">4 + 1 = 5</span> ; dénominateur : <span class="math">2 − 1 = 1 ≠ 0</span>.</p><p><span class="math">lim(x→2) (x² + 1)/(x − 1) = 5/1 = 5</span></p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p><strong>Exemple B (produit sans surprise)</strong> : <span class="math">lim(x→+∞) x² × (2 + 1/x)</span>.</p><p>D'une part <span class="math">x² → +∞</span> ; d'autre part <span class="math">2 + 1/x → 2 + 0 = 2 ≠ 0</span>.</p><p>Produit : <span class="math">+∞ × 2 = +∞</span></p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content"><p><strong>Exemple C (somme)</strong> : <span class="math">lim(x→+∞) (2x + 3) + (5/x)</span>.</p><p>Or <span class="math">2x + 3 → +∞</span> et <span class="math">5/x → 0</span>.</p><p>Somme : <span class="math">+∞ + 0 = +∞</span></p></div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Écrire <span class="math">∞ − ∞ = 0</span> ou <span class="math">0 × ∞ = 0</span> est <strong>faux</strong> ! Ces écritures sont des <strong>formes indéterminées</strong> : le résultat n'est pas automatique, il dépend de la fonction. Il faut <em>transformer l'expression</em> (factoriser, simplifier, conjuguée…) avant de conclure — c'est l'objet de la section suivante.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== SECTION 4 : FORMES INDÉTERMINÉES ===== -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · operations_limites</span>
+        <h2 class="lecture-section-title">Formes indéterminées : deux techniques</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">Il existe <strong>quatre</strong> formes indéterminées à connaître par cœur :</p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Forme</th><th>Situation typique</th><th>Technique de levée</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">∞ − ∞</span></td><td>différence de deux grandes quantités</td><td>factoriser, ou quantité conjuguée si racine</td></tr>
+            <tr><td><span class="math">0 × ∞</span></td><td>ex. <span class="math">(x² + 1) × (3/x)</span> en <span class="math">+∞</span></td><td>développer : <span class="math">3x + 3/x → +∞</span></td></tr>
+            <tr><td><span class="math">∞/∞</span></td><td>quotient de polynômes en <span class="math">±∞</span></td><td>factoriser le terme dominant</td></tr>
+            <tr><td><span class="math">0/0</span></td><td>dénominateur nul au point visé</td><td>factoriser, ou quantité conjuguée si racine</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Technique 1 — Factoriser le terme dominant</div>
+        <div class="lecture-rule-body">
+          En <span class="math">±∞</span>, factorise le terme de plus haut degré au numérateur <em>et</em> au dénominateur : les termes en <span class="math">1/x</span>, <span class="math">1/x²</span>… tendent vers <span class="math">0</span> et disparaissent. Pour un <span class="math">∞ − ∞</span> polynomial, mets le facteur commun en évidence : <span class="math">x³ − x² = x²(x − 1) → +∞</span> en <span class="math">+∞</span>.
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple résolu — une limite ∞/∞ par factorisation</div>
+        <div class="lecture-example-content"><p>Calculer <span class="math">lim(x→+∞) (3x² − 5x + 2)/(2x² + x − 7)</span>. Forme <span class="math">∞/∞</span> : les deux polynômes tendent vers <span class="math">+∞</span>.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p><strong>On factorise le terme dominant</strong> <span class="math">x²</span> au numérateur et au dénominateur :</p><p><span class="math">(3x² − 5x + 2)/(2x² + x − 7) = (x²(3 − 5/x + 2/x²))/(x²(2 + 1/x − 7/x²))</span></p><p><span class="math">= (3 − 5/x + 2/x²)/(2 + 1/x − 7/x²)</span></p><p>Quand <span class="math">x → +∞</span> : <span class="math">5/x → 0</span>, <span class="math">2/x² → 0</span>, <span class="math">1/x → 0</span>, <span class="math">7/x² → 0</span> :</p><p><span class="math">= (3 − 0 + 0)/(2 + 0 − 0) = 3/2</span></p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p><strong>Conclusion — le résultat sur sa propre ligne</strong> :</p><p><span class="math">lim(x→+∞) (3x² − 5x + 2)/(2x² + x − 7) = 3/2</span></p><p>Seul compte le rapport des coefficients dominants, 3 et 2.</p></div>
+        </div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Technique 2 — La quantité conjuguée</div>
+        <div class="lecture-rule-body">
+          Dès qu'une <strong>racine carrée</strong> est en jeu dans une forme <span class="math">0/0</span> ou <span class="math">∞ − ∞</span>, multiplie numérateur et dénominateur par la conjuguée. L'identité clé :
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">(√a − b)(√a + b) = a − b²</div>
+        <div class="lecture-formula-desc">La conjuguée fait disparaître la racine du numérateur (ou du dénominateur) : c'est l'outil standard des limites avec √.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple résolu — conjuguée pour une forme 0/0</div>
+        <div class="lecture-example-content"><p>Calculer <span class="math">lim(x→0) (√(x + 1) − 1)/x</span>.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p><strong>Diagnostic</strong> : en <span class="math">x = 0</span>, le numérateur vaut <span class="math">√1 − 1 = 0</span> et le dénominateur vaut <span class="math">0</span> : forme <span class="math">0/0</span>, indéterminée.</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p><strong>Conjuguée</strong> : on multiplie haut et bas par <span class="math">√(x + 1) + 1</span>, le numérateur se simplifie :</p><p><span class="math">(√(x + 1) − 1)/x = ((√(x + 1) − 1)(√(x + 1) + 1))/(x(√(x + 1) + 1))</span></p><p><span class="math">or (√(x + 1) − 1)(√(x + 1) + 1) = (x + 1) − 1 = x</span></p><p><span class="math">= x/(x(√(x + 1) + 1)) = 1/(√(x + 1) + 1)</span> (pour <span class="math">x ≠ 0</span>)</p><p>La racine a disparu : plus aucune forme indéterminée.</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content"><p><strong>Conclusion</strong> : quand <span class="math">x → 0</span>, <span class="math">√(x + 1) → 1</span>, donc :</p><p><span class="math">lim(x→0) (√(x + 1) − 1)/x = 1/(1 + 1) = 1/2</span></p><p>Forme indéterminée levée.</p></div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple résolu — conjuguée pour une forme ∞ − ∞</div>
+        <div class="lecture-example-content"><p>Calculer <span class="math">lim(x→+∞) (√(x² + 3x) − x)</span>. Les deux termes tendent vers <span class="math">+∞</span> : forme <span class="math">∞ − ∞</span>.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p><strong>Conjuguée</strong> : on multiplie et on divise par <span class="math">√(x² + 3x) + x</span> :</p><p><span class="math">√(x² + 3x) − x = ((√(x² + 3x) − x)(√(x² + 3x) + x))/(√(x² + 3x) + x)</span></p><p><span class="math">or (√(x² + 3x))² − x² = (x² + 3x) − x² = 3x</span></p><p><span class="math">= 3x/(√(x² + 3x) + x)</span></p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p><strong>On factorise x</strong> (avec <span class="math">x &gt; 0</span>, donc <span class="math">√(x² + 3x) = x√(1 + 3/x)</span>) :</p><p><span class="math">3x/(√(x² + 3x) + x) = 3x/(x(√(1 + 3/x) + 1)) = 3/(√(1 + 3/x) + 1)</span></p><p><strong>Conclusion</strong> : <span class="math">3/x → 0</span> donc <span class="math">√(1 + 3/x) → 1</span>, et :</p><p><span class="math">lim(x→+∞) (√(x² + 3x) − x) = 3/(1 + 1) = 3/2</span></p><p>Le « combat » <span class="math">∞ − ∞</span> se solde par un nombre fini : <span class="math">3/2</span>.</p></div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Choisir la bonne arme</div>
+          <p>Pas de racine → <strong>factorise le terme dominant</strong>. Racine présente → <strong>quantité conjuguée</strong>. Multiplier par la conjuguée d'un polynôme sans racine ne sert à rien et complique le calcul.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== SECTION 5 : CROISSANCES COMPARÉES ===== -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · croissances_comparees</span>
+        <h2 class="lecture-section-title">Croissances comparées</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        À l'infini, les fonctions de référence ne grandissent pas toutes à la même vitesse. Les <strong>croissances comparées</strong> fixent la hiérarchie une fois pour toutes — et permettent de trancher des formes indéterminées sans calcul lourd.
+      </p>
+
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La hiérarchie des puissances à l'infini</div>
+        <div class="lecture-formula-hero-main">lim(x→+∞) e^x/xⁿ = +∞<br>lim(x→+∞) xⁿ/e^x = 0<br>lim(x→+∞) (ln x)/x = 0</div>
+        <div class="lecture-formula-hero-desc">La hiérarchie <span class="math">e^x ≫ xⁿ ≫ ln x</span> : à l'infini, l'exponentielle l'emporte sur toute puissance, qui l'emporte sur le logarithme. Compare les VITESSES de croissance, jamais les valeurs.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">
+          lim(x→+∞) e^x/xⁿ = +∞<br>
+          lim(x→+∞) x·e^(−x) = 0<br>
+          lim(x→+∞) (ln x)/x = 0<br>
+          lim(x→0⁺) x·ln x = 0
+        </div>
+        <div class="lecture-formula-desc">À l'infini, <strong>l'exponentielle l'emporte sur toute puissance xⁿ (n ≥ 1)</strong>, qui l'emporte elle-même sur le logarithme : <span class="math">e^x ≫ xⁿ ≫ ln x</span>. Et près de 0, <span class="math">x·ln x → 0</span> : le logarithme « perd » aussi en 0⁺. Retiens la phrase : l'exponentielle domine, le logarithme est dominé.</div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Croissances comparées : e^x domine xⁿ qui domine ln x à l'infini">
+          <text x="260" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">CROISSANCES COMPARÉES EN +∞ : e^x ≫ xⁿ ≫ ln x</text>
+          <line x1="60" y1="252" x2="494" y2="252" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="500,252 490,248 490,256" style="fill:var(--text-dim)"/>
+          <line x1="88" y1="268" x2="88" y2="42" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="88,36 84,46 92,46" style="fill:var(--text-dim)"/>
+          <text x="506" y="256" style="fill:var(--text-dim)" font-size="11" font-family="Inter">x</text>
+          <text x="76" y="48" style="fill:var(--text-dim)" font-size="11" font-family="Inter">y</text>
+          <text x="74" y="266" style="fill:var(--text-dim)" font-size="11" font-family="Inter">O</text>
+          <line x1="366" y1="64" x2="366" y2="252" style="stroke:var(--text-dim)" stroke-width="1" stroke-dasharray="4 4"/>
+          <text x="372" y="60" style="fill:var(--text-dim)" font-size="10" font-family="Inter">à partir d'ici, e^x domine</text>
+          <path d="M 112 262 C 190 238, 280 228, 380 222 C 440 219, 475 217, 498 215" style="fill:none;stroke:var(--text-dim)" stroke-width="2.5"/>
+          <text x="452" y="206" style="fill:var(--text-dim)" font-size="12" font-weight="700" font-family="Inter">ln x</text>
+          <path d="M 110 250 C 210 247, 300 240, 360 214 C 400 190, 460 150, 498 118" style="fill:none;stroke:var(--info)" stroke-width="2.5"/>
+          <text x="468" y="140" style="fill:var(--info)" font-size="12" font-weight="700" font-family="Inter">xⁿ</text>
+          <path d="M 110 251 C 240 249, 310 246, 352 230 C 380 218, 398 150, 410 92 C 416 62, 420 44, 422 28" style="fill:none;stroke:var(--accent-bright)" stroke-width="2.5"/>
+          <text x="430" y="38" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">e^x</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Allure des trois croissances en <span class="math">+∞</span> : la puissance <span class="math">xⁿ</span> finit par dépasser <span class="math">ln x</span>, puis l'exponentielle <span class="math">e^x</span> dépasse tout à partir du seuil indiqué — la hiérarchie <span class="math">e^x ≫ xⁿ ≫ ln x</span> se lit sur le dessin.</figcaption>
+      </figure>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Ne pas confondre les deux limites avec ln</div>
+          <p><span class="math">lim(x→0⁺) x·ln x = 0</span> (près de zéro, le produit s'écrase), mais <span class="math">lim(x→+∞) x·ln x = +∞</span> (à l'infini, la puissance <span class="math">x</span> l'emporte et pousse le produit vers <span class="math">+∞</span>). Même écriture, deux points différents, deux résultats opposés : vérifie toujours <em>le point</em> où la limite est prise.</p>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemples résolus — trancher deux formes indéterminées</div>
+        <div class="lecture-example-content"><p>Calculer <span class="math">lim(x→+∞) x³/e^x</span>, puis <span class="math">lim(x→+∞) (x·ln x)/x²</span>. Les deux sont des formes <span class="math">∞/∞</span>.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p><strong>Première limite</strong> : <span class="math">x³/e^x</span> oppose une puissance à l'exponentielle. Par croissances comparées, l'exponentielle l'emporte :</p><p><span class="math">lim(x→+∞) x³/e^x = 0</span></p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p><strong>Deuxième limite</strong> : on simplifie d'abord l'écriture — <span class="math">(x·ln x)/x² = (ln x)/x</span> pour <span class="math">x &gt; 0</span>.</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content"><p><strong>Conclusion</strong> : par croissances comparées, <span class="math">lim(x→+∞) (ln x)/x = 0</span>, donc :</p><p><span class="math">lim(x→+∞) (x·ln x)/x² = 0</span></p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== SECTION 6 : THÉORÈME DES GENDARMES ===== -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · gendarmes_asymptotes</span>
+        <h2 class="lecture-section-title">Théorème des gendarmes</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Quand une fonction est <strong>coincée</strong> entre deux autres qui convergent vers la même valeur, elle n'a pas le choix : elle converge aussi. C'est le théorème des gendarmes — l'outil parfait quand la limite de <span class="math">f</span> résiste au calcul direct (souvent à cause d'un <span class="math">sin x</span> ou <span class="math">cos x</span>, qui oscillent sans limite propre).
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📘 Théorème des gendarmes (énoncé exact)</div>
+          <p><strong>Si</strong>, au voisinage du point <span class="math">a</span> (ou pour <span class="math">x</span> assez grand), on a <span class="math">g(x) ≤ f(x) ≤ h(x)</span>, <strong>et si</strong> <span class="math">lim g = lim h = L</span> où <span class="math">L</span> est un <strong>réel</strong>, <strong>alors</strong> <span class="math">lim f = L</span>.</p>
+          <p><strong>Hypothèses à vérifier :</strong> (1) l'encadrement est valable sur un voisinage du point (ou au-delà d'un certain seuil à l'infini) ; (2) les deux limites « gendarmes » existent, sont <strong>égales</strong> et <strong>finies</strong>.</p>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple résolu — sin(x)/x en +∞</div>
+        <div class="lecture-example-content"><p>Calculer <span class="math">lim(x→+∞) sin(x)/x</span>. Impossible de séparer le calcul : <span class="math">sin x</span> oscille entre <span class="math">−1</span> et <span class="math">1</span> sans avoir de limite à l'infini.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p><strong>Encadrement de base</strong> : pour tout réel <span class="math">x</span>, <span class="math">−1 ≤ sin x ≤ 1</span>.</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p><strong>Division par x &gt; 0</strong> (le sens des inégalités est conservé) :</p><p><span class="math">−1/x ≤ sin(x)/x ≤ 1/x</span></p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content"><p><strong>Limite des gendarmes</strong> : <span class="math">lim(x→+∞) (−1/x) = 0</span> et <span class="math">lim(x→+∞) 1/x = 0</span> — les deux gendarmes convergent vers la même limite finie <span class="math">0</span>.</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content"><p><strong>Conclusion</strong> : par le théorème des gendarmes,</p><p><span class="math">lim(x→+∞) sin(x)/x = 0</span></p></div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ L = +∞ ? Le théorème ne s'applique pas tel quel</div>
+          <p>L'énoncé exige des gendarmes de <strong>limite réelle</strong>. Si <span class="math">g(x) ≤ f(x)</span> avec <span class="math">lim g = +∞</span>, on peut seulement conclure que <span class="math">lim f = +∞</span> (comparaison directe) — mais un encadrement par deux fonctions qui divergent ne détermine rien.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== SECTION 7 : ASYMPTOTES ===== -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · gendarmes_asymptotes</span>
+        <h2 class="lecture-section-title">Asymptotes horizontale et verticale</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Les limites que l'on vient de calculer ont une <strong>lecture graphique</strong> directe : elles tracent des droites que la courbe suit ou fuit. C'est le premier bénéfice concret du calcul de limites : deux lignes de calcul → deux droites sur le dessin.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définitions — Asymptotes</div>
+          <p><strong>Asymptote horizontale :</strong> si <span class="math">lim(x→+∞) f(x) = b</span> (ou <span class="math">lim(x→−∞) f(x) = b</span>) avec <span class="math">b</span> réel, alors la droite d'équation <span class="math">y = b</span> est asymptote horizontale à la courbe de <span class="math">f</span> (en <span class="math">+∞</span> et/ou en <span class="math">−∞</span>).</p>
+          <p><strong>Asymptote verticale :</strong> si <span class="math">lim(x→a⁺) f(x) = ±∞</span> ou <span class="math">lim(x→a⁻) f(x) = ±∞</span>, alors la droite d'équation <span class="math">x = a</span> est asymptote verticale à la courbe.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La traduction limite → droite</div>
+        <div class="lecture-formula-hero-main">
+          lim(x→±∞) f(x) = b ⇒ asymptote y = b<br>
+          lim(x→a) f(x) = ±∞ ⇒ asymptote x = a
+        </div>
+        <div class="lecture-formula-hero-desc">Horizontale : la courbe se colle à une hauteur fixe à l'infini. Verticale : la courbe explose près d'une valeur interdite.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple résolu complet — les deux asymptotes d'une même fonction</div>
+        <div class="lecture-example-content"><p>Soit <span class="math">f(x) = (2x + 1)/(x − 3)</span>. Déterminer le domaine, puis toutes les asymptotes de la courbe.</p></div>
+      </div>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <div class="lecture-step-number">1</div>
+          <div class="lecture-step-content"><p><strong>Domaine</strong> : le dénominateur s'annule en <span class="math">3</span>, donc <span class="math">D = ℝ ∖ {3}</span>. Le point <span class="math">3</span> est le candidat asymptote verticale.</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">2</div>
+          <div class="lecture-step-content"><p><strong>Limites en 3</strong> : le numérateur tend vers <span class="math">2 × 3 + 1 = 7 ≠ 0</span>. Chaque côté sur sa ligne :</p><p><span class="math">x − 3 → 0⁺ donc lim(x→3⁺) f(x) = 7/0⁺ = +∞</span></p><p><span class="math">x − 3 → 0⁻ donc lim(x→3⁻) f(x) = 7/0⁻ = −∞</span></p><p><strong>Bilan :</strong> la droite <span class="math">x = 3</span> est asymptote verticale.</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">3</div>
+          <div class="lecture-step-content"><p><strong>Limites en ±∞</strong> : forme <span class="math">∞/∞</span> → on factorise <span class="math">x</span> :</p><p><span class="math">f(x) = (x(2 + 1/x))/(x(1 − 3/x)) = (2 + 1/x)/(1 − 3/x)</span></p><p>Quand <span class="math">x → ±∞</span>, <span class="math">1/x → 0</span> et <span class="math">3/x → 0</span>, donc :</p><p><span class="math">lim(x→±∞) f(x) = (2 + 0)/(1 − 0) = 2</span></p><p><strong>Bilan :</strong> la droite <span class="math">y = 2</span> est asymptote horizontale (en <span class="math">+∞</span> et en <span class="math">−∞</span>).</p></div>
+        </div>
+        <div class="lecture-step">
+          <div class="lecture-step-number">4</div>
+          <div class="lecture-step-content"><p><strong>Bilan complet</strong> : la courbe admet l'asymptote verticale <span class="math">x = 3</span> (branche montante à droite, descendante à gauche) et l'asymptote horizontale <span class="math">y = 2</span> des deux côtés.</p></div>
+        </div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbe de f avec asymptote verticale x = 3 et asymptote horizontale y = 2">
+          <text x="260" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">ALLURE DE LA COURBE : f(x) = (2x + 1)/(x − 3)</text>
+          <line x1="40" y1="180" x2="494" y2="180" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="500,180 490,176 490,184" style="fill:var(--text-dim)"/>
+          <line x1="132" y1="252" x2="132" y2="42" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polygon points="132,36 128,46 136,46" style="fill:var(--text-dim)"/>
+          <text x="506" y="184" style="fill:var(--text-dim)" font-size="11" font-family="Inter">x</text>
+          <text x="120" y="42" style="fill:var(--text-dim)" font-size="11" font-family="Inter">y</text>
+          <text x="120" y="196" style="fill:var(--text-dim)" font-size="11" font-family="Inter">O</text>
+          <line x1="270" y1="40" x2="270" y2="252" style="stroke:var(--info)" stroke-width="1.5" stroke-dasharray="6 5"/>
+          <line x1="45" y1="152" x2="500" y2="152" style="stroke:var(--info)" stroke-width="1.5" stroke-dasharray="6 5"/>
+          <text x="276" y="264" style="fill:var(--info)" font-size="12" font-weight="700" font-family="Inter">x = 3</text>
+          <text x="446" y="146" style="fill:var(--info)" font-size="12" font-weight="700" font-family="Inter">y = 2</text>
+          <path d="M 45 174 C 90 178, 140 184, 186 202 C 216 215, 236 242, 247 292" style="fill:none;stroke:var(--accent-bright)" stroke-width="2.5"/>
+          <path d="M 289 6 C 297 34, 305 44, 316 54 C 335 82, 352 98, 370 106 C 410 122, 452 128, 498 133" style="fill:none;stroke:var(--accent-bright)" stroke-width="2.5"/>
+          <text x="60" y="164" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">Cf</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Allure de la courbe de <span class="math">f(x) = (2x + 1)/(x − 3)</span> : la branche de gauche part de <span class="math">y = 2</span> (qu'elle approche par dessous) et plonge vers <span class="math">−∞</span> le long de <span class="math">x = 3</span> ; la branche de droite descend de <span class="math">+∞</span> et se colle à <span class="math">y = 2</span> par-dessus la ligne.</figcaption>
+      </figure>
+      <div class="lecture-vocab-grid">
+        <div class="vocab-card">
+          <div class="vocab-symbol">🎯</div>
+          <div class="vocab-name">Limite</div>
+          <div class="vocab-notation">Valeur dont f(x) s'approche autant qu'on veut</div>
+        </div>
+        <div class="vocab-card vocab-card-info">
+          <div class="vocab-symbol">🚧</div>
+          <div class="vocab-name">Forme indéterminée</div>
+          <div class="vocab-notation">∞ − ∞, 0 × ∞, ∞/∞, 0/0 : à transformer avant de conclure</div>
+        </div>
+        <div class="vocab-card vocab-card-success">
+          <div class="vocab-symbol">📏</div>
+          <div class="vocab-name">Asymptote horizontale</div>
+          <div class="vocab-notation">lim(x→±∞) f(x) = b → droite y = b</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">🧗</div>
+          <div class="vocab-name">Asymptote verticale</div>
+          <div class="vocab-notation">lim(x→a) f(x) = ±∞ → droite x = a</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — <span class="math">lim(x→+∞) (5x² + 3x)/(x² + 1)</span> vaut :</p>
+      <div class="lecture-quiz-options">
+        <span>A) 0</span>
+        <span>B) 5</span>
+        <span>C) +∞</span>
+        <span>D) 3</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) 5.</strong> Forme <span class="math">∞/∞</span> : on factorise le terme dominant, <span class="math">(5x² + 3x)/(x² + 1) = (5 + 3/x)/(1 + 1/x²)</span> → <span class="math">5/1 = 5</span>, car <span class="math">3/x → 0</span> et <span class="math">1/x² → 0</span>.</div>
+      </details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — <span class="math">lim(x→0) (√(x + 4) − 2)/x</span> vaut :</p>
+      <div class="lecture-quiz-options">
+        <span>A) 0</span>
+        <span>B) 1/4</span>
+        <span>C) 1/2</span>
+        <span>D) +∞</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) 1/4.</strong> Forme <span class="math">0/0</span> : conjuguée <span class="math">√(x + 4) + 2</span>. Le numérateur devient <span class="math">(x + 4) − 4 = x</span>, d'où <span class="math">1/(√(x + 4) + 2)</span> → <span class="math">1/(2 + 2) = 1/4</span>.</div>
+      </details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Si <span class="math">lim(x→+∞) f(x) = 3</span>, alors la courbe de f admet :</p>
+      <div class="lecture-quiz-options">
+        <span>A) une asymptote verticale x = 3</span>
+        <span>B) une asymptote horizontale y = 3</span>
+        <span>C) aucune asymptote</span>
+        <span>D) une asymptote y = x + 3</span>
+      </div>
+      <details>
+        <summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) une asymptote horizontale y = 3.</strong> Une limite finie <span class="math">b</span> en <span class="math">±∞</span> donne l'asymptote horizontale <span class="math">y = b</span>. L'asymptote verticale <span class="math">x = a</span> correspondrait au contraire à une limite infinie en <span class="math">a</span>.</div>
+      </details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[limite_point]</strong> <span class="math">lim(x→a) f(x) = L</span> : <span class="math">f(x)</span> s'approche autant qu'on veut de <span class="math">L</span> quand <span class="math">x</span> s'approche de <span class="math">a</span> — la valeur <span class="math">f(a)</span> n'intervient pas (<span class="math">x ≠ a</span>)</li>
+      <li><strong>[limite_point]</strong> Limite en <span class="math">a</span> ⇔ limites à droite (<span class="math">x→a⁺</span>) et à gauche (<span class="math">x→a⁻</span>) existent et sont égales</li>
+      <li><strong>[limite_point]</strong> Références : <span class="math">lim(x→±∞) 1/x = 0</span> ; <span class="math">lim(x→+∞) xⁿ = +∞</span> ; <span class="math">lim(x→−∞) x² = +∞</span> ; <span class="math">lim(x→−∞) x³ = −∞</span></li>
+      <li><strong>[operations_limites]</strong> Somme, produit, quotient : on combine les limites — sauf les 4 formes indéterminées : <span class="math">∞ − ∞</span>, <span class="math">0 × ∞</span>, <span class="math">∞/∞</span>, <span class="math">0/0</span></li>
+      <li><strong>[operations_limites]</strong> <span class="math">∞/∞</span> de polynômes : factoriser le terme dominant ; <span class="math">0/0</span> ou <span class="math">∞ − ∞</span> avec racine : quantité conjuguée <span class="math">(√a − b)(√a + b) = a − b²</span></li>
+      <li><strong>[croissances_comparees]</strong> En <span class="math">+∞</span> : <span class="math">e^x/xⁿ → +∞</span>, <span class="math">x·e^(−x) → 0</span>, <span class="math">(ln x)/x → 0</span> ; en <span class="math">0⁺</span> : <span class="math">x·ln x → 0</span>. L'exponentielle domine, le logarithme est dominé</li>
+      <li><strong>[gendarmes_asymptotes]</strong> Gendarmes : <span class="math">g ≤ f ≤ h</span> et <span class="math">lim g = lim h = L</span> réel ⇒ <span class="math">lim f = L</span></li>
+      <li><strong>[gendarmes_asymptotes]</strong> <span class="math">lim(x→±∞) f(x) = b</span> (réel) ⇒ asymptote horizontale <span class="math">y = b</span></li>
+      <li><strong>[gendarmes_asymptotes]</strong> <span class="math">lim(x→a) f(x) = ±∞</span> ⇒ asymptote verticale <span class="math">x = a</span> (penser aux deux limites unilatérales)</li>
+      <li><strong>[operations_limites]</strong> Une forme indéterminée n'a pas de réponse automatique : transformer l'écriture d'abord, conclure ensuite</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 1 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie 2 : continuité, TVI et théorème de la bijection</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

@@ -1,0 +1,532 @@
+<!-- ============================================================ -->
+<!-- PARTIE 4 : FICHE COMPLÈTE — LOI BINOMIALE, LOI NORMALE &      -->
+<!--            APPLICATIONS                                       -->
+<!-- Notion 1 : bernoulli — Épreuve et schéma de Bernoulli         -->
+<!-- Notion 2 : binomiale — B(n ; p), P(X = k), E(X) = np, V(X)    -->
+<!-- Notion 3 : normale — N(0 ; 1), table, centrage-réduction      -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 04 · Fiche complète de révision</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Loi binomiale, loi normale &amp; <em>applications au Bac</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Cette fiche rassemble les deux grandes lois du programme de Terminale D. D'abord la <strong>loi binomiale</strong> <span class="math">B(n ; p)</span>, qui compte les succès dans la répétition d'épreuves de Bernoulli. Ensuite la <strong>loi normale</strong>, la fameuse « courbe en cloche », avec sa version centrée réduite <span class="math">N(0 ; 1)</span> et la technique du <strong>centrage-réduction</strong>. Le tout se termine par un <strong>tableau de synthèse</strong> et les <strong>réflexes Bac</strong> : c'est la page à relire la veille de l'épreuve.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 30 min</span>
+      <span class="lecture-hero-meta-item">🧮 3 notions</span>
+      <span class="lecture-hero-meta-item">📊 6 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette fiche</span>
+      <span class="lecture-toc-count">3 notions · 6 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Mode d'emploi — Prérequis et formules vitales</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · bernoulli — Épreuve et schéma de Bernoulli</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 2 · binomiale — La loi B(n ; p) : formules et exemples calculés</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 3 · normale — La loi N(0 ; 1) : courbe en cloche et table</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 3 · normale — Centrage-réduction : de N(μ ; σ) à la table</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Synthèse — Tableau final et réflexes Bac</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MODE D'EMPLOI -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Fiche</span>
+        <h2 class="lecture-section-title">Mode d'emploi et formules vitales</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Cette fiche suppose connues les parties 1 à 3 : <strong>loi de probabilité</strong> (tableau et <span class="math">Σpᵢ = 1</span>), <strong>espérance</strong> <span class="math">E(X) = Σpᵢ·xᵢ</span>, <strong>variance</strong> <span class="math">V(X) = E(X²) − (E(X))²</span> et <strong>écart-type</strong> <span class="math">σ(X) = √V(X)</span>. Ici, on passe aux deux grandes familles de lois <em>prêtes à l'emploi</em> : au lieu de rebâtir un tableau à chaque exercice, on reconnaît la situation et on applique les formules du catalogue.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Les 4 formules à savoir par cœur avant de continuer</div>
+          <ul class="lecture-list">
+            <li>Loi binomiale : <span class="math">P(X = k) = C(n ; k) × pᵏ × (1 − p)^(n − k)</span></li>
+            <li>Ses paramètres de position et de dispersion : <span class="math">E(X) = n × p</span> et <span class="math">V(X) = n × p × (1 − p)</span></li>
+            <li>Centrage-réduction (loi normale) : <span class="math">Z = (X − μ)/σ</span></li>
+            <li>Lecture de la table : <span class="math">Φ(a) = P(Z ≤ a)</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Comment travailler cette fiche</div>
+        <div class="lecture-rule-body">
+          Trois passages conseillés : <strong>(1)</strong> lire les définitions des sections 01 et 02 et reproduire les formules de mémoire ; <strong>(2)</strong> refaire sur papier les exemples calculés <em>sans</em> regarder les étapes, puis comparer ; <strong>(3)</strong> relire uniquement le tableau de synthèse et les réflexes Bac de la section 05 la veille de l'épreuve.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : ÉPREUVE ET SCHÉMA DE BERNOULLI -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · bernoulli</span>
+        <h2 class="lecture-section-title">Épreuve et schéma de Bernoulli</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tout commence par la plus petite des expériences aléatoires : celle qui n'a que <strong>deux issues</strong>. C'est la brique élémentaire de la loi binomiale.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition officielle — Épreuve de Bernoulli</div>
+          <p>Une <strong>épreuve de Bernoulli</strong> est une expérience aléatoire comportant exactement deux issues : le <strong>succès</strong>, de probabilité <span class="math">p</span>, et l'<strong>échec</strong>, de probabilité <span class="math">1 − p</span>. La variable aléatoire associée vaut <span class="math">1</span> en cas de succès et <span class="math">0</span> en cas d'échec ; son espérance vaut <span class="math">p</span> et sa variance <span class="math">p × (1 − p)</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition officielle — Schéma de Bernoulli</div>
+          <p>Un <strong>schéma de Bernoulli</strong> est la répétition de <span class="math">n</span> épreuves de Bernoulli <strong>identiques</strong> (même probabilité <span class="math">p</span> de succès) et <strong>indépendantes</strong> (le résultat d'une épreuve ne modifie pas les probabilités des suivantes).</p>
+        </div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><strong>Lancer 5 fois une pièce équilibrée</strong> : schéma de Bernoulli — <span class="math">n = 5</span>, succès « pile », <span class="math">p = 0,5</span>.</li>
+        <li><strong>Lancer 10 fois un dé</strong> et compter les « 6 » : schéma de Bernoulli — <span class="math">n = 10</span>, succès « obtenir 6 », <span class="math">p = 1/6</span>.</li>
+        <li><strong>Tirer simultanément 3 boules d'une urne</strong> : <strong>pas</strong> un schéma de Bernoulli — il n'y a pas de répétition d'épreuves à deux issues (c'est un tirage global).</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Les deux conditions à vérifier avant tout</div>
+          <p>Avant d'annoncer « loi binomiale », contrôle <strong>toujours</strong> : <em>(1)</em> chaque épreuve a-t-elle bien deux issues avec la même probabilité <span class="math">p</span> à chaque répétition ? <em>(2)</em> les épreuves sont-elles indépendantes (tirages <strong>avec remise</strong>, ou lancers successifs, ou population assez grande pour que le retrait ne change pas <span class="math">p</span>) ? Si une seule condition manque, les formules de la section 02 ne s'appliquent pas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : LA LOI BINOMIALE B(n ; p) -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · binomiale</span>
+        <h2 class="lecture-section-title">La loi B(n ; p) : formules et exemples calculés</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Dans un schéma de Bernoulli à <span class="math">n</span> épreuves, on note <span class="math">X</span> le <strong>nombre de succès</strong> obtenus. Cette variable aléatoire prend ses valeurs dans <span class="math">{0 ; 1 ; 2 ; … ; n}</span> et suit la <strong>loi binomiale de paramètres n et p</strong>, notée <span class="math">B(n ; p)</span>.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule majeure du chapitre</div>
+        <div class="lecture-formula-hero-main">P(X = k) = C(n ; k) × pᵏ × (1 − p)^(n − k)</div>
+        <div class="lecture-formula-hero-desc"><span class="math">C(n ; k)</span> compte les façons de placer les <span class="math">k</span> succès parmi les <span class="math">n</span> épreuves ; <span class="math">pᵏ</span> pour les <span class="math">k</span> succès ; <span class="math">(1 − p)^(n − k)</span> pour les <span class="math">n − k</span> échecs.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">E(X) = n × p</div>
+        <div class="lecture-formula-desc">Espérance toute prête : pas besoin de refaire le tableau complet de la loi. Contrôle utile : la somme des <span class="math">P(X = k)</span> pour <span class="math">k</span> de <span class="math">0</span> à <span class="math">n</span> vaut <span class="math">1</span>.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">V(X) = n × p × (1 − p)</div>
+        <div class="lecture-formula-desc">Variance toute prête ; l'écart-type s'ensuit : <span class="math">σ(X) = √(n × p × (1 − p))</span>.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 1 — Quatre lancers d'une pièce équilibrée</div>
+        <div class="lecture-example-content">
+          <p>On lance 4 fois une pièce équilibrée et on note <span class="math">X</span> le nombre de piles : <span class="math">X</span> suit la loi <span class="math">B(4 ; 0,5)</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step">
+              <div class="lecture-step-number">1</div>
+              <div class="lecture-step-content"><p><strong>Reconnaître.</strong> 4 répétitions indépendantes d'une épreuve à deux issues, <span class="math">p = 0,5</span> à chaque lancer : bien <span class="math">B(4 ; 0,5)</span>.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">2</div>
+              <div class="lecture-step-content"><p><strong>P(X = 2).</strong> On applique la formule :</p>
+                <p><span class="math">P(X = 2) = C(4 ; 2) × (0,5)² × (0,5)²</span></p>
+                <p><span class="math">P(X = 2) = 6 × 0,0625</span></p>
+                <p><span class="math">P(X = 2) = 0,375</span></p>
+                <p>Car <span class="math">C(4 ; 2) = 6</span> et <span class="math">(0,5)⁴ = 0,0625</span>.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">3</div>
+              <div class="lecture-step-content"><p><strong>Les extrêmes.</strong> <span class="math">P(X = 0) = (0,5)⁴ = 0,0625</span> (aucun pile : que des faces) et <span class="math">P(X = 4) = (0,5)⁴ = 0,0625</span>.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">4</div>
+              <div class="lecture-step-content"><p><strong>Espérance et variance.</strong></p>
+                <p><span class="math">E(X) = 4 × 0,5</span></p>
+                <p><span class="math">E(X) = 2</span></p>
+                <p><span class="math">V(X) = 4 × 0,5 × 0,5</span></p>
+                <p><span class="math">V(X) = 1</span></p>
+                <p>Donc <span class="math">σ(X) = 1</span>. En moyenne, 2 piles sur 4 lancers — logique.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 2 — Cinq lancers d'un dé : compter les « 6 »</div>
+        <div class="lecture-example-content">
+          <p>On lance 5 fois un dé équilibré et on note <span class="math">X</span> le nombre de « 6 » : <span class="math">X</span> suit la loi <span class="math">B(5 ; 1/6)</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step">
+              <div class="lecture-step-number">1</div>
+              <div class="lecture-step-content"><p><strong>Aucun six.</strong></p>
+                <p><span class="math">P(X = 0) = C(5 ; 0) × (1/6)⁰ × (5/6)⁵</span></p>
+                <p><span class="math">P(X = 0) = (5/6)⁵ ≈ 0,402</span></p>
+                <p>Il est plus probable de ne tirer <em>aucun</em> six qu'un six, car <span class="math">p</span> est petit.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">2</div>
+              <div class="lecture-step-content"><p><strong>Un seul six.</strong></p>
+                <p><span class="math">P(X = 1) = C(5 ; 1) × (1/6) × (5/6)⁴</span></p>
+                <p><span class="math">P(X = 1) = 5 × (1/6) × 0,4823 ≈ 0,402</span></p>
+                <p>Remarque : ici <span class="math">P(X = 0) = P(X = 1)</span>, car <span class="math">5 × (1/6) = (5/6)</span>.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">3</div>
+              <div class="lecture-step-content"><p><strong>Paramètres.</strong></p>
+                <p><span class="math">E(X) = 5 × 1/6</span></p>
+                <p><span class="math">E(X) = 5/6 ≈ 0,83</span></p>
+                <p><span class="math">V(X) = 5 × 1/6 × 5/6</span></p>
+                <p><span class="math">V(X) = 25/36 ≈ 0,69</span></p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 3 — Contrôle qualité d'un lot</div>
+        <div class="lecture-example-content">
+          <p>Dans une usine, chaque pièce produite est défectueuse avec la probabilité <span class="math">0,1</span>, indépendamment des autres. On prélève 10 pièces et on note <span class="math">X</span> le nombre de pièces défectueuses : <span class="math">X</span> suit la loi <span class="math">B(10 ; 0,1)</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step">
+              <div class="lecture-step-number">1</div>
+              <div class="lecture-step-content"><p><strong>Lot parfait.</strong> <span class="math">P(X = 0) = (0,9)¹⁰ ≈ 0,349</span> : à peine 35 % de chances que le prélèvement ne contienne aucun défaut.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">2</div>
+              <div class="lecture-step-content"><p><strong>Un seul défaut.</strong></p>
+                <p><span class="math">P(X = 1) = C(10 ; 1) × (0,1) × (0,9)⁹</span></p>
+                <p><span class="math">P(X = 1) = 10 × 0,1 × 0,3874 ≈ 0,387</span></p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">3</div>
+              <div class="lecture-step-content"><p><strong>Au plus un défaut.</strong></p>
+                <p><span class="math">P(X ≤ 1) = P(X = 0) + P(X = 1)</span></p>
+                <p><span class="math">P(X ≤ 1) ≈ 0,349 + 0,387</span></p>
+                <p><span class="math">P(X ≤ 1) = 0,736</span></p>
+                <p>Environ 74 % de chances d'avoir au plus une pièce défectueuse.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">4</div>
+              <div class="lecture-step-content"><p><strong>Paramètres.</strong></p>
+                <p><span class="math">E(X) = 10 × 0,1</span></p>
+                <p><span class="math">E(X) = 1</span></p>
+                <p>En moyenne 1 pièce défectueuse par lot de 10 ; <span class="math">V(X) = 10 × 0,1 × 0,9 = 0,9</span>, donc <span class="math">σ(X) ≈ 0,95</span>.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Deux classiques : <strong>(1)</strong> oublier le coefficient <span class="math">C(n ; k)</span> et écrire <span class="math">P(X = 2) = (0,5)⁴</span> pour l'exemple 1 — faux, il y a 6 façons de placer les 2 piles ; <strong>(2)</strong> confondre <span class="math">P(X = k)</span> (valeur exacte) et <span class="math">P(X ≤ k)</span> (cumul, somme des <span class="math">P(X = j)</span> pour <span class="math">j ≤ k</span>). Relis toujours le symbole de l'inégalité.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : LA LOI NORMALE N(0 ; 1) -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · normale</span>
+        <h2 class="lecture-section-title">La loi N(0 ; 1) : courbe en cloche et table</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Certaines variables ne prennent pas un nombre fini de valeurs (tailles, poids, rendements, erreurs de mesure) : ce sont des variables <strong>continues</strong>, et leur loi se décrit par une <strong>densité</strong> — une courbe dont l'aire sous elle vaut <span class="math">1</span>. La plus célèbre est la <strong>loi normale</strong>, en forme de cloche : élevée au centre, s'aplatissant vite sur les côtés. La version de référence est la <strong>loi normale centrée réduite</strong> <span class="math">N(0 ; 1)</span>, de moyenne <span class="math">0</span> et d'écart-type <span class="math">1</span>, associée à une variable <span class="math">Z</span>.
+      </p>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbe en cloche de la loi normale centrée réduite, avec bande centrale de moins un à un">
+          <defs>
+            <clipPath id="cloche-aire">
+              <path d="M 40 218 C 140 214, 220 196, 262 140 C 288 104, 302 52, 320 52 C 338 52, 352 104, 378 140 C 420 196, 500 214, 600 218 L 600 220 L 40 220 Z"/>
+            </clipPath>
+          </defs>
+          <rect x="40" y="30" width="560" height="190" fill="var(--accent)" opacity="0.10" clip-path="url(#cloche-aire)"/>
+          <rect x="227" y="30" width="186" height="190" fill="var(--accent)" opacity="0.25" clip-path="url(#cloche-aire)"/>
+          <line x1="40" y1="220" x2="600" y2="220" stroke="currentColor" stroke-width="2"/>
+          <line x1="320" y1="45" x2="320" y2="220" stroke="currentColor" stroke-width="1.5" stroke-dasharray="6 5" opacity="0.6"/>
+          <path d="M 40 218 C 140 214, 220 196, 262 140 C 288 104, 302 52, 320 52 C 338 52, 352 104, 378 140 C 420 196, 500 214, 600 218" fill="none" stroke="currentColor" stroke-width="2.5"/>
+          <line x1="40" y1="214" x2="40" y2="226" stroke="currentColor" stroke-width="2"/>
+          <line x1="133" y1="214" x2="133" y2="226" stroke="currentColor" stroke-width="2"/>
+          <line x1="227" y1="214" x2="227" y2="226" stroke="currentColor" stroke-width="2"/>
+          <line x1="413" y1="214" x2="413" y2="226" stroke="currentColor" stroke-width="2"/>
+          <line x1="507" y1="214" x2="507" y2="226" stroke="currentColor" stroke-width="2"/>
+          <line x1="600" y1="214" x2="600" y2="226" stroke="currentColor" stroke-width="2"/>
+          <text x="40" y="248" text-anchor="middle" font-size="15" fill="currentColor">−3</text>
+          <text x="133" y="248" text-anchor="middle" font-size="15" fill="currentColor">−2</text>
+          <text x="227" y="248" text-anchor="middle" font-size="15" fill="currentColor">−1</text>
+          <text x="320" y="248" text-anchor="middle" font-size="15" fill="currentColor">0</text>
+          <text x="413" y="248" text-anchor="middle" font-size="15" fill="currentColor">1</text>
+          <text x="507" y="248" text-anchor="middle" font-size="15" fill="currentColor">2</text>
+          <text x="600" y="248" text-anchor="middle" font-size="15" fill="currentColor">3</text>
+          <text x="320" y="185" text-anchor="middle" font-size="14" fill="currentColor" opacity="0.85">≈ 68 % des valeurs</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">La densité de <span class="math">N(0 ; 1)</span> : courbe en cloche, <strong>symétrique par rapport à 0</strong>, aire totale égale à <span class="math">1</span>. La bande <span class="math">[−1 ; 1]</span> contient environ <span class="math">68 %</span> des valeurs : <span class="math">P(−1 ≤ Z ≤ 1) = 2 × 0,8413 − 1 ≈ 0,68</span>.</figcaption>
+      </figure>
+      <ul class="lecture-list-elegant">
+        <li><strong>Symétrie</strong> : la courbe est symétrique par rapport à l'axe <span class="math">x = 0</span>, donc <span class="math">P(Z ≤ 0) = P(Z ≥ 0) = 0,5</span>.</li>
+        <li><strong>Aire totale</strong> : <span class="math">1</span> — la somme de toutes les probabilités, comme <span class="math">Σpᵢ = 1</span> pour les lois discrètes.</li>
+        <li><strong>Concentration</strong> : les valeurs se regroupent autour de <span class="math">0</span> ; au-delà de <span class="math">−3</span> ou <span class="math">3</span>, elles deviennent très rares.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition — Lecture de la table</div>
+          <p>La <strong>fonction de répartition</strong> de <span class="math">N(0 ; 1)</span> est notée <span class="math">Φ</span> : <span class="math">Φ(a) = P(Z ≤ a)</span> pour tout réel <span class="math">a</span>. Sa valeur se lit dans la <strong>table de la loi normale centrée réduite</strong> fournie au Bac. Valeurs usuelles : <span class="math">Φ(0) = 0,5</span>, <span class="math">Φ(1) = 0,8413</span>, <span class="math">Φ(1,96) = 0,975</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>a</th><th>−1</th><th>0</th><th>0,5</th><th>1</th><th>1,5</th><th>2</th><th>3</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Φ(a) = P(Z ≤ a)</td><td>0,1587</td><td>0,5</td><td>0,6915</td><td>0,8413</td><td>0,9332</td><td>0,9772</td><td>0,9987</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Les 4 réflexes de lecture de la table</div>
+        <div class="lecture-rule-body">
+          <strong>(1)</strong> <span class="math">P(Z ≤ a) = Φ(a)</span> : lecture directe. <strong>(2)</strong> <span class="math">P(Z ≥ a) = 1 − Φ(a)</span> : l'aire totale vaut 1. <strong>(3)</strong> <span class="math">P(a ≤ Z ≤ b) = Φ(b) − Φ(a)</span> : différence d'aires. <strong>(4)</strong> Symétrie : <span class="math">Φ(−a) = 1 − Φ(a)</span>, et <span class="math">P(−a ≤ Z ≤ a) = 2 × Φ(a) − 1</span>.
+        </div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemples — Tous les types de calcul avec la table</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step">
+              <div class="lecture-step-number">1</div>
+              <div class="lecture-step-content"><p><strong>Lecture directe.</strong> <span class="math">P(Z ≤ 1,5) = Φ(1,5) = 0,9332</span>.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">2</div>
+              <div class="lecture-step-content"><p><strong>Complémentaire.</strong></p>
+                <p><span class="math">P(Z ≥ 1) = 1 − Φ(1) = 1 − 0,8413</span></p>
+                <p><span class="math">P(Z ≥ 1) = 0,1587</span></p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">3</div>
+              <div class="lecture-step-content"><p><strong>Intervalle positif.</strong></p>
+                <p><span class="math">P(0 ≤ Z ≤ 1,5) = Φ(1,5) − Φ(0) = 0,9332 − 0,5</span></p>
+                <p><span class="math">P(0 ≤ Z ≤ 1,5) = 0,4332</span></p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">4</div>
+              <div class="lecture-step-content"><p><strong>Intervalle à cheval.</strong></p>
+                <p><span class="math">P(−1 ≤ Z ≤ 2) = Φ(2) − Φ(−1)</span></p>
+                <p><span class="math">P(−1 ≤ Z ≤ 2) = 0,9772 − (1 − 0,8413) = 0,9772 − 0,1587</span></p>
+                <p><span class="math">P(−1 ≤ Z ≤ 2) = 0,8185</span></p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">5</div>
+              <div class="lecture-step-content"><p><strong>Intervalle symétrique.</strong></p>
+                <p><span class="math">P(−1,96 ≤ Z ≤ 1,96) = 2 × Φ(1,96) − 1 = 2 × 0,975 − 1</span></p>
+                <p><span class="math">P(−1,96 ≤ Z ≤ 1,96) = 0,95</span></p>
+                <p>Le célèbre intervalle qui contient <span class="math">95 %</span> des valeurs.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>La table donne <strong>P(Z ≤ a)</strong>, l'aire <em>à gauche</em> — jamais une aire « au point » : pour une loi continue, <span class="math">P(Z = a) = 0</span>, donc on peut écrire <span class="math">P(Z ≤ a) = P(Z &lt; a)</span>. Une lecture qui donne par exemple <span class="math">0,8413</span> pour « <span class="math">Z &gt; 1</span> » a utilisé la mauvaise aire : le bon résultat est <span class="math">1 − 0,8413</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : CENTRAGE-RÉDUCTION N(μ ; σ) -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · normale</span>
+        <h2 class="lecture-section-title">Centrage-réduction : de N(μ ; σ) à la table</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Une loi normale quelconque a une moyenne <span class="math">μ</span> (mu) et un écart-type <span class="math">σ</span> quelconques ; or il n'existe qu'<strong>une seule table</strong>, celle de <span class="math">N(0 ; 1)</span>. L'astuce est de <strong>ramener toute loi normale à la loi centrée réduite</strong> par un changement de variable — exactement l'esprit des propriétés <span class="math">E(X + b) = E(X) + b</span> et <span class="math">σ(aX) = |a|·σ(X)</span> de la partie 3.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition — Centrage-réduction</div>
+          <p>Si <span class="math">X</span> suit une loi normale <span class="math">N(μ ; σ)</span> de moyenne <span class="math">μ</span> et d'écart-type <span class="math">σ</span> (dans notre programme, la seconde valeur est bien l'écart-type), alors la variable <span class="math">Z = (X − μ)/σ</span> suit la loi <strong>normale centrée réduite</strong> <span class="math">N(0 ; 1)</span>. On calcule <span class="math">Z</span>, puis on lit la table.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Le passage obligé vers la table</div>
+        <div class="lecture-formula-hero-main">Z = (X − μ)/σ</div>
+        <div class="lecture-formula-hero-desc">Alors <span class="math">Z</span> suit <span class="math">N(0 ; 1)</span>. Centrer : soustraire <span class="math">μ</span> pour que la moyenne tombe à <span class="math">0</span>. Réduire : diviser par <span class="math">σ</span> pour que l'écart-type tombe à <span class="math">1</span>.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Poids des sacs de mil</div>
+        <div class="lecture-example-content">
+          <p><strong>Énoncé.</strong> Le poids <span class="math">X</span>, en kg, d'un sac de mil suit une loi normale <span class="math">N(50 ; 5)</span> : moyenne <span class="math">50</span>, écart-type <span class="math">5</span>. Calculer <span class="math">P(X ≤ 60)</span>, <span class="math">P(X ≥ 55)</span> et <span class="math">P(45 ≤ X ≤ 60)</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step">
+              <div class="lecture-step-number">1</div>
+              <div class="lecture-step-content"><p><strong>Poser le changement de variable.</strong> Ici <span class="math">μ = 50</span> et <span class="math">σ = 5</span>, donc <span class="math">Z = (X − 50)/5</span> suit <span class="math">N(0 ; 1)</span>.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">2</div>
+              <div class="lecture-step-content"><p><strong>P(X ≤ 60).</strong> On transforme l'événement :</p>
+                <p><span class="math">X ≤ 60 ⇔ Z ≤ (60 − 50)/5</span></p>
+                <p><span class="math">X ≤ 60 ⇔ Z ≤ 2</span></p>
+                <p>Donc <span class="math">P(X ≤ 60) = Φ(2) = 0,9772</span>.</p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">3</div>
+              <div class="lecture-step-content"><p><strong>P(X ≥ 55).</strong></p>
+                <p><span class="math">X ≥ 55 ⇔ Z ≥ (55 − 50)/5</span></p>
+                <p><span class="math">X ≥ 55 ⇔ Z ≥ 1</span></p>
+                <p><span class="math">P(X ≥ 55) = 1 − Φ(1) = 1 − 0,8413</span></p>
+                <p><span class="math">P(X ≥ 55) = 0,1587</span></p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">4</div>
+              <div class="lecture-step-content"><p><strong>P(45 ≤ X ≤ 60).</strong></p>
+                <p><span class="math">45 ≤ X ≤ 60 ⇔ −1 ≤ Z ≤ 2</span> (car <span class="math">(45 − 50)/5 = −1</span>)</p>
+                <p><span class="math">P(45 ≤ X ≤ 60) = Φ(2) − Φ(−1)</span></p>
+                <p><span class="math">P(45 ≤ X ≤ 60) = 0,9772 − 0,1587</span></p>
+                <p><span class="math">P(45 ≤ X ≤ 60) = 0,8185</span></p></div>
+            </div>
+            <div class="lecture-step">
+              <div class="lecture-step-number">5</div>
+              <div class="lecture-step-content"><p><strong>Lecture à retenir.</strong> L'intervalle <span class="math">[μ − σ ; μ + σ] = [45 ; 55]</span> contient <span class="math">P(−1 ≤ Z ≤ 1) = 2 × 0,8413 − 1 ≈ 0,68</span> : environ 68 % des sacs pèsent entre 45 et 55 kg.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode — Toute question de loi normale en 3 étapes</div>
+        <div class="lecture-rule-body">
+          <strong>(1)</strong> Écrire <span class="math">Z = (X − μ)/σ</span> et identifier <span class="math">μ</span>, <span class="math">σ</span>. <strong>(2)</strong> Transformer <em>toute</em> l'inégalité : chaque borne <span class="math">x</span> devient <span class="math">(x − μ)/σ</span>. <strong>(3)</strong> Lire la table avec les 4 réflexes de la section 03 (directe, complémentaire, différence, symétrie).
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Toujours centrer-réduire avant la table</div>
+          <p>Aucune valeur de <span class="math">X</span> ne se lit directement dans la table : la table ne connaît que <span class="math">Z</span>. Si tu cherches <span class="math">Φ(60)</span> pour l'exemple ci-dessus, tu lis la mauvaise ligne — la bonne valeur est <span class="math">Φ(2)</span>. Transforme d'abord, lis ensuite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : SYNTHÈSE ET RÉFLEXES BAC -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Synthèse</span>
+        <h2 class="lecture-section-title">Tableau final et réflexes Bac</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Voici le catalogue complet du chapitre, réuni sur une seule vue.
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Loi</th><th>Conditions (situation type)</th><th>Probabilité</th><th>E(X)</th><th>V(X)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bernoulli (p)</td>
+              <td>Une seule épreuve : succès / échec</td>
+              <td><span class="math">P(1) = p ; P(0) = 1 − p</span></td>
+              <td><span class="math">p</span></td>
+              <td><span class="math">p × (1 − p)</span></td>
+            </tr>
+            <tr>
+              <td><span class="math">B(n ; p)</span></td>
+              <td><span class="math">n</span> épreuves de Bernoulli identiques et indépendantes</td>
+              <td><span class="math">P(X = k) = C(n ; k) × pᵏ × (1 − p)^(n − k)</span></td>
+              <td><span class="math">n × p</span></td>
+              <td><span class="math">n × p × (1 − p)</span></td>
+            </tr>
+            <tr>
+              <td><span class="math">N(μ ; σ)</span></td>
+              <td>Variable continue « en cloche » (mesures, poids, rendements)</td>
+              <td><span class="math">P(X ≤ x)</span> par la table après centrage-réduction <span class="math">Z = (X − μ)/σ</span></td>
+              <td><span class="math">μ</span></td>
+              <td><span class="math">σ²</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Réflexes Bac — la stratégie d'examen</div>
+        <div class="lecture-rule-body">
+          <strong>(1) Reconnaître la loi.</strong> « On répète n fois, de façon indépendante, une expérience à deux issues » → loi binomiale ; « suit une loi normale de moyenne… et d'écart-type… » → centrage-réduction. <strong>(2) Identifier n, p, le succès.</strong> Écris-les en tête de copie avant tout calcul. <strong>(3) Calculer E(X) = n × p d'abord</strong> : c'est un point facile et un contrôle de cohérence pour la suite. <strong>(4) Traduire les mots</strong> : « au plus k » → <span class="math">P(X ≤ k)</span> ; « au moins k » → <span class="math">1 − P(X ≤ k − 1)</span> ; « exactement k » → <span class="math">P(X = k)</span>. <strong>(5) Loi normale</strong> : centrer-réduire <em>toutes</em> les bornes, encadrer les valeurs de <span class="math">Φ</span> lues dans la table.
+        </div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><strong>Formule du jour</strong> : <span class="math">P(X = k) = C(n ; k) × pᵏ × (1 − p)^(n − k)</span> avec <span class="math">E(X) = n × p</span> et <span class="math">V(X) = n × p × (1 − p)</span>.</li>
+        <li><strong>Valeurs de Φ à encadrer sur ta copie</strong> : <span class="math">Φ(0) = 0,5</span>, <span class="math">Φ(1) = 0,8413</span>, <span class="math">Φ(1,96) = 0,975</span>, <span class="math">Φ(2) = 0,9772</span>.</li>
+        <li><strong>Chiffres du chapitre</strong> : <span class="math">B(4 ; 0,5)</span> → <span class="math">P(X = 2) = 0,375</span> ; <span class="math">B(10 ; 0,1)</span> → <span class="math">E(X) = 1</span>, <span class="math">P(X = 0) ≈ 0,349</span> ; <span class="math">N(50 ; 5)</span> → <span class="math">P(X ≤ 60) = 0,9772</span>.</li>
+        <li><strong>Contrôles permanents</strong> : <span class="math">Σpᵢ = 1</span> (binomiale : la somme des <span class="math">P(X = k)</span> vaut 1) ; <span class="math">0 ≤ Φ(a) ≤ 1</span> ; une probabilité négative ou supérieure à <span class="math">1</span> signale une erreur de lecture.</li>
+      </ul>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Pour aller plus loin</div>
+        <div class="lecture-aside-content">
+          La loi normale doit sa célébrité à <strong>Carl Friedrich Gauss</strong> (1809), qui l'utilisa pour modéliser les erreurs de mesure en astronomie — d'où son autre nom : « loi de Gauss ». On la retrouve partout : tailles et poids des populations, notes d'un grand concours, bruits de mesure. Sa symétrie et sa table en font l'outil statistique le plus utilisé au monde.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[bernoulli]</strong> Épreuve de Bernoulli : deux issues, succès (probabilité <span class="math">p</span>) et échec (probabilité <span class="math">1 − p</span>) ; espérance <span class="math">p</span>, variance <span class="math">p × (1 − p)</span></li>
+      <li><strong>[bernoulli]</strong> Schéma de Bernoulli : <span class="math">n</span> répétitions <strong>identiques</strong> et <strong>indépendantes</strong> — les deux conditions à vérifier avant tout</li>
+      <li><strong>[binomiale]</strong> <span class="math">X</span> = nombre de succès suit <span class="math">B(n ; p)</span> : <span class="math">P(X = k) = C(n ; k) × pᵏ × (1 − p)^(n − k)</span></li>
+      <li><strong>[binomiale]</strong> <span class="math">E(X) = n × p</span> et <span class="math">V(X) = n × p × (1 − p)</span> : à calculer d'abord, réflexe de cohérence</li>
+      <li><strong>[binomiale]</strong> Repères : <span class="math">B(4 ; 0,5)</span> → <span class="math">P(X = 2) = 0,375</span> ; <span class="math">B(5 ; 1/6)</span> → <span class="math">P(X = 0) ≈ 0,402</span> ; <span class="math">B(10 ; 0,1)</span> → <span class="math">P(X ≤ 1) ≈ 0,736</span></li>
+      <li><strong>[normale]</strong> <span class="math">N(0 ; 1)</span> : courbe en cloche, symétrique, aire totale <span class="math">1</span> ; <span class="math">Φ(a) = P(Z ≤ a)</span> se lit dans la table</li>
+      <li><strong>[normale]</strong> Les 4 réflexes : directe <span class="math">Φ(a)</span>, complémentaire <span class="math">1 − Φ(a)</span>, différence <span class="math">Φ(b) − Φ(a)</span>, symétrie <span class="math">Φ(−a) = 1 − Φ(a)</span></li>
+      <li><strong>[normale]</strong> Valeurs clés : <span class="math">Φ(1) = 0,8413</span>, <span class="math">Φ(1,96) = 0,975</span>, <span class="math">Φ(2) = 0,9772</span> ; <span class="math">P(−1 ≤ Z ≤ 1) ≈ 0,68</span></li>
+      <li><strong>[normale]</strong> <span class="math">X</span> suit <span class="math">N(μ ; σ)</span> ⇒ <span class="math">Z = (X − μ)/σ</span> suit <span class="math">N(0 ; 1)</span> : toujours centrer-réduire avant de lire la table</li>
+      <li><strong>[methode]</strong> Réflexe Bac : reconnaître la loi → identifier <span class="math">n</span>, <span class="math">p</span> (ou <span class="math">μ</span>, <span class="math">σ</span>) → traduire « au plus / au moins / exactement » → calculer et interpréter</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Fiche 4 terminée — chapitre « Variable aléatoire » bouclé !</div>
+    <div class="lecture-end-sub">Reviens aux parties 1 à 3 pour consolider, puis entraîne-toi sur les annales du Bac D</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

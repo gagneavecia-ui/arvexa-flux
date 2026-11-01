@@ -1,0 +1,477 @@
+<!-- ============================================================ -->
+<!-- PARTIE 1 — Définition & Propriétés algébriques (definition, proprietes, calculs) -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · FONCTION EXPONENTIELLE   -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 01 · Fonction exponentielle</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Définition &amp; <em>Propriétés algébriques</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Après le logarithme népérien, voici sa sœur jumelle : la <strong>fonction exponentielle</strong>, notée <span class="math">exp</span>, définie sur tout <span class="math">ℝ</span> et reconnaissable à sa valeur <span class="math">e⁰ = 1</span>. Cette partie couvre <strong>3 notions</strong> : la <strong>définition</strong> de <span class="math">exp</span> comme réciproque de <span class="math">ln</span> et le nombre <span class="math">e ≈ 2,718</span>, les <strong>propriétés algébriques</strong> (somme, inverse, quotient, puissance des exposants), puis les <strong>calculs dirigés</strong> — simplifier et factoriser des expressions en <span class="math">e^x</span>, les deux techniques que le Bac fait tourner chaque année.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span>
+      <span class="lecture-hero-meta-item">🧮 3 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">3 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — L'argent qui grandit tout seul</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · definition — exp et ln : deux fonctions réciproques</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · definition — La fonction exponentielle et le nombre <span class="math">e</span></span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · proprietes — La propriété maîtresse <span class="math">e^(a + b) = e^a × e^b</span></span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · proprietes — Inverse et quotient d'exponentielles</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 2 · proprietes — Puissance d'une puissance</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 3 · calculs — Technique Bac n°1 : simplifier</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Notion 3 · calculs — Technique Bac n°2 : factoriser</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">L'argent qui grandit tout seul</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Place <strong>100 000 F CFA</strong> sur un compte rémunéré, ou confie-les à une tontine productive qui réinvestit chaque bénéfice : au bout d'un an, tu as un peu plus d'argent. Mais l'année suivante, les intérêts se calculent sur le <strong>nouveau capital</strong>, plus grand que le premier. Puis l'année d'après, sur un capital encore plus grand. C'est le principe des <strong>intérêts composés</strong> : la croissance se nourrit d'elle-même, et elle s'accélère.
+      </p>
+      <p class="lecture-text">
+        Le même phénomène gouverne la <strong>croissance démographique</strong> : plus une population est nombreuse, plus il naît d'enfants chaque année. Un pays qui croît de 3 % par an ne gagne pas le même nombre d'habitants chaque décennie — il en gagne de plus en plus. La fonction mathématique qui décrit ce type de croissance « auto-entretenue », c'est <strong>l'exponentielle</strong> : elle est à la finance, à la démographie, à l'épidémiologie et à la radioactivité ce que la droite est aux mouvements uniformes. En Terminale D, elle est aussi l'une des fonctions les plus demandées de l'épreuve.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Définir</strong> la fonction <span class="math">exp</span>, sa liaison avec <span class="math">ln</span> (réciproque) et le nombre <span class="math">e ≈ 2,718</span>.</li>
+            <li><strong>Mémoriser</strong> les quatre propriétés algébriques : somme, inverse, quotient et puissance d'exposants.</li>
+            <li><strong>Savoir calculer</strong> : simplifier <span class="math">e^(x + 3) / e^x</span> et factoriser <span class="math">e^(2x) + e^x</span> proprement, en steps.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Petite histoire des sciences</div>
+        <div class="lecture-aside-content">
+          La constante <span class="math">e</span> doit son nom au Suisse <strong>Leonhard Euler</strong>, qui l'étudie en 1728 et la révèle au monde dans son <em>Introductio</em> de 1748 : <span class="math">e = 2,718 281 828…</span>, un nombre <strong>irrationnel</strong> (ses décimales ne se répètent jamais). Euler montre que la suite <span class="math">(1 + 1/n)ⁿ</span>, qui traduit un capital placé <span class="math">n</span> fois par an à 100 %, se rapproche de <span class="math">e</span> quand <span class="math">n</span> devient grand. L'argent qui s'accumule sans pause avait donc déjà inventé l'exponentielle au XVIIIᵉ siècle.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · definition — EXP ET LN RÉCIPROQUES   -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · definition</span>
+        <h2 class="lecture-section-title">exp et ln : deux fonctions réciproques</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Dans le chapitre précédent, tu as appris que <span class="math">ln</span> est strictement croissante sur <span class="math">]0 ; +∞[</span> et que ses valeurs vont de <span class="math">−∞</span> à <span class="math">+∞</span>. Une telle fonction <strong>rencontre une fois et une seule</strong> chaque réel : elle possède donc une <strong>fonction réciproque</strong>, qui « défait » ce qu'elle fait. Cette réciproque, c'est <strong>la fonction exponentielle</strong>, notée <span class="math">exp</span>.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La réciproque dans le sens exp ∘ ln</div>
+        <div class="lecture-formula-hero-main">exp(ln x) = x&nbsp;&nbsp;(pour x &gt; 0)</div>
+        <div class="lecture-formula-hero-desc">ln reçoit un nombre strictement positif, le « compresse » ; exp le « décompresse » et rend le nombre de départ.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">ln(e^x) = x&nbsp;&nbsp;(pour tout x ∈ ℝ)</div>
+        <div class="lecture-formula-desc">Dans ce sens, la condition s'inverse : <span class="math">e^x</span> est toujours strictement positif, donc ln peut toujours le recevoir — pour n'importe quel réel <span class="math">x</span>.</div>
+      </div>
+      <p class="lecture-text">
+        Ces deux formules se lisent comme une <strong>paire de gants</strong> : chaque formule annule l'autre fonction. Retiens surtout <em>qui a le droit d'entrer</em> dans <span class="math">ln</span> : uniquement des nombres <strong>strictement positifs</strong>. C'est ce détail de domaine qui fait la différence entre les deux lignes ci-dessus, et c'est un piège classique de question de cours.
+      </p>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Vérifier la réciproque sur des valeurs</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Sens exp ∘ ln :</strong> prenons <span class="math">x = 5</span>. Alors, sans aucun calcul, exp annule ln :</p><p><span class="math">exp(ln 5) = 5</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Vérification chiffrée :</strong> on passe par la valeur approchée de <span class="math">ln 5</span> :</p><p><span class="math">ln 5 ≈ 1,609</span></p><p><span class="math">e^(1,609) ≈ 5,000</span> ✅</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Sens ln ∘ exp :</strong> prenons <span class="math">x = 3</span> (réel quelconque). Alors ln annule exp :</p><p><span class="math">ln(e³) = 3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Vérification chiffrée :</strong></p><p><span class="math">e³ ≈ 20,09</span></p><p><span class="math">ln 20,09 ≈ 3,000</span> ✅</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Deux domaines, deux conditions</div>
+          <p><span class="math">exp(ln x) = x</span> n'a de sens que si <span class="math">x &gt; 0</span> (sinon <span class="math">ln x</span> n'existe pas), tandis que <span class="math">ln(e^x) = x</span> vaut pour <strong>tout</strong> <span class="math">x ∈ ℝ</span>. Écrire <span class="math">exp(ln(−2)) = −2</span> est une faute : <span class="math">ln(−2)</span> n'existe pas. Avant toute réciproque, vérifie le <strong>domaine</strong>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · definition — LA FONCTION EXP ET e    -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · definition</span>
+        <h2 class="lecture-section-title">La fonction exponentielle et le nombre <span class="math">e</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Voici l'objet du chapitre, tel qu'il faut savoir le présenter à l'examen.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définition officielle — Fonction exponentielle</div>
+          <p>La <strong>fonction exponentielle</strong>, notée <span class="math">exp</span>, est la fonction réciproque de la fonction logarithme népérien. Elle est définie sur <strong>tout l'ensemble <span class="math">ℝ</span></strong> des réels. La valeur de cette fonction en 1 est une constante positive notée <span class="math">e</span> (nombre d'Euler), et pour tout réel <span class="math">x</span> on écrit <span class="math">exp(x) = e^x</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La fonction du chapitre, sur sa carte d'identité</div>
+        <div class="lecture-formula-hero-main">exp(x) = e^x</div>
+        <div class="lecture-formula-hero-desc">Définie sur ℝ tout entier ; elle vaut <span class="math">1</span> en <span class="math">x = 0</span> (soit <span class="math">e⁰ = 1</span>) ; sa valeur en <span class="math">x = 1</span> est le nombre <span class="math">e ≈ 2,718</span>, constante irrationnelle.</div>
+      </div>
+      <p class="lecture-text">
+        La notation <span class="math">e^x</span> est la notation <strong>puissance</strong> : elle suggère que <span class="math">e</span> se comporte comme une base et que <span class="math">x</span> est l'exposant. C'est cette écriture qui rend visibles les propriétés algébriques des sections 03 à 05. Quelques valeurs de référence, à connaître approximativement :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>x</th><th>−2</th><th>−1</th><th>0</th><th>1</th><th>2</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">e^x</span> (valeur exacte ou approchée)</td><td><span class="math">≈ 0,135</span></td><td><span class="math">≈ 0,368</span></td><td><span class="math">1</span></td><td><span class="math">≈ 2,718</span></td><td><span class="math">≈ 7,389</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lecture-text">
+        Sur la figure ci-dessous, la courbe de <span class="math">exp</span> : <strong>croissante, convexe, toujours au-dessus de l'axe des abscisses</strong>, et elle passe par le point fixe <span class="math">A(0 ; 1)</span>. Observe l'échelle : à chaque pas de <span class="math">1</span> vers la droite, la valeur est <strong>multipliée par <span class="math">e ≈ 2,718</span></strong> — c'est la signature d'une croissance exponentielle.
+      </p>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbe croissante de la fonction exponentielle passant par (0 ; 1), avec les points (1 ; e) et (2 ; e²)">
+          <line x1="16" y1="250" x2="500" y2="250" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="500,250 488,244 488,256" style="fill:var(--text-dim)"/>
+          <line x1="140" y1="310" x2="140" y2="16" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="140,16 134,28 146,28" style="fill:var(--text-dim)"/>
+          <text x="490" y="270" style="fill:var(--text-dim)" font-size="12" font-family="Inter">x</text>
+          <text x="152" y="28" style="fill:var(--text-dim)" font-size="12" font-family="Inter">y</text>
+          <text x="126" y="266" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">O</text>
+          <line x1="200" y1="245" x2="200" y2="255" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="196" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">1</text>
+          <line x1="260" y1="245" x2="260" y2="255" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="256" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">2</text>
+          <line x1="135" y1="228" x2="145" y2="228" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <line x1="200" y1="250" x2="200" y2="190" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="5 5"/>
+          <line x1="140" y1="190" x2="200" y2="190" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="5 5"/>
+          <text x="134" y="194" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">e ≈ 2,7</text>
+          <line x1="260" y1="250" x2="260" y2="87" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="5 5"/>
+          <line x1="140" y1="87" x2="260" y2="87" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="5 5"/>
+          <text x="134" y="91" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">e² ≈ 7,4</text>
+          <path d="M 20 247 C 40 246, 60 245, 80 242 C 100 239, 120 235, 140 228 C 160 221, 180 210, 200 190 C 220 170, 240 141, 260 87 C 268 65, 273 49, 278 31" style="fill:none;stroke:var(--accent-bright)" stroke-width="3"/>
+          <circle cx="140" cy="228" r="5" style="fill:var(--accent-bright)"/>
+          <text x="150" y="224" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">A(0 ; 1)</text>
+          <circle cx="200" cy="190" r="4" style="fill:var(--accent-bright)"/>
+          <text x="208" y="182" style="fill:var(--accent-bright)" font-size="12" font-family="Inter">B(1 ; e)</text>
+          <circle cx="260" cy="87" r="4" style="fill:var(--accent-bright)"/>
+          <text x="268" y="79" style="fill:var(--accent-bright)" font-size="12" font-family="Inter">C(2 ; e²)</text>
+          <text x="330" y="150" style="fill:var(--text-dim)" font-size="12" font-family="Inter">à chaque pas de +1 en x,</text>
+          <text x="330" y="168" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">la valeur est multipliée par e ≈ 2,718</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">La courbe de <span class="math">exp</span> est croissante sur <span class="math">ℝ</span> et passe par <span class="math">A(0 ; 1)</span>. De <span class="math">A</span> à <span class="math">B</span> puis de <span class="math">B</span> à <span class="math">C</span>, la hauteur est multipliée par <span class="math">e</span> à chaque unité : c'est l'échelle de la croissance exponentielle.</figcaption>
+      </figure>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · proprietes — SOMME D'EXPOSANTS       -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · proprietes</span>
+        <h2 class="lecture-section-title">La propriété maîtresse : <span class="math">e^(a + b) = e^a × e^b</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Toute l'algèbre du chapitre découle d'une seule formule, héritée des puissances : <strong>multiplier deux exponentielles revient à additionner leurs exposants</strong>. On la démontre avec <span class="math">ln</span>, en trois petites étapes.
+      </p>
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On pose le produit et on lui donne un nom :</p><p><span class="math">A = e^a × e^b</span></p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On applique <span class="math">ln</span> des deux côtés — et <span class="math">ln</span> transforme un produit en somme :</p><p><span class="math">ln A = ln(e^a) + ln(e^b)</span></p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><span class="math">ln</span> et <span class="math">exp</span> s'annulent, il reste les exposants :</p><p><span class="math">ln A = a + b</span></p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>On repasse à l'exponentielle : le résultat est bien une exponentielle dont l'exposant est la somme :</p><p><span class="math">A = e^(a + b)</span></p></div></div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La propriété maîtresse — valable pour tous réels a et b</div>
+        <div class="lecture-formula-hero-main">e^(a + b) = e^a × e^b</div>
+        <div class="lecture-formula-hero-desc">Le produit d'exponentielles devient une somme d'exposants : c'est elle qui fait fonctionner tous les calculs du chapitre.</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemples — Produits d'exponentielles</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Produit littéral :</strong> on additionne les exposants :</p><p><span class="math">e^x × e^(2x) = e^(x + 2x)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On réduit l'exposant :</p><p><span class="math">e^x × e^(2x) = e^(3x)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Produit avec un opposé :</strong> les exposants s'additionnent :</p><p><span class="math">e^(x + 1) × e^(−x) = e^((x + 1) + (−x))</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Les <span class="math">x</span> s'annulent, il reste <span class="math">1</span> :</p><p><span class="math">e^(x + 1) × e^(−x) = e¹ = e</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Contrôle numérique :</strong> d'abord la formule :</p><p><span class="math">e⁵ × e^(−2) = e³</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p>Puis la vérification avec les valeurs approchées :</p><p><span class="math">148,41 × 0,135 ≈ 20,09</span></p><p><span class="math">e³ ≈ 20,09</span> ✅</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Le piège n°1 du chapitre</div>
+          <p><span class="math">e^(a + b) ≠ e^a + e^b</span>. L'exponentielle ne distribue <strong>pas</strong> sur la somme. Preuve par l'exemple : <span class="math">e¹ + e¹ = 2e ≈ 5,44</span>, alors que <span class="math">e² ≈ 7,39</span>. Deux résultats différents : la fausse formule est démasquée. Pour additionner des exponentielles, on ne peut rien simplifier — mais on peut <strong>factoriser</strong> (section 07).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 2 · proprietes — INVERSE ET QUOTIENT     -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · proprietes</span>
+        <h2 class="lecture-section-title">Inverse et quotient d'exponentielles</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Comme <span class="math">exp</span> ne s'annule jamais (<span class="math">e^x &gt; 0</span> pour tout <span class="math">x</span>), tout inverse <span class="math">1 / e^a</span> existe. Il s'écrit lui-même comme une exponentielle, avec un exposant <strong>négatif</strong> :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">e^(−a) = 1 / e^a</div>
+        <div class="lecture-formula-desc">L'exposant négatif « retourne » l'exponentielle : <span class="math">e^(−a)</span> est l'inverse de <span class="math">e^a</span>. Exemple : <span class="math">e^(−1) ≈ 0,368 = 1 / 2,718</span>.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">e^(a − b) = e^a / e^b</div>
+        <div class="lecture-formula-desc">Un quotient d'exponentielles devient une différence d'exposants — c'est la propriété maîtresse appliquée à <span class="math">a + (−b)</span>.</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemples — Inverses et quotients</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Inverse :</strong> on écrit l'exposant négatif :</p><p><span class="math">e^(−3) = 1 / e³</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On remplace <span class="math">e³</span> par sa valeur approchée :</p><p><span class="math">1 / e³ ≈ 1 / 20,09</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Et on calcule l'inverse :</p><p><span class="math">1 / 20,09 ≈ 0,0498</span> ✅</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Quotient littéral :</strong> on soustrait les exposants :</p><p><span class="math">e^x / e^(x − 1) = e^(x − (x − 1))</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Le <span class="math">x</span> se simplifie, il reste <span class="math">1</span> :</p><p><span class="math">e^x / e^(x − 1) = e¹ = e</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Contrôle numérique :</strong> d'abord le quotient :</p><p><span class="math">e² / e¹ = 7,389 / 2,718</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p>Puis on compare à <span class="math">e</span> :</p><p><span class="math">7,389 / 2,718 ≈ 2,718 = e</span> ✅</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">8</div><div class="lecture-step-content"><p><strong>Réécriture utile :</strong> on remonte le dénominateur en changeant le signe de l'exposant :</p><p><span class="math">1 / e^(2x) = e^(−2x)</span></p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Confondre <span class="math">e^(−a)</span> et <span class="math">−e^a</span> : le premier est <strong>positif</strong> (c'est un inverse), le second est <strong>négatif</strong>. Ainsi <span class="math">e^(−1) ≈ 0,368</span> mais <span class="math">−e¹ ≈ −2,718</span>. Le signe « − » est dans l'exposant, il ne touche jamais le signe du résultat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 2 · proprietes — PUISSANCE D'UNE PUISSANCE -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · proprietes</span>
+        <h2 class="lecture-section-title">Puissance d'une puissance : <span class="math">(e^a)ⁿ = e^(a·n)</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Élever une exponentielle à la puissance <span class="math">n</span>, c'est multiplier <span class="math">n</span> fois l'exponentielle par elle-même ; les exposants s'additionnent à chaque facteur, donc se <strong>multiplient</strong> au total :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">(e^a)ⁿ = e^(a·n)</div>
+        <div class="lecture-formula-desc">Valable pour tout réel <span class="math">a</span> et tout entier <span class="math">n</span> (et même tout réel <span class="math">n</span>, mais en Terminale D on l'utilise surtout avec <span class="math">n</span> entier). Exemple : <span class="math">(e^x)³ = e^(3x)</span>.</div>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple complet — Enchaîner deux propriétés</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On simplifie l'expression :</p><p><span class="math">A = (e^x)³ × e^(1 − x)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Puissance d'abord :</strong> la puissance multiplie les exposants :</p><p><span class="math">(e^x)³ = e^(3x)</span></p><p><span class="math">A = e^(3x) × e^(1 − x)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Produit ensuite :</strong> on additionne les exposants :</p><p><span class="math">A = e^(3x + 1 − x)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>On réduit : <span class="math">3x + 1 − x = 2x + 1</span>, donc :</p><p><span class="math">A = e^(2x + 1)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Conclusion : une seule exponentielle — c'est toujours l'objectif d'une simplification.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Avec un exposant négatif, la même règle donne <span class="math">(e^x)^(−2) = e^(−2x)</span> : cohérent avec l'inverse, puisque <span class="math">(e^x)^(−2) = 1 / (e^x)² = 1 / e^(2x)</span>.
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Propriété</th><th>Formule</th><th>Mini-exemple</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Somme d'exposants (produit)</td><td><span class="math">e^(a + b) = e^a × e^b</span></td><td><span class="math">e^x × e^(2x) = e^(3x)</span></td></tr>
+            <tr><td>Différence d'exposants (quotient)</td><td><span class="math">e^(a − b) = e^a / e^b</span></td><td><span class="math">e^(x + 1) / e^x = e¹</span></td></tr>
+            <tr><td>Inverse (exposant négatif)</td><td><span class="math">e^(−a) = 1 / e^a</span></td><td><span class="math">e^(−3) = 1 / e³</span></td></tr>
+            <tr><td>Puissance d'une puissance</td><td><span class="math">(e^a)ⁿ = e^(a·n)</span></td><td><span class="math">(e^x)³ = e^(3x)</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 3 · calculs — SIMPLIFIER (TECHNIQUE BAC) -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · calculs</span>
+        <h2 class="lecture-section-title">Technique Bac n°1 : simplifier une expression</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Premier réflexe de calcul demandé au Bac : réduire une expression contenant plusieurs exponentielles à <strong>une seule</strong>. La méthode tient en deux gestes.
+      </p>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode à retenir — Simplifier</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>Étape A</strong> — transformer chaque facteur en <span class="math">e^…</span> (les inverses deviennent des exposants négatifs).</li>
+            <li><strong>Étape B</strong> — dans un <strong>produit</strong>, additionner les exposants ; dans un <strong>quotient</strong>, soustraire l'exposant du dénominateur.</li>
+            <li><strong>Objectif</strong> : aboutir à une expression de la forme <span class="math">e^(…)</span> ou <span class="math">k × e^(…)</span> avec <span class="math">k</span> réel.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet 1 — Simplifier <span class="math">e^(x + 3) / e^x</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On reconnaît un <strong>quotient</strong> d'exponentielles : on soustrait les exposants.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><span class="math">e^(x + 3) / e^x = e^((x + 3) − x)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On réduit l'exposant — le <span class="math">x</span> se simplifie :</p><p><span class="math">(x + 3) − x = 3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Conclusion : un nombre <strong>indépendant de x</strong> :</p><p><span class="math">e^(x + 3) / e^x = e³</span></p><p>(soit <span class="math">e³ ≈ 20,09</span>)</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet 2 — Simplifier <span class="math">e^(2x + 1) / e^(2x − 1)</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Quotient d'exponentielles : on soustrait les exposants :</p><p><span class="math">e^(2x + 1) / e^(2x − 1) = e^((2x + 1) − (2x − 1))</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On développe avec soin — le « − » s'applique à toute la parenthèse :</p><p><span class="math">(2x + 1) − (2x − 1) = 2x + 1 − 2x + 1</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On réduit :</p><p><span class="math">2x + 1 − 2x + 1 = 2</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Conclusion : le « −1 » du dénominateur devient « +1 » en remontant :</p><p><span class="math">e^(2x + 1) / e^(2x − 1) = e²</span></p><p>(soit <span class="math">e² ≈ 7,389</span>)</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Dans <span class="math">(2x + 1) − (2x − 1)</span>, le signe « − » s'applique à <strong>toute</strong> la parenthèse : le « −1 » devient « +1 ». Écrire <span class="math">(2x + 1) − (2x − 1) = 0</span> est l'erreur classique — vérifie toujours cette ligne, elle coûte la question entière.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : NOTION 3 · calculs — FACTORISER (TECHNIQUE BAC) -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · calculs</span>
+        <h2 class="lecture-section-title">Technique Bac n°2 : factoriser une somme</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Quand des exponentielles s'<strong>additionnent</strong> (ou se soustraient), on ne peut plus rien additionner d'exposants — mais on peut <strong>factoriser</strong>. Le principe : repérer la plus petite exponentielle, la sortir du parenthésage comme un facteur commun.
+      </p>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode à retenir — Factoriser</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li>Repérer l'<strong>exposant le plus petit</strong> (souvent <span class="math">e^x</span> quand l'autre est <span class="math">e^(2x)</span>).</li>
+            <li>Écrire chaque terme sous la forme « plus petite exponentielle × quelque chose » : <span class="math">e^(2x) = e^x × e^x</span>.</li>
+            <li>Sortir le facteur commun : <span class="math">e^x(…)</span>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet 1 — Factoriser <span class="math">e^(2x) + e^x</span> (grand classique du Bac)</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>La plus petite exponentielle est <span class="math">e^x</span>. On réécrit le premier terme avec elle :</p><p><span class="math">e^(2x) = e^x × e^x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Donc la somme devient :</p><p><span class="math">e^(2x) + e^x = e^x × e^x + e^x × 1</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On factorise par <span class="math">e^x</span> :</p><p><span class="math">e^(2x) + e^x = e^x(e^x + 1)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Vérification</strong> (redévelopper) :</p><p><span class="math">e^x × e^x + e^x × 1 = e^(2x) + e^x</span> ✅</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet 2 — Factoriser <span class="math">e^(2x) − 2 × e^x</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Facteur commun <span class="math">e^x</span> — on décompose chaque terme :</p><p><span class="math">e^(2x) − 2 × e^x = e^x × e^x − 2 × e^x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>On factorise :</p><p><span class="math">e^(2x) − 2 × e^x = e^x(e^x − 2)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Bonus résolution :</strong> cette expression est nulle si <span class="math">e^x = 0</span> (impossible, car <span class="math">e^x &gt; 0</span>) ou si <span class="math">e^x = 2</span>, c'est-à-dire <span class="math">x = ln 2</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📌 Pourquoi le Bac adore cette factorisation</div>
+          <p>Factoriser <span class="math">e^x(e^x + 1)</span> transforme une somme en <strong>produit</strong> : et un produit, on sait l'étudier (règle des signes), le dériver, le résoudre. Beaucoup d'exercices de signe ou de dérivée commencent exactement par cette ligne de factorisation — c'est un réflexe qui rapporte des points sur tout le programme du chapitre.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Que vaut <span class="math">e^(2x) × e^(3x)</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) e^(5x)</span><span>B) e^(6x)</span><span>C) 2e^(5x)</span><span>D) e^x + e^(4x)</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) e^(5x).</strong> Propriété maîtresse : le produit d'exponentielles donne une somme d'exposants, e^(2x + 3x) = e^(5x). (Attention à B : les exposants se multiplient seulement dans (e^a)ⁿ = e^(a·n).)</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Que vaut <span class="math">e^(x + 2) / e^x</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) e²</span><span>B) 2</span><span>C) e^(2x)</span><span>D) e^(x² + 2x)</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) e².</strong> Quotient : on soustrait les exposants, (x + 2) − x = 2, donc e^(x + 2) / e^x = e². La valeur ne dépend plus de x.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — La factorisation de <span class="math">e^(2x) + 3 × e^x</span> est :</p>
+      <div class="lecture-quiz-options"><span>A) e^x(e^x + 3)</span><span>B) e^(2x + 3)</span><span>C) e^x × e^(3x)</span><span>D) 4e^(3x)</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>A) e^x(e^x + 3).</strong> On écrit e^(2x) = e^x × e^x, puis on factorise par e^x : e^x(e^x + 3). Vérification en développant : e^x × e^x + 3 × e^x = e^(2x) + 3 × e^x. ✅</div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[definition]</strong> exp est la réciproque de ln : <span class="math">exp(ln x) = x</span> pour <span class="math">x &gt; 0</span> et <span class="math">ln(e^x) = x</span> pour tout <span class="math">x ∈ ℝ</span></li>
+      <li><strong>[definition]</strong> exp est définie sur ℝ tout entier ; on note <span class="math">exp(x) = e^x</span>, avec <span class="math">e ≈ 2,718</span> et <span class="math">e⁰ = 1</span></li>
+      <li><strong>[definition]</strong> Sa courbe est croissante, toujours strictement au-dessus de l'axe des abscisses, et passe par <span class="math">A(0 ; 1)</span></li>
+      <li><strong>[proprietes]</strong> Propriété maîtresse : <span class="math">e^(a + b) = e^a × e^b</span> — le produit d'exponentielles devient une somme d'exposants</li>
+      <li><strong>[proprietes]</strong> <span class="math">e^(−a) = 1 / e^a</span> et <span class="math">e^(a − b) = e^a / e^b</span> : l'exposant se soustrait dans un quotient</li>
+      <li><strong>[proprietes]</strong> <span class="math">(e^a)ⁿ = e^(a·n)</span> : la puissance multiplie les exposants</li>
+      <li><strong>[proprietes]</strong> Jamais <span class="math">e^(a + b) ≠ e^a + e^b</span> : l'exponentielle ne distribue pas sur la somme</li>
+      <li><strong>[calculs]</strong> Simplifier : tout ramener à une seule puissance <span class="math">e^(…)</span> (produit → addition, quotient → soustraction)</li>
+      <li><strong>[calculs]</strong> Factoriser par la plus petite exponentielle : <span class="math">e^(2x) + e^x = e^x(e^x + 1)</span> — réflexe de signe et de dérivée au Bac</li>
+      <li><strong>[calculs]</strong> <span class="math">1 / e^(2x) = e^(−2x)</span> : un dénominateur exponentiel remonte en changeant le signe de l'exposant</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 1 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : la dérivée de exp et de exp(u)</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

@@ -1,0 +1,444 @@
+<!-- ============================================================ -->
+<!-- PARTIE 3 : ARBRES GÉNÉALOGIQUES & ANALYSE (3 NOTIONS)         -->
+<!-- Notion 1 · conventions_arbre : carré/rond, plein/vide, lignes -->
+<!--            d'union et de descendance, générations I, II, III  -->
+<!-- Notion 2 · analyse_arbre : dominant vs récessif, autosomal vs -->
+<!--            lié à X — les critères de décision                 -->
+<!-- Notion 3 · calcul_risques : probabilité pour un enfant d'être -->
+<!--            atteint, indépendance des naissances               -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 03 · Transmission des caractères héréditaires</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Arbres généalogiques &amp; <em>analyse génétique</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Chez l'Homme, on ne fait pas de croisements : on observe les familles. L'arbre généalogique est le document qui enregistre cette observation, et savoir l'<strong>analyser</strong> est un exercice central du Bac. Cette partie t'apprend <strong>3 choses</strong> : les <strong>conventions</strong> des arbres (carrés, ronds, lignes, générations), la <strong>méthode d'analyse</strong> pour décider si un caractère est dominant ou récessif, autosomal ou lié à X, et enfin le <strong>calcul du risque</strong> pour un enfant à naître.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span>
+      <span class="lecture-hero-meta-item">🧬 3 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">3 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — La famille comme document génétique</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · conventions_arbre — Le langage des arbres généalogiques</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Exemple guidé — Lire un arbre ligne par ligne</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · analyse_arbre — Dominant ou récessif ?</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 (suite) — Autosomal ou lié à X ?</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>La méthode d'analyse en 4 étapes</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 3 · calcul_risques — Le risque pour un enfant</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Erreurs fréquentes et pièges d'examen</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ===== SECTION 0 : MOTIVATION ===== -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">La famille comme document génétique</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Impossible de croiser des êtres humains pour étudier la transmission d'un caractère : ni raison éthique, ni temps (une génération humaine dure 25 ans !). Mais l'humanité a produit, sans le savoir, des milliers d'« expériences » toutes prêtes : les <strong>familles</strong>. Il suffit d'interroger, d'écouter les grands-mères, de consulter les registres — et de dessiner ce que l'on apprend.
+      </p>
+      <p class="lecture-text">
+        Le dessin obtenu — l'<strong>arbre généalogique</strong> (ou pedigree) — ressemble à une petite carte. Et comme toute carte, il a son langage de symboles, ses règles de lecture… et des indices cachés : la position des individus atteints dans l'arbre <strong>révèle</strong> si le caractère est dominant ou récessif, porté par un autosome ou par le chromosome X. C'est un jeu de déduction passionnant, très demandé aux examens.
+      </p>
+      <aside class="lecture-aside">
+        <div class="lecture-aside-content">
+          <div class="lecture-aside-label">Métier réel</div>
+          <p>Ce que tu apprends ici est le quotidien des <strong>conseillers en génétique</strong> : à partir d'un arbre de famille, ils évaluent le risque qu'un couple transmette la drépanocytose ou l'hémophilie, et informent les futurs parents. Dans les centres de santé du Niger qui dépistent la drépanocytose, le même raisonnement sert à interpréter les résultats d'un couple.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 1 : NOTION 1 · CONVENTIONS_ARBRE ===== -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · conventions_arbre</span>
+        <h2 class="lecture-section-title">Le langage des arbres généalogiques</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">Définition — arbre généalogique</div>
+        <p>Un <strong>arbre généalogique</strong> est un schéma qui représente les liens de parenté entre les membres d'une famille sur plusieurs générations, et qui signale, pour chaque individu, s'il présente (ou non) le caractère étudié. Il permet de suivre la transmission d'un caractère héréditaire et d'en déduire le mode de transmission.</p>
+      </div></div>
+      <p class="lecture-text">
+        Voici les <strong>conventions universelles</strong> — les mêmes dans tous les manuels et tous les sujets d'examen :
+      </p>
+      <ul class="lecture-list">
+        <li><strong>Carré</strong> = homme ; <strong>rond</strong> = femme ;</li>
+        <li><strong>Figure pleine (remplie)</strong> = individu atteint (malade) ; <strong>figure vide</strong> = individu sain ;</li>
+        <li>Parfois, un <strong>point au centre</strong> d'une figure vide = porteur sain connu (hétérozygote dépisté) ;</li>
+        <li><strong>Ligne horizontale</strong> entre un homme et une femme = couple (union, mariage) ;</li>
+        <li><strong>Ligne verticale</strong> descendant d'un couple, puis barre d'où pendent les enfants = <strong>descendance</strong> (fratrie) ;</li>
+        <li>Les générations se numérotent en <strong>chiffres romains</strong> (I, II, III…) de la plus ancienne à la plus récente ;</li>
+        <li>Dans chaque génération, les individus se numérotent <strong>de gauche à droite</strong> : II-3 désigne le 3e individu de la génération II.</li>
+      </ul>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 460 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Symboles des arbres généalogiques : carré pour homme, rond pour femme, figure pleine pour individu atteint, figure vide pour individu sain">
+          <text x="230" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">LES SYMBOLES À CONNAÎTRE</text>
+          <rect x="40" y="45" width="30" height="30" rx="4" fill="none" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <text x="55" y="100" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">homme sain</text>
+          <circle cx="145" cy="60" r="16" fill="none" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <text x="145" y="100" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">femme saine</text>
+          <rect x="220" y="45" width="30" height="30" rx="4" style="fill:var(--danger-light)"/>
+          <text x="235" y="100" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">homme atteint</text>
+          <circle cx="325" cy="60" r="16" style="fill:var(--danger-light)"/>
+          <text x="325" y="100" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">femme atteinte</text>
+          <circle cx="415" cy="60" r="16" fill="none" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <circle cx="415" cy="60" r="5" style="fill:var(--danger-light)"/>
+          <text x="415" y="100" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">porteuse saine</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Carré = homme, rond = femme ; figure pleine = atteint, figure vide = sain ; point central = porteur sain.</figcaption>
+      </figure>
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">⚠️ « Atteint » ne préjuge ni du sexe ni de la gravité</div>
+        <p>« Atteint » signifie seulement « présente le caractère étudié » — cela peut être le daltonisme, la drépanocytose, ou un simple caractère morphologique. Et n'oublie pas le sens des figures : inverser carré/rond dans ta copie, et l'arbre entier change de signification ! Vérifie deux fois tes figures avant de rendre.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2 : EXEMPLE GUIDÉ ===== -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Exemple guidé</span>
+        <h2 class="lecture-section-title">Lire un arbre ligne par ligne</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Prenons un arbre simple à trois générations — tu le réutiliseras dans toute la suite de la partie. Le caractère étudié est une maladie héréditaire (imagine la drépanocytose) :
+      </p>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 560 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Arbre généalogique sur trois générations : deux parents sains ont trois enfants dont un garçon atteint ; la fille saine a épousé un homme sain et a deux enfants sains">
+          <text x="280" y="20" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">ARBRE DE LA FAMILLE — CARACTÈRE ÉTUDIÉ : MALADIE HÉRÉDITAIRE</text>
+          <text x="24" y="78" style="fill:var(--text-dim)" font-size="14" font-weight="700" font-family="Inter" text-anchor="middle">I</text>
+          <text x="24" y="155" style="fill:var(--text-dim)" font-size="14" font-weight="700" font-family="Inter" text-anchor="middle">II</text>
+          <text x="24" y="230" style="fill:var(--text-dim)" font-size="14" font-weight="700" font-family="Inter" text-anchor="middle">III</text>
+          <rect x="166" y="64" width="28" height="28" rx="3" fill="none" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <circle cx="270" cy="78" r="14" fill="none" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <line x1="194" y1="78" x2="256" y2="78" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <text x="180" y="54" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">I-1 ♂</text>
+          <text x="270" y="54" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">I-2 ♀</text>
+          <line x1="225" y1="78" x2="225" y2="112" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <line x1="90" y1="112" x2="300" y2="112" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <line x1="90" y1="112" x2="90" y2="132" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <line x1="190" y1="112" x2="190" y2="132" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <line x1="300" y1="112" x2="300" y2="132" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <circle cx="90" cy="146" r="14" fill="none" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <rect x="176" y="132" width="28" height="28" rx="3" style="fill:var(--danger-light)"/>
+          <circle cx="300" cy="146" r="14" fill="none" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <text x="90" y="180" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">II-1 ♀ saine</text>
+          <text x="190" y="180" style="fill:var(--danger-light)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle">II-2 ♂ atteint</text>
+          <text x="300" y="180" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">II-3 ♀ saine</text>
+          <rect x="386" y="132" width="28" height="28" rx="3" fill="none" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <text x="400" y="180" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">conjoint sain</text>
+          <line x1="314" y1="146" x2="386" y2="146" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <line x1="350" y1="146" x2="350" y2="196" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <line x1="270" y1="196" x2="430" y2="196" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <line x1="270" y1="196" x2="270" y2="216" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <line x1="430" y1="196" x2="430" y2="216" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <circle cx="270" cy="230" r="14" fill="none" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <rect x="416" y="216" width="28" height="28" rx="3" fill="none" style="stroke:var(--accent-bright)" stroke-width="2"/>
+          <text x="270" y="264" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">III-1 ♀ saine</text>
+          <text x="430" y="264" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">III-2 ♂ sain</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Trois générations : le couple I-1 × I-2 (tous deux sains) a trois enfants dont un garçon atteint (II-2). La fille II-3 a épousé un homme sain et a deux enfants sains.</figcaption>
+      </figure>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🎓 Lecture guidée, phrase par phrase</div>
+        <div class="lecture-example-content">
+          <p><strong>Ligne 1 (génération I) :</strong> I-1 (homme) et I-2 (femme) sont reliés par une ligne d'union — ce sont les parents. Tous deux sont <strong>sains</strong> (figures vides).</p>
+          <p><strong>Ligne 2 (génération II) :</strong> la ligne verticale issue du couple descend vers une barre d'où pend une <strong>fratrie de trois</strong> : II-1 (fille saine), <strong>II-2 (garçon ATTEINT)</strong>, II-3 (fille saine). II-3 est reliée à un homme sain extérieur à la fratrie (son époux).</p>
+          <p><strong>Ligne 3 (génération III) :</strong> le couple II-3 × son époux a deux enfants, III-1 (fille saine) et III-2 (garçon sain).</p>
+          <p><strong>Le fait qui saute aux yeux :</strong> deux parents <strong>sains</strong> (I-1, I-2) ont eu un enfant <strong>atteint</strong> (II-2). Ce détail unique va suffire à déterminer le mode de transmission — c'est l'objet de la section suivante.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">Réflexe de lecture</div>
+        <p>Toujours lire un arbre dans le même ordre : (1) compter les générations, (2) repérer les individus <strong>atteints</strong>, (3) pour chaque atteint, regarder le statut de ses <strong>parents</strong> — c'est là que se cache l'information décisive.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3 : NOTION 2 · DOMINANT OU RÉCESSIF ===== -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · analyse_arbre</span>
+        <h2 class="lecture-section-title">Dominant ou récessif ?</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">Le critère décisif</div>
+        <p>Si <strong>deux parents sains</strong> ont un <strong>enfant atteint</strong>, le caractère est nécessairement <strong>récessif</strong> : les parents possèdent l'allèle sans le montrer (ils sont porteurs), donc l'allèle atteint ne s'exprime qu'à l'état homozygote. Réciproquement, si <strong>tout individu atteint a au moins un de ses parents atteint</strong>, le caractère est <strong>dominant</strong> : il s'exprime dès qu'un seul allèle le porte et se transmet de génération en génération, <strong>sans sauter</strong>.</p>
+      </div></div>
+      <div class="lecture-table">
+        <table>
+          <tr><th>Indice observé dans l'arbre</th><th>Conclusion</th><th>Explication génétique</th></tr>
+          <tr><td>2 parents sains → enfant atteint</td><td><strong>récessif</strong></td><td>parents porteurs (<span class="math">Aa × Aa</span>) : le récessif « saute » une génération</td></tr>
+          <tr><td>le caractère apparaît à chaque génération, sans saut</td><td><strong>plutôt dominant</strong></td><td>un individu atteint a (au moins) un parent atteint</td></tr>
+          <tr><td>2 parents atteints → enfant sain</td><td><strong>dominant</strong></td><td>parents hétérozygotes (<span class="math">Aa × Aa</span>) : l'enfant <span class="math">aa</span> est sain</td></tr>
+          <tr><td>2 parents atteints → tous les enfants atteints</td><td>compatible avec <strong>récessif</strong></td><td>parents homozygotes <span class="math">aa × aa</span> : 100 % d'atteints</td></tr>
+        </table>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🎓 Application à l'arbre de la section 2</div>
+        <div class="lecture-example-content">
+          <p>I-1 et I-2 sont <strong>sains</strong>, et pourtant leur fils II-2 est <strong>atteint</strong>. Parents sains → enfant atteint : le caractère est donc <strong>récessif</strong>. On peut même écrire les génotypes : en notant <span class="math">a</span> l'allèle atteint et <span class="math">A</span> l'allèle sain, II-2 est <span class="math">aa</span> ; il a reçu un <span class="math">a</span> de chaque parent, qui sont donc <strong>tous deux porteurs</strong> : <span class="math">Aa × Aa</span>. L'enfant atteint « révèle » ce que les parents cachaient.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">⚠️ Un caractère dominant peut « sembler » sauter</div>
+        <p>Un individu atteint d'un caractère dominant a toujours un parent atteint — mais ce parent peut être <strong>décédé avant l'apparition</strong> de la maladie (maladie tardive) ou être légèrement atteint sans qu'on l'ait remarqué. Si l'arbre montre un « saut » réel (parents vraiment sains → enfant atteint), c'est récessif, sans discussion. Justifie toujours ton choix par la phrase exacte du critère.</p>
+      </div></div>
+      <aside class="lecture-aside">
+        <div class="lecture-aside-content">
+          <div class="lecture-aside-label">Savoir en contexte — la consanguinité</div>
+          <p>Les caractères <strong>récessifs</strong> apparaissent plus souvent dans les familles où les mariages se font entre cousins : deux cousins porteurs ont davantage de chances de partager le même allèle récessif venu d'un ancêtre commun. C'est un indice classique des sujets : « mariage consanguin » + caractère récurrent → pense récessif.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4 : NOTION 2 (SUITE) — AUTOSOMAL OU LIÉ À X ===== -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · analyse_arbre (suite)</span>
+        <h2 class="lecture-section-title">Autosomal ou lié à X ?</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Une fois tranché dominant/récessif, reste à localiser le gène : sur un <strong>autosome</strong> (chromosome non sexuel) ou sur le <strong>chromosome X</strong> ? De nouveau, ce sont les positions des atteints qui tranchent :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <tr><th>Indice observé dans l'arbre</th><th>Conclusion</th><th>Pourquoi</th></tr>
+          <tr><td>père atteint → <strong>toutes ses filles</strong> atteintes (et aucun garçon)</td><td>dominant <strong>lié à X</strong></td><td>le père donne son X (qui porte l'allèle) à toutes ses filles, son Y à tous ses garçons</td></tr>
+          <tr><td>garçons surtout atteints, via des mères porteuses saines</td><td>récessif <strong>lié à X</strong></td><td>l'homme hémizygote exprime son unique X ; la fille a deux X</td></tr>
+          <tr><td>atteints des deux sexes, en proportions voisines</td><td><strong>autosomal</strong></td><td>un autosome se transmet pareillement aux filles et aux garçons</td></tr>
+          <tr><td>transmission <strong>père → fils</strong> observée</td><td><strong>autosomal</strong> (sûr)</td><td>impossible pour un gène lié à X : le père donne Y à ses fils</td></tr>
+        </table>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">Règle d'or — la transmission père → fils</div>
+        <div class="lecture-rule-body">
+          <p class="lecture-text">Un gène porté par le chromosome X ne peut <strong>jamais</strong> passer d'un père à son fils (le fils reçoit le Y paternel). Donc : <strong>un seul père atteint → un seul fils atteint</strong> dans l'arbre, et le gène est forcément <strong>autosomal</strong>. C'est le test le plus rapide et le plus sûr de toute l'analyse — cherche-le en premier.</p>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🎓 Conclusion complète sur l'arbre de la section 2</div>
+        <div class="lecture-example-content">
+          <p><strong>Étape 1 :</strong> récessif (parents sains I-1 × I-2 → enfant atteint II-2). <strong>Étape 2 :</strong> l'atteint est un garçon, certes, mais un seul individu ne suffit pas à conclure « lié à X » ; aucune transmission père → fils n'est visible, et le couple I-1 × I-2 pourrait aussi bien être <span class="math">Aa × Aa</span> (autosomal) que <span class="math">XᴰXᵈ × XᴰY</span> (lié à X). Avec si peu d'individus, on conclut prudemment : caractère <strong>récessif</strong>, <strong>probablement autosomal</strong> (comme la drépanocytose). Sur un vrai sujet, un arbre plus riche lèverait le doute.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">🧯 Les quatre modes à connaître par cœur</div>
+        <ul class="lecture-list-elegant">
+          <li><strong>autosomal récessif</strong><span>drépanocytose — atteints des deux sexes, parents porteurs sains, risque 1/4 pour AS × AS</span></li>
+          <li><strong>récessif lié à X</strong><span>daltonisme, hémophilie — surtout des garçons, mères porteuses, jamais père → fils</span></li>
+          <li><strong>autosomal dominant</strong><span>transmission de génération en génération, un parent atteint suffit, père → fils possible</span></li>
+          <li><strong>dominant lié à X</strong><span>père atteint → toutes ses filles atteintes, aucun garçon</span></li>
+        </ul>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5 : LA MÉTHODE EN 4 ÉTAPES ===== -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Méthode</span>
+        <h2 class="lecture-section-title">La méthode d'analyse en 4 étapes</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Face à n'importe quel arbre de sujet d'examen, applique toujours le même ordre — c'est ce que le correcteur cherche dans ta copie :
+      </p>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <span class="lecture-step-number">1</span>
+          <div class="lecture-step-content"><strong>Décrire l'arbre</strong><p>nombre de générations, individus atteints (avec leurs numéros I-1, II-2…), statut de leurs parents — c'est la phase d'observation</p></div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">2</span>
+          <div class="lecture-step-content"><strong>Conclure : dominant ou récessif</strong><p>parents sains → enfant atteint = récessif ; tout atteint a un parent atteint = dominant — cite le couple d'individus qui te fait conclure</p></div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">3</span>
+          <div class="lecture-step-content"><strong>Conclure : autosomal ou lié à X</strong><p>père → fils possible = autosomal ; garçons surtout atteints via mères porteuses = récessif lié à X ; père atteint → toutes filles = dominant lié à X</p></div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">4</span>
+          <div class="lecture-step-content"><strong>Écrire les génotypes et calculer le risque</strong><p>attribuer un génotype à chaque individu (au moins aux parents de l'atteint), puis dresser l'échiquier du couple demandé</p></div>
+        </div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">Réflexe Bac</div>
+        <div class="lecture-rule-body">
+          <p class="lecture-text">Chaque conclusion doit être <strong>justifiée par un couple d'individus précis</strong> : « le caractère est récessif car I-1 et I-2, sains, ont un enfant atteint (II-2) » — et non « le caractère semble récessif ». En génétique, on démontre, on ne devine pas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 6 : NOTION 3 · CALCUL_RISQUES ===== -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · calcul_risques</span>
+        <h2 class="lecture-section-title">Le risque pour un enfant</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">Définition — risque génétique</div>
+        <p>Le <strong>risque</strong> (ou probabilité de récurrence) est la probabilité qu'un enfant à naître présente le caractère étudié, compte tenu du génotype de ses parents. Il se calcule à partir de l'<strong>échiquier de croisement</strong> des deux parents : nombre de cas favorables divisé par nombre de cas possibles.</p>
+      </div></div>
+      <p class="lecture-text">
+        Reprenons l'arbre de la section 2. Question type d'examen : <strong>« I-1 et I-2 attendent un quatrième enfant. Quelle est la probabilité qu'il soit atteint ? »</strong> Suivons la méthode :
+      </p>
+      <div class="lecture-steps">
+        <div class="lecture-step">
+          <span class="lecture-step-number">1</span>
+          <div class="lecture-step-content"><strong>Mode de transmission</strong><p>caractère récessif (parents sains → enfant atteint), considéré ici autosomal : allèle <span class="math">a</span> (atteint), allèle <span class="math">A</span> (sain)</p></div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">2</span>
+          <div class="lecture-step-content"><strong>Génotypes des parents</strong><p>II-2 est <span class="math">aa</span>, et chaque parent lui a donné un <span class="math">a</span> : I-1 et I-2 sont tous deux <strong>porteurs</strong> — <span class="math">Aa × Aa</span></p></div>
+        </div>
+        <div class="lecture-step">
+          <span class="lecture-step-number">3</span>
+          <div class="lecture-step-content"><strong>Échiquier et risque</strong><p><span class="math">Aa × Aa</span> → <span class="math">1/4 AA</span>, <span class="math">1/2 Aa</span>, <span class="math">1/4 aa</span> : <strong>risque = 1/4 (25 %)</strong> que l'enfant à naître soit atteint</p></div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🎓 Un second exemple — le risque lié à X</div>
+        <div class="lecture-example-content">
+          <p>Une femme dont le frère est hémophile est testée : elle est porteuse (<span class="math">XᴴXʰ</span>). Son mari est sain (<span class="math">XᴴY</span>). Échiquier (vu en partie 2) : filles 100 % saines (dont 1/2 porteuses) ; garçons 1/2 sains, 1/2 hémophiles. <strong>Risque pour l'enfant à naître :</strong> 1/2 × 1/2 = <strong>1/4</strong> d'être hémophile ; <strong>risque pour un garçon à naître : 1/2</strong>. Les deux énoncés ne posent pas la même question — relis-la deux fois.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">⚠️ Les naissances sont indépendantes — piège n°1</div>
+        <p>« Nous avons déjà trois enfants sains, le quatrième sera forcément atteint ! » <strong>Faux.</strong> Chaque fécondation est un tirage indépendant : le risque reste <strong>1/4 à chaque grossesse</strong>, quel que soit le passé du couple — comme un lancer de dé qui ne « doit » rien au lancer précédent. La réciproque est vraie aussi : quatre enfants sains ne garantissent pas que le cinquième le soit.</p>
+      </div></div>
+      <div class="lecture-callout lecture-callout-danger"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">🧯 Exprimer un risque correctement</div>
+        <p>Un risque s'exprime en <strong>fraction ou en pourcentage</strong> (« 1/4 », soit « 25 % »), et toujours <strong>par naissance</strong>. Répondre « ils auront un enfant malade » est faux : le couple n'a pas « un » enfant malade garanti, il a un <strong>risque de 25 % à chaque grossesse</strong>. Cette nuance de formulation rapporte des points.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 7 : ERREURS FRÉQUENTES ===== -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Fiche</span>
+        <h2 class="lecture-section-title">Erreurs fréquentes et pièges d'examen</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le tableau de bord des fautes que les correcteurs voient le plus souvent sur les arbres généalogiques :
+      </p>
+      <div class="lecture-callout lecture-callout-danger"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">🧯 Les 6 fautes classiques — et leurs antidotes</div>
+        <ul class="lecture-list-elegant">
+          <li><strong>Conclure dominant/récessif sans le justifier</strong><span>cite toujours le couple d'individus qui prouve ta conclusion (numéros de génération)</span></li>
+          <li><strong>Confondre récessif et lié à X</strong><span>ce sont deux questions différentes : l'expression (dominant/récessif) puis la localisation (autosome/X)</span></li>
+          <li><strong>Conclure « lié à X » sur un seul garçon atteint</strong><span>un garçon atteint est compatible avec les deux hypothèses — il faut des indices plus forts (père → fils, mères porteuses, répartition des sexes)</span></li>
+          <li><strong>Oublier que le père ne transmet pas son X à ses fils</strong><span>le test père → fils tranche immédiatement : transmission père → fils = autosomal</span></li>
+          <li><strong>Ne donner un génotype qu'aux individus atteints</strong><span>les parents sains d'un atteint sont au moins porteurs : écris-le (<span class="math">Aa</span> ou <span class="math">XᴰXᵈ</span>)</span></li>
+          <li><strong>« Déjà trois enfants sains… »</strong><span>les naissances sont indépendantes : le risque ne change pas d'une grossesse à l'autre</span></li>
+        </ul>
+      </div></div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">Phrase de conclusion modèle (à adapter)</div>
+        <div class="lecture-example-content">
+          <p>« Le caractère étudié est <strong>récessif</strong>, car les individus I-1 et I-2, tous deux sains, ont un fils atteint (II-2) ; il est <strong>autosomal</strong>, car il frappe les deux sexes et qu'aucune transmission père → fils ne l'exclut. Les parents I-1 et I-2 sont donc porteurs (<span class="math">Aa × Aa</span>) et le risque pour un nouvel enfant d'être atteint est de <strong>1/4</strong>. »</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Dans un arbre généalogique, un carré plein représente :</p>
+      <div class="lecture-quiz-options"><span>A) un homme sain</span><span>B) un homme atteint</span><span>C) une femme atteinte</span><span>D) un porteur sain</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B.</strong> Carré = homme, figure pleine = atteint. Le porteur sain se note (parfois) par un point central dans une figure vide — réponse D.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Deux parents sains ont un enfant atteint. Que peut-on conclure d'emblée ?</p>
+      <div class="lecture-quiz-options"><span>A) le caractère est dominant</span><span>B) le caractère est récessif</span><span>C) le caractère est lié à X</span><span>D) rien du tout</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B.</strong> Parents sains → enfant atteint : les parents sont porteurs, l'allèle ne s'exprime qu'en homozygote → caractère RÉCESSIF. En revanche, on ne peut pas encore conclure autosomal ou lié à X (réponse C) : cela demande d'autres indices (répartition des sexes, père → fils).</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Un couple a déjà trois enfants sains. Le risque que le quatrième soit atteint (caractère récessif, parents porteurs) est :</p>
+      <div class="lecture-quiz-options"><span>A) nul, trois sains d'affilée suffisent</span><span>B) plus faible que 1/4</span><span>C) toujours 1/4</span><span>D) plus fort que 1/4</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>C) toujours 1/4.</strong> Les fécondations sont indépendantes : le résultat d'une grossesse ne dépend pas des précédentes, comme un lancer de dé. C'est l'un des pièges les plus fréquents des sujets.</div></details>
+    </div>
+  </div>
+
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[conventions_arbre]</strong> Carré = homme, rond = femme ; figure pleine = atteint, vide = sain, point central = porteur sain ; ligne horizontale = couple, ligne verticale = descendance ; générations en chiffres romains (I, II, III), individus numérotés de gauche à droite (II-3)</li>
+      <li><strong>[conventions_arbre]</strong> Lire un arbre : compter les générations → repérer les atteints → regarder le statut de leurs parents</li>
+      <li><strong>[analyse_arbre]</strong> Parents sains → enfant atteint = caractère <strong>récessif</strong> (les parents sont porteurs) ; tout atteint a un parent atteint = <strong>dominant</strong></li>
+      <li><strong>[analyse_arbre]</strong> 2 parents atteints → enfant sain = dominant (parents <span class="math">Aa × Aa</span> → enfant <span class="math">aa</span> sain)</li>
+      <li><strong>[analyse_arbre]</strong> Transmission père → fils = gène forcément <strong>autosomal</strong> (le père ne donne que Y à ses fils)</li>
+      <li><strong>[analyse_arbre]</strong> Garçons surtout atteints via mères porteuses = récessif lié à X ; père atteint → toutes filles atteintes = dominant lié à X ; atteints des deux sexes = autosomal</li>
+      <li><strong>[calcul_risques]</strong> Le risque se calcule par l'échiquier des parents : porteurs <span class="math">Aa × Aa</span> → <strong>1/4</strong> d'enfant atteint ; femme porteuse <span class="math">XᴴXʰ</span> × homme sain <span class="math">XᴴY</span> → 1/4 d'enfant atteint (mais 1/2 pour un garçon)</li>
+      <li><strong>[calcul_risques]</strong> Les naissances sont <strong>indépendantes</strong> : le risque reste 1/4 à chaque grossesse, quel que soit le nombre d'enfants sains déjà nés</li>
+      <li><strong>[calcul_risques]</strong> Un risque s'exprime en fraction ou en pourcentage, par naissance — jamais « ils auront forcément »</li>
+      <li><strong>[analyse_arbre]</strong> La conclusion d'analyse se rédige toujours en citant les individus qui la justifient : « récessif car I-1 et I-2 sains ont II-2 atteint »</li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 3 terminée !</div>
+    <div class="lecture-end-sub">Passe à la dernière partie : la fiche complète de révision</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

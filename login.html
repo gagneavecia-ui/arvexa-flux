@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+    <title>ARVEXA — Connexion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0A0A">
+<script>(function(){try{if(localStorage.getItem('arvexa-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}})();</script>
+<script src="theme.js"></script><script src="arvexa-i18n.js" defer></script>
+  <meta name="description" content="ARVEXA School - Connexion">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="stylesheet" href="perf.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="analytics.js"></script>
+  <script src="register-sw.js" defer></script>
+
+  <link rel="stylesheet" href="arvexa-ui.css">
+  <style>
+    /* ============================================================
+       ROOT — Design tokens ARVEXA
+       ============================================================ */
+    :root {
+      --primary: #1A3A2A;
+      --accent: #B8860B;
+      --accent-bright: #E0B84A;
+      --accent-dim: rgba(184, 134, 11, 0.08);
+      --success: #2D7D5A;
+      --success-light: #3AB67E;
+      --danger: #B85C3A;
+      --danger-light: #EF9C8E;
+      --warning: #F1C40F;
+
+      --bg-dark: #0A0A0A;
+      --bg-surface: #141414;
+      --bg-card: rgba(20, 20, 20, 0.7);
+      --bg-elevated: rgba(255, 255, 255, 0.02);
+
+      --text-light: #F5F0E8;
+      --text-dim: #A0A090;
+      --text-muted: #7A7A6A;
+
+      --card-border: rgba(184, 134, 11, 0.06);
+      --card-border-hover: rgba(224, 184, 74, 0.22);
+
+      --input-bg: rgba(255, 255, 255, 0.03);
+      --input-border: rgba(255, 255, 255, 0.08);
+      --input-border-focus: rgba(224, 184, 74, 0.55);
+
+      --transition: all 0.28s cubic-bezier(0.25, 1, 0.5, 1);
+      --transition-fast: all 0.15s ease;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+
+      --radius-sm: 10px;
+      --radius: 16px;
+      --radius-lg: 18px;
+
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    /* ============================================================
+       RESET
+       ============================================================ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      width: 100%;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      min-height: 100dvh;
+      width: 100%;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+    }
+
+    /* ============================================================
+       BACKGROUND
+       ============================================================ */
+    .bg-layer {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(ellipse 40% 30% at 30% 20%, rgba(184, 134, 11,  0.14) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 20% at 70% 80%, rgba(184, 134, 11, 0.03) 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-deep) 100%);
+    }
+
+    .glow {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: -2;
+      opacity: 0.14;
+    }
+    .glow-1 { width: 380px; height: 380px; background: rgba(184, 134, 11,  0.25); top: -100px; right: -100px; }
+    .glow-2 { width: 250px; height: 250px; background: rgba(184, 134, 11, 0.08); bottom: -60px; left: -60px; }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0;
+      display: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    .site-header {
+      width: 100%;
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 20px 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0;
+      text-decoration: none;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(20px, 3.4vw, 24px);
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: var(--text-light);
+      transition: var(--transition-fast);
+    }
+    .logo:hover { opacity: 0.85; }
+    .logo .gold {
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright), var(--accent));
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-style: italic;
+      margin-left: 4px;
+      animation: shimmerText 5s linear 2;
+    }
+    @keyframes shimmerText {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .header-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-decoration: none;
+      padding: 9px 16px;
+      min-height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(224, 184, 74, 0.28);
+      background: rgba(224, 184, 74, 0.04);
+      transition: var(--transition-fast);
+      white-space: nowrap;
+    }
+    .header-link:hover {
+      color: var(--text-light);
+      border-color: rgba(224, 184, 74, 0.55);
+      background: rgba(224, 184, 74, 0.10);
+    }
+    .header-link i { font-size: 12px; color: var(--accent-bright); }
+    .header-link:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 3px;
+    }
+
+    /* ============================================================
+       MAIN CONTAINER
+       ============================================================ */
+    .page {
+      flex: 1;
+      width: 100%;
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+      animation: pageEnter 0.55s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    @keyframes pageEnter {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      text-align: center;
+      padding: 26px 0 30px;
+    }
+
+    .hero-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(224, 184, 74, 0.14), rgba(184, 134, 11,  0.10));
+      border: 1px solid rgba(224, 184, 74, 0.28);
+      color: var(--accent-bright);
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .hero-icon svg {
+      width: 32px;
+      height: 32px;
+      display: block;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      border-radius: 999px;
+      background: rgba(224, 184, 74, 0.08);
+      border: 1px solid rgba(224, 184, 74, 0.20);
+      color: var(--accent-bright);
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero-badge i { font-size: 12px; }
+
+    .hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(30px, 6.4vw, 42px);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      color: var(--text-light);
+      margin-bottom: 14px;
+    }
+    .hero-title em {
+      color: var(--accent-bright);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(14px, 2vw, 15.5px);
+      color: var(--text-dim);
+      line-height: 1.65;
+      max-width: 400px;
+      margin: 0 auto;
+      font-weight: 400;
+    }
+
+    /* ============================================================
+       FORM CARD
+       ============================================================ */
+    .form-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 32px 26px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(224, 184, 74, 0.45), transparent);
+    }
+
+    /* ============================================================
+       FORM FIELDS
+       ============================================================ */
+    .field {
+      margin-bottom: 18px;
+      position: relative;
+      min-width: 0;
+      width: 100%;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+      letter-spacing: 0.15px;
+    }
+
+    .field-input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: var(--radius);
+      transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
+      overflow: hidden;
+      min-width: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .field-input-wrap:focus-within {
+      border-color: var(--input-border-focus);
+      background: rgba(224, 184, 74, 0.03);
+      box-shadow: 0 0 0 3px rgba(224, 184, 74, 0.10);
+    }
+    .field-input-wrap.is-error {
+      border-color: rgba(231, 76, 60, 0.55);
+      background: rgba(231, 76, 60, 0.04);
+    }
+    .field-input-wrap.is-error:focus-within {
+      box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.12);
+    }
+    .field-input-wrap.is-success {
+      border-color: rgba(58, 182, 126, 0.55);
+      background: rgba(58, 182, 126, 0.03);
+    }
+
+    .field-input-wrap .icon {
+      padding: 0 4px 0 16px;
+      color: var(--text-muted);
+      font-size: 14px;
+      flex-shrink: 0;
+      transition: color 0.18s ease;
+      display: flex;
+      align-items: center;
+    }
+    .field-input-wrap:focus-within .icon {
+      color: var(--accent-bright);
+    }
+    .field-input-wrap.is-error .icon {
+      color: var(--danger);
+    }
+
+    .field-input-wrap input {
+      flex: 1;
+      min-width: 0;
+      width: 100%;
+      padding: 14px 14px 14px 10px;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-light);
+      font-size: 15px;
+      font-family: inherit;
+      font-weight: 400;
+      transition: var(--transition-fast);
+      box-sizing: border-box;
+    }
+    .field-input-wrap input::placeholder {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .field-input-wrap input:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 30px var(--bg-elev) inset !important;
+      -webkit-text-fill-color: var(--text-light) !important;
+    }
+
+    .field-status {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 15px;
+      pointer-events: none;
+      transition: var(--transition-fast);
+    }
+    .field-status.success { color: var(--success-light); }
+    .field-status.error { color: var(--danger); }
+
+    .toggle-pwd {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: var(--transition-fast);
+      z-index: 2;
+    }
+    .toggle-pwd:hover {
+      color: var(--accent-bright);
+      background: rgba(224, 184, 74, 0.08);
+    }
+    .toggle-pwd:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 1px;
+    }
+
+    .field-help {
+      display: none;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      padding-left: 4px;
+      line-height: 1.5;
+    }
+    .field-help.visible { display: block; }
+    .field-help.error { color: var(--danger-light); }
+
+    /* ============================================================
+       LOGIN OPTIONS (remember + forgot)
+       ============================================================ */
+    .login-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 6px 0 22px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .remember-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .remember-checkbox input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 22px;
+      height: 22px;
+      min-width: 22px;
+      border: 2px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      background: transparent;
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition-fast);
+      flex-shrink: 0;
+    }
+    .remember-checkbox input[type="checkbox"]:checked {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      border-color: var(--accent);
+    }
+    .remember-checkbox input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 6px;
+      top: 2px;
+      width: 7px;
+      height: 12px;
+      border: solid var(--bg-dark);
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    .remember-checkbox input[type="checkbox"]:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 2px;
+    }
+    .remember-checkbox label {
+      font-size: 13px;
+      color: var(--text-dim);
+      cursor: pointer;
+    }
+
+    .forgot-link {
+      font-size: 13px;
+      color: var(--accent-bright);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 500;
+      transition: var(--transition-fast);
+    }
+    .forgot-link:hover {
+      color: var(--accent-bright);
+    }
+    .forgot-link:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    /* ============================================================
+       SUBMIT BUTTON
+       ============================================================ */
+    .btn-submit {
+      width: 100%;
+      padding: 15px 24px;
+      border: none;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--on-gold);
+      font-family: inherit;
+      font-size: 15.5px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: transform 0.18s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s ease, opacity 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(184, 134, 11, 0.22);
+      min-height: 54px;
+      touch-action: manipulation;
+    }
+    .btn-submit:not(:disabled):hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(224, 184, 74, 0.38);
+    }
+    .btn-submit:not(:disabled):active {
+      transform: translateY(0) scale(0.99);
+    }
+    .btn-submit:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 3px;
+    }
+    .btn-submit:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .btn-submit .btn-icon { font-size: 14px; }
+    .btn-submit .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(var(--rgb-veil), 0.25);
+      border-top-color: var(--bg-dark);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    .btn-submit.loading .spinner { display: block; }
+    .btn-submit.loading .btn-icon,
+    .btn-submit.loading .btn-text { display: none; }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ============================================================
+       DIVIDER
+       ============================================================ */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 22px 0 18px;
+    }
+    .divider .line { flex: 1; height: 1px; background: rgba(var(--rgb-soft), 0.06); }
+    .divider .text {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       REGISTER LINK
+       ============================================================ */
+    .btn-register {
+      width: 100%;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(224, 184, 74, 0.28);
+      background: rgba(224, 184, 74, 0.04);
+      color: var(--text-light);
+      font-size: 14.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: inherit;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 50px;
+      touch-action: manipulation;
+    }
+    .btn-register:hover {
+      border-color: rgba(224, 184, 74, 0.55);
+      background: rgba(224, 184, 74, 0.10);
+      transform: translateY(-1px);
+    }
+    .btn-register:active { transform: scale(0.99); }
+    .btn-register:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 3px;
+    }
+    .btn-register i { font-size: 13px; color: var(--accent-bright); }
+
+    /* ============================================================
+       SECURITY BADGE
+       ============================================================ */
+    .security-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .security-note i {
+      color: var(--success-light);
+      font-size: 12px;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    .site-footer {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(var(--rgb-soft), 0.05);
+      text-align: center;
+    }
+    .site-footer p {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .site-footer a {
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: var(--transition-fast);
+    }
+    .site-footer a:hover { color: var(--accent-bright); }
+    .site-footer a:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 2px;
+      border-radius: 8px;
+    }
+
+    /* ============================================================
+       TOAST
+       ============================================================ */
+    .toast-container {
+      position: fixed;
+      top: calc(var(--safe-top) + 16px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      width: calc(100% - 32px);
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      background: rgba(var(--rgb-card), 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(var(--rgb-soft), 0.06);
+      color: var(--text-light);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow-lg);
+      animation: toastIn 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      pointer-events: auto;
+    }
+    .toast.success { border-color: rgba(58, 182, 126, 0.4); }
+    .toast.error { border-color: rgba(231, 76, 60, 0.4); }
+    .toast i { font-size: 15px; flex-shrink: 0; }
+    .toast.success i { color: var(--success-light); }
+    .toast.error i { color: var(--danger); }
+    .toast a { color: var(--accent-bright); font-weight: 600; text-decoration: underline; }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 480px) {
+      .site-header { padding: 16px 16px 0; }
+      .page { padding: 0 16px 40px; }
+      .hero { padding: 20px 0 22px; }
+      .hero-icon { width: 64px; height: 64px; border-radius: 20px; margin-bottom: 16px; }
+      .hero-icon svg { width: 28px; height: 28px; }
+      .hero-badge { font-size: 11px; padding: 6px 14px; }
+      .form-card { padding: 26px 20px; }
+      .field-input-wrap input { padding: 13px 12px 13px 8px; font-size: 16px; }
+      .btn-submit { padding: 14px 18px; min-height: 52px; font-size: 15px; }
+      .login-options { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+
+    @media (max-width: 360px) {
+      .site-header { padding: 12px 12px 0; }
+      .page { padding: 0 12px 32px; }
+      .hero { padding: 16px 0 18px; }
+      .hero-icon { width: 56px; height: 56px; border-radius: 16px; }
+      .hero-icon svg { width: 26px; height: 26px; }
+      .hero-title { font-size: 26px; }
+      .form-card { padding: 22px 16px; border-radius: 16px; }
+      .field { margin-bottom: 14px; }
+      .field-input-wrap input { font-size: 16px; padding: 12px 10px 12px 8px; }
+      .header-link span { display: none; }
+      .header-link { padding: 8px 12px; min-width: 40px; justify-content: center; }
+      .btn-submit { font-size: 14.5px; padding: 13px 16px; }
+    }
+
+    @media (min-width: 768px) {
+      .site-header { max-width: 560px; padding: 24px 24px 0; }
+      .page { max-width: 560px; padding: 0 24px 60px; }
+      .form-card { padding: 36px 32px; }
+    }
+
+    /* ============================================================
+       ACCESSIBILITÉ — prefers-reduced-motion
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      .page,
+      .logo .gold,
+      .field-input-wrap,
+      .btn-submit,
+      .btn-register,
+      .forgot-link,
+      .toast {
+        animation: none !important;
+        transition: none !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    label:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 3px;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(224, 184, 74, 0.25);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(224, 184, 74, 0.45);
+    }
+  </style>
+  <!-- ⚡ ARVEXA FLUX v1 — navigation instantanée -->
+  <script src="flux-router.js?v=flux1" defer></script>
+</head>
+<body>
+
+  <!-- ===== BACKGROUND ===== -->
+  <div class="bg-layer"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="grain"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <a href="index.html" class="logo">
+      ARVEX<span class="gold">A School</span>
+    </a>
+    <a href="register.html" class="header-link">
+      <i class="fas fa-user-plus"></i>
+      <span>Pas encore membre ?</span>
+    </a>
+  </header>
+
+  <!-- ===== PAGE ===== -->
+  <main class="page">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          <circle cx="12" cy="16.5" r="1.2" fill="currentColor" stroke="none"></circle>
+        </svg>
+      </div>
+      <div class="hero-badge">
+        <i class="fas fa-star"></i>
+        <span>Bon retour parmi nous</span>
+      </div>
+      <h1 class="hero-title">
+        Content de te <em>revoir</em> !
+      </h1>
+      <p class="hero-subtitle">
+        Retrouve ton espace personnel et continue ta préparation pour le BAC.
+      </p>
+    </section>
+
+    <!-- FORM CARD -->
+    <div class="form-card">
+      <form id="loginForm" novalidate>
+
+        <!-- EMAIL -->
+        <div class="field">
+          <label class="field-label" for="emailInput">Adresse e-mail</label>
+          <div class="field-input-wrap" id="emailWrap">
+            <span class="icon"><i class="fas fa-envelope"></i></span>
+            <input
+              type="email"
+              id="emailInput"
+              placeholder="exemple@email.com"
+              autocomplete="email"
+              inputmode="email"
+              required
+            >
+            <span class="field-status" id="emailStatus"></span>
+          </div>
+          <div class="field-help" id="emailHelp"></div>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="field">
+          <label class="field-label" for="passwordInput">Mot de passe</label>
+          <div class="field-input-wrap" id="passwordWrap">
+            <span class="icon"><i class="fas fa-lock"></i></span>
+            <input
+              type="password"
+              id="passwordInput"
+              placeholder="Entre ton mot de passe"
+              autocomplete="current-password"
+              required
+              minlength="6"
+            >
+            <button
+              type="button"
+              class="toggle-pwd"
+              id="togglePassword"
+              aria-label="Afficher le mot de passe"
+            >
+              <i class="fas fa-eye"></i>
+            </button>
+            <span class="field-status" id="passwordStatus" aria-live="polite"></span>
+          </div>
+          <div class="field-help" id="passwordHelp"></div>
+        </div>
+
+        <!-- OPTIONS -->
+        <div class="login-options">
+          <label class="remember-checkbox">
+            <input type="checkbox" id="rememberMe">
+            <label for="rememberMe">Se souvenir de moi</label>
+          </label>
+          <a href="forgot-password.html" class="forgot-link">Mot de passe oublié ?</a>
+        </div>
+
+        <!-- SUBMIT -->
+        <button type="submit" class="btn-submit" id="loginBtn" disabled>
+          <span class="btn-icon"><i class="fas fa-sign-in-alt"></i></span>
+          <span class="btn-text">Se connecter</span>
+          <span class="spinner"></span>
+        </button>
+      </form>
+
+      <!-- DIVIDER -->
+      <div class="divider">
+        <span class="line"></span>
+        <span class="text">ou</span>
+        <span class="line"></span>
+      </div>
+
+      <!-- REGISTER -->
+      <a href="register.html" class="btn-register">
+        <i class="fas fa-user-plus"></i>
+        Créer un nouveau compte
+      </a>
+
+      <!-- SECURITY -->
+      <div class="security-note">
+        <i class="fas fa-shield-alt"></i>
+        <span>Connexion sécurisée par Firebase</span>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <p>
+        &copy; 2026 ARVEXA School — Tous droits réservés
+        &nbsp;•&nbsp;
+        <a href="#" onclick="return false;">Aide</a>
+      </p>
+    </footer>
+  </main>
+
+  <!-- ===== TOASTS ===== -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js",
+      "firebase/auth": "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js",
+      "firebase/firestore": "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js"
+    }
+  }
+  </script>
+
+  <script type="module">
+  // ================================================================
+  // LOGIN — Version corrigée (sécurité + unicité de redirection)
+  // ================================================================
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+  import {
+    getAuth,
+    onAuthStateChanged,
+    setPersistence,
+    browserLocalPersistence,
+    signInWithEmailAndPassword,
+    signOut
+  } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+  import {
+    initializeFirestore,
+    persistentLocalCache,
+    persistentSingleTabManager,
+    doc,
+    getDoc,
+    updateDoc,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+  // ================================================================
+  // CONFIG
+  // ================================================================
+  const firebaseConfig = {
+    apiKey: "AIzaSyDHscOXw3rLuhV6z1Cny-bdYCumqpnG7QE",
+    authDomain: "arvexa-fbf10.firebaseapp.com",
+    projectId: "arvexa-fbf10",
+    storageBucket: "arvexa-fbf10.firebasestorage.app",
+    messagingSenderId: "920108330053",
+    appId: "1:920108330053:web:f532d71cbc2c824bc7472c"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const db = (window.__ARVEXA_DB_SHARED__ !== undefined ? window.__ARVEXA_DB_SHARED__ : (window.__ARVEXA_DB_SHARED__ = initializeFirestore(app, {
+    localCache: persistentLocalCache({
+      tabManager: persistentSingleTabManager()
+    })
+  })));
+
+  try {
+    await setPersistence(auth, browserLocalPersistence);
+  } catch (e) {
+    console.warn('[Auth] Persistance locale indisponible, repli sur le mode par défaut :', e.code || e.message);
+  }
+
+  // ================================================================
+  // DOM
+  // ================================================================
+  const form = document.getElementById('loginForm');
+  const emailInput = document.getElementById('emailInput');
+  const passwordInput = document.getElementById('passwordInput');
+  const loginBtn = document.getElementById('loginBtn');
+  const rememberMe = document.getElementById('rememberMe');
+  const togglePassword = document.getElementById('togglePassword');
+  const emailWrap = document.getElementById('emailWrap');
+  const passwordWrap = document.getElementById('passwordWrap');
+  const emailStatus = document.getElementById('emailStatus');
+  const passwordStatus = document.getElementById('passwordStatus');
+  const emailHelp = document.getElementById('emailHelp');
+  const passwordHelp = document.getElementById('passwordHelp');
+  const toastContainer = document.getElementById('toastContainer');
+
+  // ================================================================
+  // SESSION CACHE
+  // ================================================================
+  const SESSION_KEY = 'arvexa_session';
+  const REMEMBER_KEY = 'arvexa_remember_email';
+  const LAST_UID_KEY = 'arvexa_last_uid';
+
+  // Destinations internes autorisées après connexion
+  const ALLOWED_REDIRECTS = new Set([
+    'index.html',
+    'onboarding.html',
+    'whatsapp.html',
+    'profil.html',
+    'abonnement.html',
+    'notifications.html',
+    'arv-progress.html',
+    'matiere.html',
+    'calculatrice.html',
+    'formulaires.html',
+    'exam.html',
+    'tableau-periodique.html',
+    'outils.html',
+    // ✅ FIX — 10 pages protégées manquantes : les élèves renvoyés vers login
+    // après une session expirée retournaient toujours sur index.html au lieu
+    // de la page d'origine.
+    'lecture.html',
+    'chapitre.html',
+    'groupe.html',
+    'reviseur.html',
+    'exam-history.html',
+    'reviseur-history.html',
+    'planificateur.html',
+    'mathmind.html',
+    'arv.html',
+    'diagnostic.html'
+  ]);
+
+  function saveSession(user) {
+    if (!user) return;
+    try {
+      const data = {
+        uid: user.uid,
+        email: user.email,
+        lastActive: Date.now()
+      };
+      localStorage.setItem(SESSION_KEY, JSON.stringify(data));
+      localStorage.setItem(LAST_UID_KEY, user.uid);
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(data));
+    } catch (e) {
+      console.warn('[Session] Impossible de sauvegarder la session :', e.message);
+    }
+  }
+
+  function clearSession() {
+    try {
+      localStorage.removeItem(SESSION_KEY);
+      sessionStorage.removeItem(SESSION_KEY);
+    } catch (e) {}
+  }
+
+  // ================================================================
+  // SÉCURISATION DES REDIRECTIONS
+  // ================================================================
+  function sanitizeRedirect(raw) {
+    if (typeof raw !== 'string' || raw.length === 0) return null;
+
+    // Rejeter tout protocole (http:, https:, javascript:, data:, ...)
+    if (/^[a-zA-Z][a-zA-Z0-9+.-]*:/.test(raw)) return null;
+
+    // Rejeter les chemins réseau "//" et les variantes avec backslash
+    if (/^[\/\\]{2,}/.test(raw)) return null;
+
+    // Rejeter ".." pour éviter la traversée de répertoire
+    if (raw.includes('..')) return null;
+
+    // Extraire le chemin (sans query / hash)
+    const path = raw.split('?')[0].split('#')[0];
+
+    // Autoriser uniquement les fichiers HTML de la liste blanche
+    const clean = path.replace(/^\/+/, '').replace(/^\.\//, '');
+    if (!ALLOWED_REDIRECTS.has(clean)) return null;
+
+    return clean;
+  }
+
+  function consumeRedirectFromSession() {
+    const keys = ['redirectAfterLogin', 'redirectAfterAuth'];
+    let candidate = null;
+    for (const k of keys) {
+      try {
+        const v = sessionStorage.getItem(k);
+        if (v) { candidate = v; break; }
+      } catch (e) {}
+    }
+    for (const k of keys) {
+      try { sessionStorage.removeItem(k); } catch (e) {}
+    }
+    const safe = sanitizeRedirect(candidate);
+    return safe || 'index.html';
+  }
+
+  // ================================================================
+  // TOASTS — injection sécurisée par textContent
+  // ================================================================
+  function buildToast(type) {
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    const icon = document.createElement('i');
+    icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
+    toast.appendChild(icon);
+    const span = document.createElement('span');
+    toast.appendChild(span);
+    return { toast, span };
+  }
+
+  function showToast(message, type = 'success', duration = 4000) {
+    const { toast, span } = buildToast(type);
+    span.textContent = String(message);
+    toastContainer.appendChild(toast);
+    scheduleRemoval(toast, duration);
+  }
+
+  function showToastWithRegisterLink(duration = 6000) {
+    const { toast, span } = buildToast('error');
+    span.appendChild(document.createTextNode('❌ Aucun compte trouvé. '));
+    const a = document.createElement('a');
+    a.href = 'register.html';
+    a.textContent = 'Créer un compte';
+    span.appendChild(a);
+    toastContainer.appendChild(toast);
+    scheduleRemoval(toast, duration);
+  }
+
+  function scheduleRemoval(toast, duration) {
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(-10px)';
+      setTimeout(() => toast.remove(), 300);
+    }, duration);
+  }
+
+  // ================================================================
+  // VALIDATION UI
+  // ================================================================
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+  }
+
+  function validateForm() {
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+    const isValid = validateEmail(email) && password.length >= 6;
+    loginBtn.disabled = !isValid;
+    return isValid;
+  }
+
+  function validateField(fieldId) {
+    const input = fieldId === 'email' ? emailInput : passwordInput;
+    const wrap = fieldId === 'email' ? emailWrap : passwordWrap;
+    const status = fieldId === 'email' ? emailStatus : passwordStatus;
+    const help = fieldId === 'email' ? emailHelp : passwordHelp;
+
+    const value = input.value.trim();
+    let isValid = false;
+    let errorMsg = '';
+
+    if (fieldId === 'email') {
+      isValid = validateEmail(value);
+      errorMsg = 'Format d\'e-mail invalide';
+    } else {
+      isValid = value.length >= 6;
+      errorMsg = 'Le mot de passe doit contenir au moins 6 caractères';
+    }
+
+    const hasError = !isValid && value.length > 0;
+
+    if (wrap) {
+      wrap.classList.toggle('is-error', hasError);
+      wrap.classList.toggle('is-success', isValid && value.length > 0);
+    }
+
+    if (status) {
+      status.className = 'field-status';
+      if (value.length > 0) {
+        status.classList.add(isValid ? 'success' : 'error');
+        status.innerHTML = isValid ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-times-circle"></i>';
+      } else {
+        status.innerHTML = '';
+      }
+    }
+
+    if (help) {
+      help.className = 'field-help';
+      if (hasError) {
+        help.classList.add('visible', 'error');
+        help.textContent = errorMsg;
+      } else {
+        help.textContent = '';
+      }
+    }
+  }
+
+  emailInput.addEventListener('input', () => { validateField('email'); validateForm(); });
+  passwordInput.addEventListener('input', () => { validateField('password'); validateForm(); });
+  emailInput.addEventListener('blur', () => validateField('email'));
+  passwordInput.addEventListener('blur', () => validateField('password'));
+
+  togglePassword.addEventListener('click', function() {
+    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+    passwordInput.setAttribute('type', type);
+    this.querySelector('i').className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+    this.setAttribute('aria-label', type === 'password' ? 'Afficher le mot de passe' : 'Masquer le mot de passe');
+  });
+
+  // ================================================================
+  // CHARGEMENT DE L'EMAIL MÉMORISÉ
+  // ================================================================
+  const savedEmail = localStorage.getItem(REMEMBER_KEY);
+  if (savedEmail) {
+    emailInput.value = savedEmail;
+    rememberMe.checked = true;
+    validateField('email');
+    validateForm();
+  }
+
+  // ================================================================
+  // RÉSOLUTION UNIQUE DE L'ACCÈS
+  // ================================================================
+  let isResolving = false;      // une seule lecture Firestore à la fois
+  let isRedirecting = false;    // une seule redirection autorisée
+  let handledUid = null;        // évite de re-traiter le même utilisateur
+  let profileRedirectTimer = null;
+
+  function cancelProfileRedirect() {
+    if (profileRedirectTimer) {
+      clearTimeout(profileRedirectTimer);
+      profileRedirectTimer = null;
+    }
+  }
+
+  function redirectTo(path) {
+    if (isRedirecting) return;
+    isRedirecting = true;
+    cancelProfileRedirect();
+    window.location.replace(path);
+  }
+
+  async function attemptAccess(user) {
+    if (!user) return;
+    if (isResolving || isRedirecting) return;
+    if (handledUid === user.uid) return;
+
+    isResolving = true;
+    handledUid = user.uid;
+
+    let userDoc;
+    try {
+      const userRef = doc(db, 'users', user.uid);
+      userDoc = await getDoc(userRef);
+    } catch (err) {
+      console.warn('[Firestore] Lecture du profil échouée :', err.code || err.message);
+      const code = err && err.code ? err.code : '';
+      if (code === 'unavailable' || code === 'deadline-exceeded' || code === 'network-request-failed') {
+        showToast('Problème de connexion. Vérifie ta connexion internet.', 'error', 6000);
+      } else if (code === 'permission-denied') {
+        showToast('Impossible de vérifier ton compte. Contacte le support.', 'error', 6000);
+      } else {
+        showToast('Impossible de vérifier ton compte pour le moment. Réessaie.', 'error', 6000);
+      }
+      // On ne redirige pas, on ne signOut pas : l'utilisateur peut réessayer.
+      isResolving = false;
+      handledUid = null;
+      loginBtn.disabled = false;
+      loginBtn.classList.remove('loading');
+      return;
+    }
+
+    // Profil absent
+    if (!userDoc.exists()) {
+      try { await signOut(auth); } catch (e) { console.warn('[Auth] signOut :', e.code || e.message); }
+      clearSession();
+      showToast('Profil introuvable. Redirection vers l\'inscription…', 'error', 3000);
+      cancelProfileRedirect();
+      profileRedirectTimer = setTimeout(() => {
+        profileRedirectTimer = null;
+        redirectTo('register.html');
+      }, 1500);
+      isResolving = false;
+      loginBtn.disabled = false;
+      loginBtn.classList.remove('loading');
+      return;
+    }
+
+    const userData = userDoc.data();
+
+    if (userData.accountStatus === 'blocked') {
+      try { await signOut(auth); } catch (e) { console.warn('[Auth] signOut :', e.code || e.message); }
+      clearSession();
+      showToast('❌ Ton compte est bloqué. Contacte le support.', 'error', 6000);
+      isResolving = false;
+      loginBtn.disabled = false;
+      loginBtn.classList.remove('loading');
+      return;
+    }
+
+    if (userData.accountStatus === 'paused') {
+      try { await signOut(auth); } catch (e) { console.warn('[Auth] signOut :', e.code || e.message); }
+      clearSession();
+      showToast('⏸️ Ton compte est en pause. Contacte le support.', 'error', 6000);
+      isResolving = false;
+      loginBtn.disabled = false;
+      loginBtn.classList.remove('loading');
+      return;
+    }
+
+    // Compte actif → autoriser l'accès
+    saveSession(user);
+
+    // Mise à jour de lastLogin : non bloquante, mais tracée
+    try {
+      await updateDoc(doc(db, 'users', user.uid), { lastLogin: serverTimestamp() });
+    } catch (err) {
+      console.warn('[Firestore] Mise à jour de lastLogin échouée (non bloquant) :', err.code || err.message);
+    }
+
+    showToast('✅ Connexion réussie !', 'success', 1200);
+
+    const redirectPath = consumeRedirectFromSession();
+
+    // Petite pause pour laisser le toast apparaître, puis redirection unique
+    setTimeout(() => {
+      redirectTo(redirectPath);
+    }, 600);
+  }
+
+  // ================================================================
+  // onAuthStateChanged — point d'entrée unique
+  // ================================================================
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      // Pas d'utilisateur : nettoyer les résidus et laisser la page affichée
+      if (!localStorage.getItem(SESSION_KEY)) {
+        clearSession();
+      }
+      handledUid = null;
+      isResolving = false;
+      return;
+    }
+
+    // Utilisateur détecté (session restaurée OU signIn récent)
+    // On ne redirige JAMAIS sans passer par attemptAccess.
+    attemptAccess(user);
+  });
+
+  // ================================================================
+  // SOUMISSION DU FORMULAIRE
+  // ================================================================
+  let isSubmitting = false;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (isSubmitting || loginBtn.disabled) return;
+
+    isSubmitting = true;
+    loginBtn.disabled = true;
+    loginBtn.classList.add('loading');
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    try {
+      // 1. Connexion Firebase
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // 2. Mémoriser l'email si demandé
+      if (rememberMe.checked) {
+        try { localStorage.setItem(REMEMBER_KEY, email); } catch (e) {}
+      } else {
+        try { localStorage.removeItem(REMEMBER_KEY); } catch (e) {}
+      }
+
+      // 3. Résolution unique de l'accès (lecture Firestore + statut + redirection)
+      //    Note : onAuthStateChanged a peut-être déjà appelé attemptAccess,
+      //    auquel cas isResolving === true et attemptAccess retournera immédiatement.
+      await attemptAccess(user);
+
+    } catch (error) {
+      handleSignInError(error);
+      loginBtn.disabled = false;
+      loginBtn.classList.remove('loading');
+    } finally {
+      isSubmitting = false;
+    }
+  });
+
+  // ================================================================
+  // GESTION DES ERREURS DE CONNEXION
+  // ================================================================
+  function handleSignInError(error) {
+    const code = error && error.code ? error.code : '';
+
+    switch (code) {
+      case 'auth/user-not-found':
+        showToastWithRegisterLink(6000);
+        return;
+      case 'auth/wrong-password':
+      case 'auth/invalid-credential':
+        showToast('❌ Mot de passe incorrect.', 'error', 6000);
+        return;
+      case 'auth/too-many-requests':
+        showToast('⏳ Trop de tentatives. Réessaie dans quelques minutes.', 'error', 6000);
+        return;
+      case 'auth/invalid-email':
+        showToast('❌ Adresse e-mail invalide.', 'error', 6000);
+        return;
+      case 'auth/network-request-failed':
+        showToast('📶 Problème de connexion réseau.', 'error', 6000);
+        return;
+      case 'auth/user-disabled':
+        showToast('❌ Ce compte a été désactivé. Contacte le support.', 'error', 6000);
+        return;
+      default:
+        console.warn('[Auth] Erreur de connexion :', code || error.message);
+        showToast('❌ Une erreur est survenue. Réessaie.', 'error', 6000);
+    }
+  }
+
+  console.log('🚀 ARVEXA School — Login (sécurisé, redirection unique)');
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · CALCUL INTÉGRAL          -->
+<!-- PARTIE 4 : FICHE COMPLÈTE DE RÉVISION                        -->
+<!-- INTEGRALE · PRIMITIVES · INTEGRATION PAR PARTIES · AIRES ·   -->
+<!-- VALEUR MOYENNE · GRANDE TABLE DE SYNTHÈSE · RÉFLEXES BAC     -->
+<!-- Refonte présentation v2 : 1 étape = 1 calcul, ligne dédiée   -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 04 · Calcul intégral</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Fiche complète : <em>Intégration par parties &amp; aires</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Dernière partie du chapitre, pensée comme une <strong>fiche de révision condensée</strong> : toutes les formules, toutes les méthodes, tous les réflexes d'examen. Elle couvre <strong>4 blocs</strong> : les <strong>rappels essentiels</strong> (intégrale et primitives), l'<strong>intégration par parties</strong> avec ses deux exemples types, les <strong>aires et la valeur moyenne</strong>, puis la <strong>grande table de synthèse</strong> à relire la veille de l'épreuve.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 4 blocs</span>
+      <span class="lecture-hero-meta-item">📊 6 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 blocs · 6 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Mode d'emploi de la fiche</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Bloc 1 · rappels — L'intégrale et les primitives en un coup d'œil</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Bloc 2 · ipp — Intégration par parties : formule et méthode</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Bloc 2 · ipp — Deux exemples types pas à pas</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Bloc 3 · aires — Aires et valeur moyenne</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Bloc 4 · synthese — Grande table de synthèse et réflexes Bac</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MODE D'EMPLOI                                    -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Mode d'emploi</span>
+        <h2 class="lecture-section-title">Comment utiliser cette fiche</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Cette partie ne raconte pas d'histoire : elle <strong>condense</strong>. Les parties 1 à 3 ont construit les définitions et le sens ; ici, tout est mis à plat pour réviser vite et bien. Utilise-la en trois temps :
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Trois passages recommandés</div>
+          <ul class="lecture-list">
+            <li><strong>Passage 1 (compréhension)</strong> : relis chaque formule avec sa justification courte — rien n'est appris tant qu'on ne sait pas d'où ça vient.</li>
+            <li><strong>Passage 2 (mémorisation)</strong> : cache la colonne « formule » de la grande table de synthèse (section 05) et récite-la.</li>
+            <li><strong>Passage 3 (entraînement)</strong> : refais les deux exemples d'IPP sans regarder la solution, puis passe aux exercices du chapitre.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Fondations utilisées partout dans cette fiche : <span class="math">F</span> est une primitive de <span class="math">f</span> lorsque <span class="math">F' = f</span> sur un intervalle ; toute fonction continue sur un intervalle admet des primitives ; et l'intégrale transforme une primitive en nombre. Si l'un de ces points tremble, retourne à la Partie 1 avant de continuer.
+      </p>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : BLOC 1 · rappels — L'INTÉGRALE ET LES PRIMITIVES -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bloc 1 · rappels</span>
+        <h2 class="lecture-section-title">L'intégrale et les primitives en un coup d'œil</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La formule-mère du chapitre, à connaître dans les deux sens :
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Définition de l'intégrale — le théorème fondamental</div>
+        <div class="lecture-formula-hero-main">∫ₐᵇ f(x) dx = F(b) − F(a)</div>
+        <div class="lecture-formula-hero-desc">f continue sur [a ; b], F une primitive de f. Valeur en la borne haute MOINS valeur en la borne basse. Si f ≥ 0, c'est l'aire sous la courbe, en unités d'aire.</div>
+      </div>
+      <p class="lecture-text">
+        Les primitives à connaître par cœur — le tableau complet est en Partie 1, voici la version minimale, une primitive par ligne :
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Fonction <span class="math">f(x)</span></th><th>Une primitive <span class="math">F(x)</span></th><th>Intervalle</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">xⁿ</span> (n ≠ −1)</td><td><span class="math">x^(n+1)/(n+1)</span></td><td><span class="math">ℝ</span> si n entier ≥ 0</td></tr>
+            <tr><td><span class="math">1/x</span></td><td><span class="math">ln x</span></td><td><span class="math">]0 ; +∞[</span></td></tr>
+            <tr><td><span class="math">1/x²</span></td><td><span class="math">−1/x</span></td><td><span class="math">]0 ; +∞[</span> ou <span class="math">]−∞ ; 0[</span></td></tr>
+            <tr><td><span class="math">√x</span></td><td><span class="math">(2/3)·x·√x</span></td><td><span class="math">[0 ; +∞[</span></td></tr>
+            <tr><td><span class="math">e^x</span></td><td><span class="math">e^x</span></td><td><span class="math">ℝ</span></td></tr>
+            <tr><td><span class="math">cos x</span></td><td><span class="math">sin x</span></td><td><span class="math">ℝ</span></td></tr>
+            <tr><td><span class="math">sin x</span></td><td><span class="math">−cos x</span></td><td><span class="math">ℝ</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">
+          u'·uⁿ&nbsp;&nbsp;→&nbsp;&nbsp;u^(n+1)/(n+1)<br>
+          u'/u&nbsp;&nbsp;→&nbsp;&nbsp;ln(u)&nbsp;&nbsp;(u &gt; 0)<br>
+          u'·e^u&nbsp;&nbsp;→&nbsp;&nbsp;e^u
+        </div>
+        <div class="lecture-formula-desc">Les trois formes composées (Partie 2) : repérer le bloc u, vérifier que u' est présent, compenser le coefficient si besoin.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">
+          ∫ₐᵇ (α·f + β·g) = α·∫ₐᵇ f + β·∫ₐᵇ g<br>
+          ∫ₐᵇ + ∫ᵇᶜ = ∫ₐᶜ<br>
+          ∫ᵇₐ = −∫ₐᵇ
+        </div>
+        <div class="lecture-formula-desc">Les trois propriétés de calcul (Partie 3) : linéarité, relation de Chasles, bornes inversées — plus l'encadrement m·(b − a) ≤ ∫ₐᵇ f ≤ M·(b − a).</div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : BLOC 2 · ipp — FORMULE ET MÉTHODE                -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bloc 2 · ipp</span>
+        <h2 class="lecture-section-title">Intégration par parties : formule et méthode</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Comment intégrer <span class="math">x·e^x</span> ou <span class="math">ln x</span>, alors qu'aucune primitive directe n'existe dans le tableau ? En <strong>débranchant le produit</strong> : c'est l'<strong>intégration par parties</strong> (IPP). Elle vient de la dérivée d'un produit, en trois lignes :
+      </p>
+      <div class="lecture-steps">
+        <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Point de départ :</strong> la dérivée d'un produit :</p><p><span class="math">(u·v)' = u'·v + u·v'</span></p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>On intègre les deux membres</strong> entre <span class="math">a</span> et <span class="math">b</span> (linéarité) :</p><p><span class="math">[u·v]ₐᵇ = ∫ₐᵇ u'·v dx + ∫ₐᵇ u·v' dx</span></p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>On isole</strong> la première intégrale, d'où la formule ci-dessous.</p></div></div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Intégration par parties — la formule à connaître</div>
+        <div class="lecture-formula-hero-main">∫ₐᵇ u'(x)·v(x) dx = [u(x)·v(x)]ₐᵇ − ∫ₐᵇ u(x)·v'(x) dx</div>
+        <div class="lecture-formula-hero-desc">u et v dérivables sur [a ; b], avec u' et v' continues. On échange une intégrale « difficile » contre une intégrale « plus simple » : c'est TOUT le principe.</div>
+      </div>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode à retenir — Choisir u et v</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li><strong>On dérive ce qui se simplifie</strong> : les puissances de <span class="math">x</span> baissent d'un degré, <span class="math">ln x</span> disparaît (sa dérivée est <span class="math">1/x</span>).</li>
+            <li><strong>On intègre ce qui reste stable</strong> : <span class="math">e^x</span>, <span class="math">cos x</span>, <span class="math">sin x</span> gardent la même forme quand on les intègre.</li>
+            <li><strong>Cas type 1 :</strong> <span class="math">∫ x^n·e^x dx</span> → <span class="math">u(x) = xⁿ</span> et <span class="math">v(x) = e^x</span>.</li>
+            <li><strong>Cas type 2 :</strong> <span class="math">∫ ln x dx</span> → écrire <span class="math">ln x = 1 × ln x</span>, puis <span class="math">u'(x) = 1</span> et <span class="math">v(x) = ln x</span>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Le choix de u et v décide de tout</div>
+          <p>Un mauvais choix <strong>aggrave</strong> l'intégrale au lieu de la simplifier : intégrer <span class="math">∫ x·e^x dx</span> avec <span class="math">u(x) = e^x</span> fait apparaître <span class="math">x²/2</span> — direction l'impasse. Si après une ligne tu vois l'intégrale devenir plus compliquée, arrête-toi et échange les rôles de <span class="math">u</span> et <span class="math">v</span>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : BLOC 2 · ipp — DEUX EXEMPLES TYPES               -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bloc 2 · ipp</span>
+        <h2 class="lecture-section-title">Deux exemples types pas à pas</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Ces deux intégrales sont des grands classiques de l'épreuve : le logarithme seul, puis le produit <span class="math">x·e^x</span>. Les deux valent exactement <span class="math">1</span> — un résultat à savoir retrouver, pas deviner.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet 1 — Calculer <span class="math">∫₁^e ln x dx</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Étape 1 — Choix de u et v.</strong> On écrit <span class="math">ln x = 1 × ln x</span>, puis :</p><p><span class="math">u'(x) = 1</span>&nbsp;&nbsp;donc&nbsp;&nbsp;<span class="math">u(x) = x</span></p><p><span class="math">v(x) = ln x</span>&nbsp;&nbsp;donc&nbsp;&nbsp;<span class="math">v'(x) = 1/x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Étape 2 — On applique l'IPP :</strong></p><p><span class="math">∫₁^e ln x dx = [x·ln x]₁^e − ∫₁^e x·(1/x) dx</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Étape 3 — Calcul de [u·v] :</strong></p><p><span class="math">[x·ln x]₁^e = e·ln e − 1·ln 1</span></p><p><span class="math">= e − 0 = e</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Étape 4 — Calcul de la nouvelle intégrale :</strong></p><p><span class="math">∫₁^e x·(1/x) dx = ∫₁^e 1 dx</span></p><p><span class="math">∫₁^e 1 dx = e − 1</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Étape 5 — Résultat :</strong></p><p><span class="math">∫₁^e ln x dx = e − (e − 1)</span></p><p><span class="math">= e − e + 1 = 1</span></p><p>L'aire sous la courbe du logarithme entre 1 et e vaut exactement 1 u.a.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet 2 — Calculer <span class="math">∫₀¹ x·e^x dx</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Étape 1 — Choix de u et v :</strong> on dérive ce qui se simplifie, on intègre ce qui reste stable :</p><p><span class="math">u(x) = x</span>&nbsp;&nbsp;donc&nbsp;&nbsp;<span class="math">u'(x) = 1</span></p><p><span class="math">v(x) = e^x</span>&nbsp;&nbsp;donc&nbsp;&nbsp;<span class="math">v'(x) = e^x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Étape 2 — On applique l'IPP :</strong></p><p><span class="math">∫₀¹ x·e^x dx = [x·e^x]₀¹ − ∫₀¹ 1·e^x dx</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Étape 3 — Calcul de [u·v] :</strong></p><p><span class="math">[x·e^x]₀¹ = 1·e¹ − 0·e⁰</span></p><p><span class="math">= e − 0 = e</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Étape 4 — Calcul de la nouvelle intégrale :</strong></p><p><span class="math">∫₀¹ 1·e^x dx = ∫₀¹ e^x dx</span></p><p><span class="math">∫₀¹ e^x dx = [e^x]₀¹ = e − 1</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Étape 5 — Résultat :</strong></p><p><span class="math">∫₀¹ x·e^x dx = e − (e − 1)</span></p><p><span class="math">= e − e + 1 = 1</span></p><p>Là encore, exactement 1 — la similarité des deux exemples n'est pas un hasard, mais un classique d'énoncé.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>La rédaction attendue comporte <strong>trois lignes obligatoires</strong> : (1) « posons u(x) = … et v(x) = …, donc u'(x) = … et v'(x) = … » ; (2) la formule de l'IPP appliquée avec les bornes ; (3) le calcul des deux morceaux. Appliquer la formule sans annoncer <span class="math">u</span> et <span class="math">v</span>, ou substituer les bornes dans le mauvais ordre, fait perdre les points de méthode.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : BLOC 3 · aires — AIRES ET VALEUR MOYENNE         -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bloc 3 · aires</span>
+        <h2 class="lecture-section-title">Aires et valeur moyenne</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        C'est le retour géométrique du chapitre : l'intégrale mesure des <strong>aires</strong> — sous une courbe, ou entre deux courbes — et la <strong>valeur moyenne</strong> résume une fonction par un seul nombre.
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">f ≥ 0 sur [a ; b]&nbsp;&nbsp;⇒&nbsp;&nbsp;aire sous la courbe = ∫ₐᵇ f(x) dx (en u.a.)</div>
+        <div class="lecture-formula-desc">1 u.a. (unité d'aire) = aire du rectangle de côtés 1 dans les unités du repère. Si 1 unité horizontale = 2 cm et 1 unité verticale = 3 cm, alors 1 u.a. = 6 cm².</div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aire hachurée sous la courbe de f, fonction positive, entre a et b">
+          <defs>
+            <pattern id="hachures-aire-sous-courbe" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="8" style="stroke:var(--accent-bright)" stroke-width="2"/>
+            </pattern>
+          </defs>
+          <line x1="30" y1="250" x2="490" y2="250" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="500,250 488,244 488,256" style="fill:var(--text-dim)"/>
+          <line x1="50" y1="280" x2="50" y2="35" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="50,25 44,37 56,37" style="fill:var(--text-dim)"/>
+          <text x="36" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter">O</text>
+          <text x="494" y="270" style="fill:var(--text-dim)" font-size="12" font-family="Inter">x</text>
+          <text x="62" y="42" style="fill:var(--text-dim)" font-size="12" font-family="Inter">y</text>
+          <path d="M 150 250 L 150 168 Q 275 148 380 78 L 380 250 Z" style="fill:url(#hachures-aire-sous-courbe);stroke:none"/>
+          <path d="M 70 236 Q 300 206 450 54" style="fill:none;stroke:var(--green-bright)" stroke-width="3"/>
+          <line x1="150" y1="250" x2="150" y2="168" style="stroke:var(--text-dim)" stroke-width="2" stroke-dasharray="5 5"/>
+          <line x1="380" y1="250" x2="380" y2="78" style="stroke:var(--text-dim)" stroke-width="2" stroke-dasharray="5 5"/>
+          <circle cx="150" cy="168" r="4" style="fill:var(--accent-bright)"/>
+          <circle cx="380" cy="78" r="4" style="fill:var(--accent-bright)"/>
+          <text x="150" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">a</text>
+          <text x="380" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">b</text>
+          <text x="428" y="50" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter">y = f(x) ≥ 0</text>
+          <text x="196" y="180" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter">aire hachurée</text>
+          <text x="196" y="200" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter">= ∫ₐᵇ f(x) dx</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Quand <span class="math">f ≥ 0</span> sur <span class="math">[a ; b]</span>, l'intégrale <span class="math">∫ₐᵇ f(x) dx</span> est exactement l'<strong>aire hachurée</strong> : le domaine entre la courbe, l'axe des abscisses et les droites <span class="math">x = a</span> et <span class="math">x = b</span>, comptée en unités d'aire (u.a.).</figcaption>
+      </figure>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">f ≥ g sur [a ; b]&nbsp;&nbsp;⇒&nbsp;&nbsp;aire entre les courbes = ∫ₐᵇ (f(x) − g(x)) dx</div>
+        <div class="lecture-formula-desc">On intègre l'écart f − g ≥ 0. Étape obligatoire : DÉTERMINER qui est au-dessus (étude du signe de f − g), éventuellement en découpant au point d'intersection (Chasles).</div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aire entre les droites et courbes y égal x et y égal x au carré, colorée entre 0 et 1">
+          <defs>
+            <pattern id="hachures-aire-entre-courbes" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+              <line x1="0" y1="0" x2="0" y2="8" style="stroke:var(--accent-bright)" stroke-width="2"/>
+            </pattern>
+          </defs>
+          <line x1="30" y1="250" x2="490" y2="250" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="500,250 488,244 488,256" style="fill:var(--text-dim)"/>
+          <line x1="50" y1="280" x2="50" y2="35" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="50,25 44,37 56,37" style="fill:var(--text-dim)"/>
+          <text x="36" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter">O</text>
+          <text x="494" y="270" style="fill:var(--text-dim)" font-size="12" font-family="Inter">x</text>
+          <text x="62" y="42" style="fill:var(--text-dim)" font-size="12" font-family="Inter">y</text>
+          <path d="M 60 250 L 130 180 Q 95 250 60 250 Z" style="fill:url(#hachures-aire-entre-courbes);stroke:none"/>
+          <line x1="60" y1="250" x2="200" y2="110" style="stroke:var(--green-bright)" stroke-width="3"/>
+          <path d="M 60 250 Q 109 250 158 113" style="fill:none;stroke:var(--accent-bright)" stroke-width="3"/>
+          <line x1="130" y1="250" x2="130" y2="180" style="stroke:var(--text-dim)" stroke-width="2" stroke-dasharray="5 5"/>
+          <circle cx="130" cy="180" r="4" style="fill:var(--text-dim)"/>
+          <text x="130" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">1</text>
+          <text x="172" y="128" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter">f(x) = x</text>
+          <text x="176" y="78" style="fill:var(--accent-bright)" font-size="13" font-weight="700" font-family="Inter">g(x) = x²</text>
+          <text x="86" y="212" style="fill:var(--accent-bright)" font-size="12" font-weight="700" font-family="Inter">aire</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Sur <span class="math">[0 ; 1]</span>, la droite <span class="math">f(x) = x</span> est au-dessus de la parabole <span class="math">g(x) = x²</span> (car <span class="math">x − x² ≥ 0</span>). L'aire hachurée entre les deux courbes vaut <span class="math">∫₀¹ (x − x²) dx = 1/6 ≈ 0,17 u.a.</span> — calculé ci-dessous.</figcaption>
+      </figure>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple complet 1 — Aire entre <span class="math">f(x) = x</span> et <span class="math">g(x) = x²</span> sur <span class="math">[0 ; 1]</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Ordre des courbes :</strong> pour <span class="math">0 ≤ x ≤ 1</span> :</p><p><span class="math">x − x² = x·(1 − x) ≥ 0</span></p><p>donc <span class="math">f ≥ g</span> : la droite est au-dessus.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>On écrit l'aire :</strong></p><p><span class="math">A = ∫₀¹ (f(x) − g(x)) dx = ∫₀¹ (x − x²) dx</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>On primitive et on substitue :</strong></p><p><span class="math">A = [x²/2 − x³/3]₀¹ = (1/2 − 1/3) − 0</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Conclusion</strong> (même dénominateur 6) :</p><p><span class="math">A = 3/6 − 2/6</span></p><p><span class="math">A = 1/6 ≈ 0,17 u.a.</span></p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">μ = 1/(b − a) × ∫ₐᵇ f(x) dx</div>
+        <div class="lecture-formula-desc">Valeur moyenne de f sur [a ; b] : c'est la hauteur du rectangle de largeur (b − a) ayant la même aire que le domaine sous la courbe. On a toujours m ≤ μ ≤ M (entre min et max de f).</div>
+      </div>
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple complet 2 — Valeur moyenne de <span class="math">f(x) = x²</span> sur <span class="math">[0 ; 3]</span></div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>On calcule l'intégrale</strong> — primitive, puis évaluation :</p><p><span class="math">∫₀³ x² dx = [x³/3]₀³</span></p><p><span class="math">[x³/3]₀³ = 27/3 − 0 = 9</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>On divise par la largeur :</strong></p><p><span class="math">μ = 1/(3 − 0) × 9</span></p><p><span class="math">μ = 9/3 = 3</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Interprétation :</strong> le rectangle de hauteur <span class="math">μ = 3</span> et de largeur 3 a la même aire que le domaine sous la parabole. Et <span class="math">μ = f(√3)</span> : la moyenne est atteinte en <span class="math">c = √3 ∈ ]0 ; 3[</span>.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Deux oublis qui coûtent cher : (1) pour l'aire entre courbes, intégrer <span class="math">f − g</span> <strong>sans avoir justifié</strong> que <span class="math">f ≥ g</span> — si l'ordre change sur l'intervalle, découper avec Chasles ; (2) pour la valeur moyenne, oublier le facteur <span class="math">1/(b − a)</span> : <span class="math">∫₀³ x² dx = 9</span> n'est PAS la valeur moyenne, <span class="math">μ = 9/3 = 3</span> l'est.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : BLOC 4 · synthese — GRANDE TABLE ET RÉFLEXES     -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bloc 4 · synthese</span>
+        <h2 class="lecture-section-title">Grande table de synthèse et réflexes Bac</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Avant la table, les automatismes. Face à une question d'intégration, le bon réflexe est presque toujours l'un de ceux-ci :
+      </p>
+      <ul class="lecture-list-elegant">
+        <li><strong>Vérifier une primitive</strong> → la <strong>dériver</strong> : on doit retrouver <span class="math">f</span>. Trente secondes qui sauvent tout un calcul.</li>
+        <li><strong>Calculer une intégrale</strong> → écrire le <strong>crochet</strong> <span class="math">[F(x)]ₐᵇ</span> AVANT de substituer, et respecter l'ordre <span class="math">F(b) − F(a)</span>.</li>
+        <li><strong>Reconnaître une forme</strong> → chercher le bloc <span class="math">u</span> et sa dérivée <span class="math">u'</span> (formes <span class="math">u'·uⁿ</span>, <span class="math">u'/u</span>, <span class="math">u'·e^u</span>), en compensant le coefficient.</li>
+        <li><strong>Produit « xⁿ × ln ou exp »</strong> → <strong>intégration par parties</strong> : dériver ce qui se simplifie, intégrer ce qui reste stable, annoncer <span class="math">u</span> et <span class="math">v</span>.</li>
+        <li><strong>Aire demandée</strong> → justifier d'abord <strong>qui est au-dessus</strong> (signe de <span class="math">f − g</span>), découper au point d'intersection si besoin, conclure en <strong>unités d'aire</strong> (et convertir : 1 u.a. = largeur × hauteur d'un carreau unité).</li>
+      </ul>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Objet</th><th>Formule</th><th>Astuce de vérification</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Intégrale</td><td><span class="math">∫ₐᵇ f(x) dx = F(b) − F(a)</span></td><td>ordre : borne haute MOINS borne basse</td></tr>
+            <tr><td>Primitive de xⁿ</td><td><span class="math">x^(n+1)/(n+1)</span> (n ≠ −1)</td><td>dériver : on retrouve xⁿ</td></tr>
+            <tr><td>Primitives 1/x² et √x</td><td><span class="math">−1/x</span><br><span class="math">(2/3)·x·√x</span></td><td>les deux signes/coefficients se vérifient en dérivant</td></tr>
+            <tr><td>Primitive de 1/x</td><td><span class="math">ln x</span></td><td>seulement sur ]0 ; +∞[ — domaine obligatoire</td></tr>
+            <tr><td>e^x, cos x, sin x</td><td><span class="math">e^x</span><br><span class="math">sin x</span><br><span class="math">−cos x</span></td><td>le signe de sin x → −cos x est le piège n°1</td></tr>
+            <tr><td>Formes composées</td><td><span class="math">u'·uⁿ → u^(n+1)/(n+1)</span><br><span class="math">u'/u → ln(u) (u &gt; 0)</span><br><span class="math">u'·e^u → e^u</span></td><td>repérer u et u' ; compenser le coefficient</td></tr>
+            <tr><td>Linéarité</td><td><span class="math">∫ₐᵇ (α·f + β·g) = α·∫ₐᵇ f + β·∫ₐᵇ g</span></td><td>jamais sur un produit : pour cela, IPP</td></tr>
+            <tr><td>Chasles</td><td><span class="math">∫ₐᵇ f + ∫ᵇᶜ f = ∫ₐᶜ f</span></td><td>la borne commune disparaît</td></tr>
+            <tr><td>Bornes et encadrement</td><td><span class="math">∫ᵇₐ = −∫ₐᵇ</span><br><span class="math">m·(b − a) ≤ ∫ₐᵇ f ≤ M·(b − a)</span></td><td>contrôler tout résultat par l'encadrement</td></tr>
+            <tr><td>Intégration par parties</td><td><span class="math">∫ₐᵇ u'·v dx = [u·v]ₐᵇ − ∫ₐᵇ u·v' dx</span></td><td>annoncer u et v ; dériver ce qui se simplifie</td></tr>
+            <tr><td>Aires</td><td><span class="math">f ≥ 0 : ∫ₐᵇ f = aire</span><br><span class="math">f ≥ g : ∫ₐᵇ (f − g) = aire</span></td><td>justifier l'ordre, conclure en u.a.</td></tr>
+            <tr><td>Valeur moyenne</td><td><span class="math">μ = 1/(b − a) × ∫ₐᵇ f(x) dx</span></td><td>ne pas oublier 1/(b − a) ; contrôle m ≤ μ ≤ M</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 La carte mentale du chapitre</div>
+          <p>Une intégrale est un <strong>nombre</strong>, pas une fonction : on part de <span class="math">f</span>, on trouve UNE primitive <span class="math">F</span> (tableau, formes composées, IPP), et on évalue <span class="math">F(b) − F(a)</span>. Trois lectures du même objet : le calcul (<span class="math">F(b) − F(a)</span>), la géométrie (aire quand <span class="math">f ≥ 0</span>), la statistique (valeur moyenne). Chaque exercice du Bac demande simplement de choisir la bonne lecture — et de nommer les propriétés utilisées.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[rappels]</strong> <span class="math">∫ₐᵇ f(x) dx = F(b) − F(a)</span> pour f continue et F primitive — le théorème fondamental de l'analyse</li>
+      <li><strong>[rappels]</strong> Tableau des primitives (xⁿ, 1/x, 1/x², √x, e^x, cos, sin) + formes composées u'·uⁿ, u'/u, u'·e^u + linéarité, Chasles, bornes inversées</li>
+      <li><strong>[ipp]</strong> <span class="math">∫ₐᵇ u'(x)·v(x) dx = [u(x)·v(x)]ₐᵇ − ∫ₐᵇ u(x)·v'(x) dx</span> — vient de (u·v)' = u'·v + u·v'</li>
+      <li><strong>[ipp]</strong> Choix de u et v : dériver ce qui se simplifie (x, ln x), intégrer ce qui reste stable (e^x, cos x, sin x)</li>
+      <li><strong>[ipp]</strong> Exemples fondamentaux : <span class="math">∫₁^e ln x dx = 1</span> et <span class="math">∫₀¹ x·e^x dx = 1</span> (tous deux = e − (e − 1))</li>
+      <li><strong>[aires]</strong> Sous la courbe : <span class="math">f ≥ 0 ⇒ ∫ₐᵇ f(x) dx</span> = aire en unités d'aire (1 u.a. = rectangle unité, à convertir si besoin)</li>
+      <li><strong>[aires]</strong> Entre deux courbes : <span class="math">f ≥ g ⇒ A = ∫ₐᵇ (f(x) − g(x)) dx</span> — justifier l'ordre, découper si l'ordre change ; exemple : <span class="math">∫₀¹ (x − x²) dx = 1/6 ≈ 0,17 u.a.</span></li>
+      <li><strong>[aires]</strong> Valeur moyenne : <span class="math">μ = 1/(b − a) × ∫ₐᵇ f(x) dx</span> — hauteur du rectangle de même aire ; exemple : μ de x² sur [0 ; 3] vaut 3</li>
+      <li><strong>[synthese]</strong> Réflexes : vérifier en dérivant, crochet avant substitution, u et v annoncés, ordre des courbes justifié, encadrement de contrôle</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Chapitre « Calcul intégral » terminé !</div>
+    <div class="lecture-end-sub">Direction les exercices du chapitre pour ancrer toutes ces formules — bonne chance pour l'épreuve !</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

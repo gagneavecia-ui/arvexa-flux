@@ -1,0 +1,488 @@
+<!-- ============================================================ -->
+<!-- PARTIE 1 : NATURE ÉLECTRIQUE DU MESSAGE NERVEUX (20 min)      -->
+<!-- Notion 1 : potentiel_repos — Enregistrement du potentiel de   -->
+<!--            membrane (microélectrode) et potentiel de repos    -->
+<!-- Notion 2 : polarisation — Membrane polarisée, inégalité des   -->
+<!--            concentrations Na⁺/K⁺ de part et d'autre           -->
+<!-- Notion 3 : potentiel_action — Dépolarisation puis             -->
+<!--            repolarisation (inversion brève de la polarité)    -->
+<!-- Notion 4 : codage_frequence — Message nerveux = série de PA   -->
+<!--            codée en fréquence                                 -->
+<!-- Notion 5 : tout_ou_rien — Loi du tout ou rien (simplifiée)    -->
+<!-- ============================================================ -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 01 · Messages nerveux</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Nature électrique du <em>message nerveux</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Quand tu retires ta main d'une flamme, l'ordre « bouge ! » parcourt ton nerf en quelques centièmes de seconde. De quoi est fait ce message : un liquide, un souffle, un courant ? Les physiologistes ont tranché : le message nerveux est <strong>électrique</strong>, et on sait aujourd'hui le mesurer au millivolt près. Cette partie explore <strong>5 notions</strong> : l'enregistrement du potentiel de membrane par microélectrode, le <strong>potentiel de repos</strong> (−70 mV), le <strong>potentiel d'action</strong>, le <strong>codage en fréquence</strong> et la loi du <strong>tout ou rien</strong>.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span>
+      <span class="lecture-hero-meta-item">🧬 5 notions</span>
+      <span class="lecture-hero-meta-item">📚 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">5 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Le nerf est-il un fil électrique ?</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion · potentiel_repos — Mesurer le potentiel de membrane</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion · potentiel_repos — Le potentiel de repos : −70 mV</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion · polarisation — Pourquoi l'intérieur est-il négatif ?</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion · potentiel_action — Le potentiel d'action</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion · codage_frequence — Une série de PA, codée en fréquence</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion · tout_ou_rien — La loi du tout ou rien</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Entraînement — 3 QCM d'auto-évaluation</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- ===== SECTION 0 : MOTIVATION ===== -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Le nerf est-il un fil électrique ?</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Touche (presque) une marmite chaude : en moins d'une demi-seconde, ta main est déjà retirée. Pour que ce geste soit possible, l'information doit voyager du doigt jusqu'à la moelle épinière, puis revenir jusqu'au muscle, soit plusieurs dizaines de centimètres en quelques centièmes de seconde. <strong>Quelle est la nature de ce message si rapide ?</strong>
+      </p>
+      <p class="lecture-text">
+        Les savants du XIXe siècle ont longtemps imaginé un « fluide animal » qui circulerait dans les nerfs. L'expérience a tranché autrement : on peut <strong>stimuler un nerf avec un courant électrique</strong> délivré par un simple générateur, et le muscle commandé par ce nerf se contracte. Réciproquement, un nerf en activité produit lui-même un courant mesurable. Le bilan du programme est clair :
+      </p>
+
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">Notion clé</div>
+        <p><strong>Le message nerveux est de nature électrique.</strong> Il se propage le long des neurones sous forme de variations du <strong>potentiel électrique de leur membrane</strong> (le potentiel de membrane), mesurables en millivolts.</p>
+      </div></div>
+
+      <p class="lecture-text">
+        Un nerf se comporte donc un peu comme un câble — mais un câble <em>vivant</em>, fait de cellules (les <strong>neurones</strong>) dont la membrane fabrique elle-même ses variations de tension. Le trajet du message dans un réflexe comme le retrait de la main suit toujours la même chaîne :
+      </p>
+      <ul class="lecture-list">
+        <li>un <strong>récepteur sensoriel</strong> (dans la peau) détecte le stimulus et déclenche un message nerveux ;</li>
+        <li>ce message remonte le <strong>neurone sensitif</strong> jusqu'à la moelle épinière (centre nerveux) ;</li>
+        <li>il y est transmis à un <strong>neurone moteur</strong>, qui le conduit jusqu'au muscle ;</li>
+        <li>le muscle (<strong>effecteur</strong>) se contracte : la main se retire.</li>
+      </ul>
+      <p class="lecture-text">
+        Dans cette partie, nous allons <em>voir</em> ce message électrique : le mesurer, le décrire, comprendre d'où vient sa valeur de repos et comment il traduit l'intensité d'un stimulus. Tout commence par une aiguille plus fine qu'un cheveu.
+      </p>
+
+      <aside class="lecture-aside"><div class="lecture-aside-content">
+        <div class="lecture-aside-label">📚 Un peu d'histoire</div>
+        <p class="lecture-text">En 1786, le physicien italien <strong>Luigi Galvani</strong> observe que des cuisses de grenouilles suspendues par des crochets de métal se contractent quand elles touchent simultanément deux métaux différents. Il parle d'« électricité animale » : le nerf et le muscle produisent donc du courant. Cette découverte ouvre la voie à toute l'électrophysiologie — et, bien plus tard, aux électrocardiogrammes et aux pacemakers.</p>
+      </div></aside>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 1 : MESURER LE POTENTIEL DE MEMBRANE ===== -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · potentiel_repos</span>
+        <h2 class="lecture-section-title">Mesurer le potentiel de membrane</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Pour connaître la tension qui existe de part et d'autre d'une membrane vivante, on utilise une <strong>microélectrode</strong> : un tube de verre étiré jusqu'à une pointe de moins d'un micromètre (µm), remplie d'une solution conductrice. Cette pointe pénètre dans l'<strong>axone</strong> (le prolongement du neurone qui conduit le message) sans le détruire. Une seconde électrode, dite <strong>électrode de référence</strong>, reste dans le milieu extérieur : le milieu extracellulaire sert de référence, son potentiel vaut <span class="math">0 mV</span>.
+      </p>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 660 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Montage d'enregistrement : microélectrode plantée dans un axone, électrode de référence dans le milieu extracellulaire, les deux reliées à un oscilloscope affichant moins soixante-dix millivolts">
+          <text x="250" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">ENREGISTRER LE POTENTIEL DE MEMBRANE</text>
+          <rect x="30" y="100" width="330" height="160" rx="12" fill="none" style="stroke:var(--border-soft)" stroke-dasharray="5 4"/>
+          <text x="44" y="120" style="fill:var(--text-dim)" font-size="11" font-family="Inter">milieu extracellulaire (référence : 0 mV)</text>
+          <rect x="55" y="145" width="270" height="85" rx="18" fill="rgba(224,184,74,0.05)" style="stroke:var(--accent-bright)" stroke-width="1.5"/>
+          <text x="70" y="218" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter">intérieur de l'axone (cytoplasme)</text>
+          <text x="190" y="248" style="fill:var(--accent-bright)" font-size="11.5" font-weight="700" font-family="Inter" text-anchor="middle">AXONE</text>
+          <rect x="166" y="62" width="5" height="90" fill="rgba(255,255,255,0.25)" style="stroke:var(--danger-light)" stroke-width="1"/>
+          <polygon points="163,150 174,150 168.5,168" style="fill:var(--danger-light)"/>
+          <text x="182" y="76" style="fill:var(--danger-light)" font-size="11" font-family="Inter">microélectrode (pointe &lt; 1 µm)</text>
+          <polyline points="168,62 168,42 425,42" fill="none" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <polyline points="505,112 505,155 600,155" fill="none" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <line x1="600" y1="155" x2="600" y2="196" style="stroke:var(--text-dim)" stroke-width="2.5"/>
+          <line x1="592" y1="196" x2="608" y2="196" style="stroke:var(--text-dim)" stroke-width="2.5"/>
+          <rect x="425" y="20" width="160" height="92" rx="8" fill="rgba(58,182,126,0.05)" style="stroke:var(--green-bright)" stroke-width="1.5"/>
+          <line x1="438" y1="66" x2="572" y2="66" style="stroke:var(--text-dim)" stroke-width="1" stroke-dasharray="4 4"/>
+          <line x1="438" y1="88" x2="572" y2="88" style="stroke:var(--green-bright)" stroke-width="2"/>
+          <text x="438" y="62" style="fill:var(--text-dim)" font-size="9.5" font-family="Inter">0 mV</text>
+          <text x="505" y="132" style="fill:var(--green-bright)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">−70 mV</text>
+          <text x="600" y="216" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">électrode de</text>
+          <text x="600" y="230" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">référence</text>
+          <text x="505" y="176" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">oscilloscope (ou voltmètre)</text>
+          <text x="330" y="286" style="fill:var(--text-light)" font-size="12" font-weight="700" font-family="Inter" text-anchor="middle">d.d.p. mesurée = V(intérieur) − V(extérieur), l'extérieur étant la référence</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">La microélectrode plantée dans l'axone et l'électrode de référence (milieu extérieur) sont reliées à un oscilloscope : celui-ci affiche une tension négative, stable, d'environ −70 mV.</figcaption>
+      </figure>
+
+      <p class="lecture-text">
+        Que lit-on à l'écran ? Tant que la pointe est dans le milieu extérieur, l'oscilloscope affiche <span class="math">0 mV</span>. Dès qu'elle pénètre à l'intérieur de la fibre, l'affichage bascule sur une valeur <strong>négative et stable</strong> : environ <span class="math">−70 mV</span>. Cette différence de potentiel (d.d.p.) entre les deux faces de la membrane est le <strong>potentiel de membrane</strong> :
+      </p>
+
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">Définition — potentiel de membrane</div>
+        <p>Le <strong>potentiel de membrane</strong> est la différence de potentiel électrique mesurée entre l'intérieur et l'extérieur de la cellule nerveuse. Par convention, on calcule <span class="math">V = V(intérieur) − V(extérieur)</span>, le milieu extracellulaire servant de référence (<span class="math">0 mV</span>).</p>
+      </div></div>
+
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">⚠️ Le piège du signe</div>
+        <p>« <span class="math">−70 mV</span> » signifie que <strong>l'intérieur est négatif par rapport à l'extérieur</strong>. Ne dis jamais « la membrane vaut −70 mV » sans préciser par rapport à quoi : c'est l'extérieur qui est choisi comme référence à <span class="math">0 mV</span>. Inverser la référence, c'est inverser le signe !</p>
+      </div></div>
+
+      <aside class="lecture-aside"><div class="lecture-aside-content">
+        <div class="lecture-aside-label">🔬 Pourquoi le calmar ?</div>
+        <p class="lecture-text">Les premiers enregistrements réussis (Hodgkin et Huxley, 1939) ont été faits sur l'<strong>axone géant du calmar</strong>, dont le diamètre atteint près d'un millimètre — assez gros pour qu'une microélectrode y entre sans tout casser. Une grande partie de ce que nous savons sur le message nerveux vient d'abord de ce mollusque… avant d'être confirmé chez l'homme.</p>
+      </div></aside>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2 : LE POTENTIEL DE REPOS ===== -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · potentiel_repos</span>
+        <h2 class="lecture-section-title">Le potentiel de repos : −70 mV</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Au <strong>repos</strong> — c'est-à-dire quand le neurone ne transmet pas d'influx nerveux —, la tension mesurée est stable et négative : environ <span class="math">−70 mV</span>. Cette valeur permanente porte un nom qu'il faut connaître exactement :
+      </p>
+
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">Définition officielle — potentiel de repos</div>
+        <p>Le <strong>potentiel de repos</strong> est la différence de potentiel permanente qui existe entre les deux faces de la membrane d'un neurone au repos : l'intérieur est <strong>négatif</strong> par rapport à l'extérieur, avec une valeur d'environ <span class="math">−70 mV</span>. On dit que la membrane est <strong>polarisée</strong>.</p>
+      </div></div>
+
+      <div class="lecture-vocab-grid">
+        <div class="vocab-card"><div class="vocab-symbol">−70 mV</div><div class="vocab-name">Potentiel de repos</div><div class="vocab-notation">V(int) − V(ext)</div></div>
+        <div class="vocab-card vocab-card-success"><div class="vocab-symbol">polarisée</div><div class="vocab-name">État de la membrane au repos</div><div class="vocab-notation">intérieur − / extérieur +</div></div>
+        <div class="vocab-card vocab-card-info"><div class="vocab-symbol">mV</div><div class="vocab-name">Millivolt</div><div class="vocab-notation">1 mV = 10⁻³ V</div></div>
+        <div class="vocab-card"><div class="vocab-symbol">0 mV</div><div class="vocab-name">Référence</div><div class="vocab-notation">milieu extracellulaire</div></div>
+      </div>
+
+      <p class="lecture-text">
+        Trois caractères du potentiel de repos à retenir : il est <strong>permanent</strong> (il existe tant que le neurone vit), il est <strong>stable</strong> (sa valeur ne fluctue pas) et il est <strong>négatif</strong> (l'intérieur est chargé −). C'est cet état « chargé comme une batterie » qui rend le neurone prêt à décharger son message au moindre stimulus.
+      </p>
+
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">⚠️ « Au repos » ne veut pas dire « à 0 mV »</div>
+        <p>Un neurone au repos n'est pas électriquement « éteint » : il est <strong>polarisé à −70 mV</strong>, et maintenir cette différence demande un travail permanent de la cellule (nous verrons lequel en partie 2). « Repos » signifie seulement : le neurone ne transmet pas de message. Erreur classique au Bac : écrire qu'au repos, il n'y a aucune différence de potentiel.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3 : POURQUOI L'INTÉRIEUR EST-IL NÉGATIF ? ===== -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · polarisation</span>
+        <h2 class="lecture-section-title">Pourquoi l'intérieur est-il négatif ?</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        D'où vient la polarisation ? D'une <strong>répartition inégale des ions</strong> de part et d'autre de la membrane. Le milieu extracellulaire est riche en ions <span class="math">Na⁺</span> (sodium) et <span class="math">Cl⁻</span> (chlore), tandis que le milieu intracellulaire est riche en ions <span class="math">K⁺</span> (potassium) et en gros anions organiques notés <span class="math">A⁻</span> (protéines notamment), qui ne traversent pas la membrane.
+      </p>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Ion</th><th>Milieu extracellulaire (dehors)</th><th>Milieu intracellulaire (dedans)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong><span class="math">Na⁺</span></strong> (sodium)</td><td>abondant ✔</td><td>peu abondant</td></tr>
+            <tr><td><strong><span class="math">K⁺</span></strong> (potassium)</td><td>peu abondant</td><td>abondant ✔</td></tr>
+            <tr><td><strong><span class="math">Cl⁻</span></strong> (chlore)</td><td>abondant ✔</td><td>peu abondant</td></tr>
+            <tr><td><strong><span class="math">A⁻</span></strong> (anions organiques)</td><td>quasi absents</td><td>abondants ✔</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="lecture-text">
+        Au repos, la membrane est légèrement perméable aux ions, et <strong>surtout au <span class="math">K⁺</span></strong> : celui-ci sort de la cellule en suivant son gradient de concentration (du milieu le plus concentré vers le moins concentré). Des charges positives quittent l'intérieur pendant que les gros anions <span class="math">A⁻</span>, prisonniers, ne peuvent pas les suivre : <strong>l'intérieur devient négatif</strong>. Le mécanisme se décompose en quatre temps :
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><span class="lecture-step-number">1</span>
+          <div class="lecture-step-content"><strong>Inégalité des concentrations</strong><p><span class="math">Na⁺</span> et <span class="math">Cl⁻</span> dominent à l'extérieur ; <span class="math">K⁺</span> et <span class="math">A⁻</span> dominent à l'intérieur.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">2</span>
+          <div class="lecture-step-content"><strong>Perméabilité sélective de la membrane au repos</strong><p>la membrane laisse surtout passer le <span class="math">K⁺</span>, qui sort de la cellule.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">3</span>
+          <div class="lecture-step-content"><strong>Sortie de charges positives</strong><p>l'intérieur perd des charges + et devient négatif (les <span class="math">A⁻</span> restent enfermés).</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">4</span>
+          <div class="lecture-step-content"><strong>Équilibre vers −70 mV</strong><p>la polarisation s'installe ; une <strong>pompe <span class="math">Na⁺</span>/<span class="math">K⁺</span></strong> repousse en permanence le <span class="math">Na⁺</span> vers l'extérieur et le <span class="math">K⁺</span> vers l'intérieur, ce qui entretient l'inégalité des concentrations.</p></div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-gold"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">À retenir</div>
+        <p>La polarisation de repos résulte de <strong>l'inégalité des concentrations ioniques</strong> (<span class="math">Na⁺</span>/<span class="math">K⁺</span>) de part et d'autre de la membrane, associée à sa <strong>perméabilité sélective</strong> au repos. C'est cette « pile » permanente qui permet ensuite au neurone de créer son message.</p>
+      </div></div>
+
+      <div class="lecture-callout lecture-callout-warning"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">⚠️ Inégalité ne veut pas dire exclusion</div>
+        <p>Il y a des <span class="math">Na⁺</span> des deux côtés et des <span class="math">K⁺</span> des deux côtés ! L'inégalité est une question de <strong>proportions</strong> (l'ion « domine » d'un côté), pas d'exclusion totale. La phrase « il n'y a pas de <span class="math">Na⁺</span> à l'intérieur du neurone » est fausse.</p>
+      </div></div>
+
+      <div class="lecture-example"><div class="lecture-example-label">Exemple — l'analogie de la batterie</div>
+        <div class="lecture-example-content"><p class="lecture-text">La membrane au repos se comporte comme un <strong>accumulateur chargé</strong> : deux compartiments aux charges différentes (dehors +, dedans −), séparés par une paroi isolante qui laisse fuir quelques ions. Le potentiel de repos est la « charge » stockée, disponible en permanence — prête à être convertie en message dès qu'un stimulus suffisant arrive.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4 : LE POTENTIEL D'ACTION ===== -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · potentiel_action</span>
+        <h2 class="lecture-section-title">Le potentiel d'action (PA)</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Maintenant, stimulons l'axone avec un bref choc électrique d'intensité suffisante, microélectrode toujours en place. Au moment du choc, la courbe de l'oscilloscope bondit : le potentiel passe brusquement de <span class="math">−70 mV</span> à une valeur <strong>positive</strong>, puis redescend. Ce pic porte un nom : le <strong>potentiel d'action</strong>, que j'abrégerai <strong>PA</strong> comme le font les manuels.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">Définition officielle — potentiel d'action</div>
+        <p>Le <strong>potentiel d'action</strong> est une <strong>inversion brève et stéréotypée</strong> (toujours la même) du potentiel de membrane : <strong>dépolarisation</strong> jusqu'à environ <span class="math">+30 mV</span> — l'intérieur devient momentanément positif — puis <strong>repolarisation</strong>, c'est-à-dire retour vers la valeur de repos. Sa durée est courte, de l'ordre de <span class="math">2 à 3 ms</span> sur un axone, et son amplitude est constante (environ <span class="math">100 mV</span>).</p>
+      </div></div>
+
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Le potentiel d'action en une ligne</div>
+        <div class="lecture-formula-hero-main">−70 mV → +30 mV → −70 mV</div>
+        <div class="lecture-formula-hero-desc">Inversion brève de la polarité de la membrane : dépolarisation puis repolarisation · durée ≈ 2-3 ms · amplitude ≈ 100 mV</div>
+      </div>
+
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Oscillogramme d'un potentiel d'action : le potentiel de membrane monte de moins soixante-dix millivolts à plus trente millivolts puis redescend">
+          <text x="330" y="22" style="fill:var(--accent-bright)" font-size="11" font-weight="700" font-family="Inter" text-anchor="middle" letter-spacing="2">OSCILLOGRAMME : UN POTENTIEL D'ACTION</text>
+          <line x1="70" y1="30" x2="70" y2="280" style="stroke:var(--text-dim)" stroke-width="1.5"/>
+          <line x1="70" y1="190" x2="620" y2="190" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="4 4"/>
+          <polygon points="620,190 610,185 610,195" style="fill:var(--text-dim)"/>
+          <text x="56" y="194" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">0 mV</text>
+          <text x="612" y="212" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">temps (ms)</text>
+          <line x1="70" y1="274" x2="610" y2="274" style="stroke:var(--border-soft)" stroke-width="1.2" stroke-dasharray="5 4"/>
+          <text x="66" y="278" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">−70 mV</text>
+          <g style="stroke:var(--text-dim)" stroke-width="1">
+            <line x1="194" y1="276" x2="194" y2="284"/><line x1="298" y1="276" x2="298" y2="284"/>
+            <line x1="402" y1="276" x2="402" y2="284"/><line x1="506" y1="276" x2="506" y2="284"/>
+          </g>
+          <text x="194" y="298" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">2</text>
+          <text x="298" y="298" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">4</text>
+          <text x="402" y="298" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">6</text>
+          <text x="506" y="298" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter" text-anchor="middle">8</text>
+          <polyline points="90,274 194,274 236,154 350,274 610,274" fill="none" style="stroke:var(--green-bright)" stroke-width="2.5"/>
+          <circle cx="236" cy="154" r="4" style="fill:var(--danger-light)"/>
+          <text x="248" y="150" style="fill:var(--danger-light)" font-size="11.5" font-weight="700" font-family="Inter">+30 mV</text>
+          <text x="205" y="126" style="fill:var(--accent-bright)" font-size="11.5" font-weight="700" font-family="Inter" text-anchor="middle">dépolarisation</text>
+          <text x="330" y="240" style="fill:var(--accent-bright)" font-size="11.5" font-weight="700" font-family="Inter" text-anchor="middle">repolarisation</text>
+          <text x="120" y="264" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter">repos</text>
+          <text x="560" y="264" style="fill:var(--text-dim)" font-size="10.5" font-family="Inter">repos</text>
+          <line x1="194" y1="306" x2="350" y2="306" style="stroke:var(--text-light)" stroke-width="1.2"/>
+          <polygon points="194,306 202,302 202,310" style="fill:var(--text-light)"/>
+          <polygon points="350,306 342,302 342,310" style="fill:var(--text-light)"/>
+          <text x="272" y="290" style="fill:var(--text-light)" font-size="10.5" font-family="Inter" text-anchor="middle">durée ≈ 2 à 3 ms</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">Un potentiel d'action : le potentiel de membrane monte de −70 mV à +30 mV (dépolarisation : l'intérieur devient positif), puis redescend (repolarisation) et retrouve sa valeur de repos.</figcaption>
+      </figure>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><span class="lecture-step-number">1</span>
+          <div class="lecture-step-content"><strong>Repos</strong><p>potentiel stable à <span class="math">−70 mV</span> : membrane polarisée.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">2</span>
+          <div class="lecture-step-content"><strong>Dépolarisation</strong><p>le potentiel monte très vite jusqu'à ≈ <span class="math">+30 mV</span> : la polarité s'inverse, l'intérieur devient positif.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">3</span>
+          <div class="lecture-step-content"><strong>Repolarisation</strong><p>le potentiel redescend vers la valeur de repos : la polarisation se rétablit.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">4</span>
+          <div class="lecture-step-content"><strong>Retour au repos</strong><p>la membrane retrouve <span class="math">−70 mV</span> : elle est prête pour un nouveau PA.</p></div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-danger"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">🚨 Erreur fréquente au Bac</div>
+        <p>Confondre <strong>dépolarisation</strong> et <strong>repolarisation</strong>. Dépolarisation = <strong>montée</strong> du potentiel (la polarisation disparaît, l'intérieur devient positif). Repolarisation = <strong>descente</strong> (la polarisation se rétablit). Moyen mnémotechnique : « dépolar » vient <em>avant</em> « repolar », comme la montée vient avant la descente.</p>
+      </div></div>
+
+      <p class="lecture-text">
+        Note bien l'ampleur du phénomène : le potentiel ne fait pas qu'annuler la polarisation, il la <strong>renverse</strong> réellement (de <span class="math">−70</span> à <span class="math">+30 mV</span>, l'intérieur devient positif). C'est ce renversement brutal, reproductible à l'identique, qui fait du PA un signal électrique fiable — comparable à une impulsion numérique qui ne connaît que deux états.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5 : CODAGE EN FRÉQUENCE ===== -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · codage_frequence</span>
+        <h2 class="lecture-section-title">Le message nerveux : une série de PA codée en fréquence</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Un PA unique dure 2 à 3 ms : trop bref pour transporter à lui seul une information riche. Quand la stimulation persiste, l'axone ne fabrique pas des PA « plus grands » : il enchaîne une <strong>série de PA identiques</strong>, les uns après les autres. C'est cette série — ce train de potentiels d'action — qui constitue le message nerveux qui parcourt l'axone.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">Définition — codage en fréquence</div>
+        <p>Le <strong>message nerveux</strong> est une série de potentiels d'action qui se propagent le long de l'axone. Son <strong>intensité est codée en fréquence</strong> : c'est le <strong>nombre de potentiels d'action par seconde</strong> (exprimé en hertz, Hz) qui traduit l'intensité du stimulus, et non la taille des PA.</p>
+      </div></div>
+
+      <div class="lecture-formula-box"><div class="lecture-formula-main">fréquence (Hz) = nombre de PA ÷ durée de l'enregistrement (s)</div>
+        <div class="lecture-formula-desc">Exemple : 6 PA en 0,12 s → f = 6 ÷ 0,12 = 50 Hz. À savoir appliquer sur un oscillogramme.</div>
+      </div>
+
+      <div class="lecture-example lecture-example-featured"><div class="lecture-example-label">🎓 Exemple — le bout du doigt</div>
+        <div class="lecture-example-content"><p class="lecture-text">Tu effleures une toile : le neurone sensoriel de ton doigt décharge environ <strong>5 PA par seconde</strong>. Tu appuies énergiquement : le <em>même</em> neurone décharge <strong>50 PA par seconde</strong>. Les PA restent identiques (même forme, même amplitude) ; seule leur <strong>cadence</strong> change. Le cerveau lit l'intensité dans le rythme, pas dans la taille des pics.</p></div>
+      </div>
+
+      <p class="lecture-text">
+        Ce code est universel dans le système nerveux : douleur, lumière, son, tension musculaire… tout arrive au système nerveux central sous forme de trains de PA dont la <strong>fréquence</strong> traduit l'intensité du stimulus. Un nerf est donc comparable à une ligne qui transmettrait ses messages en code Morse : des impulsions toujours identiques, dont seul le rythme a du sens.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 6 : TOUT OU RIEN ===== -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion · tout_ou_rien</span>
+        <h2 class="lecture-section-title">La loi du tout ou rien</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Dernière question de cette partie : si le stimulus est plus faible, obtient-on un « petit PA », un demi-signal ? L'expérience répond <strong>non</strong>. Pour chaque fibre nerveuse, il existe un niveau limite de dépolarisation, appelé <strong>seuil</strong> (aux alentours de <span class="math">−55 mV</span>).
+      </p>
+
+      <div class="lecture-steps">
+        <div class="lecture-step"><span class="lecture-step-number">1</span>
+          <div class="lecture-step-content"><strong>Stimulus en dessous du seuil</strong><p>une petite dépolarisation locale se produit… puis tout rentre dans l'ordre : <strong>aucun PA</strong> n'est déclenché.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">2</span>
+          <div class="lecture-step-content"><strong>Stimulus au-dessus du seuil</strong><p>un PA est déclenché — et il est <strong>toujours identique</strong> : même amplitude (≈ 100 mV), même durée, même forme.</p></div>
+        </div>
+        <div class="lecture-step"><span class="lecture-step-number">3</span>
+          <div class="lecture-step-content"><strong>Stimulus encore plus fort</strong><p>pas de PA plus grand : simplement <strong>davantage de PA par seconde</strong> (la fréquence augmente — on le vérifiera en partie 2).</p></div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-key"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">Définition — loi du tout ou rien (simplifiée)</div>
+        <p>Un potentiel d'action ne se produit que si le stimulus atteint le <strong>seuil</strong> ; il a alors toujours la <strong>même amplitude</strong>, quelle que soit l'intensité du stimulus. En dessous du seuil : rien. Au-dessus : tout (un PA complet, stéréotypé).</p>
+      </div></div>
+
+      <div class="lecture-callout lecture-callout-danger"><div class="lecture-callout-body">
+        <div class="lecture-callout-title">🚨 LE piège n°1 du chapitre</div>
+        <p>Un stimulus plus intense ne donne <strong>pas</strong> de PA plus grands. Il donne <strong>plus de PA par seconde</strong> (fréquence plus élevée). L'amplitude est invariable — c'est le tout ou rien. Toute phrase du type « un stimulus fort provoque des potentiels d'action de grande amplitude » est <strong>fausse</strong> au Bac.</p>
+      </div></div>
+
+      <div class="lecture-example"><div class="lecture-example-label">Exemple — chatouille et piqûre</div>
+        <div class="lecture-example-content"><p class="lecture-text">Sur un oscillogramme, les PA des nerfs sensoriels ont la <strong>même hauteur</strong> que tu soies chatouillé ou piqué. Seule la cadence change : quelques PA par seconde pour une caresse, des dizaines pour une douleur vive. L'intensité ressentie se lit sur la fréquence.</p></div>
+      </div>
+
+      <p class="lecture-text">
+        Mais comment ce pic naît-il au sein de la membrane ? Quels ions entrent et sortent pour inverser la polarité ? Et comment le PA voyage-t-il le long de l'axone, parfois sur un mètre et plus ? C'est tout l'objet de la <strong>partie 2</strong>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 7 : QCM D'ENTRAÎNEMENT ===== -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Entraînement</span>
+        <h2 class="lecture-section-title">3 QCM d'auto-évaluation</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Réponds d'abord <strong>sans regarder la réponse</strong>, puis vérifie. Si tu te trompes, retourne à la section indiquée dans la justification.
+      </p>
+
+      <div class="lecture-quiz">
+        <div class="lecture-quiz-item">
+          <p class="lecture-quiz-q">Q1 — Chez un neurone au repos, le potentiel de membrane vaut environ (s0-s2) :</p>
+          <div class="lecture-quiz-options"><span>A) +70 mV</span><span>B) 0 mV</span><span>C) −70 mV</span><span>D) +30 mV</span></div>
+          <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>C) −70 mV.</strong> Au repos, la membrane est polarisée : l'intérieur est négatif par rapport à l'extérieur (qui sert de référence à 0 mV). +30 mV correspond au sommet du PA, et 0 mV n'est qu'une référence, jamais l'état du neurone au repos.</div></details>
+        </div>
+        <div class="lecture-quiz-item">
+          <p class="lecture-quiz-q">Q2 — Pendant la dépolarisation, le potentiel de membrane (s4) :</p>
+          <div class="lecture-quiz-options"><span>A) descend de −70 vers −90 mV</span><span>B) monte de −70 vers ≈ +30 mV</span><span>C) reste fixé à −70 mV</span><span>D) oscille autour de 0 mV</span></div>
+          <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) il monte de −70 vers ≈ +30 mV.</strong> La dépolarisation est une véritable inversion de la polarité : l'intérieur, négatif au repos, devient bref positif. La descente correspond à la repolarisation.</div></details>
+        </div>
+        <div class="lecture-quiz-item">
+          <p class="lecture-quiz-q">Q3 — Un stimulus plus intense qu'un autre provoque sur le même axone (s5-s6) :</p>
+          <div class="lecture-quiz-options"><span>A) des PA de plus grande amplitude</span><span>B) des PA de plus longue durée</span><span>C) davantage de PA par seconde</span><span>D) des PA qui se propagent plus vite</span></div>
+          <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>C) davantage de PA par seconde.</strong> Tout ou rien oblige : chaque PA garde la même amplitude et la même durée. L'intensité du stimulus se code uniquement en <strong>fréquence</strong>. (D est faux : la vitesse de propagation dépend de l'axone, pas du stimulus — voir partie 2.)</div></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[potentiel_repos]</strong> Le message nerveux est de nature électrique : c'est une variation du potentiel de membrane, mesurée entre l'intérieur et l'extérieur de la fibre à l'aide d'une <strong>microélectrode</strong> (référence : milieu extracellulaire à <span class="math">0 mV</span>)</li>
+      <li><strong>[potentiel_repos]</strong> Potentiel de repos ≈ <span class="math">−70 mV</span> : d.d.p. permanente, stable et négative — l'intérieur de la membrane est négatif par rapport à l'extérieur</li>
+      <li><strong>[polarisation]</strong> Membrane <strong>polarisée</strong> au repos : inégalité des concentrations — <span class="math">Na⁺</span> et <span class="math">Cl⁻</span> dominent dehors, <span class="math">K⁺</span> et anions <span class="math">A⁻</span> dominent dedans</li>
+      <li><strong>[polarisation]</strong> Cause de la polarisation : au repos la membrane laisse surtout sortir le <span class="math">K⁺</span> → l'intérieur devient négatif ; la pompe <span class="math">Na⁺</span>/<span class="math">K⁺</span> entretient l'inégalité des concentrations</li>
+      <li><strong>[potentiel_action]</strong> PA = <strong>inversion brève et stéréotypée</strong> du potentiel de membrane : dépolarisation jusqu'à ≈ <span class="math">+30 mV</span> puis repolarisation, retour au repos ; durée ≈ 2-3 ms, amplitude ≈ 100 mV</li>
+      <li><strong>[potentiel_action]</strong> Dépolarisation = montée (intérieur devient +) · repolarisation = descente (polarisation rétablie) — ne jamais les confondre</li>
+      <li><strong>[codage_frequence]</strong> Le message nerveux = <strong>série (train) de PA</strong> identiques parcourant l'axone ; codage en <strong>fréquence</strong> : intensité = nombre de PA par seconde (Hz), <span class="math">f = nombre de PA ÷ durée (s)</span></li>
+      <li><strong>[tout_ou_rien]</strong> Loi du tout ou rien : stimulus sous le <strong>seuil</strong> → aucun PA ; stimulus au-dessus → un PA toujours identique</li>
+      <li><strong>[tout_ou_rien]</strong> Piège n°1 : un stimulus plus intense → <strong>plus de PA par seconde</strong>, jamais de PA plus grands</li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 1 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : potentiel d'action et propagation le long de l'axone</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>

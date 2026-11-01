@@ -1,0 +1,427 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ARVEXA SCHOOL — ARVEXA-UI.CSS
+   Design system unifié — chargé par TOUTES les pages.
+   Rôle :
+     1. Garantir les mêmes tokens (couleurs, rayons, ombres, polices)
+        sur chaque page, même si la page ne les définit pas.
+     2. Donner une base commune (focus, sélection, scrollbars, tap,
+        autofill) pour un rendu "app native" identique partout.
+     3. Anti-débordement universel (v8.2) : texte toujours replié à
+        la ligne + verrou du défilement horizontal — MODALES exclues
+        (consigne propriétaire), bloc en fin de fichier.
+   Garantie de non-casse :
+     - Ce fichier est chargé AVANT le <style> interne de chaque page.
+     - Les composants utilisent :where() (spécificité zéro) : le style
+       propre de chaque page gagne TOUJOURS.
+     - Les tokens :root ne font que compléter les pages qui n'ont pas
+       la variable ; les pages qui la définissent gardent leur valeur.
+   Palette de référence (identique à index.html / login.html) :
+     fond #0A0A0A · surface #141414 · or #B8860B / #E0B84A
+     texte #F5F0E8 · dim #8A8A7A · muted #5A5A4A
+     succès #2D7D5A / #3AB67E · danger #B85C3A · warning #D4A017 · info #4AAFE0
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Couleurs de marque (uniques et officielles) ── */
+  --bg-dark: #0A0A0A;
+  --bg-surface: #141414;
+  --bg-card: rgba(20, 20, 20, 0.7);
+  --accent: #B8860B;
+  --accent-bright: #E0B84A;
+  --accent-dim: rgba(184, 134, 11, 0.08);
+  --primary: #1A3A2A;
+  --primary-dark: #0A1A12;
+  --primary-light: #2A5A3A;
+  --success: #2D7D5A;
+  --success-light: #3AB67E;
+  --danger: #B85C3A;
+  --danger-light: #FF9A84;
+  --warning: #D4A017;
+  --info: #4AAFE0;
+  --text-light: #F5F0E8;
+  --text-dim: #8A8A7A;
+  --text-muted: #5A5A4A;
+  --block-bg: rgba(255, 255, 255, 0.05);
+  --on-gold: #0A0A0A;          /* texte posé sur un élément doré */
+  --accent-purple: #B77CD9;
+  --warning-bright: #E8C255;
+  --shimmer: rgba(255, 255, 255, 0.25);
+
+  /* ── Échelle de rayons UNIQUE ──
+     10px = petits éléments (chips, tags, mini-boutons)
+     12px = inputs, boutons moyens
+     16px = cartes, panneaux          (var(--radius))
+     20px = modales, grands blocs     (var(--radius-lg))
+     999px = pilules, badges ronds ; 50% = cercles */
+  --radius-xs: 8px;
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* ── Polices officielles ── */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-math: 'Cambria Math', 'STIX Two Math', Georgia, serif;
+
+  /* ── Ombres et transitions officielles ── */
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+  --transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-fast: all 0.15s ease;
+
+  /* ── Contrôles natifs assortis au thème sombre ── */
+  color-scheme: dark;
+  accent-color: #B8860B;
+
+  /* ── Tokens canoniques pour les couleurs thémables (mode sombre) ──
+     --rgb-* : triplets RGB utilisés dans rgba(var(--rgb-x), α) pour que
+     les voiles/cartes/fills translucides changent de couleur avec le thème.
+     --bg-deep : extrémité sombre des dégradés de fond de page. */
+  --bg-deep: #060606;
+  --bg-elev: #1A1A1A;
+  --rgb-veil: 10, 10, 10;      /* headers / barres translucides */
+  --rgb-card: 20, 20, 20;      /* cartes, feuilles modales */
+  --rgb-soft: 255, 255, 255;   /* fills/hovers/bordures très subtils */
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MODE CLAIR — html[data-theme="light"]
+   Spécificité 0-1-1 : bat les blocs :root (0-1-0) définis dans chaque
+   page, quel que soit l'ordre des feuilles. Appliqué par theme.js
+   (persistance localStorage 'arvexa-theme', activable dans Profil).
+   Palette "papier & encre" : fond #F5F1E8 · surface #FFFFFF ·
+   encre #262019 · or foncé #9A7209 (texte) · accents statuts foncés.
+   ═══════════════════════════════════════════════════════════════════ */
+html[data-theme="light"] {
+  color-scheme: light;
+  accent-color: #B8860B;
+
+  /* ── Surfaces ── */
+  --bg-dark: #F5F1E8;
+  --bg: #F5F1E8;
+  --bg-deep: #ECE6D8;
+  --bg-surface: #FFFFFF;
+  --bg-card: rgba(255, 255, 255, 0.88);
+  --bg-card-solid: #FFFFFF;
+  --bg-elev: #FDFBF6;
+  --bg-elevated: #FFFFFF;
+  --bg-hover: rgba(184, 134, 11, 0.10);
+  --bg-input: #FFFFFF;
+  --input-bg: rgba(184, 134, 11, 0.05);
+  --block-bg: rgba(0, 0, 0, 0.045);
+  --on-gold: #141210;
+  --accent-purple: #7D3FA8;
+  --shimmer: rgba(0, 0, 0, 0.10);
+  --card-bg: rgba(255, 255, 255, 0.82);
+
+  /* ── Texte (encre chaude) ── */
+  --text-light: #262019;
+  --text: #262019;
+  --text-body: #4A4438;
+  --text-dim: #6E675A;
+  --text-muted: #948D7C;
+  --text-faint: #B8B1A0;
+
+  /* ── Or : même marque, version foncée pour le texte sur clair ── */
+  --accent: #B8860B;
+  --accent-bright: #9A7209;
+  --accent-dim: rgba(184, 134, 11, 0.12);
+  --accent-soft: rgba(184, 134, 11, 0.12);
+  --accent-line: rgba(184, 134, 11, 0.30);
+  --gold: #B8860B;
+  --gold-bright: #9A7209;
+  --gold-dim: rgba(184, 134, 11, 0.12);
+
+  /* ── Statuts : versions foncées, lisibles sur fond clair ── */
+  --success: #1E7A4E;
+  --success-light: #178A55;
+  --success-bright: #12855A;
+  --danger: #B85C3A;
+  --danger-light: #C0392B;
+  --danger-bright: #C05621;
+  --danger-dim: rgba(231, 76, 60, 0.08);
+  --warning: #A67C00;
+  --warning-light: #8F6B00;
+  --warning-bright: #B45309;
+  --info: #1D7FB5;
+
+  /* ── Bordures ── */
+  --border-soft: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.16);
+  --border-gold: rgba(184, 134, 11, 0.32);
+  --card-border: rgba(184, 134, 11, 0.22);
+  --card-border-hover: rgba(184, 134, 11, 0.48);
+  --input-border: rgba(0, 0, 0, 0.14);
+  --input-border-focus: rgba(184, 134, 11, 0.70);
+  --line: rgba(184, 134, 11, 0.16);
+  --line-strong: rgba(184, 134, 11, 0.32);
+
+  /* ── Ombres chaudes adoucies ── */
+  --shadow: 0 8px 32px rgba(74, 58, 24, 0.12);
+  --shadow-lg: 0 20px 60px rgba(74, 58, 24, 0.16);
+  --shadow-sm: 0 2px 8px rgba(74, 58, 24, 0.10);
+  --shadow-soft: 0 10px 34px rgba(74, 58, 24, 0.12);
+  --shadow-gold: 0 10px 34px rgba(184, 134, 11, 0.25);
+
+  /* ── Triplets RGB inversés ── */
+  --rgb-veil: 250, 247, 240;   /* voiles clairs (headers) */
+  --rgb-card: 255, 255, 255;   /* cartes blanches translucides */
+  --rgb-soft: 32, 27, 18;      /* encre : fills/hovers subtils */
+
+  /* ── Divers ── */
+  --tint-gold: rgba(184, 134, 11, 0.10);
+  --tint-red: rgba(192, 57, 43, 0.09);
+  --tint-warn: rgba(183, 121, 31, 0.10);
+  --bubble-ai: #F1ECE0;
+  --bubble-user: #E8E1CD;
+  --whatsapp-bubble-other: rgba(255, 255, 255, 0.92);
+  --whatsapp-bubble-me: rgba(184, 134, 11, 0.18);
+  --primary-dark: #E3EBE0;     /* héro vert sombre → vert pâle */
+}
+
+/* ── Sélection de texte en mode clair (encre sur or pâle) ── */
+html[data-theme="light"] ::selection {
+  background: rgba(184, 134, 11, 0.28);
+  color: #262019;
+}
+
+/* ── Focus clavier : or foncé plus visible sur fond clair ── */
+html[data-theme="light"] :focus-visible {
+  outline-color: #B8860B;
+}
+
+/* ── Autofill : encre foncée, pas de flash blanc cassé ── */
+html[data-theme="light"] input:-webkit-autofill,
+html[data-theme="light"] input:-webkit-autofill:hover,
+html[data-theme="light"] input:-webkit-autofill:focus,
+html[data-theme="light"] textarea:-webkit-autofill,
+html[data-theme="light"] select:-webkit-autofill {
+  -webkit-text-fill-color: #262019;
+  caret-color: #B8860B;
+  transition: background-color 600000s ease-out, color 600000s ease-out;
+}
+
+/* ── Barres de défilement assorties au papier ── */
+html[data-theme="light"] * {
+  scrollbar-color: #D5CEBD #F5F1E8;
+}
+html[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #F5F1E8;
+}
+html[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #D5CEBD;
+}
+html[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #B8860B;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   BASE GLOBALE — sensation "app native" identique sur tout le site
+   (spécificité minimale : chaque page garde la main)
+   ═══════════════════════════════════════════════════════════════════ */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Aucun flash de surbrillance au tap sur iOS/Android */
+button, a, input, select, textarea, label, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Les boutons héritent toujours de la police de la page */
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button {
+  touch-action: manipulation; /* pas de zoom accidentel au double-tap */
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* ── Focus clavier uniforme (anneau or ARVEXA) ── */
+:focus-visible {
+  outline: 2px solid #E0B84A;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ── Sélection de texte aux couleurs de la marque ── */
+::selection {
+  background: rgba(184, 134, 11, 0.35);
+  color: #F5F0E8;
+}
+
+/* ── Autofill sombre : plus de flash blanc sur les champs connectés ── */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: #F5F0E8;
+  caret-color: #E0B84A;
+  transition: background-color 600000s ease-out, color 600000s ease-out;
+}
+
+/* ── Barres de défilement discrètes et identiques partout ── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2A2A2A #0A0A0A;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+::-webkit-scrollbar-thumb {
+  background: #2A2A2A;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B8860B;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   COMPOSANTS — valeurs par défaut à spécificité ZÉRO (:where)
+   → elles ne s'appliquent que si la page ne définit rien elle-même.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Transition tactile uniforme sur tous les boutons du site */
+:where(button, .btn, [class*="btn"], [class*="button"], [role="button"]) {
+  transition:
+    transform 0.15s ease,
+    opacity 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* Retour tactile : léger enfoncement au pressage (feel natif) */
+:where(button:not(:disabled):active, [role="button"]:not([aria-disabled="true"]):active) {
+  transform: scale(0.97);
+}
+
+/* ── ANTI-RETOUR-À-LA-LIGNE ──
+   Le texte d'un bouton reste TOUJOURS sur une seule ligne
+   (« Se déconnecter » ne doit jamais se couper en « Se » / « déconnecter »).
+   Spécificité zéro : une page peut surcharger si nécessaire. */
+:where(button, .btn, [class*="btn"], [class*="button"], [role="button"]) {
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* Champs de formulaire : transition douce par défaut */
+:where(input, select, textarea) {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+/* Liens : pas de saut de couleur brutal */
+:where(a) {
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ANTI-DÉBORDEMENT UNIVERSEL (v8.2)
+   Consigne propriétaire : « mets en blocage contre les débordements
+   qui ne reviennent pas à la ligne — règles partout SAUF pour les
+   modales ». Trois verrous à spécificité zéro (:where) : une page
+   qui définit son propre style gagne toujours.
+
+     1. CÉSURE — le texte revient TOUJOURS à la ligne (mots longs,
+        URLs, titres) au lieu de déborder. `anywhere` réduit aussi le
+        min-content : les enfants flex/grid se compriment enfin.
+     2. COMPRESSION — min-width:0 : fini les lignes flex/grid qui
+        refusent de rétrécir et poussent la page en largeur.
+     3. VERROU PAGE — aucun défilement horizontal au niveau du
+        document (overflow-x: clip sur html : n'interrompt PAS
+        position:sticky, ne crée pas de conteneur de défilement).
+        Les carrousels internes (overflow-x:auto) et les formules
+        larges (.katex-display) gardent leur propre défilement.
+
+   EXCEPTION DEMANDÉE — MODALES INTACTES : tout l'arbre des modales,
+   popups, overlays, backdrops, sheets et dialogues (attributs de
+   classe contenant modal/popup/overlay/backdrop/dialog/lightbox/
+   sheet + élément <dialog>) est RÉTABLI AU COMPORTEMENT D'ORIGINE
+   (min-width:auto, overflow-wrap:normal) : leur mise en page actuelle
+   n'est pas touchée. Les toasts/bannières NE SONT PAS des modales et
+   restent couverts par les règles (leurs messages longs se replient).
+   PROTECTION MATHS — .katex n'est jamais coupé (une formule brisée
+   = rendu détruit) ; une formule posée plus large que l'écran
+   défile localement au lieu de déborder.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* 1 — Le texte peut toujours revenir à la ligne */
+:where(body, main, header, footer, section, article, aside, nav, div, p, span, a,
+       li, ul, ol, dt, dd, figcaption, blockquote, label, summary, td, th,
+       h1, h2, h3, h4, h5, h6, small, strong, em, b, i, u, code, pre, kbd, samp) {
+  overflow-wrap: break-word; /* repli anciens navigateurs */
+  overflow-wrap: anywhere;   /* moderne : vaut aussi pour min-content (flex/grid) */
+}
+
+/* 2 — Les enfants flex/grid acceptent de se comprimer */
+:where(*) { min-width: 0; }
+
+/* 3 — Verrou anti-débordement au niveau du document (sticky intact) */
+html { overflow-x: clip; }
+@supports not (overflow-x: clip) {
+  html { overflow-x: hidden; }
+}
+
+/* ── EXCEPTION : MODALES INTACTES (consigne « sauf pour les modales ») ── */
+[class*="modal"], [class*="modal"] *,
+[class*="popup"], [class*="popup"] *,
+[class*="overlay"], [class*="overlay"] *,
+[class*="backdrop"], [class*="backdrop"] *,
+[class*="dialog"], [class*="dialog"] *,
+[class*="lightbox"], [class*="lightbox"] *,
+[class*="sheet"], [class*="sheet"] *,
+dialog, dialog * {
+  min-width: auto;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+/* ── PROTECTION MATHS : jamais de coupure dans une formule ── */
+.katex, .katex *, .katex-display, .katex-display * {
+  overflow-wrap: normal;
+  word-break: normal;
+  min-width: auto;
+}
+/* Formule posée plus large que l'écran : défilement LOCAL (pas de débordement) */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ACCESSIBILITÉ — respect des préférences de mouvement réduit
+   ═══════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,278 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ═══════════════════════════════════════════════════════════════
+    // RÈGLES ARVEXA SCHOOL
+    // Version : 2026-10-26 (v2 sécurisée)
+    // Changements majeurs :
+    //  - Création de compte : champs sensibles verrouillés (premium/role)
+    //  - Update user : tous les champs d'abonnement/paiement protégés
+    //  - Groupes : validation stricte des messages (anti-XSS/spam)
+    //  - Bannissements : admins uniquement (serveur, plus via l'UI)
+    //  - Paiements : saspayPendingCheckouts réservé au serveur
+    // ═══════════════════════════════════════════════════════════════
+
+    // ─── Fonction helper : est-ce un admin ? ─────────────────────
+    function isAdmin() {
+      return request.auth != null
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // ─── Fonction helper : est-ce le propriétaire ? ──────────────
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // USERS + SOUS-COLLECTIONS
+    // ═══════════════════════════════════════════════════════════════
+    match /users/{userId} {
+
+      // ─── Lecture : propriétaire OU admin ────────────────────────
+      allow read: if isOwner(userId) || isAdmin();
+
+      // ─── Création : propriétaire uniquement, profil "étudiant gratuit" imposé
+      // 🔒 Empêche de créer un compte déjà premium/admin.
+      allow create: if isOwner(userId)
+        && request.resource.data.role == 'student'
+        && request.resource.data.premium == false
+        && request.resource.data.isUnlocked == false
+        && request.resource.data.hasDeposited == false
+        && request.resource.data.accountStatus == 'active';
+
+      // ─── Update : propriétaire SAUF champs sensibles ────────────
+      // 🔒 Les champs d'abonnement et de paiement ne sont modifiables
+      // que par le serveur (SDK admin, via les webhooks/API).
+      allow update: if isOwner(userId)
+        && !(request.resource.data.diff(resource.data).affectedKeys()
+              .hasAny([
+                'premium',
+                'isUnlocked',
+                'hasDeposited',
+                'role',
+                'accountStatus',
+                'subscriptionPlan',
+                'subscriptionStatus',
+                'subscriptionStartDate',
+                'subscriptionEndDate',
+                'subscriptionPaidAt',
+                'saspayTransactionId',
+                'saspayReference',
+                'saspayAmountPaid',
+                'saspayCheckoutReference',
+                'saspayCheckoutSessionId',
+                'saspayCheckoutStartedAt'
+              ]));
+
+      // ─── Suppression : admin uniquement ─────────────────────────
+      allow delete: if isAdmin();
+
+      // ─── examResults ────────────────────────────────────────────
+      match /examResults/{docId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId);
+        allow update, delete: if false;
+      }
+
+      // ─── revisionSessions ───────────────────────────────────────
+      match /revisionSessions/{docId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create: if isOwner(userId);
+        allow update, delete: if false;
+      }
+
+      // ─── grades ─────────────────────────────────────────────────
+      match /grades/{docId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create, update, delete: if isOwner(userId);
+      }
+
+      // ─── notifications ──────────────────────────────────────────
+      match /notifications/{docId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow update: if isOwner(userId);
+        allow create, delete: if isAdmin();
+      }
+
+      // ─── examCache (écriture serveur uniquement) ────────────────
+      match /examCache/{docId} {
+        allow read, write: if false;
+      }
+
+      // ─── examUsage ──────────────────────────────────────────────
+      match /examUsage/{docId} {
+        allow read: if isOwner(userId);
+        allow write: if false;
+      }
+
+      // ─── reviseurUsage ──────────────────────────────────────────
+      match /reviseurUsage/{docId} {
+        allow read: if isOwner(userId);
+        allow write: if false;
+      }
+
+      // ─── activeExam ─────────────────────────────────────────────
+      match /activeExam/{docId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // ─── activeRevision ─────────────────────────────────────────
+      match /activeRevision/{docId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      // ─── progression (v8.0) ─────────────────────────────────────
+      // Sync Firebase des progressions de cours (demande propriétaire :
+      // « chaque compte doit avoir ses propres données »). Doc unique
+      // « course » : readParts (sections lues) + notes + dailyActivity
+      // + stats (le CALCUL de progression par chapitre/matière/global).
+      // Écritures bornées (anti-abus) ; lecture réservée au propriétaire
+      // et à l'admin (console). Suppression : jamais via le client.
+      match /progression/{docId} {
+        allow read: if isOwner(userId) || isAdmin();
+        allow create, update: if isOwner(userId)
+          && (!('readParts' in request.resource.data)
+              || (request.resource.data.readParts is list
+                  && request.resource.data.readParts.size() <= 8000))
+          && (!('notes' in request.resource.data)
+              || (request.resource.data.notes is map
+                  && request.resource.data.notes.size() <= 800))
+          && (!('dailyActivity' in request.resource.data)
+              || (request.resource.data.dailyActivity is map
+                  && request.resource.data.dailyActivity.size() <= 60))
+          && (!('stats' in request.resource.data)
+              || request.resource.data.stats is map);
+        allow delete: if false;
+      }
+
+      // ─── favorites ──────────────────────────────────────────────
+      match /favorites/{docId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // PAIEMENTS — réservés au serveur (SDK admin)
+    // ═══════════════════════════════════════════════════════════════
+    match /saspayPendingCheckouts/{docId} {
+      allow read, write: if false;
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // COLLECTIONS GLOBALES
+    // ═══════════════════════════════════════════════════════════════
+
+    // ─── Sujets (cours) : lecture pour tous les connectés ────────
+    match /subjects/{document=**} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // ─── Avis utilisateurs ────────────────────────────────────────
+    match /avis/{docId} {
+      allow read: if request.auth != null;
+      allow create: if request.auth != null
+        // 🔒 Anti-spam basique : commentaires bornés
+        && (!('comment' in request.resource.data)
+            || (request.resource.data.comment is string
+                && request.resource.data.comment.size() <= 1000));
+      allow update, delete: if isAdmin();
+    }
+
+    // ─── Groupes (chat) ───────────────────────────────────────────
+    match /groups/{groupId} {
+      // Métadonnées du groupe : serveur uniquement
+      allow read: if request.auth != null;
+      allow write: if false;
+
+      // ─── Messages : création validée, immuables, suppression restreinte
+      match /messages/{msgId} {
+        allow read: if request.auth != null;
+
+        // 🔒 Validation stricte à la création :
+        //  - l'auteur est obligatoirement l'utilisateur connecté
+        //  - longueurs bornées (anti-spam / anti-XML bomb)
+        //  - imageBase64 : data URI image stricte, taille plafonnée (anti-XSS)
+        //  - createdAt imposé par le serveur (anti-faux timestamps)
+        allow create: if request.auth != null
+          && request.resource.data.userId == request.auth.uid
+          && request.resource.data.userName is string
+          && request.resource.data.userName.size() > 0
+          && request.resource.data.userName.size() <= 60
+          && request.resource.data.content is string
+          && request.resource.data.content.size() <= 2000
+          && (!('userEmail' in request.resource.data)
+              || (request.resource.data.userEmail is string
+                  && request.resource.data.userEmail.size() <= 120))
+          && (!('userAvatar' in request.resource.data)
+              || request.resource.data.userAvatar == null
+              || (request.resource.data.userAvatar is string
+                  && request.resource.data.userAvatar.size() <= 500000))
+          && (!('imageName' in request.resource.data)
+              || (request.resource.data.imageName is string
+                  && request.resource.data.imageName.size() <= 100))
+          && (!('imageBase64' in request.resource.data)
+              || (request.resource.data.imageBase64 is string
+                  && request.resource.data.imageBase64.size() > 0
+                  && request.resource.data.imageBase64.size() <= 900000
+                  && request.resource.data.imageBase64.matches(
+                      '^data:image/(png|jpe?g|gif|webp);base64,[A-Za-z0-9+/=]+$')))
+          && (!('replyTo' in request.resource.data)
+              || (request.resource.data.replyTo is map
+                  && request.resource.data.replyTo.keys().hasOnly(['id', 'author', 'content', 'type'])
+                  && request.resource.data.replyTo.id is string
+                  && request.resource.data.replyTo.id.size() <= 128
+                  && request.resource.data.replyTo.author is string
+                  && request.resource.data.replyTo.author.size() <= 60
+                  && request.resource.data.replyTo.content is string
+                  && request.resource.data.replyTo.content.size() <= 100))
+          && request.resource.data.createdAt == request.time;
+
+        // 🔒 Les messages sont immuables (pas d'édition déguisée par autrui)
+        allow update: if false;
+
+        // 🔒 Suppression : son propre message, ou admin
+        allow delete: if isAdmin()
+          || (request.auth != null && resource.data.userId == request.auth.uid);
+      }
+
+      // ─── Bannissements : admins uniquement (serveur-imposé) ─────
+      // 🔒 Avant : n'importe quel utilisateur bannissait n'importe qui.
+      match /banned/{bannedUserId} {
+        allow read: if request.auth != null;
+        allow create, update, delete: if isAdmin();
+      }
+
+      // ─── Toute autre sous-collection : accès refusé par défaut ──
+      match /{otherSub=**} {
+        allow read, write: if false;
+      }
+    }
+
+    // ─── Notifications admin (lecture pour tous) ──────────────────
+    match /admin_notifications/{docId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // ─── Codes promo : lecture pour connectés ────────────────────
+    match /promoCodes/{code} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // ─── Config : lecture pour admins ─────────────────────────────
+    match /config/{docId} {
+      allow read: if isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // ─── Logs admin : lecture pour admins ─────────────────────────
+    match /adminLogs/{docId} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+  }
+}

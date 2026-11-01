@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+    <title>ARVEXA — Matière</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0A0A">
+<script>(function(){try{if(localStorage.getItem('arvexa-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}})();</script>
+<script src="theme.js"></script><script src="arvexa-i18n.js" defer></script>
+<script src="arvexa-sync.js" defer></script><!-- ✅ v8.0 sync Firebase des progressions (par compte) -->
+  <meta name="description" content="ARVEXA School - Matière">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="stylesheet" href="perf.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="analytics.js"></script>
+  <script src="register-sw.js" defer></script>
+
+  <link rel="stylesheet" href="arvexa-ui.css">
+  <style>
+    /* ============================================================
+       ROOT — Design system ARVEXA
+       ============================================================ */
+    :root {
+      --primary: #1A3A2A;
+      --primary-dark: #0A1A12;
+      --primary-light: #2A5A3A;
+      --accent: #B8860B;
+      --accent-bright: #E0B84A;
+      --accent-dim: rgba(184, 134, 11, 0.08);
+      --success: #2D7D5A;
+      --success-light: #3AB67E;
+      --danger: #B85C3A;
+      --warning: #D4A017;
+      --info: #4AAFE0;
+      --bg-dark: #0A0A0A;
+      --bg-surface: #141414;
+      --bg-card: rgba(20, 20, 20, 0.7);
+      --text-light: #F5F0E8;
+      --text-dim: #8A8A7A;
+      --text-muted: #7A7A6A;
+      --card-border: rgba(184, 134, 11, 0.06);
+      --card-border-hover: rgba(224, 184, 74, 0.22);
+      --transition: all 0.28s cubic-bezier(0.25, 1, 0.5, 1);
+      --transition-fast: all 0.18s ease;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --radius: 16px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; width: 100%; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      width: 100%;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .gradient-bg {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+      background: radial-gradient(ellipse 40% 30% at 30% 15%, rgba(184, 134, 11,  0.18) 0%, transparent 70%),
+                  radial-gradient(ellipse 35% 25% at 75% 85%, rgba(184, 134, 11, 0.06) 0%, transparent 60%),
+                  linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-deep) 100%);
+    }
+
+    .glow {
+      position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: -1;
+      opacity: 0.12;
+    }
+    .glow-1 { width: 300px; height: 300px; background: rgba(184, 134, 11, 0.20); top: -80px; right: -80px; }
+    .glow-2 { width: 180px; height: 180px; background: rgba(184,134,11,0.06); bottom: 0; left: 0; }
+
+    /* ============================================================
+       HEADER PREMIUM
+       ============================================================ */
+    .header {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: calc(10px + var(--safe-top)) 16px 10px;
+      background: rgba(var(--rgb-veil), 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(224, 184, 74, 0.10);
+      gap: 12px;
+      min-height: 60px;
+      position: sticky;
+    }
+    .header::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: -1px; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(224, 184, 74, 0.35), transparent);
+      pointer-events: none;
+    }
+    .header-left { display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1; }
+    .brand-mark {
+      display: inline-flex;
+      align-items: baseline;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: var(--text-light);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .brand-mark span {
+      color: var(--accent-bright);
+      font-style: italic;
+      margin-left: 1px;
+    }
+    .header-divider {
+      width: 1px; height: 20px;
+      background: rgba(var(--rgb-soft), 0.08);
+      flex-shrink: 0;
+    }
+    .back-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 10px;
+      border: 1px solid rgba(var(--rgb-soft), 0.06); background: transparent;
+      color: var(--text-dim); cursor: pointer; transition: var(--transition-fast);
+      font-size: 15px; text-decoration: none; flex-shrink: 0;
+    }
+    .back-btn:hover {
+      border-color: rgba(224, 184, 74, 0.30);
+      color: var(--accent-bright);
+      background: rgba(224, 184, 74, 0.05);
+    }
+    .back-btn:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 2px;
+    }
+    .page-title {
+      font-size: clamp(13px, 1.6vw, 15px);
+      font-weight: 600; color: var(--text-light);
+      font-family: 'Playfair Display', serif;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      min-width: 0;
+      letter-spacing: -0.01em;
+    }
+    .page-title i { color: var(--accent-bright); margin-right: 6px; font-size: 13px; }
+    .header-right button {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: transparent; border: 1px solid rgba(var(--rgb-soft), 0.06);
+      color: var(--text-dim); font-size: 14px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition-fast);
+    }
+    .header-right button:hover {
+      color: var(--accent-bright);
+      border-color: rgba(224, 184, 74, 0.30);
+      background: rgba(224, 184, 74, 0.05);
+    }
+    .header-right button:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 2px;
+    }
+
+    /* ============================================================
+       CONTAINER
+       ============================================================ */
+    .container { max-width: 680px; margin: 0 auto; padding: 18px 16px 48px; width: 100%; }
+
+    /* ============================================================
+       SUBJECT HERO
+       ============================================================ */
+    .subject-hero {
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(184, 134, 11,  0.45) 0%, transparent 70%),
+        linear-gradient(160deg, rgba(var(--rgb-card), 0.85), rgba(var(--rgb-veil), 0.85));
+      border: 1px solid rgba(224, 184, 74, 0.14);
+      border-radius: 20px;
+      padding: 26px 20px 22px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .subject-hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(224, 184, 74, 0.55), transparent);
+    }
+    .subject-hero::after {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 240px; height: 240px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(224, 184, 74, 0.10), transparent 70%);
+      pointer-events: none;
+    }
+
+    .subject-icon-wrap {
+      width: 72px; height: 72px;
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 30px;
+      margin: 0 auto 16px;
+      position: relative;
+      background: linear-gradient(135deg, rgba(224, 184, 74, 0.16), rgba(184, 134, 11,  0.10));
+      color: var(--accent-bright);
+      border: 1px solid rgba(224, 184, 74, 0.30);
+      box-shadow: 0 4px 20px rgba(224, 184, 74, 0.10), inset 0 1px 0 rgba(var(--rgb-soft), 0.06);
+      transition: var(--transition);
+    }
+
+    .subject-hero h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(22px, 3.2vw, 28px);
+      font-weight: 700;
+      color: var(--text-light);
+      margin-bottom: 8px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .subject-description {
+      font-size: clamp(13px, 1.4vw, 14px);
+      color: var(--text-dim);
+      line-height: 1.65;
+      max-width: 520px;
+      margin: 0 auto 16px;
+      padding: 0 4px;
+    }
+
+    /* ============================================================
+       STATS ROW
+       ============================================================ */
+    .subject-stats {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+    .stat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--block-bg);
+      border: 1px solid rgba(var(--rgb-soft), 0.06);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-dim);
+      transition: var(--transition-fast);
+    }
+    .stat-pill i {
+      color: var(--accent-bright);
+      font-size: 11px;
+    }
+    .stat-pill .value {
+      color: var(--text-light);
+      font-weight: 700;
+    }
+    .stat-pill:hover {
+      border-color: rgba(224, 184, 74, 0.25);
+      background: var(--block-bg);
+    }
+
+    /* ============================================================
+       PROGRESS BAR
+       ============================================================ */
+    .progress-wrap {
+      background: rgba(var(--rgb-card), 0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(224, 184, 74, 0.10);
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin-bottom: 20px;
+      transition: var(--transition-fast);
+    }
+    .progress-wrap:hover { border-color: rgba(224, 184, 74, 0.20); }
+    .progress-head {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .progress-head strong { color: var(--text-light); font-weight: 700; }
+    .progress-head .percent {
+      font-weight: 700;
+      color: var(--accent-bright);
+      font-size: 13.5px;
+    }
+    .progress-track {
+      width: 100%; height: 6px; border-radius: 999px;
+      background: rgba(var(--rgb-soft), 0.06);
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+      transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 0%;
+    }
+
+    /* ============================================================
+       SECTION LABEL
+       ============================================================ */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700; color: var(--accent-bright);
+      text-transform: uppercase; letter-spacing: 1.1px;
+      padding: 6px 4px 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, rgba(224, 184, 74, 0.15), transparent);
+    }
+    .section-label .count {
+      font-size: 10.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    /* ============================================================
+       CHAPTER LIST
+       ============================================================ */
+    .chapter-list { display: flex; flex-direction: column; gap: 12px; padding-bottom: 16px; }
+
+    .chapter-card {
+      background: rgba(var(--rgb-card), 0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+    }
+    .chapter-card:hover {
+      border-color: var(--card-border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.30);
+    }
+    .chapter-card:active { transform: scale(0.995); }
+
+    .chapter-card.in-progress {
+      border-color: rgba(224, 184, 74, 0.30);
+      background: rgba(224, 184, 74, 0.035);
+    }
+    .chapter-card.in-progress::before {
+      content: '';
+      position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-bright));
+    }
+
+    .chapter-card.completed {
+      border-color: rgba(58, 182, 126, 0.30);
+      background: rgba(58, 182, 126, 0.035);
+    }
+    .chapter-card.completed::before {
+      content: '';
+      position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
+      background: linear-gradient(180deg, var(--success), var(--success-light));
+    }
+
+    .chapter-card.locked { opacity: 0.78; }
+    .chapter-card.locked:hover { opacity: 0.92; }
+
+    .cc-header {
+      display: flex; align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .cc-num {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+      font-weight: 700;
+      flex-shrink: 0;
+      font-family: 'Playfair Display', Georgia, serif;
+      background: rgba(224, 184, 74, 0.08);
+      color: var(--accent-bright);
+      border: 1px solid rgba(224, 184, 74, 0.15);
+      transition: var(--transition-fast);
+    }
+    .chapter-card.in-progress .cc-num {
+      background: rgba(224, 184, 74, 0.15);
+      color: var(--accent-bright);
+      border-color: rgba(224, 184, 74, 0.35);
+    }
+    .chapter-card.completed .cc-num {
+      background: rgba(58, 182, 126, 0.12);
+      color: var(--success-light);
+      border-color: rgba(58, 182, 126, 0.30);
+    }
+    .chapter-card.locked .cc-num {
+      background: rgba(var(--rgb-soft), 0.03);
+      color: var(--text-muted);
+      border-color: rgba(var(--rgb-soft), 0.05);
+    }
+
+    .cc-info { flex: 1; min-width: 0; }
+
+    .cc-title-row {
+      display: flex; align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .cc-title {
+      font-size: clamp(14px, 1.5vw, 16px);
+      font-weight: 600; color: var(--text-light);
+      line-height: 1.35;
+      flex: 1; min-width: 0;
+    }
+
+    .cc-badges {
+      display: flex; align-items: center; gap: 5px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 10px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-weight: 600;
+      white-space: nowrap;
+      line-height: 1.4;
+    }
+    .badge.free {
+      color: var(--success-light); background: rgba(45, 125, 90, 0.12);
+      border: 1px solid rgba(45, 125, 90, 0.20);
+    }
+    .badge.premium {
+      color: var(--accent-bright); background: rgba(224, 184, 74, 0.10);
+      border: 1px solid rgba(224, 184, 74, 0.22);
+    }
+    .badge.in-progress {
+      color: var(--accent-bright); background: rgba(224, 184, 74, 0.14);
+      border: 1px solid rgba(224, 184, 74, 0.25);
+    }
+    .badge.completed {
+      color: var(--success-light); background: rgba(58, 182, 126, 0.12);
+      border: 1px solid rgba(58, 182, 126, 0.25);
+    }
+
+    .cc-description {
+      font-size: 12.5px;
+      color: var(--text-dim);
+      line-height: 1.6;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .cc-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .cc-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .cc-meta-item i {
+      font-size: 10px;
+      color: var(--accent);
+    }
+    .cc-meta-item.difficulty-easy i { color: var(--success); }
+    .cc-meta-item.difficulty-medium i { color: var(--warning); }
+    .cc-meta-item.difficulty-hard i { color: var(--danger); }
+
+   /* Bouton textuel minimaliste */
+.chapter-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 4px 0;
+  min-height: 32px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-light);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0;
+  pointer-events: none;
+  user-select: none;
+  box-shadow: none;
+  transition: color 0.18s ease;
+}
+
+.chapter-card:not(.locked):hover .chapter-cta {
+  color: var(--accent-bright);
+}
+
+.chapter-card.locked .chapter-cta {
+  background: transparent;
+  color: var(--accent-bright);
+  border: 0;
+  box-shadow: none;
+}
+
+.chapter-cta i {
+  font-size: 11px;
+  color: var(--accent-bright);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chapter-cta {
+    transition: none;
+  }
+}
+    
+    .cc-progress {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(var(--rgb-soft), 0.05);
+    }
+    .cc-progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .cc-progress-info .value {
+      color: var(--text-dim);
+      font-weight: 600;
+    }
+    .chapter-card.completed .cc-progress-info .value { color: var(--success-light); }
+    .chapter-card.in-progress .cc-progress-info .value { color: var(--accent-bright); }
+
+    .cc-progress-track {
+      width: 100%;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(var(--rgb-soft), 0.06);
+      overflow: hidden;
+    }
+    .cc-progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright));
+      transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .chapter-card.completed .cc-progress-fill {
+      background: linear-gradient(90deg, var(--success), var(--success-light));
+    }
+
+    /* ============================================================
+       SKELETON
+       ============================================================ */
+    .skeleton {
+      background: linear-gradient(90deg, rgba(var(--rgb-soft), 0.03) 25%, rgba(var(--rgb-soft), 0.06) 50%, rgba(var(--rgb-soft), 0.03) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.8s ease-in-out infinite;
+      border-radius: 10px;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .skeleton-hero { height: 200px; border-radius: 20px; margin-bottom: 16px; }
+    .skeleton-progress { height: 70px; border-radius: 16px; margin-bottom: 20px; }
+    .skeleton-card { height: 120px; border-radius: 16px; }
+
+    /* ✅ v8.4 — le pop-up Premium utilise le composant UNIFORME du site
+       (arvexa-confirm.js), partagé par toutes les pages. */
+
+    /* ============================================================
+       EMPTY STATE
+       ============================================================ */
+    .empty-state {
+      text-align: center;
+      padding: 56px 24px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 14px;
+    }
+    .empty-state .es-icon {
+      width: 72px; height: 72px; border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(224, 184, 74, 0.08);
+      border: 1px solid rgba(224, 184, 74, 0.14);
+      font-size: 28px; color: var(--accent-bright);
+    }
+    .empty-state h4 {
+      font-size: 16px; color: var(--text-dim);
+      font-weight: 600;
+    }
+    .empty-state p {
+      font-size: 13px; color: var(--text-muted);
+      max-width: 320px; line-height: 1.65;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 640px) {
+      .container { padding: 14px 14px 36px; }
+      .subject-hero { padding: 22px 16px 18px; border-radius: 20px; }
+      .subject-icon-wrap { width: 64px; height: 64px; font-size: 26px; border-radius: 20px; }
+      .subject-hero h2 { font-size: 21px; }
+      .chapter-card { padding: 16px 16px; border-radius: 16px; }
+      .cc-num { width: 40px; height: 40px; font-size: 14px; }
+      .cc-title { font-size: 14px; }
+    }
+
+    @media (max-width: 480px) {
+      .header { padding: 8px 12px; padding-top: calc(8px + var(--safe-top)); min-height: 54px; }
+      .brand-mark { font-size: 11.5px; }
+      .page-title { font-size: 12.5px; max-width: 180px; }
+      .back-btn { width: 34px; height: 34px; font-size: 13px; }
+      .header-right button { width: 34px; height: 34px; font-size: 13px; }
+
+      .container { padding: 12px 12px 32px; }
+      .subject-hero { padding: 20px 14px 16px; border-radius: 16px; }
+      .subject-icon-wrap { width: 60px; height: 60px; font-size: 24px; border-radius: 16px; }
+      .subject-hero h2 { font-size: 19px; }
+      .subject-description { font-size: 12.5px; }
+      .stat-pill { font-size: 11px; padding: 5px 11px; }
+
+      .progress-wrap { padding: 14px 16px; border-radius: 16px; }
+      .progress-head { font-size: 12px; }
+
+      .chapter-list { gap: 10px; }
+      .chapter-card { padding: 14px 14px; border-radius: 16px; }
+      .cc-header { gap: 12px; margin-bottom: 8px; }
+      .cc-num { width: 38px; height: 38px; font-size: 13px; border-radius: 10px; }
+      .cc-title { font-size: 13.5px; }
+      .cc-description { font-size: 12px; }
+      .badge { font-size: 9.5px; padding: 2px 7px; }
+      .cc-meta { font-size: 10.5px; gap: 10px; }
+
+      .chapter-cta {
+        width: 100%;
+        min-height: 42px;
+        font-size: 12.5px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .header { padding: 6px 10px; padding-top: calc(6px + var(--safe-top)); min-height: 50px; gap: 8px; }
+      .brand-mark { display: none; }
+      .header-divider { display: none; }
+      .page-title { font-size: 12px; max-width: 160px; }
+      .back-btn { width: 32px; height: 32px; font-size: 12px; }
+      .header-right button { width: 32px; height: 32px; font-size: 12px; }
+
+      .container { padding: 10px 10px 24px; }
+      .subject-hero { padding: 18px 12px 14px; border-radius: 16px; }
+      .subject-icon-wrap { width: 54px; height: 54px; font-size: 22px; border-radius: 16px; }
+      .subject-hero h2 { font-size: 17px; }
+      .subject-description { font-size: 11.5px; }
+      .subject-stats { gap: 5px; }
+      .stat-pill { font-size: 10px; padding: 4px 9px; gap: 4px; }
+
+      .progress-wrap { padding: 12px 14px; border-radius: 12px; }
+      .progress-head { font-size: 11px; flex-direction: column; align-items: flex-start; gap: 3px; }
+      .progress-track { height: 5px; }
+
+      .chapter-list { gap: 8px; }
+      .chapter-card { padding: 12px 12px; border-radius: 12px; }
+      .cc-header { gap: 10px; }
+      .cc-num { width: 34px; height: 34px; font-size: 12px; border-radius: 10px; }
+      .cc-title { font-size: 12.5px; }
+      .cc-title-row { flex-direction: column; align-items: flex-start; gap: 5px; }
+      .cc-badges { justify-content: flex-start; }
+      .cc-description { font-size: 11.5px; }
+      .badge { font-size: 9px; padding: 1px 6px; }
+      .cc-meta { font-size: 10px; gap: 8px; }
+
+      .chapter-cta { min-height: 40px; font-size: 12px; padding: 9px 14px; }
+    }
+
+    @media (min-width: 768px) {
+      .container { max-width: 720px; padding: 24px 24px 56px; }
+    }
+
+    @media (min-width: 1024px) {
+      .container { max-width: 760px; }
+    }
+
+    /* ============================================================
+       ACCESSIBILITÉ
+       ============================================================ */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 2px solid var(--accent-bright);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(224, 184, 74, 0.25); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(224, 184, 74, 0.45); }
+  </style>
+  <!-- ⚡ ARVEXA FLUX v1 — navigation instantanée -->
+  <script src="flux-router.js?v=flux1" defer></script>
+</head>
+<body>
+
+  <div class="gradient-bg"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header-left">
+      <a href="index.html" class="back-btn" aria-label="Retour à l'accueil">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <span class="header-divider" aria-hidden="true"></span>
+      <h1 class="page-title" id="pageTitle"><i class="fas fa-book"></i> <span>Chargement...</span></h1>
+    </div>
+    <div class="header-right">
+      <button id="refreshBtn" aria-label="Rafraîchir"><i class="fas fa-sync-alt"></i></button>
+    </div>
+  </header>
+
+  <!-- ===== CONTAINER ===== -->
+  <main class="container" id="mainContainer">
+
+    <!-- ===== SUBJECT HERO ===== -->
+    <div class="subject-hero" id="subjectHero">
+      <div class="subject-icon-wrap" id="subjectIconWrap"><i class="fas fa-book"></i></div>
+      <h2 id="subjectTitle">Chargement...</h2>
+      <p class="subject-description" id="subjectDescription" style="display:none;"></p>
+      <div class="subject-stats" id="subjectStats" style="display:none;">
+        <span class="stat-pill">
+          <i class="fas fa-book-open"></i>
+          <span class="value" id="statChapters">0</span>
+          <span>chapitres</span>
+        </span>
+        <span class="stat-pill" id="statHoursPill" style="display:none;">
+          <i class="fas fa-clock"></i>
+          <span class="value" id="statHours">0</span>
+          <span>h estimées</span>
+        </span>
+        <span class="stat-pill" id="statFreePill" style="display:none;">
+          <i class="fas fa-gift"></i>
+          <span class="value" id="statFree">0</span>
+          <span>gratuits</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- ===== PROGRESS ===== -->
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-head">
+        <span>📚 <strong>Progression</strong></span>
+        <span>
+          <strong id="progressRead">0</strong> / <span id="progressTotal">0</span>
+          <span class="percent" id="progressPercent">(0%)</span>
+        </span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- ===== CHAPTER LIST ===== -->
+    <div class="section-label">
+      <span>📖 Chapitres</span>
+      <span class="count" id="chapterCount"></span>
+    </div>
+    <div class="chapter-list" id="chapterList">
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+    </div>
+
+  </main>
+
+  <!-- ✅ v8.4 — pop-up Premium retiré : window.arvexaConfirm() (composant
+       uniforme du site) est ouverte par showPremiumPopup(). -->
+
+  <!-- ============================================================ -->
+  <!-- SCRIPTS                                                       -->
+  <!-- ============================================================ -->
+  <script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js",
+      "firebase/auth": "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js",
+      "firebase/firestore": "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js"
+    }
+  }
+  </script>
+
+  <script type="module">
+  // ================================================================
+  // MATIERE — Version robuste anti-flash
+  // ⚠️ JAVASCRIPT INTÉGRALEMENT CONSERVÉ — aucune ligne modifiée
+  // ⚠️ Seul ajout HTML : <span class="chapter-cta"> dans renderChapters()
+  // ================================================================
+
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+  import {
+    getAuth,
+    onAuthStateChanged,
+    setPersistence,
+    browserLocalPersistence
+  } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+  import {
+    initializeFirestore,
+    persistentLocalCache,
+    persistentSingleTabManager,
+    doc,
+    getDoc,
+    onSnapshot,
+    collection,
+    query,
+    orderBy
+  } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+  // ================================================================
+  // CONFIG FIREBASE
+  // ================================================================
+  const firebaseConfig = {
+    apiKey: "AIzaSyDHscOXw3rLuhV6z1Cny-bdYCumqpnG7QE",
+    authDomain: "arvexa-fbf10.firebaseapp.com",
+    projectId: "arvexa-fbf10",
+    storageBucket: "arvexa-fbf10.firebasestorage.app",
+    messagingSenderId: "920108330053",
+    appId: "1:920108330053:web:f532d71cbc2c824bc7472c"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const db = (window.__ARVEXA_DB_SHARED__ !== undefined ? window.__ARVEXA_DB_SHARED__ : (window.__ARVEXA_DB_SHARED__ = initializeFirestore(app, {
+    localCache: persistentLocalCache({
+      tabManager: persistentSingleTabManager()
+    })
+  })));
+
+  try {
+    await setPersistence(auth, browserLocalPersistence);
+  } catch (e) {}
+
+  // ================================================================
+  // SESSION / CACHE
+  // ================================================================
+  const SESSION_KEY = 'arvexa_session';
+  const USER_DATA_KEY = 'arvexa_user_data';
+  const LAST_UID_KEY = 'arvexa_last_uid';
+  const READ_KEY = 'arvexa_read_parts';
+
+  function saveSession(user) {
+    if (!user) return;
+    try {
+      const data = {
+        uid: user.uid,
+        email: user.email,
+        lastActive: Date.now()
+      };
+      localStorage.setItem(SESSION_KEY, JSON.stringify(data));
+      localStorage.setItem(LAST_UID_KEY, user.uid);
+    } catch (e) {}
+  }
+
+  function clearSession() {
+    try {
+      localStorage.removeItem(SESSION_KEY);
+      localStorage.removeItem(USER_DATA_KEY);
+      localStorage.removeItem(LAST_UID_KEY);
+      sessionStorage.removeItem(SESSION_KEY);
+    } catch (e) {}
+  }
+
+  function getCachedUserData(uid) {
+    try {
+      const raw = localStorage.getItem(USER_DATA_KEY);
+      if (!raw) return null;
+      const cached = JSON.parse(raw);
+      if (cached._uid && cached._uid !== uid) {
+        localStorage.removeItem(USER_DATA_KEY);
+        return null;
+      }
+      return cached;
+    } catch (e) { return null; }
+  }
+
+  // ================================================================
+  // URL PARAMS
+  // ================================================================
+  const params = new URLSearchParams(window.location.search);
+  const subjectKey = params.get('subject') || 'mathematiques';
+
+  // ================================================================
+  // CONFIG MATIÈRES (FALLBACK)
+  // ================================================================
+ const SUBJECTS_CONFIG = {
+  mathematiques: {
+    name: 'Mathématiques',
+    description: 'Algèbre, analyse, géométrie et probabilités.',
+    icon: 'fa-square-root-variable',
+    color: 'var(--accent-bright)'
+  },
+  physique: {
+    name: 'Physique',
+    description: 'Mécanique, ondes, électricité et radioactivité.',
+    icon: 'fa-bolt',
+    color: '#4AAFE0'
+  },
+  chimie: {
+    name: 'Chimie',
+    description: 'Chimie minérale, chimie organique et acides/bases.',
+    icon: 'fa-flask',
+    color: '#E07A4A'
+  },
+  svt: {
+    name: 'SVT',
+    description: 'Génétique, physiologie, reproduction et immunologie.',
+    icon: 'fa-dna',
+    color: '#7AE04A'
+  }
+};
+const DEFAULT_CHAPTERS = {
+  mathematiques: [
+    { title: 'Nombres complexes', isFree: true },
+    { title: 'Similitudes planes directes', isFree: false },
+    { title: 'Calcul de probabilités', isFree: false },
+    { title: 'Variable aléatoire', isFree: false },
+    { title: 'Fonction numérique', isFree: false },
+    { title: 'Fonction logarithme', isFree: false },
+    { title: 'Fonction exponentielle', isFree: false },
+    { title: 'Calcul intégral', isFree: false },
+    { title: 'Équations différentielles', isFree: false },
+    { title: 'Suites numériques', isFree: false },
+    { title: 'Statistiques', isFree: false }
+  ],
+  physique: [
+    { title: 'Cinématique', isFree: true },
+    { title: 'Mouvement rectiligne', isFree: false },
+    { title: 'Mouvement dans le champ de pesanteur', isFree: false },
+    { title: 'Mouvement des particules chargées', isFree: false },
+    { title: 'Oscillateurs mécaniques', isFree: false },
+    { title: 'Généralités sur les ondes', isFree: false },
+    { title: 'Mouvement vibratoire', isFree: false },
+    { title: 'Superposition des ondes', isFree: false },
+    { title: 'Interférence lumineuse', isFree: false },
+    { title: 'Champ magnétique', isFree: false },
+    { title: 'Force de Laplace', isFree: false },
+    { title: 'Force de Lorentz', isFree: false },
+    { title: 'Induction magnétique', isFree: false },
+    { title: 'Auto-induction', isFree: false },
+    { title: 'Circuit LC', isFree: false },
+    { title: 'Circuit RLC', isFree: false },
+    { title: 'Radioactivité', isFree: false }
+  ],
+  chimie: [
+    { title: 'Solutions aqueuses et leur pH', isFree: true },
+    { title: 'Acide fort, base forte', isFree: false },
+    { title: 'Acide faible, base faible', isFree: false },
+    { title: 'Couples acide/base et classification', isFree: false },
+    { title: 'Réaction acido-basique et solution tampon', isFree: false },
+    { title: 'Alcools', isFree: false },
+    { title: 'Acides carboxyliques et ses dérivés', isFree: false },
+    { title: 'Amines et amides', isFree: false },
+    { title: 'Acides α-aminés et protéines', isFree: false }
+  ],
+  svt: [
+    { title: 'Notion de l\'IG', isFree: true },
+    { title: 'Nature chimique et structure de l\'IG : la molécule d\'ADN', isFree: false },
+    { title: 'La reproduction conforme', isFree: false },
+    { title: 'Notion de cycle cellulaire et évolution de la quantité d\'ADN au cours du cycle', isFree: false },
+    { title: 'Protéines', isFree: false },
+    { title: 'Mécanismes d\'expression des gènes : la synthèse des protéines', isFree: false },
+    { title: 'Reproduction sexuée', isFree: false },
+    { title: 'Brassage des gènes', isFree: false },
+    { title: 'Transmission des caractères héréditaires chez l\'Homme', isFree: false },
+    { title: 'Anomalies chromosomiques', isFree: false },
+    { title: 'Tissus nerveux et notions de réflexes', isFree: false },
+    { title: 'Messages nerveux', isFree: false },
+    { title: 'La glycémie', isFree: false },
+    { title: 'Les appareils génitaux et leur fonctionnement', isFree: false },
+    { title: 'Régulation du fonctionnement des organes génitaux', isFree: false },
+    { title: 'De la fécondation à la nidation', isFree: false },
+    { title: 'La régulation des naissances', isFree: false },
+    { title: 'Le soi et le non soi', isFree: false },
+    { title: 'Les réponses immunitaires', isFree: false },
+    { title: 'Dysfonctionnement du système immunitaire : cas du VIH/SIDA', isFree: false }
+  ]
+};
+
+  // ================================================================
+  // DOM
+  // ================================================================
+  const chapterList = document.getElementById('chapterList');
+  const pageTitle = document.querySelector('#pageTitle span');
+  const subjectTitle = document.getElementById('subjectTitle');
+  const subjectDescription = document.getElementById('subjectDescription');
+  const subjectIconWrap = document.getElementById('subjectIconWrap');
+  const subjectStats = document.getElementById('subjectStats');
+  const statChapters = document.getElementById('statChapters');
+  const statHoursPill = document.getElementById('statHoursPill');
+  const statHours = document.getElementById('statHours');
+  const statFreePill = document.getElementById('statFreePill');
+  const statFree = document.getElementById('statFree');
+  const chapterCount = document.getElementById('chapterCount');
+  const progressRead = document.getElementById('progressRead');
+  const progressTotal = document.getElementById('progressTotal');
+  const progressPercent = document.getElementById('progressPercent');
+  const progressFill = document.getElementById('progressFill');
+
+  // ================================================================
+  // ÉTAT
+  // ================================================================
+  let subjectConfig = null;
+  let chapters = [];
+  let isPremium = false;
+  let currentUid = null;
+  let unsubscribeUser = null;
+  let unsubscribeChapters = null;
+  let unsubscribeSubject = null;
+
+  // ================================================================
+  // UTILITAIRES
+  // ================================================================
+  function toDate(value) {
+    if (!value) return null;
+    if (typeof value.toDate === 'function') return value.toDate();
+    if (value.seconds !== undefined) return new Date(value.seconds * 1000);
+    const date = value instanceof Date ? value : new Date(value);
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  function isUserPremium(userData) {
+    if (!userData) return false;
+    const hasStatus = userData.premium === true ||
+                      userData.isUnlocked === true ||
+                      userData.hasDeposited === true;
+    if (!hasStatus) return false;
+    const endDate = toDate(userData.subscriptionEndDate);
+    if (!endDate) return true;
+    return endDate.getTime() > Date.now();
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = String(text || '');
+    return div.innerHTML;
+  }
+
+  // ================================================================
+  // LECTURE DES PARTIES LUES
+  // ================================================================
+  function getReadParts() {
+    try {
+      return JSON.parse(localStorage.getItem(READ_KEY) || '[]');
+    } catch (e) { return []; }
+  }
+
+  function getReadPartsForChapter(chapterIndex) {
+    const readParts = getReadParts();
+    const prefix = `${subjectKey}_${chapterIndex}_`;
+    return readParts.filter(key => key.startsWith(prefix)).length;
+  }
+
+  function getReadChaptersCount() {
+    const readParts = getReadParts();
+    const chaptersSet = new Set();
+    readParts.forEach(key => {
+      const parts = key.split('_');
+      if (parts[0] === subjectKey && parts.length >= 2) {
+        chaptersSet.add(parts[1]);
+      }
+    });
+    return chaptersSet.size;
+  }
+
+  // ================================================================
+  // STATUT D'UN CHAPITRE
+  // ================================================================
+  function getChapterStatus(chapterIndex, chapterData) {
+    const readCount = getReadPartsForChapter(chapterIndex);
+    // ✅ v8.0 — FIX « le calcul de section et de la progression » : totalParts
+    // valait TOUJOURS 0 (jamais présent dans les JSON ni dans les chapitres
+    // Firestore) → « Terminé » et le % du chapitre n'apparaissaient jamais.
+    // Source de vérité : progress-totals.json (généré depuis cours/*.json),
+    // total sur les 3 onglets (cours + exercices + corrections).
+    let totalParts = chapterData.totalParts || 0;
+    if (!totalParts && window.ArvexaProgress) {
+      try { totalParts = window.ArvexaProgress.chapterTotal(subjectKey, chapterIndex) || 0; } catch (e) {}
+    }
+
+    if (readCount === 0) return { status: 'not-opened', readCount, totalParts };
+    if (totalParts > 0 && readCount >= totalParts) {
+      return { status: 'completed', readCount, totalParts };
+    }
+    return { status: 'in-progress', readCount, totalParts };
+  }
+
+  // ================================================================
+  // NAVIGATION
+  // ================================================================
+  function navigateToChapter(chapterIndex) {
+    window.location.href = `chapitre.html?subject=${subjectKey}&chapter=${chapterIndex}`;
+  }
+
+  // ✅ v8.0 — SYNC FIREBASE : re-rendu quand la progression fusionne/arrive du cloud
+  window.addEventListener('arvexa-progress-updated', () => {
+    if (chapters.length === 0) return; // chapitres pas encore chargés (anti-flash)
+    try { renderProgress(); renderChapters(); } catch (e) {}
+  });
+
+  // ✅ v8.4 — modale UNIFORME du site (arvexa-confirm.js) : mêmes
+  // couleurs et mêmes boutons que index/profil/abonnement.
+  function showPremiumPopup() {
+    if (typeof window.arvexaConfirm !== 'function') { window.location.assign('abonnement.html'); return; }
+    window.arvexaConfirm({
+      title: 'Ce chapitre est réservé',
+      message: 'Passe à Premium pour débloquer tous les chapitres, exercices et corrections de cette matière.',
+      icon: '👑',
+      confirmText: 'Découvrir Premium',
+      cancelText: 'Plus tard',
+      variant: 'primary',
+      onConfirm: () => window.location.assign('abonnement.html')
+    });
+  }
+
+  window.navigateToChapter = navigateToChapter;
+  window.showPremiumPopup = showPremiumPopup;
+  // ✅ v8.4 — fermeture gérée par arvexa-confirm.js (Échap/clic extérieur)
+
+  // ================================================================
+  // RENDU HERO
+  // ================================================================
+  function renderHero() {
+    if (!subjectConfig) return;
+
+    pageTitle.textContent = subjectConfig.name;
+    document.title = 'ARVEXA - ' + subjectConfig.name;
+
+    subjectIconWrap.innerHTML = `<i class="fas ${subjectConfig.icon}"></i>`;
+    subjectIconWrap.style.background = (subjectConfig.color || 'var(--accent-bright)') + '15';
+    subjectIconWrap.style.color = subjectConfig.color || 'var(--accent-bright)';
+    subjectIconWrap.style.borderColor = (subjectConfig.color || 'var(--accent-bright)') + '30';
+
+    subjectTitle.textContent = subjectConfig.name;
+
+    if (subjectConfig.description) {
+      subjectDescription.textContent = subjectConfig.description;
+      subjectDescription.style.display = 'block';
+    } else {
+      subjectDescription.style.display = 'none';
+    }
+
+    subjectStats.style.display = 'flex';
+    statChapters.textContent = chapters.length;
+
+    const totalMinutes = chapters.reduce((sum, ch) => sum + (ch.estimatedMinutes || 0), 0);
+    if (totalMinutes > 0) {
+      statHoursPill.style.display = 'inline-flex';
+      statHours.textContent = Math.round(totalMinutes / 60);
+    } else {
+      statHoursPill.style.display = 'none';
+    }
+
+    const freeCount = chapters.filter(ch => ch.isFree).length;
+    if (freeCount > 0) {
+      statFreePill.style.display = 'inline-flex';
+      statFree.textContent = freeCount;
+    } else {
+      statFreePill.style.display = 'none';
+    }
+  }
+
+  // ================================================================
+  // RENDU PROGRESSION
+  // ================================================================
+  function renderProgress() {
+    const total = chapters.length;
+    const read = getReadChaptersCount();
+    const percent = total > 0 ? Math.round((read / total) * 100) : 0;
+
+    progressRead.textContent = read;
+    progressTotal.textContent = total;
+    progressPercent.textContent = `(${percent}%)`;
+    progressFill.style.width = percent + '%';
+  }
+
+  // ================================================================
+  // RENDU CHAPITRES
+  // ⚠️ Seul ajout : <span class="chapter-cta"> (décoratif, pointer-events:none)
+  //    + suppression du "complété" pour conserver le style du fichier original
+  // ================================================================
+  function renderChapters() {
+    chapterCount.textContent = `${chapters.length} chapitre${chapters.length > 1 ? 's' : ''}`;
+
+    if (chapters.length === 0) {
+      chapterList.innerHTML = `
+        <div class="empty-state">
+          <div class="es-icon"><i class="fas fa-folder-open"></i></div>
+          <h4>Aucun chapitre disponible</h4>
+          <p>Le contenu sera ajouté prochainement.</p>
+        </div>
+      `;
+      return;
+    }
+
+    chapterList.innerHTML = chapters.map((chap, index) => {
+      const isFree = chap.isFree === true;
+      const isLocked = !isPremium && !isFree;
+      const status = getChapterStatus(index, chap);
+
+      let cardClass = 'chapter-card';
+      if (isLocked) cardClass += ' locked';
+      if (status.status === 'in-progress') cardClass += ' in-progress';
+      if (status.status === 'completed') cardClass += ' completed';
+
+      let badgesHtml = '';
+      if (isFree) {
+        badgesHtml += '<span class="badge free">🎁 Gratuit</span>';
+      } else if (isLocked) {
+        badgesHtml += '<span class="badge premium">🔒 Premium</span>';
+      } else if (isPremium && !isFree) {
+        badgesHtml += '<span class="badge premium">👑 Premium</span>';
+      }
+
+      if (status.status === 'in-progress') {
+        badgesHtml += '<span class="badge in-progress">📌 En cours</span>';
+      } else if (status.status === 'completed') {
+        badgesHtml += '<span class="badge completed">✅ Terminé</span>';
+      }
+
+      const descriptionHtml = chap.description
+        ? `<div class="cc-description">${escapeHtml(chap.description)}</div>`
+        : '';
+
+      let metaHtml = '';
+      if (chap.estimatedMinutes || chap.difficulty) {
+        const items = [];
+
+        if (chap.estimatedMinutes) {
+          const hours = Math.floor(chap.estimatedMinutes / 60);
+          const mins = chap.estimatedMinutes % 60;
+          const timeStr = hours > 0
+            ? (mins > 0 ? `${hours}h${mins}` : `${hours}h`)
+            : `${mins}min`;
+          items.push(`<span class="cc-meta-item"><i class="fas fa-clock"></i> ${timeStr}</span>`);
+        }
+
+        if (chap.difficulty) {
+          const labels = { easy: 'Facile', medium: 'Moyen', hard: 'Difficile' };
+          const icons = { easy: 'fa-circle', medium: 'fa-circle-half-stroke', hard: 'fa-circle' };
+          const label = labels[chap.difficulty] || '';
+          const icon = icons[chap.difficulty] || 'fa-circle';
+          items.push(`<span class="cc-meta-item difficulty-${chap.difficulty}"><i class="fas ${icon}"></i> ${label}</span>`);
+        }
+
+        if (items.length > 0) {
+          metaHtml = `<div class="cc-meta">${items.join('')}</div>`;
+        }
+      }
+
+      let progressHtml = '';
+      if (status.status !== 'not-opened' && status.totalParts > 0) {
+        const chapterPercent = Math.round((status.readCount / status.totalParts) * 100);
+        progressHtml = `
+          <div class="cc-progress">
+            <div class="cc-progress-info">
+              <span>Progression</span>
+              <span class="value">${status.readCount}/${status.totalParts} parties · ${chapterPercent}%</span>
+            </div>
+            <div class="cc-progress-track">
+              <div class="cc-progress-fill" style="width:${chapterPercent}%"></div>
+            </div>
+          </div>
+        `;
+      }
+
+      // ⚡ AJOUT DÉCORATIF : bouton principal (pointer-events:none, clic remonte à la carte)
+      const ctaLabel = isLocked
+        ? '<i class="fas fa-lock"></i> Débloquer'
+        : '<i class="fas fa-arrow-right"></i> Ouvrir le chapitre';
+      const ctaHtml = `<span class="chapter-cta" aria-hidden="true">${ctaLabel}</span>`;
+
+      const onclick = isLocked ? 'showPremiumPopup()' : `navigateToChapter(${index})`;
+
+      return `
+        <div class="${cardClass}" onclick="${onclick}">
+          <div class="cc-header">
+            <div class="cc-num">${index + 1}</div>
+            <div class="cc-info">
+              <div class="cc-title-row">
+                <div class="cc-title">${escapeHtml(chap.title || 'Chapitre ' + (index + 1))}</div>
+                <div class="cc-badges">${badgesHtml}</div>
+              </div>
+              ${descriptionHtml}
+              ${metaHtml}
+            </div>
+          </div>
+          ${ctaHtml}
+          ${progressHtml}
+        </div>
+      `;
+    }).join('');
+
+    renderProgress();
+  }
+
+  // ================================================================
+  // CHARGEMENT DEPUIS FIRESTORE
+  // ================================================================
+function loadSubjectFromFirestore() {
+    // ⚡ 1. CHARGER LES DONNÉES DE FALLBACK IMMÉDIATEMENT (pour ne jamais avoir 0)
+    if (!subjectConfig) loadFallbackSubjectConfig();
+    if (chapters.length === 0) loadFallbackChapters();
+
+    // 2. Charger les infos de la matière depuis Firestore
+    const subjectRef = doc(db, 'subjects', subjectKey);
+
+    if (unsubscribeSubject) unsubscribeSubject();
+
+    unsubscribeSubject = onSnapshot(subjectRef,
+      (subjectSnap) => {
+        if (subjectSnap.exists()) {
+          const data = subjectSnap.data();
+          subjectConfig = {
+            name: data.name || (SUBJECTS_CONFIG[subjectKey]?.name || 'Matière'),
+            description: data.description || '',
+            icon: data.icon || (SUBJECTS_CONFIG[subjectKey]?.icon || 'fa-book'),
+            color: data.color || (SUBJECTS_CONFIG[subjectKey]?.color || 'var(--accent-bright)')
+          };
+          renderHero();
+        }
+      },
+      (error) => {
+        console.warn('Firestore subject error:', error);
+      }
+    );
+
+    // 3. Charger les chapitres depuis Firestore
+    if (unsubscribeChapters) unsubscribeChapters();
+
+    const chaptersQuery = query(
+      collection(db, 'subjects', subjectKey, 'chapters'),
+      orderBy('order', 'asc')
+    );
+
+    unsubscribeChapters = onSnapshot(chaptersQuery,
+      (snap) => {
+        // ⚡ Si Firestore a des données, on les utilise
+        if (!snap.empty) {
+          chapters = snap.docs.map(d => {
+            const data = d.data();
+            return {
+              id: d.id,
+              title: data.title || '',
+              description: data.description || '',
+              isFree: data.isFree === true,
+              order: data.order || 0,
+              difficulty: data.difficulty || null,
+              estimatedMinutes: data.estimatedMinutes || 0,
+              totalParts: data.totalParts || 0
+            };
+          });
+          renderChapters();
+          renderProgress();
+          renderHero(); // ⚡ Rafraîchir le hero aussi
+        }
+        // Sinon, on garde le fallback déjà chargé
+      },
+      (error) => {
+        console.warn('Firestore chapters error:', error);
+        // En cas d'erreur, le fallback est déjà chargé
+      }
+    );
+  }
+
+  function loadFallbackSubjectConfig() {
+    const cfg = SUBJECTS_CONFIG[subjectKey];
+    if (cfg) {
+      subjectConfig = {
+        name: cfg.name,
+        description: cfg.description || '',
+        icon: cfg.icon,
+        color: cfg.color
+      };
+      renderHero();
+    } else {
+      window.location.replace('index.html');
+    }
+  }
+
+ function loadFallbackChapters() {
+    const fallback = DEFAULT_CHAPTERS[subjectKey] || [];
+    chapters = fallback.map((ch, i) => ({
+      title: typeof ch === 'string' ? ch : ch.title,
+      isFree: typeof ch === 'object' ? ch.isFree === true : (i === 0),
+      description: '',
+      order: i,
+      difficulty: null,
+      estimatedMinutes: 0,
+      totalParts: 0
+    }));
+
+    if (!subjectConfig) loadFallbackSubjectConfig();
+
+    renderHero();      // ⚡ IMPORTANT : mettre à jour le hero en premier
+    renderChapters();
+    renderProgress();
+  }
+
+  // ================================================================
+  // CHARGEMENT UTILISATEUR (temps réel)
+  // ================================================================
+  function loadUserData(user) {
+    if (unsubscribeUser) {
+      unsubscribeUser();
+      unsubscribeUser = null;
+    }
+
+    const userRef = doc(db, 'users', user.uid);
+
+    unsubscribeUser = onSnapshot(userRef,
+      (docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const newPremium = isUserPremium(data);
+
+          if (newPremium !== isPremium) {
+            isPremium = newPremium;
+            if (chapters.length > 0) renderChapters();
+          }
+
+          try {
+            localStorage.setItem(USER_DATA_KEY, JSON.stringify({
+              ...data,
+              _uid: user.uid,
+              _cachedAt: Date.now()
+            }));
+          } catch (e) {}
+        } else {
+          const cached = getCachedUserData(user.uid);
+          if (cached) {
+            const newPremium = isUserPremium(cached);
+            if (newPremium !== isPremium) {
+              isPremium = newPremium;
+              if (chapters.length > 0) renderChapters();
+            }
+          }
+        }
+      },
+      (error) => {
+        const cached = getCachedUserData(user.uid);
+        if (cached) {
+          const newPremium = isUserPremium(cached);
+          if (newPremium !== isPremium) {
+            isPremium = newPremium;
+            if (chapters.length > 0) renderChapters();
+          }
+        }
+      }
+    );
+  }
+
+  // ================================================================
+  // REFRESH
+  // ================================================================
+  document.getElementById('refreshBtn').addEventListener('click', () => {
+    const btn = document.getElementById('refreshBtn');
+    const icon = btn?.querySelector('i');
+    if (icon) {
+      icon.style.transition = 'transform 0.6s ease';
+      icon.style.transform = 'rotate(360deg)';
+      setTimeout(() => {
+        icon.style.transition = 'none';
+        icon.style.transform = 'rotate(0deg)';
+      }, 600);
+    }
+    renderProgress();
+    renderChapters();
+  });
+
+  // ================================================================
+  // AUTH ROBUSTE — Anti-flash
+  // ================================================================
+  let isRedirecting = false;
+  let isAuthResolved = false;
+  let graceTimer = null;
+  let maxTimer = null;
+
+  function redirectToLogin() {
+    if (isRedirecting) return;
+    isRedirecting = true;
+    try {
+      sessionStorage.setItem('redirectAfterLogin',
+        window.location.pathname + window.location.search);
+    } catch (e) {}
+    window.location.replace('login.html');
+  }
+
+  function initAuthGuard(onAuthenticated) {
+    auth.onAuthStateChanged((user) => {
+      if (isAuthResolved) {
+        if (user && user.uid !== currentUid) {
+          currentUid = user.uid;
+          saveSession(user);
+          onAuthenticated(user);
+        } else if (!user && currentUid) {
+          currentUid = null;
+          clearSession();
+          redirectToLogin();
+        }
+        return;
+      }
+
+      if (!user) {
+        if (graceTimer) clearTimeout(graceTimer);
+        graceTimer = setTimeout(() => {
+          if (isAuthResolved) return;
+          if (auth.currentUser) return;
+
+          const hasSession = localStorage.getItem(SESSION_KEY);
+          const hasUserData = localStorage.getItem(USER_DATA_KEY);
+
+          if ((hasSession || hasUserData) && !navigator.onLine) {
+            setTimeout(() => {
+              if (auth.currentUser) return;
+              if (!isAuthResolved) redirectToLogin();
+            }, 1500);
+            return;
+          }
+
+          if (hasSession && hasUserData) {
+            setTimeout(() => {
+              if (auth.currentUser) return;
+              if (!isAuthResolved) redirectToLogin();
+            }, 1500);
+            return;
+          }
+
+          redirectToLogin();
+        }, 600);
+        return;
+      }
+
+      if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+      if (maxTimer) { clearTimeout(maxTimer); maxTimer = null; }
+
+      isAuthResolved = true;
+      currentUid = user.uid;
+      saveSession(user);
+      onAuthenticated(user);
+    });
+
+    maxTimer = setTimeout(() => {
+      if (isAuthResolved) return;
+      if (auth.currentUser) {
+        isAuthResolved = true;
+        currentUid = auth.currentUser.uid;
+        saveSession(auth.currentUser);
+        onAuthenticated(auth.currentUser);
+      } else {
+        redirectToLogin();
+      }
+    }, 5000);
+  }
+
+  // ================================================================
+  // LANCER LA PROTECTION
+  // ================================================================
+  initAuthGuard(async (user) => {
+    // Cache-first : récupérer Premium immédiatement
+    const cached = getCachedUserData(user.uid);
+    isPremium = cached ? isUserPremium(cached) : false;
+
+    // Charger les données
+    loadSubjectFromFirestore();
+    loadUserData(user);
+  });
+
+  // ================================================================
+  // REFRESH AU RETOUR
+  // ================================================================
+  window.addEventListener('focus', () => {
+    if (chapters.length > 0) {
+      renderProgress();
+      renderChapters();
+    }
+  });
+
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && chapters.length > 0) {
+      renderProgress();
+      renderChapters();
+    }
+  });
+
+  console.log('🚀 ARVEXA — Matière (avec session robuste)');
+  </script>
+<script type="module" src="./arvexa-confirm.js"></script>
+</body>
+</html>

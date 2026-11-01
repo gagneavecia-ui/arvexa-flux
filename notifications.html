@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+    <title>ARVEXA — Notifications</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <meta name="theme-color" content="#0A0A0A">
+<script>(function(){try{if(localStorage.getItem('arvexa-theme')==='light')document.documentElement.setAttribute('data-theme','light')}catch(e){}})();</script>
+<script src="theme.js"></script><script src="arvexa-i18n.js" defer></script>
+  <meta name="description" content="ARVEXA School - Notifications">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="stylesheet" href="perf.css">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="analytics.js"></script>
+  <script src="register-sw.js" defer></script>
+
+  <link rel="stylesheet" href="arvexa-ui.css">
+  <style>
+    /* ============================================================
+       ROOT — Design system ARVEXA
+       ============================================================ */
+    :root {
+      --primary: #1A3A2A;
+      --accent: #B8860B;
+      --accent-bright: #E0B84A;
+      --accent-dim: rgba(184, 134, 11, 0.08);
+      --success: #2D7D5A;
+      --success-light: #3AB67E;
+      --danger: #B85C3A;
+      --danger-light: #f87171;
+      --warning: #D4A017;
+      --info: #4AAFE0;
+      --bg-dark: #0A0A0A;
+      --bg-surface: #141414;
+      --bg-card: rgba(20, 20, 20, 0.7);
+      --text-light: #F5F0E8;
+      --text-dim: #8A8A7A;
+      --text-muted: #5A5A4A;
+      --text-body: #cfd0cc;
+      --card-border: rgba(184, 134, 11, 0.06);
+      --border-soft: rgba(255, 255, 255, 0.05);
+      --transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      --transition-fast: all 0.15s ease;
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --radius: 16px;
+      --sidebar-width: 280px;
+      --header-height: 64px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; width: 100%; overflow-x: hidden; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      width: 100%;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      display: flex;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ============================================================
+       BACKGROUND
+       ============================================================ */
+    .gradient-bg {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+      background: radial-gradient(ellipse 40% 30% at 30% 15%, rgba(184, 134, 11,  0.16) 0%, transparent 70%),
+                  radial-gradient(ellipse 35% 25% at 75% 85%, rgba(184, 134, 11, 0.05) 0%, transparent 60%),
+                  linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-deep) 100%);
+    }
+    .glow {
+      position: fixed; border-radius: 50%; filter: blur(80px); pointer-events: none; z-index: -1;
+      opacity: 0.15; animation: glowMove 10s ease-in-out infinite alternate;
+    }
+    .glow-1 { width: 350px; height: 350px; background: rgba(184, 134, 11, 0.18); top: -80px; right: -80px; }
+    .glow-2 { width: 200px; height: 200px; background: rgba(184,134,11,0.05); bottom: 0; left: 0; animation-delay: -4s; }
+    @keyframes glowMove { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(30px,-20px) scale(1.1); } }
+
+    .sidebar-overlay {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+      background: rgba(0,0,0,0.6); z-index: 99; opacity: 0; transition: opacity 0.3s ease;
+    }
+    .sidebar-overlay.active { display: block; opacity: 1; }
+
+    /* ============================================================
+       SIDEBAR
+       ============================================================ */
+    .sidebar {
+      position: fixed; top: 0; left: -280px; width: 280px; height: 100vh;
+      background: rgba(var(--rgb-veil), 0.97); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-right: 1px solid rgba(184, 134, 11, 0.06);
+      padding: calc(24px + var(--safe-top)) 16px calc(24px + var(--safe-bottom));
+      display: flex; flex-direction: column; z-index: 100;
+      overflow-y: auto; transition: left 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .sidebar.open { left: 0; }
+    .sidebar .logo {
+      display: flex; align-items: center; text-decoration: none; color: var(--text-light);
+      font-size: 20px; font-weight: 700; font-family: 'Playfair Display', Georgia, serif;
+      letter-spacing: 2px; padding-bottom: 20px; margin-bottom: 16px;
+      border-bottom: 1px solid rgba(var(--rgb-soft), 0.04);
+    }
+    .sidebar .logo span {
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright), var(--accent));
+      background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; font-style: italic; animation: shimmerText 4s linear infinite;
+      margin-left: 4px;
+    }
+    @keyframes shimmerText { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+    .sidebar .nav { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+    .sidebar .nav a {
+      display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 10px;
+      color: var(--text-dim); text-decoration: none; transition: var(--transition);
+      font-size: 13px; font-weight: 500;
+    }
+    .sidebar .nav a i { width: 20px; text-align: center; font-size: 15px; }
+    .sidebar .nav a:hover { color: var(--text-light); background: rgba(var(--rgb-soft), 0.03); }
+    .sidebar .nav a.active { color: var(--text-light); background: rgba(184, 134, 11, 0.08); border: 1px solid rgba(184, 134, 11, 0.08); }
+    .sidebar .nav a.active i { color: var(--accent); }
+    .sidebar .nav a.avis-link {
+      color: var(--accent-bright);
+      background: rgba(184, 134, 11, 0.06);
+      border: 1px solid rgba(184, 134, 11, 0.12);
+      margin-top: 4px;
+    }
+    .sidebar .nav a.avis-link:hover {
+      background: rgba(184, 134, 11, 0.12);
+      color: var(--accent-bright);
+    }
+    .sidebar .nav-divider { height: 1px; background: rgba(var(--rgb-soft), 0.04); margin: 6px 0; }
+    .sidebar .nav-bottom { margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(var(--rgb-soft), 0.04); }
+    .sidebar .nav-bottom a { color: var(--text-muted); font-size: 12px; }
+    .sidebar .nav-bottom a:hover { color: var(--text-dim); }
+
+    /* ============================================================
+       MAIN / HEADER
+       ============================================================ */
+    .main-content { flex: 1; width: 100%; min-height: 100vh; padding-bottom: 32px; }
+
+    .header {
+      position: sticky; top: 0; z-index: 50; display: flex; align-items: center;
+      justify-content: space-between; padding: calc(10px + var(--safe-top)) 16px 10px;
+      background: rgba(var(--rgb-veil), 0.92);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(184, 134, 11, 0.06);
+      gap: 12px; min-height: var(--header-height);
+    }
+    .header .header-left { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
+    .header .menu-toggle {
+      display: flex; align-items: center; justify-content: center; width: 36px; height: 36px;
+      border-radius: 10px; border: 1px solid rgba(var(--rgb-soft), 0.05); background: transparent;
+      color: var(--text-dim); cursor: pointer; transition: var(--transition); font-size: 16px;
+      flex-shrink: 0;
+    }
+    .header .menu-toggle:hover { border-color: rgba(184, 134, 11, 0.14); color: var(--text-light); }
+    .header .page-title {
+      font-size: clamp(13px, 1.6vw, 15px);
+      font-weight: 600; color: var(--text-light); font-family: 'Playfair Display', serif;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .header .page-title i { color: var(--accent-bright); margin-right: 6px; font-size: 14px; }
+    .header .header-actions { display: flex; align-items: center; gap: 6px; }
+    .header .header-actions button {
+      display: flex; align-items: center; justify-content: center;
+      height: 36px; border-radius: 10px; border: none;
+      background: rgba(var(--rgb-soft), 0.04);
+      color: var(--text-dim); cursor: pointer; transition: var(--transition);
+      font-size: 12px; font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      padding: 0 12px;
+      gap: 6px;
+    }
+    .header .header-actions button:hover { background: rgba(var(--rgb-soft), 0.07); color: var(--text-light); }
+    .header .header-actions button i { font-size: 13px; }
+    .header .header-actions button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .header .header-actions button .count {
+      background: rgba(var(--rgb-veil), 0.3);
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-size: 10px;
+    }
+
+    /* ============================================================
+       CONTAINER
+       ============================================================ */
+    .container { max-width: 720px; margin: 0 auto; padding: 12px 16px 20px; width: 100%; }
+
+    /* ============================================================
+       FILTRES
+       ============================================================ */
+    .filters {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(var(--rgb-soft), 0.05);
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Inter', sans-serif;
+    }
+    .filter-btn:hover:not(.active) {
+      color: var(--text-dim);
+      border-color: rgba(var(--rgb-soft), 0.1);
+    }
+    .filter-btn.active {
+      background: rgba(184, 134, 11, 0.12);
+      color: var(--accent-bright);
+      border-color: rgba(184, 134, 11, 0.25);
+    }
+    .filter-btn .count {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 10px;
+      background: rgba(var(--rgb-soft), 0.06);
+    }
+    .filter-btn.active .count {
+      background: rgba(184, 134, 11, 0.2);
+    }
+
+    /* ============================================================
+       LISTE NOTIFICATIONS
+       ============================================================ */
+    .notif-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .notif-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.4s cubic-bezier(0.25, 1, 0.5, 1) backwards;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .notif-card:hover {
+      border-color: rgba(184, 134, 11, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+    .notif-card.unread {
+      border-color: rgba(184, 134, 11, 0.15);
+      background: rgba(184, 134, 11, 0.03);
+    }
+    .notif-card.unread::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent-bright), var(--accent));
+    }
+
+    .notif-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .notif-icon.info { background: rgba(74, 175, 224, 0.12); color: var(--info); }
+    .notif-icon.success { background: rgba(45, 125, 90, 0.12); color: var(--success-light); }
+    .notif-icon.warning { background: rgba(212, 160, 23, 0.12); color: var(--warning); }
+    .notif-icon.danger { background: rgba(184, 92, 58, 0.12); color: var(--danger-light); }
+    .notif-icon.announce { background: rgba(184, 134, 11, 0.12); color: var(--accent-bright); }
+
+    .notif-icon.unread-dot::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--info);
+      border: 2px solid var(--bg-dark);
+      box-shadow: 0 0 8px var(--info);
+      animation: pulseDot 2s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+    }
+
+    .notif-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .notif-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .notif-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-light);
+      line-height: 1.3;
+      flex: 1;
+      min-width: 0;
+    }
+    .notif-card.unread .notif-title {
+      color: var(--accent-bright);
+    }
+
+    .notif-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .notif-body {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.5;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .notif-card.unread .notif-body {
+      color: var(--text-body);
+    }
+
+    /* ============================================================
+       ÉTAT VIDE
+       ============================================================ */
+    .empty-state {
+      text-align: center;
+      padding: 60px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      min-height: 320px;
+      justify-content: center;
+    }
+    .empty-state .es-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(184, 134, 11, 0.06);
+      border: 1px solid rgba(184, 134, 11, 0.12);
+      font-size: 32px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .empty-state h4 {
+      font-size: 17px;
+      color: var(--text-light);
+      font-weight: 600;
+      font-family: 'Playfair Display', serif;
+    }
+    .empty-state p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       SKELETON
+       ============================================================ */
+    .skeleton-card {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .skeleton-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(90deg,
+        rgba(var(--rgb-soft), .03) 0%,
+        rgba(var(--rgb-soft), .08) 50%,
+        rgba(var(--rgb-soft), .03) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.6s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    .skeleton-content { flex: 1; }
+    .skeleton-line {
+      height: 12px;
+      border-radius: 8px;
+      background: linear-gradient(90deg,
+        rgba(var(--rgb-soft), .03) 0%,
+        rgba(var(--rgb-soft), .08) 50%,
+        rgba(var(--rgb-soft), .03) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 1.6s ease-in-out infinite;
+      margin-bottom: 8px;
+    }
+    .skeleton-line.title { width: 60%; height: 14px; }
+    .skeleton-line.body { width: 90%; }
+    .skeleton-line.body2 { width: 70%; margin-bottom: 0; }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ============================================================
+       MODALE
+       ============================================================ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 1000;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .modal-overlay.show { opacity: 1; visibility: visible; }
+
+    .modal-sheet {
+      width: 100%;
+      max-width: 600px;
+      max-height: 85vh;
+      background: var(--bg-surface);
+      border-radius: 20px 20px 0 0;
+      border-top: 1px solid rgba(184, 134, 11, 0.15);
+      padding: 24px 20px;
+      padding-bottom: calc(24px + var(--safe-bottom));
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      overflow-y: auto;
+      position: relative;
+    }
+    .modal-overlay.show .modal-sheet { transform: translateY(0); }
+
+    .modal-sheet::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 4px;
+      border-radius: 8px;
+      background: rgba(var(--rgb-soft), 0.15);
+      cursor: grab;
+      transition: background 0.2s ease;
+    }
+    .modal-sheet::before:hover { background: rgba(224, 184, 74, 0.4); }
+
+    .modal-sheet::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 20px 20px 0 0;
+      background: linear-gradient(90deg, var(--accent), var(--accent-bright), var(--accent));
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin: 12px 0 16px;
+    }
+    .modal-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .modal-icon.info { background: rgba(74, 175, 224, 0.15); color: var(--info); }
+    .modal-icon.success { background: rgba(45, 125, 90, 0.15); color: var(--success-light); }
+    .modal-icon.warning { background: rgba(212, 160, 23, 0.15); color: var(--warning); }
+    .modal-icon.danger { background: rgba(184, 92, 58, 0.15); color: var(--danger-light); }
+    .modal-icon.announce { background: rgba(184, 134, 11, 0.15); color: var(--accent-bright); }
+
+    .modal-titles { flex: 1; min-width: 0; }
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-light);
+      font-family: 'Playfair Display', serif;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .modal-date {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid rgba(var(--rgb-soft), 0.05);
+      background: rgba(var(--rgb-soft), 0.03);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: var(--transition);
+      z-index: 5;
+    }
+    .modal-close:hover {
+      border-color: rgba(184, 134, 11, 0.25);
+      color: var(--text-light);
+      background: rgba(184, 134, 11, 0.1);
+    }
+
+    .modal-body {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-body);
+      padding: 4px 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+    .modal-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 13px 20px;
+  min-height: 44px;
+  border-radius: 999px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+    .modal-btn.primary {
+      background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+      color: var(--on-gold);
+    }
+    .modal-btn.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(184, 134, 11, 0.3);
+    }
+    .modal-btn.secondary {
+      background: rgba(var(--rgb-soft), 0.04);
+      color: var(--text-dim);
+      border: 1px solid rgba(var(--rgb-soft), 0.06);
+    }
+    .modal-btn.secondary:hover {
+      background: rgba(var(--rgb-soft), 0.08);
+      color: var(--text-light);
+    }
+
+    /* ============================================================
+       TOAST
+       ============================================================ */
+    .toast-container {
+      position: fixed;
+      top: calc(var(--safe-top) + 16px);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      width: calc(100% - 32px);
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+    .toast {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border-radius: 12px;
+      background: rgba(var(--rgb-card), 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(var(--rgb-soft), 0.06);
+      color: var(--text-light);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow);
+      animation: toastIn 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      pointer-events: auto;
+    }
+    .toast.success { border-color: rgba(45, 125, 90, 0.4); }
+    .toast.error { border-color: rgba(231, 76, 60, 0.4); }
+    .toast.info { border-color: rgba(224, 184, 74, 0.4); }
+    .toast i { font-size: 15px; flex-shrink: 0; }
+    .toast.success i { color: var(--success-light); }
+    .toast.error i { color: var(--danger-light); }
+    .toast.info i { color: var(--accent-bright); }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (min-width: 768px) {
+      .sidebar { left: 0; display: flex; }
+      .sidebar-overlay { display: none !important; }
+      .main-content { margin-left: var(--sidebar-width); }
+      .header .menu-toggle { display: none; }
+    }
+
+    @media (max-width: 767px) {
+      .sidebar { left: -280px; }
+      .sidebar.open { left: 0; }
+      .container { padding: 10px 12px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .header { padding: 8px 12px; padding-top: calc(8px + var(--safe-top)); min-height: 48px; }
+      .header .menu-toggle { width: 32px; height: 32px; font-size: 14px; }
+      .header .page-title { font-size: 13px; }
+      .header .header-actions button { height: 32px; padding: 0 10px; font-size: 11px; }
+
+      .container { padding: 10px 10px 16px; }
+      .notif-card { padding: 12px 14px; gap: 12px; }
+      .notif-icon { width: 38px; height: 38px; font-size: 16px; }
+      .notif-title { font-size: 13px; }
+      .notif-body { font-size: 12.5px; }
+      .notif-time { font-size: 10.5px; }
+
+      .modal-sheet { padding: 20px 16px; padding-bottom: calc(20px + var(--safe-bottom)); }
+      .modal-icon { width: 42px; height: 42px; font-size: 18px; }
+      .modal-title { font-size: 17px; }
+      .modal-body { font-size: 14px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 8px;
+    }
+
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(184, 134, 11, 0.25); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(184, 134, 11, 0.4); }
+  </style>
+  <!-- ⚡ ARVEXA FLUX v1 — navigation instantanée -->
+  <script src="flux-router.js?v=flux1" defer></script>
+</head>
+<body>
+
+  <div class="gradient-bg"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="sidebar" id="sidebar">
+    <a href="index.html" class="logo">ARVEX<span>A School</span></a>
+    <nav class="nav">
+      <a href="index.html"><i class="fas fa-home"></i> Accueil</a>
+      <a href="profil.html"><i class="fas fa-user"></i> Mon profil</a>
+      <a href="abonnement.html"><i class="fas fa-crown"></i> Mon abonnement</a>
+      <a href="notifications.html" class="active"><i class="fas fa-bell"></i> Notifications</a>
+      <a href="arv-progress.html"><i class="fas fa-graduation-cap"></i> Arv-progress</a>
+      <a href="outils.html"><i class="fas fa-toolbox"></i> Outils</a>
+      <div class="nav-divider"></div>
+      <a href="index.html?avis=1" class="avis-link"><i class="fas fa-star"></i> Donner mon avis</a>
+      <div class="nav-divider"></div>
+      <div class="nav-bottom">
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- ===== MAIN ===== -->
+  <div class="main-content">
+
+    <!-- ===== HEADER ===== -->
+    <header class="header">
+      <div class="header-left">
+        <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu">
+          <i class="fas fa-bars"></i>
+        </button>
+        <h1 class="page-title">
+          <i class="fas fa-bell"></i> Notifications
+        </h1>
+      </div>
+      <div class="header-actions">
+        <button id="markAllReadBtn" disabled>
+          <i class="fas fa-check-double"></i>
+          <span>Tout lire</span>
+          <span class="count" id="unreadCountHeader">0</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- ===== CONTAINER ===== -->
+    <div class="container">
+
+      <!-- Filtres -->
+      <div class="filters" id="filters" style="display:none;">
+        <button class="filter-btn active" data-filter="all">
+          <i class="fas fa-inbox"></i>
+          <span>Toutes</span>
+          <span class="count" id="countAll">0</span>
+        </button>
+        <button class="filter-btn" data-filter="unread">
+          <i class="fas fa-circle-dot"></i>
+          <span>Non lues</span>
+          <span class="count" id="countUnread">0</span>
+        </button>
+      </div>
+
+      <!-- Liste -->
+      <div class="notif-list" id="notifList">
+        <!-- Skeleton -->
+        <div class="skeleton-card">
+          <div class="skeleton-icon"></div>
+          <div class="skeleton-content">
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line body"></div>
+            <div class="skeleton-line body2"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-icon"></div>
+          <div class="skeleton-content">
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line body"></div>
+            <div class="skeleton-line body2"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-icon"></div>
+          <div class="skeleton-content">
+            <div class="skeleton-line title"></div>
+            <div class="skeleton-line body"></div>
+            <div class="skeleton-line body2"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== MODALE DÉTAIL ===== -->
+  <div class="modal-overlay" id="notifModal">
+    <div class="modal-sheet" id="notifModalContent"></div>
+  </div>
+
+  <!-- ===== TOASTS ===== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ============================================================ -->
+  <!-- SCRIPTS                                                       -->
+  <!-- ============================================================ -->
+  <script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js",
+      "firebase/auth": "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js",
+      "firebase/firestore": "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js"
+    }
+  }
+  </script>
+
+ <script type="module">
+// ================================================================
+// NOTIFICATIONS — Version robuste anti-flash
+// Corrections appliquées :
+//  - C1 : redirectToLogin préserve redirectAfterLogin/redirectAfterAuth
+//  - C2 : performLogout → auth-choice.html + unsub onAuthStateChanged
+//  - C3 : gestion blocked/paused alignée sur index.html / profil.html
+//  - C4 : retry doux + warn si doc users/{uid} absent
+//  - C5 : saveSession écrit aussi sessionStorage
+//  - C6 : clearSession supprime redirectAfterLogin/redirectAfterAuth
+//  - C7 : log explicite si setPersistence échoue
+//  - C8 : unsubscribe propre du listener auth
+//  - C9 : warn dans le catch de loadUserData
+// ================================================================
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-auth.js";
+import {
+  initializeFirestore,
+  persistentLocalCache,
+  persistentSingleTabManager,
+  doc,
+  getDoc,
+  collection,
+  query,
+  orderBy,
+  limit,
+  onSnapshot,
+  updateDoc,
+  writeBatch,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
+
+// ================================================================
+// CONFIG FIREBASE
+// ================================================================
+const firebaseConfig = {
+  apiKey: "AIzaSyDHscOXw3rLuhV6z1Cny-bdYCumqpnG7QE",
+  authDomain: "arvexa-fbf10.firebaseapp.com",
+  projectId: "arvexa-fbf10",
+  storageBucket: "arvexa-fbf10.firebasestorage.app",
+  messagingSenderId: "920108330053",
+  appId: "1:920108330053:web:f532d71cbc2c824bc7472c"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const db = (window.__ARVEXA_DB_SHARED__ !== undefined ? window.__ARVEXA_DB_SHARED__ : (window.__ARVEXA_DB_SHARED__ = initializeFirestore(app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentSingleTabManager()
+  })
+})));
+
+// ✅ C7 — Log explicite si persistance refusée
+try {
+  await setPersistence(auth, browserLocalPersistence);
+} catch (e) {
+  console.warn('[Auth] Persistance locale indisponible sur notifications.html :', e.code || e.message);
+}
+
+// ================================================================
+// SESSION / CACHE — ✅ C5/C6 alignements
+// ================================================================
+const SESSION_KEY = 'arvexa_session';
+const USER_DATA_KEY = 'arvexa_user_data';
+const LAST_UID_KEY = 'arvexa_last_uid';
+
+function saveSession(user) {
+  if (!user) return;
+  try {
+    const data = {
+      uid: user.uid,
+      email: user.email,
+      lastActive: Date.now()
+    };
+    localStorage.setItem(SESSION_KEY, JSON.stringify(data));
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(data)); // ✅ C5
+    localStorage.setItem(LAST_UID_KEY, user.uid);
+  } catch (e) {}
+}
+
+function clearSession() {
+  try {
+    localStorage.removeItem(SESSION_KEY);
+    localStorage.removeItem(USER_DATA_KEY);
+    localStorage.removeItem(LAST_UID_KEY);
+    sessionStorage.removeItem(SESSION_KEY);
+    // ✅ C6 — alignement
+    sessionStorage.removeItem('redirectAfterLogin');
+    sessionStorage.removeItem('redirectAfterAuth');
+  } catch (e) {}
+}
+
+function getCachedUserData(uid) {
+  try {
+    const raw = localStorage.getItem(USER_DATA_KEY);
+    if (!raw) return null;
+    const cached = JSON.parse(raw);
+    if (cached._uid && cached._uid !== uid) {
+      localStorage.removeItem(USER_DATA_KEY);
+      return null;
+    }
+    return cached;
+  } catch (e) { return null; }
+}
+
+// ================================================================
+// DOM
+// ================================================================
+const notifList = document.getElementById('notifList');
+const filtersEl = document.getElementById('filters');
+const countAll = document.getElementById('countAll');
+const countUnread = document.getElementById('countUnread');
+const unreadCountHeader = document.getElementById('unreadCountHeader');
+const markAllReadBtn = document.getElementById('markAllReadBtn');
+
+const modal = document.getElementById('notifModal');
+const modalContent = document.getElementById('notifModalContent');
+
+const toastContainer = document.getElementById('toastContainer');
+
+// ================================================================
+// ÉTAT
+// ================================================================
+let allNotifications = [];
+let currentFilter = 'all';
+let unsubscribeNotifications = null;
+let unsubscribeUser = null;
+let currentUid = null;
+let currentUser = null;
+let isRedirecting = false;
+let isAuthResolved = false;
+let graceTimer = null;
+let maxTimer = null;
+let authUnsubscribe = null;         // ✅ C8
+let missingDocInFlight = false;     // ✅ C4
+
+// ================================================================
+// UTILITAIRE — TIMESTAMP
+// ================================================================
+function toDate(value) {
+  if (!value) return null;
+  if (typeof value.toDate === 'function') return value.toDate();
+  if (value.seconds !== undefined) return new Date(value.seconds * 1000);
+  const date = value instanceof Date ? value : new Date(value);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+// ================================================================
+// FORMAT TEMPS RELATIF
+// ================================================================
+function formatRelativeTime(timestamp) {
+  const date = toDate(timestamp);
+  if (!date) return '';
+
+  const now = new Date();
+  const diffMs = now - date;
+  const diffSec = Math.floor(diffMs / 1000);
+  const diffMin = Math.floor(diffSec / 60);
+  const diffHour = Math.floor(diffMin / 60);
+  const diffDay = Math.floor(diffHour / 24);
+
+  if (diffSec < 60) return 'À l\'instant';
+  if (diffMin < 60) return `Il y a ${diffMin} min`;
+  if (diffHour < 24) return `Il y a ${diffHour}h`;
+  if (diffDay === 1) return 'Hier';
+  if (diffDay < 7) return `Il y a ${diffDay} jours`;
+  if (diffDay < 30) return `Il y a ${Math.floor(diffDay / 7)} sem.`;
+  if (diffDay < 365) return `Il y a ${Math.floor(diffDay / 30)} mois`;
+  return `Il y a ${Math.floor(diffDay / 365)} an${diffDay >= 730 ? 's' : ''}`;
+}
+
+// ================================================================
+// FORMAT DATE COMPLÈTE
+// ================================================================
+function formatFullDate(timestamp) {
+  const date = toDate(timestamp);
+  if (!date) return '';
+  return date.toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+}
+
+// ================================================================
+// TYPE → ICÔNE + COULEUR
+// ================================================================
+function getTypeConfig(type) {
+  const configs = {
+    info: { icon: 'fa-circle-info', emoji: 'ℹ️', label: 'Info' },
+    success: { icon: 'fa-circle-check', emoji: '✅', label: 'Succès' },
+    warning: { icon: 'fa-triangle-exclamation', emoji: '⚠️', label: 'Attention' },
+    danger: { icon: 'fa-circle-exclamation', emoji: '🚨', label: 'Important' },
+    announce: { icon: 'fa-bullhorn', emoji: '📢', label: 'Annonce' }
+  };
+  return configs[type] || configs.info;
+}
+
+// ================================================================
+// ESCAPE HTML
+// ================================================================
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = String(text || '');
+  return div.innerHTML;
+}
+
+// ================================================================
+// TOAST
+// ================================================================
+function showToast(message, type = 'success') {
+  const icons = {
+    success: 'fa-check-circle',
+    error: 'fa-exclamation-circle',
+    info: 'fa-info-circle'
+  };
+  const colors = {
+    success: '#3AB67E',
+    error: 'var(--danger-light)',
+    info: 'var(--accent-bright)'
+  };
+
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.innerHTML = `
+    <i class="fas ${icons[type] || icons.info}" style="color:${colors[type] || colors.info}"></i>
+    <span>${message}</span>
+  `;
+  toastContainer.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(-10px)';
+    setTimeout(() => toast.remove(), 300);
+  }, 2500);
+}
+
+// ================================================================
+// RENDU
+// ================================================================
+function renderNotifications() {
+  let list = allNotifications;
+  if (currentFilter === 'unread') {
+    list = list.filter(n => !n.read);
+  }
+
+  const totalCount = allNotifications.length;
+  const unreadCount = allNotifications.filter(n => !n.read).length;
+
+  countAll.textContent = totalCount;
+  countUnread.textContent = unreadCount;
+  unreadCountHeader.textContent = unreadCount;
+
+  markAllReadBtn.disabled = unreadCount === 0;
+
+  filtersEl.style.display = totalCount > 0 ? 'flex' : 'none';
+
+  if (list.length === 0) {
+    if (totalCount === 0) {
+      notifList.innerHTML = `
+        <div class="empty-state">
+          <div class="es-icon"><i class="fas fa-bell-slash"></i></div>
+          <h4>Aucune notification</h4>
+          <p>Tu recevras ici les annonces, les mises à jour et les informations importantes.</p>
+        </div>
+      `;
+    } else {
+      notifList.innerHTML = `
+        <div class="empty-state">
+          <div class="es-icon"><i class="fas fa-check-circle"></i></div>
+          <h4>Tout est lu !</h4>
+          <p>Tu n'as aucune notification non lue.</p>
+        </div>
+      `;
+    }
+    return;
+  }
+
+  notifList.innerHTML = list.map((n, i) => {
+    const typeConfig = getTypeConfig(n.type);
+    const title = n.title || 'Notification';
+    const body = n.body || '';
+    const time = formatRelativeTime(n.createdAt);
+    const isUnread = !n.read;
+
+    return `
+      <div class="notif-card ${isUnread ? 'unread' : ''}"
+           data-id="${n.id}"
+           style="animation-delay: ${Math.min(i * 0.03, 0.3)}s">
+        <div class="notif-icon ${n.type || 'info'} ${isUnread ? 'unread-dot' : ''}">
+          <i class="fas ${typeConfig.icon}"></i>
+        </div>
+        <div class="notif-content">
+          <div class="notif-header">
+            <div class="notif-title">${escapeHtml(title)}</div>
+            <div class="notif-time">${escapeHtml(time)}</div>
+          </div>
+          <div class="notif-body">${escapeHtml(body)}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  notifList.querySelectorAll('.notif-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const id = card.dataset.id;
+      openNotifDetail(id);
+    });
+  });
+}
+
+// ================================================================
+// OUVRIR DÉTAIL
+// ================================================================
+async function openNotifDetail(id) {
+  const notif = allNotifications.find(n => n.id === id);
+  if (!notif) return;
+
+  const typeConfig = getTypeConfig(notif.type);
+  const title = notif.title || 'Notification';
+  const body = notif.body || 'Aucun contenu.';
+  const fullDate = formatFullDate(notif.createdAt);
+
+  // Marquer comme lu si pas encore lu (best-effort, non bloquant)
+  if (!notif.read && currentUid) {
+    try {
+      await updateDoc(
+        doc(db, 'users', currentUid, 'notifications', id),
+        { read: true }
+      );
+    } catch (e) {
+      // Silencieux : le clic doit ouvrir même si le marquage échoue
+    }
+  }
+
+  modalContent.innerHTML = `
+    <button class="modal-close" id="modalCloseBtn" aria-label="Fermer">
+      <i class="fas fa-xmark"></i>
+    </button>
+
+    <div class="modal-head">
+      <div class="modal-icon ${notif.type || 'info'}">
+        <i class="fas ${typeConfig.icon}"></i>
+      </div>
+      <div class="modal-titles">
+        <div class="modal-title">${escapeHtml(title)}</div>
+        <div class="modal-date">${escapeHtml(fullDate)}</div>
+      </div>
+    </div>
+
+    <div class="modal-body">${escapeHtml(body)}</div>
+
+    <div class="modal-actions">
+      <button class="modal-btn secondary" id="closeModalBtn">
+        <i class="fas fa-check"></i> Fermer
+      </button>
+    </div>
+  `;
+
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+
+  document.getElementById('modalCloseBtn').addEventListener('click', closeNotifDetail);
+  document.getElementById('closeModalBtn').addEventListener('click', closeNotifDetail);
+
+  setupModalSwipe(modalContent);
+}
+
+function closeNotifDetail() {
+  modal.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+// ================================================================
+// SWIPE TO CLOSE
+// ================================================================
+function setupModalSwipe(sheet) {
+  let startY = 0, currentY = 0, isDragging = false;
+
+  sheet.addEventListener('touchstart', (e) => {
+    const rect = sheet.getBoundingClientRect();
+    const touchY = e.touches[0].clientY;
+    if (touchY - rect.top < 80) {
+      startY = touchY;
+      currentY = touchY;
+      isDragging = true;
+      sheet.style.transition = 'none';
+    }
+  }, { passive: true });
+
+  sheet.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    currentY = e.touches[0].clientY;
+    const diff = currentY - startY;
+    if (diff > 0) {
+      sheet.style.transform = `translateY(${diff}px)`;
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  sheet.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    sheet.style.transition = '';
+    const diff = currentY - startY;
+    if (diff > 100) {
+      sheet.style.transform = `translateY(100%)`;
+      setTimeout(() => {
+        modal.classList.remove('show');
+        sheet.style.transform = '';
+      }, 300);
+    } else {
+      sheet.style.transform = '';
+    }
+    startY = 0;
+    currentY = 0;
+  }, { passive: true });
+}
+
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) closeNotifDetail();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modal.classList.contains('show')) {
+    closeNotifDetail();
+  }
+});
+
+// ================================================================
+// MARQUER TOUT COMME LU
+// ================================================================
+async function markAllAsRead() {
+  if (!currentUid) return;
+
+  const unread = allNotifications.filter(n => !n.read);
+  if (unread.length === 0) return;
+
+  markAllReadBtn.disabled = true;
+
+  try {
+    const batch = writeBatch(db);
+    unread.forEach(n => {
+      const ref = doc(db, 'users', currentUid, 'notifications', n.id);
+      batch.update(ref, { read: true });
+    });
+    await batch.commit();
+
+    showToast(`${unread.length} notification${unread.length > 1 ? 's' : ''} marquée${unread.length > 1 ? 's' : ''} comme lue${unread.length > 1 ? 's' : ''}`, 'success');
+  } catch (e) {
+    console.error(e);
+    showToast('Impossible de marquer comme lu', 'error');
+    markAllReadBtn.disabled = false;
+  }
+}
+
+markAllReadBtn.addEventListener('click', markAllAsRead);
+
+// ================================================================
+// FILTRES
+// ================================================================
+filtersEl.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentFilter = btn.dataset.filter;
+    filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderNotifications();
+  });
+});
+
+// ================================================================
+// CHARGEMENT DES NOTIFICATIONS (temps réel) — ✅ C9
+// ================================================================
+function loadNotifications(user) {
+  if (unsubscribeNotifications) {
+    unsubscribeNotifications();
+    unsubscribeNotifications = null;
+  }
+
+  const notifsQuery = query(
+    collection(db, 'users', user.uid, 'notifications'),
+    orderBy('createdAt', 'desc'),
+    limit(50)
+  );
+
+  unsubscribeNotifications = onSnapshot(notifsQuery,
+    (snapshot) => {
+      allNotifications = snapshot.docs.map(d => ({
+        id: d.id,
+        ...d.data()
+      }));
+      renderNotifications();
+    },
+    (error) => {
+      // ✅ C9 — warn au lieu du silence
+      console.warn('[Notifs] onSnapshot error:', error.code || error.message);
+      allNotifications = [];
+      renderNotifications();
+    }
+  );
+}
+
+// ================================================================
+// ✅ C4 — Retry doux si doc users/{uid} absent
+// ================================================================
+async function handleMissingUserDoc(uid) {
+  if (missingDocInFlight) return;
+  missingDocInFlight = true;
+  try {
+    await new Promise((r) => setTimeout(r, 900));
+    if (!auth.currentUser || auth.currentUser.uid !== uid) return;
+    const retry = await getDoc(doc(db, 'users', uid));
+    if (retry.exists()) {
+      const data = retry.data();
+      try {
+        localStorage.setItem(USER_DATA_KEY, JSON.stringify({
+          ...data,
+          _uid: uid,
+          _cachedAt: Date.now()
+        }));
+      } catch (e) {}
+      return;
+    }
+    console.warn('[Notifs] Profil utilisateur introuvable pour', uid);
+  } catch (e) {
+    console.warn('[Notifs] handleMissingUserDoc:', e.code || e.message);
+  } finally {
+    missingDocInFlight = false;
+  }
+}
+
+// ================================================================
+// CHARGEMENT UTILISATEUR — ✅ C3 (blocked/paused) + C4 (retry)
+// ================================================================
+function loadUserData(user) {
+  if (unsubscribeUser) {
+    unsubscribeUser();
+    unsubscribeUser = null;
+  }
+
+  const userRef = doc(db, 'users', user.uid);
+
+  unsubscribeUser = onSnapshot(userRef,
+    (docSnap) => {
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+
+        // ✅ C3 — blocked : signOut tolérant + auth-choice.html
+        if (data.accountStatus === 'blocked') {
+          if (unsubscribeUser) { unsubscribeUser(); unsubscribeUser = null; }
+          if (unsubscribeNotifications) { unsubscribeNotifications(); unsubscribeNotifications = null; }
+          clearSession();
+          try { sessionStorage.setItem('arvexa_account_blocked', '1'); } catch (e) {}
+          signOut(auth)
+            .catch((err) => console.warn('[Notifs] signOut bloqué :', err.code || err.message))
+            .finally(() => { window.location.replace('auth-choice.html'); });
+          return;
+        }
+
+        // ✅ C3 — paused : ne pas déconnecter, message, rester sur la page
+        if (data.accountStatus === 'paused') {
+          try {
+            localStorage.setItem(USER_DATA_KEY, JSON.stringify({
+              ...data,
+              _uid: user.uid,
+              _cachedAt: Date.now()
+            }));
+          } catch (e) {}
+          showToast('Ton compte est temporairement en pause. Contacte le support.', 'error');
+          return;
+        }
+
+        try {
+          localStorage.setItem(USER_DATA_KEY, JSON.stringify({
+            ...data,
+            _uid: user.uid,
+            _cachedAt: Date.now()
+          }));
+        } catch (e) {}
+      } else {
+        const cached = getCachedUserData(user.uid);
+        if (!cached) {
+          // ✅ C4 — retry doux avant décision
+          handleMissingUserDoc(user.uid);
+        }
+      }
+    },
+    (error) => {
+      // ✅ C9 — warn au lieu du silence
+      console.warn('[Notifs] onSnapshot users:', error.code || error.message);
+    }
+  );
+}
+
+// ================================================================
+// DÉCONNEXION — ✅ C2/C8
+// ================================================================
+async function performLogout() {
+  isRedirecting = true;
+
+  // ✅ C8 — désabonnements propres
+  if (unsubscribeNotifications) { unsubscribeNotifications(); unsubscribeNotifications = null; }
+  if (unsubscribeUser) { unsubscribeUser(); unsubscribeUser = null; }
+  if (authUnsubscribe) {
+    try { authUnsubscribe(); } catch (e) {}
+    authUnsubscribe = null;
+  }
+  if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+  if (maxTimer) { clearTimeout(maxTimer); maxTimer = null; }
+
+  currentUid = null;
+  currentUser = null;
+  clearSession();
+  try { await signOut(auth); } catch (e) {}
+  // ✅ C2 — alignement sur index.html / profil.html / abonnement.html
+  window.location.replace('auth-choice.html');
+}
+
+document.getElementById('logoutBtn').addEventListener('click', (e) => {
+  e.preventDefault();
+  // ✅ Modale uniforme (même modèle que index.html)
+  if (window.arvexaLogout) { window.arvexaLogout(); return; }
+  performLogout(); // filet de sécurité si le module n'est pas chargé
+});
+
+document.getElementById('menuToggle').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('active');
+});
+
+document.getElementById('sidebarOverlay').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('active');
+});
+
+// ================================================================
+// AUTH ROBUSTE — ✅ C1/C8
+// ================================================================
+// ✅ C1 — préserver les clés existantes
+function redirectToLogin() {
+  if (isRedirecting) return;
+  isRedirecting = true;
+
+  if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+  if (maxTimer) { clearTimeout(maxTimer); maxTimer = null; }
+  if (authUnsubscribe) {
+    try { authUnsubscribe(); } catch (e) {}
+    authUnsubscribe = null;
+  }
+
+  try {
+    const existing = sessionStorage.getItem('redirectAfterLogin')
+                  || sessionStorage.getItem('redirectAfterAuth');
+    if (!existing) {
+      sessionStorage.setItem('redirectAfterLogin', window.location.pathname + window.location.search);
+    }
+  } catch (e) {}
+
+  window.location.replace('login.html');
+}
+
+function initAuthGuard(onAuthenticated) {
+  if (authUnsubscribe) return; // garde anti-double
+
+  authUnsubscribe = onAuthStateChanged(auth, (user) => {
+    if (isAuthResolved) {
+      if (user && user.uid !== currentUid) {
+        currentUid = user.uid;
+        currentUser = user;
+        saveSession(user);
+        onAuthenticated(user);
+      } else if (!user && currentUid) {
+        currentUid = null;
+        currentUser = null;
+        clearSession();
+        redirectToLogin();
+      }
+      return;
+    }
+
+    if (!user) {
+      if (graceTimer) return;
+      graceTimer = setTimeout(() => {
+        graceTimer = null;
+        if (isAuthResolved) return;
+        if (auth.currentUser) return;
+
+        const hasSession = localStorage.getItem(SESSION_KEY);
+        const hasUserData = localStorage.getItem(USER_DATA_KEY);
+
+        if ((hasSession || hasUserData) && !navigator.onLine) {
+          setTimeout(() => {
+            if (auth.currentUser) return;
+            if (!isAuthResolved) redirectToLogin();
+          }, 1500);
+          return;
+        }
+
+        if (hasSession && hasUserData) {
+          setTimeout(() => {
+            if (auth.currentUser) return;
+            if (!isAuthResolved) redirectToLogin();
+          }, 1500);
+          return;
+        }
+
+        redirectToLogin();
+      }, 600);
+      return;
+    }
+
+    if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+    if (maxTimer) { clearTimeout(maxTimer); maxTimer = null; }
+
+    isAuthResolved = true;
+    currentUid = user.uid;
+    currentUser = user;
+    saveSession(user);
+    onAuthenticated(user);
+  });
+
+  maxTimer = setTimeout(() => {
+    if (isAuthResolved) return;
+    if (auth.currentUser) {
+      isAuthResolved = true;
+      currentUid = auth.currentUser.uid;
+      currentUser = auth.currentUser;
+      saveSession(auth.currentUser);
+      onAuthenticated(auth.currentUser);
+    } else {
+      redirectToLogin();
+    }
+  }, 5000);
+}
+
+// ================================================================
+// LANCER LA PROTECTION
+// ================================================================
+initAuthGuard(async (user) => {
+  loadNotifications(user);
+  loadUserData(user);
+});
+
+// ✅ C8 — cleanup global
+window.addEventListener('beforeunload', () => {
+  if (graceTimer) { clearTimeout(graceTimer); graceTimer = null; }
+  if (maxTimer) { clearTimeout(maxTimer); maxTimer = null; }
+  if (authUnsubscribe) { try { authUnsubscribe(); } catch (e) {} authUnsubscribe = null; }
+  if (unsubscribeNotifications) { try { unsubscribeNotifications(); } catch (e) {} unsubscribeNotifications = null; }
+  if (unsubscribeUser) { try { unsubscribeUser(); } catch (e) {} unsubscribeUser = null; }
+});
+
+console.log('🚀 ARVEXA — Notifications (version corrigée C1-C9)');
+</script>
+<script type="module" src="./arvexa-confirm.js"></script>
+</body>
+</html>

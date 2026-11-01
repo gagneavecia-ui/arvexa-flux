@@ -1,0 +1,477 @@
+<!-- ============================================================ -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · STATISTIQUES             -->
+<!-- PARTIE 3 : CORRÉLATION LINÉAIRE                              -->
+<!-- Notion 1 : correlation — L'idée de corrélation               -->
+<!-- Notion 2 : coef_r — Le coefficient de corrélation r          -->
+<!-- Notion 3 : interpretation_r — Interpréter r en contexte      -->
+<!-- Notion 4 : predictions — Interpolation et extrapolation      -->
+<!-- Notion 5 : exponentiel — Quand le linéaire ne suffit plus    -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 03 · Statistiques</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Corrélation <em>linéaire</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Une droite d'ajustement se trouve toujours — encore faut-il savoir si elle <strong>mérite</strong> de représenter le nuage. Cette partie introduit le juge de paix : le <strong>coefficient de corrélation</strong> <span class="math">r</span>. Cette partie couvre <strong>5 notions</strong> : l'idée de <strong>corrélation</strong>, le <strong>coefficient</strong> <span class="math">r</span> et ses propriétés, l'<strong>interprétation</strong> de ses valeurs, les <strong>prédictions</strong> par la droite (interpolation et extrapolation) et, en bref, le recours à l'<strong>ajustement exponentiel</strong> quand le nuage se courbe.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span>
+      <span class="lecture-hero-meta-item">🧮 5 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">5 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — La droite a-t-elle le droit de prédire ?</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · correlation — Voir la corrélation sur le nuage</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 2 · coef_r — Le coefficient de corrélation <span class="math">r</span></span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 3 · interpretation_r — Interpréter les valeurs de <span class="math">r</span></span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · coef_r — Calculer <span class="math">r</span> pas à pas</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 4 · predictions — Interpolation et extrapolation</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 5 · exponentiel — Limites du linéaire</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — L'essentiel de la partie</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION                                       -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">La droite a-t-elle le droit de prédire ?</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        En Partie 2, nous avons trouvé <span class="math">D : y = 1,3x + 2,2</span> pour les 5 parcelles de sorgho. Le service agricole l'utilise pour annoncer la récolte avant la fin des pluies. Mais une question honnête s'impose : les points du nuage sont-ils <em>vraiment</em> proches de cette droite ? Sur deux nuages différents — l'un presque aligné, l'autre éparpillé — la méthode des moindres carrés donnerait toutes les deux une droite… avec une fiabilité radicalement différente.
+      </p>
+      <p class="lecture-text">
+        Il faut donc un <strong>nombre</strong> qui mesure à quel point le nuage est « rectiligne ». C'est le <strong>coefficient de corrélation</strong> <span class="math">r</span>, calculé à partir de ce que nous savons déjà : covariance, variances, écart-types. Et son interprétation conditionne tout le reste : peut-on <strong>prédire</strong> avec la droite, et jusqu'où ?
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Reconnaître</strong> sur un nuage une corrélation positive, négative ou nulle.</li>
+            <li><strong>Calculer</strong> et <strong>interpréter</strong> le coefficient <span class="math">r</span> sur l'exemple de la Partie 2.</li>
+            <li><strong>Prédire</strong> avec la droite, en distinguant interpolation et extrapolation.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · correlation                           -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · correlation</span>
+        <h2 class="lecture-section-title">Voir la corrélation sur le nuage</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Avant tout calcul, l'œil donne déjà le verdict. Trois allures typiques de nuages :
+      </p>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 560 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trois nuages : points presque alignés croissants, points dispersés, points presque alignés décroissants">
+          <rect x="20" y="20" width="160" height="120" style="fill:none;stroke:var(--text-dim)" stroke-width="1.5"/>
+          <rect x="200" y="20" width="160" height="120" style="fill:none;stroke:var(--text-dim)" stroke-width="1.5"/>
+          <rect x="380" y="20" width="160" height="120" style="fill:none;stroke:var(--text-dim)" stroke-width="1.5"/>
+          <circle cx="35" cy="125" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="52" cy="112" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="70" cy="116" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="88" cy="98" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="106" cy="88" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="124" cy="74" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="142" cy="62" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="165" cy="50" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="215" cy="60" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="232" cy="122" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="250" cy="48" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="268" cy="105" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="286" cy="70" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="304" cy="128" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="322" cy="88" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="342" cy="95" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="395" cy="50" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="412" cy="58" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="430" cy="72" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="448" cy="70" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="466" cy="92" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="484" cy="108" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="502" cy="122" r="5" style="fill:var(--accent-bright)"/>
+          <circle cx="525" cy="130" r="5" style="fill:var(--accent-bright)"/>
+          <text x="100" y="165" style="fill:var(--text-dim)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">r ≈ +1</text>
+          <text x="280" y="165" style="fill:var(--text-dim)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">r ≈ 0</text>
+          <text x="460" y="165" style="fill:var(--text-dim)" font-size="13" font-weight="700" font-family="Inter" text-anchor="middle">r ≈ −1</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">À gauche, les points montrent une <strong>corrélation positive</strong> (x grand ⇔ y grand) ; au centre, aucune liaison rectiligne (<strong>corrélation quasi nulle</strong>) ; à droite, une <strong>corrélation négative</strong> (x grand ⇔ y petit). Le coefficient <span class="math">r</span> va chiffrer cette impression.</figcaption>
+      </figure>
+      <div class="lecture-vocab-grid">
+        <div class="vocab-card">
+          <div class="vocab-symbol">↗</div>
+          <div class="vocab-name">Corrélation positive</div>
+          <div class="vocab-notation">nuage croissant : r &gt; 0 (pluie ↑, rendement ↑)</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">↘</div>
+          <div class="vocab-name">Corrélation négative</div>
+          <div class="vocab-notation">nuage décroissant : r &lt; 0 (prix ↑, demande ↓)</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">✖️</div>
+          <div class="vocab-name">Corrélation nulle</div>
+          <div class="vocab-notation">nuage éparpillé : r ≈ 0, aucune droite fiable</div>
+        </div>
+        <div class="vocab-card vocab-card-info">
+          <div class="vocab-symbol">📐</div>
+          <div class="vocab-name">Corrélation linéaire</div>
+          <div class="vocab-notation">r mesure uniquement la LIAISON RECTILIGNE</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 2 · coef_r                                -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · coef_r</span>
+        <h2 class="lecture-section-title">Le coefficient de corrélation <span class="math">r</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le coefficient de corrélation relie ce que nous connaissons déjà : la covariance, qui donne le <strong>sens</strong> de la liaison, et les écart-types de <span class="math">x</span> et de <span class="math">y</span>, qui donnent les <strong>échelles</strong>. Leur quotient est un nombre pur, sans unité, toujours compris entre −1 et 1.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définition officielle — Coefficient de corrélation</div>
+          <p>Pour une série double <span class="math">(xᵢ ; yᵢ)</span>, le <strong>coefficient de corrélation linéaire</strong> est :</p>
+          <p><span class="math">r = cov(x, y) / (σₓ·σᵧ)</span></p>
+          <p>où <span class="math">σₓ = √V(x)</span> et <span class="math">σᵧ = √V(y)</span> sont les écart-types des deux séries. C'est un nombre sans unité.</p>
+        </div>
+      </div>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule du coefficient de corrélation</div>
+        <div class="lecture-formula-hero-main">r = cov(x, y) / (σₓ·σᵧ)</div>
+        <div class="lecture-formula-hero-desc">Tous les ingrédients sont déjà connus : cov(x, y) et V(x) viennent du calcul de la droite ; il ne manque que V(y), l'écart-type de y.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">−1 ≤ r ≤ 1</div>
+        <div class="lecture-formula-desc">Propriété fondamentale : r est toujours entre −1 et 1. r ≈ 1 : points presque alignés sur une droite croissante ; r ≈ −1 : alignés sur une droite décroissante ; r ≈ 0 : aucune liaison rectiligne.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">|r| ≥ 0,9 ⇒ ajustement linéaire justifié</div>
+        <div class="lecture-formula-desc">Critère d'usage (convention usuelle) : si la valeur absolue de r atteint 0,9, les points sont suffisamment proches d'une droite pour qu'on l'utilise — et on la justifie ainsi à l'examen.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">signe de r = signe de a = signe de cov(x, y)</div>
+        <div class="lecture-formula-desc">r et la pente a ont toujours le même signe, car a = r·σᵧ/σₓ avec σᵧ/σₓ &gt; 0. Nuage croissant → a &gt; 0 et r &gt; 0.</div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ r ne mesure que la LIAISON RECTILIGNE</div>
+          <p>Un <span class="math">r</span> proche de 0 ne prouve pas « aucune relation » : des points parfaitement posés sur une parabole ont <span class="math">r ≈ 0</span> alors que la liaison est parfaite… mais courbe ! <span class="math">r</span> juge uniquement l'alignement rectiligne. Et attention : <span class="math">r</span> n'a <strong>pas d'unité</strong> — ne jamais écrire « r = 0,98 t/ha ».</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 3 · interpretation_r                      -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · interpretation_r</span>
+        <h2 class="lecture-section-title">Interpréter les valeurs de <span class="math">r</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Voici la grille de lecture usuelle — à connaître et à citer correctement à l'examen. On travaille toujours sur <span class="math">|r|</span> pour la <strong>force</strong>, puis sur le <strong>signe</strong> pour le <strong>sens</strong>.
+      </p>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Valeur de |r|</th><th>Force de la liaison</th><th>Conclusion pratique</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">0,9 ≤ |r| ≤ 1</span></td><td>très forte</td><td>nuage presque aligné : ajustement linéaire <strong>justifié</strong>, prédictions fiables</td></tr>
+            <tr><td><span class="math">0,7 ≤ |r| &lt; 0,9</span></td><td>forte</td><td>tendance nette mais points plus dispersés : prudence sur les prédictions</td></tr>
+            <tr><td><span class="math">0,5 ≤ |r| &lt; 0,7</span></td><td>modérée</td><td>liaison réelle mais faible : la droite ne résume qu'une partie du phénomène</td></tr>
+            <tr><td><span class="math">|r| &lt; 0,5</span></td><td>faible</td><td>aucun ajustement linéaire sérieux : ne pas prédire avec la droite</td></tr>
+            <tr><td><span class="math">|r| ≈ 0</span></td><td>nulle</td><td>aucune liaison rectiligne : le nuage ne suit aucune tendance droite</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">💡 La phrase d'examen à connaître</div>
+          <p>« Comme <span class="math">|r| ≈ 0,98 ≥ 0,9</span>, la corrélation est très forte et l'ajustement linéaire du nuage par la droite <span class="math">D</span> est justifié. » Une telle phrase, appuyée par le calcul de <span class="math">r</span>, valide tout l'exercice de statistiques.</p>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Des seuils, pas des lois</div>
+          <p>Le seuil <span class="math">0,9</span> est une <strong>convention</strong> de travail (certains ouvrages utilisent <span class="math">0,8</span>). Cite-la comme telle : « selon la convention usuelle ». Et souviens-toi qu'un <span class="math">r</span> fort ne dit <strong>rien</strong> sur la cause — voir la section 06.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 2 · coef_r — CALCUL DE r                  -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · coef_r</span>
+        <h2 class="lecture-section-title">Calculer <span class="math">r</span> pas à pas</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Reprenons l'exemple de la Partie 2 : les 5 parcelles de sorgho <span class="math">(2 ; 5)</span>, <span class="math">(4 ; 8)</span>, <span class="math">(6 ; 9)</span>, <span class="math">(8 ; 12)</span>, <span class="math">(10 ; 16)</span>. On y a déjà calculé : <span class="math">x̄ = 6</span>, <span class="math">ȳ = 10</span>, <span class="math">cov(x, y) = 10,4</span>, <span class="math">V(x) = 8</span>, et la droite <span class="math">D : y = 1,3x + 2,2</span>. Il ne manque que <span class="math">V(y)</span>.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Le coefficient r du nuage de sorgho</div>
+        <div class="lecture-example-content">
+          <p>Il nous faut <span class="math">V(y)</span> : on dresse le tableau de calcul des carrés <span class="math">yᵢ²</span> :</p>
+          <div class="lecture-table">
+            <table>
+              <thead>
+                <tr><th>Ordonnée yᵢ</th><th>Carré yᵢ²</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><span class="math">5</span></td><td>25</td></tr>
+                <tr><td><span class="math">8</span></td><td>64</td></tr>
+                <tr><td><span class="math">9</span></td><td>81</td></tr>
+                <tr><td><span class="math">12</span></td><td>144</td></tr>
+                <tr><td><span class="math">16</span></td><td>256</td></tr>
+                <tr><td><strong>Σ</strong></td><td><strong>570</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>La somme des carrés vaut <span class="math">570</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Variance de y</strong>, une transformation par ligne :</p>
+              <p><span class="math">V(y) = (Σ yᵢ²) / 5 − ȳ²</span><br>
+              <span class="math">V(y) = 570 / 5 − 10²</span><br>
+              <span class="math">V(y) = 114 − 100</span></p>
+              <p>Résultat sur sa propre ligne : <span class="math">V(y) = 14</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Écart-types</strong>, un calcul par ligne :</p>
+              <p><span class="math">σₓ = √V(x)</span><br>
+              <span class="math">σₓ = √8 ≈ 2,83</span></p>
+              <p><span class="math">σᵧ = √V(y)</span><br>
+              <span class="math">σᵧ = √14 ≈ 3,74</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>On applique la formule, une transformation par ligne :</p>
+              <p><span class="math">r = cov(x, y) / (σₓ·σᵧ)</span><br>
+              <span class="math">r = 10,4 / (√8 × √14)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p>Au dénominateur : <span class="math">√8 × √14 = √112 ≈ 10,58</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p>Le résultat final, sur sa propre ligne :</p>
+              <p><span class="math">r ≈ 10,4 / 10,58 ≈ 0,98</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p>Force : <span class="math">|r| = 0,98 ≥ 0,9</span> — corrélation très forte, <strong>l'ajustement linéaire est justifié</strong>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">8</div><div class="lecture-step-content"><p>Signe : <span class="math">r &gt; 0</span> et <span class="math">a = 1,3 &gt; 0</span> — même signe ✓, cohérent avec le nuage croissant.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">9</div><div class="lecture-step-content"><p><strong>Contrôle de cohérence</strong> : <span class="math">r × (σy/σx) ≈ 0,98 × (3,74/2,83) ≈ 1,3</span> — on retrouve la pente <span class="math">a = 1,3</span> ✓ (lien <span class="math">a = r·σy/σx</span>).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">9</div><div class="lecture-step-content"><p>Cohérence supplémentaire, une transformation par ligne :</p>
+              <p><span class="math">a = r·σᵧ / σₓ</span><br>
+              <span class="math">a ≈ 0,98 × 3,74 / 2,83</span><br>
+              <span class="math">a ≈ 1,3</span> ✓ — on retrouve la pente de la Partie 2.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Ne prends pas la racine carrée trop tôt ni trop tard : calcule <span class="math">cov</span>, <span class="math">V(x)</span>, <span class="math">V(y)</span> <strong>exactement</strong>, passe aux écart-types seulement à l'étape finale, et n'arrondis qu'à la fin. Arrondir <span class="math">σᵧ</span> à 0,1 près avant de diviser peut faire sortir <span class="math">r</span> du bon ordre de grandeur — et te coûter la conclusion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 4 · predictions                           -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · predictions</span>
+        <h2 class="lecture-section-title">Prédire avec la droite : interpolation et extrapolation</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La droite <span class="math">D : y = 1,3x + 2,2</span> est maintenant validée (<span class="math">r ≈ 0,98</span>). Elle permet de <strong>prédire</strong> un rendement pour une pluviométrie donnée — mais la fiabilité dépend de la <strong>position</strong> de la valeur de <span class="math">x</span> par rapport aux données observées.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Définitions — Interpolation et extrapolation</div>
+          <ul class="lecture-list">
+            <li><strong>Interpolation</strong> : prédire pour une valeur de <span class="math">x</span> <strong>à l'intérieur</strong> du domaine observé — fiable, car la tendance y est bien établie.</li>
+            <li><strong>Extrapolation</strong> : prédire pour une valeur de <span class="math">x</span> <strong>à l'extérieur</strong> du domaine observé — risquée, car rien ne garantit que la tendance continue.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Prédictions de rendement</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Rappel des unités : <span class="math">x</span> est en dm et <span class="math">1 dm = 100 mm</span> ; les pluies observées vont de <span class="math">2</span> à <span class="math">10</span> dm (200 à 1 000 mm).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Prévision pour 600 mm</strong> : <span class="math">600 mm = 6 dm</span>, donc <span class="math">x = 6</span> — valeur bien dans le domaine observé.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On remplace dans la droite, une transformation par ligne :</p>
+              <p><span class="math">y = 1,3 × 6 + 2,2</span><br>
+              <span class="math">y = 7,8 + 2,2</span></p>
+              <p>Résultat sur sa propre ligne : <span class="math">y = 10,0</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Rendement prévu : 10,0 t/ha</strong>. On remarque qu'on retrouve <span class="math">ȳ = 10</span> : normal, car <span class="math">x = 6 = x̄</span> et la droite passe par <span class="math">G(6 ; 10)</span> — un contrôle de cohérence apprécié des correcteurs.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Interpolation</strong> pour 500 mm (<span class="math">x = 5</span>, dedans) :</p>
+              <p><span class="math">y = 1,3 × 5 + 2,2</span><br>
+              <span class="math">y = 6,5 + 2,2</span></p>
+              <p>Résultat : <span class="math">y = 8,7 t/ha</span> — prévision fiable.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Extrapolation</strong> pour 1 200 mm (<span class="math">x = 12</span>, dehors) :</p>
+              <p><span class="math">y = 1,3 × 12 + 2,2</span><br>
+              <span class="math">y = 15,6 + 2,2</span></p>
+              <p>Résultat : <span class="math">y = 17,8 t/ha</span> — calcul possible mais <strong>prudence</strong> : au-delà du domaine observé, le sol peut être saturé, les maladies se développer… la tendance peut changer.</p></div></div>
+        <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p><strong>Contrôle final.</strong> Avant de conclure, on revérifie que le point moyen <span class="math">G(x̄ ; ȳ)</span> appartient bien à la droite <span class="math">y = ax + b</span> : <span class="math">a·x̄ + b = ȳ</span> ✓. Sans ce contrôle, une erreur de calcul sur <span class="math">a</span> ou <span class="math">b</span> passerait inaperçue.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-danger">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Erreur fréquente au Bac</div>
+          <p>Une prédiction par la droite se rédige toujours en trois temps : (1) rappeler que l'ajustement est justifié (<span class="math">|r| ≥ 0,9</span>) ; (2) remplacer <span class="math">x</span> par sa valeur et calculer <span class="math">y</span> ; (3) préciser <strong>interpolation</strong> ou <strong>extrapolation</strong> avec la prudence qui s'impose. Omettre le point 3 fait perdre les points d'interprétation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 5 · exponentiel                           -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 5 · exponentiel</span>
+        <h2 class="lecture-section-title">Limites du linéaire : causalité et nuages courbes</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Corrélation n'est pas causalité</div>
+          <p>Un <span class="math">r</span> fort prouve que les deux séries <strong>varient ensemble</strong>, pas que l'une <strong>cause</strong> l'autre. Exemple classique : les ventes de glaces et le nombre de noyades sont fortement corrélés… parce qu'une <strong>variable cachée</strong>, la chaleur, fait monter les deux. Pour le sorgho, l'explication agronomique (l'eau fait pousser le mil et le sorgho) rend la liaison crédible — mais c'est un raisonnement <em>extérieur</em> aux statistiques.</p>
+        </div>
+      </div>
+      <p class="lecture-text">
+        Autre limite : la droite ne convient qu'à un nuage <strong>rectiligne</strong>. Si le nuage s'incurve — c'est typique des phénomènes de <strong>croissance</strong> (population d'une ville, effet de l'engrais qui sature) — le coefficient <span class="math">r</span> baisse alors même que la liaison est évidente. La solution classique : rendre le nuage rectiligne en changeant d'échelle.
+      </p>
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode — Ajustement exponentiel (aperçu)</div>
+        <div class="lecture-rule-body">
+          <ul class="lecture-list">
+            <li>On <strong>pose</strong> <span class="math">Z = ln y</span> : on étudie la série double <span class="math">(xᵢ ; Zᵢ)</span>.</li>
+            <li>Si les points <span class="math">(xᵢ ; Zᵢ)</span> sont presque alignés, on ajuste <strong>linéairement</strong> : <span class="math">Z = a·x + b</span>.</li>
+            <li>On revient à <span class="math">y</span> en composant par l'exponentielle : <span class="math">y = e^(a·x + b) = e^b × e^(a·x)</span> — un modèle de <strong>croissance exponentielle</strong>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Petite histoire des sciences</div>
+        <div class="lecture-aside-content">
+          C'est en étudiant la taille des parents et celle de leurs enfants que Francis Galton remarque, vers 1886, que les enfants de parents très grands sont en moyenne un peu moins grands qu'eux : il nomme ce phénomène « régression vers la moyenne ». Le mot <strong>régression</strong> est depuis resté collé à la droite des moindres carrés — et on parle aujourd'hui de « régression linéaire » dans tous les logiciels de statistique.
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN                                            -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">L'essentiel de la partie</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le trio est complet : le nuage montre, la droite résume, et <span class="math">r</span> <strong>juge</strong>. Avec <span class="math">r ≈ 0,98</span>, notre droite <span class="math">y = 1,3x + 2,2</span> a le droit de prédire — à l'intérieur du domaine observé.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Le coefficient de corrélation en une ligne</div>
+        <div class="lecture-formula-hero-main">
+          −1 ≤ r ≤ 1<br>
+          |r| ≥ 0,9 → ajustement justifié<br>
+          signe de r = signe de a
+        </div>
+        <div class="lecture-formula-hero-desc">Fil rouge : r = 10,4 / (√8 × √14) ≈ 0,98 — corrélation très forte, droite fiable pour interpoler, prudence pour extrapoler.</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><strong>Allures de nuage</strong> : croissant (<span class="math">r &gt; 0</span>), décroissant (<span class="math">r &lt; 0</span>), éparpillé (<span class="math">r ≈ 0</span>).</li>
+        <li><strong>Formule</strong> : <span class="math">r = cov(x, y) / (σₓ·σᵧ)</span> — sans unité, toujours entre −1 et 1.</li>
+        <li><strong>Critère d'usage</strong> : <span class="math">|r| ≥ 0,9</span> justifie l'ajustement linéaire ; la force se lit sur <span class="math">|r|</span>, le sens sur le signe.</li>
+        <li><strong>Calcul de r</strong> : il ne manque jamais que <span class="math">V(y)</span> — tout le reste (cov, <span class="math">V(x)</span>) est déjà là depuis la droite.</li>
+        <li><strong>Prédictions</strong> : interpolation (dedans, fiable) vs extrapolation (dehors, risquée) — toujours préciser laquelle.</li>
+        <li><strong>Limites</strong> : corrélation ≠ causalité ; nuage courbe → poser <span class="math">Z = ln y</span> et ajuster <span class="math">y = e^b × e^(a·x)</span>.</li>
+      </ul>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Pour un nuage de points, on trouve r = −0,95. Que conclure ?</p>
+      <div class="lecture-quiz-options"><span>A) Corrélation faible car r est négatif</span><span>B) Ajustement linéaire justifié, avec pente négative</span><span>C) Aucun ajustement possible</span><span>D) La droite passe par l'origine</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) Ajustement linéaire justifié, avec pente négative.</strong> <span class="math">|r| = 0,95 ≥ 0,9</span> : corrélation très forte. Le signe négatif donne le sens : le nuage est décroissant, donc <span class="math">a &lt; 0</span>. (A confond force et sens.)</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — On donne cov(x,y) = 3 ; σₓ = 2 ; σᵧ = 1,5. Le coefficient r vaut :</p>
+      <div class="lecture-quiz-options"><span>A) 0,25</span><span>B) 1</span><span>C) 6,75</span><span>D) 0,9</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) 1.</strong> Le calcul, une transformation par ligne :
+        <p><span class="math">r = cov(x, y) / (σₓ·σᵧ)</span><br>
+        <span class="math">r = 3 / (2 × 1,5)</span><br>
+        <span class="math">r = 3 / 3 = 1</span></p>
+        <p>Les points seraient parfaitement alignés sur une droite croissante (cas limite).</p>
+      </div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Avec D : y = 0,8x + 1 ajustée sur des données où x ∈ [2 ; 10], prédire y pour x = 25 est :</p>
+      <div class="lecture-quiz-options"><span>A) Une interpolation fiable</span><span>B) Une extrapolation risquée</span><span>C) Impossible à calculer</span><span>D) La médiane de la série</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) Une extrapolation risquée.</strong> <span class="math">x = 25</span> est loin du domaine observé <span class="math">[2 ; 10]</span> : le calcul donne <span class="math">y = 0,8 × 25 + 1 = 21</span>, mais rien ne prouve que la tendance rectiligne persiste si loin. On précise toujours ce risque.</div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[correlation]</strong> Nuage croissant → r &gt; 0 ; décroissant → r &lt; 0 ; éparpillé → r ≈ 0 — l'œil d'abord, le calcul ensuite</li>
+      <li><strong>[coef_r]</strong> r = cov(x,y)/(σₓ·σᵧ) avec σₓ = √V(x) et σᵧ = √V(y) — nombre sans unité, −1 ≤ r ≤ 1</li>
+      <li><strong>[coef_r]</strong> signe de r = signe de a = signe de cov(x,y) — car a = r·σᵧ/σₓ</li>
+      <li><strong>[coef_r]</strong> Fil rouge : V(y) = 14, σₓ ≈ 2,83, σᵧ ≈ 3,74, r ≈ 10,4/10,58 ≈ 0,98</li>
+      <li><strong>[interpretation_r]</strong> |r| ≥ 0,9 → ajustement linéaire justifié (convention usuelle) ; les seuils 0,9 / 0,7 / 0,5 classent la force de la liaison</li>
+      <li><strong>[interpretation_r]</strong> r ne mesure que la liaison RECTILIGNE : un nuage en parabole parfaite a r ≈ 0</li>
+      <li><strong>[predictions]</strong> Interpolation = prédiction à l'intérieur du domaine observé (fiable) ; extrapolation = à l'extérieur (risquée)</li>
+      <li><strong>[predictions]</strong> Rédaction : justifier par r, calculer y = ax + b, préciser interpolation ou extrapolation</li>
+      <li><strong>[exponentiel]</strong> Corrélation ≠ causalité : une variable cachée peut expliquer un r fort</li>
+      <li><strong>[exponentiel]</strong> Nuage courbe : poser Z = ln y, ajuster Z = a·x + b, conclure y = e^b × e^(a·x)</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 3 terminée !</div>
+    <div class="lecture-end-sub">Passe à la dernière partie : la fiche complète de révision du chapitre</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

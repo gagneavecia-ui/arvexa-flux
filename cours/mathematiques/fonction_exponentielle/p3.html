@@ -1,0 +1,452 @@
+<!-- ============================================================ -->
+<!-- PARTIE 3 — Limites & Étude de la fonction exp (limites, comparaisons, etude) -->
+<!-- COURS MATHÉMATIQUES · TERMINALE D · FONCTION EXPONENTIELLE   -->
+<!-- ============================================================ -->
+<div class="lecture-container">
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 03 · Fonction exponentielle</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Limites &amp; <em>Étude de la fonction exp</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Une exponentielle ne fait rien comme les autres : elle <strong>meurt d'un côté</strong> (<span class="math">e^x</span> tend vers 0 en <span class="math">−∞</span>) et <strong>explose de l'autre</strong> (vers <span class="math">+∞</span> en <span class="math">+∞</span>), en restant toujours positive. Cette partie couvre <strong>3 notions</strong> : les <strong>limites</strong> de <span class="math">e^x</span> avec l'asymptote <span class="math">y = 0</span> et la tangente en <span class="math">(0 ; 1)</span>, les <strong>croissances comparées</strong> qui donnent à exp le pouvoir d'écraser toute puissance, puis l'<strong>étude complète</strong> d'une fonction produit <span class="math">f(x) = (2x + 1)·e^x</span> — dérivée, signe, tableau de variations, de la première à la dernière ligne.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 25 min</span>
+      <span class="lecture-hero-meta-item">🧮 3 notions</span>
+      <span class="lecture-hero-meta-item">📊 8 sections</span>
+      <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">3 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Extinction ou explosion ?</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Notion 1 · limites — Les deux limites fondamentales</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Notion 1 · limites — Asymptote <span class="math">y = 0</span> et tangente en <span class="math">(0 ; 1)</span></span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Notion 2 · comparaisons — <span class="math">e^x/xⁿ</span> : exp l'emporte</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Notion 2 · comparaisons — <span class="math">x·e^(−x)</span> : exp absorbe tout</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Notion 3 · etude — Tableau de variations de exp et le signe de <span class="math">e^x</span></span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Notion 3 · etude — Étude complète de <span class="math">f(x) = (2x + 1)e^x</span></span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — L'essentiel de la partie</span></a></li>
+    </ol>
+  </nav>
+  <!-- ============================================================ -->
+  <!-- SECTION 0 : MOTIVATION -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Extinction ou explosion ?</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Sur un marché de Niamey, deux scénarios se jouent en permanence. Une <strong>crise</strong> frappe le pouvoir d'achat : les prix hors de portée, les ventes s'effondrent — de moins en moins vite pourtant, car il restera toujours un strict minimum d'acheteurs. À l'inverse, une <strong>mode</strong> se répand : le produit connaît un succès croissant, de plus en plus rapide, sans plafond visible. Le premier scénario ressemble à <span class="math">e^x</span> quand <span class="math">x</span> va vers <span class="math">−∞</span> : la quantité s'éteint doucement vers <span class="math">0</span>. Le second ressemble à <span class="math">e^x</span> quand <span class="math">x</span> va vers <span class="math">+∞</span> : elle explose vers <span class="math">+∞</span>.
+      </p>
+      <p class="lecture-text">
+        Décrire ces deux comportements, c'est le travail des <strong>limites</strong>. Et pour aller plus loin, il faut savoir trancher les duels : quand une exponentielle affronte une puissance de <span class="math">x</span>, qui gagne à l'infini ? La réponse — <strong>exp l'emporte toujours</strong> — est l'un des résultats les plus utilisés du programme de Terminale D, et il se démontre en quelques lignes de calculs numériques que tu vas faire toi-même.
+      </p>
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">Les objectifs de cette partie</div>
+          <ul class="lecture-list">
+            <li><strong>Connaître</strong> les limites de <span class="math">e^x</span> en <span class="math">−∞</span> et en <span class="math">+∞</span>, l'asymptote <span class="math">y = 0</span> et la tangente <span class="math">y = x + 1</span> en <span class="math">(0 ; 1)</span>.</li>
+            <li><strong>Maîtriser</strong> les croissances comparées : <span class="math">e^x/xⁿ → +∞</span> et <span class="math">x·e^(−x) → 0</span>.</li>
+            <li><strong>Mener</strong> une étude complète de <span class="math">f(x) = (2x + 1)·e^x</span> : dérivée, signe, tableau de variations et limites.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 1 : NOTION 1 · limites — LES DEUX LIMITES           -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · limites</span>
+        <h2 class="lecture-section-title">Les deux limites fondamentales</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La courbe de <span class="math">exp</span> a deux destins opposés selon qu'on regarde vers la gauche ou vers la droite. Commençons par les toucher du doigt avec des valeurs numériques.
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Les deux limites à restituer mot pour mot</div>
+        <div class="lecture-formula-hero-main">lim(x→−∞) e^x = 0<br>lim(x→+∞) e^x = +∞</div>
+        <div class="lecture-formula-hero-desc">En −∞ la fonction s'éteint vers 0 (jamais négative !) ; en +∞ elle dépasse toute valeur fixée. Croissante sur ℝ, elle relie ces deux destins en passant par <span class="math">(0 ; 1)</span>.</div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>x</th><th>−10</th><th>−5</th><th>0</th><th>5</th><th>10</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="math">e^x ≈</span></td><td><span class="math">0,000045</span></td><td><span class="math">0,0067</span></td><td><span class="math">1</span></td><td><span class="math">148,4</span></td><td><span class="math">22 026</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Lire la croissance sur les valeurs</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>À gauche :</strong> les valeurs s'éteignent :</p><p><span class="math">e^(−10) ≈ 0,000045</span></p><p><span class="math">e^(−5) ≈ 0,0067</span></p><p>Elles se rapprochent de <span class="math">0</span> sans jamais l'atteindre ni devenir négatives.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>À droite :</strong> les valeurs décollent :</p><p><span class="math">e⁵ ≈ 148,4</span></p><p><span class="math">e¹⁰ ≈ 22 026</span></p><p>Dix pas de plus multiplient la valeur par <span class="math">e⁵ ≈ 148</span> : la montée s'accélère.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Conclusion : entre deux <span class="math">x</span> distants de 5, la valeur est toujours multipliée par <span class="math">e⁵ ≈ 148,4</span> — c'est la croissance exponentielle en action.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 2 : NOTION 1 · limites — ASYMPTOTE ET TANGENTE      -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · limites</span>
+        <h2 class="lecture-section-title">Asymptote <span class="math">y = 0</span> et tangente en <span class="math">(0 ; 1)</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La limite <span class="math">lim(x→−∞) e^x = 0</span> a une lecture graphique précise : à l'infini gauche, la courbe vient <strong>se coller</strong> à l'axe des abscisses sans jamais le toucher. Cet axe est une <strong>asymptote horizontale</strong>.
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Asymptote horizontale de la courbe de exp</div>
+          <p>Comme <span class="math">lim(x→−∞) e^x = 0</span>, la droite d'équation <span class="math">y = 0</span> (l'axe des abscisses) est <strong>asymptote horizontale</strong> à la courbe de <span class="math">exp</span> en <span class="math">−∞</span>. La courbe est entièrement <strong>au-dessus</strong> de cette droite : <span class="math">e^x &gt; 0</span> pour tout <span class="math">x</span>.</p>
+        </div>
+      </div>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbe de exp avec asymptote y égal 0 en moins l'infini et tangente y égal x plus 1 en (0 ; 1)">
+          <line x1="16" y1="250" x2="500" y2="250" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="500,250 488,244 488,256" style="fill:var(--text-dim)"/>
+          <line x1="140" y1="310" x2="140" y2="16" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="140,16 134,28 146,28" style="fill:var(--text-dim)"/>
+          <text x="490" y="270" style="fill:var(--text-dim)" font-size="12" font-family="Inter">x</text>
+          <text x="152" y="28" style="fill:var(--text-dim)" font-size="12" font-family="Inter">y</text>
+          <text x="126" y="266" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">O</text>
+          <line x1="16" y1="250" x2="120" y2="250" style="stroke:var(--text-dim)" stroke-width="4" stroke-dasharray="2 4"/>
+          <text x="26" y="268" style="fill:var(--text-dim)" font-size="11" font-family="Inter">asymptote : y = 0 (en −∞)</text>
+          <line x1="92" y1="246" x2="284" y2="175" style="stroke:currentColor" stroke-width="1.5" stroke-dasharray="7 4"/>
+          <text x="240" y="160" style="fill:currentColor" font-size="12" font-family="Inter">tangente en A : y = x + 1</text>
+          <line x1="200" y1="250" x2="200" y2="190" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="5 5"/>
+          <line x1="140" y1="190" x2="200" y2="190" style="stroke:var(--text-dim)" stroke-width="1.5" stroke-dasharray="5 5"/>
+          <text x="134" y="194" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">e ≈ 2,7</text>
+          <line x1="200" y1="245" x2="200" y2="255" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="196" y="268" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="middle">1</text>
+          <path d="M 20 247 C 40 246, 60 245, 80 242 C 100 239, 120 235, 140 228 C 160 221, 180 210, 200 190 C 220 170, 240 141, 260 87 C 268 65, 273 49, 278 31" style="fill:none;stroke:currentColor" stroke-width="3"/>
+          <circle cx="140" cy="228" r="5" style="fill:currentColor"/>
+          <text x="146" y="212" style="fill:currentColor" font-size="12" font-weight="700" font-family="Inter">A(0 ; 1)</text>
+          <circle cx="200" cy="190" r="4" style="fill:currentColor"/>
+          <text x="208" y="194" style="fill:currentColor" font-size="12" font-family="Inter">B(1 ; e)</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">La courbe de <span class="math">exp</span> se colle à son asymptote <span class="math">y = 0</span> en <span class="math">−∞</span>, passe par <span class="math">A(0 ; 1)</span> avec sa tangente <span class="math">y = x + 1</span> (pente <span class="math">e⁰ = 1</span>), et décolle ensuite vers <span class="math">+∞</span>.</figcaption>
+      </figure>
+      <p class="lecture-text">
+        Autre figure imposée : la <strong>tangente au point <span class="math">A(0 ; 1)</span></strong>. Son coefficient directeur vaut la dérivée en 0, c'est-à-dire <span class="math">e⁰ = 1</span>. Son équation s'obtient par la formule <span class="math">y = f'(a)(x − a) + f(a)</span> :
+      </p>
+      <div class="lecture-example"><div class="lecture-example-label">🧮 Exemple — Équation de la tangente en A(0 ; 1)</div><div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>On applique la formule avec <span class="math">a = 0</span> :</p><p><span class="math">y = f'(0)(x − 0) + f(0)</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Or la dérivée et la valeur en 0 valent toutes deux <span class="math">1</span> :</p><p><span class="math">f'(0) = e⁰ = 1</span></p><p><span class="math">f(0) = e⁰ = 1</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>On remplace :</p><p><span class="math">y = 1 × x + 1</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Conclusion : une droite de pente 1 qui frôle la courbe en <span class="math">A(0 ; 1)</span> :</p><p><span class="math">y = x + 1</span></p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">Tangente à la courbe de exp au point A(0 ; 1) : y = x + 1</div>
+        <div class="lecture-formula-desc">À savoir redonner vite : pente <span class="math">e⁰ = 1</span>, passage par <span class="math">(0 ; 1)</span>. Toute la courbe de exp est AU-DESSUS de cette tangente (la fonction est convexe).</div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 3 : NOTION 2 · comparaisons — e^x/xⁿ                -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · comparaisons</span>
+        <h2 class="lecture-section-title">Croissances comparées : <span class="math">e^x/xⁿ</span>, exp l'emporte</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        En <span class="math">+∞</span>, un duel oppose deux géants : la puissance <span class="math">xⁿ</span> (qui monte très haut) et l'exponentielle <span class="math">e^x</span> (qui monte plus vite encore). Le verdict est sans appel :
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">Croissance comparée — l'exponentielle l'emporte</div>
+        <div class="lecture-formula-hero-main">lim(x→+∞) e^x/xⁿ = +∞&nbsp;&nbsp;(pour tout entier n ≥ 1)</div>
+        <div class="lecture-formula-hero-desc">Quelque soit la puissance n, <span class="math">e^x</span> finit par dominer : l'exponentielle l'emporte sur toute puissance de x. C'est le résultat à citer tel quel.</div>
+      </div>
+      <p class="lecture-text">
+        Ce n'est pas une opinion, c'est un fait que l'on <strong>constate numériquement</strong>. Suivons le rapport <span class="math">e^x / x²</span> quand <span class="math">x</span> grandit :
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Le duel e^x contre x²</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Pour <span class="math">x = 5</span> — l'exponentielle mène déjà :</p><p><span class="math">e^x / x² = 148,4 / 25</span></p><p><span class="math">148,4 / 25 ≈ 5,9</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Pour <span class="math">x = 10</span> — l'écart explose :</p><p><span class="math">e^x / x² = 22 026 / 100</span></p><p><span class="math">22 026 / 100 ≈ 220</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Pour <span class="math">x = 20</span> — plus d'un million :</p><p><span class="math">e^x / x² ≈ 4,85 × 10⁸ / 400</span></p><p><span class="math">4,85 × 10⁸ / 400 ≈ 1,2 × 10⁶</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Conclusion : le rapport grandit sans limite, même si <span class="math">x²</span> grandit aussi. On écrit :</p><p><span class="math">lim(x→+∞) e^x / x² = +∞</span></p><p>« l'exponentielle l'emporte sur la puissance ».</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📌 Comment s'en servir au Bac</div>
+          <p>Cette limite lève l'indétermination « <span class="math">+∞/∞</span> » des quotients du type <span class="math">(x² + 3)·e^(−x)</span> ou <span class="math">e^x / x³</span> : dès que tu reconnais <span class="math">e^x</span> divisé (ou multiplié par une puissance <strong>négative</strong>) de <span class="math">x</span>, invoque la croissance comparée par son nom — « d'après les croissances comparées… » — et cite la limite.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 4 : NOTION 2 · comparaisons — x·e^(−x)              -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · comparaisons</span>
+        <h2 class="lecture-section-title"><span class="math">x·e^(−x)</span> : exp absorbe tout</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Retournons la pièce : si <span class="math">e^x</span> gagne toujours en <span class="math">+∞</span>, alors son inverse <span class="math">e^(−x) = 1 / e^x</span> écrase tout ce qu'on multiplie par lui. Même un <span class="math">x</span> qui grandit, multiplié par cette décroissance vertigineuse, finit par s'annihiler :
+      </p>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">lim(x→+∞) x·e^(−x) = 0</div>
+        <div class="lecture-formula-desc">L'exponentielle « absorbe » la puissance : le produit d'une puissance de x par <span class="math">e^(−x)</span> tend vers 0 en +∞. Forme indéterminée « ∞ × 0 » levée par croissance comparée.</div>
+      </div>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">lim(x→−∞) x·e^x = 0</div>
+        <div class="lecture-formula-desc">La même idée en −∞ : <span class="math">x</span> tend vers <span class="math">−∞</span> et <span class="math">e^x</span> vers <span class="math">0</span> ; le produit s'écrase vers 0 (par valeurs négatives). C'est elle qui donne les limites de <span class="math">f(x) = (2x + 1)·e^x</span> en −∞.</div>
+      </div>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple complet — Vérifier x·e^(−x) sur les valeurs</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p>Pour <span class="math">x = 5</span> :</p><p><span class="math">x·e^(−x) = 5 × e^(−5)</span></p><p><span class="math">5 × e^(−5) = 5 × 0,0067 ≈ 0,034</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p>Pour <span class="math">x = 10</span> :</p><p><span class="math">x·e^(−x) = 10 × e^(−10)</span></p><p><span class="math">10 × e^(−10) = 10 × 0,000045 ≈ 0,00045</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p>Pour <span class="math">x = 20</span> — quasi nul :</p><p><span class="math">20 × e^(−20) ≈ 20 × 2,1 × 10⁻⁹</span></p><p><span class="math">≈ 4,1 × 10⁻⁸</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p>Conclusion : malgré un <span class="math">x</span> qui grandit, le produit s'enfonce vers <span class="math">0</span>. L'exponentielle <span class="math">e^(−x)</span> « absorbe » la puissance :</p><p><span class="math">lim(x→+∞) x·e^(−x) = 0</span></p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Formes indéterminées à reconnaître</div>
+          <p><span class="math">x·e^(−x)</span> se présente comme « <span class="math">+∞ × 0</span> » et <span class="math">x·e^x</span> en <span class="math">−∞</span> comme « <span class="math">−∞ × 0</span> » : deux formes <strong>indéterminées</strong> que la croissance comparée lève. Sans cet outil, les quatre opérations sur les limites ne suffisent pas — c'est exactement pour cela qu'il est au programme.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 5 : NOTION 3 · etude — VARIATIONS ET SIGNE          -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · etude</span>
+        <h2 class="lecture-section-title">Tableau de variations de exp et le signe de <span class="math">e^x</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tout repose sur une seule observation : la dérivée de <span class="math">exp</span> est <span class="math">exp</span> elle-même, et une exponentielle est <strong>toujours strictement positive</strong>. Donc la dérivée est positive partout :
+      </p>
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">📗 Variations de la fonction exponentielle</div>
+          <p>La fonction <span class="math">exp</span> est <strong>strictement croissante sur <span class="math">ℝ</span></strong>. Son tableau de variations se résume à trois lignes : dérivée positive, fonction croissante, des limites <span class="math">0</span> à <span class="math">+∞</span>.</p>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>x</th><th>−∞</th><th>+∞</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Signe de <span class="math">f'(x) = e^x</span></td><td colspan="2">strictement positif : + (pour tout x)</td></tr>
+            <tr><td>Variations de <span class="math">f(x) = e^x</span></td><td colspan="2">croissante ↗</td></tr>
+            <tr><td>Bornes atteintes</td><td><span class="math">lim(x→−∞) e^x = 0</span></td><td><span class="math">lim(x→+∞) e^x = +∞</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ e^x &gt; 0, TOUJOURS — le rappel qui sauve</div>
+          <p>Pour tout réel <span class="math">x</span> : <span class="math">e^x &gt; 0</span>. Jamais nul, jamais négatif, même pour <span class="math">x = −10</span> ou <span class="math">x = −100</span>. Trois conséquences à exploiter sans réfléchir :</p>
+          <ul class="lecture-list">
+            <li>l'équation <span class="math">e^x = 0</span> n'a <strong>aucune</strong> solution, et <span class="math">e^x = −3</span> non plus ;</li>
+            <li>dans un produit <span class="math">(2x + 3)·e^x</span>, le facteur <span class="math">e^x</span> ne change <strong>jamais</strong> le signe : celui du produit est celui de <span class="math">(2x + 3)</span> ;</li>
+            <li>une exponentielle ne peut pas « passer en dessous » de l'axe : pas de minimum négatif pour <span class="math">e^x</span>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 6 : NOTION 3 · etude — ÉTUDE COMPLÈTE f(x)=(2x+1)e^x -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · etude</span>
+        <h2 class="lecture-section-title">Étude complète : <span class="math">f(x) = (2x + 1)e^x</span></h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        C'est l'exercice-type du Bac, réalisé ici de bout en bout. On étudie <span class="math">f(x) = (2x + 1)·e^x</span> sur <span class="math">ℝ</span> : dérivée, signe de la dérivée, variations, limites, puis le tableau.
+      </p>
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Étude complète — Pas à pas</div>
+        <div class="lecture-example-content">
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Nature du produit :</strong> <span class="math">f</span> est le produit de <span class="math">u(x) = 2x + 1</span> (dérivable sur ℝ) et <span class="math">v(x) = e^x</span> (dérivable sur ℝ) : <span class="math">f</span> est dérivable sur <span class="math">ℝ</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Dérivée (règle du produit) :</strong></p><p><span class="math">f'(x) = u'(x)·v(x) + u(x)·v'(x)</span></p><p><span class="math">f'(x) = 2·e^x + (2x + 1)·e^x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Factorisation obligatoire :</strong></p><p><span class="math">f'(x) = (2 + 2x + 1)·e^x</span></p><p><span class="math">f'(x) = (2x + 3)·e^x</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Signe :</strong> comme <span class="math">e^x &gt; 0</span> toujours, <span class="math">f'(x)</span> a le signe de <span class="math">2x + 3</span>, qui s'annule en <span class="math">x = −3/2</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Signe détaillé :</strong> pour <span class="math">x &lt; −3/2</span>, <span class="math">2x + 3 &lt; 0</span> donc <span class="math">f'(x) &lt; 0</span> ; pour <span class="math">x &gt; −3/2</span>, <span class="math">f'(x) &gt; 0</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">6</div><div class="lecture-step-content"><p><strong>Minimum :</strong> <span class="math">f</span> atteint son minimum en <span class="math">x = −3/2</span> :</p><p><span class="math">f(−3/2) = (2 × (−3/2) + 1)·e^(−3/2)</span></p><p><span class="math">f(−3/2) = −2·e^(−3/2)</span></p><p><span class="math">f(−3/2) ≈ −0,45</span></p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">7</div><div class="lecture-step-content"><p><strong>Limite en −∞ (croissance comparée) :</strong></p><p><span class="math">lim(x→−∞) x·e^x = 0</span></p><p>donc :</p><p><span class="math">lim(x→−∞) (2x + 1)·e^x = 0</span></p><p>La courbe se colle à l'asymptote <span class="math">y = 0</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">8</div><div class="lecture-step-content"><p><strong>Limite en +∞ :</strong></p><p><span class="math">2x + 1 → +∞</span></p><p><span class="math">e^x → +∞</span></p><p>donc :</p><p><span class="math">lim(x→+∞) f(x) = +∞</span></p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>x</th><th>−∞</th><th>−3/2</th><th>+∞</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Signe de <span class="math">f'(x) = (2x + 3)e^x</span></td><td>−</td><td>0</td><td>+</td></tr>
+            <tr><td>Variations de <span class="math">f</span></td><td>décroissante ↘</td><td>minimum</td><td>croissante ↗</td></tr>
+            <tr><td>Bornes et valeurs</td><td><span class="math">lim f = 0</span></td><td><span class="math">f(−3/2) = −2e^(−3/2) ≈ −0,45</span></td><td><span class="math">lim f = +∞</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lecture-text">
+        Et la figure qui résume tout : la courbe descend depuis l'asymptote <span class="math">y = 0</span> (en restant <strong>sous</strong> l'axe, car <span class="math">2x + 1 &lt; 0</span> pour <span class="math">x &lt; −1/2</span>), touche son minimum en <span class="math">(−3/2 ; ≈ −0,45)</span>, traverse l'axe en <span class="math">x = −1/2</span> (là où <span class="math">2x + 1 = 0</span>), passe par <span class="math">(0 ; 1)</span>, puis décolle.
+      </p>
+      <figure class="lecture-figure">
+        <svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Courbe de f x égal (2x plus 1)e^x avec minimum en (−1,5 ; −0,45), zéro en −0,5 et passage par (0 ; 1)">
+          <line x1="36" y1="272" x2="508" y2="272" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="508,272 496,266 496,278" style="fill:var(--text-dim)"/>
+          <line x1="300" y1="312" x2="300" y2="18" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <polygon points="300,18 294,30 306,30" style="fill:var(--text-dim)"/>
+          <text x="496" y="290" style="fill:var(--text-dim)" font-size="12" font-family="Inter">x</text>
+          <text x="312" y="30" style="fill:var(--text-dim)" font-size="12" font-family="Inter">y</text>
+          <text x="288" y="288" style="fill:var(--text-dim)" font-size="12" font-family="Inter" text-anchor="end">O</text>
+          <text x="42" y="260" style="fill:var(--text-dim)" font-size="11" font-family="Inter">asymptote y = 0 (en −∞)</text>
+          <line x1="210" y1="267" x2="210" y2="277" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="188" y="264" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">−1,5</text>
+          <line x1="270" y1="267" x2="270" y2="277" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="262" y="264" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">−0,5</text>
+          <line x1="355" y1="267" x2="355" y2="277" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="351" y="264" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="middle">1</text>
+          <line x1="295" y1="226" x2="305" y2="226" style="stroke:var(--text-dim)" stroke-width="2"/>
+          <text x="286" y="231" style="fill:var(--text-dim)" font-size="11" font-family="Inter" text-anchor="end">1</text>
+          <path d="M 60 278 C 90 280, 150 287, 210 292 C 240 293, 255 284, 270 272 C 280 263, 290 249, 300 226 C 310 203, 320 170, 330 120 C 334 100, 344 37, 348 6" style="fill:none;stroke:currentColor" stroke-width="3"/>
+          <circle cx="210" cy="292" r="5" style="fill:currentColor"/>
+          <text x="220" y="306" style="fill:currentColor" font-size="11" font-weight="700" font-family="Inter">min (−1,5 ; ≈ −0,45)</text>
+          <circle cx="270" cy="272" r="4" style="fill:currentColor"/>
+          <text x="148" y="308" style="fill:var(--text-dim)" font-size="11" font-family="Inter">f(−0,5) = 0</text>
+          <circle cx="300" cy="226" r="4" style="fill:currentColor"/>
+          <text x="310" y="220" style="fill:currentColor" font-size="12" font-weight="700" font-family="Inter">A(0 ; 1)</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">La courbe de <span class="math">f(x) = (2x + 1)e^x</span> : asymptote <span class="math">y = 0</span> en <span class="math">−∞</span>, minimum <span class="math">−2e^(−3/2) ≈ −0,45</span> en <span class="math">x = −1,5</span>, zéro en <span class="math">x = −0,5</span>, puis croissance explosive après le passage par <span class="math">A(0 ; 1)</span>.</figcaption>
+      </figure>
+    </div>
+  </section>
+  <!-- ============================================================ -->
+  <!-- SECTION 7 : BILAN                                           -->
+  <!-- ============================================================ -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">L'essentiel de la partie</h2>
+      </div>
+    </div>
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        La partie tient en une image : une courbe qui <strong>s'éteint vers 0</strong> à gauche, <strong>explose vers +∞</strong> à droite, et écrase toute puissance sur son passage. Formules de service :
+      </p>
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La carte des limites du chapitre</div>
+        <div class="lecture-formula-hero-main">lim(x→−∞) e^x = 0<br>lim(x→+∞) e^x = +∞<br>e^x/xⁿ → +∞<br>x·e^(−x) → 0</div>
+        <div class="lecture-formula-hero-desc">Les deux limites de e^x, puis les deux croissances comparées : exp l'emporte sur xⁿ en +∞, et e^(−x) absorbe toute puissance de x.</div>
+      </div>
+      <ul class="lecture-list-elegant">
+        <li><span class="math">lim(x→−∞) e^x = 0</span> : la droite <span class="math">y = 0</span> est <strong>asymptote horizontale</strong> en <span class="math">−∞</span> — la courbe se colle à l'axe sans le toucher.</li>
+        <li><span class="math">lim(x→+∞) e^x = +∞</span> : croissance sans plafond ; entre <span class="math">(0 ; 1)</span> et <span class="math">(1 ; e)</span>, la valeur est déjà multipliée par <span class="math">e ≈ 2,7</span>.</li>
+        <li>Tangente en <span class="math">A(0 ; 1)</span> : <span class="math">y = x + 1</span> (pente <span class="math">e⁰ = 1</span>), courbe entièrement au-dessus.</li>
+        <li>Croissances comparées : <span class="math">lim(x→+∞) e^x/xⁿ = +∞</span> (exp l'emporte) et <span class="math">lim(x→+∞) x·e^(−x) = 0</span> (exp absorbe) ; elles lèvent les formes indéterminées.</li>
+        <li><span class="math">e^x &gt; 0</span> toujours : l'équation <span class="math">e^x = 0</span> est impossible et <span class="math">e^x</span> ne change jamais le signe d'un produit.</li>
+        <li>Étude de <span class="math">(2x + 1)·e^x</span> : dérivée <span class="math">(2x + 3)·e^x</span>, minimum <span class="math">−2e^(−3/2) ≈ −0,45</span> en <span class="math">x = −3/2</span>, limites <span class="math">0</span> puis <span class="math">+∞</span>.</li>
+      </ul>
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body"><div class="lecture-callout-title">⚠️ Réflexe rédaction pour l'examen</div>
+          <p>Toute levée d'indétermination doit être <strong>nommée</strong> : « d'après les croissances comparées, <span class="math">lim(x→+∞) x·e^(−x) = 0</span> ». Et toute étude de fonction se termine par un <strong>tableau de variations</strong> : une conclusion sur les variations sans tableau est une réponse incomplète aux yeux du correcteur.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — Que vaut <span class="math">lim(x→−∞) e^x</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) −∞</span><span>B) 0</span><span>C) +∞</span><span>D) La limite n'existe pas</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) 0.</strong> En −∞, e^x s'éteint vers 0 sans jamais devenir négatif : e^(−10) ≈ 0,000045. L'option A est le piège : la courbe reste au-dessus de l'axe, e^x &gt; 0 toujours.</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Que vaut <span class="math">lim(x→+∞) e^x/x</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) 0</span><span>B) 1</span><span>C) +∞</span><span>D) Forme indéterminée, on ne peut pas conclure</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>C) +∞.</strong> C'est la croissance comparée e^x/xⁿ avec n = 1 : l'exponentielle l'emporte sur la puissance x. Le quotient tend vers +∞ (vérification : x = 10 donne 22 026 / 10 ≈ 2 203).</div></details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Soit <span class="math">f(x) = (x + 1)e^x</span>. Que vaut <span class="math">f'(x)</span> ?</p>
+      <div class="lecture-quiz-options"><span>A) e^x</span><span>B) (x + 2)e^x</span><span>C) (x + 1)e^(x + 1)</span><span>D) 2e^x</span></div>
+      <details><summary>Voir la réponse</summary><div class="lecture-quiz-answer"><strong>B) (x + 2)e^x.</strong> Produit : f'(x) = 1·e^x + (x + 1)e^x, puis on factorise par e^x : f'(x) = (1 + x + 1)e^x = (x + 2)e^x. Comme e^x &gt; 0, le signe de f' est celui de x + 2 : minimum en x = −2.</div></details>
+    </div>
+  </div>
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[limites]</strong> <span class="math">lim(x→−∞) e^x = 0</span> et <span class="math">lim(x→+∞) e^x = +∞</span> — à restituer mot pour mot</li>
+      <li><strong>[limites]</strong> La droite <span class="math">y = 0</span> est asymptote horizontale à la courbe de exp en <span class="math">−∞</span></li>
+      <li><strong>[limites]</strong> Tangente au point <span class="math">A(0 ; 1)</span> : <span class="math">y = x + 1</span>, de pente <span class="math">e⁰ = 1</span></li>
+      <li><strong>[comparaisons]</strong> <span class="math">lim(x→+∞) e^x/xⁿ = +∞</span> pour tout <span class="math">n ≥ 1</span> : l'exponentielle l'emporte sur toute puissance</li>
+      <li><strong>[comparaisons]</strong> <span class="math">lim(x→+∞) x·e^(−x) = 0</span> et <span class="math">lim(x→−∞) x·e^x = 0</span> : l'exponentielle absorbe les puissances</li>
+      <li><strong>[comparaisons]</strong> Ces limites lèvent les formes indéterminées « ∞ × 0 » et « ∞/∞ » — à citer par leur nom</li>
+      <li><strong>[etude]</strong> exp est strictement croissante sur ℝ (dérivée <span class="math">e^x</span> strictement positive) et <span class="math">e^x &gt; 0</span> pour tout x</li>
+      <li><strong>[etude]</strong> <span class="math">e^x = 0</span> n'a aucune solution ; dans un produit, <span class="math">e^x</span> ne change pas le signe</li>
+      <li><strong>[etude]</strong> Étude de <span class="math">f(x) = (2x + 1)·e^x</span> : <span class="math">f'(x) = (2x + 3)·e^x</span>, minimum <span class="math">−2e^(−3/2) ≈ −0,45</span> en <span class="math">x = −3/2</span></li>
+      <li><strong>[etude]</strong> Méthode d'étude : dériver (produit), factoriser par <span class="math">e^x</span>, étudier le signe du facteur restant, conclure en tableau</li>
+    </ul>
+  </div>
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 3 terminée !</div>
+    <div class="lecture-end-sub">Passe à la fiche complète : relation ln/exp, équations et applications</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+</div>

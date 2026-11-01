@@ -1,0 +1,622 @@
+<!-- PARTIE 1 : VOCABULAIRE, UNIVERS & PROBABILITÉ                 -->
+<!-- Notion 1 : expérience aléatoire, univers Ω, événements        -->
+<!-- Notion 2 : opérations sur les événements (∪, ∩, contraire)    -->
+<!-- Notion 3 : équiprobabilité et définition de la probabilité    -->
+<!-- Notion 4 : propriétés des probabilités                        -->
+
+<div class="lecture-container">
+
+  <!-- ===== HERO ===== -->
+  <header class="lecture-hero">
+    <div class="lecture-hero-badge">
+      <span class="lecture-hero-icon">📘</span>
+      <span class="lecture-hero-label">Partie 01 · Calcul de probabilités</span>
+    </div>
+    <h1 class="lecture-hero-title">
+      Vocabulaire, univers &amp; <em>premières probabilités</em>
+    </h1>
+    <p class="lecture-hero-intro">
+      Un dé roule sur la table, une boule sort de l'urne, un délégué est tiré au sort : peut-on <em>mesurer</em> le hasard ? Oui — c'est tout l'objet des probabilités. Cette partie construit d'abord le <strong>vocabulaire</strong> (expérience aléatoire, univers, événements et leurs opérations), puis donne la <strong>définition de la probabilité</strong> en situation d'équiprobabilité, avec ses <strong>propriétés essentielles</strong>. Objectif : savoir calculer <span class="math">P(A)</span> sur des exemples concrets — dés, urnes, cartes, tirages au sort.
+    </p>
+    <div class="lecture-hero-meta">
+      <span class="lecture-hero-meta-item">⏱ 20 min</span> <span class="lecture-hero-meta-item">🧮 4 notions</span> <span class="lecture-hero-meta-item">📊 8 sections</span> <span class="lecture-hero-meta-item">🎓 Terminale D</span>
+    </div>
+  </header>
+
+  <!-- ===== SOMMAIRE ===== -->
+  <nav class="lecture-toc">
+    <div class="lecture-toc-header">
+      <span>Dans cette partie</span>
+      <span class="lecture-toc-count">4 notions · 8 sections</span>
+    </div>
+    <ol class="lecture-toc-list">
+      <li><a href="#s0"><span class="toc-num">00</span><span>Motivation — Mesurer le hasard</span></a></li>
+      <li><a href="#s1"><span class="toc-num">01</span><span>Expérience aléatoire &amp; univers Ω</span></a></li>
+      <li><a href="#s2"><span class="toc-num">02</span><span>Événements : élémentaires, certains, impossibles</span></a></li>
+      <li><a href="#s3"><span class="toc-num">03</span><span>Opérations sur les événements : ∪, ∩, contraire</span></a></li>
+      <li><a href="#s4"><span class="toc-num">04</span><span>Équiprobabilité &amp; définition de la probabilité</span></a></li>
+      <li><a href="#s5"><span class="toc-num">05</span><span>Propriétés des probabilités</span></a></li>
+      <li><a href="#s6"><span class="toc-num">06</span><span>Exemples complets — dés, urnes, cartes, délégué</span></a></li>
+      <li><a href="#s7"><span class="toc-num">07</span><span>Bilan — La méthode de calcul en 4 étapes</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- SECTION 0 : MOTIVATION                                        -->
+  <section class="lecture-section" id="s0">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">00</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Motivation</span>
+        <h2 class="lecture-section-title">Mesurer le hasard</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Le hasard est partout : le joueur de <em>ludo</em> qui lance le dé, la tontine qui tire au sort l'ordre des cotisations, le proviseur qui désigne un délégué parmi les élèves, la météo qui annonce « 30 % de chances de pluie sur Niamey ». Dans tous ces cas, on <strong>ne peut pas prédire</strong> le résultat à l'avance… et pourtant, on <strong>sent</strong> bien que certains résultats sont plus ou moins probables que d'autres.
+      </p>
+
+      <p class="lecture-text">
+        Les probabilités transforment ce sentiment en <strong>calcul exact</strong>. L'idée est simple : décrire tous les résultats possibles, compter ceux qui nous intéressent, et en déduire un nombre entre <span class="math">0</span> et <span class="math">1</span>. Ce nombre, c'est la <strong>probabilité</strong>.
+      </p>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">Les questions de ce chapitre</div>
+          <ul class="lecture-list">
+            <li><strong>Comment décrire</strong> une expérience aléatoire avec précision ? (univers, événements — Partie 1)</li>
+            <li><strong>Comment calculer</strong> la probabilité d'un événement ? (définition et propriétés — Partie 1)</li>
+            <li><strong>Comment combiner</strong> les événements : « ou », « et », « non » ? (Partie 2)</li>
+            <li><strong>Comment tenir compte de l'information</strong> : « sachant que… » ? (Parties 3 et 4)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lecture-aside">
+        <div class="lecture-aside-label">🌍 Pour aller plus loin</div>
+        <div class="lecture-aside-content">
+          En 1654, le chevalier de Méré, joueur passionné, pose à <strong>Blaise Pascal</strong> une question de pari qui résiste à son intuition. Pascal en discute par lettres avec <strong>Pierre de Fermat</strong> : de cette correspondance naît le calcul des probabilités. Aujourd'hui, les mêmes outils servent aux compagnies d'assurance, aux loteries, aux prévisions météo… et au Bac D !
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1 : EXPÉRIENCE ALÉATOIRE & UNIVERS                    -->
+  <section class="lecture-section" id="s1">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">01</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 1 · expérience &amp; univers</span>
+        <h2 class="lecture-section-title">Expérience aléatoire &amp; univers Ω</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Tout commence par décrire <em>proprement</em> l'expérience. Deux définitions officielles à connaître mot pour mot :
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition officielle — Expérience aléatoire</div>
+          <p>Une <strong>expérience aléatoire</strong> est une expérience dont on connaît tous les résultats possibles, mais dont on ne peut ni prédire ni calculer avec certitude le résultat qui se produira, chaque résultat dépendant du hasard.</p>
+        </div>
+      </div>
+
+      <ul class="lecture-list-elegant">
+        <li>Lancer un dé cubique équilibré et observer le numéro de la face supérieure : six résultats possibles, aucun prévisible avec certitude.</li>
+        <li>Lancer une pièce de monnaie et observer la face : « pile » ou « face ».</li>
+        <li>Tirer une boule dans une urne et observer sa couleur ou son numéro.</li>
+        <li>Tirer au sort un délégué dans une classe de 45 élèves : chacun peut être désigné.</li>
+      </ul>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition officielle — Univers</div>
+          <p>L'<strong>univers</strong> (ou ensemble fondamental) de l'expérience aléatoire est l'<strong>ensemble de tous les résultats possibles</strong>. On le note <span class="math">Ω</span> (lettre grecque « oméga » majuscule). Chaque résultat possible <span class="math">ω</span> s'appelle une <strong>issue</strong> (ou éventualité).</p>
+        </div>
+      </div>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">🔍 Exemples d'univers</div>
+        <div class="lecture-example-content">
+          <ul class="lecture-list">
+            <li>Dé cubique : <span class="math">Ω = {1 ; 2 ; 3 ; 4 ; 5 ; 6}</span>, donc <span class="math">card(Ω) = 6</span>.</li>
+            <li>Pièce : <span class="math">Ω = {pile ; face}</span>, donc <span class="math">card(Ω) = 2</span>.</li>
+            <li>Urne contenant 8 boules numérotées de 1 à 8 : <span class="math">Ω = {1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8}</span>, donc <span class="math">card(Ω) = 8</span>.</li>
+            <li>Délégué tiré au sort dans une classe : <span class="math">Ω</span> = ensemble des 45 élèves, donc <span class="math">card(Ω) = 45</span>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Chaque issue prise isolément forme un <strong>événement élémentaire</strong> : pour le dé, <span class="math">{3}</span> est un événement élémentaire, tout comme <span class="math">{6}</span>. Un événement élémentaire ne contient <strong>qu'une seule</strong> issue.
+      </p>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ L'univers dépend de ce qu'on observe</div>
+          <p>Pour un même objet, l'univers change selon l'observation : on lance un dé et on regarde <strong>le numéro</strong> → <span class="math">card(Ω) = 6</span> ; on regarde seulement <strong>pair ou impair</strong> → <span class="math">card(Ω) = 2</span>. Avant tout calcul, demande-toi toujours : <em>qu'est-ce que j'observe exactement ?</em></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 : ÉVÉNEMENTS                                        -->
+  <section class="lecture-section" id="s2">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">02</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · événements</span>
+        <h2 class="lecture-section-title">Événements : élémentaires, certains, impossibles</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition officielle — Événement</div>
+          <p>Un <strong>événement</strong> est un ensemble d'issues de l'univers <span class="math">Ω</span> (donc une partie de <span class="math">Ω</span>). Un événement <span class="math">A</span> est <strong>réalisé</strong> lorsque le résultat obtenu est l'une des issues qui le composent.</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Exemple — on lance un dé et on note <span class="math">A</span> : « obtenir un nombre pair ». Alors <span class="math">A = {2 ; 4 ; 6}</span>. Si le dé sort un <span class="math">4</span>, on dit que <span class="math">A</span> est <strong>réalisé</strong> (car <span class="math">4 ∈ A</span>) ; si le dé sort un <span class="math">5</span>, l'événement <span class="math">A</span> n'est pas réalisé (car <span class="math">5 ∉ A</span>). Les événements se notent souvent entre accolades ou par une phrase entre guillemets.
+      </p>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">💡 Deux événements particuliers</div>
+          <ul class="lecture-list">
+            <li>L'<strong>événement certain</strong> est l'univers <span class="math">Ω</span> lui-même : il se réalise <em>toujours</em>. Exemple (dé) : « obtenir un nombre compris entre 1 et 6 ».</li>
+            <li>L'<strong>événement impossible</strong> est l'ensemble vide <span class="math">∅</span> : il ne se réalise <em>jamais</em>. Exemple (dé) : « obtenir un 7 ».</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lecture-vocab-grid">
+        <div class="vocab-card">
+          <div class="vocab-symbol">🎲</div>
+          <div class="vocab-name">Expérience aléatoire</div>
+          <div class="vocab-notation">Résultats connus, issue imprévisible</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">Ω</div>
+          <div class="vocab-name">Univers</div>
+          <div class="vocab-notation">Ensemble de toutes les issues possibles</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">•</div>
+          <div class="vocab-name">Événement élémentaire</div>
+          <div class="vocab-notation">Événement formé d'une seule issue : {ω}</div>
+        </div>
+        <div class="vocab-card">
+          <div class="vocab-symbol">A</div>
+          <div class="vocab-name">Événement</div>
+          <div class="vocab-notation">Partie de Ω ; réalisé si l'issue obtenue lui appartient</div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Ne pas confondre « 3 » et « {3} »</div>
+          <p>Le <strong>3</strong> est une issue (un nombre) ; <span class="math">{3}</span> est l'<strong>événement élémentaire</strong> « obtenir 3 » (un ensemble à un élément). Sur ta copie, écris toujours l'accolade pour parler d'un événement : « l'événement <span class="math">{3}</span> » et non « l'événement 3 ».</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 : OPÉRATIONS SUR LES ÉVÉNEMENTS                     -->
+  <section class="lecture-section" id="s3">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">03</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 2 · opérations</span>
+        <h2 class="lecture-section-title">Opérations sur les événements : ∪, ∩, contraire</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        À partir d'événements, on en fabrique d'autres, exactement comme on fabrique de nouveaux ensembles à partir d'ensembles connus. Prenons pour fil conducteur le lancer d'un dé avec :
+      </p>
+      <ul class="lecture-list">
+        <li><span class="math">A</span> : « obtenir un nombre pair », soit <span class="math">A = {2 ; 4 ; 6}</span> ;</li>
+        <li><span class="math">B</span> : « obtenir un multiple de 3 », soit <span class="math">B = {3 ; 6}</span>.</li>
+      </ul>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définitions officielles — Réunion, intersection, contraire</div>
+          <ul class="lecture-list">
+            <li>La <strong>réunion</strong> de <span class="math">A</span> et <span class="math">B</span>, notée <span class="math">A ∪ B</span>, est l'événement « <strong>au moins l'un</strong> des deux événements <span class="math">A</span> ou <span class="math">B</span> se réalise » (l'un <em>ou</em> l'autre, ou les deux).</li>
+            <li>L'<strong>intersection</strong> de <span class="math">A</span> et <span class="math">B</span>, notée <span class="math">A ∩ B</span>, est l'événement « <strong>les deux</strong> événements <span class="math">A</span> et <span class="math">B</span> se réalisent simultanément ».</li>
+            <li>Le <strong>contraire</strong> (ou événement complémentaire) de <span class="math">A</span>, noté <span class="math">Ā</span>, est l'événement qui se réalise lorsque <span class="math">A</span> <strong>ne se réalise pas</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Opération</th><th>Notation</th><th>Se réalise si…</th><th>Exemple avec le dé</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Réunion</td><td><span class="math">A ∪ B</span></td><td>A, ou B, ou les deux</td><td><span class="math">{2 ; 3 ; 4 ; 6}</span></td></tr>
+            <tr><td>Intersection</td><td><span class="math">A ∩ B</span></td><td>A et B en même temps</td><td><span class="math">{6}</span></td></tr>
+            <tr><td>Contraire</td><td><span class="math">Ā</span></td><td>A ne se réalise pas</td><td><span class="math">{1 ; 3 ; 5}</span> (« impair »)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">💡 Événements incompatibles</div>
+          <p>Deux événements <span class="math">A</span> et <span class="math">B</span> sont dits <strong>incompatibles</strong> lorsqu'ils ne peuvent pas se réaliser en même temps, c'est-à-dire lorsque leur intersection est vide : <span class="math">A ∩ B = ∅</span>.</p>
+          <p>Exemple : <span class="math">C</span> : « obtenir 1 » et <span class="math">D</span> : « obtenir 6 » sont incompatibles, car <span class="math">C ∩ D = ∅</span>. En revanche <span class="math">A</span> et <span class="math">B</span> ci-dessus sont <strong>compatibles</strong> : ils se réalisent ensemble sur le <span class="math">6</span>.</p>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Incompatible ≠ contraire</div>
+          <p>Deux événements incompatibles ne peuvent pas sortir <em>ensemble</em>, mais rien n'oblige leur réunion à remplir tout l'univers : <span class="math">{1}</span> et <span class="math">{6}</span> sont incompatibles, pourtant <span class="math">{1} ∪ {6} ≠ Ω</span>. Le contraire <span class="math">Ā</span> est le cas extrême : il est incompatible avec <span class="math">A</span> <strong>et</strong> <span class="math">A ∪ Ā = Ω</span>. Deux événements incompatibles ne sont donc pas forcément contraires.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 : ÉQUIPROBABILITÉ & DÉFINITION                      -->
+  <section class="lecture-section" id="s4">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">04</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 3 · équiprobabilité</span>
+        <h2 class="lecture-section-title">Équiprobabilité &amp; définition de la probabilité</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Mesurer le hasard, c'est attribuer à chaque événement un nombre qui dit « à quel point il a des chances de sortir ». Le cadre le plus fréquent au lycée est celui où <strong>toutes les issues ont les mêmes chances</strong>.
+      </p>
+
+      <div class="lecture-callout lecture-callout-key">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">📗 Définition officielle — Équiprobabilité</div>
+          <p>On dit qu'il y a <strong>équiprobabilité</strong> lorsque tous les événements élémentaires de l'univers <span class="math">Ω</span> ont la même probabilité, c'est-à-dire lorsque toutes les issues ont <strong>aussi nombreuses chances les unes que les autres</strong> de se réaliser (dé équilibré, boules indiscernables au toucher, tirage au sort…).</p>
+        </div>
+      </div>
+
+      <p class="lecture-text">
+        Dans ce cadre, si l'univers contient <span class="math">n</span> issues, chaque événement élémentaire a pour probabilité <span class="math">1/n</span>. Un événement <span class="math">A</span> qui regroupe <span class="math">card(A)</span> issues a donc une probabilité proportionnelle à son nombre d'issues :
+      </p>
+
+            <figure class="lecture-figure">
+        <svg viewBox="0 0 340 170" role="img" aria-label="Univers et événement A">
+          <rect x="10" y="14" width="320" height="140" rx="10" style="fill: none; stroke: currentColor; stroke-width: 2"/>
+          <text x="26" y="38" style="fill: currentColor" font-size="14" font-weight="bold">Ω — tous les cas possibles</text>
+          <ellipse cx="148" cy="102" rx="90" ry="42" style="fill: var(--accent-bright); opacity: 0.22"/>
+          <ellipse cx="148" cy="102" rx="90" ry="42" style="fill: none; stroke: var(--accent-bright); stroke-width: 2"/>
+          <text x="92" y="98" style="fill: currentColor" font-size="13" font-weight="bold">A — cas favorables</text>
+          <text x="100" y="116" style="fill: var(--text-dim)" font-size="12">card(A) issues</text>
+          <circle cx="288" cy="72" r="4" style="fill: var(--text-dim)"/>
+          <circle cx="306" cy="96" r="4" style="fill: var(--text-dim)"/>
+          <circle cx="284" cy="122" r="4" style="fill: var(--text-dim)"/>
+          <text x="252" y="146" style="fill: var(--text-dim)" font-size="12">issues hors de A</text>
+        </svg>
+        <figcaption class="lecture-figure-caption">L'univers <span class="math">Ω</span> regroupe tous les cas possibles ; l'événement <span class="math">A</span> en est une partie. En équiprobabilité, <span class="math">P(A) = card(A)/card(Ω)</span> : la proportion occupée par A dans le rectangle.</figcaption>
+      </figure>
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">P(A) = card(A) / card(Ω)</div>
+        <div class="lecture-formula-desc">En situation d'équiprobabilité : probabilité = (nombre de cas favorables) / (nombre de cas possibles).</div>
+      </div>
+
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple travaillé — le dé</div>
+        <div class="lecture-example-content">
+          <p>On lance un dé cubique équilibré. Quelle est la probabilité d'obtenir un multiple de 3 ?</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Décrire l'univers.</strong> <span class="math">Ω = {1 ; 2 ; 3 ; 4 ; 5 ; 6}</span>, donc <span class="math">card(Ω) = 6</span>. Le dé est équilibré : il y a <strong>équiprobabilité</strong>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Compter les cas favorables.</strong> « Obtenir un multiple de 3 » : les multiples de 3 dans <span class="math">Ω</span> sont <span class="math">3</span> et <span class="math">6</span>, donc <span class="math">A = {3 ; 6}</span> et <span class="math">card(A) = 2</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Appliquer la formule.</strong> On écrit d'abord la formule, puis on remplace par les valeurs comptées :</p>
+              <p><span class="math">P(A) = card(A) / card(Ω)</span></p>
+              <p><span class="math">P(A) = 2/6 = 1/3</span></p>
+            </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Conclure.</strong> La probabilité d'obtenir un multiple de 3 est <span class="math">1/3</span>, soit environ <span class="math">0,33</span> : un peu moins d'une chance sur trois.</p></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ L'équiprobabilité est une hypothèse, pas une évidence</div>
+          <p>La formule <span class="math">P(A) = card(A) / card(Ω)</span> n'est valable <strong>que s'il y a équiprobabilité</strong>. Un dé pipé, une urne contenant des boules de tailles différentes, un tirage favorisant certains élèves : tout cela casse l'hypothèse. Sur ta copie, <strong>justifie toujours</strong> l'équiprobabilité (« le dé est équilibré », « les boules sont indiscernables », « le tirage est au hasard ») avant d'utiliser la formule.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 : PROPRIÉTÉS DES PROBABILITÉS                       -->
+  <section class="lecture-section" id="s5">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">05</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Notion 4 · propriétés</span>
+        <h2 class="lecture-section-title">Propriétés des probabilités</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Une probabilité n'est pas n'importe quel nombre : elle obéit à des règles strictes, valables <strong>toujours</strong> (équiprobabilité ou non). Ce sont elles qui permettent de vérifier un calcul.
+      </p>
+
+      <div class="lecture-callout lecture-callout-gold">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">💡 Propriétés fondamentales</div>
+          <ul class="lecture-list">
+            <li>Pour tout événement <span class="math">A</span> : <span class="math">0 ≤ P(A) ≤ 1</span>. Une probabilité est toujours comprise entre 0 et 1.</li>
+            <li><span class="math">P(Ω) = 1</span> : l'événement certain se réalise toujours.</li>
+            <li><span class="math">P(∅) = 0</span> : l'événement impossible ne se réalise jamais.</li>
+            <li><span class="math">P(Ā) = 1 − P(A)</span> : la probabilité de « ne pas A » (démontrée et exploitée en Partie 2).</li>
+            <li>Si <span class="math">A ⊂ B</span>, alors <span class="math">P(A) ≤ P(B)</span> : un événement « inclus dans » un autre est moins probable que lui.</li>
+      </ul>
+        </div>
+      </div>
+
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La règle d'or du contrôle</div>
+        <div class="lecture-formula-hero-main">0 ≤ P(A) ≤ 1</div>
+        <div class="lecture-formula-hero-desc">Toute probabilité est un nombre entre 0 et 1. Si ton calcul donne 1,5 ou −0,2 : il est FAUX — reviens sur les cas favorables avant d'aller plus loin.</div>
+      </div>
+
+      <div class="lecture-formula-box">
+        <div class="lecture-formula-main">P(Ω) = 1<br>P(∅) = 0</div>
+        <div class="lecture-formula-desc">Les deux bornes : l'événement certain vaut 1, l'événement impossible vaut 0. Contrôle express : la somme des probabilités de tous les événements élémentaires vaut exactement 1.</div>
+      </div>
+
+      <p class="lecture-text">
+        Ces bornes sont des <strong>contrôles automatiques</strong> : si tu trouves <span class="math">7/6</span> ou <span class="math">−0,2</span>, ton calcul est faux. De même, en équiprobabilité, les probabilités de tous les événements élémentaires somment à <span class="math">1</span> : c'est un excellent réflexe de vérification.
+      </p>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple — repérer une probabilité impossible</div>
+        <div class="lecture-example-content">
+          <p>Quatre élèves proposent une valeur pour la probabilité de « obtenir au plus 6 » avec un dé équilibré : Mariama propose <span class="math">1</span>, Idé propose <span class="math">7/6</span>, Aïcha propose <span class="math">0,5</span> et Souley propose <span class="math">−1/6</span>.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Analyser l'événement.</strong> « Obtenir au plus 6 » signifie obtenir un nombre de <span class="math">1</span> à <span class="math">6</span> : c'est <strong>toujours vrai</strong>, c'est l'événement certain <span class="math">Ω</span>.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Appliquer les propriétés.</strong></p>
+              <p><span class="math">P(Ω) = 1</span></p>
+              <p>La bonne réponse est donc <span class="math">1</span> : c'est la proposition de Mariama.</p>
+            </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Vérifier les autres.</strong> On compare chaque proposition aux bornes <span class="math">0 ≤ P(A) ≤ 1</span> :</p>
+              <p><span class="math">7/6 &gt; 1</span> : impossible.</p>
+              <p><span class="math">−1/6 &lt; 0</span> : impossible.</p>
+              <p><span class="math">0,5</span> est une valeur possible en général… mais pas pour cet événement particulier.</p>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 : EXEMPLES COMPLETS                                 -->
+  <section class="lecture-section" id="s6">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">06</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Entraînement</span>
+        <h2 class="lecture-section-title">Exemples complets — dés, urnes, cartes, délégué</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <div class="lecture-example lecture-example-featured">
+        <div class="lecture-example-label">🧮 Exemple 1 — Dé : plusieurs événements d'un coup</div>
+        <div class="lecture-example-content">
+          <p>On lance un dé cubique équilibré. Calculons <span class="math">P(A)</span>, <span class="math">P(B)</span>, <span class="math">P(C)</span>, <span class="math">P(D)</span> pour : <span class="math">A</span> « obtenir un nombre premier », <span class="math">B</span> « obtenir un nombre supérieur ou égal à 5 », <span class="math">C</span> « obtenir 7 », <span class="math">D</span> « obtenir un nombre inférieur ou égal à 6 ».</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Univers.</strong> <span class="math">Ω = {1 ; 2 ; 3 ; 4 ; 5 ; 6}</span>, <span class="math">card(Ω) = 6</span>, équiprobabilité (dé équilibré).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Événement A.</strong> Les nombres premiers de <span class="math">Ω</span> sont <span class="math">2</span>, <span class="math">3</span> et <span class="math">5</span> (1 n'est pas premier) : <span class="math">A = {2 ; 3 ; 5}</span>, <span class="math">card(A) = 3</span>.</p>
+              <p><span class="math">P(A) = 3/6 = 1/2</span></p>
+            </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Événement B.</strong> <span class="math">B = {5 ; 6}</span>, <span class="math">card(B) = 2</span>.</p>
+              <p><span class="math">P(B) = 2/6 = 1/3</span></p>
+            </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Événement C.</strong> Aucun numéro du dé ne vaut 7 : <span class="math">C = ∅</span>.</p>
+              <p><span class="math">P(C) = P(∅) = 0</span></p>
+              <p>C'est l'événement impossible.</p>
+            </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Événement D.</strong> Tout numéro convient : <span class="math">D = Ω</span>.</p>
+              <p><span class="math">P(D) = P(Ω) = 1</span></p>
+              <p>C'est l'événement certain.</p>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 2 — Urne à boules numérotées</div>
+        <div class="lecture-example-content">
+          <p>Une urne contient 8 boules indiscernables au toucher, numérotées de 1 à 8. On tire une boule au hasard. Calculons la probabilité de tirer : un numéro pair, un multiple de 4, un numéro supérieur ou égal à 6, un nombre premier.</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Univers.</strong> <span class="math">Ω = {1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8}</span>, <span class="math">card(Ω) = 8</span>, équiprobabilité (boules indiscernables, tirage au hasard).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Pair.</strong> <span class="math">{2 ; 4 ; 6 ; 8}</span> : 4 boules.</p>
+              <p><span class="math">P = 4/8 = 1/2</span></p>
+            </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Multiple de 4.</strong> <span class="math">{4 ; 8}</span> : 2 boules.</p>
+              <p><span class="math">P = 2/8 = 1/4</span></p>
+            </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Supérieur ou égal à 6.</strong> <span class="math">{6 ; 7 ; 8}</span> : 3 boules.</p>
+              <p><span class="math">P = 3/8</span></p>
+            </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">5</div><div class="lecture-step-content"><p><strong>Premier.</strong> <span class="math">{2 ; 3 ; 5 ; 7}</span> : 4 boules.</p>
+              <p><span class="math">P = 4/8 = 1/2</span></p>
+              <p>Vérification utile : <span class="math">1/2 + 1/4 + 3/8</span> n'a pas de raison de valoir 1 (les événements se recouvrent), mais chaque valeur est bien comprise entre <span class="math">0</span> et <span class="math">1</span>.</p>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 3 — Jeu de 32 cartes</div>
+        <div class="lecture-example-content">
+          <p>On tire une carte au hasard dans un jeu de 32 cartes (4 couleurs : cœur, carreau, pique, trèfle ; 8 valeurs : 7, 8, 9, 10, valet, dame, roi, as).</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Univers.</strong> <span class="math">card(Ω) = 32</span>, équiprobabilité (tirage au hasard).</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Tirer un as.</strong> Il y a 4 as (un par couleur).</p>
+              <p><span class="math">P = 4/32 = 1/8</span></p>
+            </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Tirer un cœur.</strong> Il y a 8 cœurs.</p>
+              <p><span class="math">P = 8/32 = 1/4</span></p>
+            </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Tirer une figure</strong> (valet, dame ou roi). On compte les figures :</p>
+              <p><span class="math">3 × 4 = 12</span></p>
+              <p>Il y a 12 figures (3 valeurs × 4 couleurs).</p>
+              <p><span class="math">P = 12/32 = 3/8</span></p>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-example">
+        <div class="lecture-example-label">🧮 Exemple 4 — Tirage d'un délégué dans une classe</div>
+        <div class="lecture-example-content">
+          <p>Dans une classe de terminale de 45 élèves (25 filles et 20 garçons), on tire au sort le nom du délégué. Quelle est la probabilité que ce soit une fille ? Un garçon ?</p>
+          <div class="lecture-steps">
+            <div class="lecture-step"><div class="lecture-step-number">1</div><div class="lecture-step-content"><p><strong>Univers.</strong> <span class="math">Ω</span> = les 45 élèves ; <span class="math">card(Ω) = 45</span>. Le tirage étant au hasard, chaque élève a la même chance : équiprobabilité.</p></div></div>
+            <div class="lecture-step"><div class="lecture-step-number">2</div><div class="lecture-step-content"><p><strong>Fille.</strong> <span class="math">F</span> : « le délégué est une fille » ; <span class="math">card(F) = 25</span>.</p>
+              <p><span class="math">P(F) = 25/45 = 5/9</span></p>
+              <p>Soit environ <span class="math">0,56</span>.</p>
+            </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">3</div><div class="lecture-step-content"><p><strong>Garçon.</strong> <span class="math">G</span> : « le délégué est un garçon » ; <span class="math">card(G) = 20</span>.</p>
+              <p><span class="math">P(G) = 20/45 = 4/9</span></p>
+              <p>Soit environ <span class="math">0,44</span>.</p>
+            </div></div>
+            <div class="lecture-step"><div class="lecture-step-number">4</div><div class="lecture-step-content"><p><strong>Vérification.</strong> <span class="math">F</span> et <span class="math">G</span> sont incompatibles et <span class="math">F ∪ G = Ω</span> : on doit avoir <span class="math">P(F) + P(G) = 1</span>.</p>
+              <p><span class="math">5/9 + 4/9 = 9/9 = 1</span> ✓</p>
+            </div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lecture-table">
+        <table>
+          <thead>
+            <tr><th>Expérience</th><th>Événement</th><th>Cas favorables</th><th>Probabilité</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Dé équilibré</td><td>« multiple de 3 »</td><td><span class="math">{3 ; 6}</span> — 2 cas</td><td><span class="math">P = 2/6 = 1/3</span></td></tr>
+            <tr><td>Dé équilibré</td><td>« nombre premier »</td><td><span class="math">{2 ; 3 ; 5}</span> — 3 cas</td><td><span class="math">P = 3/6 = 1/2</span></td></tr>
+            <tr><td>Urne 1 à 8</td><td>« multiple de 4 »</td><td><span class="math">{4 ; 8}</span> — 2 cas</td><td><span class="math">P = 2/8 = 1/4</span></td></tr>
+            <tr><td>Jeu de 32 cartes</td><td>« tirer une figure »</td><td>12 figures</td><td><span class="math">P = 12/32 = 3/8</span></td></tr>
+            <tr><td>Délégué (45 élèves)</td><td>« tirer une fille »</td><td>25 filles</td><td><span class="math">P = 25/45 = 5/9</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7 : BILAN — MÉTHODE                                   -->
+  <section class="lecture-section" id="s7">
+    <div class="lecture-section-header">
+      <div class="lecture-section-num">07</div>
+      <div class="lecture-section-heading">
+        <span class="lecture-section-eyebrow">Bilan</span>
+        <h2 class="lecture-section-title">La méthode de calcul en 4 étapes</h2>
+      </div>
+    </div>
+
+    <div class="lecture-section-body">
+      <p class="lecture-text">
+        Retiens cette méthode une fois pour toutes : elle s'applique à <strong>tous</strong> les exercices d'équiprobabilité, du dé au tirage au sort.
+      </p>
+
+      <div class="lecture-rule">
+        <div class="lecture-rule-label">🧠 Méthode — Calculer une probabilité en équiprobabilité</div>
+        <div class="lecture-rule-body">
+          <strong>(1)</strong> Décrire l'univers <span class="math">Ω</span> et compter <span class="math">card(Ω)</span>. <strong>(2)</strong> Justifier l'équiprobabilité (dé équilibré, tirage au hasard…). <strong>(3)</strong> Décrire l'événement <span class="math">A</span> et compter <span class="math">card(A)</span>. <strong>(4)</strong> Conclure : <span class="math">P(A) = card(A) / card(Ω)</span>, puis simplifier la fraction et vérifier que le résultat est bien entre <span class="math">0</span> et <span class="math">1</span>.
+        </div>
+      </div>
+
+      <div class="lecture-formula-hero">
+        <div class="lecture-formula-hero-label">La formule centrale de la partie</div>
+        <div class="lecture-formula-hero-main">
+          P(A) = card(A) / card(Ω)<br>
+          P(A) = (cas favorables) / (cas possibles)
+        </div>
+        <div class="lecture-formula-hero-desc">Valable uniquement en situation d'équiprobabilité. Contrôles : <span class="math">0 ≤ P(A) ≤ 1</span>, <span class="math">P(Ω) = 1</span>, <span class="math">P(∅) = 0</span>.</div>
+      </div>
+
+      <ul class="lecture-list-elegant">
+        <li>Une <strong>expérience aléatoire</strong> a des résultats connus mais imprévisibles ; l'ensemble de ses résultats est l'<strong>univers</strong> <span class="math">Ω</span>.</li>
+        <li>Un <strong>événement</strong> est une partie de <span class="math">Ω</span> ; il est <strong>réalisé</strong> si l'issue obtenue lui appartient.</li>
+        <li><span class="math">A ∪ B</span> : « au moins l'un des deux » · <span class="math">A ∩ B</span> : « les deux à la fois » · <span class="math">Ā</span> : « non A » · incompatibles : <span class="math">A ∩ B = ∅</span>.</li>
+        <li><strong>Équiprobabilité</strong> : toutes les issues ont la même probabilité ; alors <span class="math">P(A) = card(A) / card(Ω)</span>.</li>
+        <li>Propriétés : <span class="math">0 ≤ P(A) ≤ 1</span>, <span class="math">P(Ω) = 1</span>, <span class="math">P(∅) = 0</span>, <span class="math">P(Ā) = 1 − P(A)</span>.</li>
+      </ul>
+
+      <div class="lecture-callout lecture-callout-warning">
+        <div class="lecture-callout-body">
+          <div class="lecture-callout-title">⚠️ Rédaction type pour l'examen</div>
+          <p>Un calcul de probabilité bien rédigé contient trois ingrédients : l'<strong>univers</strong> avec son cardinal, la <strong>justification de l'équiprobabilité</strong>, et le <strong>dénombrement des cas favorables</strong>. Une fraction donnée sans ces justifications perd des points, même si le résultat est juste.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QCM D'ENTRAÎNEMENT ===== -->
+  <div class="lecture-quiz">
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q1 — On lance un dé cubique équilibré. La probabilité d'obtenir un nombre supérieur ou égal à 5 est :</p>
+      <div class="lecture-quiz-options"><span>A) 1/6</span><span>B) 1/3</span><span>C) 1/2</span><span>D) 2/3</span></div>
+      <details><summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) 1/3.</strong> Les cas favorables sont <span class="math">{5 ; 6}</span>, soit 2 issues sur 6 :</div>
+        <div class="lecture-quiz-answer"><span class="math">P = 2/6 = 1/3</span></div>
+        <div class="lecture-quiz-answer">L'erreur classique consiste à ne compter qu'une issue (« le 6 ») et répondre <span class="math">1/6</span>.</div>
+      </details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q2 — Pour tout événement A d'un univers Ω, on a toujours :</p>
+      <div class="lecture-quiz-options"><span>A) P(Ω) = 0 et P(∅) = 1</span><span>B) P(A) &gt; 1 possible si A est très grand</span><span>C) 0 ≤ P(A) ≤ 1 et P(Ω) = 1</span><span>D) P(A) = card(A), quel que soit Ω</span></div>
+      <details><summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>C) 0 ≤ P(A) ≤ 1 et P(Ω) = 1.</strong> Ce sont les propriétés fondamentales : une probabilité est toujours entre 0 et 1, et l'événement certain a pour probabilité 1. La formule <span class="math">P(A) = card(A) / card(Ω)</span> n'a de sens qu'en équiprobabilité.</div>
+      </details>
+    </div>
+    <div class="lecture-quiz-item">
+      <p class="lecture-quiz-q">Q3 — Une urne contient 8 boules numérotées de 1 à 8, indiscernables au toucher. La probabilité de tirer un nombre premier est :</p>
+      <div class="lecture-quiz-options"><span>A) 3/8</span><span>B) 1/2</span><span>C) 5/8</span><span>D) 1/4</span></div>
+      <details><summary>Voir la réponse</summary>
+        <div class="lecture-quiz-answer"><strong>B) 1/2.</strong> Les nombres premiers de 1 à 8 sont <span class="math">2 ; 3 ; 5 ; 7</span> (attention : 1 n'est pas premier, et 4, 6, 8 ne le sont pas). Donc 4 issues sur 8 :</div>
+        <div class="lecture-quiz-answer"><span class="math">P = 4/8 = 1/2</span></div>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== RÉCAPITULATIF ===== -->
+  <div class="lecture-recap">
+    <div class="lecture-recap-title">📌 Ce qu'il faut retenir</div>
+    <ul class="lecture-recap-list">
+      <li><strong>[univers]</strong> Une <strong>expérience aléatoire</strong> a tous ses résultats connus mais le résultat effectif est imprévisible ; l'univers <span class="math">Ω</span> est l'ensemble de ces résultats</li>
+      <li><strong>[univers]</strong> Un <strong>événement élémentaire</strong> contient une seule issue : <span class="math">{ω}</span></li>
+      <li><strong>[evenement]</strong> Un <strong>événement</strong> est une partie de <span class="math">Ω</span> ; il est réalisé si l'issue obtenue lui appartient ; événement certain : <span class="math">Ω</span>, événement impossible : <span class="math">∅</span></li>
+      <li><strong>[evenement]</strong> Ne pas confondre l'issue <span class="math">3</span> et l'événement élémentaire <span class="math">{3}</span></li>
+      <li><strong>[operations]</strong> <span class="math">A ∪ B</span> : réalisé si <strong>au moins l'un</strong> se réalise ; <span class="math">A ∩ B</span> : réalisé si <strong>les deux</strong> se réalisent ; <span class="math">Ā</span> : réalisé si <span class="math">A</span> ne se réalise pas</li>
+      <li><strong>[operations]</strong> <span class="math">A</span> et <span class="math">B</span> <strong>incompatibles</strong> ⇔ <span class="math">A ∩ B = ∅</span> (incompatible ≠ contraire)</li>
+      <li><strong>[equiprobabilite]</strong> Équiprobabilité : toutes les issues ont la même probabilité ; alors <span class="math">P(A) = card(A) / card(Ω)</span> — à justifier avant usage</li>
+      <li><strong>[proprietes]</strong> <span class="math">0 ≤ P(A) ≤ 1</span> ; <span class="math">P(Ω) = 1</span> ; <span class="math">P(∅) = 0</span> ; <span class="math">P(Ā) = 1 − P(A)</span> ; <span class="math">A ⊂ B ⇒ P(A) ≤ P(B)</span></li>
+      <li><strong>[methode]</strong> Méthode : univers + card(Ω) → justifier l'équiprobabilité → compter les cas favorables → conclure et simplifier la fraction</li>
+      <li><strong>[methode]</strong> Vérification permanente : tout résultat doit rester entre <span class="math">0</span> et <span class="math">1</span></li>
+    </ul>
+  </div>
+
+  <!-- ===== FIN ===== -->
+  <div class="lecture-end">
+    <span class="lecture-end-icon">🎯</span>
+    <div class="lecture-end-text">Partie 1 terminée !</div>
+    <div class="lecture-end-sub">Passe à la partie suivante : contraire, réunion et la technique « au moins un »</div>
+    <div class="lecture-end-divider"></div>
+  </div>
+
+</div>
